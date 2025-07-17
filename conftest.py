@@ -169,7 +169,7 @@ def pytest_sessionfinish(session, exitstatus):
     os.system(f"allure generate report -o {str(allure_output_dir)} --clean")
 
     # ✅ 构建本地 file:/// 链接用于邮件
-    report_link = allure_output_dir.resolve().as_uri()
+    report_link = "https://wh0206040321.github.io/APS_report/"
 
     # ✅ 构造 HTML 邮件内容
     if test_failures:
