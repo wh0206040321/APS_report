@@ -219,7 +219,7 @@ def pytest_sessionfinish(session, exitstatus):
         shutil.copytree(allure_output_dir, docs_dir)
 
         # 提交并推送到仓库
-        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "add", "docs/"], check=True)
         subprocess.run(["git", "commit", "-m", "自动更新 Allure 报告"], check=True)
         subprocess.run(["git", "push", "origin", "main"], check=True)
 
