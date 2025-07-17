@@ -1,0 +1,1 @@
+{"uuid": "3f372810-dbb9-4b2d-b171-ea62a94441bd", "children": ["daab8bf6-0914-4b14-ac98-910b4e0c8b59"], "befores": [{"name": "login_to_shift", "status": "passed", "start": 1752669495180, "stop": 1752669503145}], "afters": [{"name": "login_to_shift::0", "status": "passed", "start": 1752669509396, "stop": 1752669511536}], "start": 1752669495180, "stop": 1752669511536}

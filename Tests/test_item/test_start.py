@@ -1,0 +1,321 @@
+import random
+from time import sleep
+
+import allure
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+from Pages.item_page import ItemPage
+from Pages.login_page import LoginPage
+from Pages.master_page import MasterPage
+from Pages.operationPlan_page import operationPlanPage
+from Pages.order_page import OrderPage
+from Pages.plan_page import PlanPage
+from Pages.resource_page import ResourcePage
+from Utils.data_driven import DateDriver
+from Utils.shared_data_util import SharedDataUtil
+from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+
+
+@allure.feature("添加物品，添加工艺产能，添加制造订单测试用例")
+@pytest.mark.run(order=19)
+class TestStartPage:
+    @allure.story("添加物品，添加工艺产能，添加制造订单进行排产")
+    # @pytest.mark.run(order=1)
+    def test_start(self):
+        """初始化并返回 driver"""
+        driver_path = DateDriver().driver_path
+        driver = create_driver(driver_path)
+        driver.implicitly_wait(3)
+
+        item = ItemPage(driver)  # 用 driver 初始化 ItemPage
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        page.navigate_to(DateDriver().url)  # 导航到登录页面
+        page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
+        # 清空之前的共享数据
+        SharedDataUtil.clear_data()
+        item.go_item()
+
+        # 检查并添加物品（如果不存在）
+        item_names = ["1测试A", "1测试B", "1测试C"]
+        for name in item_names:
+            if not item.check_item_exists(name):
+                item.add_item(name, name)
+            else:
+                print(f"物品 {name} 已存在，跳过添加")
+
+        page.click_button('(//span[text()="工艺产能"])[1]')  # 点击工艺产能
+        master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        sleep(1)
+        # 检查工艺产能是否存在
+        if not master.check_master_exists("1测试C"):
+            master.click_add_button()  # 检查点击添加
+            # 放大页面
+            master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
+
+            master.go_item_dialog("1测试C")
+            sleep(1)
+            item_value = master.get_find_element_xpath(
+                '//span[text()=" 物料代码： "]/parent::div//input'
+            ).get_attribute("value")
+
+            # 点击工序选定器
+            master.click_button(
+                '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
+            )
+
+            # 点击新增工序编号
+            master.add_serial2()
+            # 填写工序编号
+            master.enter_texts(
+                '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
+                "1",
+            )
+            # 点击下拉框
+            master.click_button(
+                '//table[.//div[@class="vxe-input type--text size--mini is--controls is--suffix is--readonly"]]//tr[1]/td[3]//span'
+            )
+            random_sel1 = random.randint(1, 8)
+            sleep(1)
+            # 输入工序代码
+            master.click_button(
+                f'(//div[@class="vxe-select-option--wrapper"])[1]/div[{random_sel1}]'
+            )
+
+            # 点击新增输入指令
+            master.add_serial3()
+            # 获取物料名称
+            master.click(
+                By.XPATH,
+                '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
+            )
+            sleep(1)
+            master.click_button(
+                '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试A"]]/td[2]//span[text()="1测试A"]'
+            )
+            master.click(
+                By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[last()]'
+            )
+            # 获取物料数量
+            random_num1 = random.randint(1, 100)
+            master.enter_texts(
+                '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[3]//input',
+                f"{random_num1}",
+            )
+
+            # 点击使用指令
+            master.click_button(
+                '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
+            )
+            master.add_serial4()
+
+            # 使用指令 点击对话框按钮 获取资源名称
+            master.click(
+                By.XPATH,
+                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
+            )
+            random_int1 = random.randint(3, 10)
+            master.click_button(
+                f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int1}]'
+            )
+
+            # 点击对话框按钮
+            master.click(
+                By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[last()]'
+            )
+            sleep(2)
+            master_res1 = master.get_find_element_xpath(
+                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input'
+            ).get_attribute("value")
+
+            # 获取资源能力
+            random_n = random.randint(1, 10)
+            master.enter_texts(
+                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[7]//input',
+                f"{random_n}pm",
+            )
+
+            # 点击新增工序编号
+            master.add_serial2()
+            # 填写工序编号
+            master.enter_texts(
+                '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[2]/td[2]//input',
+                "2",
+            )
+            # 点击下拉框
+            master.click_button(
+                '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[2]/td[3]//i'
+            )
+            random_sel2 = random.randint(1, 8)
+            sleep(1)
+            # 输入工序代码
+            master.click_button(
+                f'(//div[@class="vxe-select-option--wrapper"])[2]/div[{random_sel2}]'
+            )
+
+            # 点击新增输入指令
+            master.click_button(
+                '//div[.//div[text()=" 输入指令 "] and @class="ivu-tabs-nav"]//div[text()=" 输入指令 "]'
+            )
+            master.add_serial3()
+            # 获取物料名称
+            master.click(
+                By.XPATH,
+                '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
+            )
+            sleep(1)
+            master.click_button(
+                '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试B"]]/td[2]//span[text()="1测试B"]'
+            )
+            master.click(
+                By.XPATH,
+                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
+            )
+            # 获取物料数量
+            random_num2 = random.randint(1, 100)
+            master.enter_texts(
+                '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[3]//input',
+                f"{random_num2}",
+            )
+
+            # 点击使用指令 放大按钮
+            master.click_button(
+                '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
+            )
+            master.add_serial4()
+
+            # 使用指令 点击对话框按钮 获取资源名称
+            master.click(
+                By.XPATH,
+                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
+            )
+            random_int2 = random.randint(3, 10)
+            while random_int2 == random_int1:
+                random_int2 = random.randint(3, 10)
+
+            sleep(2)
+            master.click_button(
+                f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int2}]'
+            )
+            sleep(1)
+            # 点击对话框按钮
+            master.click(
+                By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[last()]'
+            )
+            sleep(2)
+            master_res2 = master.get_find_element_xpath(
+                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input'
+            ).get_attribute("value")
+
+            SharedDataUtil.save_data(
+                {"master_res1": master_res1, "master_res2": master_res2}
+            )
+
+            # 获取资源能力
+            random_n2 = random.randint(1, 10)
+            master.enter_texts(
+                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[7]//input',
+                f"{random_n2}pm",
+            )
+
+            # 点击确定
+            confirm_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            backup_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+
+            if master.is_clickable(confirm_xpath):
+                master.click_button(confirm_xpath)
+            elif master.is_clickable(backup_xpath):
+                master.click_button(backup_xpath)
+            else:
+                raise Exception("主按钮和备用按钮都不可点击，请检查页面状态")
+
+        else:
+            eles = driver.find_elements(
+                By.XPATH,
+                '//tr[.//td[2]//span[text()="1测试C"] and .//td[9]//div[text()=" 使用指令 "]]//td[12]',
+            )
+            master_res1 = eles[0].text
+            master_res2 = eles[1].text
+            SharedDataUtil.save_data(
+                {"master_res1": master_res1, "master_res2": master_res2}
+            )
+            print("工艺产能 1测试C 已存在，跳过创建")
+
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
+        page.click_button('(//span[text()="制造订单"])[1]')  # 点击制造订单
+
+        # 检查制造订单是否存在
+        if not order.check_order_exists("1测试C订单"):
+            order.add_order("1测试C订单", "1测试C")
+        else:
+            print("制造订单 1测试C订单 已存在，跳过创建")
+
+        plan = PlanPage(driver)
+        wait = WebDriverWait(driver, 60)
+        page.click_button('(//span[text()="计划运行"])[1]')
+        # 点击“计算工作台”
+        page.click_button('(//span[text()="计算工作台"])[1]')
+        # 点击“计划计算”
+        page.click_button('(//span[text()="计划计算"])[1]')
+
+        # 等待遮挡元素消失
+        wait.until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-spinner"))
+        )
+        # 额外加一个短暂等待，确保UI稳定
+        sleep(1)
+        ele = driver.find_elements(By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
+        if len(ele) == 0:
+            page.click_button('(//span[text()="系统管理"])[1]')  # 点击系统管理
+            page.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
+            page.click_button('(//span[text()="环境设置"])[1]')  # 点击环境设置
+            sleep(1)
+            # 点击勾选框
+            input_ele = page.get_find_element('//label[text()=" 服务器"]/span')
+            if input_ele.get_attribute("class") == "ivu-radio":
+                page.click_button('//label[text()=" 服务器"]/span')
+                sleep(1)
+            page.click_button('//p[text()="保存"]')  # 点击保存
+            sleep(3)
+            page.click_button('(//span[text()="计划运行"])[1]')  # 点击计划运行
+            page.click_button('(//span[text()="计划计算"])[1]')
+
+        # 等待下拉框按钮可点击后点击展开
+        dropdown_arrow = wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
+            )
+        )
+        dropdown_arrow.click()
+
+        # 等待第一个方案标签可点击后点击选择
+        first_option = wait.until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '//div[@class="vue-treeselect__list"]/div[.]//label[text()="均衡排产"]',
+                )
+            )
+        )
+        first_option.click()
+
+        # 执行计划
+        plan.click_plan()
+
+        # 等待“完成”的文本出现
+        success_element = wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, '(//div[@class="d-flex"])[3]/p[text()=" 完成 "]')
+            )
+        )
+
+        assert success_element.text == "完成"
+        assert not item.has_fail_message()

@@ -1,0 +1,111 @@
+from time import sleep
+
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from Pages.base_page import BasePage
+
+
+class SchedPage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)  # 调用基类构造函数
+
+    def click_add_schedbutton(self):
+        """点击添加方案按钮."""
+        self.click(By.XPATH, '//span[text()="新增方案"]')
+
+    def click_del_schedbutton(self):
+        """点击删除方案按钮."""
+        self.click(By.XPATH, '//span[text()="删除方案"]')
+
+    def click_add_commandbutton(self):
+        """点击添加命令按钮."""
+        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-add"]')
+
+    def click_del_commandbutton(self):
+        """点击删除命令按钮."""
+        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-close"]')
+
+    def click_up_commandbutton(self):
+        """点击向上移动命令按钮."""
+        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-arrow-up"]')
+
+    def click_down_commandbutton(self):
+        """点击向下移动命令按钮."""
+        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-arrow-down"]')
+
+    def click_attribute_button(self):
+        """点击属性设置按钮."""
+        self.click(By.XPATH, '//span[text()="属性设置"]')
+
+    def click_sched_button(self):
+        """点击均衡排产按钮."""
+        self.click(By.XPATH, '//div[text()=" 分派属性 "]')
+
+    def click_time_sched(self):
+        """点击时间属性"""
+        self.click(By.XPATH, '//div[text()=" 时间属性 "]')
+
+    def click_ok_schedbutton(self):
+        """点击确定按钮."""
+        self.click(By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+
+    def click_ok_button(self):
+        """点击确定按钮."""
+        self.click(By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+
+    def click_save_button(self):
+        """点击保存按钮."""
+        self.click(By.XPATH, '//button[./span[text()="保存设置"]]')
+
+    def enter_texts(self, xpath, text):
+        """输入文字."""
+        self.enter_text(By.XPATH, xpath, text)
+
+    def click_button(self, xpath):
+        """点击按钮."""
+        self.click(By.XPATH, xpath)
+
+    def get_find_element_xpath(self, xpath):
+        """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
+        try:
+            return self.find_element(By.XPATH, xpath)
+        except NoSuchElementException:
+            return None
+
+    def get_find_elements_xpath(self, xpath):
+        """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
+        self.finds_elements(By.XPATH, xpath)
+
+    def get_find_element_class(self, classname):
+        """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
+        try:
+            return self.find_element(By.CLASS_NAME, classname)
+        except NoSuchElementException:
+            return None
+
+    def get_error_message(self, xpath):
+        """获取错误消息元素，返回该元素。如果元素未找到，返回None。"""
+        try:
+            return self.find_element(By.XPATH, xpath)
+        except NoSuchElementException:
+            return None
+
+    def get_find_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="ivu-message"]//span')
+            )
+        )
+        return message
+
+    def get_after_value(self, name):
+        """获取保存之后的值"""
+        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])[1]')
+        self.click_save_button()
+        self.driver.refresh()
+        sleep(1)
+        self.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
+        self.click_attribute_button()

@@ -1,0 +1,1 @@
+{"uuid": "43e30ffc-6dac-4231-8d85-88b34dd5b62d", "children": ["d3553319-15c2-4881-a0cb-72dfb4e5d5ea"], "befores": [{"name": "login_to_sched", "status": "passed", "start": 1752672230429, "stop": 1752672238166}], "afters": [{"name": "login_to_sched::0", "status": "passed", "start": 1752672245734, "stop": 1752672247867}], "start": 1752672230429, "stop": 1752672247867}

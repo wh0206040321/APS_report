@@ -1,0 +1,18 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="排产方案(订单级)复制"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //span[text()="属性设置"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[text()="按分派规则顺序排列"]/following-sibling::div
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[text()="按分派规则顺序排列"]/following-sibling::div//ul[2]/li[2]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = //div[text()="按分派规则顺序排列"]/following-sibling::div//input/following-sibling::div/input
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="排产方案(订单级)复制"]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = //div[text()="按分派规则顺序排列"]/following-sibling::div//input/following-sibling::div/input
+[33mWARNING [0m root:base_page.py:28 ❌ 未找到元素：xpath = //div[text()="按分派规则顺序排列"]/following-sibling::div//input/following-sibling::div/input，等待超时 10s
+[33mWARNING [0m root:base_page.py:102 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_find_element_timeout_2694882080224_20250716_103856.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2694882080224

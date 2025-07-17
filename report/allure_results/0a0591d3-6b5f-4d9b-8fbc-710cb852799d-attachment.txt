@@ -1,0 +1,25 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试透视表B "]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//i[@style="cursor: pointer;"])[2]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2555804593424
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试透视表B "]
+[32mINFO    [0m root:base_page.py:34 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2555804592272
+[33mWARNING [0m urllib3.connectionpool:connectionpool.py:868 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000025311DAF2E0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/0a8615da873f16a250d7de9f11327488
+[33mWARNING [0m urllib3.connectionpool:connectionpool.py:868 Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000025311DACDF0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/0a8615da873f16a250d7de9f11327488
+[33mWARNING [0m urllib3.connectionpool:connectionpool.py:868 Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000025311DAF4F0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/0a8615da873f16a250d7de9f11327488
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2555804593424

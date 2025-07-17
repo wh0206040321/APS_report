@@ -1,0 +1,1 @@
+{"uuid": "0b9927f5-a656-47e2-a4c5-9300595d4891", "children": ["99bebaa8-f384-4e77-8881-3a84ef9632c7"], "befores": [{"name": "login_to_customer", "status": "passed", "start": 1752718673767, "stop": 1752718681430}], "afters": [{"name": "login_to_customer::0", "status": "passed", "start": 1752718691064, "stop": 1752718693185}], "start": 1752718673767, "stop": 1752718693185}

@@ -1,0 +1,1 @@
+{"uuid": "5f994268-56e5-45df-8580-a9cb05f19cad", "children": ["6ffeff17-5eeb-4c6c-9b23-762fb631bdd9"], "befores": [{"name": "login_to_chart", "status": "passed", "start": 1752673927744, "stop": 1752673935562}], "afters": [{"name": "login_to_chart::0", "status": "passed", "start": 1752673954673, "stop": 1752673956812}], "start": 1752673927744, "stop": 1752673956812}
