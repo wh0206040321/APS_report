@@ -2654,3 +2654,15 @@
 2025-07-17 16:03:18,744 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
 2025-07-17 16:03:23,902 - INFO - 🛑 已从实例池移除并关闭 driver：2296061116176
 2025-07-17 16:03:23,907 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 16:10:01,692 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 16:10:01,765 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 16:10:02,414 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 16:10:02,514 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 16:10:03,788 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-17 16:10:03,845 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-17 16:10:04,410 - INFO - 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+2025-07-17 16:10:05,292 - INFO - 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+2025-07-17 16:10:05,911 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-17 16:10:07,038 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 16:10:12,196 - INFO - 🛑 已从实例池移除并关闭 driver：2955563319248
+2025-07-17 16:10:12,201 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
