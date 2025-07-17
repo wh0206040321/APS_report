@@ -783,6 +783,8 @@ class TestCalendarPage:
         assert calendarcode == "焊接机1#"
         assert not calendar.has_fail_message()
 
+    @allure.story("删除布局成功")
+    # @pytest.mark.run(order=1)
     def test_calendar_deletelayout(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar

@@ -43,6 +43,42 @@ class TestChangeIPage:
     def test_changeI_addfail(self, login_to_changeI):
         driver = login_to_changeI  # WebDriver 实例
         changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
+        layout = "测试布局A"
+        changeI.add_layout()
+        sleep(1)
+        changeI.enter_texts(
+            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
+        )
+        checkbox1 = changeI.get_find_element_xpath(
+            '//div[text()="是否默认启动:"]/following-sibling::label/span'
+        )
+
+        # 检查复选框是否未被选中
+        if checkbox1.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            changeI.click_button(
+                '//div[text()="是否默认启动:"]/following-sibling::label/span'
+            )
+        sleep(1)
+
+        changeI.click_button('(//div[text()=" 显示设置 "])[1]')
+        # 获取是否可见选项的复选框元素
+        checkbox2 = changeI.get_find_element_xpath(
+            '(//div[./div[text()="是否可见:"]])[1]/label/span'
+        )
+        # 检查复选框是否未被选中
+        if checkbox2.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            changeI.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
+            # 点击确定按钮保存设置
+            changeI.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        else:
+            # 如果已选中，直接点击确定按钮保存设置
+            changeI.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        # 获取布局名称的文本元素
+        name = changeI.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
 
         changeI.click_add_button()
         changeI.click_button(
@@ -76,6 +112,7 @@ class TestChangeIPage:
         assert (
             borderitem_color2 == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{borderitem_color2}"
+        assert layout == name
         assert not changeI.has_fail_message()
 
     @allure.story("添加物品切换信息 填写资源不填写前品目和后品目 不允许提交")
@@ -891,4 +928,44 @@ class TestChangeIPage:
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         ).text
         assert changeIcode == ele
+        assert not changeI.has_fail_message()
+
+    @allure.story("删除布局成功")
+    # @pytest.mark.run(order=1)
+    def test_changeI_delete(self, login_to_changeI):
+        driver = login_to_changeI  # WebDriver 实例
+        changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
+        layout = "测试布局A"
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = changeI.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = changeI.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+        sleep(2)
+        changeI.click_button(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+        )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        changeI.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        sleep(2)
+        # 点击确认删除的按钮
+        changeI.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        # 等待一段时间，确保删除操作完成
+        sleep(1)
+
+        # 再次查找页面上是否有目标 div，以验证是否删除成功
+        after_layout = driver.find_elements(
+            By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+        assert 0 == len(after_layout)
         assert not changeI.has_fail_message()

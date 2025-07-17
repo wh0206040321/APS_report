@@ -41,6 +41,11 @@ class ChangeI(BasePage):
         """点击按钮."""
         self.click(By.XPATH, xpath)
 
+    def add_layout(self):
+        """添加布局."""
+        self.click_button('//div[@class="newDropdown"]//i')
+        self.click_button('//li[text()="添加新布局"]')
+
     def get_find_element_xpath(self, xpath):
         """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
         try:

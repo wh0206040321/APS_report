@@ -2666,3 +2666,77 @@
 2025-07-17 16:10:07,038 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
 2025-07-17 16:10:12,196 - INFO - 🛑 已从实例池移除并关闭 driver：2955563319248
 2025-07-17 16:10:12,201 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 17:23:55,865 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 17:23:55,950 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 17:23:56,630 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 17:23:56,739 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 17:23:57,915 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-17 17:23:58,053 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品切换"])[1]
+2025-07-17 17:23:58,171 - INFO - 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+2025-07-17 17:23:58,819 - INFO - 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+2025-07-17 17:23:59,995 - INFO - 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-17 17:24:00,012 - INFO - 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-17 17:24:01,091 - INFO - 点击元素：By = xpath, Value = (//div[text()=" 显示设置 "])[1]
+2025-07-17 17:24:01,210 - INFO - 查找元素：xpath = (//div[./div[text()="是否可见:"]])[1]/label/span
+2025-07-17 17:24:01,224 - INFO - 点击元素：By = xpath, Value = (//div[./div[text()="是否可见:"]])[1]/label/span
+2025-07-17 17:24:01,293 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-17 17:24:01,380 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-17 17:24:02,355 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-17 17:24:02,419 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-17 17:24:02,822 - INFO - 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+2025-07-17 17:24:02,899 - INFO - 查找元素：xpath = (//label[text()="前品目"])[1]/parent::div//input
+2025-07-17 17:24:02,911 - INFO - 查找元素：xpath = (//label[text()="后品目"])[1]/parent::div//input
+2025-07-17 17:24:03,951 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 17:24:09,087 - INFO - 🛑 已从实例池移除并关闭 driver：1711286602144
+2025-07-17 17:24:09,092 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 17:28:02,017 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 17:28:02,100 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 17:28:02,777 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 17:28:02,871 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 17:28:03,935 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-17 17:28:04,033 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品切换"])[1]
+2025-07-17 17:28:04,613 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-17 17:28:05,200 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon" and ./div[text()=" 测试布局A "]]
+2025-07-17 17:28:07,230 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]//i
+2025-07-17 17:28:07,284 - INFO - 点击元素：By = xpath, Value = (//li[text()="删除布局"])[1]
+2025-07-17 17:28:09,362 - INFO - 点击元素：By = xpath, Value = //button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]
+2025-07-17 17:28:13,468 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 17:28:18,651 - INFO - 🛑 已从实例池移除并关闭 driver：2531045189488
+2025-07-17 17:28:18,657 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 17:30:22,414 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 17:30:22,493 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 17:30:23,103 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 17:30:23,202 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 17:30:24,225 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-17 17:30:24,300 - INFO - 点击元素：By = xpath, Value = (//span[text()="资源切换"])[1]
+2025-07-17 17:30:24,882 - INFO - 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+2025-07-17 17:30:25,478 - INFO - 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+2025-07-17 17:30:26,723 - INFO - 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-17 17:30:26,736 - INFO - 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-17 17:30:27,806 - INFO - 点击元素：By = xpath, Value = (//div[text()=" 显示设置 "])[1]
+2025-07-17 17:30:27,916 - INFO - 查找元素：xpath = (//div[./div[text()="是否可见:"]])[1]/label/span
+2025-07-17 17:30:27,933 - INFO - 点击元素：By = xpath, Value = (//div[./div[text()="是否可见:"]])[1]/label/span
+2025-07-17 17:30:28,029 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-17 17:30:28,127 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-17 17:30:28,578 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-17 17:30:28,712 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-17 17:30:29,105 - INFO - 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+2025-07-17 17:30:29,198 - INFO - 查找元素：xpath = (//label[text()="前资源"])[1]/parent::div//input
+2025-07-17 17:30:29,210 - INFO - 查找元素：xpath = (//label[text()="后资源"])[1]/parent::div//input
+2025-07-17 17:30:30,240 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 17:30:35,407 - INFO - 🛑 已从实例池移除并关闭 driver：1776749945344
+2025-07-17 17:30:35,410 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 17:32:00,497 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 17:32:00,584 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 17:32:01,222 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 17:32:01,347 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 17:32:02,479 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-17 17:32:02,562 - INFO - 点击元素：By = xpath, Value = (//span[text()="资源切换"])[1]
+2025-07-17 17:32:03,132 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-17 17:32:03,800 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon" and ./div[text()=" 测试布局A "]]
+2025-07-17 17:32:05,838 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]//i
+2025-07-17 17:32:05,891 - INFO - 点击元素：By = xpath, Value = (//li[text()="删除布局"])[1]
+2025-07-17 17:32:07,961 - INFO - 点击元素：By = xpath, Value = //button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]
+2025-07-17 17:32:12,084 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 17:32:17,259 - INFO - 🛑 已从实例池移除并关闭 driver：2575110748240
+2025-07-17 17:32:17,263 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
