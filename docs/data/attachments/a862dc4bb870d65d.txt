@@ -1,0 +1,24 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="生产报工"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //label[text()="工作代码"]/following-sibling::div//i
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = //table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:117 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2195666289184_20250717_215817.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2195666289184
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="生产报工"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //label[text()="工作代码"]/following-sibling::div//i
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = //table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:117 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2195664709920_20250717_215840.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2195664709920
