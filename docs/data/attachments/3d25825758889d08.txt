@@ -1,0 +1,32 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[text()=" 个人设置 "]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()=" 本地引擎打开方式: "]/following-sibling::div//i
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="系统设置"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[@class="demo-drawer-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="环境设置"])[1]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = //label[text()=" 服务器"]/span
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择"]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = //input[@placeholder="请选择"] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:117 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2195664003872_20250717_231950.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2195664003872
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[text()=" 个人设置 "]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()=" 本地引擎打开方式: "]/following-sibling::div//i
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="系统设置"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[@class="demo-drawer-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="环境设置"])[1]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = //label[text()=" 服务器"]/span
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择"]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = //input[@placeholder="请选择"] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:117 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2195665472096_20250717_232012.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2195665472096
