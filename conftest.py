@@ -164,12 +164,10 @@ def pytest_sessionfinish(session, exitstatus):
 
     allure_output_dir = Path("report/allure_report")
     docs_dir = Path("docs")
-
-    # ✅ 生成 Allure 静态报告
-    os.system(f"allure generate report -o {str(allure_output_dir)} --clean")
-
-    # ✅ 构建本地 file:/// 链接用于邮件
+    # ✅ 链接用于邮件
     report_link = "https://wh0206040321.github.io/APS_report/"
+    # ✅ 生成 Allure 静态报告
+    os.system(f"allure generate report/allure_results -o {str(allure_output_dir)} --clean")
 
     # ✅ 构造 HTML 邮件内容
     if test_failures:
@@ -196,8 +194,6 @@ def pytest_sessionfinish(session, exitstatus):
         </html>
         """
         subject = "✅ 自动化测试全部通过"
-    # ✅ 发送 HTML 邮件
-    logger.info("📧 正在调用 send_test_failure_email() 函数")
 
     # ✅ 发送 HTML 邮件
     send_test_failure_email(
@@ -213,14 +209,22 @@ def pytest_sessionfinish(session, exitstatus):
 
     # ✅ 部署报告到 GitHub Pages
     try:
-        # 删除旧 docs 文件夹并复制新报告
         if docs_dir.exists():
             shutil.rmtree(docs_dir)
         shutil.copytree(allure_output_dir, docs_dir)
 
-        # 提交并推送到仓库
+        # ✅ 添加 .nojekyll 文件
+        Path("docs/.nojekyll").touch()
+
+        subprocess.run(["git", "pull", "origin", "main", "--allow-unrelated-histories"], check=True)
+        subprocess.run(["git", "checkout", "--ours", "docs/"], check=True)
+
         subprocess.run(["git", "add", "docs/"], check=True)
         subprocess.run(["git", "commit", "-m", "自动更新 Allure 报告"], check=True)
+
+        # ✅ 添加空提交，确保触发构建
+        subprocess.run(["git", "commit", "--allow-empty", "-m", "强制触发 GitHub Pages 构建"], check=True)
+
         subprocess.run(["git", "push", "origin", "main"], check=True)
 
         logging.info("✅ Allure 报告已自动部署到 GitHub Pages")

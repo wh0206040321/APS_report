@@ -396,14 +396,14 @@ class TestChangeSpecPage:
         )
 
         # 勾选框
-        rows = driver.find_elements(By.XPATH, f'(//div[@class="vxe-table--body-wrapper body--wrapper" and .//table[.//tr[td[3]//span[text()="{code2}"]]]])[2]//table//tr')
+        rows = driver.find_elements(By.XPATH, f'//div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body" and .//tr[td[3] and .//span[text()="{code2}"]]]//tr')
         for index, row in enumerate(rows, start=1):
             td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
-            if f"{code2}" in td3_text:
+            if f"{code2}" == td3_text:
                 print(f"✅ 找到匹配行，行号为：{index}")
 
                 # 3. 使用这个行号 idx 构造另一个 XPath
-                target_xpath = f'(//table[.//tr[{index}]/td[2][contains(@class,"col--checkbox")]])[2]//tr[{index}]/td[.//span[@class="vxe-cell--checkbox"]]//div/span'
+                target_xpath = f'//div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[{index}]/td[2]//div/span'
                 # 点击前重新获取元素，防止 stale
                 try:
                     target_element = change.get_find_element_xpath(target_xpath)
@@ -422,7 +422,7 @@ class TestChangeSpecPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        change.click_button(f'(//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span')
+        change.click_button('//div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[3]/td[2]//div/span')
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
@@ -503,14 +503,14 @@ class TestChangeSpecPage:
 
         # 勾选框
         rows = driver.find_elements(By.XPATH,
-                                    f'(//div[@class="vxe-table--body-wrapper body--wrapper" and .//table[.//tr[td[3]//span[text()="{code2}"]]]])[2]//table//tr')
+                                    f'//div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body" and .//tr[td[3] and .//span[text()="{code2}"]]]//tr')
         for index, row in enumerate(rows, start=1):
             td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
-            if f"{code2}" in td3_text:
+            if f"{code2}" == td3_text:
                 print(f"✅ 找到匹配行，行号为：{index}")
 
                 # 3. 使用这个行号 idx 构造另一个 XPath
-                target_xpath = f'(//table[.//tr[{index}]/td[2][contains(@class,"col--checkbox")]])[2]//tr[{index}]/td[.//span[@class="vxe-cell--checkbox"]]//div/span'
+                target_xpath = f'//div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[{index}]/td[2]//div/span'
                 # 点击前重新获取元素，防止 stale
                 try:
                     target_element = change.get_find_element_xpath(target_xpath)
@@ -530,7 +530,7 @@ class TestChangeSpecPage:
         )
         # 勾选框
         change.click_button(
-            f'(//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span')
+            '//div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[3]/td[2]//div/span')
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )

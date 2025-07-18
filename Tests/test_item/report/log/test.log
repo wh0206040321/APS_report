@@ -2740,3 +2740,229 @@
 2025-07-17 17:32:12,084 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
 2025-07-17 17:32:17,259 - INFO - 🛑 已从实例池移除并关闭 driver：2575110748240
 2025-07-17 17:32:17,263 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 19:25:34,849 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 19:25:34,929 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 19:25:35,545 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 19:25:35,644 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 19:25:36,763 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+2025-07-17 19:25:36,844 - INFO - 点击元素：By = xpath, Value = (//span[text()="制造订单"])[1]
+2025-07-17 19:25:37,415 - INFO - 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+2025-07-17 19:25:37,983 - INFO - 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+2025-07-17 19:25:38,733 - INFO - 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-17 19:25:38,752 - INFO - 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-17 19:25:38,825 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-17 19:25:38,987 - INFO - 查找元素：xpath = //div[./div[text()="是否可见:"]]/label/span
+2025-07-17 19:25:39,030 - INFO - 点击元素：By = xpath, Value = //div[./div[text()="是否可见:"]]/label/span/span
+2025-07-17 19:25:40,131 - WARNING - ⚠️ 原生点击被拦截，尝试使用 JS 点击
+2025-07-17 19:25:40,156 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-17 19:25:40,259 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试表 "]
+2025-07-17 19:25:43,376 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-17 19:25:43,448 - INFO - 查找元素：xpath = (//label[text()="订单代码"])[1]/parent::div//input
+2025-07-17 19:25:44,150 - INFO - 查找元素：xpath = (//label[text()="物料"])[1]/parent::div//input
+2025-07-17 19:25:44,161 - INFO - 查找元素：xpath = (//label[text()="交货期"])[1]/parent::div//input
+2025-07-17 19:25:44,170 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-17 19:25:45,253 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 19:25:50,445 - INFO - 🛑 已从实例池移除并关闭 driver：2980043287008
+2025-07-17 19:25:50,449 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 19:26:01,263 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 19:26:01,331 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 19:26:01,978 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 19:26:02,078 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 19:26:03,165 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+2025-07-17 19:26:03,248 - INFO - 点击元素：By = xpath, Value = (//span[text()="制造订单"])[1]
+2025-07-17 19:26:03,824 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试表 "]
+2025-07-17 19:26:04,612 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-17 19:26:05,969 - INFO - 点击元素：By = xpath, Value = //label[text()="物料"]/parent::div/div//i
+2025-07-17 19:26:06,066 - INFO - 点击元素：By = xpath, Value = //table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[6]/td[2]
+2025-07-17 19:26:06,823 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-17 19:26:06,887 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-17 19:26:07,364 - INFO - 查找元素：xpath = (//label[text()="交货期"])[1]/parent::div//input
+2025-07-17 19:26:08,389 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 19:26:13,507 - INFO - 🛑 已从实例池移除并关闭 driver：1981894222432
+2025-07-17 19:26:13,511 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-17 19:26:29,614 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-17 19:26:29,693 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-17 19:26:30,264 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-17 19:26:30,361 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-17 19:26:31,486 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+2025-07-17 19:26:31,570 - INFO - 点击元素：By = xpath, Value = (//span[text()="制造订单"])[1]
+2025-07-17 19:26:32,143 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-17 19:26:34,149 - INFO - 点击元素：By = xpath, Value = (//label[text()="交货期"])[1]/parent::div//input
+2025-07-17 19:26:34,261 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-date-picker-cells"])[3]/span[19]
+2025-07-17 19:26:34,396 - INFO - 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[3]
+2025-07-17 19:26:34,462 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-17 19:26:34,841 - INFO - 查找元素：xpath = (//label[text()="物料"])[1]/parent::div//input
+2025-07-17 19:26:35,866 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-17 19:26:41,098 - INFO - 🛑 已从实例池移除并关闭 driver：1543531308864
+2025-07-17 19:26:41,107 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:09:49,391 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:09:49,508 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:09:50,111 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:09:50,246 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:09:51,327 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:09:51,542 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:09:52,119 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:09:53,203 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:09:54,759 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:09:54,814 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:09:54,870 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:09:58,363 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:09:58,408 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]
+2025-07-18 10:09:58,866 - INFO - 点击元素：By = xpath, Value = (//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span
+2025-07-18 10:09:59,674 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:09:59,726 - INFO - 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+2025-07-18 10:09:59,743 - INFO - 查找元素：xpath = (//label[text()="前生产特征"])[1]/parent::div//input
+2025-07-18 10:10:00,759 - INFO - 查找元素：xpath = (//label[text()="后生产特征"])[1]/parent::div//input
+2025-07-18 10:10:00,934 - WARNING - [test_changespec_addweeksuccess] 截图或邮件发送失败：Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7793d6f65+78965]
+	GetHandleVerifier [0x0x7ff7793d6fc0+79056]
+	(No symbol) [0x0x7ff779169c0c]
+	(No symbol) [0x0x7ff7791b043f]
+	(No symbol) [0x0x7ff7791e8532]
+	(No symbol) [0x0x7ff7791e2f5c]
+	(No symbol) [0x0x7ff7791e2039]
+	(No symbol) [0x0x7ff779135fc5]
+	GetHandleVerifier [0x0x7ff77968e26d+2926461]
+	GetHandleVerifier [0x0x7ff779688993+2903715]
+	GetHandleVerifier [0x0x7ff7796a6aed+3026941]
+	GetHandleVerifier [0x0x7ff7793f16fe+187406]
+	GetHandleVerifier [0x0x7ff7793f96ef+220159]
+	(No symbol) [0x0x7ff779135036]
+	GetHandleVerifier [0x0x7ff7797972f8+4012040]
+	BaseThreadInitThunk [0x0x7ffa099e7374+20]
+	RtlUserThreadStart [0x0x7ffa0b89cc91+33]
+
+2025-07-18 10:10:02,955 - INFO - 🛑 已从实例池移除并关闭 driver：2129891084608
+2025-07-18 10:10:08,978 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:10:09,198 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:10:09,735 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:10:09,969 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:10:11,382 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:10:11,579 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:10:12,200 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:12:49,291 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:12:49,397 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:12:49,998 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:12:50,123 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:12:51,216 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:12:51,327 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:12:51,913 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:12:52,961 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:12:54,521 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:12:54,571 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:12:54,628 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:34:23,475 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:34:32,483 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:34:32,575 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:34:33,182 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:34:33,301 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:34:34,375 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:34:34,479 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:34:35,061 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:34:36,386 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:34:37,856 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:34:37,904 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:34:37,954 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:34:39,156 - INFO - 查找元素：xpath = //div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[1]/td[2]//div/span
+2025-07-18 10:34:39,217 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:34:39,262 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]
+2025-07-18 10:34:39,713 - INFO - 点击元素：By = xpath, Value = //div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[3]/td[2]//div/span
+2025-07-18 10:34:40,463 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:34:40,543 - INFO - 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+2025-07-18 10:34:40,560 - INFO - 查找元素：xpath = (//label[text()="前生产特征"])[1]/parent::div//input
+2025-07-18 10:34:41,588 - INFO - 查找元素：xpath = (//label[text()="后生产特征"])[1]/parent::div//input
+2025-07-18 10:34:42,603 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-18 10:34:43,660 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]
+2025-07-18 10:34:44,722 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]
+2025-07-18 10:34:44,772 - INFO - 查找元素：xpath = (//span[text()="11"])[1]/ancestor::tr[1]/td[2]
+2025-07-18 10:34:44,796 - INFO - 查找元素：xpath = (//span[text()="11"])[1]/ancestor::tr[1]/td[3]
+2025-07-18 10:34:44,849 - INFO - 查找元素：xpath = (//span[text()="11"])[1]/ancestor::tr[1]/td[4]
+2025-07-18 10:34:44,862 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 10:34:50,017 - INFO - 🛑 已从实例池移除并关闭 driver：1693155175072
+2025-07-18 10:34:50,021 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:35:50,860 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:35:50,968 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:35:51,578 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:35:51,700 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:35:52,696 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:35:52,903 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:35:53,519 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:35:54,403 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:35:55,945 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:35:55,996 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:35:56,050 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:45:32,749 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:45:40,512 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:45:40,601 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:45:41,298 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:45:41,413 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:45:42,556 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:45:42,659 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:45:43,245 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:45:44,449 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:45:45,881 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:45:45,933 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:45:45,984 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:46:32,565 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:46:40,083 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:46:40,172 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:46:40,764 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:46:40,884 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:46:42,334 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:46:42,406 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:46:43,021 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:46:43,733 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:46:45,227 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:46:45,277 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:46:45,328 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:50:36,800 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:50:44,450 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:50:44,536 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:50:45,117 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:50:45,235 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:50:46,303 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:50:46,382 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:50:46,973 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:50:47,982 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:50:49,398 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:50:49,454 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:50:49,507 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 10:51:44,286 - INFO - 查找元素：xpath = //div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[2]/td[2]//div/span
+2025-07-18 10:51:44,408 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:51:44,452 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]
+2025-07-18 10:51:44,882 - INFO - 点击元素：By = xpath, Value = //div[@class="h-0px flex-grow1"]//table[@class="vxe-table--body"]//tr[3]/td[2]//div/span
+2025-07-18 10:51:45,895 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:51:45,945 - INFO - 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+2025-07-18 10:51:45,962 - INFO - 查找元素：xpath = (//label[text()="前生产特征"])[1]/parent::div//input
+2025-07-18 10:51:46,982 - INFO - 查找元素：xpath = (//label[text()="后生产特征"])[1]/parent::div//input
+2025-07-18 10:51:48,015 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-18 10:51:49,068 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]
+2025-07-18 10:51:50,132 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]
+2025-07-18 10:51:50,190 - INFO - 查找元素：xpath = (//span[text()="11"])[1]/ancestor::tr[1]/td[2]
+2025-07-18 10:51:50,211 - INFO - 查找元素：xpath = (//span[text()="11"])[1]/ancestor::tr[1]/td[3]
+2025-07-18 10:51:50,246 - INFO - 查找元素：xpath = (//span[text()="11"])[1]/ancestor::tr[1]/td[4]
+2025-07-18 10:51:50,262 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 10:51:55,397 - INFO - 🛑 已从实例池移除并关闭 driver：1896484689504
+2025-07-18 10:51:55,409 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 10:52:13,473 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 10:52:13,552 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 10:52:14,161 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 10:52:14,261 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 10:52:15,581 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 10:52:15,674 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 10:52:16,247 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 10:52:17,142 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 10:52:18,651 - INFO - 查找元素：xpath = (//table[.//tr[2]/td[2][contains(@class,"col--checkbox")]])[2]//tr[2]/td[2]/div/span
+2025-07-18 10:52:18,702 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+2025-07-18 10:52:18,758 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+2025-07-18 11:48:32,257 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 11:48:32,350 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 11:48:32,966 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 11:48:33,090 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 11:48:34,219 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 11:48:34,317 - INFO - 点击元素：By = xpath, Value = (//span[text()="工艺产能"])[1]
+2025-07-18 11:49:06,428 - INFO - 点击元素：By = xpath, Value = //p[text()="删除"]
+2025-07-18 11:58:49,532 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 11:58:53,604 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002461373C640>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/eb52de08413820e6c6f1b6aee8015e56
+2025-07-18 11:58:57,634 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000024614F5EA70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/eb52de08413820e6c6f1b6aee8015e56
