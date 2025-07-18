@@ -2966,3 +2966,485 @@ Stacktrace:
 2025-07-18 11:58:49,532 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
 2025-07-18 11:58:53,604 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002461373C640>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/eb52de08413820e6c6f1b6aee8015e56
 2025-07-18 11:58:57,634 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000024614F5EA70>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/eb52de08413820e6c6f1b6aee8015e56
+2025-07-18 11:59:04,557 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 11:59:04,641 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 11:59:05,272 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 11:59:05,382 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 11:59:06,463 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 11:59:06,553 - INFO - 点击元素：By = xpath, Value = (//span[text()="工艺产能"])[1]
+2025-07-18 17:14:59,927 - WARNING - [test_changespec_addweeksuccess] 截图或邮件发送失败：Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7793d6f65+78965]
+	GetHandleVerifier [0x0x7ff7793d6fc0+79056]
+	(No symbol) [0x0x7ff779169c0c]
+	(No symbol) [0x0x7ff7791b043f]
+	(No symbol) [0x0x7ff7791e8532]
+	(No symbol) [0x0x7ff7791e2f5c]
+	(No symbol) [0x0x7ff7791e2039]
+	(No symbol) [0x0x7ff779135fc5]
+	GetHandleVerifier [0x0x7ff77968e26d+2926461]
+	GetHandleVerifier [0x0x7ff779688993+2903715]
+	GetHandleVerifier [0x0x7ff7796a6aed+3026941]
+	GetHandleVerifier [0x0x7ff7793f16fe+187406]
+	GetHandleVerifier [0x0x7ff7793f96ef+220159]
+	(No symbol) [0x0x7ff779135036]
+	GetHandleVerifier [0x0x7ff7797972f8+4012040]
+	BaseThreadInitThunk [0x0x7ffa099e7374+20]
+	RtlUserThreadStart [0x0x7ffa0b89cc91+33]
+
+2025-07-18 17:15:00,430 - INFO - 点击元素：By = xpath, Value = //p[text()="删除"]
+2025-07-18 17:15:01,198 - WARNING - [test_master_delsuccess3] 截图或邮件发送失败：Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7793d6f65+78965]
+	GetHandleVerifier [0x0x7ff7793d6fc0+79056]
+	(No symbol) [0x0x7ff779169c0c]
+	(No symbol) [0x0x7ff7791b043f]
+	(No symbol) [0x0x7ff7791e8532]
+	(No symbol) [0x0x7ff7791e2f5c]
+	(No symbol) [0x0x7ff7791e2039]
+	(No symbol) [0x0x7ff779135fc5]
+	GetHandleVerifier [0x0x7ff77968e26d+2926461]
+	GetHandleVerifier [0x0x7ff779688993+2903715]
+	GetHandleVerifier [0x0x7ff7796a6aed+3026941]
+	GetHandleVerifier [0x0x7ff7793f16fe+187406]
+	GetHandleVerifier [0x0x7ff7793f96ef+220159]
+	(No symbol) [0x0x7ff779135036]
+	GetHandleVerifier [0x0x7ff7797972f8+4012040]
+	BaseThreadInitThunk [0x0x7ffa099e7374+20]
+	RtlUserThreadStart [0x0x7ffa0b89cc91+33]
+
+2025-07-18 17:15:01,965 - INFO - 🛑 已从实例池移除并关闭 driver：2983128684272
+2025-07-18 17:15:03,215 - INFO - 🛑 已从实例池移除并关闭 driver：2301623483456
+2025-07-18 17:15:03,253 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 17:15:09,034 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 17:15:09,322 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 17:15:09,927 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 17:15:10,133 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 17:15:11,527 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+2025-07-18 17:15:11,640 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产特征1切换"])[1]
+2025-07-18 17:15:12,319 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-18 17:15:13,324 - INFO - 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+2025-07-18 17:15:15,391 - INFO - [test_changespec_addweeksuccess] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_changespec_addweeksuccess_2983129935120_20250718_171515.png
+2025-07-18 17:15:17,938 - INFO - 🛑 已从实例池移除并关闭 driver：2983129935120
+2025-07-18 17:15:17,978 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 17:55:55,125 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 17:55:55,226 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 17:55:55,864 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 17:55:55,998 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 17:55:57,190 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 17:55:57,276 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 17:55:57,887 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 17:55:59,696 - INFO - 点击元素：By = xpath, Value = (//i[@style="cursor: pointer;"])[2]
+2025-07-18 17:55:59,807 - INFO - 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-18 17:55:59,830 - INFO - 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-18 17:56:10,175 - WARNING - ❌ 点击超时：元素 xpath = //div[text()="是否默认启动:"]/following-sibling::label/span 未在 10 秒内变为可点击
+2025-07-18 17:56:10,356 - WARNING - 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2403385524176_20250718_175610.png
+2025-07-18 17:56:12,673 - INFO - 🛑 已从实例池移除并关闭 driver：2403385524176
+2025-07-18 17:56:18,318 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 17:56:18,423 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 17:56:19,099 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 17:56:19,270 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 17:56:20,541 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 17:56:20,670 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 17:56:21,529 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 17:56:23,145 - INFO - 点击元素：By = xpath, Value = (//i[@style="cursor: pointer;"])[2]
+2025-07-18 17:56:23,236 - INFO - 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-18 17:56:23,257 - INFO - 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-18 17:56:33,627 - WARNING - ❌ 点击超时：元素 xpath = //div[text()="是否默认启动:"]/following-sibling::label/span 未在 10 秒内变为可点击
+2025-07-18 17:56:33,752 - WARNING - 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2403387435584_20250718_175633.png
+2025-07-18 17:56:35,944 - INFO - 🛑 已从实例池移除并关闭 driver：2403387435584
+2025-07-18 17:56:35,960 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 17:56:58,374 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 17:56:58,484 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 17:56:59,127 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 17:56:59,296 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 17:57:00,620 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 17:57:00,726 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 17:57:01,336 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:23:41,813 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:23:41,915 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:23:42,724 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:23:42,872 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:23:44,799 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:23:44,869 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:23:45,481 - INFO - 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+2025-07-18 18:23:45,894 - INFO - 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+2025-07-18 18:23:46,764 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:23:46,953 - INFO - 查找元素：xpath = //div[./div[text()="是否可见:"]]/label/span
+2025-07-18 18:23:46,973 - INFO - 点击元素：By = xpath, Value = //div[./div[text()="是否可见:"]]/label/span/span
+2025-07-18 18:23:48,085 - WARNING - ⚠️ 原生点击被拦截，尝试使用 JS 点击
+2025-07-18 18:23:48,111 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:23:48,236 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:23:49,593 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:23:54,833 - INFO - 🛑 已从实例池移除并关闭 driver：1927726153488
+2025-07-18 18:23:54,839 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:24:29,757 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:24:29,866 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:24:30,500 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:24:30,640 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:24:32,331 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:24:32,436 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:24:33,048 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:24:34,014 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:24:34,144 - INFO - 点击元素：By = xpath, Value = //div[text()="表尾内容:"]/following-sibling::div//i
+2025-07-18 18:24:34,777 - INFO - 点击元素：By = xpath, Value = //div[text()="合计"]
+2025-07-18 18:24:35,370 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:24:35,458 - INFO - 查找元素：xpath = (//span[text()="合计"])[2]
+2025-07-18 18:24:36,910 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:24:42,090 - INFO - 🛑 已从实例池移除并关闭 driver：2986800234448
+2025-07-18 18:24:42,094 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:24:57,441 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:24:57,548 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:24:58,288 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:24:58,410 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:25:00,368 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:25:00,465 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:25:01,121 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:25:01,796 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:25:02,687 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:25:03,071 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:25:05,221 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:25:05,362 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:25:05,615 - INFO - [test_setting_displaynum1] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_setting_displaynum1_2407084375872_20250718_182505.png
+2025-07-18 18:25:07,871 - INFO - 🛑 已从实例池移除并关闭 driver：2407084375872
+2025-07-18 18:25:14,312 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:25:14,639 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:25:16,057 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:25:16,214 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:25:18,389 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:25:18,470 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:25:19,073 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:25:19,896 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:25:20,057 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:25:20,635 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:25:25,835 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:25:25,856 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:25:25,873 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:25:31,075 - INFO - 🛑 已从实例池移除并关闭 driver：2407084362336
+2025-07-18 18:25:31,087 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:25:49,892 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:25:50,005 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:25:50,640 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:25:50,769 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:25:52,250 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:25:52,346 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:25:52,937 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:25:53,621 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:25:53,827 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:25:54,328 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:25:56,577 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:25:56,595 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:25:56,610 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:26:01,748 - INFO - 🛑 已从实例池移除并关闭 driver：2667716001648
+2025-07-18 18:26:01,753 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:26:12,993 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:26:13,117 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:26:13,936 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:26:14,112 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:26:15,750 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:26:15,905 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:26:16,532 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:26:17,369 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:26:17,674 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:26:18,237 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:26:20,374 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:26:20,393 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:26:20,616 - INFO - [test_setting_displaynum1] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_setting_displaynum1_2429317201680_20250718_182620.png
+2025-07-18 18:26:22,841 - INFO - 🛑 已从实例池移除并关闭 driver：2429317201680
+2025-07-18 18:26:29,646 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:26:29,758 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:26:30,440 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:26:30,611 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:26:32,260 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:26:32,345 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:26:32,956 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:26:33,871 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:26:33,973 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:26:34,590 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:26:39,778 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:26:39,798 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:26:39,813 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:26:44,980 - INFO - 🛑 已从实例池移除并关闭 driver：2429317188192
+2025-07-18 18:26:44,993 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:27:12,139 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:27:12,247 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:27:12,919 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:27:13,063 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:27:14,598 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:27:14,699 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:27:15,316 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:27:16,120 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:27:16,306 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:27:16,731 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:27:18,837 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:27:18,856 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:27:18,873 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:27:24,014 - INFO - 🛑 已从实例池移除并关闭 driver：2508897631392
+2025-07-18 18:27:24,018 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:28:06,305 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:28:06,415 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:28:07,205 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:28:07,337 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:28:08,986 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:28:09,084 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:28:09,927 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:28:10,223 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:28:10,632 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:28:11,085 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:28:17,263 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:28:17,282 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:28:17,296 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:28:22,465 - INFO - 🛑 已从实例池移除并关闭 driver：3019004361936
+2025-07-18 18:28:22,471 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:28:48,061 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:28:48,174 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:28:48,812 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:28:48,954 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:28:50,809 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:28:50,909 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:28:51,791 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:28:52,613 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:28:52,816 - INFO - 查找元素：xpath = //div[text()="一页显示条数:"]/following-sibling::div//input
+2025-07-18 18:28:53,101 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:28:56,034 - INFO - 查找元素：xpath = //span[@class="vxe-pager--btn-wrapper"]/button[last()]
+2025-07-18 18:28:56,054 - INFO - 查找元素：xpath = //span[contains(text(),'共') and contains(text(),'条记录')]
+2025-07-18 18:28:56,067 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:29:01,218 - INFO - 🛑 已从实例池移除并关闭 driver：2954869058448
+2025-07-18 18:29:01,229 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:29:19,652 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:29:19,770 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:29:20,601 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:29:20,757 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:29:22,332 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:29:22,470 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:29:23,099 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:29:24,246 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:29:24,270 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:29:24,355 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:29:24,514 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:29:24,997 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:29:26,957 - INFO - [test_setting_display1] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_setting_display1_2631673167728_20250718_182926.png
+2025-07-18 18:29:29,170 - INFO - 🛑 已从实例池移除并关闭 driver：2631673167728
+2025-07-18 18:29:35,055 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:29:35,173 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:29:35,756 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:29:35,898 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:29:37,320 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:29:37,395 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:29:38,307 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:29:39,178 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:29:39,205 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:29:39,482 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:29:40,040 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:29:40,069 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:29:41,636 - INFO - [test_setting_display1] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_setting_display1_2631673154048_20250718_182941.png
+2025-07-18 18:29:43,853 - INFO - 🛑 已从实例池移除并关闭 driver：2631673154048
+2025-07-18 18:29:43,858 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:30:35,149 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:30:35,262 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:30:35,956 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:30:36,128 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:30:37,919 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:30:38,014 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:30:38,626 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:30:39,809 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:30:39,832 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:30:40,051 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:30:40,507 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:30:40,526 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:30:42,474 - INFO - [test_setting_display1] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_setting_display1_2891905482608_20250718_183042.png
+2025-07-18 18:30:44,667 - INFO - 🛑 已从实例池移除并关闭 driver：2891905482608
+2025-07-18 18:30:50,422 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:30:50,540 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:30:51,185 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:30:51,338 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:30:52,964 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:30:53,065 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:30:53,670 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:30:54,460 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:30:54,486 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:30:54,591 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:30:55,169 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:30:55,194 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:30:57,001 - INFO - [test_setting_display1] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_setting_display1_2891904873280_20250718_183056.png
+2025-07-18 18:30:59,206 - INFO - 🛑 已从实例池移除并关闭 driver：2891904873280
+2025-07-18 18:30:59,228 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:32:14,026 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:32:14,143 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:32:14,835 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:32:14,965 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:32:16,970 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:32:17,073 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:32:17,681 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:32:18,245 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:32:18,596 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:32:18,705 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:32:19,872 - WARNING - ⚠️ 原生点击被拦截，尝试使用 JS 点击
+2025-07-18 18:32:19,894 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:32:19,985 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:33:16,523 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:33:26,128 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:33:26,240 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:33:26,933 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:33:27,116 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:33:28,677 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:33:28,818 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:33:29,403 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:33:30,242 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:33:30,272 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:33:30,387 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:33:30,920 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:33:31,144 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:33:54,278 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:33:59,446 - INFO - 🛑 已从实例池移除并关闭 driver：1891371645440
+2025-07-18 18:33:59,460 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:34:11,006 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:34:11,120 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:34:11,757 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:34:11,906 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:34:13,290 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:34:13,406 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:34:15,028 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:34:15,239 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:34:15,328 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:34:15,719 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:34:15,921 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:34:18,093 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:34:18,110 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:34:23,279 - INFO - 🛑 已从实例池移除并关闭 driver：2865361026496
+2025-07-18 18:34:23,289 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:34:37,053 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:34:37,193 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:34:37,805 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:34:38,058 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:34:39,658 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:34:39,798 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:34:40,895 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:34:41,635 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:34:41,661 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:34:41,792 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:34:42,216 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:34:42,399 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:34:43,773 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:34:49,005 - INFO - 🛑 已从实例池移除并关闭 driver：2092268961648
+2025-07-18 18:34:49,010 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:34:59,279 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:34:59,380 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:34:59,955 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:35:00,114 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:35:01,474 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:35:01,597 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:35:03,192 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:35:03,337 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:35:03,460 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:35:03,870 - INFO - 查找元素：xpath = //tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]
+2025-07-18 18:35:04,044 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:35:06,213 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[3]//p
+2025-07-18 18:35:06,231 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:35:11,389 - INFO - 🛑 已从实例池移除并关闭 driver：2564109811664
+2025-07-18 18:35:11,394 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:35:23,140 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:35:23,246 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:35:23,852 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:35:23,994 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:35:25,204 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:35:25,297 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:35:25,913 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:35:26,823 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[4]//p
+2025-07-18 18:35:26,849 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:35:26,945 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:35:27,405 - INFO - 查找元素：xpath = //tr[./td[3][.//span[text()="物料组代码"]]]/td[4]//input
+2025-07-18 18:35:27,622 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:35:28,763 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[4]//p
+2025-07-18 18:35:28,875 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:35:34,037 - INFO - 🛑 已从实例池移除并关闭 driver：2241001668368
+2025-07-18 18:35:34,042 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:35:43,521 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:35:43,613 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:35:44,282 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:35:44,439 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:35:45,602 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:35:45,681 - INFO - 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+2025-07-18 18:35:46,324 - INFO - 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-18 18:35:47,264 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[4]//p
+2025-07-18 18:35:47,533 - INFO - 点击元素：By = xpath, Value = (//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]
+2025-07-18 18:35:47,642 - INFO - 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+2025-07-18 18:35:48,215 - INFO - 查找元素：xpath = //tr[./td[3][.//span[text()="物料组代码"]]]/td[4]//input
+2025-07-18 18:35:48,328 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-18 18:35:49,496 - INFO - 查找元素：xpath = //table[.//th[.//p[text()="物料代码"]]]//th[4]//p
+2025-07-18 18:35:49,672 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:35:54,851 - INFO - 🛑 已从实例池移除并关闭 driver：1941229888960
+2025-07-18 18:35:54,862 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:37:56,439 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:38:07,252 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:38:07,357 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:38:07,971 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:38:08,123 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:38:09,180 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:38:09,386 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+2025-07-18 18:38:10,465 - INFO - 查找元素：xpath = (//span[text()="客户"])[1]
+2025-07-18 18:38:11,062 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]/following-sibling::i
+2025-07-18 18:38:11,118 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2]
+2025-07-18 18:38:21,205 - WARNING - ❌ 点击超时：元素 xpath = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2] 未在 10 秒内变为可点击
+2025-07-18 18:38:21,284 - WARNING - 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2254347808208_20250718_183821.png
+2025-07-18 18:38:23,604 - INFO - 🛑 已从实例池移除并关闭 driver：2254347808208
+2025-07-18 18:38:28,864 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:38:28,963 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:38:29,580 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:38:29,729 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:38:30,887 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:38:30,976 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+2025-07-18 18:38:32,562 - INFO - 查找元素：xpath = (//span[text()="客户"])[1]
+2025-07-18 18:38:32,847 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]/following-sibling::i
+2025-07-18 18:38:32,932 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2]
+2025-07-18 18:38:43,014 - WARNING - ❌ 点击超时：元素 xpath = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2] 未在 10 秒内变为可点击
+2025-07-18 18:38:43,101 - WARNING - 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2254349105616_20250718_183843.png
+2025-07-18 18:38:45,257 - INFO - 🛑 已从实例池移除并关闭 driver：2254349105616
+2025-07-18 18:38:45,286 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:39:10,176 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:39:10,277 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:39:10,894 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:39:11,030 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:39:12,209 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:39:12,309 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+2025-07-18 18:39:13,389 - INFO - 查找元素：xpath = (//span[text()="客户"])[1]
+2025-07-18 18:39:13,957 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]/following-sibling::i
+2025-07-18 18:39:34,301 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2]
+2025-07-18 18:39:44,417 - WARNING - ❌ 点击超时：元素 xpath = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2] 未在 10 秒内变为可点击
+2025-07-18 18:39:44,571 - WARNING - 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_3155615493776_20250718_183944.png
+2025-07-18 18:43:17,545 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:43:24,332 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:43:24,423 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:43:25,083 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:43:25,240 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:43:26,499 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:43:26,589 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+2025-07-18 18:43:27,682 - INFO - 查找元素：xpath = (//span[text()="客户"])[1]
+2025-07-18 18:43:28,117 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]/following-sibling::i
+2025-07-18 18:43:28,175 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]
+2025-07-18 18:43:31,484 - INFO - [test_function_collect] 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_function_collect_2818458420224_20250718_184331.png
+2025-07-18 18:43:33,713 - INFO - 🛑 已从实例池移除并关闭 driver：2818458420224
+2025-07-18 18:43:38,767 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:43:38,889 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:43:39,479 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:43:39,665 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:43:40,966 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:43:41,055 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+2025-07-18 18:43:42,144 - INFO - 查找元素：xpath = (//span[text()="客户"])[1]
+2025-07-18 18:43:42,696 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]/following-sibling::i
+2025-07-18 18:43:42,750 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]
+2025-07-18 18:43:45,839 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:43:50,994 - INFO - 🛑 已从实例池移除并关闭 driver：2818457954736
+2025-07-18 18:43:50,999 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 18:45:35,979 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-18 18:45:36,066 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-18 18:45:36,719 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-18 18:45:36,852 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-18 18:45:37,938 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-18 18:45:38,115 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+2025-07-18 18:45:39,710 - INFO - 查找元素：xpath = (//span[text()="客户"])[1]
+2025-07-18 18:45:40,023 - INFO - 点击元素：By = xpath, Value = (//span[text()="客户"])[1]/following-sibling::i
+2025-07-18 18:45:40,073 - INFO - 点击元素：By = xpath, Value = (//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]
+2025-07-18 18:45:43,222 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-18 18:45:48,369 - INFO - 🛑 已从实例池移除并关闭 driver：2141831004016
+2025-07-18 18:45:48,380 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署

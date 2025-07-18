@@ -159,6 +159,9 @@ class TestPreviewPlanPage:
         # 点击下月按钮
         operationPlan.click_button(
             '(//span[@class="ivu-picker-panel-icon-btn ivu-date-picker-next-btn ivu-date-picker-next-btn-arrow"])[2]/i')
+        sleep(0.5)
+        operationPlan.click_button(
+            '(//span[@class="ivu-picker-panel-icon-btn ivu-date-picker-next-btn ivu-date-picker-next-btn-arrow"])[2]/i')
         # 选择具体的时间点（例如：28 日）
         operationPlan.click_button('(//em[text()="28"])[last()]')
         # 点击确认按钮以完成时间段的选择

@@ -140,7 +140,7 @@ class TestFunctionPage:
         # 鼠标悬停
         ActionChains(driver).move_to_element(element).perform()
         function.click_button(f'(//span[text()="{name}"])[1]/following-sibling::i')
-        function.click_button('(//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2]')
+        function.click_button('(//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]')
         sleep(3)
         eles = driver.find_elements(By.XPATH, '//div[@class="ivu-select-dropdown GroundGlass"]/ul/li')
         assert any(li.text.strip() == "客户" for li in eles)
@@ -158,7 +158,7 @@ class TestFunctionPage:
         # 鼠标悬停
         ActionChains(driver).move_to_element(element).perform()
         function.click_button(f'(//span[text()="{name}"])[1]/following-sibling::i')
-        function.click_button('(//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"iconfont")]])[2]')
+        function.click_button('(//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]')
         sleep(3)
         eles = driver.find_elements(By.XPATH, '//div[@class="ivu-select-dropdown GroundGlass"]/ul/li')
         # 提取所有元素的文本并去除空格

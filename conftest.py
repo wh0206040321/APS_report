@@ -211,20 +211,35 @@ def pytest_sessionfinish(session, exitstatus):
     try:
         if docs_dir.exists():
             shutil.rmtree(docs_dir)
+            logging.info("🧹 已清空旧的 docs/ 目录")
+
         shutil.copytree(allure_output_dir, docs_dir)
+        logging.info(f"📦 report/allure_report 文件数：{len(list(allure_output_dir.rglob('*')))}")
+        logging.info(f"📦 docs/ 文件数：{len(list(docs_dir.rglob('*')))}")
 
         # ✅ 添加 .nojekyll 文件
         Path("docs/.nojekyll").touch()
+        logging.info("✅ 已复制报告并添加 .nojekyll 文件")
 
-        subprocess.run(["git", "pull", "origin", "main", "--allow-unrelated-histories"], check=True)
-        subprocess.run(["git", "checkout", "--ours", "docs/"], check=True)
+        compare_file_counts(allure_output_dir, docs_dir)
 
+        # ✅ 检查关键文件是否存在
+        for file in ["index.html", "app.js", "styles.css"]:
+            if not (docs_dir / file).exists():
+                logging.warning(f"❌ 缺失关键文件：{file}")
+            else:
+                logging.info(f"✅ 存在关键文件：{file}")
+
+        # ✅ 添加并提交 docs/
         subprocess.run(["git", "add", "docs/"], check=True)
-        subprocess.run(["git", "commit", "-m", "自动更新 Allure 报告"], check=True)
+
+        # ✅ 提交变更（忽略无变更错误）
+        subprocess.run(["git", "commit", "-m", "自动更新 Allure 报告"], check=False)
 
         # ✅ 添加空提交，确保触发构建
-        subprocess.run(["git", "commit", "--allow-empty", "-m", "强制触发 GitHub Pages 构建"], check=True)
+        subprocess.run(["git", "commit", "--allow-empty", "-m", "强制触发 GitHub Pages 构建"], check=False)
 
+        # ✅ 推送到远程
         subprocess.run(["git", "push", "origin", "main"], check=True)
 
         logging.info("✅ Allure 报告已自动部署到 GitHub Pages")
@@ -233,4 +248,14 @@ def pytest_sessionfinish(session, exitstatus):
         logging.warning(f"🚨 GitHub Pages 部署失败：{e}")
 
 
+def compare_file_counts(src: Path, dst: Path):
+    src_files = set(f.relative_to(src) for f in src.rglob("*") if f.is_file())
+    dst_files = set(f.relative_to(dst) for f in dst.rglob("*") if f.is_file())
+    diff = src_files.symmetric_difference(dst_files)
+    if diff:
+        logging.warning(f"❌ 报告文件不一致：{len(diff)} 个差异")
+        for f in diff:
+            logging.warning(f"↪️ 差异文件：{f}")
+    else:
+        logging.info("✅ 报告文件完全一致")
 

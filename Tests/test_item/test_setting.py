@@ -541,7 +541,7 @@ class TestSettingPage:
         inupt_number.send_keys(Keys.DELETE)
         inupt_number.send_keys(f"{num}")
         setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(1)
+        sleep(1.5)
         tr_text = driver.find_elements(
             By.XPATH,
             f'//div[@class="vxe-table--body-wrapper body--wrapper" and @xid="2"]/table//tr[{num}]',
@@ -601,7 +601,7 @@ class TestSettingPage:
         # 滚动到页面底部以加载所有元素
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         # 等待1秒以确保页面滚动完成
-        sleep(1)
+        sleep(1.5)
         # 获取分页数字
         nums = setting.get_find_element_xpath(
             '//span[@class="vxe-pager--btn-wrapper"]/button[last()]'
@@ -1597,7 +1597,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局B"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[3]')
+        setting.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
         ele = setting.get_find_element_xpath('//div[@class="statisticalListItemTitle"]/span').text
         # 刷新当前页面
         driver.refresh()
@@ -1626,7 +1626,7 @@ class TestSettingPage:
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         ).text
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[3]')
+        setting.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
         sleep(1)
         eles = driver.find_elements(By.XPATH, '//div[.//span[text()="统计图1 "] and @class="statisticalListItemTitle"]')
         assert len(eles) == 1 and ele == "统计图1 (数据源:测试布局A)" and name == layout
@@ -1817,7 +1817,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[3]')
+        setting.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
 
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
@@ -1843,7 +1843,7 @@ class TestSettingPage:
         layout = "测试布局A"
         statistics = "统计图13"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[3]')
+        setting.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
 
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
@@ -1870,7 +1870,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[3]')
+        setting.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
         i = 2
         while i <= 13:
             try:
@@ -1893,7 +1893,7 @@ class TestSettingPage:
         sleep(3)
         driver.refresh()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[3]')
+        setting.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
         ele = driver.find_elements(By.XPATH, '//div[@class="statisticalListItemTitle"]/span[contains(text(),"统计图")]')
         assert len(ele) == 0
         assert not setting.has_fail_message()
@@ -1947,7 +1947,7 @@ class TestSettingPage:
         layout = "测试布局A"
         lable = "标签1"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[4]')
+        setting.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="编辑"]'
@@ -1967,7 +1967,7 @@ class TestSettingPage:
         layout = "测试布局A"
         lable = "标签1"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[4]')
+        setting.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="编辑"]'
         )
@@ -2014,7 +2014,7 @@ class TestSettingPage:
         layout = "测试布局A"
         lable = "标签3"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[4]')
+        setting.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         sleep(1)
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="编辑"]'
@@ -2042,7 +2042,7 @@ class TestSettingPage:
         layout = "测试布局A"
         lable = "标签3"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[4]')
+        setting.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         sleep(1)
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="编辑"]'
@@ -2075,7 +2075,7 @@ class TestSettingPage:
         layout = "测试布局A"
         lable = "标签3"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[4]')
+        setting.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="编辑"]'
         )
@@ -2103,7 +2103,7 @@ class TestSettingPage:
         layout = "测试布局A"
         lable = "标签3"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button('(//i[@style="cursor: pointer;"])[4]')
+        setting.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="删除"]'
         )

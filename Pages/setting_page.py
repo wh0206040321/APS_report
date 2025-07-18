@@ -40,7 +40,7 @@ class SettingPage(BasePage):
 
     def click_setting_button(self):
         """点击设置按钮."""
-        self.click_button('(//i[@style="cursor: pointer;"])[2]')
+        self.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]')
 
     def get_find_message(self):
         """获取错误信息"""
@@ -57,7 +57,7 @@ class SettingPage(BasePage):
 
     def add_statistics(self, num='', data="", name="", code1='', code2='', code3=''):
         """添加统计."""
-        self.click_button('(//i[@style="cursor: pointer;"])[3]')
+        self.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
         self.click_button('//div[./span[text()=" 统计 "]]//i')
         self.click_button(f'//h2[text()="图表"]/following-sibling::div/div[{num}]')
         if data:  # 如果 data 不为空，则输入
@@ -106,7 +106,7 @@ class SettingPage(BasePage):
 
     def add_lable(self, name=''):
         """添加标签."""
-        self.click_button('(//i[@style="cursor: pointer;"])[4]')
+        self.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
         self.click_button('(//i[@class="el-tooltip ivu-icon ivu-icon-md-add"])[2]')
         if name:
             self.enter_texts('//div[text()="标签名："]/following-sibling::div/input', f"{name}")
