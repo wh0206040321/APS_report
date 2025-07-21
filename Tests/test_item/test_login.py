@@ -1,14 +1,11 @@
 # tests/test_login.py
-from time import sleep
 
 import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 
-from Pages.login_page import LoginPage
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+from Utils.driver_manager import create_driver, safe_quit
 
 
 @pytest.fixture

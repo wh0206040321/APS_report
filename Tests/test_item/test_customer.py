@@ -3,18 +3,16 @@ from time import sleep
 
 import allure
 import pytest
-from selenium import webdriver
 from selenium.common import StaleElementReferenceException
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.customer_page import CustomerPage
-from Pages.login_page import LoginPage
+from Pages.itemsPage.customer_page import CustomerPage
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+from Utils.driver_manager import create_driver, safe_quit
 from selenium.webdriver.common.keys import Keys
 
 

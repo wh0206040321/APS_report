@@ -1,27 +1,17 @@
-import random
 from time import sleep
 
 import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.item_page import ItemPage
-from Pages.login_page import LoginPage
-from Pages.master_page import MasterPage
-from Pages.operationPlan_page import operationPlanPage
-from Pages.order_page import OrderPage
-from Pages.plan_page import PlanPage
-from Pages.previewPlan_page import PreviewPlanPage
-from Pages.resource_page import ResourcePage
+from Pages.itemsPage.item_page import ItemPage
+from Pages.itemsPage.login_page import LoginPage
+from Pages.itemsPage.master_page import MasterPage
+from Pages.itemsPage.order_page import OrderPage
+from Pages.itemsPage.previewPlan_page import PreviewPlanPage
 from Utils.data_driven import DateDriver
 from Utils.shared_data_util import SharedDataUtil
-from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+from Utils.driver_manager import create_driver
 
 
 @allure.feature("删除添加的物品，添加的工艺产能，添加的制造订单,删除工作指示测试用例")

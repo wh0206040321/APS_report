@@ -3448,3 +3448,48 @@ Stacktrace:
 2025-07-18 18:45:43,222 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
 2025-07-18 18:45:48,369 - INFO - 🛑 已从实例池移除并关闭 driver：2141831004016
 2025-07-18 18:45:48,380 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-18 20:04:45,087 - INFO - 点击元素：By = xpath, Value = (//i[@style="cursor: pointer;"])[2]
+2025-07-18 20:04:46,027 - WARNING - [test_setting_default_start_success] 截图或邮件发送失败：Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7793d6f65+78965]
+	GetHandleVerifier [0x0x7ff7793d6fc0+79056]
+	(No symbol) [0x0x7ff779169c0c]
+	(No symbol) [0x0x7ff7791b043f]
+	(No symbol) [0x0x7ff7791e8532]
+	(No symbol) [0x0x7ff7791e2f5c]
+	(No symbol) [0x0x7ff7791e2039]
+	(No symbol) [0x0x7ff779135fc5]
+	GetHandleVerifier [0x0x7ff77968e26d+2926461]
+	GetHandleVerifier [0x0x7ff779688993+2903715]
+	GetHandleVerifier [0x0x7ff7796a6aed+3026941]
+	GetHandleVerifier [0x0x7ff7793f16fe+187406]
+	GetHandleVerifier [0x0x7ff7793f96ef+220159]
+	(No symbol) [0x0x7ff779135036]
+	GetHandleVerifier [0x0x7ff7797972f8+4012040]
+	BaseThreadInitThunk [0x0x7ffa099e7374+20]
+	RtlUserThreadStart [0x0x7ffa0b89cc91+33]
+
+2025-07-18 20:04:48,055 - INFO - 🛑 已从实例池移除并关闭 driver：1487828546464
+2025-07-18 20:04:48,101 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署
+2025-07-21 09:35:40,757 - INFO - 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+2025-07-21 09:35:40,827 - INFO - 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+2025-07-21 09:35:41,439 - INFO - 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+2025-07-21 09:35:41,537 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+2025-07-21 09:35:42,978 - INFO - 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+2025-07-21 09:35:43,031 - INFO - 点击元素：By = xpath, Value = (//span[text()="生产日历"])[1]
+2025-07-21 09:35:43,600 - INFO - 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+2025-07-21 09:35:44,302 - INFO - 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+2025-07-21 09:35:45,535 - INFO - 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-21 09:35:45,549 - INFO - 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+2025-07-21 09:35:46,613 - INFO - 点击元素：By = xpath, Value = (//div[text()=" 显示设置 "])[1]
+2025-07-21 09:35:46,729 - INFO - 查找元素：xpath = (//div[./div[text()="是否可见:"]])[1]/label/span
+2025-07-21 09:35:46,743 - INFO - 点击元素：By = xpath, Value = (//div[./div[text()="是否可见:"]])[1]/label/span
+2025-07-21 09:35:46,807 - INFO - 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+2025-07-21 09:35:46,896 - INFO - 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+2025-07-21 09:35:47,583 - INFO - 点击元素：By = xpath, Value = //p[text()="新增"]
+2025-07-21 09:35:47,656 - INFO - 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+2025-07-21 09:35:48,045 - INFO - 查找元素：xpath = (//label[text()="班次"])[1]/parent::div//input
+2025-07-21 09:35:48,057 - INFO - 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+2025-07-21 09:35:49,150 - INFO - 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+2025-07-21 09:35:54,335 - INFO - 🛑 已从实例池移除并关闭 driver：2823846538800
+2025-07-21 09:35:54,339 - WARNING - ⚠️ 当前目录不是 Git 仓库，跳过自动部署

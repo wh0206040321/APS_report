@@ -7,13 +7,11 @@ from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.changeI_page import ChangeI
-from Pages.login_page import LoginPage
+from Pages.itemsPage.changeI_page import ChangeI
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+from Utils.driver_manager import create_driver, safe_quit
 from Utils.shared_data_util import SharedDataUtil
 
 

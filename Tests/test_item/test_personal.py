@@ -1,23 +1,17 @@
-import random
 from time import sleep
 
 import allure
 import pytest
-from selenium import webdriver
-from selenium.common import StaleElementReferenceException, NoSuchElementException
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.color import Color
 from selenium.common.exceptions import TimeoutException
 
-from Pages.personal_page import PersonalPage
-from Pages.login_page import LoginPage
+from Pages.itemsPage.personal_page import PersonalPage
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+from Utils.driver_manager import create_driver, safe_quit
 from Utils.shared_data_util import SharedDataUtil
 
 

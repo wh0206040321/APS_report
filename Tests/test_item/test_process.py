@@ -1,22 +1,19 @@
-import logging
 import random
 from time import sleep
 
 import allure
 import pytest
-from selenium import webdriver
 from selenium.common import StaleElementReferenceException, NoSuchElementException
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.login_page import LoginPage
-from Pages.process_page import ProcessPage
+from Pages.itemsPage.login_page import LoginPage
+from Pages.itemsPage.process_page import ProcessPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
+from Utils.driver_manager import create_driver, safe_quit
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次

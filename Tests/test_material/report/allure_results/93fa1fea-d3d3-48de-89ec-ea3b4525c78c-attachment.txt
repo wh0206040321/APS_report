@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:22 查找元素：xpath = (//label[text()="工厂代码"])[1]/parent::div//input
+[33mWARNING [0m root:base_page.py:28 ❌ 未找到元素：xpath = (//label[text()="工厂代码"])[1]/parent::div//input，等待超时 10s
+[33mWARNING [0m root:base_page.py:102 截图已保存：C:\zhong\APS\report\screenshots\test_find_element_timeout_1563338090496_20250715_144935.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1563338090496
