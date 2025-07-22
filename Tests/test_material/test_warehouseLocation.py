@@ -3,13 +3,17 @@ from time import sleep
 
 import allure
 import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
@@ -331,19 +335,11 @@ class TestItemPage:
         )
         assert not self.item.has_fail_message()
 
-    @allure.story("刷新成功")
+    @allure.story("筛选刷新成功")
     # @pytest.mark.run(order=1)
     def test_item_refreshsuccess(self, login_to_item):
-
-        # 物料代码筛选框输入123
-        self.item.enter_texts(
-            '//p[text()="物料代码"]/ancestor::div[2]//input', "123"
-        )
-        self.item.click_ref_button()
-        itemtext = self.item.get_find_element_xpath(
-            '//p[text()="物料代码"]/ancestor::div[2]//input'
-        ).text
-        assert itemtext == "", f"预期{itemtext}"
+        filter_results = self.item.filter_method('//span[text()=" 工厂代码"]/ancestor::div[3]//span//span//span')
+        assert filter_results
         assert not self.item.has_fail_message()
 
     @allure.story("查询工厂代码成功")

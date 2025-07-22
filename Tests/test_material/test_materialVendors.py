@@ -1,14 +1,19 @@
+import random
 from time import sleep
 
 import allure
 import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
@@ -27,6 +32,7 @@ def login_to_item():
     page.click_button('(//span[text()="供应商信息"])[1]')  # 点击物品
     yield driver  # 提供给测试用例使用
     safe_quit(driver)
+
 
 
 @allure.feature("供应商信息测试用例")

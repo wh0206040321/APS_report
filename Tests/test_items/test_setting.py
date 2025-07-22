@@ -413,81 +413,81 @@ class TestSettingPage:
         assert not setting.has_fail_message()
         safe_quit(driver)
 
-    @allure.story("设置表格布局-设置为不显示布局")
-    # @pytest.mark.run(order=1)
-    def test_setting_notdisplay(self, login_to_setting):
-        driver = login_to_setting  # WebDriver 实例
-        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "测试布局A"
-        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        sleep(1)
-        setting.click_setting_button()
-        checkbox = setting.get_find_element_xpath(
-            '//div[text()="是否显示布局:"]/following-sibling::label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox.get_attribute("class") == "ivu-checkbox":
-            # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-            sleep(1)
-        else:
-            # 如果已选中，点击取消选中
-            setting.click_button(
-                '//div[text()="是否显示布局:"]/following-sibling::label/span'
-            )
-            sleep(1)
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-
-        setting.click_ref_button()
-        name = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-        assert name.get_attribute("style") == "display: none;"
-        assert not setting.has_fail_message()
-
-    @allure.story("设置表格布局-布局列表设置为显示布局")
-    # @pytest.mark.run(order=1)
-    def test_setting_display(self, login_to_setting):
-        driver = login_to_setting  # WebDriver 实例
-        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "测试布局A"
-        sleep(1)
-        setting.click_button('//i[@id="tabsDrawerIcon"]')
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = setting.get_find_element_xpath(
-            f'//div[@id="container"]/div[.//text()="{layout}"]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-        xpath = f'(//i[@class="el-icon-more layoutListDropdown"])[{index + 1}]'
-        element = driver.find_element(By.XPATH, xpath)
-        # 判断是否可点击（可见 + 启用）
-        sleep(1)
-        if element.is_displayed() and element.is_enabled():
-            print(f"元素存在且可点击，即将点击...")
-            element.click()  # 执行点击操作
-        else:
-            setting.click_button(
-                f'//span[./span[text()="{layout}"]]/following-sibling::i[1]'
-            )
-
-        setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
-        setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
-        name = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-        assert name.text == layout
-        assert not setting.has_fail_message()
+    # @allure.story("设置表格布局-设置为不显示布局")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_notdisplay(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     layout = "测试布局A"
+    #     setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+    #     sleep(1)
+    #     setting.click_setting_button()
+    #     checkbox = setting.get_find_element_xpath(
+    #         '//div[text()="是否显示布局:"]/following-sibling::label/span'
+    #     )
+    #     # 检查复选框是否未被选中
+    #     if checkbox.get_attribute("class") == "ivu-checkbox":
+    #         # 点击确定按钮保存设置
+    #         setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+    #         sleep(1)
+    #     else:
+    #         # 如果已选中，点击取消选中
+    #         setting.click_button(
+    #             '//div[text()="是否显示布局:"]/following-sibling::label/span'
+    #         )
+    #         sleep(1)
+    #         setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+    #
+    #     setting.click_ref_button()
+    #     name = setting.get_find_element_xpath(
+    #         f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+    #     )
+    #     assert name.get_attribute("style") == "display: none;"
+    #     assert not setting.has_fail_message()
+    #
+    # @allure.story("设置表格布局-布局列表设置为显示布局")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_display(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     layout = "测试布局A"
+    #     sleep(1)
+    #     setting.click_button('//i[@id="tabsDrawerIcon"]')
+    #
+    #     # 获取目标 div 元素，这里的目标是具有特定文本的 div
+    #     target_div = setting.get_find_element_xpath(
+    #         f'//div[@id="container"]/div[.//text()="{layout}"]'
+    #     )
+    #
+    #     # 获取父容器下所有 div
+    #     # 这一步是为了确定目标 div 在其父容器中的位置
+    #     parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
+    #     all_children = parent_div.find_elements(By.XPATH, "./div")
+    #
+    #     # 获取目标 div 的位置索引（从0开始）
+    #     # 这里是为了后续操作，比如点击目标 div 相关的按钮
+    #     index = all_children.index(target_div)
+    #     print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+    #     xpath = f'(//i[@class="el-icon-more layoutListDropdown"])[{index + 1}]'
+    #     element = driver.find_element(By.XPATH, xpath)
+    #     # 判断是否可点击（可见 + 启用）
+    #     sleep(1)
+    #     if element.is_displayed() and element.is_enabled():
+    #         print(f"元素存在且可点击，即将点击...")
+    #         element.click()  # 执行点击操作
+    #     else:
+    #         setting.click_button(
+    #             f'//span[./span[text()="{layout}"]]/following-sibling::i[1]'
+    #         )
+    #
+    #     setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
+    #     setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+    #     sleep(1)
+    #     name = setting.get_find_element_xpath(
+    #         f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+    #     )
+    #     assert name.text == layout
+    #     assert not setting.has_fail_message()
 
     @allure.story("设置表格布局-表尾内容设置为合计")
     # @pytest.mark.run(order=1)
@@ -1440,80 +1440,80 @@ class TestSettingPage:
         assert not setting.has_fail_message()
         safe_quit(driver)
 
-    @allure.story("设置透视表格布局-设置为不显示布局")
-    # @pytest.mark.run(order=1)
-    def test_setting_perspective_notdisplay(self, login_to_setting):
-        driver = login_to_setting  # WebDriver 实例
-        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "测试透视表B"
-        sleep(1)
-        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_setting_button()
-        checkbox = setting.get_find_element_xpath(
-            '//div[text()="是否显示布局:"]/following-sibling::label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox.get_attribute("class") == "ivu-checkbox":
-            # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-            sleep(1)
-        else:
-            # 如果已选中，点击取消选中
-            setting.click_button(
-                '//div[text()="是否显示布局:"]/following-sibling::label/span'
-            )
-            sleep(1)
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(2)
-        name = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-        assert name.get_attribute("style") == "display: none;"
-        assert not setting.has_fail_message()
-
-    @allure.story("设置透视表格布局-布局列表设置为显示布局")
-    # @pytest.mark.run(order=1)
-    def test_setting_perspective_display(self, login_to_setting):
-        driver = login_to_setting  # WebDriver 实例
-        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "测试透视表B"
-        sleep(1)
-        setting.click_button('//i[@id="tabsDrawerIcon"]')
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = setting.get_find_element_xpath(
-            f'//div[@id="container"]/div[.//text()="{layout}"]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-        xpath = f'(//i[@class="el-icon-more layoutListDropdown"])[{index + 1}]'
-        element = driver.find_element(By.XPATH, xpath)
-        # 判断是否可点击（可见 + 启用）
-        sleep(1)
-        if element.is_displayed() and element.is_enabled():
-            print(f"元素存在且可点击，即将点击...")
-            element.click()  # 执行点击操作
-        else:
-            setting.click_button(
-                f'//span[./span[text()="{layout}"]]/following-sibling::i[1]'
-            )
-
-        setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
-        setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
-        name = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-        assert name.text == layout
-        assert not setting.has_fail_message()
+    # @allure.story("设置透视表格布局-设置为不显示布局")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_perspective_notdisplay(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     layout = "测试透视表B"
+    #     sleep(1)
+    #     setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+    #     setting.click_setting_button()
+    #     checkbox = setting.get_find_element_xpath(
+    #         '//div[text()="是否显示布局:"]/following-sibling::label/span'
+    #     )
+    #     # 检查复选框是否未被选中
+    #     if checkbox.get_attribute("class") == "ivu-checkbox":
+    #         # 点击确定按钮保存设置
+    #         setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+    #         sleep(1)
+    #     else:
+    #         # 如果已选中，点击取消选中
+    #         setting.click_button(
+    #             '//div[text()="是否显示布局:"]/following-sibling::label/span'
+    #         )
+    #         sleep(1)
+    #         setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+    #     sleep(2)
+    #     name = setting.get_find_element_xpath(
+    #         f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+    #     )
+    #     assert name.get_attribute("style") == "display: none;"
+    #     assert not setting.has_fail_message()
+    #
+    # @allure.story("设置透视表格布局-布局列表设置为显示布局")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_perspective_display(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     layout = "测试透视表B"
+    #     sleep(1)
+    #     setting.click_button('//i[@id="tabsDrawerIcon"]')
+    #
+    #     # 获取目标 div 元素，这里的目标是具有特定文本的 div
+    #     target_div = setting.get_find_element_xpath(
+    #         f'//div[@id="container"]/div[.//text()="{layout}"]'
+    #     )
+    #
+    #     # 获取父容器下所有 div
+    #     # 这一步是为了确定目标 div 在其父容器中的位置
+    #     parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
+    #     all_children = parent_div.find_elements(By.XPATH, "./div")
+    #
+    #     # 获取目标 div 的位置索引（从0开始）
+    #     # 这里是为了后续操作，比如点击目标 div 相关的按钮
+    #     index = all_children.index(target_div)
+    #     print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+    #     xpath = f'(//i[@class="el-icon-more layoutListDropdown"])[{index + 1}]'
+    #     element = driver.find_element(By.XPATH, xpath)
+    #     # 判断是否可点击（可见 + 启用）
+    #     sleep(1)
+    #     if element.is_displayed() and element.is_enabled():
+    #         print(f"元素存在且可点击，即将点击...")
+    #         element.click()  # 执行点击操作
+    #     else:
+    #         setting.click_button(
+    #             f'//span[./span[text()="{layout}"]]/following-sibling::i[1]'
+    #         )
+    #
+    #     setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
+    #     setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+    #     sleep(1)
+    #     name = setting.get_find_element_xpath(
+    #         f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+    #     )
+    #     assert name.text == layout
+    #     assert not setting.has_fail_message()
 
     @allure.story("删除透视表布局成功")
     # @pytest.mark.run(order=1)

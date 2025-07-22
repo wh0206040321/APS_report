@@ -43,47 +43,17 @@ class TestShiftPage:
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
         layout = "测试布局A"
-        shift.add_layout()
-        sleep(1)
-        shift.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = shift.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            shift.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-        sleep(1)
-
-        shift.click_button('(//div[text()=" 显示设置 "])[1]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = shift.get_find_element_xpath(
-            '(//div[./div[text()="是否可见:"]])[1]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            shift.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            shift.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            shift.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        shift.add_layout(layout)
+        # 获取布局名称的文本元素
+        name = shift.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
 
         shift.click_add_button()
         # 班次代码xpath
         input_box = shift.get_find_element_xpath(
             '(//label[text()="代码"])[1]/parent::div//input'
         )
-        # 获取布局名称的文本元素
-        name = shift.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        ).text
 
         shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）

@@ -1,14 +1,19 @@
+import random
 from time import sleep
 
 import allure
 import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
@@ -29,7 +34,7 @@ def login_to_item():
     safe_quit(driver)
 
 
-@allure.feature("在途库存测试用例")
+@allure.feature("物料库存库存测试用例")
 @pytest.mark.run(order=104)
 class TestItemPage:
     @pytest.fixture(autouse=True)
@@ -41,13 +46,13 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_warehouselocation_addfail(self, login_to_item):
         self.item.click_add_button()
-        # 物料员代码xpath
+        # 在途库存单据号xpath
         input_box = self.item.get_find_element_xpath(
             "//div[@id='p34nag46-7evf']//input"
         )
-        # 物料员名称xpath
+        # 在途数量xpath
         inputname_box = self.item.get_find_element_xpath(
-            "//div[@id='f4ke63vb-p976']//input"
+            "//div[@id='izykzohi-1l5u']//input"
         )
 
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
@@ -64,17 +69,17 @@ class TestItemPage:
         ), f"预期边框颜色为{expected_color}, 但得到{bordername_color}"
         assert not self.item.has_fail_message()
 
-    @allure.story("添加物料员信息，只填写物料员代码，不填写物料员名称，不允许提交")
+    @allure.story("添加在途库存信息，只填写在途数量，不填写在途库存单据号等，不允许提交")
     # @pytest.mark.run(order=2)
     def test_item_addcodefail(self, login_to_item):
 
         self.item.click_add_button()
         self.item.enter_texts(
-            "//div[@id='gijkldi4-3t63']//input", "text1231"
+            "//div[@id='izykzohi-1l5u']//input", "text1231"
         )
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
         input_box = self.item.get_find_element_xpath(
-            "//div[@id='6xinn6bp-wo90']//input"
+            "//div[@id='p34nag46-7evf']//input"
         )
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
@@ -90,10 +95,17 @@ class TestItemPage:
     def test_item_addsuccess(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
-        # 输入物料员代码
-        self.item.enter_texts("//div[@id='gijkldi4-3t63']//input", "111")
-        self.item.enter_texts("//div[@id='6xinn6bp-wo90']//input", "111")
-        self.item.enter_texts("//div[@id='d6aetx1m-kaqh']//input", "111")
+        # 在途库存单据号
+        self.item.enter_texts("//div[@id='p34nag46-7evf']//input", "111")
+        # 在途可用日期
+        self.item.enter_texts("//div[@id='f4ke63vb-p976']//input", "2025/07/17 00:00:00")
+        # 供应商代码
+        self.item.enter_texts("//div[@id='x1k7t87i-tvc3']//input", "111")
+        # 物料代码
+        self.item.enter_texts("//div[@id='hpjqsv1m-5607']//input", "111")
+        # 输入在途数量
+        self.item.enter_texts("//div[@id='izykzohi-1l5u']//input", "111")
+
 
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
@@ -336,40 +348,47 @@ class TestItemPage:
     @allure.story("新增全部数据测试")
     # @pytest.mark.run(order=1)
     def test_item_add_success(self, login_to_item):
-        # 输入框要修改的值
-        text_str = "111"
         # 输入框的xpath
         input_xpath_list = [
             "//div[@id='gijkldi4-3t63']//input",
             "//div[@id='6xinn6bp-wo90']//input",
             "//div[@id='d6aetx1m-kaqh']//input"
         ]
-        input_xpath_list2 = [
+        # 日期的xpath
+        date_xpath_list = [
             "//div[@id='fsnjxjfd-o0cu']//input",
             "//div[@id='jvw66rzs-0ygz']//input",
             "//div[@id='bvbyj1j3-p5s1']//input"
         ]
+        # 输入框要修改的值
+        text_str = "111"
+        # 日期要修改的值
+        date_str = "2025/07/17 00:00:00"
         self.item.click_add_button()  # 点击添加
         sleep(1)
 
         # 批量修改输入框
         self.item.batch_modify_input(input_xpath_list, text_str)
+        # 批量修改日期
+        self.item.batch_modify_input(date_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
         sleep(1)
-        # 选中物料员代码
+        # 选中物料代码
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         # 点击编辑按钮
         self.item.click_edi_button()
         sleep(1)
         # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(input_xpath_list2, text_str)
-        print('input_values', input_values)
+        input_values = self.item.batch_acquisition_input(input_xpath_list, text_str)
+        # 批量获取日期的value
+        date_values = self.item.batch_acquisition_input(date_xpath_list, date_str)
         sleep(1)
         assert (
-            len(input_xpath_list) == len(input_values)
+                len(input_xpath_list) == len(input_values)
+                and len(date_xpath_list) == len(date_values)
         )
         assert not self.item.has_fail_message()
 

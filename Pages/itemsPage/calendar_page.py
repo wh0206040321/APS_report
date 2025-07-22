@@ -61,10 +61,39 @@ class Calendar(BasePage):
         except NoSuchElementException:
             return None
 
-    def add_layout(self):
+    def add_layout(self, layout):
         """添加布局."""
         self.click_button('//div[@class="newDropdown"]//i')
         self.click_button('//li[text()="添加新布局"]')
+        self.enter_texts(
+            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
+        )
+        checkbox1 = self.get_find_element_xpath(
+            '//div[text()="是否默认启动:"]/following-sibling::label/span'
+        )
+
+        # 检查复选框是否未被选中
+        if checkbox1.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            self.click_button(
+                '//div[text()="是否默认启动:"]/following-sibling::label/span'
+            )
+        sleep(1)
+
+        self.click_button('(//div[text()=" 显示设置 "])[1]')
+        # 获取是否可见选项的复选框元素
+        checkbox2 = self.get_find_element_xpath(
+            '(//div[./div[text()="是否可见:"]])[1]/label/span'
+        )
+        # 检查复选框是否未被选中
+        if checkbox2.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
+            # 点击确定按钮保存设置
+            self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        else:
+            # 如果已选中，直接点击确定按钮保存设置
+            self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
     def add_input_all(self, num):
         """输入框全部输入保存"""

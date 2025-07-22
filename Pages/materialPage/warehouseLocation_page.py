@@ -1,3 +1,5 @@
+import random
+from time import sleep
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -17,6 +19,25 @@ class WarehouseLocationPage(BasePage):
     def click_edi_button(self):
         """点击修改按钮."""
         self.click(By.XPATH, '//p[text()="编辑"]')
+
+    def filter_method(self, click_xpath):
+        """过滤公共方法"""
+        sleep(2)
+        self.click_button(click_xpath)
+        sleep(1)
+        self.click_button('//div[@class="filterInput"]//following-sibling::label')
+        sleep(1)
+        item_code = self.driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+        )
+        sleep(1)
+        self.click_button('//div[@class="filterInput"]//preceding-sibling::div[1]')
+        item_code2 = self.driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+        )
+        return len(item_code) == 0 and len(item_code2) > 0
 
     def click_del_button(self):
         """点击删除按钮."""
@@ -47,6 +68,12 @@ class WarehouseLocationPage(BasePage):
                 print(f"未找到元素: {xpath}")
             except Exception as e:
                 print(f"操作 {xpath} 时出错: {str(e)}")
+
+    def get_demo_num1(self):
+        num = 0
+        sleep(1)
+        num = 1
+        return num
 
     def batch_acquisition_input(self, xpath_list=[], text_value=""):
         """批量获取输入框"""

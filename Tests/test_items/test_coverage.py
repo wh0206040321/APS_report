@@ -42,32 +42,7 @@ class TestCoveragePage:
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
         layout = "测试布局A"
-        coverage.add_layout()
-        coverage.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = coverage.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            coverage.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-        sleep(1)
-
-        coverage.click_button('(//div[text()=" 显示设置 "])[1]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = coverage.get_find_element_xpath(
-            '(//div[./div[text()="是否可见:"]])[1]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            coverage.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-
+        coverage.add_layout(layout)
         num = coverage.get_find_element_xpath(
             '//tr[./td[3][.//span[text()="更新时间"]]]/td[7]//input'
         )

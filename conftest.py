@@ -171,7 +171,9 @@ def pytest_sessionfinish(session, exitstatus):
 
     # ✅ 构造 HTML 邮件内容
     if test_failures:
-        failure_items = "".join(f"<li>{name}</li>" for name in test_failures)
+        # ✅ 去重失败用例
+        unique_failures = list(dict.fromkeys(test_failures))
+        failure_items = "".join(f"<li>{name}</li>" for name in unique_failures)
         body = f"""
         <html>
         <body>
@@ -231,7 +233,7 @@ def pytest_sessionfinish(session, exitstatus):
                 logging.info(f"✅ 存在关键文件：{file}")
 
         # ✅ 添加并提交 docs/
-        subprocess.run(["git", "add", "docs/"], check=True)
+        subprocess.run(["git", "add", "D:\PycharmProjects\APS\docs"], check=True)
 
         # ✅ 提交变更（忽略无变更错误）
         subprocess.run(["git", "commit", "-m", "自动更新 Allure 报告"], check=False)

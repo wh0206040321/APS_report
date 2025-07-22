@@ -173,7 +173,7 @@ class TestPersonalPage:
 
     @allure.story("新密码登录成功")
     # @pytest.mark.run(order=1)
-    def test_personal_loginsuccess(self, login_to_personal):
+    def test_personal_loginsuccess1(self, login_to_personal):
         driver = login_to_personal  # WebDriver 实例
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
         # 断言登录成功，检查排产单元是否存在
@@ -185,7 +185,7 @@ class TestPersonalPage:
 
     @allure.story("注销成功，使用旧密码登录，登录失败")
     # @pytest.mark.run(order=1)
-    def test_personal_loginsuccess(self, login_to_personal):
+    def test_personal_loginsuccess2(self, login_to_personal):
         driver = login_to_personal  # WebDriver 实例
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
         personal.click_button('//div[@class="flex-alignItems-center"]')

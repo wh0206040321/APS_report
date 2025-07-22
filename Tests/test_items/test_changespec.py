@@ -42,36 +42,11 @@ class TestChangeSpecPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
 
         layout = "测试布局A"
-        change.add_layout()
-        change.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = change.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            change.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-        sleep(1)
-
-        change.click_button('(//div[text()=" 显示设置 "])[1]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = change.get_find_element_xpath(
-            '(//div[./div[text()="是否可见:"]])[1]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            change.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            change.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            change.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        change.add_layout(layout)
+        # 获取布局名称的文本元素
+        name = change.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
 
         change.click_add_button()
         change.click_button(
@@ -96,10 +71,6 @@ class TestChangeSpecPage:
         borderitem_color1 = inputitem_box1.value_of_css_property("border-color")
         borderitem_color2 = inputitem_box2.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
-        # 获取布局名称的文本元素
-        name = change.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        ).text
         assert (
             borderresource_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{borderresource_color}"

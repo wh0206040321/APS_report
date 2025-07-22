@@ -43,37 +43,10 @@ class TestSpecPage:
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         layout = "测试布局A"
-        spec.add_layout()
-        spec.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = spec.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            spec.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-        sleep(1)
-
-        spec.click_button('(//div[text()=" 显示设置 "])[1]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = spec.get_find_element_xpath(
-            '(//div[./div[text()="是否可见:"]])[1]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            spec.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            spec.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            spec.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-
+        spec.add_layout(layout)
+        name = spec.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
         spec.click_add_button()
         # 代码xpath
         input_box = spec.get_find_element_xpath(
@@ -87,6 +60,7 @@ class TestSpecPage:
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"
+        assert layout == name
         assert not spec.has_fail_message()
 
     @allure.story("数字文本框 只允许填写数字")

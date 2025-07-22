@@ -43,38 +43,11 @@ class TestCustomerPage:
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
         layout = "测试布局A"
-        customer.add_layout()
-        sleep(1)
-        customer.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = customer.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            customer.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-        sleep(1)
-
-        customer.click_button('(//div[text()=" 显示设置 "])[1]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = customer.get_find_element_xpath(
-            '(//div[./div[text()="是否可见:"]])[1]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            customer.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            customer.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            customer.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-
+        customer.add_layout(layout)
+        # 获取布局名称的文本元素
+        name = customer.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
         customer.click_add_button()
         # 客户代码xpath
         input_box = customer.get_find_element_xpath(
@@ -90,10 +63,7 @@ class TestCustomerPage:
         border_color = input_box.value_of_css_property("border-color")
         bordername_color = inputname_box.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
-        # 获取布局名称的文本元素
-        name = customer.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        ).text
+
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"

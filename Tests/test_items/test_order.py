@@ -42,36 +42,7 @@ class TestOrderPage:
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
         layout = "测试表"
-        order.add_layout()
-        order.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = order.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            order.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-
-        order.click_button('//div[text()=" 显示设置 "]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = order.get_find_element_xpath(
-            '//div[./div[text()="是否可见:"]]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            order.click_button('//div[./div[text()="是否可见:"]]/label/span/span')
-            # 点击确定按钮保存设置
-            order.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            order.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-
+        order.add_layout(layout)
         # 获取布局名称的文本元素
         name = order.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

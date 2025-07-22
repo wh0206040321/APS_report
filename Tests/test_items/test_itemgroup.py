@@ -1,5 +1,6 @@
 import random
 from time import sleep
+from datetime import date
 
 import allure
 import pytest
@@ -9,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from Pages.itemsPage.adds_page import AddsPaes
 from Pages.itemsPage.item_page import ItemPage
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -43,36 +45,7 @@ class TestItemGroupPage:
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
 
         layout = "测试布局A"
-        item.add_layout()
-        item.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        checkbox1 = item.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox1.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            item.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-        sleep(1)
-
-        item.click_button('(//div[text()=" 显示设置 "])[1]')
-        # 获取是否可见选项的复选框元素
-        checkbox2 = item.get_find_element_xpath(
-            '(//div[./div[text()="是否可见:"]])[1]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox2.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            item.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            item.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            item.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        item.add_layout(layout)
         # 获取布局名称的文本元素
         name = item.get_find_element_xpath(
                 f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -964,94 +937,161 @@ class TestItemGroupPage:
         assert int(code) <= 0 and int(itemcode) > 0 and itemname == "1测试A"
         assert not item.has_fail_message()
 
-    @allure.story("删除数据成功")
+    @allure.story("输入全部数据，添加保存成功")
+    # @pytest.mark.run(order=1)
+    def test_itemgroup_addall(self, login_to_itemgroup):
+        driver = login_to_itemgroup  # WebDriver 实例
+        item = ItemPage(driver)  # 用 driver 初始化 ItemPage
+        adds = AddsPaes(driver)
+        input_value = '11测试全部数据'
+        item.click_add_button()
+        custom_xpath_list = [
+            f'//label[text()="自定义字符{i}"]/following-sibling::div//input'
+            for i in range(1, 21)
+        ]
+        text_list = [
+            '//label[text()="物料组代码"]/following-sibling::div//input',
+            '//label[text()="物料组名称"]/following-sibling::div//input',
+            '//label[text()="工作分割比率"]/following-sibling::div//input',
+            '//label[text()="备注"]/following-sibling::div//input',
+        ]
+        text_list.extend(custom_xpath_list)
+        adds.batch_modify_input(text_list, input_value)
+
+        value_bos = '//div[@class="vxe-modal--body"]//table[@class="vxe-table--body"]//tr[1]/td[3]'
+        spe_xpath_list = [
+            f'//label[text()="生产特征{i}"]/following-sibling::div//i'
+            for i in range(1, 11)
+        ]
+        box_list = [
+            '//label[text()="物料组"]/following-sibling::div//i',
+            '//label[text()="BASE物料"]/following-sibling::div//i',
+            '//label[text()="资源"]/following-sibling::div//i',
+            '//label[text()="物料切换对象"]/following-sibling::div//i',
+        ]
+        box_list.extend(spe_xpath_list)
+        adds.batch_modify_dialog_box(box_list, value_bos)
+
+        code_value = '//span[text()="AdvanceAlongResourceWorkingTime"]'
+        code_list = [
+            '//label[text()="关联条件"]/following-sibling::div//i',
+        ]
+        adds.batch_modify_code_box(code_list, code_value)
+
+        select_list = [
+            {"select": '//label[text()="物料种类"]/following-sibling::div//i', "value": '//li[text()="原材料"]'},
+            {"select": '//label[text()="自动补充标志"]/following-sibling::div//i',
+             "value": '//li[text()="是(库存+1对1制造)"]'},
+            {"select": '//label[text()="备料方法"]/following-sibling::div//i', "value": '//li[text()="采购优先"]'},
+            {"select": '//label[text()="显示颜色"]/following-sibling::div//i',
+             "value": '//span[text()="RGB(128,128,255)"]'},
+            {"select": '//label[text()="物料切换方法"]/following-sibling::div//i', "value": '//li[text()="混存"]'},
+            {"select": '//label[text()="物料制约标志"]/following-sibling::div//i',
+             "value": '//label[text()="物料制约标志"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="是"]'},
+            {"select": '//label[text()="库存增减方法"]/following-sibling::div//i', "value": '//li[text()="线形/梯形"]'},
+            {"select": '//label[text()="制造批量大小计算方法"]/following-sibling::div//i',
+             "value": '//li[text()="均等"]'},
+            {"select": '//label[text()="制造批量尾数为末尾"]/following-sibling::div//i',
+             "value": '//label[text()="制造批量尾数为末尾"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="否"]'},
+            {"select": '//label[text()="采购批量计算方法"]/following-sibling::div//i',
+             "value": '//label[text()="采购批量计算方法"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="均等"]'},
+            {"select": '//label[text()="采购批量尾数为末尾"]/following-sibling::div//i',
+             "value": '//label[text()="采购批量尾数为末尾"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="否"]'},
+        ]
+        adds.batch_modify_select_input(select_list)
+
+        input_num_value = '1'
+        num_xpath_list1 = [
+            f'//label[text()="数值特征{i}"]/following-sibling::div//input'
+            for i in range(1, 6)
+        ]
+        num_xpath_list2 = [
+            f'//label[text()="自定义数字{i}"]/following-sibling::div//input'
+            for i in range(1, 21)
+        ]
+
+        num_list = [
+            '//label[text()="物料优先度"]/following-sibling::div//input',
+            '//label[text()="单价"]/following-sibling::div//input',
+            '//label[text()="制造效率"]/following-sibling::div//input',
+            '//label[text()="显示顺序"]/following-sibling::div//input',
+            '//label[text()="库存MIN"]/following-sibling::div//input',
+            '//label[text()="库存MIN2"]/following-sibling::div//input',
+            '//label[text()="库存MIN3"]/following-sibling::div//input',
+            '//label[text()="预留"]/following-sibling::div//input',
+            '//label[text()="目标库存MIN"]/following-sibling::div//input',
+            '//label[text()="库存MAX"]/following-sibling::div//input',
+            '//label[text()="制造批量MAX"]/following-sibling::div//input',
+            '//label[text()="制造批量MIN"]/following-sibling::div//input',
+            '//label[text()="制造批量单位"]/following-sibling::div//input',
+            '//label[text()="采购批量MAX"]/following-sibling::div//input',
+            '//label[text()="采购批量MIN"]/following-sibling::div//input',
+            '//label[text()="采购批量单位"]/following-sibling::div//input',
+            '//label[text()="工作分割数量"]/following-sibling::div//input',
+            '//label[text()="工作并行数量"]/following-sibling::div//input',
+            '//label[text()="工作批量MIN"]/following-sibling::div//input',
+            '//label[text()="工作批量MAX"]/following-sibling::div//input',
+            '//label[text()="工作批量单位"]/following-sibling::div//input',
+        ]
+        num_list.extend(num_xpath_list1 + num_xpath_list2)
+        adds.batch_modify_input(num_list, input_num_value)
+
+        time_xpath_list = [
+            f'//label[text()="自定义日期{i}"]/following-sibling::div//input'
+            for i in range(1, 11)
+        ]
+        adds.batch_modify_time_input(time_xpath_list)
+
+        box_input_list = [xpath.replace("//i", "//input") for xpath in box_list]
+        code_input_list = [xpath.replace("//i", "//input") for xpath in code_list]
+        select_input_list = [item["select"].replace("//i", "//input") for item in select_list]
+        all_value = text_list + box_input_list + code_input_list + select_input_list + num_list + time_xpath_list
+        len_num = len(all_value)
+        before_all_value = adds.batch_acquisition_input(all_value)
+        item.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        sleep(1)
+        driver.refresh()
+
+        num = adds.go_settings_page()
+        sleep(2)
+        item.enter_texts(
+            '//p[text()="物料组代码"]/ancestor::div[2]//input', input_value
+        )
+        sleep(1)
+        item.click_button(
+            f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        sleep(1)
+        item.click_edi_button()
+        after_all_value = adds.batch_acquisition_input(all_value)
+        username = item.get_find_element_xpath('//label[text()="更新者"]/following-sibling::div//input').get_attribute(
+            "value")
+        updatatime = item.get_find_element_xpath(
+            '//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
+        today_str = date.today().strftime('%Y/%m/%d')
+        assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
+            num) == (int(len_num) + 2)
+
+
+    @allure.story("删除测试数据成功，删除布局成功")
     # @pytest.mark.run(order=1)
     def test_itemgroup_delsuccess(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
-        # 定位内容为‘111’的行
-        item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        item.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = item.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        item.click_ref_button()
-        sleep(1)
-        # 定位内容为‘111’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
-        assert not item.has_fail_message()
-
-    @allure.story("删除测试数据成功，删除布局成功")
-    # @pytest.mark.run(order=1)
-    def test_itemgroup_delsuccess1(self, login_to_itemgroup):
-        driver = login_to_itemgroup  # WebDriver 实例
-        item = ItemPage(driver)  # 用 driver 初始化 ItemPage
         layout = "测试布局A"
 
-        # 定位内容为‘1测试A’的行
-        item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
-        item.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = item.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        item.click_ref_button()
-        sleep(1)
-        # 定位内容为‘1测试A’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
-        )
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = item.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = item.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-
-        item.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        item.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        value = ['111', '11测试全部数据', '1测试A']
+        item.del_all(value)
+        itemdata = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        item.del_loyout(layout)
         sleep(2)
-        # 点击确认删除的按钮
-        item.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert len(itemdata) == 0 == len(after_layout)
+        assert all(len(elements) == 0 for elements in itemdata)
+        assert 0 == len(after_layout)
         assert not item.has_fail_message()
