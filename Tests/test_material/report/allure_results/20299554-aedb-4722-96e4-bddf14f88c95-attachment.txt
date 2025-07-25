@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物控方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //span[text()="新增方案"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //label[text()="选择复制的方案"]/following-sibling::div/div
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="标准方案"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[2]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2177776248736

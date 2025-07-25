@@ -345,11 +345,11 @@ class TestChangeIPage:
         )
         sleep(1)
         changeI.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         changeI.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         # 缩放到最小（例如 60%）
@@ -405,11 +405,11 @@ class TestChangeIPage:
         item2 = shared_data.get("item2")
         time = shared_data.get("time")
         changeI.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         changeI.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         # 缩放到最小（例如 60%）
@@ -460,11 +460,11 @@ class TestChangeIPage:
         changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
 
         changeI.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         changeI.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         # 定位

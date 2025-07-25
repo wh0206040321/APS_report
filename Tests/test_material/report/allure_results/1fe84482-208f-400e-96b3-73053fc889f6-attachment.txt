@@ -1,0 +1,41 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="仓库库位"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //span[text()=" 工厂代码"]/ancestor::div[3]//span
+[33mWARNING [0m root:base_page.py:59 点击失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=138.0.7204.101); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7be696f65+78965]
+	GetHandleVerifier [0x0x7ff7be696fc0+79056]
+	(No symbol) [0x0x7ff7be429dda]
+	(No symbol) [0x0x7ff7be4317c1]
+	(No symbol) [0x0x7ff7be43482c]
+	(No symbol) [0x0x7ff7be4348ff]
+	(No symbol) [0x0x7ff7be4881cb]
+	(No symbol) [0x0x7ff7be485c82]
+	(No symbol) [0x0x7ff7be482cd1]
+	(No symbol) [0x0x7ff7be481c44]
+	(No symbol) [0x0x7ff7be473635]
+	(No symbol) [0x0x7ff7be4a866a]
+	(No symbol) [0x0x7ff7be472b56]
+	(No symbol) [0x0x7ff7be4a8880]
+	(No symbol) [0x0x7ff7be4d0dbe]
+	(No symbol) [0x0x7ff7be4a8443]
+	(No symbol) [0x0x7ff7be471311]
+	(No symbol) [0x0x7ff7be4720a3]
+	GetHandleVerifier [0x0x7ff7be94e26d+2926461]
+	GetHandleVerifier [0x0x7ff7be948993+2903715]
+	GetHandleVerifier [0x0x7ff7be966aed+3026941]
+	GetHandleVerifier [0x0x7ff7be6b16fe+187406]
+	GetHandleVerifier [0x0x7ff7be6b96ef+220159]
+	GetHandleVerifier [0x0x7ff7be69faf4+114692]
+	GetHandleVerifier [0x0x7ff7be69fca9+115129]
+	GetHandleVerifier [0x0x7ff7be6864d8+10728]
+	BaseThreadInitThunk [0x0x7ffd35f37374+20]
+	RtlUserThreadStart [0x0x7ffd36ddcc91+33]
+
+[33mWARNING [0m root:base_page.py:102 截图已保存：C:\zhong\APS\report\screenshots\test_click_timeout_1560693663648_20250721_165404.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1560693663648

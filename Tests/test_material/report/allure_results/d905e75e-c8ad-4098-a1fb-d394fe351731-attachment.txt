@@ -1,0 +1,4 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//button[@type="button"]/span[text()="确定"])[4]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="111"]]]/td[2]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //p[text()="编辑"]

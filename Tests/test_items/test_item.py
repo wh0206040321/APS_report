@@ -1061,6 +1061,7 @@ class TestItemPage:
         updatatime = item.get_find_element_xpath('//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
         today_str = date.today().strftime('%Y/%m/%d')
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(num) == (int(len_num) + 2)
+        assert not item.has_fail_message()
 
     @allure.story("删除测试数据成功，删除布局成功")
     # @pytest.mark.run(order=1)

@@ -1,0 +1,17 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物控方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="标准方案复制"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //span[text()="属性设置"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //div[text()="标准供应表排序分组 "]/following-sibling::div
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//button[@class="SchemeButton ivu-btn ivu-btn-primary ivu-btn-icon-only"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//div[@class="inputSlot ivu-input-wrapper ivu-input-wrapper-small ivu-input-type-text"])/ancestor::td/following-sibling::td
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//div[@class="flex-j-c-between editButtonPadding"])//button[@class="m-r-5 ivu-btn ivu-btn-primary ivu-btn-small ivu-btn-icon-only"][1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//div[@class="vxe-select size--mini is--filter"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])//div[2]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = (//div[@class="vxe-select-option--wrapper"])//div[2] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:117 截图已保存：C:\zhong\APS\report\screenshots\test_click_timeout_2141727778480_20250725_160506.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2141727778480

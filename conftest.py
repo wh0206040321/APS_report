@@ -1,5 +1,6 @@
 import subprocess
 
+import allure
 import pytest
 import os
 import re
@@ -120,6 +121,27 @@ def pytest_runtest_makereport(item, call):
                 except Exception as e:
                     # 如果截图失败，记录警告信息
                     logger.warning(f"自动截图失败：{e}")
+
+
+def pytest_runtest_setup(item):
+    """
+    pytest测试用例执行前的钩子函数，用于设置Allure测试报告的feature标签
+
+    该函数会根据测试文件的路径结构，自动提取模块名称并设置为Allure的feature标签，
+    便于在测试报告中按模块进行分类展示。
+
+    参数:
+        item: pytest的测试项对象，包含测试用例的相关信息
+
+    返回值:
+        无返回值
+    """
+    rel_path = item.location[0]  # 示例值：'test_system/test_home.py'
+    parts = rel_path.split('/')
+    # 当路径包含多级目录时，提取第一级目录作为模块名
+    if len(parts) > 1:
+        feature_name = parts[0].replace('test_', '') + "模块"
+        allure.dynamic.feature(feature_name)
 
 
 @pytest.fixture(scope="class")

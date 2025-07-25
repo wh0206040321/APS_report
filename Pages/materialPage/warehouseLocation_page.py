@@ -178,3 +178,47 @@ class WarehouseLocationPage(BasePage):
         """添加布局."""
         self.click_button('//div[@class="newDropdown"]//i')
         self.click_button('//li[text()="添加新布局"]')
+
+    def add_none(self, xpath_list=[], color_value=""):
+        """新增弹窗(有必填项)不填写信息，不允许提交公共方法."""
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                element = self.get_find_element_xpath(xpath)
+                # 获取输入框的值
+                if color_value != element.value_of_css_property("border-color"):
+                    raise NoSuchElementException(
+                        f"边框颜色不对（XPath列表第{index}个）: {xpath}"
+                    )
+                    return False
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+        return True
+
+    def add_one(self, xpath_list=[], color_value=""):
+        """新增弹窗(有必填项)多项必填只填写一项不允许提交方法，不允许提交公共方法."""
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                element = self.get_find_element_xpath(xpath)
+                # 获取输入框的值
+                if color_value != element.value_of_css_property("border-color"):
+                    raise NoSuchElementException(
+                        f"边框颜色不对（XPath列表第{index}个）: {xpath}"
+                    )
+                    return False
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+        return True

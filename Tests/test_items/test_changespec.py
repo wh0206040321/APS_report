@@ -1,4 +1,5 @@
 import random
+from datetime import date
 from time import sleep
 
 import allure
@@ -8,6 +9,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+from Pages.itemsPage.adds_page import AddsPaes
 from Pages.itemsPage.changeR_page import ChangeR
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -416,11 +418,11 @@ class TestChangeSpecPage:
         )
         sleep(1)
         change.click_button(
-            '(//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         change.click_button(
-            '(//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
 
         addresource = change.get_find_element_xpath(
@@ -613,11 +615,11 @@ class TestChangeSpecPage:
         )
         sleep(1)
         change.click_button(
-            '(//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         change.click_button(
-            '(//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         adddata = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[2]'
@@ -657,11 +659,11 @@ class TestChangeSpecPage:
         )
         sleep(1)
         change.click_button(
-            '(//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
         change.click_button(
-            '(//div[@class="h-23px w-20px text-align-c cursor-pointer"])[8]'
+            '//div[p[text()="更新时间"]]/div[1]'
         )
         adddata = change.get_find_element_xpath(
             '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[6]'
@@ -733,6 +735,75 @@ class TestChangeSpecPage:
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         ).text
         assert changeRcode == after
+        assert not change.has_fail_message()
+
+    @allure.story("输入全部数据，添加保存成功")
+    # @pytest.mark.run(order=1)
+    def test_changespec_addall(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        adds = AddsPaes(driver)
+        input_value = '11测试全部数据'
+        change.click_add_button()
+        text_list = [
+            '//label[text()="备注"]/following-sibling::div//input',
+        ]
+        adds.batch_modify_input(text_list, input_value)
+
+        value_bos = '//div[@class="vxe-modal--body"]//table[@class="vxe-table--body"]//tr[1]/td[3]'
+        box_list = [
+            '//label[text()="资源"]/following-sibling::div//i',
+            '//label[text()="前生产特征"]/following-sibling::div//i',
+            '//label[text()="后生产特征"]/following-sibling::div//i',
+        ]
+        adds.batch_modify_dialog_box(box_list, value_bos)
+        resource_value = change.get_find_element_xpath('//label[text()="资源"]/following-sibling::div//input')
+
+        code_value = '//span[text()="AdvanceAlongResourceWorkingTime"]'
+        code_list = [
+            '//label[text()="切换时间调整表达式"]/following-sibling::div//i',
+        ]
+        adds.batch_modify_code_box(code_list, code_value)
+
+        input_num_value = '1'
+        num_list = [
+            '//label[text()="优先度"]/following-sibling::div//input',
+            '//label[text()="切换时间(分钟)"]/following-sibling::div//input',
+        ]
+        adds.batch_modify_input(num_list, input_num_value)
+
+        box_input_list = [xpath.replace("//i", "//input") for xpath in box_list]
+        code_input_list = [xpath.replace("//i", "//input") for xpath in code_list]
+        all_value = text_list + box_input_list + code_input_list + num_list
+        len_num = len(all_value)
+        before_all_value = adds.batch_acquisition_input(all_value)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        sleep(1)
+        driver.refresh()
+
+        num = adds.go_settings_page()
+        sleep(2)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        change.click_button(
+            f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{resource_value}"]]')
+        sleep(1)
+        change.click_edi_button()
+        after_all_value = adds.batch_acquisition_input(all_value)
+        username = change.get_find_element_xpath(
+            '//label[text()="更新者"]/following-sibling::div//input').get_attribute(
+            "value")
+        updatatime = change.get_find_element_xpath(
+            '//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
+        today_str = date.today().strftime('%Y/%m/%d')
+        assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
+            num) == (int(len_num) + 2)
         assert not change.has_fail_message()
 
     @allure.story("删除布局成功")

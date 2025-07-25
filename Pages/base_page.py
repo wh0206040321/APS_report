@@ -15,7 +15,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
-        driver.maximize_window()  # 最大化窗口
+        try:
+            driver.maximize_window()
+        except Exception as e:
+            print(f"⚠️ 无法最大化窗口：{e}")
+            driver.set_window_size(1920, 1080)  # 使用默认分辨率
 
     def find_element(self, by, value, wait_time=10):
         """查找单个元素，失败时截图"""

@@ -1021,6 +1021,7 @@ class TestResourcePage:
         ]
 
         num_list = [
+            '//label[text()="显示顺序"]/following-sibling::div//input',
             '//label[text()="制造效率"]/following-sibling::div//input',
             '//label[text()="前设置时间效率"]/following-sibling::div//input',
             '//label[text()="资源制造批量MIN"]/following-sibling::div//input',
@@ -1079,6 +1080,7 @@ class TestResourcePage:
         today_str = date.today().strftime('%Y/%m/%d')
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 3) and before_checked == after_checked
+        assert not resource.has_fail_message()
 
     @allure.story("删除测试数据成功，删除布局成功")
     # @pytest.mark.run(order=1)

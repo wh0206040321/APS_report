@@ -1,0 +1,3 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = //input[@placeholder="请选择计划单元"] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:102 截图已保存：C:\zhong\APS\report\screenshots\test_click_timeout_2912815834848_20250721_172713.png

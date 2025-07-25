@@ -41,7 +41,7 @@ class TestOrderPage:
     def test_order_addfail(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        layout = "测试表"
+        layout = "测试布局A"
         order.add_layout(layout)
         # 获取布局名称的文本元素
         name = order.get_find_element_xpath(
@@ -80,7 +80,7 @@ class TestOrderPage:
     def test_order_addcodefail(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        layout = "测试表"
+        layout = "测试布局A"
         div = order.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         ).get_attribute("class")
@@ -884,7 +884,7 @@ class TestOrderPage:
     def test_order_dellayout(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        layout = "测试表"
+        layout = "测试布局A"
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = order.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

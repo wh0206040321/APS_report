@@ -35,7 +35,7 @@ def login_to_item():
 
 
 @allure.feature("物料库存测试用例")
-@pytest.mark.run(order=104)
+@pytest.mark.run(order=105)
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):
@@ -290,9 +290,21 @@ class TestItemPage:
         # 输入框的xpath
         input_xpath_list = [
             "//div[@id='p1wga124-jvvf']//input",
-            "//div[@id='ok1vodsa-fqqw']//input",
+            "//div[@id='1zhq0z7j-2ez4']//input",
             "//div[@id='on74wn62-nh6q']//input",
             "//div[@id='9htv60fa-r898']//input",
+            "//div[@id='vmwk72rc-wqrg']//input",
+            "//div[@id='hr2nhh4n-rvqh']//input",
+            "//div[@id='m7f0gze8-2zml']//input",
+            "//div[@id='c598aall-jr00']//input",
+            "//div[@id='pdzt74aq-adsv']//input",
+            "//div[@id='5e9ym6lb-llo1']//input",
+            "//div[@id='gdqlbl5a-c7i7']//input",
+            "//div[@id='1zhq0z7j-2ez4']//input",
+            "//div[@id='8y8vyaob-3wj0']//input",
+            "//div[@id='nv3c15jw-2hev']//input",
+            "//div[@id='ug0t65ji-8tvf']//input",
+            "//div[@id='709yi9e5-7q9b']//input",
         ]
 
         # 选中工厂代码
@@ -449,7 +461,7 @@ class TestItemPage:
         )
         assert not self.item.has_fail_message()
 
-    @allure.story("查询物料员代码成功")
+    @allure.story("查询物料代码成功")
     # @pytest.mark.run(order=1)
     def test_item_selectcodesuccess(self, login_to_item):
         driver = login_to_item  # WebDriver 实例
@@ -469,7 +481,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击工厂代码
-        item.click_button('//div[text()="物料员代码" and contains(@optid,"opt_")]')
+        item.click_button('//div[text()="物料代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         item.click_button(
@@ -521,7 +533,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击物料代码
-        self.item.click_button('//div[text()="物料员代码" and contains(@optid,"opt_")]')
+        self.item.click_button('//div[text()="物料代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         self.item.click_button(

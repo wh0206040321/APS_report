@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = (//span[text()="物控方案管理"])[1]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //span[text()="新增方案"]
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //label[text()="选择复制的方案"]/following-sibling::div/div
+[32mINFO    [0m root:base_page.py:40 点击元素：By = xpath, Value = //li[text()="排产方案(订单级)"]
+[33mWARNING [0m root:base_page.py:46 ❌ 点击超时：元素 xpath = //li[text()="排产方案(订单级)"] 未在 10 秒内变为可点击
+[33mWARNING [0m root:base_page.py:117 截图已保存：C:\zhong\APS\report\screenshots\test_click_timeout_1989951973184_20250724_145633.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1989951973184
