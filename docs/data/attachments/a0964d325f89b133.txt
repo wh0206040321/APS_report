@@ -1,0 +1,8 @@
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()=" 金属（演示） "]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //ul[@class="ivu-dropdown-menu" and ./li[text()="金属（演示）"]]//li[text()="AA"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="unitCodeBox"]
+[32mINFO    [0m root:base_page.py:38 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：3082584122432

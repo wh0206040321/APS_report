@@ -1,0 +1,27 @@
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划切换定义"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="资源切换"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//label[text()="资源"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//label[text()="前资源"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//label[text()="后资源"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[p[text()="更新时间"]]/div[1]
+[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[p[text()="更新时间"]]/div[1]
+[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//span[text()=""])[1]/ancestor::tr[1]/td[2]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = (//span[text()=""])[1]/ancestor::tr[1]/td[2]，等待超时 10s
+[33mWARNING [0m root:base_page.py:121 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_find_element_timeout_3082578797968_20250728_205923.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：3082578797968

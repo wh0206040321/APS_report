@@ -1,0 +1,27 @@
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="工序"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //p[text()="查询"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()="工序名" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[3]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()="(" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()="包含" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[7]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()=")" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[3]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()="(" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()="表示顺序" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[5]//input
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()=">" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[7]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()=")" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = (//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]，等待超时 10s
+[33mWARNING [0m root:base_page.py:121 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_find_element_timeout_3082577073520_20250728_203124.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：3082577073520

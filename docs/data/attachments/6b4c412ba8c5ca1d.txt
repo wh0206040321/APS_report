@@ -1,0 +1,6 @@
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="标准方案复制"]
+[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //span[text()="属性设置"]
+[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
