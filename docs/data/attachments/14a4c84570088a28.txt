@@ -1,6 +1,0 @@
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //span[text()="新增方案"]
-[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //label[text()="选择复制的方案"]/following-sibling::div/div
-[33mWARNING [0m root:base_page.py:60 ⚠️ 原生点击被拦截，尝试使用 JS 点击
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="标准方案"]
-[33mWARNING [0m root:base_page.py:50 ❌ 点击超时：元素 xpath = //li[text()="标准方案"] 未在 10 秒内变为可点击

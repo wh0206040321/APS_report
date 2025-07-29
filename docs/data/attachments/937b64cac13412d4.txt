@@ -1,6 +1,0 @@
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
-[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
-[33mWARNING [0m root:base_page.py:50 ❌ 点击超时：元素 xpath = (//span[text()="计划管理"])[1] 未在 10 秒内变为可点击
-[33mWARNING [0m root:base_page.py:121 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_click_timeout_2329599072416_20250729_105641.png
