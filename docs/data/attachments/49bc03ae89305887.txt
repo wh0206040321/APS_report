@@ -1,0 +1,17 @@
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//span[text()="资源"])[1]
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[@class="newDropdown"]//i
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[text()=" 显示设置 "])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//div[./div[text()="是否可见:"]])[1]/label/span
+[32mINFO    [0m root:base_page.py:44 点击元素：By = xpath, Value = (//div[./div[text()="是否可见:"]])[1]/label/span
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[./td[3][.//span[text()="更新时间"]]]/td[7]//input
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //tr[./td[3][.//span[text()="更新时间"]]]/td[7]//input，等待超时 10s
+[33mWARNING [0m root:base_page.py:121 截图已保存：D:\PycharmProjects\APS\report\screenshots\test_find_element_timeout_2207089628864_20250729_160141.png
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2207089628864
