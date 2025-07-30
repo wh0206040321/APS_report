@@ -21,16 +21,16 @@ class TestDeleteStart:
     # @pytest.mark.run(order=1)
     def test_delete_start(self):
         """初始化并返回 driver"""
-        driver_path = DateDriver().driver_path
-        driver = create_driver(driver_path)
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path)
         driver.implicitly_wait(3)
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
 
 
         # 初始化登录页面
         page = LoginPage(driver)  # 初始化登录页面
-        page.navigate_to(DateDriver().url)  # 导航到登录页面
-        page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
+        page.navigate_to(date_driver.url)  # 导航到登录页面
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
         item.go_item()
 
         # 待删除的物品名称列表

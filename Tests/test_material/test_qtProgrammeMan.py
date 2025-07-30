@@ -13,7 +13,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.login_page import LoginPage
+from Pages.itemsPage.login_page import LoginPage
 from Pages.materialPage.qtProgrammeMan_page import SchedPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
@@ -38,7 +38,7 @@ def login_to_sched():
 
 
 @allure.feature("物控方案管理表测试用例")
-@pytest.mark.run(order=17)
+@pytest.mark.run(order=106)
 class TestSchedPage:
     @allure.story("添加方案管理信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)

@@ -141,6 +141,7 @@ class OrderPage(BasePage):
         self.enter_texts(
             '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
         )
+        sleep(0.5)
         checkbox1 = self.get_find_element_xpath(
             '//div[text()="是否默认启动:"]/following-sibling::label/span'
         )
@@ -167,3 +168,52 @@ class OrderPage(BasePage):
         else:
             # 如果已选中，直接点击确定按钮保存设置
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+
+    def del_all(self, value=[]):
+        for index, xpath in enumerate(value, start=1):
+            try:
+                self.click_button(f'//tr[./td[2][.//span[text()="{xpath}"]]]/td[2]')
+                self.click_del_button()  # 点击删除
+                sleep(1)
+                # 点击确定
+                # 找到共同的父元素
+                parent = self.get_find_element_class("ivu-modal-confirm-footer")
+
+                # 获取所有button子元素
+                all_buttons = parent.find_elements(By.TAG_NAME, "button")
+
+                # 选择需要的button 第二个确定按钮
+                second_button = all_buttons[1]
+                second_button.click()
+                sleep(1)
+            except NoSuchElementException:
+                print(f"未找到元素: {xpath}")
+            except Exception as e:
+                print(f"操作 {xpath} 时出错: {str(e)}")
+
+    def del_loyout(self, layout):
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+
+        self.click_button(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+        )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        sleep(2)
+        # 点击确认删除的按钮
+        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')

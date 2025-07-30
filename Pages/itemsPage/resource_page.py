@@ -1,6 +1,7 @@
 from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 from Pages.base_page import BasePage
@@ -87,11 +88,21 @@ class ResourcePage(BasePage):
         if checkbox2.get_attribute("class") == "ivu-checkbox":
             # 如果未选中，则点击复选框进行选中
             self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+
+        num = self.get_find_element_xpath(
+            '//tr[./td[3][.//span[text()="数值特征1MAX"]]]/td[7]//input'
+        )
+        self.driver.execute_script("arguments[0].scrollIntoView();", num)
+        sleep(1)
+        num1 = self.get_find_element_xpath(
+            '//tr[./td[3][.//span[text()="数值特征1MAX"]]]/td[7]//input'
+        )
+        num1.clear()
+        num1.send_keys(Keys.CONTROL, "a")
+        num1.send_keys(Keys.DELETE)
+        num1.send_keys("8")
+        # 点击确定按钮保存设置
+        self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
     def del_all(self, value=[]):
         for index, xpath in enumerate(value, start=1):

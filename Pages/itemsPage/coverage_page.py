@@ -89,10 +89,17 @@ class Coverage(BasePage):
         if checkbox2.get_attribute("class") == "ivu-checkbox":
             # 如果未选中，则点击复选框进行选中
             self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
+
+        num = self.get_find_element_xpath(
+            '//tr[./td[3][.//span[text()="更新时间"]]]/td[7]//input'
+        )
+        num.send_keys(Keys.CONTROL, "a")
+        num.send_keys(Keys.DELETE)
+        num.send_keys("8")
+        # 点击确定按钮保存设置
+        try:
+            self.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+        except:
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
     def add_input_all(self, num):

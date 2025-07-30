@@ -1,8 +1,10 @@
+import logging
 import random
 from time import sleep
 
 import allure
 import pytest
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,7 +16,7 @@ from Pages.itemsPage.order_page import OrderPage
 from Pages.itemsPage.plan_page import PlanPage
 from Utils.data_driven import DateDriver
 from Utils.shared_data_util import SharedDataUtil
-from Utils.driver_manager import create_driver
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @allure.feature("添加物品，添加工艺产能，添加制造订单测试用例")
@@ -24,15 +26,35 @@ class TestStartPage:
     # @pytest.mark.run(order=1)
     def test_start(self):
         """初始化并返回 driver"""
-        driver_path = DateDriver().driver_path
-        driver = create_driver(driver_path)
+        date_driver = DateDriver()
+        # 初始化 driver
+        driver = create_driver(date_driver.driver_path)
         driver.implicitly_wait(3)
+
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
+
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
 
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
         # 初始化登录页面
         page = LoginPage(driver)  # 初始化登录页面
-        page.navigate_to(DateDriver().url)  # 导航到登录页面
-        page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
         # 清空之前的共享数据
         SharedDataUtil.clear_data()
         item.go_item()
@@ -168,10 +190,11 @@ class TestStartPage:
             master.click_button(
                 '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试B"]]/td[2]//span[text()="1测试B"]'
             )
-            master.click(
-                By.XPATH,
-                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
-            )
+            try:
+                master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]')
+            except:
+                master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
+
             # 获取物料数量
             random_num2 = random.randint(1, 100)
             master.enter_texts(
@@ -288,6 +311,7 @@ class TestStartPage:
                 (By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
             )
         )
+        sleep(2)
         dropdown_arrow.click()
 
         # 等待第一个方案标签可点击后点击选择

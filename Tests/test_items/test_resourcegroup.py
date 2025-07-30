@@ -1,9 +1,11 @@
+import logging
 import random
 from datetime import date
 from time import sleep
 
 import allure
 import pytest
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
@@ -11,20 +13,37 @@ from Pages.itemsPage.adds_page import AddsPaes
 from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.resource_page import ResourcePage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_resourcegroup():
     """初始化并返回 driver"""
-    driver_path = DateDriver().driver_path
-    driver = create_driver(driver_path)
+    date_driver = DateDriver()
+    # 初始化 driver
+    driver = create_driver(date_driver.driver_path)
     driver.implicitly_wait(3)
 
     # 初始化登录页面
     page = LoginPage(driver)  # 初始化登录页面
-    page.navigate_to(DateDriver().url)  # 导航到登录页面
-    page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
+    url = date_driver.url
+    print(f"[INFO] 正在导航到 URL: {url}")
+    # 尝试访问 URL，捕获连接错误
+    for attempt in range(2):
+        try:
+            page.navigate_to(url)
+            break
+        except WebDriverException as e:
+            capture_screenshot(driver, f"login_fail_{attempt + 1}")
+            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+            driver.refresh()
+            sleep(date_driver.URL_RETRY_WAIT)
+    else:
+        logging.error("连接失败多次，测试中止")
+        safe_quit(driver)
+        raise RuntimeError("无法连接到登录页面")
+
+    page.login(date_driver.username, date_driver.password, date_driver.planning)
     page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
     page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
     page.click_button('(//span[text()="资源组"])[1]')  # 点击资源组
@@ -329,7 +348,7 @@ class TestResourceGroupPage:
         )
         # 点击确定
         resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
-        sleep(1)
+        sleep(3)
         # 定位表格内容
         resourcedata = resource.get_find_element_xpath(
             '(//span[contains(text(),"1测试A")])[1]'
@@ -617,7 +636,6 @@ class TestResourceGroupPage:
         ]
         box_list = [
             '//label[text()="资源组"]/following-sibling::div//i',
-            '//label[text()="后资源"]/following-sibling::div//i',
         ]
         box_list.extend(spe_xpath_list)
         adds.batch_modify_dialog_box(box_list, value_bos)
@@ -655,6 +673,7 @@ class TestResourceGroupPage:
              "value": '//label[text()="跨其它工作分派"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="是"]'},
             {"select": '//label[text()="保证工作的最后分派顺序"]/following-sibling::div//i',
              "value": '//label[text()="保证工作的最后分派顺序"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="是"]'},
+            {"select": '//label[text()="区间控制-制约类型"]/following-sibling::div//i', "value": '//li[text()="类型个数"]'},
             {"select": '//label[text()="区间控制-制约区间"]/following-sibling::div//i',
              "value": '//label[text()="区间控制-制约区间"]/following-sibling::div//div[@class="ivu-select-dropdown"]//li[text()="班次"]'},
         ]
@@ -708,6 +727,15 @@ class TestResourceGroupPage:
             checked.click()
         before_checked = resource.get_find_element_xpath(
             '//label[text()="无效资源"]/following-sibling::div//label/span').get_attribute("class")
+
+        resource.click_button('//label[text()="后资源"]/following-sibling::div//i')
+        resource.click_button(
+            '(//div[@class="vxe-modal--body"]//table[@class="vxe-table--body"]//tr[1]/td[2])[2]/div/span')
+        resource.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
+        sleep(1)
+        before_value = resource.get_find_element_xpath('//label[text()="后资源"]/following-sibling::div//input').get_attribute("value")
+
         all_value = text_list + box_input_list + code_input_list + select_input_list + num_list + time_xpath_list
         len_num = len(all_value)
         before_all_value = adds.batch_acquisition_input(all_value)
@@ -715,7 +743,7 @@ class TestResourceGroupPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         sleep(1)
         driver.refresh()
-
+        sleep(3)
         num = adds.go_settings_page()
         sleep(2)
         resource.enter_texts(
@@ -734,9 +762,11 @@ class TestResourceGroupPage:
             '//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
         after_checked = resource.get_find_element_xpath(
             '//label[text()="无效资源"]/following-sibling::div//label/span').get_attribute("class")
+        after_value = resource.get_find_element_xpath('//label[text()="后资源"]/following-sibling::div//input').get_attribute("value")
         today_str = date.today().strftime('%Y/%m/%d')
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
-            num) == (int(len_num) + 3) and before_checked == after_checked
+            num) == (int(len_num) + 4) and before_checked == after_checked and before_value == after_value
+        assert all(before_all_value), "列表中存在为空或为假值的元素！"
         assert not resource.has_fail_message()
 
     @allure.story("删除测试数据成功，删除布局成功")

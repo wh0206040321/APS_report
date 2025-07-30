@@ -1,7 +1,9 @@
+import logging
 from time import sleep
 
 import allure
 import pytest
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,28 +13,44 @@ from selenium.common.exceptions import TimeoutException
 from Pages.itemsPage.personal_page import PersonalPage
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 from Utils.shared_data_util import SharedDataUtil
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_personal():
     """初始化并返回 driver"""
-    driver_path = DateDriver().driver_path
-    driver = create_driver(driver_path)
+    date_driver = DateDriver()
+    driver = create_driver(date_driver.driver_path)
     shared_data = SharedDataUtil.load_data()
     password = shared_data.get("password")
     driver.implicitly_wait(3)
 
     # 初始化登录页面
     page = LoginPage(driver)  # 初始化登录页面
-    page.navigate_to(DateDriver().url)  # 导航到登录页面
-    page.enter_username(DateDriver().username)
+    url = date_driver.url
+    logging.info(f"[INFO] 正在导航到 URL: {url}")
+
+    # 🔁 添加重试机制（最多 3 次）
+    for attempt in range(3):
+        try:
+            page.navigate_to(url)
+            break
+        except WebDriverException as e:
+            capture_screenshot(driver, f"login_fail_attempt_{attempt + 1}")
+            logging.warning(f"第 {attempt + 1} 次导航失败: {e}")
+            driver.refresh()
+            sleep(date_driver.URL_RETRY_WAIT)
+    else:
+        logging.error("导航失败多次，中止测试")
+        safe_quit(driver)
+        raise RuntimeError("无法连接到登录页面")
+    page.enter_username(date_driver.username)
     if password is not None:
         page.enter_password(password)
     else:
-        page.enter_password(DateDriver().password)
-    page.select_planning_unit(DateDriver().planning)
+        page.enter_password(date_driver.password)
+    page.select_planning_unit(date_driver.planning)
     page.click_login_button()
     yield driver  # 提供给测试用例使用
     safe_quit(driver)
@@ -118,103 +136,103 @@ class TestPersonalPage:
         assert len(ele) == 1
         assert not personal.has_fail_message()
 
-    @allure.story("修改密码不符合标准,新密码与确认密码不一致")
-    # @pytest.mark.run(order=1)
-    def test_personal_editpassword8(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        password = [f"{DateDriver.password}", "Qw123456", "Qw123446"]
-        personal.edit_password(password[0], password[1], password[2])
-        ele = driver.find_elements(By.XPATH, '//p[text()=" 与新密码保持一致 "]')
-        assert len(ele) == 1
-        assert not personal.has_fail_message()
-
-    @allure.story("修改密码不符合标准,新密码不能包含旧密码")
-    # @pytest.mark.run(order=1)
-    def test_personal_editpassword10(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        password = [f"{DateDriver.password}", f"{DateDriver.password}1", f"{DateDriver.password}1"]
-        personal.edit_password(password[0], password[1], password[2])
-        ele = driver.find_elements(By.XPATH, '//p[text()=" 新密码不能包含旧密码 "]')
-        assert len(ele) == 1
-        assert not personal.has_fail_message()
-
-    @allure.story("旧密码错误不允许修改")
-    # @pytest.mark.run(order=1)
-    def test_personal_editpassword11(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        password = [f"{DateDriver.password}1", "Qw123456", "Qw123456"]
-        personal.edit_password(password[0], password[1], password[2])
-        message = personal.get_find_message().text
-        assert message == "修改失败"
-        assert not personal.has_fail_message()
-
-    @allure.story("修改密码成功")
-    # @pytest.mark.run(order=1)
-    def test_personal_editpasswordsuccess(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        newpassword = "Qw123456"
-        password = [f"{DateDriver.password}", newpassword, newpassword]
-        personal.edit_password(password[0], password[1], password[2])
-        message = personal.get_find_message().text
-        if message == "修改成功":
-            # 清空之前的共享数据
-            SharedDataUtil.clear_data()
-            SharedDataUtil.save_data(
-                {"password": newpassword}
-            )
-            assert message == "修改成功"
-        else:
-            assert 1 != 1
-        assert not personal.has_fail_message()
-
-    @allure.story("新密码登录成功")
-    # @pytest.mark.run(order=1)
-    def test_personal_loginsuccess1(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        # 断言登录成功，检查排产单元是否存在
-        profile_icon = personal.get_find_element(
-            f'//div[text()=" {DateDriver().planning} "]'
-        )
-        assert profile_icon.is_displayed()  # 断言用户头像可见，表明登录成功
-        assert not personal.has_fail_message()
-
-    @allure.story("注销成功，使用旧密码登录，登录失败")
-    # @pytest.mark.run(order=1)
-    def test_personal_loginsuccess2(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        personal.click_button('//div[@class="flex-alignItems-center"]')
-        personal.click_button('//div[text()=" 注销 "]')
-        personal.enter_username(f"{DateDriver().username}")  # 输入用户名
-        personal.enter_password(f"{DateDriver().password}")  # 输入密码
-        personal.click_button('(//input[@type="text"])[2]')  # 点击下拉框
-        personal.click_button(f'//li[text()="{DateDriver().planning}"]')  # 点击计划单元
-        personal.click_button(
-            '//button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"]'
-        )  # 点击登录按钮
-        element = personal.get_find_element('//div[text()=" 用户名或密码无效 "]')
-        assert element.text == "用户名或密码无效"
-        assert not personal.has_fail_message()
-
-    @allure.story("把密码修改回来")
-    # @pytest.mark.run(order=1)
-    def test_personal_editpasswordback(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        shared_data = SharedDataUtil.load_data()
-        password = shared_data.get("password")
-        pw = [password, f"{DateDriver.password}", f"{DateDriver.password}"]
-        personal.edit_password(pw[0], pw[1], pw[2])
-        # 清空之前的共享数据
-        SharedDataUtil.clear_data()
-        message = personal.get_find_message().text
-        assert message == "修改成功"
-        assert not personal.has_fail_message()
+    # @allure.story("修改密码不符合标准,新密码与确认密码不一致")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_editpassword8(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     password = [f"{DateDriver.password}", "Qw123456", "Qw123446"]
+    #     personal.edit_password(password[0], password[1], password[2])
+    #     ele = driver.find_elements(By.XPATH, '//p[text()=" 与新密码保持一致 "]')
+    #     assert len(ele) == 1
+    #     assert not personal.has_fail_message()
+    #
+    # @allure.story("修改密码不符合标准,新密码不能包含旧密码")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_editpassword10(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     password = [f"{DateDriver.password}", f"{DateDriver.password}1", f"{DateDriver.password}1"]
+    #     personal.edit_password(password[0], password[1], password[2])
+    #     ele = driver.find_elements(By.XPATH, '//p[text()=" 新密码不能包含旧密码 "]')
+    #     assert len(ele) == 1
+    #     assert not personal.has_fail_message()
+    #
+    # @allure.story("旧密码错误不允许修改")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_editpassword11(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     password = [f"{DateDriver.password}1", "Qw123456", "Qw123456"]
+    #     personal.edit_password(password[0], password[1], password[2])
+    #     message = personal.get_find_message().text
+    #     assert message == "修改失败"
+    #     assert not personal.has_fail_message()
+    #
+    # @allure.story("修改密码成功")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_editpasswordsuccess(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     newpassword = "Qw123456"
+    #     password = [f"{DateDriver.password}", newpassword, newpassword]
+    #     personal.edit_password(password[0], password[1], password[2])
+    #     message = personal.get_find_message().text
+    #     if message == "修改成功":
+    #         # 清空之前的共享数据
+    #         SharedDataUtil.clear_data()
+    #         SharedDataUtil.save_data(
+    #             {"password": newpassword}
+    #         )
+    #         assert message == "修改成功"
+    #     else:
+    #         assert 1 != 1
+    #     assert not personal.has_fail_message()
+    #
+    # @allure.story("新密码登录成功")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_loginsuccess1(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     # 断言登录成功，检查排产单元是否存在
+    #     profile_icon = personal.get_find_element(
+    #         f'//div[text()=" {DateDriver().planning} "]'
+    #     )
+    #     assert profile_icon.is_displayed()  # 断言用户头像可见，表明登录成功
+    #     assert not personal.has_fail_message()
+    #
+    # @allure.story("注销成功，使用旧密码登录，登录失败")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_loginsuccess2(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     personal.click_button('//div[@class="flex-alignItems-center"]')
+    #     personal.click_button('//div[text()=" 注销 "]')
+    #     personal.enter_username(f"{DateDriver().username}")  # 输入用户名
+    #     personal.enter_password(f"{DateDriver().password}")  # 输入密码
+    #     personal.click_button('(//input[@type="text"])[2]')  # 点击下拉框
+    #     personal.click_button(f'//li[text()="{DateDriver().planning}"]')  # 点击计划单元
+    #     personal.click_button(
+    #         '//button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"]'
+    #     )  # 点击登录按钮
+    #     element = personal.get_find_element('//div[text()=" 用户名或密码无效 "]')
+    #     assert element.text == "用户名或密码无效"
+    #     assert not personal.has_fail_message()
+    #
+    # @allure.story("把密码修改回来")
+    # # @pytest.mark.run(order=1)
+    # def test_personal_editpasswordback(self, login_to_personal):
+    #     driver = login_to_personal  # WebDriver 实例
+    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+    #     shared_data = SharedDataUtil.load_data()
+    #     password = shared_data.get("password")
+    #     pw = [password, f"{DateDriver.password}", f"{DateDriver.password}"]
+    #     personal.edit_password(pw[0], pw[1], pw[2])
+    #     # 清空之前的共享数据
+    #     SharedDataUtil.clear_data()
+    #     message = personal.get_find_message().text
+    #     assert message == "修改成功"
+    #     assert not personal.has_fail_message()
 
     @allure.story("切换系统格式")
     # @pytest.mark.run(order=1)

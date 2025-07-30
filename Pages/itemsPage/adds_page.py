@@ -1,6 +1,6 @@
 from time import sleep
 
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -44,6 +44,7 @@ class AddsPaes(BasePage):
             try:
                 self.click_button(xpath)
                 self.click_button(new_value)
+                sleep(0.2)
                 self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")
@@ -56,6 +57,7 @@ class AddsPaes(BasePage):
             try:
                 self.click_button(xpath)
                 ActionChains(self.driver).double_click(self.get_find_element_xpath(new_value)).perform()
+                sleep(0.5)
                 self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")
@@ -68,7 +70,6 @@ class AddsPaes(BasePage):
             self.click_button(d['select'])
             self.click_button(d['value'])
 
-
     def batch_modify_time_input(self, xpath_list=[]):
         """批量修改时间"""
         for index, xpath in enumerate(xpath_list, start=1):
@@ -76,6 +77,7 @@ class AddsPaes(BasePage):
                 self.click_button(xpath)
                 self.click_button(f'(//span[@class="ivu-date-picker-cells-cell ivu-date-picker-cells-cell-today ivu-date-picker-cells-focused"])[1]')
                 self.click_button(f'(//div[@class="ivu-picker-confirm"])[{index}]/button[3]')
+                sleep(0.5)
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")
             except Exception as e:
@@ -109,6 +111,56 @@ class AddsPaes(BasePage):
         ele = self.get_find_element_xpath('(//div[@class="vxe-table--body-wrapper body--wrapper"])[4]')
         self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", ele)
         sleep(1)
-        num = self.get_find_element_xpath('(//div[@class="vxe-table--fixed-left-wrapper"])[3]//table[@class="vxe-table--body"]//tr[last()]//div').text
+        ele = self.finds_elements(By.XPATH, '(//div[@class="vxe-table--fixed-left-wrapper"])[3]//table[@class="vxe-table--body"]//tr[last()]//div')
+        num1 = ele[0].text
+        if num1:
+            num = self.get_find_element_xpath('(//div[@class="vxe-table--fixed-left-wrapper"])[3]//table[@class="vxe-table--body"]//tr[last()]//div').text
+        else:
+            num = self.get_find_element_xpath(
+                '(//div[@class="vxe-table--fixed-left-wrapper"])[2]//table[@class="vxe-table--body"]//tr[last()]//div').text
+        sleep(0.5)
         self.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
         return num
+
+    def batch_order_time_input(self, xpath_list=[]):
+        """订单页：按累积策略查找“今天”按钮，每次点击成功后索引递增"""
+        start_today_index = 1  # 初始查找索引
+
+        for input_index, xpath in enumerate(xpath_list, start=1):
+            try:
+                self.click_button(xpath)
+                sleep(0.5)  # 等待日期控件弹出
+
+                max_today_index = 50  # 可根据页面总数设定更大的范围
+                clicked = False
+
+                for today_index in range(start_today_index, max_today_index + 1):
+                    today_xpath = f'(//span[contains(@class, "ivu-date-picker-cells-cell-today")])[{today_index}]'
+                    try:
+                        WebDriverWait(self.driver, 2).until(
+                            EC.element_to_be_clickable((By.XPATH, today_xpath))
+                        )
+                        self.click_button(today_xpath)
+
+                        # 确认按钮与 today_index 一致（如页面结构不稳定可改为 input_index）
+                        confirm_xpath = f'(//div[@class="ivu-picker-confirm"])[{today_index}]/button[3]'
+                        WebDriverWait(self.driver, 5).until(
+                            EC.element_to_be_clickable((By.XPATH, confirm_xpath))
+                        )
+                        self.click_button(confirm_xpath)
+
+                        print(f"✅ 第 {input_index} 项: 点击了第 {today_index} 个“今天”按钮")
+                        start_today_index = today_index + 1  # 下次从下一个开始
+                        clicked = True
+                        break
+                    except (TimeoutException, ElementClickInterceptedException):
+                        continue
+
+                if not clicked:
+                    print(f"❌ 第 {input_index} 项: 没有可点击的“今天”按钮")
+
+            except Exception as e:
+                print(f"🛑 第 {input_index} 项执行出错: {str(e)}")
+
+
+

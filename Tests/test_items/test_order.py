@@ -1,31 +1,52 @@
+import logging
 import random
+from datetime import date
 from time import sleep
 
 import allure
 import pytest
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from Pages.itemsPage.adds_page import AddsPaes
 from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.order_page import OrderPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_order():
     """初始化并返回 driver"""
-    driver_path = DateDriver().driver_path
-    driver = create_driver(driver_path)
+    date_driver = DateDriver()
+    # 初始化 driver
+    driver = create_driver(date_driver.driver_path)
     driver.implicitly_wait(3)
 
     # 初始化登录页面
     page = LoginPage(driver)  # 初始化登录页面
-    page.navigate_to(DateDriver().url)  # 导航到登录页面
-    page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
+    url = date_driver.url
+    print(f"[INFO] 正在导航到 URL: {url}")
+    # 尝试访问 URL，捕获连接错误
+    for attempt in range(2):
+        try:
+            page.navigate_to(url)
+            break
+        except WebDriverException as e:
+            capture_screenshot(driver, f"login_fail_{attempt + 1}")
+            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+            driver.refresh()
+            sleep(date_driver.URL_RETRY_WAIT)
+    else:
+        logging.error("连接失败多次，测试中止")
+        safe_quit(driver)
+        raise RuntimeError("无法连接到登录页面")
+
+    page.login(date_driver.username, date_driver.password, date_driver.planning)
     page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
     page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
     page.click_button('(//span[text()="制造订单"])[1]')  # 点击制造订单
@@ -825,96 +846,148 @@ class TestOrderPage:
         assert int(ordercode) > 100 and "1A" in ordername
         assert not order.has_fail_message()
 
-    @allure.story("删除数据成功")
+    @allure.story("输入全部数据，添加保存成功")
+    # @pytest.mark.run(order=1)
+    def test_order_addall(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        adds = AddsPaes(driver)
+        input_value = '11测试全部数据'
+        order.click_add_button()
+        custom_xpath_list = [
+            f'//label[text()="自定义字符{i}"]/following-sibling::div//input'
+            for i in range(1, 51) if i != 3
+        ]
+        text_list = [
+            '//label[text()="订单代码"]/following-sibling::div//input',
+            '//label[text()="指定产线"]/following-sibling::div//input',
+            '//label[text()="关联订单组"]/following-sibling::div//input',
+            '//label[text()="备注"]/following-sibling::div//input',
+        ]
+        text_list.extend(custom_xpath_list)
+        adds.batch_modify_input(text_list, input_value)
+
+        value_bos = '//div[@class="vxe-modal--body"]//table[@class="vxe-table--body"]//tr[1]/td[3]'
+        spe_xpath_list = [
+            f'//label[text()="生产特征{i}"]/following-sibling::div//i'
+            for i in range(1, 11)
+        ]
+        box_list = [
+            '//label[text()="物料"]/following-sibling::div//i',
+            '//label[text()="BASE物料"]/following-sibling::div//i',
+            '//label[text()="客户"]/following-sibling::div//i',
+            '//label[text()="一对一关联指定料号"]/following-sibling::div//i',
+            '//label[text()="后订单"]/following-sibling::div//i',
+            '//label[text()="用户指定资源"]/following-sibling::div//i',
+            '//label[text()="首工序资源"]/following-sibling::div//i',
+        ]
+        box_list.extend(spe_xpath_list)
+        adds.batch_modify_dialog_box(box_list, value_bos)
+
+        select_list = [
+            {"select": '//label[text()="订单区分"]/following-sibling::div//i', "value": '//li[text()="补充"]'},
+            {"select": '//label[text()="显示颜色"]/following-sibling::div//i',
+             "value": '//span[text()="RGB(128,128,255)"]'},
+            {"select": '//label[text()="分派方向"]/following-sibling::div//i', "value": '//li[text()="遵从优先度"]'},
+            {"select": '//label[text()="订单状态"]/following-sibling::div//i', "value": '//li[text()="开始生产"]'},
+        ]
+        adds.batch_modify_select_input(select_list)
+
+        input_num_value = '1'
+        num_xpath_list1 = [
+            f'//label[text()="数值特征{i}"]/following-sibling::div//input'
+            for i in range(1, 6)
+        ]
+        num_xpath_list2 = [
+            f'//label[text()="自定义数字{i}"]/following-sibling::div//input'
+            for i in range(1, 51)
+        ]
+
+        num_list = [
+            '//label[text()="计划数量"]/following-sibling::div//input',
+            '//label[text()="用户指定订单数量固定级别"]/following-sibling::div//input',
+            '//label[text()="优先度"]/following-sibling::div//input',
+            '//label[text()="显示顺序"]/following-sibling::div//input',
+            '//label[text()="制造效率"]/following-sibling::div//input',
+            '//label[text()="实绩数量"]/following-sibling::div//input',
+            '//label[text()="系统内部资源计划顺序"]/following-sibling::div//input',
+            '//label[text()="用户调整计划顺序"]/following-sibling::div//input',
+        ]
+        num_list.extend(num_xpath_list1 + num_xpath_list2)
+        adds.batch_modify_input(num_list, input_num_value)
+
+        time_xpath_list = [
+            f'//label[text()="自定义日期{i}"]/following-sibling::div//input'
+            for i in range(1, 21)
+        ]
+        time_list = [
+            '//label[text()="订货时间"]/following-sibling::div//input',
+            '//label[text()="最早开始时间"]/following-sibling::div//input',
+            '//label[text()="交货期"]/following-sibling::div//input',
+            '//label[text()="实绩结束时间"]/following-sibling::div//input',
+        ]
+        time_list.extend(time_xpath_list)
+        adds.batch_order_time_input(time_list)
+
+        box_input_list = [xpath.replace("//i", "//input") for xpath in box_list]
+        select_input_list = [item["select"].replace("//i", "//input") for item in select_list]
+
+        checked = order.get_find_element_xpath('//label[text()="非分派对象标志"]/following-sibling::div//label/span')
+        if checked.get_attribute("class") == "ivu-checkbox":
+            checked.click()
+        before_checked = order.get_find_element_xpath(
+            '//label[text()="非分派对象标志"]/following-sibling::div//label/span').get_attribute("class")
+
+        all_value = text_list + box_input_list + select_input_list + num_list + time_list
+        len_num = len(all_value)
+        before_all_value = adds.batch_acquisition_input(all_value)
+        order.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        sleep(1)
+        driver.refresh()
+        sleep(3)
+        num = adds.go_settings_page()
+        sleep(2)
+        order.enter_texts(
+            '//p[text()="订单代码"]/ancestor::div[2]//input', input_value
+        )
+        sleep(1)
+        order.click_button(
+            f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        sleep(1)
+        order.click_edi_button()
+        after_all_value = adds.batch_acquisition_input(all_value)
+        after_checked = order.get_find_element_xpath(
+            '//label[text()="非分派对象标志"]/following-sibling::div//label/span').get_attribute("class")
+        username = order.get_find_element_xpath('//label[text()="更新者"]/following-sibling::div//input').get_attribute(
+            "value")
+        updatatime = order.get_find_element_xpath(
+            '//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
+        today_str = date.today().strftime('%Y/%m/%d')
+        assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
+            num) == (int(len_num) + 17) and before_checked == after_checked
+        assert all(before_all_value), "列表中存在为空或为假值的元素！"
+        assert not order.has_fail_message()
+
+    @allure.story("删除测试数据成功，删除布局成功")
     # @pytest.mark.run(order=1)
     def test_order_delsuccess(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        # 定位内容为‘1A’的行
-        order.click_button('(//span[text()="1A"])[1]/ancestor::tr[1]/td[2]')
-        order.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = order.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘1A’的行
-        orderdata = driver.find_elements(
-            By.XPATH, '(//span[text()="1A"])[1]/ancestor::tr[1]/td[2]'
-        )
-        assert len(orderdata) == 0
-        assert not order.has_fail_message()
-
-    @allure.story("删除测试数据成功")
-    # @pytest.mark.run(order=1)
-    def test_order_delsuccess1(self, login_to_order):
-        driver = login_to_order  # WebDriver 实例
-        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        # 定位内容为‘1B’的行
-        order.click_button('(//span[text()="1B"])[1]/ancestor::tr[1]/td[2]')
-        order.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = order.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘1B’的行
-        orderdata = driver.find_elements(
-            By.XPATH, '(//span[text()="1B"])[1]/ancestor::tr[1]/td[2]'
-        )
-        assert len(orderdata) == 0
-        assert not order.has_fail_message()
-
-    @allure.story("删除布局")
-    # @pytest.mark.run(order=1)
-    def test_order_dellayout(self, login_to_order):
-        driver = login_to_order  # WebDriver 实例
-        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
         layout = "测试布局A"
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = order.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
 
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = order.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-
-        order.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        order.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        # 点击确认删除的按钮
-        order.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
+        value = ['1A', '1B', '11测试全部数据']
+        order.del_all(value)
+        orderdata = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        order.del_loyout(layout)
+        sleep(2)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert len(after_layout) == 0
+        assert all(len(elements) == 0 for elements in orderdata)
+        assert 0 == len(after_layout)
         assert not order.has_fail_message()

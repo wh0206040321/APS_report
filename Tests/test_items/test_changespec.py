@@ -1,9 +1,11 @@
+import logging
 import random
 from datetime import date
 from time import sleep
 
 import allure
 import pytest
+from selenium.common.exceptions import WebDriverException
 from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -13,20 +15,37 @@ from Pages.itemsPage.adds_page import AddsPaes
 from Pages.itemsPage.changeR_page import ChangeR
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_changespec():
     """初始化并返回 driver"""
-    driver_path = DateDriver().driver_path
-    driver = create_driver(driver_path)
+    date_driver = DateDriver()
+    # 初始化 driver
+    driver = create_driver(date_driver.driver_path)
     driver.implicitly_wait(3)
 
     # 初始化登录页面
     page = LoginPage(driver)  # 初始化登录页面
-    page.navigate_to(DateDriver().url)  # 导航到登录页面
-    page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
+    url = date_driver.url
+    print(f"[INFO] 正在导航到 URL: {url}")
+    # 尝试访问 URL，捕获连接错误
+    for attempt in range(2):
+        try:
+            page.navigate_to(url)
+            break
+        except WebDriverException as e:
+            capture_screenshot(driver, f"login_fail_{attempt + 1}")
+            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+            driver.refresh()
+            sleep(date_driver.URL_RETRY_WAIT)
+    else:
+        logging.error("连接失败多次，测试中止")
+        safe_quit(driver)
+        raise RuntimeError("无法连接到登录页面")
+
+    page.login(date_driver.username, date_driver.password, date_driver.planning)
     page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
     page.click_button('(//span[text()="计划切换定义"])[1]')  # 点击计划切换定义
     page.click_button('(//span[text()="生产特征1切换"])[1]')  # 点击生产特征1切换
@@ -560,17 +579,17 @@ class TestChangeSpecPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         # 定位第一行
         change.click_button(
-            '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[2]'
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
         )
         changedata1 = change.get_find_element_xpath(
-            '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[2]'
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
         ).text
         change.click_del_button()  # 点击删除
         # 点击取消
         change.get_find_element_class("ivu-btn-text").click()
         # 定位第一行
         changedata = change.get_find_element_xpath(
-            '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[2]'
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
         ).text
         assert changedata1 == changedata, f"预期{changedata}"
         assert not change.has_fail_message()
@@ -582,7 +601,7 @@ class TestChangeSpecPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         # 定位第一行
         change.click_button(
-            '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[2]'
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
         )
         # 点击修改按钮
         change.click_edi_button()
@@ -634,7 +653,7 @@ class TestChangeSpecPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         # 定位第一行
         change.click_button(
-            '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[2]'
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
         )
         # 点击修改按钮
         change.click_edi_button()
@@ -666,7 +685,7 @@ class TestChangeSpecPage:
             '//div[p[text()="更新时间"]]/div[1]'
         )
         adddata = change.get_find_element_xpath(
-            '(//table[@style="margin-top: 0px; width: 980px; margin-left: 0px;"])[1]//tr[1]/td[6]'
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[6]'
         ).text
         assert adddata == prioritization
         assert not change.has_fail_message()
@@ -750,14 +769,14 @@ class TestChangeSpecPage:
         ]
         adds.batch_modify_input(text_list, input_value)
 
-        value_bos = '//div[@class="vxe-modal--body"]//table[@class="vxe-table--body"]//tr[1]/td[3]'
+        value_bos = '(//div[@class="vxe-modal--body"]//table[@class="vxe-table--body"]//tr[1]/td[2])[2]/div/span'
         box_list = [
             '//label[text()="资源"]/following-sibling::div//i',
             '//label[text()="前生产特征"]/following-sibling::div//i',
             '//label[text()="后生产特征"]/following-sibling::div//i',
         ]
         adds.batch_modify_dialog_box(box_list, value_bos)
-        resource_value = change.get_find_element_xpath('//label[text()="资源"]/following-sibling::div//input')
+        resource_value = change.get_find_element_xpath('//label[text()="资源"]/following-sibling::div//input').get_attribute("value")
 
         code_value = '//span[text()="AdvanceAlongResourceWorkingTime"]'
         code_list = [
@@ -781,7 +800,7 @@ class TestChangeSpecPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         sleep(1)
         driver.refresh()
-
+        sleep(3)
         num = adds.go_settings_page()
         sleep(2)
         change.click_button(
@@ -804,6 +823,45 @@ class TestChangeSpecPage:
         today_str = date.today().strftime('%Y/%m/%d')
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 2)
+        assert all(before_all_value), "列表中存在为空或为假值的元素！"
+        assert not change.has_fail_message()
+
+    @allure.story("删除全部数据功")
+    # @pytest.mark.run(order=1)
+    def test_changespec_deleteall(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        changedata1 = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        change.click_button(
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]')
+        change.click_del_button()
+        # 点击确定
+        # 找到共同的父元素
+        parent = change.get_find_element_class("ivu-modal-confirm-footer")
+
+        # 获取所有button子元素
+        all_buttons = parent.find_elements(By.TAG_NAME, "button")
+
+        # 选择需要的button 第二个确定按钮
+        second_button = all_buttons[1]
+        second_button.click()
+        # 定位
+        changedata = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        assert (
+                changedata != changedata1
+        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
         assert not change.has_fail_message()
 
     @allure.story("删除布局成功")

@@ -11,12 +11,12 @@ from Utils.driver_manager import create_driver, safe_quit
 @pytest.fixture
 def login_pa():
     """初始化并返回 LoginPage 对象"""
-    driver_path = DateDriver().driver_path
-    driver = create_driver(driver_path)
+    date_driver = DateDriver()
+    driver = create_driver(date_driver.driver_path)
 
     # 初始化页面
     page = LoginPage(driver)
-    page.navigate_to(DateDriver().url)
+    page.navigate_to(date_driver.url)
 
     yield page
 
@@ -47,8 +47,8 @@ class TestLoginPage:
         login_pa.click_button(
             '//button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"]'
         )  # 点击登录按钮
-        element = login_pa.get_find_element('//div[text()=" 用户名或密码无效 "]')
-        assert element.text == "用户名或密码无效"
+        element = login_pa.get_find_element('//div[text()=" 用户名或密码无效 "]').text
+        assert element == "用户名或密码无效"
         assert not login_pa.has_fail_message()
 
     @allure.story("登录成功")
