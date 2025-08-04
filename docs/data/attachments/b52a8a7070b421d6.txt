@@ -1,0 +1,10 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="供应商信息"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="查询"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[text()="工厂代码" and contains(@optid,"opt_")]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[text()="工厂代码" and contains(@optid,"opt_")] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1290886517744

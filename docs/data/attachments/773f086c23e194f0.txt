@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="制造订单"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="1B"])[1]/ancestor::tr[1]/td[2]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[text()=" 记录已存在,请检查！ "]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1290889357120
