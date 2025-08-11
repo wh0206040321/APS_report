@@ -1,0 +1,18 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控业务数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="在途库存"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1测试A"]]]/td[2]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //tr[./td[2][.//span[text()="1测试A"]]]/td[2] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1932175133472
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控业务数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="在途库存"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1测试A"]]]/td[2]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //tr[./td[2][.//span[text()="1测试A"]]]/td[2] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：1932174137216

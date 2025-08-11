@@ -1,0 +1,5 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()="新增方案"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //label[text()="选择复制的方案"]/following-sibling::div/div
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="测试方案"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[2]
