@@ -5,6 +5,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 from Pages.base_page import BasePage
 
 
@@ -102,6 +103,11 @@ class SchedPage(BasePage):
         )
         return message
 
+    def set_input_value(self, xpath, value):
+        input_element = self.find_element_by_xpath(xpath)
+        input_element.clear()  # 清空input元素的内容
+        input_element.send_keys(value)  # 设置input元素的新值
+
     def get_after_value(self, name):
         """获取保存之后的值"""
         self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])[1]')
@@ -111,6 +117,25 @@ class SchedPage(BasePage):
         sleep(1)
         self.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
         self.click_attribute_button()
+
+    def batch_modify_input_number(self, xpath_list=[], value_list=[]):
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.BACK_SPACE)
+                sleep(1)
+                self.enter_texts(xpath, value_list[index-1]
+                )
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
 
     def batch_modify_input(self, xpath_list=[], new_value=""):
         """批量修改输入框"""
@@ -210,7 +235,7 @@ class SchedPage(BasePage):
                 print("text_str", text_str)
                 sleep(1)
                 # self.click_button('//div[contains(text(),"方案是否循环执行")]/following-sibling::div//li[contains(text(),"是")]')
-                self.click_button(f'//div[contains(text(),"方案是否循环执行")]/following-sibling::div//li[contains(text(),"{text_str}")]')
+                self.click_button(f'{xpath}//li[contains(text(),"{text_str}")]')
                 # 获取输入框的值
                 # value = element.get_attribute("value")
                 # if value == val_list[index - 1]:

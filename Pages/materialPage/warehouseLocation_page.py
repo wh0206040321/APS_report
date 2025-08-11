@@ -75,6 +75,58 @@ class WarehouseLocationPage(BasePage):
         num = 1
         return num
 
+    def batch_acquisition_text(self, xpath_list=[], val_list=[]):
+        """批量获取文本"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                # 显式等待元素可见（最多等待10秒）
+                value = self.get_find_element_xpath(xpath).text
+                # 获取输入框的值
+                print("text", value)
+                print("index", index-1)
+                if value == val_list[index-1]:
+                    values.append(value)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+
+        return values
+
+    def batch_acquisition_input(self, xpath_list=[], val_list=[]):
+        """批量获取输入框"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                # 显式等待元素可见（最多等待10秒）
+                element = WebDriverWait(self.driver, 10).until(
+                    EC.visibility_of_element_located(("xpath", xpath))
+                )
+
+                # 获取输入框的值
+                value = element.get_attribute("value")
+                print("value", value)
+                print("index", index - 1)
+                if value == val_list[index - 1]:
+                    values.append(value)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+
+        return values
+
     def batch_acquisition_input(self, xpath_list=[], text_value=""):
         """批量获取输入框"""
         values = []

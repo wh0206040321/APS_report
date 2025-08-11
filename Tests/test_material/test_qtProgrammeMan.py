@@ -13,7 +13,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Pages.materialPage.qtProgrammeMan_page import SchedPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
@@ -38,7 +38,7 @@ def login_to_sched():
 
 
 @allure.feature("物控方案管理表测试用例")
-@pytest.mark.run(order=106)
+@pytest.mark.run(order=111)
 class TestSchedPage:
     @allure.story("添加方案管理信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
@@ -698,8 +698,22 @@ class TestSchedPage:
             '//div[contains(text(),"齐套回答基准项 ")]/following-sibling::div',
             '//div[contains(text(),"是否启用最小齐套量 ")]/following-sibling::div',
             '//div[contains(text(),"是否考虑物料替代 ")]/following-sibling::div',
-            '//div[contains(text(),"是否考虑最小替代量 ")]/following-sibling::div',
+            # '//div[contains(text(),"是否考虑最小替代量 ")]/following-sibling::div',
             '//div[contains(text(),"物料欠料计算方式 ")]/following-sibling::div',
+            '//div[contains(text(),"是否按替代比例拆分订单 ")]/following-sibling::div',
+            '//div[contains(text(),"齐套结果是否参与计算 ")]/following-sibling::div'
+        ]
+        select_xpath_list2 = [
+            '//div[contains(text(),"方案是否循环执行 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"物料齐套方式 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"是否释放不齐套料 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"齐套回答基准项 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"是否启用最小齐套量 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"是否考虑物料替代 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            # '//div[contains(text(),"是否考虑最小替代量 ")]/following-sibling::div',
+            '//div[contains(text(),"物料欠料计算方式 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"是否按替代比例拆分订单 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"齐套结果是否参与计算 ")]/following-sibling::div//input[@class="ivu-select-input"]'
         ]
         select_value_list = [
             '是',
@@ -708,12 +722,302 @@ class TestSchedPage:
             '按下阶齐套标识物料',
             '否',
             '否',
-            '否',
+            # '否',
             '考虑替代,产生分配明细',
+            '否',
+            '否'
         ]
         sched.batch_selection_dropdown(select_xpath_list, select_value_list)
-        input()
-        assert True
+
+        sleep(1)
+        expression_list = [
+            '//div[text()="齐套结果供应有效条件式 "]/following-sibling::div'
+        ]
+        sched.expression_click(expression_list)
+        sleep(1)
+        # 点击主替代料不混用排序设置
+        sched.click_button('//div[contains(text(),"主替代料不混用排序设置 ")]/following-sibling::div')
+        # 点击+号
+        sched.click_button(
+            '(//div[@class="flex-j-c-between editButtonPadding"])//button[@class="m-r-5 ivu-btn ivu-btn-primary ivu-btn-small ivu-btn-icon-only"][1]')
+        # 点击排序键名称下拉
+        sched.click_button('(//div[@class="vxe-select size--mini is--filter"])[1]')
+        # 选择第二项
+        sched.click_button('(//div[@class="vxe-select-option--wrapper"])[1]//div[2]')
+        sleep(2)
+        # 点击排序方式下拉
+        sched.click_button('(//div[@class="vxe-select size--mini is--filter"])[1]')
+        # # 选择第一项 升序
+        sched.click_button('(//div[@class="vxe-select-option--wrapper"])[2]//div[1]')
+        sched.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]//span[text()="确定"]')
+        # 供需计算开启线程的最大数目设置2
+        sched.enter_texts('//div[@class="w-b-100 ivu-input-number ivu-input-number-small"]//input', 2)
+        sleep(1)
+        sched.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        # 保存刷新后打开属性设置弹窗
+        sched.get_after_value(name)
+
+        sleep(1)
+        sched.click_button('//div[text()=" 齐套计算规则 "]')
+        sleep(1)
+        tabs1 = sched.batch_acquisition_input(select_xpath_list2, select_value_list)
+        text_xpath_list = [
+            '//div[text()="主替代料不混用排序设置 "]/following-sibling::div//p',
+            '//div[text()="齐套结果供应有效条件式 "]/following-sibling::div//p'
+        ]
+        value_list = [
+            '主料优先 asc',
+            'Abs(-100.28)'
+        ]
+        res_data = sched.batch_acquisition_text(text_xpath_list, value_list)
+        # 下拉框xpath
+        tabs1 = sched.batch_acquisition_input(select_xpath_list2, select_value_list)
+        number_list = sched.batch_acquisition_input(['//div[contains(text(),"方案循环执行次数 ")]/following-sibling::div//input[@class="ivu-input-number-input"]'], ['2'])
+        print('tabs1', tabs1)
+        assert len(tabs1) == len(select_xpath_list) and len(res_data) == len(text_xpath_list) and len(number_list) == 1
+        assert not sched.has_fail_message()
+
+    @allure.story("属性设置-齐套其它设置保存")
+    # @pytest.mark.run(order=1)
+    def test_sched_attribute5(self, login_to_sched):
+        driver = login_to_sched  # WebDriver 实例
+        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        name = "标准方案复制"
+        # 选择排产方案(订单级)复制方案
+        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
+        sched.click_attribute_button()
+
+        # 点击tab切换齐套计算规则
+        sleep(1)
+        sched.click_button('//div[text()=" 齐套其它设置 "]')
+        sleep(1)
+        # 齐套运算结果保留次数设置5
+        ele = sched.get_find_element_xpath(
+            '//div[@class="w-b-100 ivu-input-number ivu-input-number-small"]//input'
+        )
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
+        sleep(1)
+        sched.enter_texts(
+            '//div[@class="w-b-100 ivu-input-number ivu-input-number-small"]//input', "5"
+        )
+        select_xpath_list = [
+            '//div[contains(text(),"齐套运算结果保留方式 ")]/following-sibling::div'
+        ]
+        select_value_list = [
+            '按全局'
+        ]
+        sched.batch_selection_dropdown(select_xpath_list, select_value_list)
+
+        sched.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        # 保存刷新后打开属性设置弹窗
+        sched.get_after_value(name)
+
+        sleep(1)
+        sched.click_button('//div[text()=" 齐套其它设置 "]')
+        sleep(1)
+        number_list = sched.batch_acquisition_input([
+            '//div[contains(text(),"齐套运算结果保留方式 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"齐套运算结果保留次数 ")]/following-sibling::div//input[@class="ivu-input-number-input"]'
+        ], ['按全局', '5'])
+        print('number_list', number_list)
+        assert len(number_list) == 2
+        assert not sched.has_fail_message()
+
+    @allure.story("属性设置-交付计算规则保存")
+    # @pytest.mark.run(order=1)
+    def test_sched_attribute5(self, login_to_sched):
+        driver = login_to_sched  # WebDriver 实例
+        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        name = "标准方案复制"
+        # 选择排产方案(订单级)复制方案
+        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
+        sched.click_attribute_button()
+
+        # 点击tab切换齐套计算规则
+        sleep(1)
+        sched.click_button('//div[text()=" 交付计算规则 "]')
+        sleep(1)
+        # 交付锁定期间设置5
+        ele = sched.get_find_element_xpath(
+            '//div[contains(text(),"交付锁定期间 ")]/following-sibling::div//input'
+        )
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
+        sleep(1)
+        sched.enter_texts(
+            '//div[contains(text(),"交付锁定期间 ")]/following-sibling::div//input', "5"
+        )
+
+        # 安全库存天数设置6
+        ele = sched.get_find_element_xpath(
+            '//div[contains(text(),"安全库存天数 ")]/following-sibling::div//input'
+        )
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
+        sleep(1)
+        sched.enter_texts(
+            '//div[contains(text(),"安全库存天数 ")]/following-sibling::div//input', "6"
+        )
+
+        # 交货提前天数设置2
+        ele = sched.get_find_element_xpath(
+            '//div[contains(text(),"交货提前天数 ")]/following-sibling::div//input'
+        )
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
+        sleep(1)
+        sched.enter_texts(
+            '//div[contains(text(),"交货提前天数 ")]/following-sibling::div//input', "2"
+        )
+
+        select_xpath_list = [
+            '//div[contains(text(),"交付分配方式 ")]/following-sibling::div'
+        ]
+        select_value_list = [
+            '按月'
+        ]
+        sched.batch_selection_dropdown(select_xpath_list, select_value_list)
+        sleep(1)
+        # 批量修改表达式
+        expression_list = [
+            '//div[text()="交付需求数据筛选 "]/following-sibling::div',
+            '//div[text()="交付计算开始日期 "]/following-sibling::div',
+            '//div[text()="交付计算结束日期 "]/following-sibling::div'
+        ]
+        sched.expression_click(expression_list)
+        sleep(1)
+
+        sched.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        # 保存刷新后打开属性设置弹窗
+        sched.get_after_value(name)
+
+        sleep(1)
+        sched.click_button('//div[text()=" 交付计算规则 "]')
+        sleep(1)
+        number_list = sched.batch_acquisition_input([
+            '//div[contains(text(),"交付锁定期间 ")]/following-sibling::div//input',
+            '//div[contains(text(),"安全库存天数 ")]/following-sibling::div//input',
+            '//div[contains(text(),"交货提前天数 ")]/following-sibling::div//input',
+            '//div[contains(text(),"交付分配方式 ")]/following-sibling::div//input[@class="ivu-select-input"]'
+        ], ['5', '6', '2', '按月'])
+
+        text_xpath_list = [
+            '//div[text()="交付需求数据筛选 "]/following-sibling::div//p',
+            '//div[text()="交付计算开始日期 "]/following-sibling::div//p',
+            '//div[text()="交付计算结束日期 "]/following-sibling::div//p'
+        ]
+        value_list = [
+            'Abs(-100.28)',
+            'Abs(-100.28)',
+            'Abs(-100.28)'
+        ]
+        res_data = sched.batch_acquisition_text(text_xpath_list, value_list)
+        print('number_list', number_list)
+        assert len(number_list) == 4 and len(res_data) == len(value_list)
+        assert not sched.has_fail_message()
+
+    @allure.story("属性设置-设置保存")
+    # @pytest.mark.run(order=1)
+    def test_sched_attribute6(self, login_to_sched):
+        driver = login_to_sched  # WebDriver 实例
+        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        name = "标准方案复制"
+        # 选择排产方案(订单级)复制方案
+        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
+        sched.click_attribute_button()
+
+        # 点击tab切换齐套计算规则
+        sleep(1)
+        sched.click_button('//div[text()=" 设置 "]')
+        sleep(1)
+        sched.enter_texts(
+            '//div[contains(text(),"设置生成的计划单(自制)的前缀字符 ")]/following-sibling::div//input', "2"
+        )
+        sched.enter_texts(
+            '//div[contains(text(),"设置生成的计划单(外购)的前缀字符 ")]/following-sibling::div//input', "3"
+        )
+
+        select_xpath_list = [
+            '//div[contains(text(),"设置生成的计划单(自制)是否包含底层料号 ")]/following-sibling::div',
+            '//div[contains(text(),"设置生成的计划单(外购)是否包含底层料号 ")]/following-sibling::div'
+        ]
+        select_value_list = [
+            '是',
+            '是'
+        ]
+        sched.batch_selection_dropdown(select_xpath_list, select_value_list)
+        sleep(1)
+        # 批量修改表达式
+        number_xpath_list = [
+            '//div[contains(text(),"设置生成的计划单(自制)的流水号位数 ")]/following-sibling::div//input',
+            '//div[contains(text(),"设置生成的计划单(外购)的流水号位数 ")]/following-sibling::div//input'
+        ]
+        number_value_list = [
+            '5',
+            '6'
+        ]
+        sched.batch_modify_input_number(number_xpath_list, number_value_list)
+        sleep(1)
+
+        sched.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+
+        # 保存刷新后打开属性设置弹窗
+        sched.get_after_value(name)
+
+        sleep(1)
+        sched.click_button('//div[text()=" 设置 "]')
+        sleep(1)
+        number_list = sched.batch_acquisition_input([
+            '//div[contains(text(),"设置生成的计划单(自制)的前缀字符 ")]/following-sibling::div//input',
+            '//div[contains(text(),"设置生成的计划单(自制)的流水号位数 ")]/following-sibling::div//input',
+            '//div[contains(text(),"设置生成的计划单(自制)是否包含底层料号 ")]/following-sibling::div//input[@class="ivu-select-input"]',
+            '//div[contains(text(),"设置生成的计划单(外购)的前缀字符 ")]/following-sibling::div//input',
+            '//div[contains(text(),"设置生成的计划单(外购)的流水号位数 ")]/following-sibling::div//input',
+            '//div[contains(text(),"设置生成的计划单(外购)是否包含底层料号 ")]/following-sibling::div//input[@class="ivu-select-input"]'
+        ], ['2', '5', '是', '3', '6', '是'])
+        print('number_list', number_list)
+        assert len(number_list) == 6
+        assert not sched.has_fail_message()
+
+    @allure.story("属性设置-通用属性")
+    # @pytest.mark.run(order=1)
+    def test_sched_attribute6(self, login_to_sched):
+        driver = login_to_sched  # WebDriver 实例
+        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        name = "标准方案复制"
+        # 选择排产方案(订单级)复制方案
+        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
+        sched.click_attribute_button()
+
+        # 点击tab切换齐套计算规则
+        sleep(1)
+        sched.click_button('//div[text()=" 通用属性 "]')
+        sleep(1)
+        sched.enter_texts(
+            '//div[text()="别名 "]/following-sibling::div//input', "测试别名"
+        )
+        sleep(1)
+
+        sched.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+
+        # 保存刷新后打开属性设置弹窗
+        sched.get_after_value(name)
+
+        sleep(1)
+        sched.click_button('//div[text()=" 通用属性 "]')
+        sleep(1)
+        number_list = sched.batch_acquisition_input([
+            '//div[text()="别名 "]/following-sibling::div//input'
+        ], ['测试别名'])
+        print('number_list', number_list)
+        assert len(number_list) == 1
         assert not sched.has_fail_message()
 
     @allure.story("属性设置-分派规则-降序")
@@ -757,782 +1061,4 @@ class TestSchedPage:
         )
         assert not sched.has_fail_message()
 
-    @allure.story("属性设置-分派规则-升序")
-    # @pytest.mark.run(order=1)
-    def test_sched_rule2(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="分派规则"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
 
-        ele = driver.find_elements(
-            By.XPATH,
-            '(//div[text()="分派规则"])[3]/ancestor::div[1]/following-sibling::div[1]//input[@class="ivu-select-input"]',
-        )
-        ele[0].click()
-        sched.click_button('//li[text()="OLD订单类别"]')
-        sele_text1 = ele[0].get_attribute("value")
-        ele[1].click()
-        sched.click_button('//li[text()="升序"]')
-        sele_text2 = ele[1].get_attribute("value")
-        sched.click_ok_button()
-        sleep(2)
-        # 获取输入框数据
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="分派规则"]/following-sibling::div//p'
-        ).text
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="分派规则"]/following-sibling::div//p'
-        ).text
-        assert (
-            befort_input == after_input == 'ME.Order.UserStr2,a'
-            and sele_text1 == "OLD订单类别"
-            and sele_text2 == "升序"
-        )
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-不填写数据不允许提交")
-    # @pytest.mark.run(order=1)
-    def test_sched_rule3(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="分派规则"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击添加
-        sched.click_button('(//i[@class="ivu-icon ivu-icon-md-add"])[2]')
-
-        sched.click_ok_button()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
-        # 检查元素是否包含子节点
-        sleep(1)
-        assert message.text == "请把信息填写完整"
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-分派失败时(资源锁定制约)")
-    # @pytest.mark.run(order=1)
-    def test_sched_dispatchfailed1(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button(
-            '//div[text()="分派失败时(资源锁定制约)"]/following-sibling::div'
-        )
-        sched.click_button(
-            '//div[text()="分派失败时(资源锁定制约)"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="分派失败时(资源锁定制约)"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="分派失败时(资源锁定制约)"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '忽视制约'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-分派失败时(最大移动时间制约)")
-    # @pytest.mark.run(order=1)
-    def test_sched_dispatchfailed2(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button(
-            '//div[text()="分派失败时(最大移动时间制约)"]/following-sibling::div'
-        )
-        sched.click_button(
-            '//div[text()="分派失败时(最大移动时间制约)"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="分派失败时(最大移动时间制约)"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="分派失败时(最大移动时间制约)"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '忽视制约'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-分派停止条件式")
-    # @pytest.mark.run(order=1)
-    def test_sched_dispatchstopped(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="分派停止条件式"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击添加
-        sched.click_button('//div[text()=" 标准登录 "]')
-        element = sched.get_find_element_xpath(
-            '//span[text()="大前个工序分派的主资源为A"]'
-        )
-        actions = ActionChains(driver)
-        # 双击命令
-        actions.double_click(element).perform()
-
-        sched.click_ok_button()
-        sleep(2)
-        # 获取输入框数据
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="分派停止条件式"]/following-sibling::div//p'
-        ).text
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="分派停止条件式"]/following-sibling::div//p'
-        ).text
-        assert "ME.PrevOperation[1].PrevOperation[1].IsAssigned!='0'&&ME.PrevOperation[1].PrevOperation[1].OperationMainRes=='A'" in befort_input == after_input
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-分派资源")
-    # @pytest.mark.run(order=1)
-    def test_sched_allocateresources(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button('//div[text()="分派资源"]/following-sibling::div')
-        sched.click_button(
-            '//div[text()="分派资源"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="分派资源"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="分派资源"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '优先资源'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-更新关联/补充订单")
-    # @pytest.mark.run(order=1)
-    def test_sched_order(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button('//div[text()="更新关联/补充订单"]/following-sibling::div')
-        sched.click_button(
-            '//div[text()="更新关联/补充订单"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="更新关联/补充订单"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="更新关联/补充订单"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '是'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-工作临时固定")
-    # @pytest.mark.run(order=1)
-    def test_sched_work(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button('//div[text()="工作临时固定"]/following-sibling::div')
-        sched.click_button(
-            '//div[text()="工作临时固定"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="工作临时固定"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="工作临时固定"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '分派结束工作'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-忽视未分派的前后工序的工作")
-    # @pytest.mark.run(order=1)
-    def test_sched_neglectingwork(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button(
-            '//div[text()="忽视未分派的前后工序的工作"]/following-sibling::div'
-        )
-        sched.click_button(
-            '//div[text()="忽视未分派的前后工序的工作"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="忽视未分派的前后工序的工作"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="忽视未分派的前后工序的工作"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '是'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-启用原料库存制约")
-    # @pytest.mark.run(order=1)
-    def test_sched_restrict(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击下拉框
-        sched.click_button('//div[text()="启用原料库存制约"]/following-sibling::div')
-        sched.click_button(
-            '//div[text()="启用原料库存制约"]/following-sibling::div//ul[2]/li[2]'
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="启用原料库存制约"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="启用原料库存制约"]/following-sibling::div//input/following-sibling::div/input'
-        ).get_attribute("value")
-        assert befort_input == after_input == '是'
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-筛选工作")
-    # @pytest.mark.run(order=1)
-    def test_sched_screeningwork(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="筛选工作"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击添加
-        sched.click_button('//div[text()=" 标准登录 "]')
-
-        element = sched.get_find_element_xpath('//span[text()="订单规格1等于‘A’"]')
-        actions = ActionChains(driver)
-        # 双击命令
-        actions.double_click(element).perform()
-
-        sched.click_ok_button()
-        sleep(2)
-        # 获取输入框数据
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="筛选工作"]/following-sibling::div//p'
-        ).text
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="筛选工作"]/following-sibling::div//p'
-        ).text
-        assert befort_input == after_input
-        assert "ME.Order.Spec1=='A'" in befort_input
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-筛选订单")
-    # @pytest.mark.run(order=1)
-    def test_sched_filterorders(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="筛选订单"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击添加
-        sched.click_button('//div[text()=" 标准登录 "]')
-
-        element = sched.get_find_element_xpath('//span[text()="采购订单"]')
-        actions = ActionChains(driver)
-        # 双击命令
-        actions.double_click(element).perform()
-
-        sched.click_ok_button()
-        sleep(2)
-        # 获取输入框数据
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="筛选订单"]/following-sibling::div//p'
-        ).text
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="筛选订单"]/following-sibling::div//p'
-        ).text
-        assert befort_input == after_input
-        assert "ME.Order_Type=='P'" in befort_input
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-严格遵守后资源制约-开关开启")
-    # @pytest.mark.run(order=1)
-    def test_sched_resourceconstraints1(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击开关
-        ele = sched.get_find_element_xpath(
-            '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-        )
-        if ele.get_attribute("class") == "ivu-switch ivu-switch-default":
-            sched.click_button(
-                '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-            )
-        sleep(1)
-        # 获取输入框数据
-        befort_class = sched.get_find_element_xpath(
-            '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-        ).get_attribute("class")
-        sched.get_after_value(name)
-        after_class = sched.get_find_element_xpath(
-            '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-        ).get_attribute("class")
-        assert befort_class == after_class
-        assert (
-            befort_class
-            == "ivu-switch ivu-switch-checked ivu-switch-default"
-        )
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-严格遵守后资源制约-开关关闭")
-    # @pytest.mark.run(order=1)
-    def test_sched_resourceconstraints2(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击开关
-        ele = sched.get_find_element_xpath(
-            '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-        )
-        if (
-            ele.get_attribute("class")
-            == "ivu-switch ivu-switch-checked ivu-switch-default"
-        ):
-            sched.click_button(
-                '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-            )
-
-        # 获取输入框数据
-        befort_class = sched.get_find_element_xpath(
-            '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-        ).get_attribute("class")
-        sched.get_after_value(name)
-        after_class = sched.get_find_element_xpath(
-            '//div[text()="严格遵守后资源制约"]/following-sibling::div//span[1]'
-        ).get_attribute("class")
-        assert befort_class == after_class
-        assert befort_class == "ivu-switch ivu-switch-default"
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-制造效率")
-    # @pytest.mark.run(order=1)
-    def test_sched_restrictnum(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击数字框
-        ele = sched.get_find_element_xpath(
-            '//div[text()="制造效率"]/following-sibling::div//input'
-        )
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        sched.enter_texts(
-            '//div[text()="制造效率"]/following-sibling::div//input', "1aQ!~_-1+=0.8"
-        )
-        sleep(1)
-        befort_input = sched.get_find_element_xpath(
-            '//div[text()="制造效率"]/following-sibling::div//input'
-        ).get_attribute("value")
-        sched.get_after_value(name)
-        after_input = sched.get_find_element_xpath(
-            '//div[text()="制造效率"]/following-sibling::div//input'
-        ).get_attribute("value")
-        assert befort_input == after_input
-        assert befort_input == "110.8"
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-新增资源选择策略")
-    # @pytest.mark.run(order=1)
-    def test_sched_add_resourcefailed(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="资源选择策略"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击策略
-        sched.click_button('(//i[@class="ivu-icon ivu-icon-md-add"])[2]')
-        # 点击确认
-        sched.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]'
-        )
-
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="el-message el-message--error"]//p')
-            )
-        )
-        # 检查元素是否包含子节点
-        sleep(1)
-        assert message.text == "请填写策略名称"
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-新增资源选择策略")
-    # @pytest.mark.run(order=1)
-    def test_sched_add_resourcesuccess(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="资源选择策略"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击策略
-        sched.click_button('(//i[@class="ivu-icon ivu-icon-md-add"])[2]')
-        # 填写策略名称
-        sleep(1)
-        sched.enter_texts(
-            '(//p[text()=" 策略名称 "])[2]/following-sibling::div//input', "策略名称111"
-        )
-        # 点击确认
-        sched.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]'
-        )
-        sleep(1)
-        before_text = sched.get_find_element_xpath(
-            '//div[@class="flex-1 p-r-10 overflow-auto"]/div[contains(text(), "策略名称111")]'
-        ).text
-        sched.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-        sched.get_after_value(name)
-        sleep(1)
-        # 点击对话框
-        sched.click_button(
-            '(//div[text()="资源选择策略"]/following-sibling::div)[2]//i'
-        )
-
-        after_text = sched.get_find_element_xpath(
-            '//div[@class="flex-1 p-r-10 overflow-auto"]//div[contains(text(), "策略名称111")]'
-        ).text
-        assert before_text == after_text == "策略名称111"
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-新增资源选择策略-评估方案")
-    # @pytest.mark.run(order=1)
-    def test_sched_add_resourcesuccess1(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="资源选择策略"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击策略
-        sched.click_button('(//i[@class="ivu-icon ivu-icon-md-add"])[2]')
-        # 填写策略名称
-        sleep(1)
-        sched.enter_texts(
-            '(//p[text()=" 策略名称 "])[2]/following-sibling::div//input', "策略名称222"
-        )
-        # 点击确认
-        sched.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]'
-        )
-
-        sched.click_button('//div[text()=" 策略名称222 "]')
-
-        sched.click_button(
-            '(//input[@class="ivu-select-input" and @placeholder="请选择"])[1]'
-        )
-        sched.click_button('//li[text()="AS相同物料优先"]')
-        sched.click_button('(//input[@placeholder="请输入数字"])[2]')
-        sched.enter_texts('(//input[@placeholder="请输入数字"])[2]', "1aQ!~_-1+=0.8")
-
-        before_input_text = sched.get_find_element_xpath(
-            '//div[@class="flex-1"]//input[@class="ivu-select-input"]'
-        ).get_attribute("value")
-        before_input_num = sched.get_find_element_xpath(
-            '(//input[@placeholder="请输入数字"])[2]'
-        ).get_attribute("value")
-
-        sched.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-
-        input_after = sched.get_find_element_xpath(
-            '//div[text()="资源选择策略"]/following-sibling::div//p'
-        )
-        sched.click_ok_button()
-        # 点击对话框
-        sched.click_button(
-            '(//div[text()="资源选择策略"]/following-sibling::div)[2]//i'
-        )
-
-        after_input_text = sched.get_find_element_xpath(
-            '//div[@class="flex-1"]//input[@class="ivu-select-input"]'
-        ).get_attribute("value")
-        after_input_num = sched.get_find_element_xpath(
-            '(//input[@placeholder="请输入数字"])[2]'
-        ).get_attribute("value")
-        assert (
-            before_input_text == after_input_text == "AS相同物料优先"
-            and before_input_num == after_input_num == "110.8"
-            and input_after.text == "(集合)"
-        )
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-新增资源选择策略-不允许命名一致")
-    # @pytest.mark.run(order=1)
-    def test_sched_add_resourcefail(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        # 点击对话框
-        sched.click_button(
-            '//div[text()="资源选择策略"]/following-sibling::div//i[@class="ivu-icon ivu-icon-md-albums"]'
-        )
-
-        # 点击策略
-        sched.click_button('(//i[@class="ivu-icon ivu-icon-md-add"])[2]')
-        # 填写策略名称
-        sleep(1)
-        sched.enter_texts(
-            '(//p[text()=" 策略名称 "])[2]/following-sibling::div//input', "策略名称111"
-        )
-        # 点击确认
-        sched.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]'
-        )
-        message = sched.get_find_message().text
-        assert message == "记录已存在,请检查！"
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-时间属性-分派开始时间")
-    # @pytest.mark.run(order=1)
-    def test_sched_starttime(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        sched.click_time_sched()
-        # 点击分派开始时间对话框
-        sched.click_button(
-            '//div[text()="分派开始时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        )
-        sched.click_button('//div[text()=" 标准登录 "]')
-        ele = sched.get_find_element_xpath(
-            '//span[text()="收集的工作中最早的开始时刻"]'
-        )
-        action = ActionChains(driver)
-        action.double_click(ele).perform()
-        sleep(1)
-        sched.click_ok_button()
-        sleep(2)
-        before_div_text = sched.get_find_element_xpath(
-            '//div[text()="分派开始时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        sched.get_after_value(name)
-        sched.click_time_sched()
-        after_div_text = sched.get_find_element_xpath(
-            '//div[text()="分派开始时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        assert "Min(ME.Command_OperationList,TARGET.Work_StartTime)" in before_div_text == after_div_text
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-时间属性-分派结束时间")
-    # @pytest.mark.run(order=1)
-    def test_sched_endtime(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        sched.click_time_sched()
-        # 点击分派开始时间对话框
-        sched.click_button(
-            '//div[text()="分派结束时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        )
-        sched.click_button('//div[text()=" 标准登录 "]')
-        ele = sched.get_find_element_xpath(
-            '//span[text()="收集的工作中最迟的结束时刻的次日"]'
-        )
-        action = ActionChains(driver)
-        action.double_click(ele).perform()
-
-        sched.click_ok_button()
-        sleep(2)
-        before_div_text = sched.get_find_element_xpath(
-            '//div[text()="分派结束时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        sched.get_after_value(name)
-        sched.click_time_sched()
-        after_div_text = sched.get_find_element_xpath(
-            '//div[text()="分派结束时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        assert "Max(ME.Command_OperationList,TARGET.Work_EndTime)+1d" in before_div_text == after_div_text
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-时间属性-用户指定最早开始时刻")
-    # @pytest.mark.run(order=1)
-    def test_sched_moststarttime(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        sched.click_time_sched()
-        # 点击分派开始时间对话框
-        sched.click_button(
-            '//div[text()="用户指定最早开始时刻"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        )
-        sched.click_button('//div[text()=" 标准登录 "]')
-        ele = sched.get_find_element_xpath(
-            '//span[text()="从第1个子工作的开始时间起5个小时后"]'
-        )
-        action = ActionChains(driver)
-        action.double_click(ele).perform()
-
-        sched.click_ok_button()
-        sleep(2)
-        before_div_text = sched.get_find_element_xpath(
-            '//div[text()="用户指定最早开始时刻"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        sched.get_after_value(name)
-        sched.click_time_sched()
-        after_div_text = sched.get_find_element_xpath(
-            '//div[text()="用户指定最早开始时刻"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        assert "ME.Parent.Work_StartTime+5h" in before_div_text == after_div_text
-        assert not sched.has_fail_message()
-
-    @allure.story("属性设置-时间属性-用户指定最迟结束时刻")
-    # @pytest.mark.run(order=1)
-    def test_sched_mostendtime(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        # 选择排产方案(订单级)复制方案
-        sched.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
-        sched.click_attribute_button()
-        sched.click_time_sched()
-        # 点击分派开始时间对话框
-        sched.click_button(
-            '//div[text()="用户指定最迟结束时刻"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        )
-        sched.click_button('//div[text()=" 标准登录 "]')
-        ele = sched.get_find_element_xpath(
-            '//span[text()="从第1个子工作的开始时间起5个小时后"]'
-        )
-        action = ActionChains(driver)
-        action.double_click(ele).perform()
-
-        sched.click_ok_button()
-        sleep(2)
-        before_div_text = sched.get_find_element_xpath(
-            '//div[text()="用户指定最迟结束时刻"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        sched.get_after_value(name)
-        sched.click_time_sched()
-        after_div_text = sched.get_find_element_xpath(
-            '//div[text()="用户指定最迟结束时刻"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]'
-        ).text
-        assert "ME.Parent.Work_StartTime+5h" in before_div_text == after_div_text
-        assert not sched.has_fail_message()
-
-    @allure.story("删除测试方案")
-    # @pytest.mark.run(order=1)
-    def test_sched_delsched3(self, login_to_sched):
-        driver = login_to_sched  # WebDriver 实例
-        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        sched.click_button(
-            f'(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="{name}"]'
-        )
-        sched.click_del_schedbutton()  # 点击删除
-        sched.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
-
-        # 点击保存
-        sched.click_save_button()
-        ele = driver.find_elements(
-            By.XPATH,
-            '(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="22"]',
-        )
-        assert len(ele) == 0
-        assert not sched.has_fail_message()

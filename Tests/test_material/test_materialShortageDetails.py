@@ -11,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -29,7 +29,7 @@ def login_to_item():
     page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
     page.click_button('(//span[text()="物控管理"])[1]')  # 点击计划管理
     page.click_button('(//span[text()="物控业务数据"])[1]')  # 点击计划基础数据
-    page.click_button('(//span[text()="交付需求明细"])[1]')  # 点击物品
+    page.click_button('(//span[text()="交付需求明细"])[1]')  # 点击交付需求明细
     yield driver  # 提供给测试用例使用
     safe_quit(driver)
 

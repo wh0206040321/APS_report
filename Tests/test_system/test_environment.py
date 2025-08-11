@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 from time import sleep
 
@@ -8,26 +9,43 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import WebDriverException
 
 from Pages.itemsPage.adds_page import AddsPaes
 from Pages.itemsPage.personal_page import PersonalPage
 from Pages.systemPage.environment_page import EnvironmentPage
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
-from Utils.driver_manager import create_driver, safe_quit
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_environment():
     """初始化并返回 driver"""
-    driver_path = DateDriver().driver_path
-    driver = create_driver(driver_path)
+    date_driver = DateDriver()
+    driver = create_driver(date_driver.driver_path)
     driver.implicitly_wait(3)
 
     # 初始化登录页面
     page = LoginPage(driver)  # 初始化登录页面
-    page.navigate_to(DateDriver().url)  # 导航到登录页面
-    page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
+    url = date_driver.url
+    print(f"[INFO] 正在导航到 URL: {url}")
+    # 尝试访问 URL，捕获连接错误
+    for attempt in range(2):
+        try:
+            page.navigate_to(url)
+            break
+        except WebDriverException as e:
+            capture_screenshot(driver, f"login_fail_{attempt + 1}")
+            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+            driver.refresh()
+            sleep(date_driver.URL_RETRY_WAIT)
+    else:
+        logging.error("连接失败多次，测试中止")
+        safe_quit(driver)
+        raise RuntimeError("无法连接到登录页面")
+
+    page.login(date_driver.username, date_driver.password, date_driver.planning)
     page.click_button('(//span[text()="系统管理"])[1]')  # 点击系统管理
     page.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
     page.click_button('(//span[text()="环境设置"])[1]')  # 点击环境设置

@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from Pages.base_page import BasePage
 
 
-class HomePage(BasePage):
+class AffairsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -37,7 +37,16 @@ class HomePage(BasePage):
         )
         return message.text
 
-    def right_refresh(self, name="主页设置"):
+    def get_message(self):
+        """获取信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+            )
+        )
+        return message.text
+
+    def right_refresh(self, name="事务管理"):
         """右键刷新."""
         but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
         but.click()
@@ -65,65 +74,69 @@ class HomePage(BasePage):
         )
         sleep(1)
 
-    def click_save_button(self):
-        """点击保存按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[1]')
+    def del_cycle(self, name="", edi="删除"):
+        """循环删除指定名称的模板
 
-    def click_template(self):
-        self.click_button('//div[text()=" 模板 "]')
-
-    def click_save_template_button(self, name="", button=""):
-        """点击保存模版按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[2]')
-        if name == "":
-            self.click_button(
-                f'//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="{button}"]')
-            message = WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(
-                    (By.XPATH, '//div[@class="el-message el-message--error"]//p')
-                )
-            )
-            return message.text
-        else:
-            self.enter_texts('//div[text()=" 名称 "]/following-sibling::div//input', name)
-            self.click_button(
-                f'//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="{button}"]')
-            self.click_template()
-            eles = self.finds_elements(By.XPATH,
-                                       f'//div[@class="flex-column flex-align-items-center overflow-auto b-r-s-dcdee2 flex-1"]//div[@class="flex-j-c-between"]/span[1][text()=" {name} "]')
-            return len(eles)
-
-    def clear_all_button(self, span_text):
-        """点击清除所有按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[3]')
-        self.click_button(
-            f'//div[./div[text()="确定要删除所有的组件吗？"]]/following-sibling::div//span[text()="{span_text}"]')
-
-    def clear_button(self, span_text):
-        """点击清除按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[4]')
-        self.click_button(f'//div[./div[text()="你确定要删除这个组件吗"]]/following-sibling::div//span[text()="{span_text}"]')
-
-    def count_div_elements(self):
+        Args:
+            name (str): 模板名称（默认空）
+            edi (str): 操作类型，如"删除"（默认空）
         """
-        返回 id 为 homeCanvasBox 的容器下的直接子 div 元素个数（排除后两个元素）。
+        deleted_count = 0  # 记录成功删除的数量
+        for i in range(1, 8):  # 循环7次，对应name1到name7
+            current_name = f"{name}{i}"  # 拼接当前要删除的模板名
 
-        注意：减2是由于后两个子元素为布局占位符，非实际内容项。
+            try:
+                print(f"正在尝试删除模板: {current_name}")
+
+                # 1. 悬停并点击删除按钮
+                self.hover(current_name, edi)
+
+                # 2. 处理删除确认弹窗
+                try:
+                    confirm = WebDriverWait(self.driver, 3).until(
+                        EC.visibility_of_element_located(
+                            (By.XPATH, '//div[@class="el-message-box__btns"]//button/span[contains(text(),"确定")]')
+                        )
+                    )
+                    confirm.click()
+                    print(f"成功删除模板: {current_name}")
+                    deleted_count += 1
+
+                    # 等待删除操作完成
+                    sleep(1)  # 根据实际需要调整等待时间
+
+                except TimeoutException:
+                    print(f"未找到删除确认弹窗，可能已经删除或无需确认: {current_name}")
+                    continue
+
+            except NoSuchElementException:
+                print(f"模板 {current_name} 不存在，跳过")
+                continue
+            except Exception as e:
+                print(f"删除模板 {current_name} 时发生异常: {str(e)}")
+                continue
+
+    def del_process(self, name, edi="删除"):
         """
-        try:
-            eles = self.finds_elements(By.XPATH, '//div[@id="homeCanvasBox"]/div')
-            count = (len(eles) - 2)
-            return count
-        except Exception as e:
-            # 可根据实际日志系统记录错误
-            print(f"元素查找或处理失败: {e}")
+        删除指定名称的流程记录
 
-    def delete_template(self, name=""):
-        self.click_template()
-        self.wait_for_loading_to_disappear()
-        # 1️⃣ 悬停模版容器触发图标显示
+        :param name: 要删除的流程记录名称
+        :param edi: 删除按钮的文本内容，默认为"删除"
+        :return: 无返回值
+        """
+        # 查找包含指定名称的表格行中的删除按钮元素
+        eles = self.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[contains(text(),"{name}")]]]/td[last()]//span[text()="{edi}"]')
+        # 遍历找到的删除按钮并点击，然后确认删除操作
+        for ele in eles:
+            sleep(0.5)
+            ele.click()
+            sleep(0.5)
+            self.click_button('//div[@class="el-message-box__btns"]/button[2]')
+
+    def hover(self, name="", edi=""):
+        # 悬停模版容器触发图标显示
         container = self.get_find_element_xpath(
-            f'//span[text()=" {name} "]/ancestor::div[2]'
+            f'//div[@class="template-card__title"]/div[text()="{name}"]'
         )
         ActionChains(self.driver).move_to_element(container).perform()
 
@@ -131,72 +144,190 @@ class HomePage(BasePage):
         delete_icon = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((
                 By.XPATH,
-                f'//span[text()=" {name} "]/ancestor::div[2]//i[contains(@class, "el-icon-delete-solid")]'
+                f'//div[@class="template-card__title"]/div[text()="{name}"]/ancestor::div[3]//button/span[text()="{edi}"]'
             ))
         )
 
         # 3️⃣ 再点击图标
         delete_icon.click()
-        self.click_button('(//div[@class="ivu-modal-confirm-footer"])[2]//span[text()="确定"]')
-        self.wait_for_loading_to_disappear()
-        self.click_save_button()
-        self.wait_for_loading_to_disappear()
-        self.right_refresh()
-        self.click_template()
-        ele = self.driver.find_elements(By.XPATH, f'//div[./span[text()=" {name} "]]')
-        return len(ele)
 
-    def drag_component(self, name="", index=""):
-        input_element = self.get_find_element_xpath('//div[@id="homeCanvasBox"]')
-        canvas_size = input_element.size
-        max_x = int(canvas_size['width'] * 0.25) - 10  # 考虑 zoom 后的大小
+    def input_text(self, text):
+        """输入文字."""
+        self.enter_texts('//input[@placeholder="搜索相关事务名称或描述关键词"]', text)
 
-        offset_step = 30
-        current_offset_x = 5
-        current_offset_y = 5
-        # 情况一：指定名称拖一个组件
-        if name:
+    def click_process(self):
+        """点击流程"""
+        self.click_button('//div[@id="tab-flow"]')
+
+    def click_process_log(self):
+        """点击流程日志"""
+        self.click_button('//div[@id="tab-log"]')
+
+    def click_process_update(self, name):
+        """点击编辑流程"""
+        self.click_button(f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]/td[last()]//span[text()="编辑"]')
+
+    def add_process_affairs(self, add: bool = True, name="", sel=""):
+        """点击添加事务"""
+        self.click_button('//div[text()="添加下一个事务 "]/i')
+        if add:
+            self.click_button('//div[@class="layout" and button[span[text()="新建事务"]]]/button')
+            self.enter_texts('//div[label[text()="事务名称"]]//input', name)
+            self.click_button(f'//div[label[text()="事务类型"]]//i')
+            self.click_button(f'//span[text()="服务"]')
+            self.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
+            self.click_button('//div[text()=" 自定义 "]')
+            self.enter_texts('//div[p[text()="自定义服务:"]]//input', "http12ssc")
+            self.click_button(
+                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
+            self.click_button(
+                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+            self.click_button(f'//div[@class="application__name"]/div[@class="name" and contains(text(),"{name}")]')
+        elif sel:
+            self.enter_texts('//input[@placeholder="请输入关键词"]', sel)
             sleep(1)
-            text_element = self.get_find_element_xpath(
-                f'(//div[@class="menuList"])[1]/div[.//span[text()="{name}"]]'
-            )
-            ActionChains(self.driver).drag_and_drop(text_element, input_element).perform()
-            return 1
+            self.click_button(f'//div[@class="application__name"]/div[@class="name" and contains(text(),"{sel}")]')
+        sleep(1)
+        num = len(self.finds_elements(By.XPATH, '//div[@class="application__name"]/div[@class="name"]'))
+        value = self.get_find_element_xpath('//div[@class="application__item activated"]/div[@class="application__name"]/div[@class="name"]').text
+        self.click_button('//div[@class="el-dialog__footer"]//span[text()="确定"]')
+        return num, value
 
-        # 情况二和三：准备组件 XPath 列表
-        index1 = len(self.finds_elements(By.XPATH, '(//div[@class="menuList"])[1]/div'))
-        index2 = len(self.finds_elements(By.XPATH, '(//div[@class="menuList"])[2]/div'))
-        xpath_list = [
-            f'(//div[@class="menuList"])[{group}]/div[{i}]'
-            for group, count in [(1, index1), (2, index2)]
-            for i in range(1, count + 1)
-        ]
+    def click_add_affairs(self, name="", type="", button: bool = True):
+        """点击新增事务"""
+        self.click_button('//div[@id="pane-air"]//span[text()="新建事务"]')
+        if name:
+            self.enter_texts('//div[label[text()="事务名称"]]//input', name)
+        if type:
+            self.click_button(f'//div[label[text()="事务类型"]]//i')
+            self.click_button(f'//span[text()="{type}"]')
+            self.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
+        if button:
+            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
-        # 情况二：如果传入数字 index，只拖对应数量的组件
-        if isinstance(index, int) or (isinstance(index, str) and index.isdigit()):
-            count_limit = int(index)
-            xpath_list = xpath_list[:count_limit]
+    def get_border_color(self, xpath_list=[], text_value=""):
+        """获取边框颜色"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath).value_of_css_property("border-color")
+                values.append(value)
 
-        col = 0
-        row = 0
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
 
-        for xpath in xpath_list:
-            text_element = self.get_find_element_xpath(xpath)
-            offset_x = current_offset_x + (col * offset_step)
-            offset_y = current_offset_y + (row * offset_step)
+        return values
 
-            # 防止越界
-            if offset_x > max_x:
-                col = 0
-                row += 1
-                offset_x = current_offset_x
-                offset_y = current_offset_y + (row * offset_step)
+    def batch_acquisition_text(self, xpath_list=[], text_value=""):
+        """批量获取输入框"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath).text
+                values.append(value)
 
-            ActionChains(self.driver) \
-                .click_and_hold(text_element) \
-                .move_to_element_with_offset(input_element, offset_x, offset_y) \
-                .release() \
-                .perform()
-            col += 1
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
 
-        return index1 + index2
+        return values
+
+    def batch_acquisition_input(self, xpath_list=[], text_value=""):
+        """批量获取输入框"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath).get_attribute("value")
+                values.append(value)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+
+        return values
+
+    def click_next(self):
+        """点击下一步"""
+        self.click_button('//div[@class="footer"]//span[text()="下一步"]')
+
+    def click_save(self):
+        """点击保存"""
+        self.click_button('//div[@class="footer"]//span[text()="保存"]')
+
+    def add_process(self, name="", type="", frequency="", time=""):
+        """新增流程"""
+        self.click_button('//button[span[text()="新建流程"]]')
+        if name:
+            self.enter_texts('//div[label[text()="名称"]]/div//input', name)
+        if type:
+            self.enter_texts('//div[label[text()="分类"]]/div//input', type)
+        if frequency:
+            self.click_button('//div[label[text()="频率"]]/div//i')
+            if frequency == "一次":
+                self.click_button(f'//li[span[text()="{frequency}"]]')
+                if time:
+                    self.click_button('//div[label[text()="执行时间"]]/div//input')
+                    self.click_button('//td[@class="available today"]//span')
+                    self.click_button('//div[@class="el-picker-panel__footer"]/button[2]')
+            elif frequency == "每天":
+                self.click_button(f'//li[span[text()="{frequency}"]]')
+                self.click_button('//div[label[text()="执行设置"]]/div//i')
+                if time == "1":
+                    self.click_button('//li[span[text()="每天执行一次"]]')
+                    self.click_button('(//input[@placeholder="开始日期"])[2]')
+                    self.click_button('//td[@class="available today"]')
+                    self.click_button('(//span[normalize-space(text())="26"])[2]')
+                else:
+                    self.click_button('//li[span[text()="间隔执行"]]')
+                    self.click_button('(//input[@placeholder="开始日期"])[2]')
+                    self.click_button('//td[@class="available today"]')
+                    self.click_button('(//span[normalize-space(text())="26"])[2]')
+                    self.click_button('//div[@class="el-picker-panel__footer"]/button[2]')
+
+            elif frequency == "周":
+                self.click_button(f'//li[span[text()="{frequency}"]]')
+                if time:
+                    self.click_button('//div[label[text()="按周"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up"]')
+                    self.click_button('//li[span[text()="星期三"]]')
+                    self.click_button('//div[label[text()="按周"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up is-reverse"]')
+            elif frequency == "月":
+                self.click_button(f'//li[span[text()="{frequency}"]]')
+                if time:
+                    self.click_button('//div[label[text()="按月"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up"]')
+                    self.click_button('//li[span[text()="3"]]')
+                    self.click_button('//div[label[text()="按周"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up is-reverse"]')
+
+    def select_all(self, affairs="", enable="", process="", button: bool = True):
+        """查询所有."""
+        if affairs:
+            self.click_button('//div[label[text()="流程事务:"]]//input')
+            self.click_button(f'//li[@class="el-select-dropdown__item"]//span[text()="{affairs}"]')
+        if enable:
+            self.click_button('//div[label[text()="是否启用:"]]//input')
+            if enable == "全部":
+                self.click_button(f'(//ul[@class="el-scrollbar__view el-select-dropdown__list"]//span[text()="{enable}"])[2]')
+            else:
+                self.click_button(f'//ul[@class="el-scrollbar__view el-select-dropdown__list"]//span[text()="{enable}"]')
+        if process:
+            self.enter_texts('//div[label[text()="流程名称:"]]//input[not(@placeholder="请输入流程名称")]', process)
+        sleep(1)
+        if button:
+            self.click_button(f'(//button[span[text()="筛选"]])[1]')
+        else:
+            self.click_button(f'(//button[span[text()="重置筛选条件"]])[1]')

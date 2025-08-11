@@ -1,0 +1,22 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="事务管理"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版7"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[label[text()="事务类型"]]//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()=服务]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //span[text()=服务] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2477620233120
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="事务管理"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版7"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[label[text()="事务类型"]]//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()=服务]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //span[text()=服务] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2477620360672

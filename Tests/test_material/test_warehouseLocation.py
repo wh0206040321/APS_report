@@ -11,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -395,6 +395,19 @@ class TestItemPage:
         )
         assert itemcode == "1测试A" and len(itemcode2) == 0
         assert not item.has_fail_message()
+
+
+    @allure.story("查询")
+    # @pytest.mark.run(order=1)
+    def query_demo(self, login_to_item):
+        row_xpath = '//table[@xid="2" and @class="vxe-table--body"]//tr[1]'
+        # 获取目标行
+        target_row = self.driver.find_element(By.XPATH, row_xpath)
+
+        # 获取该行下所有 td 元素
+        td_elements = target_row.find_elements(By.XPATH, "./td")
+        td_count = len(td_elements)
+        print(f"该行共有 {td_count} 个 <td> 元素")
 
     @allure.story("没有数据时显示正常")
     # @pytest.mark.run(order=1)
