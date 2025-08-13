@@ -1,8 +1,0 @@
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="标准方案复制"]
-[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()="属性设置"]
-[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="d-flex set-teble-style noBorder h-40px"][1]/div[2]
-[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="d-flex set-teble-style noBorder h-40px"][1]//li[@class="ivu-select-item"][1]
-[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[@class="d-flex set-teble-style noBorder h-40px"][1]//li[@class="ivu-select-item"][1] 未在 10 秒内变为可点击

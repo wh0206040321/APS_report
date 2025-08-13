@@ -1,0 +1,2 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[1]/label[1]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[1]/label[1] 未在 10 秒内变为可点击

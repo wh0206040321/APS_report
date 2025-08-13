@@ -1,0 +1,62 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="事务管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@id="pane-air"]//span[text()="新建事务"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[label[text()="事务类型"]]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()="服务"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[text()=" 物控计算 "]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）" and @class="ivu-select-item"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="选择物控方案"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="标准方案" and @class="ivu-select-item"]
+[33mWARNING [0m root:base_page.py:61 点击失败：Message: element not interactable
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff634466f65+78965]
+	GetHandleVerifier [0x0x7ff634466fc0+79056]
+	(No symbol) [0x0x7ff6341f9c0c]
+	(No symbol) [0x0x7ff6342517fd]
+	(No symbol) [0x0x7ff6342432a4]
+	(No symbol) [0x0x7ff63427866a]
+	(No symbol) [0x0x7ff634242b56]
+	(No symbol) [0x0x7ff634278880]
+	(No symbol) [0x0x7ff6342a0dbe]
+	(No symbol) [0x0x7ff634278443]
+	(No symbol) [0x0x7ff634241311]
+	(No symbol) [0x0x7ff6342420a3]
+	GetHandleVerifier [0x0x7ff63471e26d+2926461]
+	GetHandleVerifier [0x0x7ff634718993+2903715]
+	GetHandleVerifier [0x0x7ff634736aed+3026941]
+	GetHandleVerifier [0x0x7ff6344816fe+187406]
+	GetHandleVerifier [0x0x7ff6344896ef+220159]
+	GetHandleVerifier [0x0x7ff63446faf4+114692]
+	GetHandleVerifier [0x0x7ff63446fca9+115129]
+	GetHandleVerifier [0x0x7ff6344564d8+10728]
+	BaseThreadInitThunk [0x0x7ff992b87374+20]
+	RtlUserThreadStart [0x0x7ff99357cc91+33]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2455996605216
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="事务管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@id="pane-air"]//span[text()="新建事务"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[label[text()="事务类型"]]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()="服务"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[text()=" 物控计算 "]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="请选择计划单元"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）" and @class="ivu-select-item"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //input[@placeholder="选择物控方案"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="标准方案" and @class="ivu-select-item"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2456020573856

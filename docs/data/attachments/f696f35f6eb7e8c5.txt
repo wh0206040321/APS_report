@@ -1,0 +1,22 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="供应商信息"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@id='i24ntrok-sf6n']
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[@id='i24ntrok-sf6n'] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2455991878128
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="供应商信息"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@id='i24ntrok-sf6n']
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[@id='i24ntrok-sf6n'] 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:55 🛑 已从实例池移除并关闭 driver：2455985582096
