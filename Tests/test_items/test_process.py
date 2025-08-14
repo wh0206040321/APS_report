@@ -179,9 +179,8 @@ class TestProcessPage:
         process.click_button('//span[text()="2"]')
         # 获取下拉框数据
         processsel = process.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input['
-            '@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         assert processsel == "2", f"预期{processsel}"
         assert not process.has_fail_message()
 
@@ -415,9 +414,8 @@ class TestProcessPage:
         process.click_button(f'//span[text()="{random_int}"]')
         # 获取下拉框数据
         processsel = process.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input['
-            '@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         # 点击确定
         process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
         sleep(1)

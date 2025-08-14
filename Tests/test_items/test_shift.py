@@ -297,9 +297,8 @@ class TestShiftPage:
         shift.click_button('//span[text()="RGB(100,255,178)"]')
         # 获取下拉框数据
         shiftsel = shift.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input['
-            '@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         assert shiftsel == "RGB(100,255,178)", f"预期{shiftsel}"
         assert not shift.has_fail_message()
 
@@ -591,8 +590,8 @@ class TestShiftPage:
         shift.click_button(f'//span[text()="{random_int}"]')
         # 获取下拉框数据
         shiftsel = shift.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input[@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         # 点击确定
         shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
         sleep(1)

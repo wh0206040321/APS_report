@@ -119,15 +119,25 @@ class HomePage(BasePage):
             print(f"元素查找或处理失败: {e}")
 
     def delete_template(self, name=""):
+        """
+        删除指定名称的模板
+
+        参数:
+            name (str): 要删除的模板名称，默认为空字符串
+
+        返回值:
+            int: 删除操作后仍存在的同名模板数量，正常情况下应为0
+        """
         self.click_template()
         self.wait_for_loading_to_disappear()
+
         # 1️⃣ 悬停模版容器触发图标显示
         container = self.get_find_element_xpath(
             f'//span[text()=" {name} "]/ancestor::div[2]'
         )
         ActionChains(self.driver).move_to_element(container).perform()
 
-        # 2️⃣ 等待图标可见
+        # 2️⃣ 等待删除图标可见
         delete_icon = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((
                 By.XPATH,
@@ -135,7 +145,7 @@ class HomePage(BasePage):
             ))
         )
 
-        # 3️⃣ 再点击图标
+        # 3️⃣ 点击删除图标并确认删除操作
         delete_icon.click()
         self.click_button('(//div[@class="ivu-modal-confirm-footer"])[2]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
@@ -143,10 +153,25 @@ class HomePage(BasePage):
         self.wait_for_loading_to_disappear()
         self.right_refresh()
         self.click_template()
+
+        # 检查删除后的模板数量并返回
         ele = self.driver.find_elements(By.XPATH, f'//div[./span[text()=" {name} "]]')
         return len(ele)
 
     def drag_component(self, name="", index=""):
+        """
+        拖拽组件到画布区域。
+
+        参数:
+            name (str): 组件名称，如果指定该参数，则只拖拽对应名称的组件。
+            index (str or int): 指定拖拽组件的数量。可以是数字字符串或整数，
+                                表示从组件列表中按顺序拖拽前 index 个组件。
+
+        返回:
+            int: 成功拖拽的组件总数。若指定了 name，则返回 1；
+                 否则返回第一组和第二组组件数量之和。
+        """
+
         input_element = self.get_find_element_xpath('//div[@id="homeCanvasBox"]')
         canvas_size = input_element.size
         max_x = int(canvas_size['width'] * 0.25) - 10  # 考虑 zoom 后的大小
@@ -154,6 +179,7 @@ class HomePage(BasePage):
         offset_step = 30
         current_offset_x = 5
         current_offset_y = 5
+
         # 情况一：指定名称拖一个组件
         if name:
             sleep(1)
@@ -180,6 +206,7 @@ class HomePage(BasePage):
         col = 0
         row = 0
 
+        # 遍历组件列表并依次拖拽到画布上，按行列排列
         for xpath in xpath_list:
             text_element = self.get_find_element_xpath(xpath)
             offset_x = current_offset_x + (col * offset_step)
@@ -200,3 +227,4 @@ class HomePage(BasePage):
             col += 1
 
         return index1 + index2
+

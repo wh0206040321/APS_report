@@ -1,4 +1,6 @@
 # pages/login_page.py
+from time import sleep
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -22,7 +24,7 @@ class LoginPage(BasePage):
         self.click(By.XPATH, xpath)
 
     def select_planning_unit(self, planning_unit):
-        self.click_button('//input[@placeholder="请选择计划单元"]')
+        self.click_button('//div[@class="ivu-select-head-flex"]/input')
         self.click_button(f'//li[text()="{planning_unit}"]')
 
     def login(self, username, password, planning_unit):

@@ -117,9 +117,8 @@ class TestSpecPage:
         spec.click_button('//span[text()="RGB(100,255,178)"]')
         # 获取下拉框数据
         specsel = spec.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input['
-            '@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         assert specsel == "2", f"预期{specsel}"
         assert not spec.has_fail_message()
 
@@ -312,13 +311,14 @@ class TestSpecPage:
 
         # 修改显示颜色下拉框
         spec.click_button('(//label[text()="显示颜色"])[1]/parent::div//i')
+        sleep(0.5)
+        spec.click_button('(//label[text()="显示颜色"])[1]/parent::div//i')
         # 显示颜色
         spec.click_button('//span[text()="RGB(242,128,255)"]')
         # 获取下拉框数据
         specsel = spec.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input['
-            '@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         # 点击确定
         spec.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'

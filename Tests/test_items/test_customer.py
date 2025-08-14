@@ -171,14 +171,14 @@ class TestCustomerPage:
         customer.click_add_button()  # 检查点击添加
         # 显示颜色下拉框
         customer.click_button(
-            '(//label[text()="显示颜色"])[1]/parent::div//input[@class="ivu-select-input"]'
+            '//div[label[text()="显示颜色"]]//i'
         )
         # 选择颜色4
         customer.click_button('//div[@class="d-flex"]/span[text()="4"]')
         # 获取下拉框数值
         customersel = customer.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input[@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
         assert customersel == "4", f"预期{customersel}"
         assert not customer.has_fail_message()
 
@@ -359,14 +359,14 @@ class TestCustomerPage:
 
         # 修改显示颜色
         customer.click_button(
-            '(//label[text()="显示颜色"])[1]/parent::div//input[@class="ivu-select-input"]'
+            '//div[label[text()="显示颜色"]]//i'
         )
         # 选择5
         customer.click_button('//div[@class="d-flex"]/span[text()="5"]')
         # 获取下拉框的值
         customersel = customer.get_find_element_xpath(
-            '(//label[text()="显示颜色"])[1]/parent::div//input[@class="ivu-select-input"]'
-        ).get_attribute("value")
+            '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
+        ).text
 
         # 修改表示顺序
         ele = customer.get_find_element_xpath(

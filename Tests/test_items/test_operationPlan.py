@@ -119,9 +119,7 @@ class TestOperationPlanPage:
     # @pytest.mark.run(order=1)
     def test_operationPlan_success(self, login_to_operationPlan):
         driver = login_to_operationPlan  # WebDriver 实例
-        operationPlan = operationPlanPage(
-            driver
-        )  # 用 operationPlan 初始化 operationPlanPage
+        operationPlan = operationPlanPage(driver)  # 用 operationPlan 初始化 operationPlanPage
         shared_data = SharedDataUtil.load_data()
         resource1 = shared_data.get("master_res1")
         resource2 = shared_data.get("master_res2")
@@ -141,7 +139,7 @@ class TestOperationPlanPage:
         )
         print(f"行号: {int(row_number)}")
         operationPlan.click_button(
-            f'//table[@style="width: 140px; margin-top: 0px;"]//tr[{int(row_number)}]/td[2]//span[1]/span'
+            f'//table[@class="vxe-table--body"]//tr[{int(row_number)}]/td[2]//span[1]/span'
         )
         sleep(1)
         # 清除资源代码的输入
@@ -165,7 +163,7 @@ class TestOperationPlanPage:
         )
         print(f"行号: {int(row_number2)}")
         operationPlan.click_button(
-            f'//table[@style="width: 140px; margin-top: 0px;"]//tr[{int(row_number2)}]/td[2]//span[1]/span'
+            f'//table[@class="vxe-table--body"]//tr[{int(row_number2)}]/td[2]//span[1]/span'
         )
         # 清除资源代码的输入
         ele = operationPlan.get_find_element_xpath(

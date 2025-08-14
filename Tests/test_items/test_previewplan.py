@@ -131,7 +131,7 @@ class TestPreviewPlanPage:
         )
         print(f"行号: {int(row_number)}")
         operationPlan.click_button(
-            f'//table[@style="width: 140px; margin-top: 0px;"]//tr[{int(row_number)}]/td[2]//span[1]/span'
+            f'//table[@class="vxe-table--body"]//tr[{int(row_number)}]/td[2]//span[1]/span'
         )
         sleep(1)
         # 清除资源代码的输入
@@ -155,7 +155,7 @@ class TestPreviewPlanPage:
         )
         print(f"行号: {int(row_number2)}")
         operationPlan.click_button(
-            f'//table[@style="width: 140px; margin-top: 0px;"]//tr[{int(row_number2)}]/td[2]//span[1]/span'
+            f'//table[@class="vxe-table--body"]//tr[{int(row_number2)}]/td[2]//span[1]/span'
         )
         # 清除资源代码的输入
         ele = operationPlan.get_find_element_xpath(

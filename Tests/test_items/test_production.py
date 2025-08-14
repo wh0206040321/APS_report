@@ -251,10 +251,9 @@ class TestProductionPage:
         # 获取提示信息
         sleep(1)
         message = production.get_find_element_xpath(
-            '//p[text()="当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"]'
+            '//p[text()="当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"]'
         ).text
-        production.click_button('//div[@class="el-message-box__btns"]/button[2]')
-        sleep(1)
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
         ele = production.get_find_element_xpath(
             '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]'
         ).text
@@ -265,7 +264,7 @@ class TestProductionPage:
         )
         # 断言提示信息为“请先填写表单”
         assert (
-            message == "当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"
+            message == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
             and ele == "100"
             and after_text.text == "结束"
         )
@@ -286,7 +285,7 @@ class TestProductionPage:
         text = production.get_find_element_xpath(
             '//p[text()="当前工作已【结束】，是否需要修改成【开始生产】？"]'
         ).text
-        # 点击否
+        # 点击是
         production.click_button('//div[@class="el-message-box__btns"]/button[2]')
         sleep(1)
         ele = driver.find_elements(
@@ -343,9 +342,9 @@ class TestProductionPage:
         # 获取提示信息
         sleep(1)
         message = production.get_find_element_xpath(
-            '//p[text()="当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"]'
+            '//p[text()="当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"]'
         ).text
-        production.click_button('//div[@class="el-message-box__btns"]/button[2]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
         sleep(1)
         ele = production.get_find_element_xpath(
             '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]'
@@ -357,7 +356,7 @@ class TestProductionPage:
         )
         # 断言提示信息为“请先填写表单”
         assert (
-            message == "当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"
+            message == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
             and ele == "100"
             and after_text.text == "结束"
         )
@@ -444,7 +443,7 @@ class TestProductionPage:
         sleep(1)
         production.enter_texts(
             '//label[text()="报工数量"]/following-sibling::div//input',
-            "1+2=。，、？w’；6",
+            "e1+2=。，、.？w’；6",
         )
         assert input_num.get_attribute("value") == "126"
         assert not production.has_fail_message()
@@ -496,7 +495,7 @@ class TestProductionPage:
         message = production.get_find_element_xpath(
             '//p[text()="当前工作报工数量小于计划数量，是否将实绩状态改为开始生产"]'
         ).text
-        production.click_button('//div[@class="el-message-box__btns"]/button[1]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
         sleep(1)
 
         ele1 = production.get_find_element_xpath(
@@ -547,9 +546,9 @@ class TestProductionPage:
         # 获取提示信息
         sleep(1)
         message = production.get_find_element_xpath(
-            '//p[text()="当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"]'
+            '//p[text()="当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"]'
         ).text
-        production.click_button('//div[@class="el-message-box__btns"]/button[1]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="否"]')
         sleep(1)
 
         ele1 = production.get_find_element_xpath(
@@ -569,7 +568,7 @@ class TestProductionPage:
             ele1 == "300"
             and ele2 == "1测试C订单:2"
             and message
-            == "当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"
+            == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
             and after_text.text == "开始生产"
         )
         assert not production.has_fail_message()
@@ -598,9 +597,9 @@ class TestProductionPage:
         # 获取提示信息
         sleep(1)
         message = production.get_find_element_xpath(
-            '//p[text()="当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"]'
+            '//p[text()="当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"]'
         ).text
-        production.click_button('//div[@class="el-message-box__btns"]/button[2]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
         sleep(1)
 
         ele1 = production.get_find_element_xpath(
@@ -620,7 +619,7 @@ class TestProductionPage:
             ele1 == "300"
             and ele2 == "1测试C订单:2"
             and message
-            == "当前工作报工数量大于计划数量加完成数量，是否将实绩状态改为结束"
+            == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
             and after_text.text == "结束"
         )
         assert not production.has_fail_message()

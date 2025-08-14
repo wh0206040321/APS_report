@@ -117,7 +117,7 @@ class TestCoveragePage:
         # 输入文本
         coverage.enter_texts(
             '//div[@id="k0z05daz-8tok"]//input',
-            "1文字abc。？~1++3.,/=8",
+            "e1文字abc。？~1++3.,/.=8",
         )
         sleep(1)
         # 获取表示顺序数字框

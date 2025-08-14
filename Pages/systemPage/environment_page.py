@@ -127,6 +127,15 @@ class EnvironmentPage(BasePage):
             except Exception as e:
                 print(f"操作 {xpath} 时出错: {str(e)}")
 
+    def batch_modify_inputs(self, xpath_value_map: dict):
+        """通过字典批量修改输入框（键为XPath，值为输入内容）"""
+        for xpath, value in xpath_value_map.items():
+            element = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, xpath)))
+            element.send_keys(Keys.CONTROL, 'a')
+            element.send_keys(Keys.DELETE)
+            element.send_keys(value)
+
     def batch_acquisition_input(self, xpath_list=[], text_value=""):
         """批量获取输入框"""
         values = []

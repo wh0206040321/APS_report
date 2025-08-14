@@ -71,7 +71,11 @@ class TestEnvironmentPage:
     def test_environment_all_clearnum(self, login_to_environment):
         driver = login_to_environment  # WebDriver 实例
         environment = EnvironmentPage(driver)  # 用 driver 初始化 EnvironmentPage
-        value = environment.enter_number_input()
+        xpth = '//div[label[text()="备份文件最大数:"]]//input'
+        ele = environment.get_find_element_xpath(xpth)
+        ele.send_keys(Keys.CONTROL, 'a')
+        ele.send_keys(Keys.DELETE)
+        value = environment.get_find_element_xpath(xpth).get_attribute("value")
         environment.click_save_button()
         message = environment.get_find_message()
         assert value == "" and message == "请填写信息"
@@ -585,3 +589,47 @@ class TestEnvironmentPage:
         text = environment.get_find_element_xpath('//div[@class="navTop"]/div/span').text
         assert message == "保存成功" and text == "Elligent SCP"
         assert not environment.has_fail_message()
+
+    @allure.story("恢复默认设置")
+    # @pytest.mark.run(order=1)
+    def test_environment_restore_default_settings(self, login_to_environment):
+        driver = login_to_environment  # WebDriver 实例
+        environment = EnvironmentPage(driver)  # 用 driver 初始化 EnvironmentPage
+        environment.enter_number_input(10)
+        check1 = environment.get_find_element_xpath('//div[label[text()="变更使用时间:"]]/div//span').get_attribute("class")
+        if check1 == "ivu-checkbox ivu-checkbox-checked":
+            environment.click_button('//div[label[text()="变更使用时间:"]]/div//span')
+        select_list = [
+            {"select": '//div[label[text()="用鼠标移动工作方法:"]]/div//i', "value": '//li[text()="无限能力"]'},
+        ]
+        environment.batch_modify_select_input(select_list)
+
+        environment.click_cycle()
+        xpath_value_map = {
+            '//div[label[text()="分派开始时间:"]]//input': "0",
+            '//div[label[text()="分派结束时间:"]]//input': "90",
+            '//div[label[text()="生产指令结束时间:"]]//input': "0",
+            '//div[label[text()="显示开始时间:"]]//input': "-3",
+            '//div[label[text()="显示结束时间:"]]//input': "100",
+        }
+        environment.batch_modify_inputs(xpath_value_map)
+
+        environment.click_plan()
+        xpath_value_map1 = {
+            '//div[label[text()="制造效率:"]]//input': "1",
+            '//div[label[text()="分派侯补数的上限:"]]//input': "1000",
+            '//div[label[text()="自动补充制造订单序列号:"]]//input': "1",
+        }
+        environment.batch_modify_inputs(xpath_value_map1)
+
+        check2 = environment.get_find_element_xpath('//div[label[text()="启用资源锁定:"]]/div//input').get_attribute("class")
+        if check2 == "ivu-checkbox ivu-checkbox-checked":
+            environment.click_button('//div[label[text()="变更使用时间:"]]/div//span')
+
+        sleep(2)
+        environment.click_save_button()
+        assert environment.get_find_message() == "保存成功"
+        assert not environment.has_fail_message()
+
+
+

@@ -1241,8 +1241,8 @@ class TestSchedPage:
         sched.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]'
         )
-        message = sched.get_find_message().text
-        assert message == "记录已存在,请检查！"
+        message = sched.get_find_element_xpath('//div[@class="el-message el-message--error"]//p').text
+        assert message == "不允许新增相同名称的策略"
         assert not sched.has_fail_message()
 
     @allure.story("属性设置-时间属性-分派开始时间")

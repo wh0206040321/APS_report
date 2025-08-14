@@ -1,4 +1,5 @@
 from time import sleep
+from datetime import datetime
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import ActionChains
@@ -331,3 +332,52 @@ class AffairsPage(BasePage):
             self.click_button(f'(//button[span[text()="筛选"]])[1]')
         else:
             self.click_button(f'(//button[span[text()="重置筛选条件"]])[1]')
+
+    def click_paging(self, num):
+        """点击分页."""
+        self.click_button('//div[@class="el-select el-select--mini"]//input')
+        self.click_button(f'//ul[@class="el-scrollbar__view el-select-dropdown__list"]//span[text()="{num}条/页"]')
+    def get_log_time(self):
+        """获取日志时间."""
+        time1 = self.get_find_element_xpath('(//table[@class="el-table__body"])[2]//tr[2]/td[5]').text
+        time2 = self.get_find_element_xpath('(//table[@class="el-table__body"])[2]//tr[4]/td[5]').text
+        # 解析原始字符串
+        dt1 = datetime.strptime(time1, "%Y/%m/%d %H:%M:%S")
+        dt2 = datetime.strptime(time2, "%Y/%m/%d %H:%M:%S")
+        # 格式化为新字符串
+        formatted_date1 = dt1.strftime("%Y-%m-%d")
+        formatted_date2 = dt2.strftime("%Y-%m-%d")
+        return formatted_date1, formatted_date2
+
+    def sel_log_all(self, time1="", time2="", ptype="", pid="", pname="", affairs_name="", button: bool = True):
+        """查询所有."""
+        if time1:
+            if len(time1) > 10:
+                self.click_button('(//input[@placeholder="开始日期"])[1]')
+                self.enter_texts('(//input[@placeholder="开始日期"])[2]', time1)
+                self.enter_texts('//input[@placeholder="开始时间"]', time2)
+                self.enter_texts('(//input[@placeholder="结束日期"])[2]', time1)
+                self.enter_texts('//input[@placeholder="结束时间"]', time2)
+                self.click_button('//div[@class="el-picker-panel__footer"]/button[2]')
+            else:
+                self.click_button('(//input[@placeholder="开始日期"])[1]')
+                self.enter_texts('(//input[@placeholder="开始日期"])[2]', time2)
+                self.enter_texts('//input[@placeholder="开始时间"]', "00:00:00")
+                self.enter_texts('(//input[@placeholder="结束日期"])[2]', time1)
+                self.enter_texts('//input[@placeholder="结束时间"]', "00:00:00")
+                self.click_button('//div[@class="el-picker-panel__footer"]/button[2]')
+        if ptype:
+            self.click_button('//div[label[text()="执行状态:"]]//input')
+            self.click_button(f'//li[span[text()="{ptype}"]]')
+        if pid:
+            self.enter_texts('//input[@placeholder="请输入流程ID"]', pid)
+        if pname:
+            self.enter_texts('//input[@placeholder="请输入流程名称"]', pname)
+        if affairs_name:
+            self.click_button('//div[label[text()="事务:"]]//input')
+            self.click_button(f'//li[div/span[text()="{affairs_name}"]]')
+        if button:
+            self.click_button(f'(//button[span[text()="筛选"]])[2]')
+        else:
+            self.click_button(f'(//button[span[text()="重置筛选条件"]])[2]')
+        sleep(3)
