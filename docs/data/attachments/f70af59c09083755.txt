@@ -1,0 +1,8 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="33"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[2]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
