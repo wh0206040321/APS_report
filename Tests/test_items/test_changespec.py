@@ -711,6 +711,7 @@ class TestChangeSpecPage:
     def test_changespec_selectcodesuccess(self, login_to_changespec):
         driver = login_to_changespec  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        sleep(2)
         after = change.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][3]/td[2]'
         ).text
@@ -752,8 +753,8 @@ class TestChangeSpecPage:
         # 定位第一行是否为开料
         changeRcode = change.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
-        ).text
-        assert changeRcode == after
+        )
+        assert changeRcode.text == after
         assert not change.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")

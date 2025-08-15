@@ -337,6 +337,7 @@ class AffairsPage(BasePage):
         """点击分页."""
         self.click_button('//div[@class="el-select el-select--mini"]//input')
         self.click_button(f'//ul[@class="el-scrollbar__view el-select-dropdown__list"]//span[text()="{num}条/页"]')
+
     def get_log_time(self):
         """获取日志时间."""
         time1 = self.get_find_element_xpath('(//table[@class="el-table__body"])[2]//tr[2]/td[5]').text

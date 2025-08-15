@@ -110,3 +110,21 @@ class SettingPage(BasePage):
         self.click_button('(//i[@class="el-tooltip ivu-icon ivu-icon-md-add"])[2]')
         if name:
             self.enter_texts('//div[text()="标签名："]/following-sibling::div/input', f"{name}")
+
+    def hover(self, name=""):
+        # 悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//div[@id="container"]//span[text()="{name}"]'
+        )
+        ActionChains(self.driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//div[@id="container"]//span[text()="{name}"]/ancestor::div[1]/div'
+            ))
+        )
+
+        # 3️⃣ 再点击图标
+        delete_icon.click()

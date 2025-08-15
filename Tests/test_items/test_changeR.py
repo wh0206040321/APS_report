@@ -750,8 +750,8 @@ class TestChangeRPage:
         # 定位第一行是否为开料
         changeRcode = changeR.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
-        ).text
-        assert changeRcode == ele
+        )
+        assert changeRcode.text == ele
         assert not changeR.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
