@@ -1,4 +1,0 @@
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()=" 交付单号"]/ancestor::div[3]//span//span//span
-[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="filterInput"]//following-sibling::label
-[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[@class="filterInput"]//following-sibling::label 未在 10 秒内变为可点击
