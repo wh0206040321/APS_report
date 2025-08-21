@@ -9,7 +9,7 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.resource_page import ResourcePage
 from Utils.data_driven import DateDriver
@@ -601,7 +601,7 @@ class TestResourceGroupPage:
     def test_resourcegroup_addall(self, login_to_resourcegroup):
         driver = login_to_resourcegroup  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-        adds = AddsPaes(driver)
+        adds = AddsPages(driver)
         input_value = '11测试全部数据'
         resource.click_add_button()
         custom_xpath_list = [

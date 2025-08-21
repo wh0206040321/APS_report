@@ -1,7 +1,7 @@
 import random
 from time import sleep
 
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
@@ -61,6 +61,30 @@ class Coverage(BasePage):
         except NoSuchElementException:
             return None
 
+    def batch_modify_inputs(self, xpath_value_map: dict):
+        """通过字典批量修改输入框（键为XPath，值为输入内容）"""
+        for xpath, value in xpath_value_map.items():
+            self.enter_texts(xpath, value)
+
+    def get_border_color(self, xpath_list=[], text_value=""):
+        """获取边框颜色"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath).value_of_css_property("border-color")
+                values.append(value)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+
+        return values
+
     def add_layout(self, layout):
         """添加布局."""
         self.click_button('//div[@class="newDropdown"]//i')
@@ -104,6 +128,8 @@ class Coverage(BasePage):
 
     def add_input_all(self, num):
         """输入框全部输入保存"""
+        start = "2027/08/21 00:00:00"
+        end = "2028/07/21 00:00:00"
         if num != "":
             # 点击资源
             self.click_button(
@@ -123,47 +149,14 @@ class Coverage(BasePage):
                 '//div[@id="2ssy7pog-1nb7"]//input'
             ).get_attribute("value")
 
-            # 开始时间
-            self.click_button(
-                '//div[@id="dnj11joa-anmy"]//input'
-            )
-            self.click_button('(//em[text()="13"])[1]')
-            self.click_button(
-                '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[1]'
-            )
-            start = self.get_find_element_xpath(
-                '(//input[@class="ivu-input ivu-input-default ivu-input-with-suffix"])[1]'
-            ).get_attribute("value")
-            sleep(1)
-            # 结束时间
-            self.click_button(
-                '//div[@id="qqs38txd-vd0r"]//input'
-            )
-            self.click_button('(//em[text()="20"])[2]')
-            self.click_button(
-                '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[2]'
-            )
-            end = self.get_find_element_xpath(
-                '(//input[@class="ivu-input ivu-input-default ivu-input-with-suffix"])[2]'
-            ).get_attribute("value")
-
             # 时序
             self.enter_texts(
                 '//div[@id="tg89jocr-6to2"]//input', f"{start};{end}"
-            )
-            # 时间标记
-            self.click_button(
-                '(//input[@class="ivu-input ivu-input-default ivu-input-with-suffix"])[3]'
-            )
-            self.click_button('(//em[text()="20"])[3]')
-            self.click_button(
-                '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[3]'
             )
 
             # 点击下拉框
             self.click_button('//span[text()="请选择"]/following-sibling::i')
             self.click_button('//span[text()="RGB(100,255,178)"]')
-
 
             for index in range(1, 7):
                 if index == 2 or index == 4 or index == 5 or index == 6:

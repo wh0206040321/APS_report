@@ -67,7 +67,6 @@ class BasePage:
             EC.visibility_of_element_located((by, value))
         )
         sleep(0.5)
-        element.clear()  # 清空文本框
         element.send_keys(text)
 
     def navigate_to(self, url):

@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import WebDriverException
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.personal_page import PersonalPage
 from Pages.systemPage.homepage_page import HomePage
 from Pages.itemsPage.login_page import LoginPage

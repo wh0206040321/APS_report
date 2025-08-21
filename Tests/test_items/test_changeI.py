@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.changeI_page import ChangeI
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -57,6 +57,7 @@ def login_to_changeI():
 @allure.feature("物品切换表测试用例")
 @pytest.mark.run(order=12)
 class TestChangeIPage:
+
     @allure.story("添加物品切换信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
     def test_changeI_addfail(self, login_to_changeI):
@@ -711,6 +712,7 @@ class TestChangeIPage:
     def test_changeI_selectcodesuccess(self, login_to_changeI):
         driver = login_to_changeI  # WebDriver 实例
         changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
+        sleep(3)
         ele = changeI.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
         ).text
@@ -761,7 +763,7 @@ class TestChangeIPage:
     def test_changeI_addall(self, login_to_changeI):
         driver = login_to_changeI  # WebDriver 实例
         changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
-        adds = AddsPaes(driver)
+        adds = AddsPages(driver)
         input_value = '11测试全部数据'
         changeI.click_add_button()
         text_list = [

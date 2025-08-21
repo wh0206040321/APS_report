@@ -1,5 +1,6 @@
 import logging
 import random
+from datetime import datetime
 from time import sleep
 
 import allure
@@ -10,6 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.coverage_page import Coverage
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -74,14 +76,6 @@ class TestCoveragePage:
         resource_box = coverage.get_find_element_xpath(
             '//div[@id="2ssy7pog-1nb7"]//input'
         )
-        # 开始时间
-        start_box = coverage.get_find_element_xpath(
-            '//div[@id="dnj11joa-anmy"]//input'
-        )
-        # 结束时间
-        end_box = coverage.get_find_element_xpath(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        )
         # 时序
         chronology_box = coverage.get_find_element_xpath(
             '//div[@id="tg89jocr-6to2"]//input'
@@ -94,14 +88,10 @@ class TestCoveragePage:
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         resource_box_color = resource_box.value_of_css_property("border-color")
-        start_box_color = start_box.value_of_css_property("border-color")
-        end_box_color = end_box.value_of_css_property("border-color")
         chronology_box_color = chronology_box.value_of_css_property("border-color")
         resources_box_color = resources_box.value_of_css_property("border-color")
         expected_color = "rgb(255, 0, 0)"  # 红色的 rgb 值
         assert resource_box_color == expected_color
-        assert start_box_color == expected_color
-        assert end_box_color == expected_color
         assert chronology_box_color == expected_color
         assert resources_box_color == expected_color
         assert layout == name
@@ -116,15 +106,215 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         coverage.enter_texts(
-            '//div[@id="k0z05daz-8tok"]//input',
+            '//div[@id="9la8xi09-07ws"]//input',
             "e1文字abc。？~1++3.,/.=8",
         )
         sleep(1)
         # 获取表示顺序数字框
         coveragenum = coverage.get_find_element_xpath(
-            '//div[@id="k0z05daz-8tok"]//input'
+            '//div[@id="9la8xi09-07ws"]//input'
         ).get_attribute("value")
         assert coveragenum == "1138", f"预期{coveragenum}"
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框的校验，只填写一个时间，文本框爆红")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence1(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': "2026/08/21",
+        }
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        assert all(color == "rgb(255, 0, 0)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框和资源量的校验，设置不合法，文本框爆红")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence2(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': "2026/08/21;202e/08/21",
+            '//div[@id="k0z05daz-8tok"]//input': "e1;2",
+        }
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        assert all(color == "rgb(255, 0, 0)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框和资源量的校验，设置不合法，文本框爆红")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence3(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': "226/08/2r",
+            '//div[@id="k0z05daz-8tok"]//input': "1;d2",
+        }
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        assert all(color == "rgb(255, 0, 0)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框和资源量的校验，设置为中文分号，文本框爆红")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence4(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': "2026/08/21；2027/08/21",
+            '//div[@id="k0z05daz-8tok"]//input': "1；2",
+        }
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        assert all(color == "rgb(255, 0, 0)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框和资源量的校验，输入多个时间段和资源量，可通过")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence5(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': "2026/08/21;2027/08/21;2028/08/21;2029/08/21",
+            '//div[@id="k0z05daz-8tok"]//input': "1;2;19;300",
+        }
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        assert all(color == "rgb(220, 222, 226)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框的校验，当后面的时间段比前面的时间段早，会自动纠正")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence6(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        start = "2026/08/21 00:00:00"
+        end = "2025/07/21 00:00:00"
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': f"{start};{end}",
+        }
+        xpath_list = [
+            '//div[@id="dnj11joa-anmy"]//input',
+            '//div[@id="qqs38txd-vd0r"]//input',
+        ]
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        value_list = add.batch_acquisition_input(xpath_list)
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        value = coverage.get_find_element_xpath(key_list[0]).get_attribute("value")
+        assert all(color == "rgb(220, 222, 226)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert value == end + ";" + start
+        assert value_list[0] == end and value_list[1] == start
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框的校验，输入三个时间段，当中间的时间段比前面的时间段早，会自动纠正")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence7(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        start = "2026/08/21 00:00:00"
+        middle = "2025/08/22 00:00:00"
+        end = "2027/07/21 00:00:00"
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': f"{start};{middle};{end}",
+        }
+        xpath_list = [
+            '//div[@id="dnj11joa-anmy"]//input',
+            '//div[@id="qqs38txd-vd0r"]//input',
+        ]
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        sleep(1)
+        # 获取表示顺序数字框
+        value_list = add.batch_acquisition_input(xpath_list)
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        value = coverage.get_find_element_xpath(key_list[0]).get_attribute("value")
+        assert all(color == "rgb(220, 222, 226)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert value == middle + ";" + start + ";" + end
+        assert value_list[0] == middle and value_list[1] == end
+        assert not coverage.has_fail_message()
+
+    @allure.story("时序文本框的校验，输入错误的年份会爆红，点击确定时间标记会显示当前时间")
+    # @pytest.mark.run(order=1)
+    def test_coverage_timesequence8(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        add = AddsPages(driver)
+        start = "202/08/21 00:00:00"
+        end = "2025/07/21 00:00:00"
+        xpath_value_map = {
+            '//div[@id="tg89jocr-6to2"]//input': f"{start};{end}",
+        }
+        xpath_list = [
+            '//div[@id="dnj11joa-anmy"]//input',
+            '//div[@id="qqs38txd-vd0r"]//input',
+            '//div[@id="dmnoa1tj-z7w5"]//input',
+        ]
+        coverage.click_add_button()  # 检查点击添加
+        # 输入文本
+        add.batch_modify_inputs(xpath_value_map)
+        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        # 获取当前时间
+        current_time = datetime.now()
+        # 格式化为 年/月/日 的字符串
+        formatted_date = current_time.strftime("%Y/%m/%d")
+        sleep(1)
+        # 获取表示顺序数字框
+        value_list = add.batch_acquisition_input(xpath_list)
+        key_list = list(xpath_value_map.keys())
+        sequence_box_color = add.get_border_color(key_list)
+        value = coverage.get_find_element_xpath(xpath_list[2]).get_attribute("value")
+        assert all(color == "rgb(255, 0, 0)" for color in sequence_box_color), f"预期{sequence_box_color}"
+        assert formatted_date in value
+        assert value_list[0] == "" and value_list[1] == end
         assert not coverage.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -132,7 +322,8 @@ class TestCoveragePage:
     def test_coverage_addweeksuccess1(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-
+        start = "2027/08/21 00:00:00"
+        end = "2028/07/21 00:00:00"
         coverage.click_add_button()
 
         # 点击资源
@@ -154,30 +345,6 @@ class TestCoveragePage:
         ).get_attribute("value")
 
         coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
-
-        # 开始时间
-        coverage.click_button(
-            '//div[@id="dnj11joa-anmy"]//input'
-        )
-        coverage.click_button('(//em[text()="13"])[1]')
-        coverage.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[1]'
-        )
-        start = coverage.get_find_element_xpath(
-            '//div[@id="dnj11joa-anmy"]//input'
-        ).get_attribute("value")
-        sleep(1)
-        # 结束时间
-        coverage.click_button(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        )
-        coverage.click_button('(//em[text()="20"])[2]')
-        coverage.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[2]'
-        )
-        end = coverage.get_find_element_xpath(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        ).get_attribute("value")
 
         # 时序
         coverage.enter_texts(
@@ -287,14 +454,19 @@ class TestCoveragePage:
                 text = td.text.strip()
                 print(f"第 {i} 个单元格内容：{text}")
                 columns_text.append(text)
-
+        # 获取当前时间
+        current_time = datetime.now()
+        # 格式化为 年/月/日 的字符串
+        formatted_date = current_time.strftime("%Y/%m/%d")
         print(columns_text)
-        bef_text = [f'{resource}', f'{start}', f'{end}', f'{data_list}', f'{selClass}', f'{start};{end}', f'{data_list}', '2025', f'{end}',
+        bef_text = [f'{resource}', f'{start}', f'{end}', f'{data_list}', f'{selClass}', f'{start};{end}', f'{data_list}', '2025', f'{formatted_date}',
                     '2', f'{data_list}', f'{data_list}',  f'{DateDriver.username}']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text),start=1):
             if i == 8:
                 assert str(e) in str(a), f"第8项包含断言失败：'{e}' not in '{a}'"
+            elif i == 9:
+                assert str(e) in str(a), f"第9项包含断言失败：'{e}' not in '{a}'"
             else:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not coverage.has_fail_message()
@@ -353,15 +525,20 @@ class TestCoveragePage:
                 text = td.text.strip()
                 print(f"第 {i} 个单元格内容：{text}")
                 columns_text.append(text)
-
+        # 获取当前时间
+        current_time = datetime.now()
+        # 格式化为 年/月/日 的字符串
+        formatted_date = current_time.strftime("%Y/%m/%d")
         print(columns_text)
         bef_text = [f'{resource}', f'{start}', f'{end}', f'{data_list}', f'{selClass}', f'{start};{end}',
-                    f'{data_list}', '2025', f'{end}',
+                    f'{data_list}', '2025', f'{formatted_date}',
                     '2', f'{data_list}', f'{data_list}', f'{DateDriver.username}']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):
             if i == 8:
                 assert str(e) in str(a), f"第8项包含断言失败：'{e}' not in '{a}'"
+            elif i == 9:
+                assert str(e) in str(a), f"第9项包含断言失败：'{e}' not in '{a}'"
             else:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not coverage.has_fail_message()
@@ -406,7 +583,8 @@ class TestCoveragePage:
     def test_coverage_addweeksuccess2(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-
+        start = "2027/08/21 00:00:00"
+        end = "2028/07/21 00:00:00"
         coverage.click_add_button()
 
         # 点击资源
@@ -427,30 +605,6 @@ class TestCoveragePage:
             '//div[@id="2ssy7pog-1nb7"]//input'
         ).get_attribute("value")
         coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
-
-        # 开始时间
-        coverage.click_button(
-            '//div[@id="dnj11joa-anmy"]//input'
-        )
-        coverage.click_button('(//em[text()="13"])[1]')
-        coverage.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[1]'
-        )
-        start = coverage.get_find_element_xpath(
-            '//div[@id="dnj11joa-anmy"]//input'
-        ).get_attribute("value")
-        sleep(1)
-        # 结束时间
-        coverage.click_button(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        )
-        coverage.click_button('(//em[text()="20"])[2]')
-        coverage.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[2]'
-        )
-        end = coverage.get_find_element_xpath(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        ).get_attribute("value")
 
         # 时序
         coverage.enter_texts(
@@ -508,7 +662,8 @@ class TestCoveragePage:
     def test_coverage_addweeksuccess3(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-
+        start = "2027/08/21 00:00:00"
+        end = "2028/07/21 00:00:00"
         coverage.click_add_button()
 
         # 点击资源
@@ -529,30 +684,6 @@ class TestCoveragePage:
             '//div[@id="2ssy7pog-1nb7"]//input'
         ).get_attribute("value")
         coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
-
-        # 开始时间
-        coverage.click_button(
-            '//div[@id="dnj11joa-anmy"]//input'
-        )
-        coverage.click_button('(//em[text()="13"])[1]')
-        coverage.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[1]'
-        )
-        start = coverage.get_find_element_xpath(
-            '//div[@id="dnj11joa-anmy"]//input'
-        ).get_attribute("value")
-        sleep(1)
-        # 结束时间
-        coverage.click_button(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        )
-        coverage.click_button('(//em[text()="20"])[2]')
-        coverage.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[2]'
-        )
-        end = coverage.get_find_element_xpath(
-            '//div[@id="qqs38txd-vd0r"]//input'
-        ).get_attribute("value")
 
         # 时序
         coverage.enter_texts(
@@ -635,15 +766,15 @@ class TestCoveragePage:
     def test_coverage_refreshsuccess(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-
+        sleep(3)
         # 覆盖日历筛选框输入123
         coverage.enter_texts(
-            '//table[@style="margin-left: 0px; width: 1400px;"]//th[2]/div[1]//input',
+            '//div[span[text()=" 资源代码"]]/following-sibling::div//input',
             "123",
         )
         coverage.click_ref_button()
         coveragetext = coverage.get_find_element_xpath(
-            '//table[@style="margin-left: 0px; width: 1400px;"]//th[2]/div[1]//input'
+            '//div[span[text()=" 资源代码"]]/following-sibling::div//input'
         ).text
         assert coveragetext == "", f"预期{coveragetext}"
         assert not coverage.has_fail_message()
@@ -712,7 +843,7 @@ class TestCoveragePage:
 
         # 点击资源
         coverage.click_button(
-            '//div[@id="koj93t4j-ynyg"]//i'
+            '//div[@id="2zfqnpsf-3nsq"]//i'
         )
         # 勾选框
         random_int = random.randint(2, 10)
@@ -723,7 +854,7 @@ class TestCoveragePage:
         sleep(1)
         # 获取勾选的资源代码
         resource = coverage.get_find_element_xpath(
-            '//div[@id="koj93t4j-ynyg"]//input'
+            '//div[@id="2zfqnpsf-3nsq"]//input'
         ).get_attribute("value")
 
         coverage.click_button(

@@ -12,8 +12,7 @@
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.common.exceptions import WebDriverException
 #
-# from Pages.itemsPage.adds_page import AddsPaes
-# from Pages.itemsPage.personal_page import PersonalPage
+# from Pages.itemsPage.adds_page import AddsPages
 # from Pages.systemPage.psi_page import PsiPage
 # from Pages.itemsPage.login_page import LoginPage
 # from Utils.data_driven import DateDriver
@@ -226,6 +225,19 @@
 #         assert message == "保存成功" and len(eles) == 1
 #         assert not psi.has_fail_message()
 #
+#     @allure.story("添加测试数据")
+#     # @pytest.mark.run(order=1)
+#     def test_psi_addsuccess1(self, login_to_psi):
+#         driver = login_to_psi  # WebDriver 实例
+#         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
+#         name = "1测试psi3"
+#         psi.add_psi(name=name)
+#         psi.click_button_psi("保存")
+#         message = psi.get_find_message()
+#         eles = psi.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+#         assert message == "保存成功" and len(eles) == 1
+#         assert not psi.has_fail_message()
+#
 #     @allure.story("添加名称重复")
 #     # @pytest.mark.run(order=1)
 #     def test_psi_addrepeat(self, login_to_psi):
@@ -421,17 +433,56 @@
 #         assert message == "保存成功" and ele == "vxe-icon-funnel suffixIcon"
 #         assert not psi.has_fail_message()
 #
+#     @allure.story("点击取消不会修改数据")
+#     # @pytest.mark.run(order=1)
+#     def test_psi_cancel(self, login_to_psi):
+#         driver = login_to_psi  # WebDriver 实例
+#         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
+#         name = "1测试psi1"
+#         name1 = "11"
+#         psi.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+#         psi.click_button_psi("编辑")
+#         psi.enter_text(By.XPATH, '//div[p[text()="PSI名称: "]]//input', name1)
+#         psi.click_button_psi("取消")
+#         psi.right_refresh()
+#         eles = psi.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+#         assert len(eles) == 1
+#         assert not psi.has_fail_message()
+#
+#     @allure.story("删除透视数据，表行，表列，数据内容成功")
+#     # @pytest.mark.run(order=1)
+#     def test_psi_deldata(self, login_to_psi):
+#         driver = login_to_psi  # WebDriver 实例
+#         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
+#         name = "1测试psi2"
+#         list_ = [
+#             '//div[text()=" 透视数据表行 "]',
+#             '//div[text()=" 透视数据表列 "]',
+#             '//div[text()=" 透视数据内容 "]',
+#         ]
+#         psi.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+#         psi.click_button_psi("编辑")
+#         psi.del_data(list_)
+#         psi.click_button_psi("保存")
+#         message = psi.get_find_message()
+#         psi.right_refresh()
+#         psi.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+#         psi.click_button_psi("编辑")
+#         ele = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//input')
+#         assert len(ele) == 0
+#         assert message == "保存成功"
+#         assert not psi.has_fail_message()
+#
 #     @allure.story("删除数据成功")
 #     # @pytest.mark.run(order=1)
 #     def test_psi_del(self, login_to_psi):
 #         driver = login_to_psi  # WebDriver 实例
 #         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
-#         list_ = ["1测试psi1", "1测试psi2"]
+#         list_ = ["1测试psi1","1测试psi2","1测试psi3"]
 #         psi.del_all(list_)
 #         message = psi.get_find_message()
 #         psi.right_refresh()
-#         eles1 = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi1"]')
 #         eles2 = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]')
-#         assert not eles1 and not eles2
+#         assert not eles2
 #         assert message == "删除成功！"
 #         assert not psi.has_fail_message()

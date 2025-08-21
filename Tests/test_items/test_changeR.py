@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.changeR_page import ChangeR
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -709,6 +709,7 @@ class TestChangeRPage:
     def test_changer_selectcodesuccess(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        sleep(3)
         ele = changeR.get_find_element_xpath(
             '//table[@xid=2 and @class="vxe-table--body"]//tr[2]/td[2]'
         ).text
@@ -759,7 +760,7 @@ class TestChangeRPage:
     def test_changeR_addall(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        adds = AddsPaes(driver)
+        adds = AddsPages(driver)
         input_value = '11测试全部数据'
         changeR.click_add_button()
         text_list = [

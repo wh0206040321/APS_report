@@ -81,7 +81,7 @@ class TestSchedPage:
         sched.click_button(
             '//label[text()="选择复制的方案"]/following-sibling::div/div'
         )  # 点击下拉框
-        sched.click_button('//li[text()="测试方案"]')
+        sched.click_button('//li[text()="排产方案（工序级）"]')
 
         sched.click_ok_schedbutton()  # 点击确定
         message = WebDriverWait(driver, 10).until(
@@ -101,7 +101,7 @@ class TestSchedPage:
 
         sched.click_add_schedbutton()  # 点击添加方案
         sched.enter_texts(
-            '//label[text()="名称"]/following-sibling::div//input', "测试方案"
+            '//label[text()="名称"]/following-sibling::div//input', "排产方案（工序级）"
         )
 
         sched.click_ok_schedbutton()  # 点击确定
@@ -129,7 +129,7 @@ class TestSchedPage:
         sched.click_button(
             '//label[text()="选择复制的方案"]/following-sibling::div/div'
         )  # 点击下拉框
-        sched.click_button('//li[text()="测试方案"]')
+        sched.click_button('//li[text()="排产方案（工序级）"]')
         sched.click_ok_schedbutton()  # 点击确定
         sched.click_save_button()  # 点击保存
         sleep(1)

@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from Pages.base_page import BasePage
 
 
-class AddsPaes(BasePage):
+class AddsPages(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -101,6 +101,68 @@ class AddsPaes(BasePage):
                 )
 
         return values
+
+    def batch_acquisition_text(self, xpath_list=[], text_value=""):
+        """批量获取输入框"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath).text
+                values.append(value)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+
+        return values
+
+    def get_checkbox_value(self, xpath_list=[]):
+        """获取复选框值"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath)
+                is_checked = value.is_selected()
+                values.append(is_checked)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+        return values
+
+    def get_border_color(self, xpath_list=[], text_value=""):
+        """获取边框颜色"""
+        values = []
+        for index, xpath in enumerate(xpath_list, 1):
+            try:
+                value = self.get_find_element_xpath(xpath).value_of_css_property("border-color")
+                values.append(value)
+
+            except TimeoutException:
+                raise NoSuchElementException(
+                    f"元素未找到（XPath列表第{index}个）: {xpath}"
+                )
+            except Exception as e:
+                raise Exception(
+                    f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
+                )
+
+        return values
+
+    def batch_modify_inputs(self, xpath_value_map: dict):
+        """通过字典批量修改输入框（键为XPath，值为输入内容）"""
+        for xpath, value in xpath_value_map.items():
+            self.enter_texts(xpath, value)
 
     def go_settings_page(self):
         """

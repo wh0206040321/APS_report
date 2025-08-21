@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.order_page import OrderPage
 from Utils.data_driven import DateDriver
@@ -851,7 +851,7 @@ class TestOrderPage:
     def test_order_addall(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        adds = AddsPaes(driver)
+        adds = AddsPages(driver)
         input_value = '11测试全部数据'
         order.click_add_button()
         custom_xpath_list = [

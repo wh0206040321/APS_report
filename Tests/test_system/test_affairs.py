@@ -13,8 +13,7 @@
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.common.exceptions import WebDriverException
 #
-# from Pages.itemsPage.adds_page import AddsPaes
-# from Pages.itemsPage.personal_page import PersonalPage
+# from Pages.itemsPage.adds_page import AddsPages
 # from Pages.systemPage.affairs_page import AffairsPage
 # from Pages.itemsPage.login_page import LoginPage
 # from Utils.data_driven import DateDriver

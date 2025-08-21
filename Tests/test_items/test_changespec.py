@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.changeR_page import ChangeR
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -762,7 +762,7 @@ class TestChangeSpecPage:
     def test_changespec_addall(self, login_to_changespec):
         driver = login_to_changespec  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        adds = AddsPaes(driver)
+        adds = AddsPages(driver)
         input_value = '11测试全部数据'
         change.click_add_button()
         text_list = [

@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from Pages.itemsPage.adds_page import AddsPaes
+from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.item_page import ItemPage
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
@@ -948,7 +948,7 @@ class TestItemPage:
     def test_item_addall(self, login_to_item):
         driver = login_to_item  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-        adds = AddsPaes(driver)
+        adds = AddsPages(driver)
         input_value = '11测试全部数据'
         item.click_add_button()
         custom_xpath_list = [
