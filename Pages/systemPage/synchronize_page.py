@@ -81,10 +81,12 @@ class SynchronizePage(BasePage):
         """点击同步按钮."""
         self.click_button('//p[text()="同步"]')
 
-    def switch_plane(self, name, num):
+    def switch_plane(self, name, num, js=True):
         """切换计划方案。"""
-        plan = DateDriver()
-        self.click_button(f'//div[contains(text(),"{plan.planning}")]')
+        if js:
+            plan = DateDriver()
+            self.click_button(f'//div[contains(text(),"{plan.planning}")]')
+
         self.click_button(f'//ul/li[text()="{name}"]')
         WebDriverWait(self.driver, 10).until(
             EC.invisibility_of_element_located(
@@ -92,18 +94,14 @@ class SynchronizePage(BasePage):
             )
         )
         sleep(1)
-        if num == 1:
-            self.click_button('(//span[text()="系统管理"])[1]')
-            self.click_button('(//span[text()="单元设置"])[1]')
-            self.click_button('(//span[text()="PSI设置"])[1]')
-        elif num == 2:
-            self.click_button('(//span[text()="计划运行"])[1]')
-            self.click_button('(//span[text()="方案管理"])[1]')
-            self.click_button('(//span[text()="计划方案管理"])[1]')
-        elif num == 3:
-            self.click_button('(//span[text()="数据接口底座"])[1]')
-            self.click_button('(//span[text()=" DBLinK "])[1]')
-            self.click_button('(//span[text()="导入设置"])[1]')
+        menu_paths = {
+            1: ["系统管理", "单元设置", "PSI设置"],
+            2: ["计划运行", "方案管理", "计划方案管理"],
+            3: ["数据接口底座", "DBLinK", "导入设置"]
+        }
+
+        for menu in menu_paths.get(num, []):
+            self.click_button(f'(//span[text()="{menu}"])[1]')
 
     # def click_checkbox_value(self, name1=[], name2=[], num=""):
     #     """批量勾选复选框"""
@@ -205,7 +203,7 @@ class SynchronizePage(BasePage):
         # 处理计划单元部分
         for value in name2:
             input_xpath = f'(//div[p[text()="计划单元"]]/following-sibling::div//input)[{num}]'
-            click_xpath = f'(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
+            click_xpath = f'//tr[td[3]//span[text()="{value}"]]/td[2]/div/span'
             self.handle_checkbox_interaction(input_xpath, value, click_xpath)
 
     def click_synchronize_pop(self, button: bool = True):

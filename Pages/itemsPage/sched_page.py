@@ -109,3 +109,24 @@ class SchedPage(BasePage):
         sleep(1)
         self.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')
         self.click_attribute_button()
+
+    def add_copy_sched(self, name=[]):
+        """添加复制方案"""
+        for v in name:
+            self.click_add_schedbutton()
+            self.enter_texts('//label[text()="名称"]/following-sibling::div//input', v)
+            self.click_button(
+                '//label[text()="选择复制的方案"]/following-sibling::div/div'
+            )  # 点击下拉框
+            self.click_button('//li[text()="排产方案(订单级)"]')
+            self.click_ok_schedbutton()  # 点击确定
+            self.click_save_button()  # 点击保存
+
+    def del_all_sched(self, name=[]):
+        """删除所有方案"""
+        for v in name:
+            self.click_button(f'//label[text()="{v}"]')
+            self.click_del_schedbutton()  # 点击删除
+            self.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+            # 点击保存
+            self.click_save_button()

@@ -174,8 +174,8 @@ class TestCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(2, 10)
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        random_int = random.randint(1, 6)
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
@@ -241,9 +241,9 @@ class TestCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 6)
         sleep(1)
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
         sleep(1)
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -308,9 +308,9 @@ class TestCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 6)
         sleep(1)
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
 
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -610,9 +610,10 @@ class TestCalendarPage:
         )
 
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 6)
         sleep(1)
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        # calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
         sleep(1)
 
         calendar.click_button(
@@ -659,7 +660,7 @@ class TestCalendarPage:
         )
 
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 6)
         sleep(1)
         calendar.click_button(
             '//span[@class="vxe-checkbox--icon iconfont icon-fuxuankuangdaiding"]'
@@ -668,7 +669,7 @@ class TestCalendarPage:
         calendar.click_button(
             '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-checked-fill"])[1]'
         )
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
         sleep(1)
 
         calendar.click_button(
@@ -719,7 +720,10 @@ class TestCalendarPage:
     def test_calendar_selectcodesuccess(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-
+        sleep(3)
+        ele = calendar.get_find_element_xpath(
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
+        ).text
         # 点击查询
         calendar.click_sel_button()
         sleep(1)
@@ -747,7 +751,7 @@ class TestCalendarPage:
         # 点击输入数值
         calendar.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "焊接机1#",
+            ele,
         )
         sleep(1)
 
@@ -756,11 +760,11 @@ class TestCalendarPage:
             '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为焊接机1#
+        # 定位第一行
         calendarcode = calendar.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         ).text
-        assert calendarcode == "焊接机1#"
+        assert calendarcode == ele
         assert not calendar.has_fail_message()
 
     @allure.story("删除布局成功")

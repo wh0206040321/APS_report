@@ -470,7 +470,10 @@ class TestItemGroupPage:
     def test_itemgroup_selectcodesuccess(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        sleep(3)
+        ele = item.get_find_element_xpath(
+            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
+        ).text
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -498,7 +501,7 @@ class TestItemGroupPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "1测试A",
+            ele,
         )
         sleep(1)
 
@@ -516,7 +519,7 @@ class TestItemGroupPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert itemcode == "1测试A" and len(itemcode2) == 0
+        assert itemcode == ele and len(itemcode2) == 0
         assert not item.has_fail_message()
 
     @allure.story("没有数据时显示正常")

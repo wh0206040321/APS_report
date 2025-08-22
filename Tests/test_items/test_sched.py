@@ -1386,18 +1386,27 @@ class TestSchedPage:
     def test_sched_delsched3(self, login_to_sched):
         driver = login_to_sched  # WebDriver 实例
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        name = "排产方案(订单级)复制"
-        sched.click_button(
-            f'(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="{name}"]'
-        )
-        sched.click_del_schedbutton()  # 点击删除
-        sched.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
-
-        # 点击保存
-        sched.click_save_button()
+        name = ["排产方案(订单级)复制"]
+        sched.del_all_sched(name)
         ele = driver.find_elements(
             By.XPATH,
             '(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="22"]',
         )
         assert len(ele) == 0
+        assert not sched.has_fail_message()
+
+    @allure.story("添加复制测试方案，配置同步使用")
+    # @pytest.mark.run(order=1)
+    def test_sched_addrepeatsuccess2(self, login_to_sched):
+        driver = login_to_sched  # WebDriver 实例
+        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        name = [
+            "排产方案(订单级)同步1",
+            "排产方案(订单级)同步2",
+            "排产方案(订单级)同步3",
+        ]
+        sched.add_copy_sched(name)
+        eles = sched.finds_elements(By.XPATH, '//span[@class="ivu-tree-title"]')
+        all_texts = [ele.text for ele in eles]
+        assert all(n in all_texts for n in name), f"不是所有名称都存在。现有的元素: {all_texts}"
         assert not sched.has_fail_message()
