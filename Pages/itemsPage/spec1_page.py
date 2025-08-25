@@ -4,7 +4,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from Pages.base_page import BasePage
 
 
@@ -54,12 +55,35 @@ class Spec1Page(BasePage):
         except NoSuchElementException:
             return None
 
-    def get_error_message(self, xpath):
-        """获取错误消息元素，返回该元素。如果元素未找到，返回None。"""
-        try:
-            return self.find_element(By.XPATH, xpath)
-        except NoSuchElementException:
-            return None
+    def get_find_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="ivu-message"]//span')
+            )
+        )
+        return message.text
+
+    def get_message(self):
+        """获取信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+            )
+        )
+        return message.text
+
+    def add_test_data(self, name):
+        self.click_add_button()  # 检查点击添加
+        # 输入代码
+        self.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
+        self.enter_texts('(//label[text()="名称"])[1]/parent::div//input', name)
+
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
 
     def add_layout(self, layout):
         """添加布局."""
@@ -95,6 +119,50 @@ class Spec1Page(BasePage):
             # 如果已选中，直接点击确定按钮保存设置
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
+    def del_all(self, value=[]):
+        for index, v in enumerate(value, start=1):
+            try:
+                xpath = '//p[text()="代码"]/ancestor::div[2]//input'
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+                self.click_del_button()  # 点击删除
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+                sleep(1)
+            except NoSuchElementException:
+                print(f"未找到元素: {v}")
+            except Exception as e:
+                print(f"操作 {v} 时出错: {str(e)}")
+
+    def del_loyout(self, layout):
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+
+        self.click_button(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+        )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        sleep(2)
+        # 点击确认删除的按钮
+        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+
     def add_input_all(self, name, num):
         """输入框全部输入保存"""
         if name != "":
@@ -121,5 +189,5 @@ class Spec1Page(BasePage):
                 for i in range(1, 8):  # 遍历 1~7
                     xpath = f'(//label[text()="{prefix}{i}"])[1]/parent::div//input'
                     self.enter_texts(xpath, str(num))
-            self.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 

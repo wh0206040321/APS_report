@@ -121,5 +121,5 @@ class ShiftPage(BasePage):
             self.click_button(
                     '//label[text()="时间"]/ancestor::div[1]//div[@class="left"]/parent::div/div[2]/button'
                     )
-            self.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 

@@ -5,7 +5,7 @@ from time import sleep
 
 import allure
 import pytest
-from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import WebDriverException, StaleElementReferenceException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -76,7 +76,7 @@ class TestResourcePage:
         inputname_box = resource.get_find_element_xpath(
             '(//label[text()="资源名称"])[1]/parent::div//input'
         )
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -101,7 +101,7 @@ class TestResourcePage:
         resource.enter_texts(
             '(//label[text()="资源代码"])[1]/parent::div//input', "text1231"
         )
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = resource.get_find_element_xpath(
             '(//label[text()="资源名称"])[1]/parent::div//input'
         )
@@ -126,7 +126,7 @@ class TestResourcePage:
         )
         sleep(1)
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = resource.get_find_element_xpath(
             '(//label[text()="资源代码"])[1]/parent::div//input'
         )
@@ -149,7 +149,7 @@ class TestResourcePage:
         # 数值特征数字框输入文字字母符号数字
         resource.enter_texts(
             '(//label[text()="数值特征1MAX"])[1]/parent::div//input',
-            "1文字abc。？~1_2+3",
+            "e1.文字abc。？~1_2+3",
         )
         sleep(1)
         # 获取数值特征数字框
@@ -216,22 +216,15 @@ class TestResourcePage:
     def test_resource_addsuccess(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
-        resource.click_add_button()  # 检查点击添加
-        # 输入资源代码
-        resource.enter_texts(
-            '(//label[text()="资源代码"])[1]/parent::div//input', "111"
-        )
-        resource.enter_texts(
-            '(//label[text()="资源名称"])[1]/parent::div//input', "111"
-        )
+        name = "111"
+        resource.add_test_resource(name)
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = resource.get_find_element_xpath(
-            '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
-        assert adddata == "111", f"预期数据是111，实际得到{adddata}"
+        assert adddata == name, f"预期数据是111，实际得到{adddata}"
         assert not resource.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -240,16 +233,10 @@ class TestResourcePage:
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
 
-        resource.click_add_button()  # 检查点击添加
-        # 输入资源代码
-        resource.enter_texts(
-            '(//label[text()="资源代码"])[1]/parent::div//input', "111"
-        )
-        resource.enter_texts(
-            '(//label[text()="资源名称"])[1]/parent::div//input', "切割机"
-        )
+        name = "111"
+        resource.add_test_resource(name)
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = resource.get_find_element_xpath(
@@ -265,19 +252,17 @@ class TestResourcePage:
     def test_resource_delcancel(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
+        name = "111"
         # 定位内容为‘111’的行
         resource.click_button('(//span[text()="111"])[1]/ancestor::tr[1]/td[2]')
         resource.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击取消
-        resource.get_find_element_class("ivu-btn-text").click()
+        resource.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位内容为‘111’的行
         resourcedata = resource.get_find_element_xpath(
-            '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
-        assert resourcedata == "111", f"预期{resourcedata}"
+        assert resourcedata == name, f"预期{resourcedata}"
         assert not resource.has_fail_message()
 
     @allure.story("添加测试数据成功")
@@ -285,22 +270,15 @@ class TestResourcePage:
     def test_resource_addsuccess1(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
-        resource.click_add_button()  # 检查点击添加
-        # 输入资源代码
-        resource.enter_texts(
-            '(//label[text()="资源代码"])[1]/parent::div//input', "1测试A"
-        )
-        resource.enter_texts(
-            '(//label[text()="资源名称"])[1]/parent::div//input', "1测试A"
-        )
+        name = "1测试A"
+        resource.add_test_resource(name)
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = resource.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
-        assert adddata == "1测试A", f"预期数据是1测试A，实际得到{adddata}"
+        assert adddata == name, f"预期数据是1测试A，实际得到{adddata}"
         assert not resource.has_fail_message()
 
     @allure.story("修改资源代码重复")
@@ -308,9 +286,9 @@ class TestResourcePage:
     def test_resource_editrepeat(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
+        name = "1测试A"
         # 选中1测试A代码
-        resource.click_button('(//span[text()="1测试A"])[1]')
+        resource.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         resource.click_edi_button()
         # 资源代码输入111
@@ -318,7 +296,7 @@ class TestResourcePage:
             '(//label[text()="资源代码"])[1]/parent::div//input', "111"
         )
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = resource.get_find_element_xpath(
@@ -332,25 +310,24 @@ class TestResourcePage:
     def test_resource_editcodesuccess(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
-        # 选中产品D资源代码
-        resource.click_button('(//span[text()="1测试A"])[1]')
+        name = "1测试A"
+        resource.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         resource.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 资源代码输入
         resource.enter_texts(
             '(//label[text()="资源代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         resourcedata = resource.get_find_element_xpath(
-            '(//span[contains(text(),"1测试A")])[1]'
+            f'(//span[contains(text(),"{name}")])[1]'
         ).text
         assert resourcedata == text, f"预期{resourcedata}"
         assert not resource.has_fail_message()
@@ -360,23 +337,23 @@ class TestResourcePage:
     def test_resource_editcodesuccess2(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
+        name = "1测试A"
         # 选中资源代码
-        resource.click_button('(//span[contains(text(),"1测试A")])[1]')
+        resource.click_button(f'(//span[contains(text(),"{name}")])[1]')
         # 点击修改按钮
         resource.click_edi_button()
         # 资源代码输入
         resource.enter_texts(
-            '(//label[text()="资源代码"])[1]/parent::div//input', "1测试A"
+            '(//label[text()="资源代码"])[1]/parent::div//input', name
         )
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         resourcedata = resource.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]'
+            f'(//span[text()="{name}"])[1]'
         ).text
-        assert resourcedata == "1测试A", f"预期{resourcedata}"
+        assert resourcedata == name, f"预期{resourcedata}"
         assert not resource.has_fail_message()
 
     @allure.story("修改资源名称，资源量制约")
@@ -384,9 +361,9 @@ class TestResourcePage:
     def test_resource_editnamesuccess(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
+        name = "1测试A"
         # 选中资源代码
-        resource.click_button('(//span[text()="1测试A"])[1]')
+        resource.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         resource.click_edi_button()
         sleep(1)
@@ -414,14 +391,14 @@ class TestResourcePage:
         ).get_attribute("value")
 
         # 点击确定
-        resource.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        resource.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         resourcename = resource.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]/ancestor::tr/td[3]/div'
+            f'(//span[text()="{name}"])[1]/ancestor::tr/td[3]/div'
         ).text
         resourceautoGenerateFlag = resource.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]/ancestor::tr/td[7]/div'
+            f'(//span[text()="{name}"])[1]/ancestor::tr/td[7]/div'
         ).text
         assert resourcename == editname and resourceautoGenerateFlag == resourcesel
         assert not resource.has_fail_message()
@@ -476,16 +453,16 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "包装机",
+            "111",
         )
         sleep(1)
 
         # 点击确认
         resource.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为包装机
+        # 定位第一行是否为111
         resourcecode = resource.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         ).text
@@ -494,7 +471,7 @@ class TestResourcePage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert resourcecode == "包装机" and len(resourcecode2) == 0
+        assert resourcecode == "111" and len(resourcecode2) == 0
         assert not resource.has_fail_message()
 
     @allure.story("没有数据时显示正常")
@@ -536,7 +513,7 @@ class TestResourcePage:
 
         # 点击确认
         resource.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         resourcecode = driver.find_elements(
@@ -551,7 +528,7 @@ class TestResourcePage:
     def test_resource_selectnamesuccess(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
+        name = "111"
         # 点击查询
         resource.click_sel_button()
         sleep(1)
@@ -579,23 +556,21 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "打包",
+            name,
         )
         sleep(1)
 
         # 点击确认
         resource.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为检查
-        resourcecode = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[3]'
-        ).text
-        assert resourcecode == "打包"
+        eles = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        assert len(eles) > 0
+        assert all(name == ele for ele in eles)
         assert not resource.has_fail_message()
 
-    @allure.story("数值特征1MAX>60")
+    @allure.story("显示顺序大于>5")
     # @pytest.mark.run(order=1)
     def test_resource_selectsuccess1(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
@@ -616,7 +591,7 @@ class TestResourcePage:
         sleep(1)
         # 点击数值特征1MAX
         resource.click_button(
-            '//div[text()="数值特征1MAX" and contains(@optid,"opt_")]'
+            '//div[text()="显示顺序" and contains(@optid,"opt_")]'
         )
         sleep(1)
         # 点击比较关系框
@@ -630,27 +605,21 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "60",
+            "5",
         )
         sleep(1)
 
         # 点击确认
         resource.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行数值特征1MAX
-        resourcecode = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[9]'
-        ).text
-        # 定位第二行数据
-        resourcecode2 = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[9]'
-        ).text
-        assert int(resourcecode) > 60 and int(resourcecode2) > 60
+        eles = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[9]')
+        assert len(eles) > 0
+        assert all(int(ele) > 5 for ele in eles)
         assert not resource.has_fail_message()
 
-    @allure.story("查询资源名称包含开料并且数值特征1MAX>70")
+    @allure.story("查询资源组包含C并且显示顺序>5")
     # @pytest.mark.run(order=1)
     def test_resource_selectsuccess2(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
@@ -671,7 +640,7 @@ class TestResourcePage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击资源名称
-        resource.click_button('//div[text()="资源名称" and contains(@optid,"opt_")]')
+        resource.click_button('//div[text()="资源组" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击（
         resource.click_button(
@@ -689,7 +658,7 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "开料",
+            "C",
         )
 
         # 点击（
@@ -749,7 +718,7 @@ class TestResourcePage:
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
         resource.click_button(
-            '//div[text()="数值特征1MAX" and contains(@optid,"opt_")]'
+            '//div[text()="显示顺序" and contains(@optid,"opt_")]'
         )
         sleep(1)
         # 点击比较关系框
@@ -762,7 +731,7 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "70",
+            "5",
         )
         # 点击（
         resource.click_button(
@@ -774,28 +743,18 @@ class TestResourcePage:
 
         # 点击确认
         resource.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行数值特征1MAX
-        resourcecode = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[9]'
-        ).text
-        resourcename = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        resourcename2 = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        # 判断第一行数值特征1MAX>70 并且 资源名称包含开料
-        assert (
-            "开料" in resourcename
-            and "开料" in resourcename2
-            and int(resourcecode) > 70
+        ele1 = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[9]')
+        ele2 = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[4]')
+        assert len(ele1) > 0 and len(ele2) > 0
+        assert all(int(ele) > 5 for ele in ele1) and all(
+            "C" in ele for ele in ele2
         )
         assert not resource.has_fail_message()
 
-    @allure.story("查询资源名称包含开料或数值特征1MAX>70")
+    @allure.story("查询资源名称包含1或显示顺序>5")
     # @pytest.mark.run(order=1)
     def test_resource_selectsuccess3(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
@@ -815,7 +774,7 @@ class TestResourcePage:
         # 双击命令
         actions.double_click(element_to_double_click).perform()
         sleep(1)
-        # 点击资源名称
+        # 点击名称
         resource.click_button('//div[text()="资源名称" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击（
@@ -834,7 +793,7 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "开料",
+            "1",
         )
 
         # 点击（
@@ -849,12 +808,13 @@ class TestResourcePage:
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[2]',
         )
         # 双击命令
+        sleep(1)
         actions.double_click(double_click).perform()
         # 定义or元素的XPath
         or_xpath = '//div[text()="or" and contains(@optid,"opt_")]'
 
         try:
-            # 首先尝试直接查找并点击and元素
+            # 首先尝试直接查找并点击or元素
             and_element = WebDriverWait(driver, 2).until(
                 EC.presence_of_element_located((By.XPATH, or_xpath))
             )
@@ -889,13 +849,11 @@ class TestResourcePage:
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[3]'
         )
         resource.click_button('//div[text()="(" and contains(@optid,"opt_")]')
-        # 点击数值特征1MAX
+        # 点击显示顺序
         resource.click_button(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
-        resource.click_button(
-            '//div[text()="数值特征1MAX" and contains(@optid,"opt_")]'
-        )
+        resource.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         resource.click_button(
@@ -904,10 +862,10 @@ class TestResourcePage:
         # 点击>
         resource.click_button('//div[text()=">" and contains(@optid,"opt_")]')
         sleep(1)
-        # 点击输入数值70
+        # 点击输入数值5
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "70",
+            "5",
         )
         # 点击（
         resource.click_button(
@@ -919,28 +877,40 @@ class TestResourcePage:
 
         # 点击确认
         resource.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行数据
-        resourcename1 = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        resourcecode1 = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[9]'
-        ).text
-        # 定位第二行数据
-        resourcename2 = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[3]'
-        ).text
-        resourcecode2 = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[9]'
-        ).text
-        sleep(1)
-        assert ("开料" in resourcename1 or int(resourcecode1) > 70) and (
-            "开料" in resourcename2 or int(resourcecode2) > 70
-        )
+        # 获取目标表格第2个 vxe 表格中的所有数据行
+        xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
+
+        # 先拿到总行数
+        base_rows = driver.find_elements(By.XPATH, xpath_rows)
+        total = len(base_rows)
+
+        valid_count = 0
+        for idx in range(total):
+            try:
+                # 每次都按索引重新定位这一行
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td9_raw = tds[8].text.strip()
+                td9_raw = int(td9_raw) if td9_raw else 0
+
+                assert "1" in td3 or td9_raw > 5, f"第 {idx + 1} 行不符合：td3={td3}, td8={td9_raw}"
+                valid_count += 1
+
+            except StaleElementReferenceException:
+                # 如果行元素失效，再重试一次
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td9_raw = tds[8].text.strip()
+                td9_raw = int(td9_raw) if td9_raw else 0
+                assert "1" in td3 or td9_raw > 5, f"第 {idx + 1} 行不符合：td3={td3}, td5={td9_raw}"
+                valid_count += 1
         assert not resource.has_fail_message()
+        print(f"符合条件的行数：{valid_count}")
 
     @allure.story("输入全部数据，添加保存成功")
     # @pytest.mark.run(order=1)
@@ -964,7 +934,6 @@ class TestResourcePage:
             '//label[text()="后设置和制造之间中断时间MAX"]/following-sibling::div//input',
             '//label[text()="分割工作中断时间MAX"]/following-sibling::div//input',
             '//label[text()="自动确定期间结束时间"]/following-sibling::div//input',
-            '//label[text()="按资源量分派的任务"]/following-sibling::div//input',
             '//label[text()="备注"]/following-sibling::div//input',
             '//label[text()="制造任务可开工日期"]/following-sibling::div//input',
             '//label[text()="制造任务可开工时间段"]/following-sibling::div//input',
@@ -1055,6 +1024,7 @@ class TestResourcePage:
             '//label[text()="事件控制-资源产生保养时长"]/following-sibling::div//input',
             '//label[text()="事件控制-计数累计值"]/following-sibling::div//input',
             '//label[text()="事件控制-资源生命周期"]/following-sibling::div//input',
+            '//label[text()="按资源量分派的任务"]/following-sibling::div//input',
         ]
         num_list.extend(num_xpath_list1 + num_xpath_list2 + num_xpath_list3)
         adds.batch_modify_input(num_list, input_num_value)
@@ -1111,8 +1081,8 @@ class TestResourcePage:
         layout = "测试布局A"
 
         value = ['111', '11测试全部数据', '1测试A']
-        resource.del_all(value)
-        itemdata = [
+        resource.del_all(value, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
+        data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:3]
         ]
@@ -1122,6 +1092,6 @@ class TestResourcePage:
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert all(len(elements) == 0 for elements in itemdata)
+        assert all(len(elements) == 0 for elements in data)
         assert 0 == len(after_layout)
         assert not resource.has_fail_message()

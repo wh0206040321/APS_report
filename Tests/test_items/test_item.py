@@ -77,7 +77,7 @@ class TestItemPage:
         inputname_box = item.get_find_element_xpath(
             '(//label[text()="物料名称"])[1]/parent::div//input'
         )
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -102,7 +102,7 @@ class TestItemPage:
         item.enter_texts(
             '(//label[text()="物料代码"])[1]/parent::div//input', "text1231"
         )
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = item.get_find_element_xpath(
             '(//label[text()="物料名称"])[1]/parent::div//input'
         )
@@ -127,7 +127,7 @@ class TestItemPage:
         )
 
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = item.get_find_element_xpath(
             '(//label[text()="物料代码"])[1]/parent::div//input'
         )
@@ -218,7 +218,7 @@ class TestItemPage:
         item.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', "111")
         item.enter_texts('(//label[text()="物料名称"])[1]/parent::div//input', "111")
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="111"]]]/td[2]'
@@ -237,7 +237,7 @@ class TestItemPage:
         item.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', "111")
         item.enter_texts('(//label[text()="物料名称"])[1]/parent::div//input', "111")
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = item.get_find_element_xpath(
@@ -259,7 +259,7 @@ class TestItemPage:
         item.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        item.click_button('//button[@class="ivu-btn ivu-btn-text"]')
+        item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = item.get_find_element_xpath(
@@ -279,7 +279,7 @@ class TestItemPage:
         item.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', "1测试A")
         item.enter_texts('(//label[text()="物料名称"])[1]/parent::div//input', "1测试A")
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
@@ -300,7 +300,7 @@ class TestItemPage:
         # 物料代码输入111
         item.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', "111")
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = item.get_find_element_xpath(
@@ -327,7 +327,7 @@ class TestItemPage:
             '(//label[text()="物料代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(3)
         # 定位表格内容
         itemdata = item.get_find_element_xpath(
@@ -349,7 +349,7 @@ class TestItemPage:
         # 物料代码输入
         item.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', "1测试A")
         # 点击确定
-        item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         itemdata = item.get_find_element_xpath(
@@ -492,7 +492,7 @@ class TestItemPage:
 
         # 点击确认
         item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为产品A
@@ -546,7 +546,7 @@ class TestItemPage:
 
         # 点击确认
         item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         itemcode = driver.find_elements(
@@ -595,7 +595,7 @@ class TestItemPage:
 
         # 点击确认
         item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为M1
@@ -649,7 +649,7 @@ class TestItemPage:
 
         # 点击确认
         item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行物料优先度
@@ -784,7 +784,7 @@ class TestItemPage:
 
         # 点击确认
         item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行物料优先度
@@ -926,7 +926,7 @@ class TestItemPage:
 
         # 点击确认
         item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行物料优先度

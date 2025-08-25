@@ -74,7 +74,7 @@ class TestShiftPage:
             '(//label[text()="代码"])[1]/parent::div//input'
         )
 
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -312,7 +312,7 @@ class TestShiftPage:
         # 输入班次代码
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
             '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
         )
@@ -329,7 +329,7 @@ class TestShiftPage:
         # 输入班次代码
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 等待弹窗出现（最多等10秒）
         error_popup = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(
@@ -409,7 +409,7 @@ class TestShiftPage:
         ).text
 
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
             '(//span[text()="1修改代码"])[1]/ancestor::tr[1]/td[3]'
         ).text
@@ -430,7 +430,7 @@ class TestShiftPage:
         sleep(1)
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 等待弹窗出现（最多等10秒）
         error_popup = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(
@@ -457,7 +457,7 @@ class TestShiftPage:
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', f"{text}")
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath(
@@ -479,7 +479,7 @@ class TestShiftPage:
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "1修改代码")
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath('(//span[text()="1修改代码"])[1]').text
@@ -562,7 +562,7 @@ class TestShiftPage:
         ).text
 
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = shift.get_find_element_xpath(
             '(//span[text()="1修改代码"])[1]/ancestor::tr[1]/td[3]'
@@ -593,7 +593,7 @@ class TestShiftPage:
             '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
         ).text
         # 点击确定
-        shift.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         shiftautoGenerateFlag = shift.get_find_element_xpath(
             '(//span[text()="1修改代码"])[1]/ancestor::tr/td[4]/div'
@@ -684,7 +684,7 @@ class TestShiftPage:
 
         # 点击确认
         shift.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为白班

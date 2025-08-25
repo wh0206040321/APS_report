@@ -596,7 +596,7 @@ class TestOrderPage:
 
         # 点击确认
         order.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为1A
@@ -649,7 +649,7 @@ class TestOrderPage:
 
         # 点击确认
         order.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为A
@@ -697,7 +697,7 @@ class TestOrderPage:
 
         # 点击确认
         order.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行制造订单优先度
@@ -832,7 +832,7 @@ class TestOrderPage:
 
         # 点击确认
         order.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行计划数量

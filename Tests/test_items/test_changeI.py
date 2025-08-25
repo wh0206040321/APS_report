@@ -748,7 +748,7 @@ class TestChangeIPage:
 
         # 点击确认
         changeI.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行

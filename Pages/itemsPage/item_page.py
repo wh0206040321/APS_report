@@ -55,7 +55,7 @@ class ItemPage(BasePage):
         self.enter_texts(
             '(//label[text()="物料名称"])[1]/parent::div//input', material_name
         )
-        self.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
     def delete_item(self, material_code):
         """删除物料信息."""
@@ -145,17 +145,7 @@ class ItemPage(BasePage):
             try:
                 self.click_button(f'//tr[./td[2][.//span[text()="{xpath}"]]]/td[2]')
                 self.click_del_button()  # 点击删除
-                sleep(1)
-                # 点击确定
-                # 找到共同的父元素
-                parent = self.get_find_element_class("ivu-modal-confirm-footer")
-
-                # 获取所有button子元素
-                all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-                # 选择需要的button 第二个确定按钮
-                second_button = all_buttons[1]
-                second_button.click()
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
                 sleep(1)
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")

@@ -60,6 +60,24 @@ class ResourcePage(BasePage):
         except NoSuchElementException:
             return None
 
+    def add_test_resource(self, name):
+        self.click_add_button()  # 检查点击添加
+        # 输入代码
+        self.enter_texts('(//label[text()="资源代码"])[1]/parent::div//input', name)
+        self.enter_texts('(//label[text()="资源名称"])[1]/parent::div//input', name)
+
+    def add_test_data(self, name):
+        self.click_add_button()  # 检查点击添加
+        # 输入代码
+        self.enter_texts('(//label[text()="资源组代码"])[1]/parent::div//input', name)
+        self.enter_texts('(//label[text()="资源组名称"])[1]/parent::div//input', name)
+
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
+
     def add_layout(self, layout):
         """添加布局."""
         self.click_button('//div[@class="newDropdown"]//i')
@@ -95,7 +113,7 @@ class ResourcePage(BasePage):
         self.driver.execute_script("arguments[0].scrollIntoView();", num)
         sleep(1)
         num1 = self.get_find_element_xpath(
-            '//tr[./td[3][.//span[text()="数值特征1MAX"]]]/td[7]//input'
+            '//tr[./td[3][.//span[text()="显示顺序"]]]/td[7]//input'
         )
         num1.clear()
         num1.send_keys(Keys.CONTROL, "a")
@@ -104,27 +122,21 @@ class ResourcePage(BasePage):
         # 点击确定按钮保存设置
         self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
-    def del_all(self, value=[]):
-        for index, xpath in enumerate(value, start=1):
+    def del_all(self, value=[], xpath=""):
+        for index, v in enumerate(value, start=1):
             try:
-                self.click_button(f'//tr[./td[2][.//span[text()="{xpath}"]]]/td[2]')
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
                 self.click_del_button()  # 点击删除
-                sleep(1)
-                # 点击确定
-                # 找到共同的父元素
-                parent = self.get_find_element_class("ivu-modal-confirm-footer")
-
-                # 获取所有button子元素
-                all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-                # 选择需要的button 第二个确定按钮
-                second_button = all_buttons[1]
-                second_button.click()
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
                 sleep(1)
             except NoSuchElementException:
-                print(f"未找到元素: {xpath}")
+                print(f"未找到元素: {v}")
             except Exception as e:
-                print(f"操作 {xpath} 时出错: {str(e)}")
+                print(f"操作 {v} 时出错: {str(e)}")
 
     def del_loyout(self, layout):
         # 获取目标 div 元素，这里的目标是具有特定文本的 div

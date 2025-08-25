@@ -76,7 +76,7 @@ class TestProcessPage:
         inputname_box = process.get_find_element_xpath(
             '(//label[text()="工序名"])[1]/parent::div//input'
         )
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -102,7 +102,7 @@ class TestProcessPage:
         process.enter_texts(
             '(//label[text()="工序代码"])[1]/parent::div//input', "text1231"
         )
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = process.get_find_element_xpath(
             '(//label[text()="工序名"])[1]/parent::div//input'
         )
@@ -127,7 +127,7 @@ class TestProcessPage:
         )
         sleep(1)
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = process.get_find_element_xpath(
             '(//label[text()="工序代码"])[1]/parent::div//input'
         )
@@ -196,7 +196,7 @@ class TestProcessPage:
     #     # 勾选复选框
     #     if checkbox.get_attribute('class') == 'ivu-checkbox ivu-checkbox-checked':
     #         # 点击确定
-    #         process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+    #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
     #     else:
     #         element = process.get_find_element_xpath('//label[text()="无效标志"]/parent::div//input')
     #         driver.execute_script("arguments[0].click();", element)
@@ -218,7 +218,7 @@ class TestProcessPage:
     #         sleep(1)
     #         process.click_button('//label[text()="无效标志"]/parent::div//input')
     #         # 点击确定
-    #         process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+    #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
     #     else:
     #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
     #     checkboxlist = process.get_find_element_xpath('//span[text()="勾选复选框"]/ancestor::tr[1]/td[6]//input')
@@ -236,7 +236,7 @@ class TestProcessPage:
         process.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', "111")
         process.enter_texts('(//label[text()="工序名"])[1]/parent::div//input', "111")
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = process.get_find_element_xpath(
             '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
@@ -255,7 +255,7 @@ class TestProcessPage:
         process.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', "111")
         process.enter_texts('(//label[text()="工序名"])[1]/parent::div//input', "检查")
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = process.get_find_element_xpath(
@@ -277,7 +277,7 @@ class TestProcessPage:
         process.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        process.click_button('//button[@class="ivu-btn ivu-btn-text"]')
+        process.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位内容为‘111’的行
         processdata = process.get_find_element_xpath(
@@ -301,7 +301,7 @@ class TestProcessPage:
             '(//label[text()="工序名"])[1]/parent::div//input', "1测试A"
         )
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = process.get_find_element_xpath(
             '(//span[text()="1测试A"])[1]/ancestor::tr[1]/td[2]'
@@ -323,7 +323,7 @@ class TestProcessPage:
         sleep(1)
         process.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', "111")
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = process.get_find_element_xpath(
@@ -351,7 +351,7 @@ class TestProcessPage:
             '(//label[text()="工序代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         processdata = process.get_find_element_xpath(
@@ -375,7 +375,7 @@ class TestProcessPage:
             '(//label[text()="工序代码"])[1]/parent::div//input', "1测试A"
         )
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         processdata = process.get_find_element_xpath(
@@ -417,7 +417,7 @@ class TestProcessPage:
             '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
         ).text
         # 点击确定
-        process.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         processname = process.get_find_element_xpath(
@@ -485,7 +485,7 @@ class TestProcessPage:
 
         # 点击确认
         process.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为111
@@ -539,7 +539,7 @@ class TestProcessPage:
 
         # 点击确认
         process.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为
@@ -589,7 +589,7 @@ class TestProcessPage:
 
         # 点击确认
         process.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行
@@ -643,7 +643,7 @@ class TestProcessPage:
 
         # 点击确认
         process.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行
@@ -778,7 +778,7 @@ class TestProcessPage:
         sleep(1)
         # 点击确认
         process.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行表示顺序
@@ -915,7 +915,7 @@ class TestProcessPage:
 
         # 点击确认
         process.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行物料优先度

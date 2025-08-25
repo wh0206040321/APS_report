@@ -76,7 +76,7 @@ class ProcessPage(BasePage):
             '(//label[text()="表示顺序"])[1]/parent::div//input', f"{number}"
         )
         # 点击确定
-        self.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
     def add_layout(self, layout):
         """添加布局."""
@@ -138,4 +138,4 @@ class ProcessPage(BasePage):
             if ele.get_attribute("class") == 'ivu-checkbox':
                 ele.click()
 
-            self.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')

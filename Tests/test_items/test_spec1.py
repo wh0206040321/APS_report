@@ -71,7 +71,7 @@ class TestSpecPage:
         input_box = spec.get_find_element_xpath(
             '(//label[text()="代码"])[1]/parent::div//input'
         )
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -95,7 +95,7 @@ class TestSpecPage:
         ele.send_keys(Keys.DELETE)
         # 数值特征数字框输入文字字母符号数字
         spec.enter_texts(
-            '(//label[text()="显示顺序"])[1]/parent::div//input', "1文字abc。？~1_2+=3"
+            '(//label[text()="显示顺序"])[1]/parent::div//input', "e1文字abc。.？~1_2+=3"
         )
         sleep(1)
         # 获取显示顺序数字框
@@ -127,18 +127,15 @@ class TestSpecPage:
     def test_spec_addsuccess(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
-        spec.click_add_button()  # 检查点击添加
-        # 输入代码
-        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
-        spec.enter_texts('(//label[text()="名称"])[1]/parent::div//input', "111")
+        name = "111"
+        spec.add_test_data(name)
         # 点击确定
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "111", f"预期数据是111，实际得到{adddata}"
+        assert adddata == name, f"预期数据是111，实际得到{adddata}"
         assert not spec.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -146,14 +143,12 @@ class TestSpecPage:
     def test_spec_addrepeat(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
+        name = "111"
+        spec.add_test_data(name)
         spec.click_add_button()  # 检查点击添加
-        # 输入代码
-        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
-        spec.enter_texts('(//label[text()="名称"])[1]/parent::div//input', "111")
+
         # 点击确定
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
-        sleep(1)
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -168,19 +163,17 @@ class TestSpecPage:
     def test_spec_delcancel(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
+        name = "111"
         # 定位内容为‘111’的行
-        spec.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
+        spec.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         spec.click_del_button()  # 点击删除
-        sleep(1)
         # 点击取消
-        spec.click_button('//button[@class="ivu-btn ivu-btn-text"]')
-        sleep(1)
+        spec.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         # 定位内容为‘111’的行
         itemdata = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert itemdata == "111", f"预期{itemdata}"
+        assert itemdata == name, f"预期{itemdata}"
         assert not spec.has_fail_message()
 
     @allure.story("添加测试数据")
@@ -188,11 +181,8 @@ class TestSpecPage:
     def test_spec_addsuccess1(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
-        spec.click_add_button()  # 检查点击添加
-        # 输入代码
-        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "1测试A")
-        spec.enter_texts('(//label[text()="名称"])[1]/parent::div//input', "1测试A")
+        name = "1测试A"
+        spec.add_test_data(name)
         # 显示颜色下拉框
         spec.click_button('(//label[text()="显示颜色"])[1]/parent::div//i')
         # 显示颜色
@@ -207,12 +197,12 @@ class TestSpecPage:
             '(//label[text()="显示顺序"])[1]/parent::div//input', "20"
         )
         # 点击确定
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "1测试A", f"预期数据是1测试A，实际得到{adddata}"
+        assert adddata == name, f"预期数据是1测试A，实际得到{adddata}"
         assert not spec.has_fail_message()
 
     @allure.story("修改代码重复")
@@ -228,7 +218,7 @@ class TestSpecPage:
         # 物料代码输入111
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
@@ -242,24 +232,25 @@ class TestSpecPage:
     def test_spec_editcodesuccess(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
+        name = "1测试A"
         # 选中1测试A代码
-        spec.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        spec.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         spec.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 物料代码输入
         spec.enter_texts(
             '(//label[text()="代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(3)
         # 定位表格内容
         specdata = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]'
+            f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
         ).text
         assert specdata == text, f"预期{specdata}"
         assert not spec.has_fail_message()
@@ -269,21 +260,21 @@ class TestSpecPage:
     def test_spec_editcodesuccess2(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
+        name = "1测试A"
         # 选中1测试A代码
-        spec.click_button('//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]')
+        spec.click_button(f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]')
         # 点击修改按钮
         spec.click_edi_button()
         # 代码输入
-        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "1测试A")
+        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
         # 点击确定
-        spec.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         specdata = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert specdata == "1测试A", f"预期{specdata}"
+        assert specdata == name, f"预期{specdata}"
         assert not spec.has_fail_message()
 
     @allure.story("修改名称，显示颜色成功")
@@ -291,15 +282,15 @@ class TestSpecPage:
     def test_spec_editnamesuccess(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
+        name = "1测试A"
         # 选中代码
-        spec.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        spec.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         spec.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 输入修改的物料名称
         spec.enter_texts(
             '(//label[text()="名称"])[1]/parent::div//input', f"{text}"
@@ -326,10 +317,10 @@ class TestSpecPage:
         sleep(1)
         # 定位表格内容
         itemname = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[3]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[3]/div'
         ).text
         color = spec.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[4]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[4]/div'
         ).text
         sleep(1)
         assert (
@@ -360,7 +351,7 @@ class TestSpecPage:
     def test_spec_selectcodesuccess(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
+        name = "111"
         # 点击查询
         spec.click_sel_button()
         sleep(1)
@@ -388,25 +379,25 @@ class TestSpecPage:
         # 点击输入数值
         spec.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            name,
         )
         sleep(1)
 
         # 点击确认
         spec.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为111
         speccode = spec.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert speccode == "111" and len(speccode2) == 0
+        assert speccode == name and len(speccode2) == 0
         assert not spec.has_fail_message()
 
     @allure.story("没有数据时显示正常")
@@ -448,12 +439,12 @@ class TestSpecPage:
 
         # 点击确认
         spec.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         itemcode = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]',
         )
         assert len(itemcode) == 0
         assert not spec.has_fail_message()
@@ -497,14 +488,13 @@ class TestSpecPage:
 
         # 点击确认
         spec.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行显示顺序
-        speccode = spec.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        assert int(speccode) > 10
+        speccode = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
+        assert len(speccode) > 0
+        assert all(int(code) > 10 for code in speccode)
         assert not spec.has_fail_message()
 
     @allure.story("查询名称包含1并且显示顺序>10")
@@ -628,21 +618,18 @@ class TestSpecPage:
 
         # 点击确认
         spec.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行
-        specname = spec.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        specorder = spec.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        # 判断第一行名称包含1、显示顺序>10
-        assert "1" in specname and int(specorder) > 10
+        specname = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        speccode = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
+        assert len(specname) > 0 and len(speccode) > 0
+        assert all(int(code) > 10 for code in speccode) and all(
+            "1" in name for name in specname
+        )
         assert not spec.has_fail_message()
 
-    @allure.story("查询名称包含11或显示顺序>10")
+    @allure.story("以普开头或显示顺序>10")
     # @pytest.mark.run(order=1)
     def test_spec_selectsuccess3(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
@@ -676,12 +663,12 @@ class TestSpecPage:
         )
         sleep(1)
         # 点击包含
-        spec.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
+        spec.click_button('//div[text()="Begins with" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击输入数值
         spec.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "11",
+            "普",
         )
 
         # 点击（
@@ -765,7 +752,7 @@ class TestSpecPage:
 
         # 点击确认
         spec.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 获取目标表格第2个 vxe 表格中的所有数据行
@@ -785,7 +772,7 @@ class TestSpecPage:
                 td5_raw = tds[4].text.strip()
                 td5_val = int(td5_raw) if td5_raw else 0
 
-                assert "11" in td3 or td5_val > 10, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
+                assert "普" in td3 or td5_val > 10, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
                 valid_count += 1
 
             except StaleElementReferenceException:
@@ -795,7 +782,7 @@ class TestSpecPage:
                 td3 = tds[2].text.strip()
                 td5_raw = tds[4].text.strip()
                 td5_val = int(td5_raw) if td5_raw else 0
-                assert "11" in td3 or td5_val > 10, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
+                assert "普" in td3 or td5_val > 10, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
                 valid_count += 1
         assert not spec.has_fail_message()
         print(f"符合条件的行数：{valid_count}")
@@ -903,65 +890,6 @@ class TestSpecPage:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not spec.has_fail_message()
 
-    @allure.story("删除全部input数据成功")
-    # @pytest.mark.run(order=1)
-    def test_spec_delall(self, login_to_spec1):
-        driver = login_to_spec1  # WebDriver 实例
-        spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-        spec.enter_texts(
-            '//p[text()="代码"]/ancestor::div[2]//input', "全部数据"
-        )
-        sleep(2)
-        # 定位内容为‘全部数据’的行
-        spec.click_button('//tr[./td[2][.//span[text()="全部数据"]]]/td[2]')
-        spec.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = spec.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘全部数据’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="全部数据"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
-        assert not spec.has_fail_message()
-
-    @allure.story("删除数据成功")
-    # @pytest.mark.run(order=1)
-    def test_spec_delsuccess(self, login_to_spec1):
-        driver = login_to_spec1  # WebDriver 实例
-        spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-
-        # 定位内容为‘111’的行
-        spec.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        spec.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = spec.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘111’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
-        assert not spec.has_fail_message()
-
     @allure.story("删除测试数据成功，删除布局成功")
     # @pytest.mark.run(order=1)
     def test_spec_delsuccess1(self, login_to_spec1):
@@ -969,57 +897,18 @@ class TestSpecPage:
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         layout = "测试布局A"
 
-        # 定位内容为‘1测试A’的行
-        spec.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
-        spec.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = spec.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘1测试A’的行
-        specdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
-        )
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = spec.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = spec.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+        value = ['全部数据', '111', '1测试A']
+        spec.del_all(value)
+        data = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        spec.del_loyout(layout)
         sleep(2)
-        spec.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        spec.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        spec.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert len(specdata) == 0 == len(after_layout)
+        assert all(len(elements) == 0 for elements in data)
+        assert 0 == len(after_layout)
         assert not spec.has_fail_message()

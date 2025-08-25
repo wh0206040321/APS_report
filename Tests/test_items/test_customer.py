@@ -76,7 +76,7 @@ class TestCustomerPage:
         inputname_box = customer.get_find_element_xpath(
             '(//label[text()="客户名称"])[1]/parent::div//input'
         )
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -102,7 +102,7 @@ class TestCustomerPage:
         customer.enter_texts(
             '(//label[text()="客户代码"])[1]/parent::div//input', "text1231"
         )
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = customer.get_find_element_xpath(
             '(//label[text()="客户名称"])[1]/parent::div//input'
         )
@@ -127,7 +127,7 @@ class TestCustomerPage:
         )
 
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         input_box = customer.get_find_element_xpath(
             '(//label[text()="客户代码"])[1]/parent::div//input'
         )
@@ -153,7 +153,7 @@ class TestCustomerPage:
         ele.send_keys(Keys.DELETE)
         # 表示顺序输入文字字母符号数字
         customer.enter_texts(
-            '(//label[text()="表示顺序"])[1]/parent::div//input', "1文字abc。+？~1_2+3"
+            '(//label[text()="表示顺序"])[1]/parent::div//input', "e1文字abc。+？~1._2+3"
         )
         sleep(1)
         # 获取表示顺序框
@@ -187,18 +187,15 @@ class TestCustomerPage:
     def test_customer_addsuccess(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
-        customer.click_add_button()  # 检查点击添加
-        # 输入客户代码
-        customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', "111")
-        customer.enter_texts('(//label[text()="客户名称"])[1]/parent::div//input', "111")
+        name = "111"
+        customer.add_test_data(name)
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "111", f"预期数据是111，实际得到{adddata}"
+        assert adddata == name, f"预期数据是{name}，实际得到{adddata}"
         assert not customer.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -206,13 +203,10 @@ class TestCustomerPage:
     def test_customer_addrepeat(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
-        customer.click_add_button()  # 检查点击添加
-        # 输入客户代码
-        customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', "111")
-        customer.enter_texts('(//label[text()="客户名称"])[1]/parent::div//input', "111")
+        name = "111"
+        customer.add_test_data(name)
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = customer.get_find_element_xpath(
@@ -228,19 +222,19 @@ class TestCustomerPage:
     def test_customer_delcancel(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "111"
         # 定位内容为‘111’的行
-        customer.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
+        customer.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         customer.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        customer.click_button('//button[@class="ivu-btn ivu-btn-text"]')
+        customer.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位内容为‘111’的行
         customerdata = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert customerdata == "111", f"预期{customerdata}"
+        assert customerdata == name, f"预期{customerdata}"
         assert not customer.has_fail_message()
 
     @allure.story("添加测试数据")
@@ -248,18 +242,15 @@ class TestCustomerPage:
     def test_customer_addsuccess1(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
-        customer.click_add_button()  # 检查点击添加
-        # 输入客户代码
-        customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', "1测试A")
-        customer.enter_texts('(//label[text()="客户名称"])[1]/parent::div//input', "1测试A")
+        name = "1测试A"
+        customer.add_test_data(name)
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "1测试A", f"预期数据是1测试A，实际得到{adddata}"
+        assert adddata == name, f"预期数据是1测试A，实际得到{adddata}"
         assert not customer.has_fail_message()
 
     @allure.story("修改客户代码重复")
@@ -267,15 +258,15 @@ class TestCustomerPage:
     def test_customer_editrepeat(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "1测试A"
         # 选中1测试A客户代码
-        customer.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        customer.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         customer.click_edi_button()
         # 客户代码输入111
         customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', "111")
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = customer.get_find_element_xpath(
@@ -289,25 +280,25 @@ class TestCustomerPage:
     def test_customer_editcodesuccess(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "1测试A"
         # 选中1测试A客户代码
-        customer.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        customer.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         customer.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 客户代码输入
         customer.enter_texts(
             '(//label[text()="客户代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         customerdata = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]'
+            f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
         ).text
         assert customerdata == text, f"预期{customerdata}"
         assert not customer.has_fail_message()
@@ -317,21 +308,21 @@ class TestCustomerPage:
     def test_customer_editcodesuccess2(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "1测试A"
         # 选中1测试A客户代码
-        customer.click_button('//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]')
+        customer.click_button(f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]')
         # 点击修改按钮
         customer.click_edi_button()
         # 客户代码输入
-        customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', "1测试A")
+        customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', name)
         # 点击确定
-        customer.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         customerdata = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert customerdata == "1测试A", f"预期{customerdata}"
+        assert customerdata == name, f"预期{customerdata}"
         assert not customer.has_fail_message()
 
     @allure.story("修改客户名称，显示颜色，表示顺序")
@@ -339,15 +330,15 @@ class TestCustomerPage:
     def test_customer_editnamesuccess(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "1测试A"
         # 选中客户代码
-        customer.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        customer.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         customer.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 输入修改的客户名称
         customer.enter_texts(
             '(//label[text()="客户名称"])[1]/parent::div//input', f"{text}"
@@ -390,14 +381,14 @@ class TestCustomerPage:
         sleep(1)
         # 定位表格内容
         customername = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[3]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[3]/div'
         ).text
         color = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[4]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[4]/div'
         ).text
         sleep(1)
         num = customer.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[5]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[5]/div'
         ).text
         assert (
             customername == editname
@@ -428,7 +419,7 @@ class TestCustomerPage:
     def test_customer_selectcodesuccess(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "111"
         # 点击查询
         customer.click_sel_button()
         sleep(1)
@@ -456,13 +447,13 @@ class TestCustomerPage:
         # 点击输入数值
         customer.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            name,
         )
         sleep(1)
 
         # 点击确认
         customer.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         # 定位第一行是否为111
@@ -474,7 +465,7 @@ class TestCustomerPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert customercode == "111" and len(customercode2) == 0
+        assert customercode == name and len(customercode2) == 0
         assert not customer.has_fail_message()
 
     @allure.story("没有数据时显示正常")
@@ -516,7 +507,7 @@ class TestCustomerPage:
 
         # 点击确认
         customer.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
         customercode = driver.find_elements(
@@ -531,7 +522,7 @@ class TestCustomerPage:
     def test_customer_selectnamesuccess(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
+        name = "111"
         # 点击查询
         customer.click_sel_button()
         sleep(1)
@@ -559,20 +550,19 @@ class TestCustomerPage:
         # 点击输入数值
         customer.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            name,
         )
         sleep(1)
 
         # 点击确认
         customer.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
+        eles = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         # 定位第一行是否为111
-        customercode = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[3]'
-        ).text
-        assert customercode == "111"
+        assert len(eles) > 0
+        assert all(name == v for v in eles)
         assert not customer.has_fail_message()
 
     @allure.story("查询表示顺序<10")
@@ -580,7 +570,6 @@ class TestCustomerPage:
     def test_customer_selectsuccess1(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
         # 点击查询
         customer.click_sel_button()
         sleep(1)
@@ -614,21 +603,15 @@ class TestCustomerPage:
 
         # 点击确认
         customer.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行
-        customercode = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        # 定位第二行数据
-        customercode2 = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[5]'
-        ).text
-        assert int(customercode) < 10 and int(customercode2) < 10
+        eles = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
+        assert len(eles) > 0
+        assert all(int(v) < 10 for v in eles)
         assert not customer.has_fail_message()
 
-    @allure.story("查询客户名称包含美菱并且表示顺序<10")
+    @allure.story("查询客户名称包含美并且表示顺序<10")
     # @pytest.mark.run(order=1)
     def test_customer_selectsuccess2(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
@@ -667,7 +650,7 @@ class TestCustomerPage:
         # 点击输入数值
         customer.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "美菱",
+            "美",
         )
 
         # 点击（
@@ -749,28 +732,18 @@ class TestCustomerPage:
 
         # 点击确认
         customer.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行
-        customercode = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        customername = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        # 定位第二行
-        customercode2 = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[5]'
-        ).text
-        customername2 = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[3]'
-        ).text
-        # 判断第一行客户优先度>70 并且 客户名称为材料B 并且第二行没有数据
-        assert int(customercode) < 10 and "美菱" in customername and "美菱" in customername2 and int(customercode2) < 10
+        name = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        code = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
+        assert len(code) > 0 and len(name) > 0
+        assert all(int(code) < 10 for code in code) and all(
+            "美" in name for name in name
+        )
         assert not customer.has_fail_message()
 
-    @allure.story("查询客户代码包含111或表示顺序>60")
+    @allure.story("查询客户名称以美开头或表示顺序>10")
     # @pytest.mark.run(order=1)
     def test_customer_selectsuccess3(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
@@ -790,8 +763,8 @@ class TestCustomerPage:
         # 双击命令
         actions.double_click(element_to_double_click).perform()
         sleep(1)
-        # 点击客户名称
-        customer.click_button('//div[text()="客户代码" and contains(@optid,"opt_")]')
+        # 点击名称
+        customer.click_button('//div[text()="客户名称" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击（
         customer.click_button(
@@ -804,12 +777,12 @@ class TestCustomerPage:
         )
         sleep(1)
         # 点击包含
-        customer.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
+        customer.click_button('//div[text()="Begins with" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击输入数值
         customer.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            "美",
         )
 
         # 点击（
@@ -865,7 +838,7 @@ class TestCustomerPage:
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[3]'
         )
         customer.click_button('//div[text()="(" and contains(@optid,"opt_")]')
-        # 点击客户优先度
+        # 点击显示顺序
         customer.click_button(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
@@ -878,10 +851,10 @@ class TestCustomerPage:
         # 点击>
         customer.click_button('//div[text()=">" and contains(@optid,"opt_")]')
         sleep(1)
-        # 点击输入数值70
+        # 点击输入数值10
         customer.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "60",
+            "10",
         )
         # 点击（
         customer.click_button(
@@ -893,26 +866,40 @@ class TestCustomerPage:
 
         # 点击确认
         customer.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[3]'
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行
-        customercode = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[2]'
-        ).text
-        customernum = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        # 定位第二行数据
-        customercode2 = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[2]'
-        ).text
-        customernum2 = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[5]'
-        ).text
-        assert "111" in customercode and int(customernum) < 60
-        assert "111" not in customercode2 and int(customernum2) > 60
+        # 获取目标表格第2个 vxe 表格中的所有数据行
+        xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
+
+        # 先拿到总行数
+        base_rows = driver.find_elements(By.XPATH, xpath_rows)
+        total = len(base_rows)
+
+        valid_count = 0
+        for idx in range(total):
+            try:
+                # 每次都按索引重新定位这一行
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td5_raw = tds[4].text.strip()
+                td5_val = int(td5_raw) if td5_raw else 0
+
+                assert "美" in td3 or td5_val > 10, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
+                valid_count += 1
+
+            except StaleElementReferenceException:
+                # 如果行元素失效，再重试一次
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td5_raw = tds[4].text.strip()
+                td5_val = int(td5_raw) if td5_raw else 0
+                assert "美" in td3 or td5_val > 10, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
+                valid_count += 1
         assert not customer.has_fail_message()
+        print(f"符合条件的行数：{valid_count}")
 
     @allure.story("输入全部数据，添加保存成功")
     # @pytest.mark.run(order=1)
@@ -1018,66 +1005,6 @@ class TestCustomerPage:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not customer.has_fail_message()
 
-    @allure.story("删除全部input数据成功")
-    # @pytest.mark.run(order=1)
-    def test_customer_delall(self, login_to_customer):
-        driver = login_to_customer  # WebDriver 实例
-        customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-        code = '全部数据'
-        customer.enter_texts(
-            '//p[text()="客户代码"]/ancestor::div[2]//input', code
-        )
-        sleep(2)
-        # 定位内容为‘全部数据’的行
-        customer.click_button('//tr[./td[2][.//span[text()="全部数据"]]]/td[2]')
-        customer.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = customer.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘全部数据’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="全部数据"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
-        assert not customer.has_fail_message()
-
-    @allure.story("删除数据成功")
-    # @pytest.mark.run(order=1)
-    def test_customer_delsuccess(self, login_to_customer):
-        driver = login_to_customer  # WebDriver 实例
-        customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
-
-        # 定位内容为‘111’的行
-        customer.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        customer.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = customer.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘111’的行
-        customerdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
-        )
-        assert len(customerdata) == 0
-        assert not customer.has_fail_message()
-
     @allure.story("删除测试数据成功，删除布局成功")
     # @pytest.mark.run(order=1)
     def test_customer_delsuccess1(self, login_to_customer):
@@ -1085,57 +1012,18 @@ class TestCustomerPage:
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
         layout = "测试布局A"
 
-        # 定位内容为‘1测试A’的行
-        customer.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
-        customer.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = customer.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘1测试A’的行
-        customerdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
-        )
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = customer.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = customer.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+        value = ['全部数据', '111', '1测试A']
+        customer.del_all(value)
+        data = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        customer.del_loyout(layout)
         sleep(2)
-        customer.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        customer.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        customer.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert len(customerdata) == 0 == len(after_layout)
+        assert all(len(elements) == 0 for elements in data)
+        assert 0 == len(after_layout)
         assert not customer.has_fail_message()
