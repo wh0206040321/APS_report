@@ -66,13 +66,9 @@ class TestMasterPage:
         master.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = master.get_find_message()
         # 检查元素是否包含子节点
-        assert message.text == "请根据必填项填写信息"
+        assert message == "请根据必填项填写信息"
         assert not master.has_fail_message()
 
     @allure.story("添加工艺产能信息，只填写物料，不允许提交")
@@ -95,13 +91,9 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = master.get_find_message()
         # 检查元素是否包含子节点
-        assert message.text == "请根据必填项填写信息"
+        assert message == "请根据必填项填写信息"
         assert not master.has_fail_message()
 
     @allure.story("添加工艺产能信息，只填写物料和工序选定器和工序编号，不允许提交")
@@ -137,7 +129,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         # 输入工序代码
         master.click_button(
             f'(//div[@class="vxe-select-option--wrapper"])[1]/div[{random_int}]'
@@ -145,13 +137,9 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = master.get_find_message()
         # 检查元素是否包含子节点
-        assert message.text == "请根据必填项填写信息"
+        assert message == "请根据必填项填写信息"
         assert not master.has_fail_message()
 
     @allure.story(
@@ -193,7 +181,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -329,7 +317,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -420,7 +408,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -580,7 +568,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -842,7 +830,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -921,7 +909,7 @@ class TestMasterPage:
         master.click_button(
             '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -1000,7 +988,7 @@ class TestMasterPage:
         master.click_button(
             '//table[.//div[@class="vxe-input type--text size--mini is--controls is--suffix is--readonly"]]//tr[1]/td[3]//span'
         )
-        random_int = random.randint(1, 8)
+        random_int = random.randint(1, 5)
         sleep(1)
         # 输入工序代码
         master.click_button(

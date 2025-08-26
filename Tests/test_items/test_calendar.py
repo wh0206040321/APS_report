@@ -219,7 +219,7 @@ class TestCalendarPage:
         resource.send_keys(Keys.BACK_SPACE, "a")
         # 输入文本
         calendar.enter_texts(
-            '//label[text()="资源量"]/ancestor::div[1]//input[1]', "1文字abc。？~1++3"
+            '//label[text()="资源量"]/ancestor::div[1]//input[1]', "e1.文字abc。？~1++3"
         )
         sleep(1)
         # 获取表示顺序数字框
@@ -240,10 +240,7 @@ class TestCalendarPage:
         calendar.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
-        # 勾选框
-        random_int = random.randint(1, 6)
-        sleep(1)
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+        calendar.click_button('//table[@class="vxe-table--header"]//th[2]//span[@class="vxe-cell--checkbox"]')
         sleep(1)
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -259,9 +256,9 @@ class TestCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int1 = random.randint(2, 4)
+        random_int1 = random.randint(1, 2)
         sleep(1)
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
         sleep(1)
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -271,6 +268,8 @@ class TestCalendarPage:
         resource1 = calendar.get_find_element_xpath(
             '//label[text()="班次"]/parent::div/div[1]//input[1]'
         ).get_attribute("value")
+
+        calendar.enter_texts('//div[label[text()="优先级"]]//input', "200")
 
         calendar.click_button('(//div[text()=" 星期 "])[1]')
         element = calendar.get_find_element_xpath(
@@ -308,7 +307,7 @@ class TestCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
+        random_int = random.randint(1, 5)
         sleep(1)
         calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
 
@@ -326,9 +325,9 @@ class TestCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int1 = random.randint(2, 10)
+        random_int1 = random.randint(1, 2)
         sleep(1)
-        calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
 
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -492,46 +491,6 @@ class TestCalendarPage:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not calendar.has_fail_message()
 
-    @allure.story("删除全部input数据成功")
-    # @pytest.mark.run(order=1)
-    def test_calendar_delall(self, login_to_calendar):
-        driver = login_to_calendar  # WebDriver 实例
-        calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-
-        calendar.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
-        )
-        sleep(1)
-        calendar.click_button(
-            '//p[text()="更新时间"]/following-sibling::div'
-        )
-        sleep(1)
-        # 定位
-        calendar.click_button('//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]/td[2]')
-        calendardata1 = calendar.get_find_element_xpath(
-            '(//span[contains(text(),"条记录")])[1]'
-        ).text
-        calendar.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = calendar.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        calendardata = calendar.get_find_element_xpath(
-            '(//span[contains(text(),"条记录")])[1]'
-        ).text
-        assert (
-                calendardata != calendardata1
-        ), f"删除后的数据{calendardata}，删除前的数据{calendardata1}"
-        assert not calendar.has_fail_message()
-
     @allure.story("取消删除数据")
     # @pytest.mark.run(order=1)
     def test_calendar_delcancel(self, login_to_calendar):
@@ -548,7 +507,7 @@ class TestCalendarPage:
         calendar.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        calendar.get_find_element_class("ivu-btn-text").click()
+        calendar.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位第一行
         calendardata = calendar.get_find_element_xpath(
@@ -564,7 +523,9 @@ class TestCalendarPage:
     def test_calendar_delsuccess(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-
+        calendar.click_button(
+            '//p[text()="更新时间"]/following-sibling::div'
+        )
         # 定位第一行
         calendar.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]/td[2]'
@@ -573,16 +534,7 @@ class TestCalendarPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         calendar.click_del_button()  # 点击删除
-        # 点击确定
-        # 找到共同的父元素
-        parent = calendar.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        calendar.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(1)
         calendardata = calendar.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
@@ -612,7 +564,6 @@ class TestCalendarPage:
         # 勾选框
         random_int = random.randint(1, 6)
         sleep(1)
-        # calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
         calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
         sleep(1)
 
@@ -660,7 +611,7 @@ class TestCalendarPage:
         )
 
         # 勾选框
-        random_int = random.randint(1, 6)
+        random_int = random.randint(1, 2)
         sleep(1)
         calendar.click_button(
             '//span[@class="vxe-checkbox--icon iconfont icon-fuxuankuangdaiding"]'

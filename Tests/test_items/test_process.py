@@ -156,7 +156,7 @@ class TestProcessPage:
         element.send_keys(Keys.DELETE)
         sleep(1)
         process.enter_texts(
-            '(//label[text()="表示顺序"])[1]/parent::div//input', "1文字abc。？~1_2+3"
+            '(//label[text()="表示顺序"])[1]/parent::div//input', "e1.文字abc。？~1_2+3"
         )
         sleep(1)
         # 获取表示顺序数字框
@@ -184,64 +184,18 @@ class TestProcessPage:
         assert processsel == "2", f"预期{processsel}"
         assert not process.has_fail_message()
 
-    # @allure.story('复选框勾选成功')
-    # # @pytest.mark.run(order=1)
-    # def test_process_checkbox(self, login_to_process):
-    #     driver = login_to_process  # WebDriver 实例
-    #     process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-    #
-    #     process.click_button('(//span[(text()="勾选复选框")])[1]')
-    #     process.click_edi_button()  # 检查点击修改
-    #     checkbox = process.get_find_element_xpath('//label[text()="无效标志"]/parent::div//span[1]')
-    #     # 勾选复选框
-    #     if checkbox.get_attribute('class') == 'ivu-checkbox ivu-checkbox-checked':
-    #         # 点击确定
-    #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-    #     else:
-    #         element = process.get_find_element_xpath('//label[text()="无效标志"]/parent::div//input')
-    #         driver.execute_script("arguments[0].click();", element)
-    #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
-    #     checkboxlist = process.get_find_element_xpath('//span[text()="勾选复选框"]/ancestor::tr/td[6]//label')
-    #     assert checkboxlist.get_attribute('class') == 'notClick vxe-checkbox size--small is--checked'
-
-    # @allure.story('取消复选框勾选成功')
-    # # @pytest.mark.run(order=1)
-    # def test_process_nocheckbox(self, login_to_process):
-    #     driver = login_to_process  # WebDriver 实例
-    #     process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-    #     sleep(1)  # 等待页面加载
-    #     process.click_button('(//span[(text()="勾选复选框")])[1]')
-    #     process.click_edi_button()  # 检查点击修改
-    #     checkbox = process.get_find_element_xpath('//label[text()="无效标志"]/parent::div//input')
-    #     # 勾选复选框
-    #     if checkbox.is_selected():
-    #         sleep(1)
-    #         process.click_button('//label[text()="无效标志"]/parent::div//input')
-    #         # 点击确定
-    #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-    #     else:
-    #         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
-    #     checkboxlist = process.get_find_element_xpath('//span[text()="勾选复选框"]/ancestor::tr[1]/td[6]//input')
-    #     sleep(3)
-    #     assert checkbox.is_selected() == checkboxlist.is_selected()
-
     @allure.story("添加数据成功")
     # @pytest.mark.run(order=1)
     def test_process_addsuccess(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
-        process.click_add_button()  # 检查点击添加
-        # 输入工序代码
-        process.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', "111")
-        process.enter_texts('(//label[text()="工序名"])[1]/parent::div//input', "111")
-        # 点击确定
-        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        sleep(1)
+        name = "111"
+        num = "60"
+        process.adds_process(name, num)
         adddata = process.get_find_element_xpath(
-            '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
-        assert adddata == "111", f"预期数据是111，实际得到{adddata}"
+        assert adddata == name, f"预期数据是111，实际得到{adddata}"
         assert not process.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -249,14 +203,9 @@ class TestProcessPage:
     def test_process_addrepeat(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
-        process.click_add_button()  # 检查点击添加
-        # 输入工序代码
-        process.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', "111")
-        process.enter_texts('(//label[text()="工序名"])[1]/parent::div//input', "检查")
-        # 点击确定
-        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        sleep(1)
+        name = "111"
+        num = "60"
+        process.adds_process(name, num)
         # 获取重复弹窗文字
         error_popup = process.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -271,9 +220,9 @@ class TestProcessPage:
     def test_process_delcancel(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "111"
         # 定位内容为‘111’的行
-        process.click_button('(//span[text()="111"])[1]/ancestor::tr[1]/td[2]')
+        process.click_button(f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]')
         process.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
@@ -281,9 +230,9 @@ class TestProcessPage:
         sleep(1)
         # 定位内容为‘111’的行
         processdata = process.get_find_element_xpath(
-            '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
-        assert processdata == "111", f"预期{processdata}"
+        assert processdata == name, f"预期{processdata}"
         assert not process.has_fail_message()
 
     @allure.story("添加测试数据成功")
@@ -291,22 +240,14 @@ class TestProcessPage:
     def test_process_addsuccess1(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
-        process.click_add_button()  # 检查点击添加
-        # 输入工序代码
-        process.enter_texts(
-            '(//label[text()="工序代码"])[1]/parent::div//input', "1测试A"
-        )
-        process.enter_texts(
-            '(//label[text()="工序名"])[1]/parent::div//input', "1测试A"
-        )
-        # 点击确定
-        process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        name = "1测试A"
+        num = "70"
+        process.adds_process(name, num)
         sleep(1)
         adddata = process.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
-        assert adddata == "1测试A", f"预期数据是1测试A，实际得到{adddata}"
+        assert adddata == name, f"预期数据是1测试A，实际得到{adddata}"
         assert not process.has_fail_message()
 
     @allure.story("修改工序代码重复")
@@ -337,15 +278,15 @@ class TestProcessPage:
     def test_process_editcodesuccess(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "1测试A"
         # 选中产包装工序代码
-        process.click_button('(//span[text()="1测试A"])[1]')
+        process.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         process.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 工序代码输入
         process.enter_texts(
             '(//label[text()="工序代码"])[1]/parent::div//input', f"{text}"
@@ -355,7 +296,7 @@ class TestProcessPage:
         sleep(1)
         # 定位表格内容
         processdata = process.get_find_element_xpath(
-            '(//span[contains(text(),"1测试A")])[1]'
+            f'(//span[contains(text(),"{name}")])[1]'
         ).text
         assert processdata == text, f"预期{processdata}"
         assert not process.has_fail_message()
@@ -365,23 +306,23 @@ class TestProcessPage:
     def test_process_editcodesuccess2(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "1测试A"
         # 选中1测试A工序代码
-        process.click_button('(//span[contains(text(),"1测试A")])[1]')
+        process.click_button(f'(//span[contains(text(),"{name}")])[1]')
         # 点击修改按钮
         process.click_edi_button()
         # 工序代码输入
         process.enter_texts(
-            '(//label[text()="工序代码"])[1]/parent::div//input', "1测试A"
+            '(//label[text()="工序代码"])[1]/parent::div//input', name
         )
         # 点击确定
         process.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         processdata = process.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]'
+            f'(//span[text()="{name}"])[1]'
         ).text
-        assert processdata == "1测试A", f"预期{processdata}"
+        assert processdata == name, f"预期{processdata}"
         assert not process.has_fail_message()
 
     @allure.story("修改工序名，显示颜色成功")
@@ -389,7 +330,7 @@ class TestProcessPage:
     def test_process_editnamesuccess(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "1测试A"
         # 选中工序代码
         process.click_button('//tr[.//span[text()="1测试A"]]/td[2]')
         # 点击修改按钮
@@ -397,7 +338,7 @@ class TestProcessPage:
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 8)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 输入修改的工序名
         process.enter_texts(
             '(//label[text()="工序名"])[1]/parent::div//input', f"{text}"
@@ -421,10 +362,10 @@ class TestProcessPage:
         sleep(1)
         # 定位表格内容
         processname = process.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]/ancestor::tr/td[3]/div'
+            f'(//span[text()="{name}"])[1]/ancestor::tr/td[3]/div'
         ).text
         processautoGenerateFlag = process.get_find_element_xpath(
-            '(//span[text()="1测试A"])[1]/ancestor::tr/td[4]/div'
+            f'(//span[text()="{name}"])[1]/ancestor::tr/td[4]/div'
         ).text
         assert processname == editname and processautoGenerateFlag == processsel
         assert not process.has_fail_message()
@@ -451,7 +392,7 @@ class TestProcessPage:
     def test_process_selectcodesuccess(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "111"
         # 点击查询
         process.click_sel_button()
         sleep(1)
@@ -479,7 +420,7 @@ class TestProcessPage:
         # 点击输入数值
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            name,
         )
         sleep(1)
 
@@ -497,7 +438,7 @@ class TestProcessPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert processcode == "111" and len(processcode2) == 0
+        assert processcode == name and len(processcode2) == 0
         assert not process.has_fail_message()
 
     @allure.story("没有数据时显示正常")
@@ -550,12 +491,12 @@ class TestProcessPage:
         assert len(processcode) == 0
         assert not process.has_fail_message()
 
-    @allure.story("查询工序名字成功")
+    @allure.story("查询工序名字包含1查询成功")
     # @pytest.mark.run(order=1)
     def test_process_selectnamesuccess(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "1"
         # 点击查询
         process.click_sel_button()
         sleep(1)
@@ -578,12 +519,12 @@ class TestProcessPage:
         )
         sleep(1)
         # 点击=
-        process.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+        process.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击输入数值
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "打包",
+            name,
         )
         sleep(1)
 
@@ -592,16 +533,9 @@ class TestProcessPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行
-        processcode = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[3]'
-        ).text
-        # 定位第二行没有数据
-        processcode2 = driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[3]',
-        )
-        assert processcode == "打包" and len(processcode2) == 0
+        eles = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        assert len(eles) > 0
+        assert all(name in ele for ele in eles)
         assert not process.has_fail_message()
 
     @allure.story("表示顺序>60")
@@ -609,7 +543,7 @@ class TestProcessPage:
     def test_process_selectsuccess1(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        num = 60
         # 点击查询
         process.click_sel_button()
         sleep(1)
@@ -637,7 +571,7 @@ class TestProcessPage:
         # 点击输入数值
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "60",
+            num,
         )
         sleep(1)
 
@@ -646,23 +580,18 @@ class TestProcessPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行
-        processcode = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        # 定位第二行数据
-        processcode2 = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[5]'
-        ).text
-        assert int(processcode) > 60 and int(processcode2) > 60
+        eles = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
+        assert len(eles) > 0
+        assert all(int(ele) > num for ele in eles)
         assert not process.has_fail_message()
 
-    @allure.story("查询工序名包含裁剪并且表示顺序>70")
+    @allure.story("查询工序名包含1并且表示顺序>60")
     # @pytest.mark.run(order=1)
     def test_process_selectsuccess2(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "1"
+        num = 60
         # 点击查询
         process.click_sel_button()
         sleep(1)
@@ -696,7 +625,7 @@ class TestProcessPage:
         # 点击输入数值
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "裁剪",
+            name,
         )
 
         # 点击（
@@ -767,7 +696,7 @@ class TestProcessPage:
         # 点击输入数值
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "70",
+            num,
         )
         # 点击（
         process.click_button(
@@ -781,22 +710,19 @@ class TestProcessPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行表示顺序
-        processcode = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        processname = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        assert "裁剪" in processname and int(processcode) > 70
+        eles1 = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
+        eles2 = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        assert len(eles1) > 0 and len(eles2) > 0
+        assert all(int(ele) > num for ele in eles1) and all(name in ele for ele in eles2)
         assert not process.has_fail_message()
 
-    @allure.story("查询工序名包含检查或表示顺序>70")
+    @allure.story("查询工序名包含1或表示顺序>60")
     # @pytest.mark.run(order=1)
     def test_process_selectsuccess3(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
+        name = "1"
+        num = 60
         # 点击查询
         process.click_sel_button()
         sleep(1)
@@ -830,7 +756,7 @@ class TestProcessPage:
         # 点击输入数值
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "检查",
+            name,
         )
 
         # 点击（
@@ -903,7 +829,7 @@ class TestProcessPage:
         # 点击输入数值70
         process.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "70",
+            num,
         )
         # 点击（
         process.click_button(
@@ -918,33 +844,44 @@ class TestProcessPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行物料优先度
-        processname = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-        processcode = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[5]'
-        ).text
-        # 定位第二行数据
-        processname2 = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[3]'
-        ).text
-        processcode2 = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[5]'
-        ).text
+        # 获取目标表格第2个 vxe 表格中的所有数据行
+        xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 
-        sleep(1)
-        assert ("开料" in processname or int(processcode) > 70) and (
-            "开料" in processname2 or int(processcode2) > 70
-        )
+        # 先拿到总行数
+        base_rows = driver.find_elements(By.XPATH, xpath_rows)
+        total = len(base_rows)
+
+        valid_count = 0
+        for idx in range(total):
+            try:
+                # 每次都按索引重新定位这一行
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td5_raw = tds[4].text.strip()
+                td5_raw = int(td5_raw) if td5_raw else 0
+
+                assert name in td3 or td5_raw > num, f"第 {idx + 1} 行不符合：td3={td3}, td8={td5_raw}"
+                valid_count += 1
+
+            except StaleElementReferenceException:
+                # 如果行元素失效，再重试一次
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td5_raw = tds[4].text.strip()
+                td5_raw = int(td5_raw) if td5_raw else 0
+                assert name in td3 or td5_raw > num, f"第 {idx + 1} 行不符合：td3={td3}, td5={td5_raw}"
+                valid_count += 1
         assert not process.has_fail_message()
+        print(f"符合条件的行数：{valid_count}")
 
     @allure.story("输入全部数据，添加保存成功")
     # @pytest.mark.run(order=1)
     def test_process_addall(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-        data_list = ["全部数据", "20"]
+        data_list = ["11测试全部数据", "20"]
         process.click_add_button()  # 检查点击添加
         process.add_input_all(data_list[0], data_list[1])
         sleep(1)
@@ -991,7 +928,7 @@ class TestProcessPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = ['全部数据', '全部数据', '2', '20', 'is--checked', '全部数据', f'{DateDriver.username}', '2025']
+        bef_text = [f'{data_list[0]}', f'{data_list[0]}', '2', f'{data_list[1]}', 'is--checked', f'{data_list[0]}', f'{DateDriver.username}', '2025']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):
             if i == 4:
@@ -1007,7 +944,7 @@ class TestProcessPage:
     def test_process_restart(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-        code = '全部数据'
+        code = '11测试全部数据'
         process.enter_texts(
             '//p[text()="工序代码"]/ancestor::div[2]//input', code
         )
@@ -1051,7 +988,7 @@ class TestProcessPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = ['全部数据', '全部数据', '2', '20', 'is--checked', '全部数据', f'{DateDriver.username}', '2025']
+        bef_text = [code, code, '2', '20', 'is--checked', code, f'{DateDriver.username}', '2025']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):
             if i == 4:
@@ -1062,66 +999,6 @@ class TestProcessPage:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not process.has_fail_message()
 
-    @allure.story("删除全部input数据成功")
-    # @pytest.mark.run(order=1)
-    def test_processr_delall(self, login_to_process):
-        driver = login_to_process  # WebDriver 实例
-        process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-        code = '全部数据'
-        process.enter_texts(
-            '//p[text()="工序代码"]/ancestor::div[2]//input', code
-        )
-        sleep(2)
-        # 定位内容为‘全部数据’的行
-        process.click_button('//tr[./td[2][.//span[text()="全部数据"]]]/td[2]')
-        process.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = process.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘全部数据’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="全部数据"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
-        assert not process.has_fail_message()
-
-    @allure.story("删除数据成功")
-    # @pytest.mark.run(order=1)
-    def test_process_delsuccess(self, login_to_process):
-        driver = login_to_process  # WebDriver 实例
-        process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-
-        # 定位内容为‘111’的行
-        process.click_button('(//span[text()="111"])[1]/ancestor::tr[1]/td[2]')
-        process.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = process.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘111’的行
-        processdata = driver.find_elements(
-            By.XPATH, '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
-        )
-        assert len(processdata) == 0
-        assert not process.has_fail_message()
-
     @allure.story("删除测试数据成功，删除布局")
     # @pytest.mark.run(order=1)
     def test_process_delsuccess1(self, login_to_process):
@@ -1129,57 +1006,18 @@ class TestProcessPage:
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
         layout = "测试布局A"
 
-        # 定位内容为‘1测试A’的行
-        process.click_button('(//span[text()="1测试A"])[1]/ancestor::tr[1]/td[2]')
-        process.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = process.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘1测试A’的行
-        processdata = driver.find_elements(
-            By.XPATH, '(//span[text()="1测试A"])[1]/ancestor::tr[1]/td[2]'
-        )
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = process.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = process.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+        value = ['111', '11测试全部数据', '1测试A']
+        process.del_all(value)
+        itemdata = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        process.del_layout(layout)
         sleep(2)
-        process.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        process.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        process.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert len(processdata) == 0 == len(after_layout)
+        assert all(len(elements) == 0 for elements in itemdata)
+        assert 0 == len(after_layout)
         assert not process.has_fail_message()

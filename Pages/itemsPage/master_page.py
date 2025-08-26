@@ -80,6 +80,24 @@ class MasterPage(BasePage):
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
 
+    def get_find_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="ivu-message"]//span')
+            )
+        )
+        return message.text
+
+    def get_message(self):
+        """获取信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+            )
+        )
+        return message.text
+
     def get_find_element_xpath(self, xpath):
         """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
         try:

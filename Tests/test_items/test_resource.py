@@ -759,7 +759,8 @@ class TestResourcePage:
     def test_resource_selectsuccess3(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
-
+        name = "1"
+        num = 5
         # 点击查询
         resource.click_sel_button()
         sleep(1)
@@ -793,7 +794,7 @@ class TestResourcePage:
         # 点击输入数值
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "1",
+            name,
         )
 
         # 点击（
@@ -865,7 +866,7 @@ class TestResourcePage:
         # 点击输入数值5
         resource.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "5",
+            num,
         )
         # 点击（
         resource.click_button(
@@ -897,7 +898,7 @@ class TestResourcePage:
                 td9_raw = tds[8].text.strip()
                 td9_raw = int(td9_raw) if td9_raw else 0
 
-                assert "1" in td3 or td9_raw > 5, f"第 {idx + 1} 行不符合：td3={td3}, td8={td9_raw}"
+                assert name in td3 or td9_raw > num, f"第 {idx + 1} 行不符合：td3={td3}, td8={td9_raw}"
                 valid_count += 1
 
             except StaleElementReferenceException:
@@ -907,7 +908,7 @@ class TestResourcePage:
                 td3 = tds[2].text.strip()
                 td9_raw = tds[8].text.strip()
                 td9_raw = int(td9_raw) if td9_raw else 0
-                assert "1" in td3 or td9_raw > 5, f"第 {idx + 1} 行不符合：td3={td3}, td5={td9_raw}"
+                assert name in td3 or td9_raw > num, f"第 {idx + 1} 行不符合：td3={td3}, td5={td9_raw}"
                 valid_count += 1
         assert not resource.has_fail_message()
         print(f"符合条件的行数：{valid_count}")
@@ -1049,7 +1050,7 @@ class TestResourcePage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         sleep(3)
         driver.refresh()
-        sleep(3)
+        sleep(5)
         num = adds.go_settings_page()
         sleep(2)
         resource.enter_texts(

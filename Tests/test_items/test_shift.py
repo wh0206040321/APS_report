@@ -94,7 +94,7 @@ class TestShiftPage:
         shift.click_add_button()  # 检查点击添加
         # 填写数字的第一个数字框
         shift.enter_texts(
-            '//label[text()="时间"]/ancestor::div[1]//input[1]', "1文字abc。？~1"
+            '//label[text()="时间"]/ancestor::div[1]//input[1]', "e1.文字abc。？~1"
         )
         sleep(1)
         # 获取表示顺序数字框
@@ -307,16 +307,16 @@ class TestShiftPage:
     def test_shift_addsuccess(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "111"
         shift.click_add_button()  # 检查点击添加
         # 输入班次代码
-        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
+        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', {name})
         # 点击确定
         shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
-            '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         )
-        assert adddata.text == "111", f"预期数据是111，实际得到{adddata}"
+        assert adddata.text == name, f"预期数据是111，实际得到{adddata}"
         assert not shift.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -346,17 +346,17 @@ class TestShiftPage:
     def test_shift_delcancel(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "111"
         # 定位内容为‘111’的行
-        shift.click_button('(//span[text()="111"])[1]/ancestor::tr[1]/td[2]')
+        shift.click_button(f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]')
         shift.click_del_button()  # 点击删除
         # 点击取消
-        shift.get_find_element_class("ivu-btn-text").click()
+        shift.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         # 定位内容为‘111’的行
         shiftdata = shift.get_find_element_xpath(
-            '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         )
-        assert shiftdata.text == "111", f"预期{shiftdata}"
+        assert shiftdata.text == name, f"预期{shiftdata}"
         assert not shift.has_fail_message()
 
     @allure.story("添加测试数据成功")
@@ -364,10 +364,10 @@ class TestShiftPage:
     def test_shift_addsuccess1(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1测试A"
         shift.click_add_button()  # 检查点击添加
         # 输入班次代码
-        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "1修改代码")
+        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
 
         # 填写第一个日期数字的第一个时间数字框
         shift.enter_texts(
@@ -411,7 +411,7 @@ class TestShiftPage:
         # 点击确定
         shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
-            '(//span[text()="1修改代码"])[1]/ancestor::tr[1]/td[3]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[3]'
         ).text
         assert adddata == timedata
         assert not shift.has_fail_message()
@@ -421,9 +421,9 @@ class TestShiftPage:
     def test_shift_editrepeat(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1测试A"
         # 选中晚班班次代码
-        shift.click_button('(//span[text()="1修改代码"])[1]')
+        shift.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         shift.click_edi_button()
         # 班次代码输入白班
@@ -445,15 +445,15 @@ class TestShiftPage:
     def test_shift_editcodesuccess(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1测试A"
         # 选中产包装班次代码
-        shift.click_button('(//span[text()="1修改代码"])[1]')
+        shift.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         shift.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1修改代码" + f"{random_int}"
+        text = name + f"{random_int}"
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', f"{text}")
         # 点击确定
@@ -461,7 +461,7 @@ class TestShiftPage:
         sleep(1)
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath(
-            '(//span[contains(text(),"1修改代码")])[1]'
+            f'(//span[contains(text(),"{name}")])[1]'
         ).text
         assert shiftdata == text, f"预期{shiftdata}"
         assert not shift.has_fail_message()
@@ -471,19 +471,19 @@ class TestShiftPage:
     def test_shift_editcodesuccess2(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1测试A"
         # 选中修改代码班次代码
-        shift.click_button('(//span[contains(text(),"1修改代码")])[1]')
+        shift.click_button(f'(//span[contains(text(),"{name}")])[1]')
         # 点击修改按钮
         shift.click_edi_button()
         # 班次代码输入
-        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "1修改代码")
+        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
         # 点击确定
         shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
-        shiftdata = shift.get_find_element_xpath('(//span[text()="1修改代码"])[1]').text
-        assert shiftdata == "1修改代码", f"预期{shiftdata}"
+        shiftdata = shift.get_find_element_xpath('(//span[text()="1测试A"])[1]').text
+        assert shiftdata == name, f"预期{shiftdata}"
         assert not shift.has_fail_message()
 
     @allure.story("修改时间成功")
@@ -491,9 +491,9 @@ class TestShiftPage:
     def test_shift_edittimesuccess(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1测试A"
         # 选中修改代码班次代码
-        shift.click_button('(//span[contains(text(),"1修改代码")])[1]')
+        shift.click_button(f'(//span[contains(text(),"{name}")])[1]')
         # 点击修改按钮
         shift.click_edi_button()
         # 点击编辑按钮
@@ -565,7 +565,7 @@ class TestShiftPage:
         shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = shift.get_find_element_xpath(
-            '(//span[text()="1修改代码"])[1]/ancestor::tr[1]/td[3]'
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[3]'
         ).text
         assert adddata == timedata and adddata == "05:05:05-08:05:05"
         assert not shift.has_fail_message()
@@ -575,9 +575,9 @@ class TestShiftPage:
     def test_shift_editcolorsuccess(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1测试A"
         # 选中班次代码
-        shift.click_button('(//span[text()="1修改代码"])[1]')
+        shift.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         shift.click_edi_button()
         sleep(1)
@@ -596,36 +596,9 @@ class TestShiftPage:
         shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         shiftautoGenerateFlag = shift.get_find_element_xpath(
-            '(//span[text()="1修改代码"])[1]/ancestor::tr/td[4]/div'
+            f'(//span[text()="{name}"])[1]/ancestor::tr/td[4]/div'
         ).text
         assert shiftautoGenerateFlag == shiftsel
-        assert not shift.has_fail_message()
-
-    @allure.story("删除测试数据成功")
-    # @pytest.mark.run(order=1)
-    def test_shift_delsuccess1(self, login_to_shift):
-        driver = login_to_shift  # WebDriver 实例
-        shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
-        # 定位内容为‘1修改代码’的行
-        shift.click_button('(//span[text()="1修改代码"])[1]/ancestor::tr[1]/td[2]')
-        shift.click_del_button()  # 点击删除
-        # 点击确定
-        # 找到共同的父元素
-        parent = shift.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘1修改代码’的行
-        shiftdata = driver.find_elements(
-            By.XPATH, '(//span[text()="1修改代码"])[1]/ancestor::tr[1]/td[2]'
-        )
-        assert len(shiftdata) == 0
         assert not shift.has_fail_message()
 
     @allure.story("刷新成功")
@@ -645,12 +618,12 @@ class TestShiftPage:
         assert shifttext == "", f"预期{shifttext}"
         assert not shift.has_fail_message()
 
-    @allure.story("查询代码成功")
+    @allure.story("查询代码包含1成功")
     # @pytest.mark.run(order=1)
     def test_shift_selectcodesuccess(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-
+        name = "1"
         # 点击查询
         shift.click_sel_button()
         sleep(1)
@@ -673,12 +646,12 @@ class TestShiftPage:
         )
         sleep(1)
         # 点击=
-        shift.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+        shift.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击输入数值
         shift.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            name,
         )
         sleep(1)
 
@@ -687,16 +660,9 @@ class TestShiftPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为白班
-        shiftcode = shift.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
-        ).text
-        # 定位第二行没有数据
-        shiftcode2 = driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
-        )
-        assert shiftcode == "111" and len(shiftcode2) == 0
+        eles = shift.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[2]')
+        assert len(eles) > 0
+        assert all(name in ele for ele in eles)
         assert not shift.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
@@ -704,7 +670,7 @@ class TestShiftPage:
     def test_shift_addall(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-        data_list = ["全部数据", "20"]
+        data_list = ["11测试全部数据", "20"]
         shift.click_add_button()  # 检查点击添加
         shift.add_input_all(data_list[0], data_list[1])
         sleep(1)
@@ -742,7 +708,7 @@ class TestShiftPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = ['全部数据', '20:20:20-21:20:20', 'RGB(100,255,178)', '全部数据', f'{DateDriver.username}', '2025']
+        bef_text = [f'{data_list[0]}', '20:20:20-21:20:20', 'RGB(100,255,178)', f'{data_list[0]}', f'{DateDriver.username}', '2025']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):
             if i == 6:
@@ -756,7 +722,7 @@ class TestShiftPage:
     def test_shift_restart(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-        code = '全部数据'
+        code = '11测试全部数据'
         shift.enter_texts(
             '//p[text()="代码"]/ancestor::div[2]//input', code
         )
@@ -791,7 +757,7 @@ class TestShiftPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = ['全部数据', '20:20:20-21:20:20', 'RGB(100,255,178)', '全部数据', f'{DateDriver.username}', '2025']
+        bef_text = [code, '20:20:20-21:20:20', 'RGB(100,255,178)', code, f'{DateDriver.username}', '2025']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):
             if i == 6:
@@ -800,96 +766,25 @@ class TestShiftPage:
                 assert a == e, f"第{i + 1}项不一致：actual='{a}', expected='{e}'"
         assert not shift.has_fail_message()
 
-    @allure.story("删除全部input数据成功")
-    # @pytest.mark.run(order=1)
-    def test_shift_delall(self, login_to_shift):
-        driver = login_to_shift  # WebDriver 实例
-        shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
-        code = '全部数据'
-        shift.enter_texts(
-            '//p[text()="代码"]/ancestor::div[2]//input', code
-        )
-        sleep(2)
-
-        # 定位内容为‘全部数据’的行
-        shift.click_button('//tr[./td[2][.//span[text()="全部数据"]]]/td[2]')
-        shift.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = shift.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘全部数据’的行
-        itemdata = driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="全部数据"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
-        assert not shift.has_fail_message()
-
     @allure.story("删除数据成功,删除数据删除布局成功")
     # @pytest.mark.run(order=1)
-    def test_shift_delsuccess2(self, login_to_shift):
+    def test_shift_delsuccess(self, login_to_shift):
         driver = login_to_shift  # WebDriver 实例
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
         layout = "测试布局A"
 
-        # 定位内容为‘111’的行
-        shift.click_button('(//span[text()="111"])[1]/ancestor::tr[1]/td[2]')
-        shift.click_del_button()  # 点击删除
-        # 点击确定
-        # 找到共同的父元素
-        parent = shift.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        sleep(1)
-        # 定位内容为‘111’的行
-        shiftdata = driver.find_elements(
-            By.XPATH, '(//span[text()="111"])[1]/ancestor::tr[1]/td[2]'
-        )
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = shift.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = shift.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+        value = ['11测试全部数据', '111', '1测试A']
+        shift.del_all(value)
+        data = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        shift.del_layout(layout)
         sleep(2)
-        shift.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        shift.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        shift.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert len(shiftdata) == 0 == len(after_layout)
+        assert all(len(elements) == 0 for elements in data)
+        assert 0 == len(after_layout)
         assert not shift.has_fail_message()

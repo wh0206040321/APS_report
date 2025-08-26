@@ -1018,7 +1018,7 @@ class TestCustomerPage:
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:3]
         ]
-        customer.del_loyout(layout)
+        customer.del_layout(layout)
         sleep(2)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(

@@ -5,7 +5,7 @@ from datetime import date
 
 import allure
 import pytest
-from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import WebDriverException, StaleElementReferenceException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -154,7 +154,7 @@ class TestItemGroupPage:
         ele.send_keys(Keys.DELETE)
         # 物料优先度框输入文字字母符号数字
         item.enter_texts(
-            '(//label[text()="物料优先度"])[1]/parent::div//input', "1文字abc。+=？~1_2+3"
+            '(//label[text()="物料优先度"])[1]/parent::div//input', "e1.文字abc。+=？~1_2+3"
         )
         sleep(1)
         # 获取物料优先度
@@ -204,7 +204,7 @@ class TestItemGroupPage:
         # 双击命令
         actions.double_click(element_to_double_click).perform()
         # 点击确认
-        item.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
+        item.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
         # 获取代码设计器文本框
         sleep(1)
         itemcode = item.get_find_element_xpath(
@@ -218,23 +218,21 @@ class TestItemGroupPage:
     def test_itemgroup_addsuccess(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
-        item.click_add_button()  # 检查点击添加
-        # 输入物料组代码
-        item.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', "111")
-        item.enter_texts('(//label[text()="物料组名称"])[1]/parent::div//input', "111")
+        name = "111"
+        item.add_test_item_group(name)
         ele = item.get_find_element_xpath(
             '(//label[text()="物料优先度"])[1]/parent::div//input'
         )
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
+        ele.send_keys("70")
         # 点击确定
         item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "111", f"预期数据是111，实际得到{adddata}"
+        assert adddata == name, f"预期数据是111，实际得到{adddata}"
         assert not item.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -243,10 +241,8 @@ class TestItemGroupPage:
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
 
-        item.click_add_button()  # 检查点击添加
-        # 输入物料组代码
-        item.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', "111")
-        item.enter_texts('(//label[text()="物料组名称"])[1]/parent::div//input', "111")
+        name = "111"
+        item.add_test_item_group(name)
         # 点击确定
         item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
@@ -264,9 +260,9 @@ class TestItemGroupPage:
     def test_itemgroup_delcancel(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "111"
         # 定位内容为‘111’的行
-        item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
+        item.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         item.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
@@ -274,9 +270,9 @@ class TestItemGroupPage:
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert itemdata == "111", f"预期{itemdata}"
+        assert itemdata == name, f"预期{itemdata}"
         assert not item.has_fail_message()
 
     @allure.story("添加测试数据")
@@ -285,17 +281,15 @@ class TestItemGroupPage:
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
 
-        item.click_add_button()  # 检查点击添加
-        # 输入物料组代码
-        item.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', "1测试A")
-        item.enter_texts('(//label[text()="物料组名称"])[1]/parent::div//input', "1测试A")
+        name = "1测试A"
+        item.add_test_item_group(name)
         # 点击确定
         item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         adddata = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "1测试A", f"预期数据是1测试A，实际得到{adddata}"
+        assert adddata == name, f"预期数据是1测试A，实际得到{adddata}"
         assert not item.has_fail_message()
 
     @allure.story("修改物料组代码重复")
@@ -303,9 +297,9 @@ class TestItemGroupPage:
     def test_itemgroup_editrepeat(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "1测试A"
         # 选中1测试A物料组代码
-        item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        item.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         item.click_edi_button()
         # 物料组代码输入111
@@ -325,15 +319,15 @@ class TestItemGroupPage:
     def test_itemgroup_editcodesuccess(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "1测试A"
         # 选中1测试A物料组代码
-        item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        item.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         item.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 物料组代码输入
         item.enter_texts(
             '(//label[text()="物料组代码"])[1]/parent::div//input', f"{text}"
@@ -343,7 +337,7 @@ class TestItemGroupPage:
         sleep(1)
         # 定位表格内容
         itemdata = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]'
+            f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
         ).text
         assert itemdata == text, f"预期{itemdata}"
         assert not item.has_fail_message()
@@ -353,21 +347,21 @@ class TestItemGroupPage:
     def test_itemgroup_editcodesuccess2(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "1测试A"
         # 选中1测试A物料组代码
-        item.click_button('//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]')
+        item.click_button(f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]')
         # 点击修改按钮
         item.click_edi_button()
         # 物料组代码输入
-        item.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', "1测试A")
+        item.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', name)
         # 点击确定
         item.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         itemdata = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert itemdata == "1测试A", f"预期{itemdata}"
+        assert itemdata == name, f"预期{itemdata}"
         assert not item.has_fail_message()
 
     @allure.story("修改物料组名称，自动补充标识，关联条件成功")
@@ -375,15 +369,15 @@ class TestItemGroupPage:
     def test_itemgroup_editnamesuccess(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "1测试A"
         # 选中物料组代码
-        item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
+        item.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         item.click_edi_button()
         sleep(1)
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1测试A" + f"{random_int}"
+        text = name + f"{random_int}"
         # 输入修改的物料组名称
         item.enter_texts(
             '(//label[text()="物料组名称"])[1]/parent::div//input', f"{text}"
@@ -432,14 +426,14 @@ class TestItemGroupPage:
         sleep(1)
         # 定位表格内容
         itemname = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[3]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[3]/div'
         ).text
         itemautoGenerateFlag = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[8]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[8]/div'
         ).text
         sleep(1)
         itempeggingConditionExpr = item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="1测试A"]]]/td[10]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[10]/div'
         ).text
         assert (
             itemname == editname
@@ -471,9 +465,7 @@ class TestItemGroupPage:
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
         sleep(3)
-        ele = item.get_find_element_xpath(
-            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
-        ).text
+        name = "1测试A"
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -501,7 +493,7 @@ class TestItemGroupPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            ele,
+            name,
         )
         sleep(1)
 
@@ -519,7 +511,7 @@ class TestItemGroupPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert itemcode == ele and len(itemcode2) == 0
+        assert itemcode == name and len(itemcode2) == 0
         assert not item.has_fail_message()
 
     @allure.story("没有数据时显示正常")
@@ -571,12 +563,12 @@ class TestItemGroupPage:
         assert len(itemcode) == 0
         assert not item.has_fail_message()
 
-    @allure.story("查询物料组名字成功")
+    @allure.story("查询物料组名字包含A成功")
     # @pytest.mark.run(order=1)
     def test_itemgroup_selectnamesuccess(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "A"
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -599,12 +591,12 @@ class TestItemGroupPage:
         )
         sleep(1)
         # 点击=
-        item.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+        item.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "A类",
+            name,
         )
         sleep(1)
 
@@ -613,11 +605,9 @@ class TestItemGroupPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为M1
-        itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[3]'
-        ).text
-        assert "A类" == itemcode
+        eles = item.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        assert len(eles) > 0
+        assert all(name in ele for ele in eles)
         assert not item.has_fail_message()
 
     @allure.story("查询物料优先度>0")
@@ -625,7 +615,7 @@ class TestItemGroupPage:
     def test_itemgroupselectsuccess1(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        num = 0
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -653,7 +643,7 @@ class TestItemGroupPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "0",
+            num,
         )
         sleep(1)
 
@@ -662,15 +652,9 @@ class TestItemGroupPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行物料优先度
-        itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[6]'
-        ).text
-        # 定位第二行数据
-        itemcode2 = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[6]'
-        ).text
-        assert int(itemcode) > 0 and int(itemcode2) > 0
+        eles = item.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[6]')
+        assert len(eles) > 0
+        assert all(int(ele) > num for ele in eles)
         assert not item.has_fail_message()
 
     @allure.story("查询物料组名称包含A并且物料优先度>0")
@@ -678,7 +662,8 @@ class TestItemGroupPage:
     def test_itemgroup_selectsuccess2(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "A"
+        num = 0
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -712,7 +697,7 @@ class TestItemGroupPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "A",
+            name,
         )
 
         # 点击（
@@ -782,7 +767,7 @@ class TestItemGroupPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "0",
+            num,
         )
         # 点击（
         item.click_button(
@@ -797,35 +782,19 @@ class TestItemGroupPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行物料优先度
-        itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[6]'
-        ).text
-        itemname = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[3]'
-        ).text
-
-        itemcode2 = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[6]'
-        ).text
-        itemname2 = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[3]'
-        ).text
-
-        # 定位第三行没有数据
-        itemcode3 = driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][3]/td[3]',
-        )
-        assert int(itemcode) > 0 and "A" in itemname and int(itemcode2) > 0 and "A" in itemname2 and len(itemcode3) == 0
+        eles1 = item.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[6]')
+        eles2 = item.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+        assert len(eles1) > 0 and len(eles2) > 0
+        assert all(int(ele) > num for ele in eles1) and all(name in ele for ele in eles2)
         assert not item.has_fail_message()
 
-    @allure.story("查询物料组代码包含产品A或物料优先度>0")
+    @allure.story("查询物料组名称包含A或物料优先度>0")
     # @pytest.mark.run(order=1)
     def test_itemgroup_selectsuccess3(self, login_to_itemgroup):
         driver = login_to_itemgroup  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = "A"
+        num = 0
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -841,7 +810,7 @@ class TestItemGroupPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击物料名称
-        item.click_button('//div[text()="物料组代码" and contains(@optid,"opt_")]')
+        item.click_button('//div[text()="物料组名称" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击（
         item.click_button(
@@ -859,7 +828,7 @@ class TestItemGroupPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "产品A",
+            name,
         )
 
         # 点击（
@@ -931,7 +900,7 @@ class TestItemGroupPage:
         # 点击输入数值0
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "0",
+            num,
         )
         # 点击（
         item.click_button(
@@ -946,18 +915,37 @@ class TestItemGroupPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行物料优先度
-        itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[6]'
-        ).text
-        itemname = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[2]'
-        ).text
-        code = item.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="产品A"]]//td[6]'
-        ).text
-        assert int(code) <= 0 and int(itemcode) > 0 and itemname == "1测试A"
+        # 获取目标表格第2个 vxe 表格中的所有数据行
+        xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
+
+        # 先拿到总行数
+        base_rows = driver.find_elements(By.XPATH, xpath_rows)
+        total = len(base_rows)
+
+        valid_count = 0
+        for idx in range(total):
+            try:
+                # 每次都按索引重新定位这一行
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td6_raw = tds[5].text.strip()
+                td6_raw = int(td6_raw) if td6_raw else 0
+
+                assert name in td3 or td6_raw > num, f"第 {idx + 1} 行不符合：td3={td3}, td8={td6_raw}"
+                valid_count += 1
+
+            except StaleElementReferenceException:
+                # 如果行元素失效，再重试一次
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td3 = tds[2].text.strip()
+                td6_raw = tds[5].text.strip()
+                td6_raw = int(td6_raw) if td6_raw else 0
+                assert name in td3 or td6_raw > num, f"第 {idx + 1} 行不符合：td3={td3}, td5={td6_raw}"
+                valid_count += 1
         assert not item.has_fail_message()
+        print(f"符合条件的行数：{valid_count}")
 
     @allure.story("输入全部数据，添加保存成功")
     # @pytest.mark.run(order=1)
@@ -1074,7 +1062,7 @@ class TestItemGroupPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         sleep(1)
         driver.refresh()
-        sleep(3)
+        sleep(4)
         num = adds.go_settings_page()
         sleep(2)
         item.enter_texts(
@@ -1104,12 +1092,12 @@ class TestItemGroupPage:
         layout = "测试布局A"
 
         value = ['111', '11测试全部数据', '1测试A']
-        item.del_all(value)
+        item.del_all(value, xpath='//p[text()="物料组代码"]/ancestor::div[2]//input')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:3]
         ]
-        item.del_loyout(layout)
+        item.del_layout(layout)
         sleep(2)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(

@@ -1,6 +1,7 @@
 from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -106,6 +107,24 @@ class ItemPage(BasePage):
         )
         return message
 
+    def add_test_item(self, name):
+        self.click_add_button()  # 检查点击添加
+        # 输入代码
+        self.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', name)
+        self.enter_texts('(//label[text()="物料名称"])[1]/parent::div//input', name)
+
+    def add_test_item_group(self, name):
+        self.click_add_button()  # 检查点击添加
+        # 输入代码
+        self.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', name)
+        self.enter_texts('(//label[text()="物料组名称"])[1]/parent::div//input', name)
+
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
+
     def add_layout(self, layout):
         """添加布局."""
         self.click_button('//div[@class="newDropdown"]//i')
@@ -140,19 +159,23 @@ class ItemPage(BasePage):
             # 如果已选中，直接点击确定按钮保存设置
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
-    def del_all(self, value=[]):
-        for index, xpath in enumerate(value, start=1):
+    def del_all(self, value=[], xpath=""):
+        for index, v in enumerate(value, start=1):
             try:
-                self.click_button(f'//tr[./td[2][.//span[text()="{xpath}"]]]/td[2]')
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
                 self.click_del_button()  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
                 sleep(1)
             except NoSuchElementException:
-                print(f"未找到元素: {xpath}")
+                print(f"未找到元素: {v}")
             except Exception as e:
-                print(f"操作 {xpath} 时出错: {str(e)}")
+                print(f"操作 {v} 时出错: {str(e)}")
 
-    def del_loyout(self, layout):
+    def del_layout(self, layout):
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = self.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

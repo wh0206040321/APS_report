@@ -719,7 +719,7 @@ class TestResourceGroupPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         sleep(1)
         driver.refresh()
-        sleep(3)
+        sleep(5)
         num = adds.go_settings_page()
         sleep(2)
         resource.enter_texts(

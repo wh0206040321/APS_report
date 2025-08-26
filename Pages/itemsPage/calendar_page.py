@@ -103,9 +103,9 @@ class Calendar(BasePage):
                 '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
             )
             # 勾选框
-            random_int = random.randint(2, 10)
+            random_int = random.randint(1, 5)
             sleep(1)
-            self.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+            self.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
 
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -118,9 +118,9 @@ class Calendar(BasePage):
                 '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
             )
             # 勾选框
-            random_int1 = random.randint(2, 10)
+            random_int1 = random.randint(1, 2)
             sleep(1)
-            self.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+            self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
             )
@@ -133,7 +133,6 @@ class Calendar(BasePage):
                 ele.send_keys(Keys.CONTROL, "a")
                 ele.send_keys(Keys.DELETE)
                 ele.send_keys(num)
-
 
             self.click_button('(//div[text()=" 星期 "])[1]')
             self.click_button(
