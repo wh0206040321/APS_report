@@ -70,7 +70,7 @@ class TestCoveragePage:
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         ).text
         coverage.click_add_button()
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 资源
         resource_box = coverage.get_find_element_xpath(
@@ -129,7 +129,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -150,7 +150,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -171,7 +171,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -192,7 +192,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -213,7 +213,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -239,7 +239,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         value_list = add.batch_acquisition_input(xpath_list)
@@ -270,7 +270,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         value_list = add.batch_acquisition_input(xpath_list)
@@ -301,7 +301,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 获取当前时间
         current_time = datetime.now()
         # 格式化为 年/月/日 的字符串
@@ -331,7 +331,7 @@ class TestCoveragePage:
             '//div[@id="2ssy7pog-1nb7"]//i'
         )
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 8)
         sleep(1)
         coverage.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
         sleep(1)
@@ -592,7 +592,7 @@ class TestCoveragePage:
             '//div[@id="2ssy7pog-1nb7"]//i'
         )
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 8)
         sleep(1)
         coverage.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
         sleep(1)
@@ -752,7 +752,7 @@ class TestCoveragePage:
         coverage.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        coverage.get_find_element_class("ivu-btn-text").click()
+        coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位第一行
         coveragedata = coverage.get_find_element_xpath(
@@ -846,7 +846,7 @@ class TestCoveragePage:
             '//div[@id="2zfqnpsf-3nsq"]//i'
         )
         # 勾选框
-        random_int = random.randint(2, 10)
+        random_int = random.randint(1, 8)
         coverage.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
         coverage.click_button(
             '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -889,16 +889,7 @@ class TestCoveragePage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         coverage.click_del_button()  # 点击删除
-        # 点击确定
-        # 找到共同的父元素
-        parent = coverage.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         # 定位第一行
         sleep(1)
         coveragedata = coverage.get_find_element_xpath(

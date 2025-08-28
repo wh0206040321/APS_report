@@ -52,6 +52,21 @@ def login_to_production():
 @allure.feature("生产报工测试用例")
 @pytest.mark.run(order=22)
 class TestProductionPage:
+
+    @allure.story("添加布局")
+    # @pytest.mark.run(order=1)
+    def test_production_addlayout(self, login_to_production):
+        driver = login_to_production  # WebDriver 实例
+        production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        layout = "测试布局A"
+        production.add_layout(layout)
+        # 获取布局名称的文本元素
+        name = production.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
+        assert layout == name
+        assert not production.has_fail_message()
+
     @allure.story("添加工作代码 直接点击确定 不允许提交")
     # @pytest.mark.run(order=1)
     def test_production_addfail1(self, login_to_production):
@@ -60,7 +75,7 @@ class TestProductionPage:
         production.click_add_button()
 
         # 点击提交按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
         # 获取提示信息
         message = production.get_find_message()
@@ -74,20 +89,20 @@ class TestProductionPage:
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
         production.click_add_button()
-
+        name = "1测试C订单"
         # 点击工作代码对话框
         production.click_button('//label[text()="工作代码"]/following-sibling::div//i')
         # 在订单代码输入框中输入“1测试C订单”
         production.enter_texts(
             '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
-            "1测试C订单",
+            name,
         )
         # 选择搜索到的第一个订单“1测试C订单”
         production.click_button(
-            '//table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]'
+            f'//table[.//tr[./td[3]//span[text()="{name}:1"]]]//td[3]//span[text()="{name}:1"]'
         )
         # 点击确认按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
+        production.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
 
         sleep(1)
         # 定位“报工数量”输入框，并清空已填写内容
@@ -98,7 +113,7 @@ class TestProductionPage:
         input_num.send_keys(Keys.BACK_SPACE)  # 删除已填写的内容
 
         # 点击提交按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
         # 获取提示信息
         message = production.get_find_message()
@@ -111,6 +126,7 @@ class TestProductionPage:
     def test_production_editresource(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
         production.click_add_button()
 
         # 点击工作代码对话框
@@ -118,14 +134,14 @@ class TestProductionPage:
         # 在订单代码输入框中输入“1测试C订单”
         production.enter_texts(
             '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
-            "1测试C订单",
+            name,
         )
         # 选择搜索到的第一个订单“1测试C订单”
         production.click_button(
-            '//table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]'
+            f'//table[.//tr[./td[3]//span[text()="{name}:1"]]]//td[3]//span[text()="{name}:1"]'
         )
         # 点击确认按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
+        production.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
 
         sleep(1)
         # 定位输入框元素
@@ -152,7 +168,7 @@ class TestProductionPage:
                 '//label[text()="报工资源"]/following-sibling::div//input[@type="text"]'
             ).get_attribute("value")
 
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 弹出提示框 点击是
         production.click_button(
             '//div[.//p[text()="当前选择的报工资源与资源代码不一致，是否继续？"] and @class="el-message-box__content"]/following-sibling::div/button[2]'
@@ -170,12 +186,13 @@ class TestProductionPage:
     def test_production_delete(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.click_button('//tr[./td[9]//span[text()="1测试C订单"]]/td[4]')
+        name = "1测试C订单"
+        production.click_button(f'//tr[./td[9]//span[text()="{name}"]]/td[4]')
         production.click_del_button()
 
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(1)
-        ele = driver.find_elements(By.XPATH, '//tr[./td[9]//span[text()="1测试C订单"]]')
+        ele = driver.find_elements(By.XPATH, f'//tr[./td[9]//span[text()="{name}"]]')
 
         assert len(ele) == 0
         assert not production.has_fail_message()
@@ -186,29 +203,29 @@ class TestProductionPage:
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
         production.click_add_button()
-
+        name = "1测试C订单"
         # 点击工作代码对话框
         production.click_button('//label[text()="工作代码"]/following-sibling::div//i')
         # 在订单代码输入框中输入“1测试C订单”
         production.enter_texts(
             '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
-            "1测试C订单",
+            name,
         )
         # 选择搜索到的第一个订单“1测试C订单”
         production.click_button(
-            '//table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]'
+            f'//table[.//tr[./td[3]//span[text()="{name}:1"]]]//td[3]//span[text()="{name}:1"]'
         )
         # 点击确认按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         ele1 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:1"]]/td[9]'
+            f'//tr[./td[2]//span[text()="{name}:1"]]/td[9]'
         )
         ele2 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:1"]]/td[2]'
+            f'//tr[./td[2]//span[text()="{name}:1"]]/td[2]'
         )
         # 断言提示信息为“请先填写表单”
-        assert ele1.text == "1测试C订单" and ele2.text == "1测试C订单:1"
+        assert ele1.text == name and ele2.text == f"{name}:1"
         assert not production.has_fail_message()
 
     @allure.story(
@@ -219,21 +236,22 @@ class TestProductionPage:
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
         production.click_add_button()
-
+        name = "1测试C订单"
+        num = "100"
         # 点击工作代码对话框
         production.click_button('//label[text()="工作代码"]/following-sibling::div//i')
         # 在订单代码输入框中输入“1测试C订单”
         production.enter_texts(
             '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
-            "1测试C订单",
+            name,
         )
         sleep(1)
         # 选择搜索到的第一个订单“1测试C订单”
         production.click_button(
-            '//table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]'
+            f'//table[.//tr[./td[3]//span[text()="{name}:1"]]]//td[3]//span[text()="{name}:1"]'
         )
         # 点击确认按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
+        production.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
 
         sleep(1)
         # 定位“报工数量”输入框，并清空已填写内容
@@ -243,11 +261,11 @@ class TestProductionPage:
         input_num.send_keys(Keys.CONTROL, "a")  # 全选输入框内容
         input_num.send_keys(Keys.BACK_SPACE)  # 删除已填写的内容
         production.enter_texts(
-            '//label[text()="报工数量"]/following-sibling::div//input', "100"
+            '//label[text()="报工数量"]/following-sibling::div//input', num
         )
 
         # 点击提交按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 获取提示信息
         sleep(1)
         message = production.get_find_element_xpath(
@@ -255,20 +273,50 @@ class TestProductionPage:
         ).text
         production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
         ele = production.get_find_element_xpath(
-            '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]'
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
         ).text
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:1"]]/td[10]'
+            f'//tr[.//span[text()="{name}:1"]]/td[10]'
         )
         # 断言提示信息为“请先填写表单”
         assert (
             message == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
-            and ele == "100"
+            and ele == num
             and after_text.text == "结束"
         )
         assert not production.has_fail_message()
+
+    # @allure.story(
+    #     "弹出是否删除工作，点击取消不会删除数据"
+    # )
+    # # @pytest.mark.run(order=1)
+    # def test_production_canceldelete(self, login_to_production):
+    #     driver = login_to_production  # WebDriver 实例
+    #     production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+    #     name = "1测试C订单"
+    #     num = "100"
+    #     production.click_button(
+    #         f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
+    #     )
+    #     production.click_del_button()
+    #     sleep(1)
+    #     text = production.get_find_element_xpath(
+    #         '//p[text()="当前工作已【结束】，是否需要修改成【开始生产】？"]'
+    #     ).text
+    #     # 点击是
+    #     production.click_button('//div[@class="el-message-box__header"]/button')
+    #     sleep(1)
+    #     ele = driver.find_elements(
+    #         By.XPATH,
+    #         f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]',
+    #     )
+    #     assert (
+    #             text == "当前工作已【结束】，是否需要修改成【开始生产】？"
+    #             and len(ele) == 1
+    #     )
+    #     assert not production.has_fail_message()
 
     @allure.story(
         "删除超出的报工数量点击删除弹出弹窗，点击是报工状态会变为开始生产，数据会删除"
@@ -277,8 +325,10 @@ class TestProductionPage:
     def test_production_delete1(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
+        num = "100"
         production.click_button(
-            '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]'
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
         )
         production.click_del_button()
         sleep(1)
@@ -290,12 +340,12 @@ class TestProductionPage:
         sleep(1)
         ele = driver.find_elements(
             By.XPATH,
-            '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]',
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]',
         )
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:1"]]/td[10]'
+            f'//tr[.//span[text()="{name}:1"]]/td[10]'
         )
         assert (
             text == "当前工作已【结束】，是否需要修改成【开始生产】？"
@@ -310,21 +360,22 @@ class TestProductionPage:
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
         production.click_add_button()
-
+        name = "1测试C订单"
+        num = "100"
         # 点击工作代码对话框
         production.click_button('//label[text()="工作代码"]/following-sibling::div//i')
         # 在订单代码输入框中输入“1测试C订单”
         production.enter_texts(
             '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
-            "1测试C订单",
+            name,
         )
         sleep(1)
         # 选择搜索到的第一个订单“1测试C订单”
         production.click_button(
-            '//table[.//tr[./td[3]//span[text()="1测试C订单:1"]]]//td[3]//span[text()="1测试C订单:1"]'
+            f'//table[.//tr[./td[3]//span[text()="{name}:1"]]]//td[3]//span[text()="{name}:1"]'
         )
         # 点击确认按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
+        production.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
 
         sleep(1)
         # 定位“报工数量”输入框，并清空已填写内容
@@ -334,11 +385,11 @@ class TestProductionPage:
         input_num.send_keys(Keys.CONTROL, "a")  # 全选输入框内容
         input_num.send_keys(Keys.BACK_SPACE)  # 删除已填写的内容
         production.enter_texts(
-            '//label[text()="报工数量"]/following-sibling::div//input', "100"
+            '//label[text()="报工数量"]/following-sibling::div//input', num
         )
 
         # 点击提交按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         # 获取提示信息
         sleep(1)
         message = production.get_find_element_xpath(
@@ -347,17 +398,17 @@ class TestProductionPage:
         production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
         sleep(1)
         ele = production.get_find_element_xpath(
-            '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]'
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
         ).text
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:1"]]/td[10]'
+            f'//tr[.//span[text()="{name}:1"]]/td[10]'
         )
         # 断言提示信息为“请先填写表单”
         assert (
             message == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
-            and ele == "100"
+            and ele == num
             and after_text.text == "结束"
         )
         assert not production.has_fail_message()
@@ -369,8 +420,10 @@ class TestProductionPage:
     def test_production_delete2(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
+        num = "100"
         production.click_button(
-            '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]'
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
         )
         production.click_del_button()
         sleep(1)
@@ -382,12 +435,12 @@ class TestProductionPage:
         sleep(1)
         ele = driver.find_elements(
             By.XPATH,
-            '//tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]',
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]',
         )
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:1"]]/td[10]'
+            f'//tr[.//span[text()="{name}:1"]]/td[10]'
         )
         assert (
             text == "当前工作已【结束】，是否需要修改成【开始生产】？"
@@ -402,29 +455,29 @@ class TestProductionPage:
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
         production.click_add_button()
-
+        name = "1测试C订单"
         # 点击工作代码对话框
         production.click_button('//label[text()="工作代码"]/following-sibling::div//i')
         # 在订单代码输入框中输入“1测试C订单”
         production.enter_texts(
             '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
-            "1测试C订单",
+            name,
         )
 
         production.click_button(
-            '//table[.//tr[./td[3]//span[text()="1测试C订单:2"]]]//td[3]//span[text()="1测试C订单:2"]'
+            f'//table[.//tr[./td[3]//span[text()="{name}:2"]]]//td[3]//span[text()="{name}:2"]'
         )
         # 点击确认按钮
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[5]')
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         ele1 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[9]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[9]'
         )
         ele2 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[2]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[2]'
         )
         # 断言提示信息为“请先填写表单”
-        assert ele1.text == "1测试C订单" and ele2.text == "1测试C订单:2"
+        assert ele1.text == name and ele2.text == f"{name}:2"
         assert not production.has_fail_message()
 
     @allure.story("数字文本框只允许输入数字")
@@ -432,7 +485,8 @@ class TestProductionPage:
     def test_production_editnum(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.click_button('//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]')
+        name = "1测试C订单"
+        production.click_button(f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]')
         production.click_edi_button()
         # 定位“报工数量”输入框，并清空已填写内容
         input_num = production.get_find_element_xpath(
@@ -453,7 +507,8 @@ class TestProductionPage:
     def test_production_editsele(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.click_button('//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]')
+        name = "1测试C订单"
+        production.click_button(f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]')
         production.click_edi_button()
 
         before_input = production.get_find_element_xpath(
@@ -474,7 +529,9 @@ class TestProductionPage:
     def test_production_editnum1(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.click_button('//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]')
+        name = "1测试C订单"
+        num = "100"
+        production.click_button(f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]')
         production.click_edi_button()
 
         # 定位“报工数量”输入框，并清空已填写内容
@@ -485,37 +542,27 @@ class TestProductionPage:
         input_num.send_keys(Keys.BACK_SPACE)  # 删除已填写的内容
         sleep(1)
         production.enter_texts(
-            '//label[text()="报工数量"]/following-sibling::div//input', "100"
+            '//label[text()="报工数量"]/following-sibling::div//input', num
         )
 
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
-
-        # 获取提示信息
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
         sleep(1)
-        message = production.get_find_element_xpath(
-            '//p[text()="当前工作报工数量小于计划数量，是否将实绩状态改为开始生产"]'
-        ).text
-        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="是"]')
-        sleep(1)
-
         ele1 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]'
         ).text
         ele2 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[2]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[2]'
         ).text
 
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:2"]]/td[10]'
+            f'//tr[.//span[text()="{name}:2"]]/td[10]'
         )
         # 断言提示信息为“请先填写表单”
         assert (
-                ele1 == "100"
-                and ele2 == "1测试C订单:2"
-                and message
-                == "当前工作报工数量小于计划数量，是否将实绩状态改为开始生产"
+                ele1 == num
+                and ele2 == f"{name}:2"
                 and after_text.text == "开始生产"
         )
         assert not production.has_fail_message()
@@ -527,7 +574,9 @@ class TestProductionPage:
     def test_production_editnum2(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.click_button('//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]')
+        name = "1测试C订单"
+        num = "300"
+        production.click_button(f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]')
         production.click_edi_button()
 
         # 定位“报工数量”输入框，并清空已填写内容
@@ -538,10 +587,10 @@ class TestProductionPage:
         input_num.send_keys(Keys.BACK_SPACE)  # 删除已填写的内容
         sleep(1)
         production.enter_texts(
-            '//label[text()="报工数量"]/following-sibling::div//input', "300"
+            '//label[text()="报工数量"]/following-sibling::div//input', num
         )
 
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
         # 获取提示信息
         sleep(1)
@@ -552,21 +601,21 @@ class TestProductionPage:
         sleep(1)
 
         ele1 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]'
         ).text
         ele2 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[2]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[2]'
         ).text
 
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:2"]]/td[10]'
+            f'//tr[.//span[text()="{name}:2"]]/td[10]'
         )
         # 断言提示信息为“请先填写表单”
         assert (
-            ele1 == "300"
-            and ele2 == "1测试C订单:2"
+            ele1 == num
+            and ele2 == f"{name}:2"
             and message
             == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
             and after_text.text == "开始生产"
@@ -578,7 +627,9 @@ class TestProductionPage:
     def test_production_editnum3(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.click_button('//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]')
+        name = "1测试C订单"
+        num = "300"
+        production.click_button(f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]')
         production.click_edi_button()
 
         # 定位“报工数量”输入框，并清空已填写内容
@@ -589,10 +640,10 @@ class TestProductionPage:
         input_num.send_keys(Keys.BACK_SPACE)  # 删除已填写的内容
         sleep(1)
         production.enter_texts(
-            '//label[text()="报工数量"]/following-sibling::div//input', "300"
+            '//label[text()="报工数量"]/following-sibling::div//input', num
         )
 
-        production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
         # 获取提示信息
         sleep(1)
@@ -603,21 +654,21 @@ class TestProductionPage:
         sleep(1)
 
         ele1 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[6]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[6]'
         ).text
         ele2 = production.get_find_element_xpath(
-            '//tr[./td[2]//span[text()="1测试C订单:2"]]/td[2]'
+            f'//tr[./td[2]//span[text()="{name}:2"]]/td[2]'
         ).text
 
         production.click_button('(//span[text()="工作指示一览"])[1]')
         sleep(1)
         after_text = production.get_find_element_xpath(
-            '//tr[.//span[text()="1测试C订单:2"]]/td[10]'
+            f'//tr[.//span[text()="{name}:2"]]/td[10]'
         )
         # 断言提示信息为“请先填写表单”
         assert (
-            ele1 == "300"
-            and ele2 == "1测试C订单:2"
+            ele1 == num
+            and ele2 == f"{name}:2"
             and message
             == "当前工作报工数量加完成数量大于计划数量，是否将实绩状态改为结束"
             and after_text.text == "结束"
@@ -629,10 +680,11 @@ class TestProductionPage:
     def test_production_selectcode(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
         production.click_button(
             '(//input[@placeholder="请选择" and @class="ivu-select-input"])[1]'
         )
-        production.click_button('//li[text()="1测试C订单:2"]')
+        production.click_button(f'//li[text()="{name}:2"]')
         production.click_button('//span[text()="查询"]')
         sleep(1)
         ele1 = production.get_find_element_xpath(
@@ -641,7 +693,7 @@ class TestProductionPage:
         ele2 = driver.find_elements(
             By.XPATH, '(//table[@class="vxe-table--body"])[2]/tbody/tr[2]/td[3]'
         )
-        assert ele1 == "1测试C订单:2" and len(ele2) == 0
+        assert ele1 == f"{name}:2" and len(ele2) == 0
         assert not production.has_fail_message()
 
     @allure.story("查询资源成功")
@@ -649,6 +701,7 @@ class TestProductionPage:
     def test_production_selectresource(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
         shared_data = SharedDataUtil.load_data()
         resource2 = shared_data.get("master_res2")
         production.click_button(
@@ -666,7 +719,7 @@ class TestProductionPage:
         ele3 = driver.find_elements(
             By.XPATH, '(//table[@class="vxe-table--body"])[2]/tbody/tr[2]/td[3]'
         )
-        assert ele1 == "1测试C订单:2" and ele2 == resource2 and len(ele3) == 0
+        assert ele1 == f"{name}:2" and ele2 == resource2 and len(ele3) == 0
         assert not production.has_fail_message()
 
     @allure.story("查询物料代码成功")
@@ -697,17 +750,33 @@ class TestProductionPage:
     def test_production_delete3(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
 
-        ele = driver.find_elements(By.XPATH, '//tr[./td[9]//span[text()="1测试C订单"]]')
+        ele = driver.find_elements(By.XPATH, f'//tr[./td[9]//span[text()="{name}"]]')
         while len(ele) > 0:
-            production.click_button('//tr[./td[9]//span[text()="1测试C订单"]]/td[4]')
+            production.click_button(f'//tr[./td[9]//span[text()="{name}"]]/td[4]')
             production.click_del_button()
 
-            production.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[4]')
+            production.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             sleep(1)
             ele = driver.find_elements(
-                By.XPATH, '//tr[./td[9]//span[text()="1测试C订单"]]'
+                By.XPATH, f'//tr[./td[9]//span[text()="{name}"]]'
             )
 
         assert len(ele) == 0
+        assert not production.has_fail_message()
+
+    @allure.story("删除布局成功")
+    # @pytest.mark.run(order=1)
+    def test_production_delsuccess(self, login_to_production):
+        driver = login_to_production  # WebDriver 实例
+        production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        layout = "测试布局A"
+        production.del_layout(layout)
+        sleep(2)
+        # 再次查找页面上是否有目标 div，以验证是否删除成功
+        after_layout = driver.find_elements(
+            By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+        assert 0 == len(after_layout)
         assert not production.has_fail_message()

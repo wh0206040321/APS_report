@@ -1,9 +1,10 @@
 import random
 from time import sleep
-
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
 
 from Pages.base_page import BasePage
 
@@ -53,9 +54,12 @@ class OrderPage(BasePage):
         self.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', code)
         # 物料
         self.click_button('//label[text()="物料"]/parent::div/div//i')
-        self.click_button(
-            f'(//table[.//td[2]//span[text()="{order_item}"]])[2]//td[2]//span[text()="{order_item}"]'
-        )
+        try:
+            self.click_button(
+                f'(//div[@class="vxe-table--body-wrapper body--wrapper"]//table//tr/td[3]//span[text()="{order_item}"])[1]')
+        except:
+            self.click_button(
+                f'(//div[@class="vxe-table--body-wrapper body--wrapper"]//table//tr/td[3]//span[text()="{order_item}"])[2]')
         self.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]/button[1]'
         )
@@ -79,11 +83,15 @@ class OrderPage(BasePage):
         num.send_keys(Keys.CONTROL, "a")
         num.send_keys(Keys.BACK_SPACE)
         self.enter_texts('(//label[text()="计划数量"])[1]/parent::div//input', "200")
-
-        # 点击确定
-        self.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[5]/button[1]'
-        )
+        confirm_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[5]/button[1]'
+        backup_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[4]/button[1]'
+        backup2_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        if self.is_clickable(confirm_xpath):
+            self.click_button(confirm_xpath)
+        elif self.is_clickable(backup_xpath):
+            self.click_button(backup_xpath)
+        elif self.click_button(backup2_xpath):
+            self.click_button(backup2_xpath)
 
     def delete_order(self, code):
         # 判断是否存在该订单
@@ -129,6 +137,21 @@ class OrderPage(BasePage):
             return self.find_element(By.XPATH, xpath)
         except NoSuchElementException:
             return None
+
+    def is_clickable(self, xpath, timeout=5):
+        """
+        判断指定的元素是否可点击。
+        :param xpath: 要检查的 XPath
+        :param timeout: 等待超时时间（秒）
+        :return: True/False
+        """
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.element_to_be_clickable((By.XPATH, xpath))
+            )
+            return True
+        except TimeoutException:
+            return False
 
     def click_setting_button(self):
         """点击设置按钮."""

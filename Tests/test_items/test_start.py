@@ -78,9 +78,6 @@ class TestStartPage:
 
             master.go_item_dialog("1测试C")
             sleep(1)
-            item_value = master.get_find_element_xpath(
-                '//span[text()=" 物料代码： "]/parent::div//input'
-            ).get_attribute("value")
 
             # 点击工序选定器
             master.click_button(
@@ -96,9 +93,9 @@ class TestStartPage:
             )
             # 点击下拉框
             master.click_button(
-                '//table[.//div[@class="vxe-input type--text size--mini is--controls is--suffix is--readonly"]]//tr[1]/td[3]//span'
+                '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
             )
-            random_sel1 = random.randint(1, 8)
+            random_sel1 = random.randint(1, 4)
             sleep(1)
             # 输入工序代码
             master.click_button(
@@ -108,17 +105,12 @@ class TestStartPage:
             # 点击新增输入指令
             master.add_serial3()
             # 获取物料名称
-            master.click(
-                By.XPATH,
-                '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
-            )
+            master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
             sleep(1)
             master.click_button(
                 '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试A"]]/td[2]//span[text()="1测试A"]'
             )
-            master.click(
-                By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[last()]'
-            )
+            master.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
             # 获取物料数量
             random_num1 = random.randint(1, 100)
             master.enter_texts(
@@ -133,19 +125,14 @@ class TestStartPage:
             master.add_serial4()
 
             # 使用指令 点击对话框按钮 获取资源名称
-            master.click(
-                By.XPATH,
-                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
-            )
-            random_int1 = random.randint(3, 10)
+            master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
+            random_int1 = random.randint(1, 8)
             master.click_button(
-                f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int1}]'
+                f'//tr[{random_int1}]/td//span[@class="vxe-cell--checkbox"]'
             )
 
             # 点击对话框按钮
-            master.click(
-                By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[last()]'
-            )
+            master.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
             sleep(2)
             master_res1 = master.get_find_element_xpath(
                 '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input'
@@ -167,9 +154,9 @@ class TestStartPage:
             )
             # 点击下拉框
             master.click_button(
-                '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[2]/td[3]//i'
+                '//table[@class="vxe-table--body"]//tr[2]/td[3]//input[@placeholder="请选择"]'
             )
-            random_sel2 = random.randint(1, 8)
+            random_sel2 = random.randint(1, 4)
             sleep(1)
             # 输入工序代码
             master.click_button(
@@ -182,10 +169,7 @@ class TestStartPage:
             )
             master.add_serial3()
             # 获取物料名称
-            master.click(
-                By.XPATH,
-                '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
-            )
+            master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
             sleep(1)
             master.click_button(
                 '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试B"]]/td[2]//span[text()="1测试B"]'
@@ -209,23 +193,18 @@ class TestStartPage:
             master.add_serial4()
 
             # 使用指令 点击对话框按钮 获取资源名称
-            master.click(
-                By.XPATH,
-                '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
-            )
-            random_int2 = random.randint(3, 10)
+            master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
+            random_int2 = random.randint(1, 8)
             while random_int2 == random_int1:
-                random_int2 = random.randint(3, 10)
+                random_int2 = random.randint(1, 8)
 
             sleep(2)
             master.click_button(
-                f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int2}]'
+                f'//tr[{random_int2}]/td//span[@class="vxe-cell--checkbox"]'
             )
             sleep(1)
             # 点击对话框按钮
-            master.click(
-                By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[last()]'
-            )
+            master.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
             sleep(2)
             master_res2 = master.get_find_element_xpath(
                 '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input'
@@ -266,8 +245,9 @@ class TestStartPage:
             print("工艺产能 1测试C 已存在，跳过创建")
 
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
-        page.click_button('(//span[text()="制造订单"])[1]')  # 点击制造订单
+        list_ = ["计划业务数据", "制造订单"]
+        for v in list_:
+            page.click_button(f'(//span[text()="{v}"])[1]')
 
         # 检查制造订单是否存在
         if not order.check_order_exists("1测试C订单"):
@@ -277,11 +257,9 @@ class TestStartPage:
 
         plan = PlanPage(driver)
         wait = WebDriverWait(driver, 60)
-        page.click_button('(//span[text()="计划运行"])[1]')
-        # 点击“计算工作台”
-        page.click_button('(//span[text()="计算工作台"])[1]')
-        # 点击“计划计算”
-        page.click_button('(//span[text()="计划计算"])[1]')
+        list_ = ["计划运行", "计算工作台", "计划计算"]
+        for v in list_:
+            page.click_button(f'(//span[text()="{v}"])[1]')
 
         # 等待遮挡元素消失
         wait.until(
@@ -291,9 +269,9 @@ class TestStartPage:
         sleep(1)
         ele = driver.find_elements(By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
         if len(ele) == 0:
-            page.click_button('(//span[text()="系统管理"])[1]')  # 点击系统管理
-            page.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
-            page.click_button('(//span[text()="环境设置"])[1]')  # 点击环境设置
+            list_ = ["系统管理", "单元设置", "环境设置"]
+            for v in list_:
+                page.click_button(f'(//span[text()="{v}"])[1]')
             sleep(1)
             # 点击勾选框
             input_ele = page.get_find_element('//label[text()=" 服务器"]/span')
@@ -302,8 +280,9 @@ class TestStartPage:
                 sleep(1)
             page.click_button('//p[text()="保存"]')  # 点击保存
             sleep(3)
-            page.click_button('(//span[text()="计划运行"])[1]')  # 点击计划运行
-            page.click_button('(//span[text()="计划计算"])[1]')
+            list_ = [ "计划运行", "计划计算"]
+            for v in list_:
+                page.click_button(f'(//span[text()="{v}"])[1]')
 
         # 等待下拉框按钮可点击后点击展开
         dropdown_arrow = wait.until(

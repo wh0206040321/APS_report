@@ -205,7 +205,7 @@ class TestOperationPlanPage:
         )
 
         operationPlan.click_button('//p[text()="工作指示发布"]')
-        operationPlan.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+        operationPlan.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(2)
         after_text = driver.find_elements(
             By.XPATH, '(//table[@class="vxe-table--body"])[3]/tbody//tr'

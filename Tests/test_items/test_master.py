@@ -16,6 +16,7 @@ from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.master_page import MasterPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
+from Utils.shared_data_util import SharedDataUtil
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
@@ -56,6 +57,21 @@ def login_to_master():
 @allure.feature("工艺产能表测试用例")
 @pytest.mark.run(order=16)
 class TestMasterPage:
+
+    @allure.story("添加布局")
+    # @pytest.mark.run(order=1)
+    def test_master_addlayout(self, login_to_master):
+        driver = login_to_master  # WebDriver 实例
+        master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        layout = "测试布局A"
+        master.add_layout(layout)
+        # 获取布局名称的文本元素
+        name = master.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        ).text
+        assert layout == name
+        assert not master.has_fail_message()
+
     @allure.story("添加工艺产能信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
     def test_master_addfail(self, login_to_master):
@@ -80,13 +96,11 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
 
         # 点击确定
@@ -105,13 +119,11 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
 
         # 点击工序选定器
         master.click_button(
@@ -127,9 +139,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         # 输入工序代码
         master.click_button(
             f'(//div[@class="vxe-select-option--wrapper"])[1]/div[{random_int}]'
@@ -149,17 +161,17 @@ class TestMasterPage:
     def test_master_addserial2(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        # 清空之前的共享数据
+        SharedDataUtil.clear_data()
         master.click_add_button()
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
         item = master.get_find_element_xpath(
             '//span[text()=" 物料代码： "]/parent::div//input'
@@ -179,9 +191,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -191,19 +203,13 @@ class TestMasterPage:
         # 点击新增输入指令
         master.add_serial3()
         # 获取物料名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
-        )
-        random_int = random.randint(1, 10)
+        master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
+        random_int = random.randint(1, 4)
         sleep(1)
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         # 获取物料数量
         random_int = random.randint(1, 100)
         master.enter_texts(
@@ -224,6 +230,9 @@ class TestMasterPage:
         error_popup = driver.find_elements(
             By.XPATH, '//div[text()=" 记录已存在,请检查！ "]'
         )
+        SharedDataUtil.save_data(
+            {"item": item}
+        )
         assert item == adddata and addtext == "输入指令" and len(error_popup) == 0
         assert not master.has_fail_message()
 
@@ -232,48 +241,12 @@ class TestMasterPage:
     def test_master_delsuccess1(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
-        wait = WebDriverWait(driver, 3)
-        # 循环删除元素直到不存在
-        while True:
-            eles = driver.find_elements(
-                By.XPATH, '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]'
-            )
-            if not eles:
-                break  # 没有找到元素时退出循环
-                # 存在元素，点击删除按钮
-            eles[0].click()
-            master.click_del_button()
-            # 点击确定
-            # 找到共同的父元素
-            parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-            # 获取所有button子元素
-            all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-            # 选择需要的button 第二个确定按钮
-            second_button = all_buttons[1]
-            second_button.click()
-            # 等待元素消失
-            try:
-                wait.until_not(
-                    EC.presence_of_element_located(
-                        (
-                            By.XPATH,
-                            '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]',
-                        )
-                    )
-                )
-            except TimeoutException:
-                print("警告：元素未在预期时间内消失")
-                continue  # 继续下一轮尝试
-            else:
-                # 不再找到元素，退出循环
-                break
+        item = SharedDataUtil.load_data().get("item")
+        master.delete_material(item)
 
         # 断言元素已经不存在
         final_eles = driver.find_elements(
-            By.XPATH, '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]'
+            By.XPATH, f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
         )
         assert len(final_eles) == 0, "元素仍然存在，删除失败！"
         assert not master.has_fail_message()
@@ -285,17 +258,16 @@ class TestMasterPage:
     def test_master_addserial3(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        SharedDataUtil.clear_data()
         master.click_add_button()  # 检查点击添加
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
         item = master.get_find_element_xpath(
             '//span[text()=" 物料代码： "]/parent::div//input'
@@ -315,9 +287,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -337,9 +309,9 @@ class TestMasterPage:
             By.XPATH,
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[5]//i',
         )
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 8)
         master.click_button(
-            f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int}]'
+            f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
         # 点击对话框按钮
         master.click(
@@ -347,7 +319,7 @@ class TestMasterPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
         )
         # 获取资源能力
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         master.enter_texts(
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[7]//input',
             f"{random_int}pm",
@@ -368,6 +340,9 @@ class TestMasterPage:
         error_popup = driver.find_elements(
             By.XPATH, '//div[text()=" 记录已存在,请检查！ "]'
         )
+        SharedDataUtil.save_data(
+            {"item": item}
+        )
         assert item == adddata and addtext == "使用指令" and len(error_popup) == 0
         assert not master.has_fail_message()
 
@@ -380,17 +355,12 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
-        item = master.get_find_element_xpath(
-            '//span[text()=" 物料代码： "]/parent::div//input'
-        ).get_attribute("value")
 
         # 点击工序选定器
         master.click_button(
@@ -406,9 +376,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -418,19 +388,13 @@ class TestMasterPage:
         # 点击新增输入指令
         master.add_serial3()
         # 获取物料名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
-        )
-        random_int = random.randint(1, 10)
+        master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
+        random_int = random.randint(1, 4)
         sleep(1)
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         # 获取物料数量
         random_int = random.randint(1, 100)
         master.enter_texts(
@@ -447,21 +411,15 @@ class TestMasterPage:
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
         # 点击对话框按钮 获取资源名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
-        )
-        random_int = random.randint(3, 8)
+        master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
+        random_int = random.randint(1, 8)
         master.click_button(
-            f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int}]'
+            f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
         # 点击对话框按钮
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]')
         # 获取资源能力
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         master.enter_texts(
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[7]//input',
             f"{random_int}pm",
@@ -485,48 +443,12 @@ class TestMasterPage:
     def test_master_delsuccess2(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
-        wait = WebDriverWait(driver, 3)
-        # 循环删除元素直到不存在
-        while True:
-            eles = driver.find_elements(
-                By.XPATH, '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]'
-            )
-            if not eles:
-                break  # 没有找到元素时退出循环
-                # 存在元素，点击删除按钮
-            eles[0].click()
-            master.click_del_button()
-            # 点击确定
-            # 找到共同的父元素
-            parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-            # 获取所有button子元素
-            all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-            # 选择需要的button 第二个确定按钮
-            second_button = all_buttons[1]
-            second_button.click()
-            # 等待元素消失
-            try:
-                wait.until_not(
-                    EC.presence_of_element_located(
-                        (
-                            By.XPATH,
-                            '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]',
-                        )
-                    )
-                )
-            except TimeoutException:
-                print("警告：元素未在预期时间内消失")
-                continue  # 继续下一轮尝试
-            else:
-                # 不再找到元素，退出循环
-                break
+        item = SharedDataUtil.load_data()["item"]
+        master.delete_material( item)
 
         # 断言元素已经不存在
         final_eles = driver.find_elements(
-            By.XPATH, '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]'
+            By.XPATH, f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
         )
         assert len(final_eles) == 0, "元素仍然存在，删除失败！"
         assert not master.has_fail_message()
@@ -536,17 +458,16 @@ class TestMasterPage:
     def test_master_addsuccess(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        SharedDataUtil.clear_data()
         master.click_add_button()  # 检查点击添加
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
         item = master.get_find_element_xpath(
             '//span[text()=" 物料代码： "]/parent::div//input'
@@ -566,9 +487,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -577,20 +498,13 @@ class TestMasterPage:
 
         # 点击新增输入指令
         master.add_serial3()
-        # 获取物料名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
-        )
-        random_int = random.randint(1, 10)
+        master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
+        random_int = random.randint(1, 4)
         sleep(1)
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         # 获取物料数量
         random_int = random.randint(1, 100)
         master.enter_texts(
@@ -607,21 +521,15 @@ class TestMasterPage:
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
         # 点击对话框按钮 获取资源名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
-        )
-        random_int = random.randint(3, 8)
+        master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
+        random_int = random.randint(1, 8)
         master.click_button(
-            f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int}]'
+            f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
         # 点击对话框按钮
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]')
         # 获取资源能力
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         master.enter_texts(
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[7]//input',
             f"{random_int}pm",
@@ -638,6 +546,7 @@ class TestMasterPage:
         error_popup = driver.find_elements(
             By.XPATH, '//div[text()=" 记录已存在,请检查！ "]'
         )
+        SharedDataUtil.save_data({"item": item})
         assert item == adddata and len(error_popup) == 0
         assert not master.has_fail_message()
 
@@ -646,48 +555,12 @@ class TestMasterPage:
     def test_master_delsuccess3(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
-        wait = WebDriverWait(driver, 3)
-        # 循环删除元素直到不存在
-        while True:
-            eles = driver.find_elements(
-                By.XPATH, '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]'
-            )
-            if not eles:
-                break  # 没有找到元素时退出循环
-                # 存在元素，点击删除按钮
-            eles[0].click()
-            master.click_del_button()
-            # 点击确定
-            # 找到共同的父元素
-            parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-            # 获取所有button子元素
-            all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-            # 选择需要的button 第二个确定按钮
-            second_button = all_buttons[1]
-            second_button.click()
-            # 等待元素消失
-            try:
-                wait.until_not(
-                    EC.presence_of_element_located(
-                        (
-                            By.XPATH,
-                            '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]',
-                        )
-                    )
-                )
-            except TimeoutException:
-                print("警告：元素未在预期时间内消失")
-                continue  # 继续下一轮尝试
-            else:
-                # 不再找到元素，退出循环
-                break
+        item = SharedDataUtil.load_data()["item"]
+        master.delete_material(item)
 
         # 断言元素已经不存在
         final_eles = driver.find_elements(
-            By.XPATH, '//tr[.//span[text()="1211"]]/td[2]//span[text()="1211"]'
+            By.XPATH, f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
         )
         assert len(final_eles) == 0, "元素仍然存在，删除失败！"
         assert not master.has_fail_message()
@@ -701,13 +574,11 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
 
         # 点击工序选定器
         master.add_serial1()
@@ -725,16 +596,7 @@ class TestMasterPage:
             '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
         )
         master.del_serial1()
-        # 点击确定
-        # 找到共同的父元素
-        parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        master.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         input_after = master.get_find_element_xpath(
             '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
         ).get_attribute("value")
@@ -750,13 +612,11 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
 
         # 点击工序选定器
         master.click_button(
@@ -782,16 +642,7 @@ class TestMasterPage:
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input'
         )
         master.del_serial2()
-        # 点击确定
-        # 找到共同的父元素
-        parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        master.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         input_after = master.get_find_element_xpath(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input'
         ).get_attribute("value")
@@ -807,13 +658,11 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         # 点击工序选定器
         master.click_button(
             '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
@@ -828,9 +677,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -856,16 +705,7 @@ class TestMasterPage:
             '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[4]//input'
         )
         master.del_serial3()
-        # 点击确定
-        # 找到共同的父元素
-        parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        master.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         input_after = master.get_find_element_xpath(
             '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[4]//input'
         ).get_attribute("value")
@@ -881,13 +721,11 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="1211"]]/td[.//span[text()="1211"]]'
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
         item = master.get_find_element_xpath(
             '//span[text()=" 物料代码： "]/parent::div//input'
@@ -907,9 +745,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '(//table[contains(@style,"margin-left: 0px; margin-top: 0px;")])[5]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -935,16 +773,8 @@ class TestMasterPage:
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[2]//input'
         )
         master.del_serial4()
-        # 点击确定
-        # 找到共同的父元素
-        parent = master.get_find_element_class("ivu-modal-confirm-footer")
+        master.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
         input_after = master.get_find_element_xpath(
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[2]//input'
         ).get_attribute("value")
@@ -956,17 +786,17 @@ class TestMasterPage:
     def test_master_addsuccess1(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        SharedDataUtil.clear_data()
         master.click_add_button()  # 检查点击添加
+
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        sleep(1.5)
         master.click_button(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]/table//tr[.//span[text()="2339"]]/td[.//span[text()="2339"]]'
+            '(//table[@class="vxe-table--body"]//tr[2]/td[2])[last()]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
         item = master.get_find_element_xpath(
             '//span[text()=" 物料代码： "]/parent::div//input'
@@ -986,9 +816,9 @@ class TestMasterPage:
         )
         # 点击下拉框
         master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls is--suffix is--readonly"]]//tr[1]/td[3]//span'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 5)
+        random_int = random.randint(1, 4)
         sleep(1)
         # 输入工序代码
         master.click_button(
@@ -998,19 +828,13 @@ class TestMasterPage:
         # 点击新增输入指令
         master.add_serial3()
         # 获取物料名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i',
-        )
-        random_int = random.randint(1, 10)
+        master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
+        random_int = random.randint(1, 4)
         sleep(1)
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         # 获取物料数量
         random_int = random.randint(1, 100)
         master.enter_texts(
@@ -1027,21 +851,15 @@ class TestMasterPage:
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
         # 点击对话框按钮 获取资源名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
-        )
-        random_int = random.randint(3, 8)
+        master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
+        random_int = random.randint(1, 8)
         master.click_button(
-            f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int}]'
+            f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
         # 点击对话框按钮
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]')
         # 获取资源能力
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         master.enter_texts(
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[7]//input',
             f"{random_int}pm",
@@ -1058,6 +876,7 @@ class TestMasterPage:
         error_popup = driver.find_elements(
             By.XPATH, '//div[text()=" 记录已存在,请检查！ "]'
         )
+        SharedDataUtil.save_data({"item": item})
         assert item == adddata and len(error_popup) == 0
         assert not master.has_fail_message()
 
@@ -1066,16 +885,16 @@ class TestMasterPage:
     def test_master_editprocess(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
+        item = SharedDataUtil.load_data()["item"]
         # 选中物料代码点击编辑
-        master.click_button('//tr[.//span[text()="2339"]]/td[2]//span[text()="2339"]')
+        master.click_button(f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]')
         master.click_edi_button()
 
         # 点击下拉框
         master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls is--suffix is--readonly"]]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         )
-        random_int = random.randint(1, 7)
+        random_int = random.randint(1, 4)
         # 输入工序代码
         master.click_button(
             f'(//div[@class="vxe-select-option--wrapper"])[1]/div[{random_int}]'
@@ -1083,12 +902,12 @@ class TestMasterPage:
         sleep(1)
         # 获取工序代码
         process_input = master.get_find_element_xpath(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls is--suffix is--readonly"]]//tr[1]/td[3]//input'
+            '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         ).get_attribute("value")
         master.add_ok_button()
         sleep(1)
         edittext = master.get_find_element_xpath(
-            f'//tr[.//td[2]//span[text()="2339"]]/td[6]'
+            f'//tr[.//td[2]//span[text()="{item}"]]/td[6]'
         ).text
         assert process_input == edittext
         assert not master.has_fail_message()
@@ -1098,24 +917,21 @@ class TestMasterPage:
     def test_master_edititem(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
+        item = SharedDataUtil.load_data()["item"]
         # 选中物料代码点击编辑
-        master.click_button('//tr[.//span[text()="2339"]]/td[2]//span[text()="2339"]')
+        master.click_button(f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]')
         master.click_edi_button()
 
         # 获取物料名称
         master.click_button(
             '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i'
         )
-        random_int = random.randint(1, 7)
+        random_int = random.randint(1, 4)
         sleep(1)
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
         # 获取物料代码
         item_input = master.get_find_element_xpath(
@@ -1124,7 +940,7 @@ class TestMasterPage:
         master.add_ok_button()
         sleep(1)
         edittext = master.get_find_element_xpath(
-            f'//tr[.//td[2]//span[text()="2339"]]/td[12]'
+            f'//tr[.//td[2]//span[text()="{item}"]]/td[11]'
         ).text
         assert item_input == edittext
         assert not master.has_fail_message()
@@ -1134,9 +950,9 @@ class TestMasterPage:
     def test_master_editresource(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
+        item = SharedDataUtil.load_data()["item"]
         # 选中物料代码点击编辑
-        master.click_button('//tr[.//span[text()="2339"]]/td[2]//span[text()="2339"]')
+        master.click_button(f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]')
         master.click_edi_button()
 
         # 点击使用指令 放大按钮
@@ -1149,7 +965,7 @@ class TestMasterPage:
             By.XPATH,
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i',
         )
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 8)
         master.click_button(
             '(//span[@class="vxe-checkbox--icon iconfont icon-fuxuankuangdaiding"])[2]'
         )
@@ -1158,13 +974,10 @@ class TestMasterPage:
         )
 
         master.click_button(
-            f'(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[{random_int}]'
+            f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
         # 点击对话框按钮
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]',
-        )
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         # 获取资源代码
         sleep(1)
         resource_input = master.get_find_element_xpath(
@@ -1173,7 +986,7 @@ class TestMasterPage:
         master.add_ok_button()
         sleep(1)
         edittext = master.get_find_element_xpath(
-            '//tr[.//td[2]//span[text()="2339"]][2]/td[12]'
+            f'//tr[.//td[2]//span[text()="{item}"]][2]/td[11]'
         ).text
         assert resource_input == edittext
         assert not master.has_fail_message()
@@ -1199,7 +1012,7 @@ class TestMasterPage:
     def test_master_selectcodesuccess(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
+        item = SharedDataUtil.load_data()["item"]
         # 点击查询
         master.click_sel_button()
         sleep(1)
@@ -1227,7 +1040,7 @@ class TestMasterPage:
         # 点击输入数值
         master.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "2339",
+            item,
         )
         sleep(1)
 
@@ -1236,7 +1049,7 @@ class TestMasterPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为产品A
+        # 定位第一行是
         ordercode = master.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         ).text
@@ -1245,7 +1058,7 @@ class TestMasterPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert ordercode == "2339" and len(notext) == 0
+        assert ordercode == item and len(notext) == 0
         assert not master.has_fail_message()
 
     @allure.story("删除数据成功")
@@ -1253,48 +1066,26 @@ class TestMasterPage:
     def test_master_delsuccess4(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-
-        wait = WebDriverWait(driver, 3)
-        # 循环删除元素直到不存在
-        while True:
-            eles = driver.find_elements(
-                By.XPATH, '//tr[.//span[text()="2339"]]/td[2]//span[text()="2339"]'
-            )
-            if not eles:
-                break  # 没有找到元素时退出循环
-                # 存在元素，点击删除按钮
-            eles[0].click()
-            master.click_del_button()
-            # 点击确定
-            # 找到共同的父元素
-            parent = master.get_find_element_class("ivu-modal-confirm-footer")
-
-            # 获取所有button子元素
-            all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-            # 选择需要的button 第二个确定按钮
-            second_button = all_buttons[1]
-            second_button.click()
-            # 等待元素消失
-            try:
-                wait.until_not(
-                    EC.presence_of_element_located(
-                        (
-                            By.XPATH,
-                            '//tr[.//span[text()="2339"]]/td[2]//span[text()="2339"]',
-                        )
-                    )
-                )
-            except TimeoutException:
-                print("警告：元素未在预期时间内消失")
-                continue  # 继续下一轮尝试
-            else:
-                # 不再找到元素，退出循环
-                break
-
+        item = SharedDataUtil.load_data()["item"]
+        master.delete_material(item)
         # 断言元素已经不存在
         final_eles = driver.find_elements(
-            By.XPATH, '//tr[.//span[text()="2339"]]/td[2]//span[text()="2339"]'
+            By.XPATH, f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
         )
         assert len(final_eles) == 0, "元素仍然存在，删除失败！"
+        assert not master.has_fail_message()
+
+    @allure.story("删除布局成功")
+    # @pytest.mark.run(order=1)
+    def test_master_delsuccess(self, login_to_master):
+        driver = login_to_master  # WebDriver 实例
+        master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        layout = "测试布局A"
+        master.del_layout(layout)
+        sleep(2)
+        # 再次查找页面上是否有目标 div，以验证是否删除成功
+        after_layout = driver.find_elements(
+            By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+        assert 0 == len(after_layout)
         assert not master.has_fail_message()

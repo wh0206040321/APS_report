@@ -48,10 +48,9 @@ def login_to_synchronize():
         raise RuntimeError("无法连接到登录页面")
 
     page.login(date_driver.username, date_driver.password, date_driver.planning)
-    page.click_button('(//span[text()="系统管理"])[1]')  # 点击系统管理
-    page.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
-    page.click_button('(//span[text()="配置同步"])[1]')  # 点击配置同步
-    yield driver  # 提供给测试用例使用
+    list_ = ["系统管理", "单元设置", "配置同步"]
+    for v in list_:
+        page.click_button(f'(//span[text()="{v}"])[1]')
     safe_quit(driver)
 
 

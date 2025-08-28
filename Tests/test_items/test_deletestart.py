@@ -26,7 +26,6 @@ class TestDeleteStart:
         driver.implicitly_wait(3)
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
 
-
         # 初始化登录页面
         page = LoginPage(driver)  # 初始化登录页面
         page.navigate_to(date_driver.url)  # 导航到登录页面
@@ -114,7 +113,5 @@ class TestDeleteStart:
         ele_none = driver.find_elements(
             By.XPATH, '//table[.//td[4]//span[text()="1测试C订单"]]/tbody//tr'
         )
-
-
         assert len(ele) == 0 and len(ele_none) == 0
         assert not item.has_fail_message()

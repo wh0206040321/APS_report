@@ -43,9 +43,9 @@ def login_to_plan():
         raise RuntimeError("无法连接到登录页面")
 
     page.login(date_driver.username, date_driver.password, date_driver.planning)
-    page.click_button('(//span[text()="系统管理"])[1]')  # 点击系统管理
-    page.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
-    page.click_button('(//span[text()="环境设置"])[1]')  # 点击环境设置
+    list_ = ["系统管理", "单元设置", "环境设置"]
+    for v in list_:
+        page.click_button(f'(//span[text()="{v}"])[1]')
     sleep(1)
     # 点击勾选框
     input_ele = page.get_find_element('//label[text()=" 服务器"]/span')
@@ -84,10 +84,9 @@ class TestPlanPage:
                 (By.CSS_SELECTOR, "div.el-loading-spinner")
             )
         )
-
-        plan.click_button('(//span[text()="计划运行"])[1]')  # 点击计划运行
-        plan.click_button('(//span[text()="计算工作台"])[1]')  # 点击计算工作台
-        plan.click_button('(//span[text()="计划计算"])[1]')  # 点击计划计算
+        list_ = ["计划运行", "计算工作台", "计划计算"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
         sleep(2)
         text = plan.get_find_element_xpath('//span[text()=" 引擎启动方式:本地 "]').text
         # 检查元素是否包含子节点
@@ -107,8 +106,9 @@ class TestPlanPage:
             )
         )
 
-        plan.click_button('(//span[text()="计算工作台"])[1]')  # 点击计算工作台
-        plan.click_button('(//span[text()="计划计算"])[1]')  # 点击计划计算
+        list_ = ["计算工作台", "计划计算"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
         sleep(1)
         plan.click_plan()
         message = WebDriverWait(driver, 10).until(
@@ -127,8 +127,9 @@ class TestPlanPage:
         plan = PlanPage(driver)  # 用 driver 初始化 PlanPage
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
         wait = WebDriverWait(driver, 20)
-        plan.click_button('(//span[text()="方案管理"])[1]')  # 点击方案管理
-        plan.click_button('(//span[text()="计划方案管理"])[1]')  # 点击计划方案管理
+        list_ = ["方案管理", "计划方案管理"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
         # 选择第一个方案
         sched_text = sched.get_find_element_xpath(
             '//div[@class="ivu-tree"]//li/ul[1]'
@@ -147,7 +148,7 @@ class TestPlanPage:
                 '//div[text()="计划方案组合框显示"]/following-sibling::div//span[1]'
             )
 
-        sched.click_ok_schedbutton()
+        sched.click_ok_button()
         sched.click_save_button()
 
         # 等待loading遮罩消失
@@ -156,8 +157,10 @@ class TestPlanPage:
                 (By.CSS_SELECTOR, "div.el-loading-spinner")
             )
         )
-        plan.click_button('(//span[text()="计算工作台"])[1]')  # 点击计算工作台
-        plan.click_button('(//span[text()="计划计算"])[1]')  # 点击计划计算
+
+        list_ = ["计算工作台", "计划计算"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
 
         plan.click_button('//div[@class="vue-treeselect__control-arrow-container"]')
         ele_input = plan.get_find_element_xpath(
@@ -176,8 +179,9 @@ class TestPlanPage:
         wait = WebDriverWait(driver, 20)
 
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
-        plan.click_button('(//span[text()="方案管理"])[1]')  # 点击方案管理
-        plan.click_button('(//span[text()="计划方案管理"])[1]')  # 点击计划方案管理
+        list_ = ["方案管理", "计划方案管理"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
         sleep(1)
         # 选择第一个方案
         sched_text = sched.get_find_element_xpath(
@@ -194,7 +198,7 @@ class TestPlanPage:
                 '//div[text()="计划方案组合框显示"]/following-sibling::div//span[1]'
             )
 
-        sched.click_ok_schedbutton()
+        sched.click_ok_button()
         sched.click_save_button()
         # 等待loading遮罩消失
 
@@ -204,8 +208,9 @@ class TestPlanPage:
             )
         )
 
-        plan.click_button('(//span[text()="计算工作台"])[1]')  # 点击计算工作台
-        plan.click_button('(//span[text()="计划计算"])[1]')  # 点击计划计算
+        list_ = ["计算工作台", "计划计算"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
 
         plan.click_button('//div[@class="vue-treeselect__control-arrow-container"]')
         ele_input = plan.get_find_element_xpath(
@@ -228,10 +233,9 @@ class TestPlanPage:
             )
         )
 
-        # 点击“计算工作台”
-        plan.click_button('(//span[text()="计算工作台"])[1]')
-        # 点击“计划计算”
-        plan.click_button('(//span[text()="计划计算"])[1]')
+        list_ = ["计算工作台", "计划计算"]
+        for v in list_:
+            plan.click_button(f'(//span[text()="{v}"])[1]')
 
         # 等待下拉框按钮可点击后点击展开
         dropdown_arrow = wait.until(

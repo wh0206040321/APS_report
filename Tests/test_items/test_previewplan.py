@@ -109,13 +109,14 @@ class TestPreviewPlanPage:
             )
             sleep(1)
             previewPlan.click_del_button()
-            previewPlan.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+            previewPlan.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(1)
         ele_none = driver.find_elements(
             By.XPATH, '//table[.//td[4]//span[text()="1测试C订单"]]/tbody//tr'
         )
 
         previewPlan.click_button('(//span[text()="工作指示发布"])[1]')
+        sleep(1)
         # 搜索框输入资源代码
         operationPlan.enter_texts(
             '(//div[./p[text()="资源代码"]]/following-sibling::div//input)[1]',
@@ -198,7 +199,7 @@ class TestPreviewPlanPage:
         )
 
         operationPlan.click_button('//p[text()="工作指示发布"]')
-        operationPlan.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+        operationPlan.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(2)
         after_text = driver.find_elements(
             By.XPATH, '(//table[@class="vxe-table--body"])[3]/tbody//tr'

@@ -13,55 +13,55 @@ class SchedPage(BasePage):
 
     def click_add_schedbutton(self):
         """点击添加方案按钮."""
-        self.click(By.XPATH, '//span[text()="新增方案"]')
+        self.click_button('//span[text()="新增方案"]')
 
     def click_del_schedbutton(self):
         """点击删除方案按钮."""
-        self.click(By.XPATH, '//span[text()="删除方案"]')
+        self.click_button('//span[text()="删除方案"]')
 
     def click_add_commandbutton(self):
         """点击添加命令按钮."""
-        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-add"]')
+        self.click_button('//i[@class="ivu-icon ivu-icon-md-add"]')
 
     def click_del_commandbutton(self):
         """点击删除命令按钮."""
-        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-close"]')
+        self.click_button('//i[@class="ivu-icon ivu-icon-md-close"]')
 
     def click_up_commandbutton(self):
         """点击向上移动命令按钮."""
-        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-arrow-up"]')
+        self.click_button('//i[@class="ivu-icon ivu-icon-md-arrow-up"]')
 
     def click_down_commandbutton(self):
         """点击向下移动命令按钮."""
-        self.click(By.XPATH, '//i[@class="ivu-icon ivu-icon-md-arrow-down"]')
+        self.click_button('//i[@class="ivu-icon ivu-icon-md-arrow-down"]')
 
     def click_attribute_button(self):
         """点击属性设置按钮."""
-        self.click(By.XPATH, '//span[text()="属性设置"]')
+        self.click_button('//span[text()="属性设置"]')
 
     def click_sched_button(self):
         """点击均衡排产按钮."""
-        self.click(By.XPATH, '//div[text()=" 分派属性 "]')
+        self.click_button('//div[text()=" 分派属性 "]')
 
     def click_time_sched(self):
         """点击时间属性"""
-        self.click(By.XPATH, '//div[text()=" 时间属性 "]')
+        self.click_button('//div[text()=" 时间属性 "]')
 
     def click_ok_schedbutton(self):
         """点击确定按钮."""
-        self.click(By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+        self.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
 
     def click_ok_button(self):
         """点击确定按钮."""
-        self.click(By.XPATH, '(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        self.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
 
     def click_save_button(self):
         """点击保存按钮."""
-        self.click(By.XPATH, '//button[./span[text()="保存设置"]]')
+        self.click_button('//button[./span[text()="保存设置"]]')
 
     def enter_texts(self, xpath, text):
         """输入文字."""
-        self.enter_text(By.XPATH, xpath, text)
+        self.enter_texts(xpath, text)
 
     def click_button(self, xpath):
         """点击按钮."""
