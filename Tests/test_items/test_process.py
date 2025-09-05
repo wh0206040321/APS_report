@@ -235,6 +235,23 @@ class TestProcessPage:
         assert processdata == name, f"预期{processdata}"
         assert not process.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_process_textverify(self, login_to_process):
+        driver = login_to_process  # WebDriver 实例
+        process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
+        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        process.adds_process(name, name)
+        sleep(1)
+        adddata = process.get_find_element_xpath(
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
+        ).text
+        num_ = process.get_find_element_xpath(
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[5]'
+        ).text
+        assert adddata == name and num_ == '9999999999', f"预期数据是{name}，实际得到{adddata}"
+        assert not process.has_fail_message()
+
     @allure.story("添加测试数据成功")
     # @pytest.mark.run(order=1)
     def test_process_addsuccess1(self, login_to_process):
@@ -1006,7 +1023,7 @@ class TestProcessPage:
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
         layout = "测试布局A"
 
-        value = ['111', '11测试全部数据', '1测试A']
+        value = ['111', '11测试全部数据', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         process.del_all(value)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

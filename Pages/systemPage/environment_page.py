@@ -217,14 +217,3 @@ class EnvironmentPage(BasePage):
         for idx, d in enumerate(xpath_list, start=1):
             self.click_button(d['select'])
             self.click_button(d['value'])
-
-    def enter_number_input(self, num=""):
-        """输入 备份文件最大数 数字输入框"""
-        xpth = '//div[label[text()="备份文件最大数:"]]//input'
-        if num != "":
-            ele = self.get_find_element_xpath(xpth)
-            ele.send_keys(Keys.CONTROL, 'a')
-            ele.send_keys(Keys.DELETE)
-            self.enter_texts(xpth, num)
-        value = self.get_find_element_xpath(xpth)
-        return value.get_attribute("value")

@@ -16,6 +16,7 @@ from Pages.itemsPage.changeR_page import ChangeR
 from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
+from Utils.shared_data_util import SharedDataUtil
 
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
@@ -114,9 +115,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -160,9 +161,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -173,9 +174,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(3, 8)
+        random_int1 = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -204,8 +205,8 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(3, 8)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        random_int = random.randint(1, 6)
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
@@ -215,9 +216,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -228,9 +229,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(3, 8)
+        random_int1 = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -269,8 +270,8 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(3, 8)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        random_int = random.randint(1, 6)
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
@@ -280,9 +281,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -293,9 +294,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(3, 8)
+        random_int1 = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
         sleep(1)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -338,7 +339,7 @@ class TestChangeRPage:
         # 输入文本
         changeR.enter_texts(
             '//label[text()="切换时间(分钟)"]/ancestor::div[1]//input[1]',
-            "1文字abc。？~1+1-=3",
+            "e1文字abc。？~1+1-=3",
         )
         sleep(1)
         # 获取表示顺序数字框
@@ -348,69 +349,155 @@ class TestChangeRPage:
         assert changeRnum == "1113", f"预期{changeRnum}"
         assert not changeR.has_fail_message()
 
-    @allure.story("添加数据成功")
+    @allure.story("校验数字文本框和文本框成功")
     # @pytest.mark.run(order=1)
-    def test_changeR_addweeksuccess(self, login_to_changeR):
+    def test_changeR_numverify(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        code1 = "11"
-        code2 = "12"
+        num = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
         change.click_add_button()
         # 点击资源
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        rows = driver.find_elements(By.XPATH, f"//table[.//tr[td[3]//span[text()='{code1}']]]//tr")
-        for index, row in enumerate(rows, start=1):
-            td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
-            if f"{code1}" in td3_text:
-                print(f"✅ 找到匹配行，行号为：{index}")
-
-                # 3. 使用这个行号 idx 构造另一个 XPath
-                target_xpath = f'(//table[.//tr[{index}]/td[2][contains(@class,"col--checkbox")]])[2]//tr[{index}]/td[2]/div/span'
-                target_element = change.get_find_element_xpath(target_xpath)
-
-                # 4. 操作目标元素
-                target_element.click()
-                break  # 如果只处理第一个匹配行，可以 break
+        random_int = random.randint(1, 6)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
 
-        # 点击前生产特征
+        # 点击前资源
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
-        sleep(3)
         # 勾选框
-        rows = driver.find_elements(By.XPATH, '(//div[@class="vxe-table--body-wrapper body--wrapper"])[last()]//table//tr')
-        for index, row in enumerate(rows, start=1):
-            td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
-            if f"{code2}" in td3_text:
-                print(f"✅ 找到匹配行，行号为：{index}")
-
-                # 3. 使用这个行号 idx 构造另一个 XPath
-                target_xpath = f'(//table[.//tr[{index}]/td[2][contains(@class,"col--checkbox")]])[2]//tr[{index}]/td[.//span[@class="vxe-cell--checkbox"]]//div/span'
-                # 点击前重新获取元素，防止 stale
-                try:
-                    target_element = change.get_find_element_xpath(target_xpath)
-                    target_element.click()
-                except StaleElementReferenceException:
-                    print("⚠️ 元素过期，重新获取一次")
-                    target_element = change.get_find_element_xpath(target_xpath)
-                    target_element.click()
-
+        random_int = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        sleep(1)
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
 
-        # 点击后生产特征
+        # 点击后资源
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        change.click_button(f'(//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span')
+        random_int1 = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        sleep(1)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 获取勾选的资源
+        resource = change.get_find_element_xpath(
+            '(//label[text()="资源"])[1]/parent::div//input'
+        ).get_attribute("value")
+        # 获取前目录
+        item1 = change.get_find_element_xpath(
+            '(//label[text()="前资源"])[1]/parent::div//input'
+        ).get_attribute("value")
+        sleep(1)
+        # 获取后目录
+        item2 = change.get_find_element_xpath(
+            '(//label[text()="后资源"])[1]/parent::div//input'
+        ).get_attribute("value")
+        sleep(1)
+
+        change.enter_texts('(//label[text()="优先度"])[1]/parent::div//input', num)
+        change.enter_texts('(//label[text()="备注"])[1]/parent::div//input', num)
+
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        )
+        sleep(1)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+
+        addresource = change.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[2]'
+        ).text
+        additem1 = change.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[3]'
+        ).text
+        additem2 = change.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[4]'
+        ).text
+        num_ = change.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[6]'
+        ).text
+        text_ = change.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
+        ).text
+        assert addresource == resource and additem1 == item1 and additem2 == item2 and '9999999999' == num_ and text_ == num
+        assert not change.has_fail_message()
+
+    @allure.story("删除数据成功")
+    # @pytest.mark.run(order=1)
+    def test_changeR_delsuccess1(self, login_to_changeR):
+        driver = login_to_changeR  # WebDriver 实例
+        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        changedata1 = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        change.del_data()
+        changedata = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        assert (
+                changedata != changedata1
+        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+        assert not change.has_fail_message()
+
+    @allure.story("添加数据成功")
+    # @pytest.mark.run(order=1)
+    def test_changeR_addweeksuccess(self, login_to_changeR):
+        driver = login_to_changeR  # WebDriver 实例
+        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        SharedDataUtil.load_data()
+        change.click_add_button()
+        # 点击资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 6)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 点击前资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        sleep(1)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 点击后资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
+        )
+        # 勾选框
+        random_int1 = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        sleep(1)
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
@@ -442,6 +529,11 @@ class TestChangeRPage:
             '//div[p[text()="更新时间"]]/div[1]'
         )
 
+        # 保存数据
+        SharedDataUtil.save_data(
+            {"resource": resource, "item1": item1, "item2": item2}
+        )
+
         addresource = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[2]'
         ).text
@@ -459,8 +551,9 @@ class TestChangeRPage:
     def test_changeR_addrepe(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        code1 = "11"
-        code2 = "12"
+        code1 = SharedDataUtil.load_data().get("resource")
+        code2 = SharedDataUtil.load_data().get("item1")
+        code3 = SharedDataUtil.load_data().get("item2")
         change.click_add_button()
         # 点击资源
         change.click_button(
@@ -470,7 +563,7 @@ class TestChangeRPage:
         rows = driver.find_elements(By.XPATH, f"//table[.//tr[td[3]//span[text()='{code1}']]]//tr")
         for index, row in enumerate(rows, start=1):
             td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
-            if f"{code1}" in td3_text:
+            if f"{code1}" == td3_text:
                 print(f"✅ 找到匹配行，行号为：{index}")
 
                 # 3. 使用这个行号 idx 构造另一个 XPath
@@ -494,7 +587,7 @@ class TestChangeRPage:
                                     f'(//div[@class="vxe-table--body-wrapper body--wrapper" and .//table[.//tr[td[3]//span[text()="{code2}"]]]])[2]//table//tr')
         for index, row in enumerate(rows, start=1):
             td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
-            if f"{code2}" in td3_text:
+            if f"{code2}" == td3_text:
                 print(f"✅ 找到匹配行，行号为：{index}")
 
                 # 3. 使用这个行号 idx 构造另一个 XPath
@@ -516,12 +609,30 @@ class TestChangeRPage:
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
+        sleep(3)
         # 勾选框
-        change.click_button(
-            f'(//table[.//tr[3]/td[2][contains(@class,"col--checkbox")]])[2]//tr[3]/td[.//span[@class="vxe-cell--checkbox"]]//div/span')
+        rows = driver.find_elements(By.XPATH,
+                                    f'(//div[@class="vxe-table--body-wrapper body--wrapper" and .//table[.//tr[td[3]//span[text()="{code2}"]]]])[2]//table//tr')
+        for index, row in enumerate(rows, start=1):
+            td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
+            if f"{code3}" == td3_text:
+                print(f"✅ 找到匹配行，行号为：{index}")
+
+                # 3. 使用这个行号 idx 构造另一个 XPath
+                target_xpath = f'(//table[.//tr[{index}]/td[2][contains(@class,"col--checkbox")]])[2]//tr[{index}]/td[.//span[@class="vxe-cell--checkbox"]]//div/span'
+                # 点击前重新获取元素，防止 stale
+                try:
+                    target_element = change.get_find_element_xpath(target_xpath)
+                    target_element.click()
+                except StaleElementReferenceException:
+                    print("⚠️ 元素过期，重新获取一次")
+                    target_element = change.get_find_element_xpath(target_xpath)
+                    target_element.click()
+
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
+
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
@@ -535,8 +646,8 @@ class TestChangeRPage:
     def test_changeR_delsuccess2(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        code1 = "11"
-        code2 = "12"
+        code1 = SharedDataUtil.load_data().get("resource")
+        code2 = SharedDataUtil.load_data().get("item1")
         # 定位第一行
         change.click_button(
             f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
@@ -545,16 +656,7 @@ class TestChangeRPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         change.click_del_button()  # 点击删除
-        # 点击确定
-        # 找到共同的父元素
-        parent = change.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         # 定位
         changedata = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
@@ -584,13 +686,118 @@ class TestChangeRPage:
         ).text
         changeR.click_del_button()  # 点击删除
         # 点击取消
-        changeR.get_find_element_class("ivu-btn-text").click()
+        changeR.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         # 定位第一行
         changeRdata = changeR.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
         ).text
         assert changeRdata1 == changeRdata, f"预期{changeRdata}"
         assert not changeR.has_fail_message()
+
+    @allure.story("刷新成功")
+    # @pytest.mark.run(order=1)
+    def test_changer_refreshsuccess(self, login_to_changeR):
+        driver = login_to_changeR  # WebDriver 实例
+        changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        # 资源切换筛选框输入123
+        changeR.enter_texts(
+            '//p[text()="资源"]/ancestor::div[2]//input', "123"
+        )
+        changeR.click_ref_button()
+        changeRtext = changeR.get_find_element_xpath(
+            '//p[text()="资源"]/ancestor::div[2]//input'
+        ).text
+        assert changeRtext == "", f"预期{changeRtext}"
+        assert not changeR.has_fail_message()
+
+    @allure.story("添加数据成功")
+    # @pytest.mark.run(order=1)
+    def test_changeR_addtt(self, login_to_changeR):
+        driver = login_to_changeR  # WebDriver 实例
+        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        change.click_add_button()
+        # 点击资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 6)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 点击前资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        sleep(1)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 点击后资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
+        )
+        # 勾选框
+        random_int1 = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        sleep(1)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        )
+
+        change.click_add_button()
+        # 点击资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 6)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 点击前资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        sleep(1)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 点击后资源
+        change.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
+        )
+        # 勾选框
+        random_int1 = random.randint(1, 6)
+        sleep(1)
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        sleep(1)
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+        change.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        )
+
+        assert not change.has_fail_message()
 
     @allure.story("修改资源切换资源成功")
     # @pytest.mark.run(order=1)
@@ -609,14 +816,14 @@ class TestChangeRPage:
         )
 
         # 勾选框
-        random_int = random.randint(3, 8)
+        random_int = random.randint(1, 6)
         changeR.click_button(
             '(//span[@class="vxe-checkbox--icon iconfont icon-fuxuankuangdaiding"])[2]'
         )
         changeR.click_button(
             '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-checked-fill"])[2]'
         )
-        changeR.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
 
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -688,22 +895,6 @@ class TestChangeRPage:
         assert adddata == prioritization
         assert not changeR.has_fail_message()
 
-    @allure.story("刷新成功")
-    # @pytest.mark.run(order=1)
-    def test_changer_refreshsuccess(self, login_to_changeR):
-        driver = login_to_changeR  # WebDriver 实例
-        changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        # 资源切换筛选框输入123
-        changeR.enter_texts(
-            '//p[text()="资源"]/ancestor::div[2]//input', "123"
-        )
-        changeR.click_ref_button()
-        changeRtext = changeR.get_find_element_xpath(
-            '//p[text()="资源"]/ancestor::div[2]//input'
-        ).text
-        assert changeRtext == "", f"预期{changeRtext}"
-        assert not changeR.has_fail_message()
-
     @allure.story("查询资源成功")
     # @pytest.mark.run(order=1)
     def test_changer_selectcodesuccess(self, login_to_changeR):
@@ -748,12 +939,32 @@ class TestChangeRPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为开料
+        # 定位第一行
         changeRcode = changeR.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         )
         assert changeRcode.text == ele
         assert not changeR.has_fail_message()
+
+    @allure.story("删除数据")
+    # @pytest.mark.run(order=1)
+    def test_changeR_del1(self, login_to_changeR):
+        driver = login_to_changeR  # WebDriver 实例
+        changeI = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        sleep(1)
+        changedata1 = changeI.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        changeI.del_data()
+        changeI.del_data()
+        # 定位
+        changedata = changeI.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        assert (
+                changedata != changedata1
+        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+        assert not changeI.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
     # @pytest.mark.run(order=1)
@@ -843,16 +1054,7 @@ class TestChangeRPage:
         changeR.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]')
         changeR.click_del_button()
-        # 点击确定
-        # 找到共同的父元素
-        parent = changeR.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        changeR.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         # 定位
         changedata = changeR.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
@@ -861,7 +1063,6 @@ class TestChangeRPage:
                 changedata != changedata1
         ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
         assert not changeR.has_fail_message()
-
 
     @allure.story("删除布局成功")
     # @pytest.mark.run(order=1)

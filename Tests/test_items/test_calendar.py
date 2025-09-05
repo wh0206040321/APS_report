@@ -370,6 +370,89 @@ class TestCalendarPage:
         assert adddata == resource and addshift == resource1
         assert not calendar.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_calendar_numverify(self, login_to_calendar):
+        driver = login_to_calendar  # WebDriver 实例
+        calendar = Calendar(driver)  # 用 driver 初始化 Calendar
+        num = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        calendar.click_add_button()
+        # 点击资源
+        calendar.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
+        )
+        # 勾选框
+        random_int = random.randint(1, 5)
+        sleep(1)
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+
+        calendar.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+        sleep(1)
+        # 获取勾选的资源代码
+        resource = calendar.get_find_element_xpath(
+            '//label[text()="资源"]/parent::div/div[1]//input[1]'
+        ).get_attribute("value")
+
+        # 点击班次
+        calendar.click_button(
+            '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
+        )
+        # 勾选框
+        random_int1 = random.randint(1, 2)
+        sleep(1)
+        calendar.click_button(
+            f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+
+        calendar.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+        sleep(1)
+        # 获取勾选的班次
+        resource1 = calendar.get_find_element_xpath(
+            '//label[text()="班次"]/parent::div/div[1]//input[1]'
+        ).get_attribute("value")
+        calendar.enter_texts('//label[text()="资源量"]/parent::div/div[1]//input[1]', num)
+        calendar.enter_texts('//label[text()="备注"]/parent::div/div[1]//input[1]', num)
+        # 点击第一个日期时间
+        calendar.click_button('(//input[@placeholder="请选择时间"])[1]')
+
+        calendar.click_button('(//em[text()="13"])[1]')
+        # 点击第二个日期时间
+        calendar.click_button('(//input[@placeholder="请选择时间"])[2]')
+
+        calendar.click_button('(//em[text()="20"])[2]')
+
+        # 点击添加按钮
+        calendar.click_button('(//span[text()="添加"])[1]')
+
+        calendar.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        )
+
+        calendar.click_button(
+            '//p[text()="更新时间"]/following-sibling::div'
+        )
+
+        calendar.click_button(
+            '//p[text()="更新时间"]/following-sibling::div'
+        )
+        adddata = calendar.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[2]'
+        ).text
+        addshift = calendar.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[4]'
+        ).text
+        addnum = calendar.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[6]'
+        ).text
+        addtext = calendar.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
+        ).text
+        assert adddata == resource and addshift == resource1 and addnum == num and addtext == num
+        assert not calendar.has_fail_message()
+
     @allure.story("输入全部数据，添加保存成功")
     # @pytest.mark.run(order=1)
     def test_calendar_addall(self, login_to_calendar):

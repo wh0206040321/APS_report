@@ -48,6 +48,12 @@ class OrderPage(BasePage):
         except NoSuchElementException:
             return None
 
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
+
     def add_order(self, code, order_item):
         self.click_add_button()
         # 填写订单代码

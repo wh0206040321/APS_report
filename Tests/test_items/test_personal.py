@@ -136,45 +136,45 @@ class TestPersonalPage:
         assert len(ele) == 1
         assert not personal.has_fail_message()
 
-    # @allure.story("修改密码不符合标准,新密码与确认密码不一致")
-    # # @pytest.mark.run(order=1)
-    # def test_personal_editpassword8(self, login_to_personal):
-    #     driver = login_to_personal  # WebDriver 实例
-    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-    #     password = [f"{DateDriver.password}", "Qw123456", "Qw123446"]
-    #     personal.edit_password(password[0], password[1], password[2])
-    #     ele = driver.find_elements(By.XPATH, '//p[text()=" 与新密码保持一致 "]')
-    #     assert len(ele) == 1
-    #     assert not personal.has_fail_message()
-    #
-    # @allure.story("修改密码不符合标准,新密码不能包含旧密码")
-    # # @pytest.mark.run(order=1)
-    # def test_personal_editpassword10(self, login_to_personal):
-    #     driver = login_to_personal  # WebDriver 实例
-    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-    #     password = [f"{DateDriver.password}", f"{DateDriver.password}1", f"{DateDriver.password}1"]
-    #     personal.edit_password(password[0], password[1], password[2])
-    #     ele = driver.find_elements(By.XPATH, '//p[text()=" 新密码不能包含旧密码 "]')
-    #     assert len(ele) == 1
-    #     assert not personal.has_fail_message()
-    #
-    # @allure.story("旧密码错误不允许修改")
-    # # @pytest.mark.run(order=1)
-    # def test_personal_editpassword11(self, login_to_personal):
-    #     driver = login_to_personal  # WebDriver 实例
-    #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-    #     password = [f"{DateDriver.password}1", "Qw123456", "Qw123456"]
-    #     personal.edit_password(password[0], password[1], password[2])
-    #     message = personal.get_find_message().text
-    #     assert message == "修改失败"
-    #     assert not personal.has_fail_message()
-    #
+    @allure.story("修改密码不符合标准,新密码与确认密码不一致")
+    # @pytest.mark.run(order=1)
+    def test_personal_editpassword8(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        password = [f"{DateDriver.password}", "Qw123456", "Qw123446"]
+        personal.edit_password(password[0], password[1], password[2])
+        ele = driver.find_elements(By.XPATH, '//p[text()=" 与新密码保持一致 "]')
+        assert len(ele) == 1
+        assert not personal.has_fail_message()
+
+    @allure.story("修改密码不符合标准,新密码不能包含旧密码")
+    # @pytest.mark.run(order=1)
+    def test_personal_editpassword10(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        password = [f"{DateDriver.password}", f"{DateDriver.password}1", f"{DateDriver.password}1"]
+        personal.edit_password(password[0], password[1], password[2])
+        ele = driver.find_elements(By.XPATH, '//p[text()=" 新密码不能包含旧密码 "]')
+        assert len(ele) == 1
+        assert not personal.has_fail_message()
+
+    @allure.story("旧密码错误不允许修改")
+    # @pytest.mark.run(order=1)
+    def test_personal_editpassword11(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        password = [f"{DateDriver.password}1", "Qq123456", "Qq123456"]
+        personal.edit_password(password[0], password[1], password[2])
+        message = personal.get_find_message().text
+        assert message == "修改失败"
+        assert not personal.has_fail_message()
+
     # @allure.story("修改密码成功")
     # # @pytest.mark.run(order=1)
     # def test_personal_editpasswordsuccess(self, login_to_personal):
     #     driver = login_to_personal  # WebDriver 实例
     #     personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-    #     newpassword = "Qw123456"
+    #     newpassword = "Qq123456"
     #     password = [f"{DateDriver.password}", newpassword, newpassword]
     #     personal.edit_password(password[0], password[1], password[2])
     #     message = personal.get_find_message().text
@@ -188,7 +188,7 @@ class TestPersonalPage:
     #     else:
     #         assert 1 != 1
     #     assert not personal.has_fail_message()
-    #
+
     # @allure.story("新密码登录成功")
     # # @pytest.mark.run(order=1)
     # def test_personal_loginsuccess1(self, login_to_personal):
@@ -554,15 +554,6 @@ class TestPersonalPage:
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
         text = personal.switch_language("日本語")
         assert text == "検索けんさく"
-        assert not personal.has_fail_message()
-
-    @allure.story("切换系统语言-汉语")
-    # @pytest.mark.run(order=1)
-    def test_personal_language3(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        text = personal.switch_language("简体中文")
-        assert text == "搜索"
         assert not personal.has_fail_message()
 
     @allure.story("切换系统语言-汉语")

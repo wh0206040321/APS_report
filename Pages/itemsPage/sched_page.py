@@ -61,7 +61,7 @@ class SchedPage(BasePage):
 
     def enter_texts(self, xpath, text):
         """输入文字."""
-        self.enter_texts(xpath, text)
+        self.enter_text(By.XPATH, xpath, text)
 
     def click_button(self, xpath):
         """点击按钮."""

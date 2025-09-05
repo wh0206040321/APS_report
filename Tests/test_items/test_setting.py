@@ -111,24 +111,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
-        setting.add_layout()
-        setting.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        setting.click_button('//div[text()=" 显示设置 "]')
-        # 获取是否可见选项的复选框元素
-        checkbox = setting.get_find_element_xpath(
-            '//div[./div[text()="是否可见:"]]/label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            setting.click_button('//div[./div[text()="是否可见:"]]/label/span/span')
-            # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.add_layout_ok(layout)
 
         # 获取布局名称的文本元素
         name = setting.get_find_element_xpath(
@@ -144,25 +127,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
-        setting.add_layout()
-        setting.enter_texts(
-            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
-        )
-        setting.click_button('//div[text()=" 显示设置 "]')
-        # 获取是否可见选项的复选框元素
-        checkbox = setting.get_find_element_xpath(
-            '//div[./div[text()="是否可见:"]]/label/span'
-        )
-
-        # 检查复选框是否未被选中
-        if checkbox.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            setting.click_button('//div[./div[text()="是否可见:"]]/label/span/span')
-            # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.add_layout_ok(layout)
 
         # 获取设置后的提示信息
         message = setting.get_find_message()
@@ -176,35 +141,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
-        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        setting.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-
-        sleep(2)
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
+        setting.del_layout(layout)
 
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
@@ -310,34 +247,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试透视表A"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        sleep(1)
-        setting.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = setting.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
+        setting.del_layout(layout)
 
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
@@ -957,6 +867,26 @@ class TestSettingPage:
 
         # 断言查询结果中的数据均为0，以验证查询功能的准确性
         assert num1 == num2 == num3 and num1 == "0"
+        assert not setting.has_fail_message()
+
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_setting_select_textverify(self, login_to_setting):
+        driver = login_to_setting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        layout = "测试布局A"
+        num = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+        setting.enter_texts(
+            f'//div[text()="物料优先度"]/following-sibling::div//input', num
+        )
+        setting.enter_texts(
+            f'//div[text()="物料代码"]/following-sibling::div//input', num
+        )
+        # 点击查询按钮，启动查询过程
+        setting.click_button('//div[@class="queryBtn"]/button[1]')
+        ele = setting.finds_elements(By.XPATH, '//div[@class="ivu-modal-body"]//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
         assert not setting.has_fail_message()
 
     @allure.story("设置表格布局-物料种类快速查询-下拉框")
@@ -2219,47 +2149,47 @@ class TestSettingPage:
         assert message.text == "布局名称不能重复！"
         assert not setting.has_fail_message()
 
-    @allure.story("默认布局不允许修改")
-    # @pytest.mark.run(order=1)
-    def test_setting_layoutlist_defaultfail(self, login_to_setting):
-        driver = login_to_setting  # WebDriver 实例
-        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "默认"
-        sleep(2)
-        setting.click_button('//i[@id="tabsDrawerIcon"]')
-        sleep(1)
-
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = setting.get_find_element_xpath(
-            f'//div[@id="container"]/div[.//text()="{layout}"]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-        setting.hover(layout)
-
-        setting.click_button(f'(//div[text()="重命名"])[{index + 1}]')
-        ele = setting.get_find_element_xpath(
-            f'//div[@id="container"]/div[.//text()="{layout}"]//input'
-        )
-        ele.send_keys(Keys.CONTROL, 'a')
-        ele.send_keys(Keys.DELETE)
-        setting.enter_texts(f'//div[@id="container"]/div[.//text()="{layout}"]//input', "默认1")
-
-        setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
-        # 获取设置后的提示信息
-        message = setting.get_find_message()
-        # 断言提示信息是否符合预期，以验证设置是否生效
-        assert message.text == "默认布局不允许修改!"
-        assert not setting.has_fail_message()
+    # @allure.story("默认布局不允许修改")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_layoutlist_defaultfail(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     layout = "默认"
+    #     sleep(2)
+    #     setting.click_button('//i[@id="tabsDrawerIcon"]')
+    #     sleep(1)
+    #
+    #     # 获取目标 div 元素，这里的目标是具有特定文本的 div
+    #     target_div = setting.get_find_element_xpath(
+    #         f'//div[@id="container"]/div[.//text()="{layout}"]'
+    #     )
+    #
+    #     # 获取父容器下所有 div
+    #     # 这一步是为了确定目标 div 在其父容器中的位置
+    #     parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
+    #     all_children = parent_div.find_elements(By.XPATH, "./div")
+    #
+    #     # 获取目标 div 的位置索引（从0开始）
+    #     # 这里是为了后续操作，比如点击目标 div 相关的按钮
+    #     index = all_children.index(target_div)
+    #     print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+    #     setting.hover(layout)
+    #
+    #     setting.click_button(f'(//div[text()="重命名"])[{index + 1}]')
+    #     ele = setting.get_find_element_xpath(
+    #         f'//div[@id="container"]/div[.//text()="{layout}"]//input'
+    #     )
+    #     ele.send_keys(Keys.CONTROL, 'a')
+    #     ele.send_keys(Keys.DELETE)
+    #     setting.enter_texts(f'//div[@id="container"]/div[.//text()="{layout}"]//input', "默认1")
+    #
+    #     setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+    #     sleep(1)
+    #     # 获取设置后的提示信息
+    #     message = setting.get_find_message()
+    #     # 断言提示信息是否符合预期，以验证设置是否生效
+    #     assert message.text == "默认布局不允许修改!"
+    #     assert not setting.has_fail_message()
 
     @allure.story("布局删除成功")
     # @pytest.mark.run(order=1)

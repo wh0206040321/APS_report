@@ -213,6 +213,28 @@ class TestItemGroupPage:
         assert itemcode == "ME.Order.Spec1==OTHER.Order.Spec1", f"预期{itemcode}"
         assert not item.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_itemgroup_textverify(self, login_to_itemgroup):
+        driver = login_to_itemgroup  # WebDriver 实例
+        item = ItemPage(driver)  # 用 driver 初始化 ItemPage
+
+        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        item.add_test_item_group(name)
+        item.enter_texts('(//label[text()="物料优先度"])[1]/parent::div//input', name)
+        # 点击确定
+        item.click_button(
+            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        sleep(1)
+        adddata = item.get_find_element_xpath(
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
+        ).text
+        num_ = item.get_find_element_xpath(
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[6]'
+        ).text
+        assert adddata == name and num_ == "9999999999", f"预期数据是111，实际得到{adddata}"
+        assert not item.has_fail_message()
+
     @allure.story("添加数据成功")
     # @pytest.mark.run(order=1)
     def test_itemgroup_addsuccess(self, login_to_itemgroup):
@@ -1091,7 +1113,7 @@ class TestItemGroupPage:
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
         layout = "测试布局A"
 
-        value = ['111', '11测试全部数据', '1测试A']
+        value = ['111', '11测试全部数据', '1测试A','111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         item.del_all(value, xpath='//p[text()="物料组代码"]/ancestor::div[2]//input')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

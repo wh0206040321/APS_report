@@ -5,7 +5,7 @@ from time import sleep
 
 import allure
 import pytest
-from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import WebDriverException, StaleElementReferenceException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -112,10 +112,10 @@ class TestOrderPage:
         )
 
         # 物料
-        random_int = random.randint(1, 7)
+        random_int = random.randint(1, 4)
         order.click_button('//label[text()="物料"]/parent::div/div//i')
         order.click_button(
-            f'//table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[{random_int}]/td[2]'
+            f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -189,10 +189,10 @@ class TestOrderPage:
         )
 
         # 物料
-        random_int = random.randint(1, 7)
+        random_int = random.randint(1, 4)
         order.click_button('//label[text()="物料"]/parent::div/div//i')
         order.click_button(
-            f'//table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[{random_int}]/td[2]'
+            f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -242,7 +242,7 @@ class TestOrderPage:
         num.send_keys(Keys.CONTROL, "a")
         num.send_keys(Keys.BACK_SPACE)
         order.enter_texts(
-            '(//label[text()="计划数量"])[1]/parent::div//input', "1文字abc。？~1_2+=3"
+            '(//label[text()="计划数量"])[1]/parent::div//input', "e1文字abc。？~1_2+=3"
         )
 
         # 获取计划数量数字框
@@ -273,20 +273,69 @@ class TestOrderPage:
         assert ordersel == "补充", f"预期{ordersel}"
         assert not order.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_order_textverify(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        order.click_add_button()  # 检查点击添加
+        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        # 填写订单代码
+        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', name)
+
+        # 物料
+        random_int = random.randint(1, 4)
+        order.click_button('//label[text()="物料"]/parent::div/div//i')
+        order.click_button(
+            f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
+        )
+        order.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+
+        # 填写交货期
+        order.click_button('(//label[text()="交货期"])[1]/parent::div//input')
+        order.click_button('(//div[@class="ivu-date-picker-cells"])[3]/span[19]')
+        order.click_button(
+            '(//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[3]'
+        )
+
+        # 计划数量
+        num = order.get_find_element_xpath(
+            '(//label[text()="计划数量"])[1]/parent::div//input'
+        )
+        num.send_keys(Keys.CONTROL, "a")
+        num.send_keys(Keys.BACK_SPACE)
+        order.enter_texts('(//label[text()="计划数量"])[1]/parent::div//input', name)
+
+        # 点击确定
+        order.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        )
+        adddata = order.get_find_element_xpath(
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
+        ).text
+        num_ = order.get_find_element_xpath(
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[10]'
+        ).text
+        assert adddata == name and num_ == '9999999999'
+        assert not order.has_fail_message()
+
     @allure.story("添加数据成功")
     # @pytest.mark.run(order=1)
     def test_order_addsuccess(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
         order.click_add_button()  # 检查点击添加
+        name = "111"
         # 填写订单代码
-        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "1A")
+        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', name)
 
         # 物料
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         order.click_button('//label[text()="物料"]/parent::div/div//i')
         order.click_button(
-            f'//table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[{random_int}]/td[2]'
+            f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -312,9 +361,9 @@ class TestOrderPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
         adddata = order.get_find_element_xpath(
-            '(//span[text()="1A"])[1]/ancestor::tr[1]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "1A"
+        assert adddata == name
         assert not order.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -323,15 +372,15 @@ class TestOrderPage:
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
         order.click_add_button()  # 检查点击添加
-
+        name = "111"
         # 填写订单代码
-        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "1A")
+        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', name)
 
         # 物料
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         order.click_button('//label[text()="物料"]/parent::div/div//i')
         order.click_button(
-            f'//table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[{random_int}]/td[2]'
+            f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -363,19 +412,19 @@ class TestOrderPage:
     def test_order_delcancel(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-
-        # 定位内容为‘1A’的行
-        order.click_button('(//span[text()="1A"])[1]/ancestor::tr[1]/td[2]')
+        name = "111"
+        # 定位内容为‘111’的行
+        order.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         order.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        order.get_find_element_class("ivu-btn-text").click()
+        order.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
-        # 定位内容为‘1A’的行
+        # 定位内容为‘111’的行
         orderdata = order.get_find_element_xpath(
-            '(//span[text()="1A"])[1]/ancestor::tr[1]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert orderdata == "1A", f"预期{orderdata}"
+        assert orderdata == name, f"预期{orderdata}"
         assert not order.has_fail_message()
 
     @allure.story("添加测试数据成功")
@@ -383,15 +432,16 @@ class TestOrderPage:
     def test_order_addsuccess1(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        name = "1测试A"
         order.click_add_button()  # 检查点击添加
         # 填写订单代码
-        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "1B")
+        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', name)
 
         # 物料
-        random_int = random.randint(1, 10)
+        random_int = random.randint(1, 4)
         order.click_button('//label[text()="物料"]/parent::div/div//i')
         order.click_button(
-            f'//table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[{random_int}]/td[2]'
+            f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -409,9 +459,9 @@ class TestOrderPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
         adddata = order.get_find_element_xpath(
-            '(//span[text()="1B"])[1]/ancestor::tr[1]/td[2]'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
-        assert adddata == "1B"
+        assert adddata == name
         assert not order.has_fail_message()
 
     @allure.story("修改制造订单代码重复")
@@ -419,13 +469,14 @@ class TestOrderPage:
     def test_order_editrepeat(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        # 选中1B制造订单代码
-        order.click_button('(//span[text()="1B"])[1]/ancestor::tr[1]/td[2]')
+        name = "1测试A"
+        # 选中1测试A制造订单代码
+        order.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         order.click_edi_button()
 
-        # 制造订单代码输入1A
-        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "1A")
+        # 制造订单代码输入111
+        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "111")
         # 点击确定
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
@@ -442,14 +493,15 @@ class TestOrderPage:
     def test_order_editcodesuccess(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        # 选中1A制造订单代码
-        order.click_button('(//span[text()="1B"])[1]')
+        name = "1测试A"
+        # 选中1测试A制造订单代码
+        order.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         order.click_edi_button()
 
         # 生成随机数
         random_int = random.randint(1, 10)
-        text = "1B" + f"{random_int}"
+        text = name + f"{random_int}"
         sleep(1)
         # 制造订单代码输入
         order.enter_texts(
@@ -462,7 +514,7 @@ class TestOrderPage:
         sleep(3)
         # 定位表格内容
         orderdata = order.get_find_element_xpath(
-            '(//span[contains(text(),"1B")])[1]'
+            f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
         ).text
         assert orderdata == text, f"预期{orderdata}"
         assert not order.has_fail_message()
@@ -472,20 +524,21 @@ class TestOrderPage:
     def test_order_editcodesuccess2(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        name = "1测试A"
         # 选中1B制造订单代码
-        order.click_button('(//span[contains(text(),"1B")])[1]')
+        order.click_button(f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]')
         # 点击修改按钮
         order.click_edi_button()
         # 制造订单代码输入
-        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "1B")
+        order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', name)
         # 点击确定
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
         sleep(1)
         # 定位表格内容
-        orderdata = order.get_find_element_xpath('(//span[text()="1B"])[1]').text
-        assert orderdata == "1B", f"预期{orderdata}"
+        orderdata = order.get_find_element_xpath(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]').text
+        assert orderdata == name, f"预期{orderdata}"
         assert not order.has_fail_message()
 
     @allure.story("修改物料名称，计划数量成功")
@@ -493,16 +546,17 @@ class TestOrderPage:
     def test_order_editnamesuccess(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        name = "1测试A"
         # 选中制造订单代码
-        order.click_button('(//span[text()="1B"])[1]')
+        order.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
         # 点击修改按钮
         order.click_edi_button()
 
         # 物料
-        randomitem_int = random.randint(1, 10)
+        randomitem_int = random.randint(1, 4)
         order.click_button('//label[text()="物料"]/parent::div/div//i')
         order.click_button(
-            f'//table[@style="margin-top: 0px; width: 780px; margin-left: 0px;"]/tbody/tr[{randomitem_int}]/td[2]'
+            f'(//div[@class="vxe-grid--table-container"]//tr[{randomitem_int}]/td[2])[2]'
         )
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -533,10 +587,10 @@ class TestOrderPage:
         sleep(1)
         # 定位表格内容
         orderitem = order.get_find_element_xpath(
-            '(//span[text()="1B"])[1]/ancestor::tr/td[5]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]/ancestor::tr/td[5]/div'
         ).text
         ordernum = order.get_find_element_xpath(
-            '(//span[text()="1B"])[1]/ancestor::tr/td[10]/div'
+            f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]/ancestor::tr/td[10]/div'
         ).text
         assert orderitem == edititem and ordernum == editnum
         assert not order.has_fail_message()
@@ -562,6 +616,7 @@ class TestOrderPage:
     def test_order_selectcodesuccess(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        name = "1测试A"
 
         # 点击查询
         order.click_sel_button()
@@ -590,7 +645,7 @@ class TestOrderPage:
         # 点击输入数值
         order.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "1A",
+            name,
         )
         sleep(1)
 
@@ -608,14 +663,64 @@ class TestOrderPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert ordercode == "1A" and len(ordercode2) == 0
+        assert ordercode == name and len(ordercode2) == 0
         assert not order.has_fail_message()
 
-    @allure.story("查询物料名字成功")
+    @allure.story("没有数据时显示正常")
+    # @pytest.mark.run(order=1)
+    def test_order_selectnodatasuccess(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 ItemPage
+
+        # 点击查询
+        order.click_sel_button()
+        sleep(1)
+        # 定位名称输入框
+        element_to_double_click = driver.find_element(
+            By.XPATH,
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
+        )
+        # 创建一个 ActionChains 对象
+        actions = ActionChains(driver)
+        # 双击命令
+        actions.double_click(element_to_double_click).perform()
+        sleep(1)
+        # 点击物料代码
+        order.click_button('//div[text()="订单代码" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击比较关系框
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
+        )
+        sleep(1)
+        # 点击=
+        order.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击输入数值
+        order.enter_texts(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
+            "没有数据",
+        )
+        sleep(1)
+
+        # 点击确认
+        order.click_button(
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
+        )
+        sleep(1)
+        itemcode = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+        )
+        assert len(itemcode) == 0
+        assert not order.has_fail_message()
+
+    @allure.story("查询物订单代码包含A成功")
     # @pytest.mark.run(order=1)
     def test_order_selectnamesuccess(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        name = "A"
         # 点击查询
         order.click_sel_button()
         sleep(1)
@@ -630,7 +735,7 @@ class TestOrderPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击制造订单名称
-        order.click_button('//div[text()="物料" and contains(@optid,"opt_")]')
+        order.click_button('//div[text()="订单代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         order.click_button(
@@ -638,12 +743,12 @@ class TestOrderPage:
         )
         sleep(1)
         # 点击=
-        order.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+        order.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击输入数值
         order.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "A",
+            name,
         )
         sleep(1)
 
@@ -652,18 +757,178 @@ class TestOrderPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行是否为A
-        orderitem = order.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[5]'
-        ).text
-        assert orderitem == "A"
+        eles = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[2]')
+        assert len(eles) > 0
+        assert all(name in ele for ele in eles)
         assert not order.has_fail_message()
+
+    @allure.story("查询订单代码包含1或计划数量>=100")
+    # @pytest.mark.run(order=1)
+    def test_order_selectsuccess3(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+
+        name = "1"
+        num = 100
+        # 点击查询
+        order.click_sel_button()
+        sleep(1)
+
+        # 定位名称输入框
+        element_to_double_click = driver.find_element(
+            By.XPATH,
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
+        )
+        # 创建一个 ActionChains 对象
+        actions = ActionChains(driver)
+        # 双击命令
+        actions.double_click(element_to_double_click).perform()
+        sleep(1)
+        # 点击订单代码
+        order.click_button('//div[text()="订单代码" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击（
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[3]'
+        )
+        order.click_button('//div[text()="(" and contains(@optid,"opt_")]')
+        # 点击比较关系框
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
+        )
+        sleep(1)
+        # 点击包含
+        order.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击输入数值
+        order.enter_texts(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
+            name,
+        )
+
+        # 点击（
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[7]'
+        )
+        order.click_button('//div[text()=")" and contains(@optid,"opt_")]')
+
+        sleep(1)
+        double_click = driver.find_element(
+            By.XPATH,
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[2]',
+        )
+        # 双击命令
+        sleep(1)
+        actions.double_click(double_click).perform()
+        # 定义or元素的XPath
+        or_xpath = '//div[text()="or" and contains(@optid,"opt_")]'
+
+        try:
+            # 首先尝试直接查找并点击or元素
+            and_element = WebDriverWait(driver, 2).until(
+                EC.presence_of_element_located((By.XPATH, or_xpath))
+            )
+            and_element.click()
+        except:
+            # 如果直接查找失败，进入循环双击操作
+            max_attempts = 5
+            attempt = 0
+            or_found = False
+
+            while attempt < max_attempts and not or_found:
+                try:
+                    # 执行双击操作
+                    actions.double_click(double_click).perform()
+                    sleep(1)
+
+                    # 再次尝试查找or元素
+                    or_element = WebDriverWait(driver, 2).until(
+                        EC.presence_of_element_located((By.XPATH, or_xpath))
+                    )
+                    or_element.click()
+                    or_found = True
+                except:
+                    attempt += 1
+                    sleep(1)
+
+            if not or_found:
+                raise Exception(f"在{max_attempts}次尝试后仍未找到并点击到'or'元素")
+
+        # 点击（
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[3]'
+        )
+        order.click_button('//div[text()="(" and contains(@optid,"opt_")]')
+        # 点击计划数量
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
+        )
+        order.click_button('//div[text()="计划数量" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击比较关系框
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[5]//input'
+        )
+        # 点击>
+        order.click_button('//div[text()="≥" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击输入数值0
+        order.enter_texts(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
+            num,
+        )
+        # 点击（
+        order.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[7]'
+        )
+        order.click_button('//div[text()=")" and contains(@optid,"opt_")]')
+
+        sleep(1)
+
+        # 点击确认
+        order.click_button(
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
+        )
+        sleep(1)
+        # 获取目标表格第2个 vxe 表格中的所有数据行
+        xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
+
+        # 先拿到总行数
+        base_rows = driver.find_elements(By.XPATH, xpath_rows)
+        total = len(base_rows)
+
+        valid_count = 0
+        for idx in range(total):
+            try:
+                # 每次都按索引重新定位这一行
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td2 = tds[1].text.strip()
+                td10_raw = tds[9].text.strip()
+                td10_raw = int(td10_raw) if td10_raw else 0
+
+                assert name in td2 or td10_raw >= num, f"第 {idx + 1} 行不符合：td2={td2}, td8={td10_raw}"
+                valid_count += 1
+
+            except StaleElementReferenceException:
+                # 如果行元素失效，再重试一次
+                row = driver.find_elements(By.XPATH, xpath_rows)[idx]
+                tds = row.find_elements(By.TAG_NAME, "td")
+                td2 = tds[1].text.strip()
+                td10_raw = tds[9].text.strip()
+                td10_raw = int(td10_raw) if td10_raw else 0
+
+                assert name in td2 or td10_raw >= num, f"第 {idx + 1} 行不符合：td2={td2}, td8={td10_raw}"
+                valid_count += 1
+        assert not order.has_fail_message()
+        print(f"符合条件的行数：{valid_count}")
 
     @allure.story("查询计划数量>100")
     # @pytest.mark.run(order=1)
     def test_order_selectsuccess1(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        num = 100
         # 点击查询
         order.click_sel_button()
         sleep(1)
@@ -691,7 +956,7 @@ class TestOrderPage:
         # 点击输入数值
         order.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "100",
+            num,
         )
         sleep(1)
 
@@ -700,15 +965,9 @@ class TestOrderPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行制造订单优先度
-        ordercode = order.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[10]'
-        ).text
-        # 定位第二行数据
-        ordercode2 = order.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][2]/td[10]'
-        ).text
-        assert int(ordercode) > 100 and int(ordercode2) > 100
+        eles = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[10]')
+        assert len(eles) > 0
+        assert all(int(ele) > num for ele in eles)
         assert not order.has_fail_message()
 
     @allure.story("查询订单代码包含1A并且计划数量>100")
@@ -716,6 +975,8 @@ class TestOrderPage:
     def test_order_selectsuccess2(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        name = "1"
+        num = 100
         # 点击查询
         order.click_sel_button()
         sleep(1)
@@ -749,7 +1010,7 @@ class TestOrderPage:
         # 点击输入数值
         order.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "1A",
+            name,
         )
 
         # 点击（
@@ -820,7 +1081,7 @@ class TestOrderPage:
         # 点击输入数值
         order.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[6]//input',
-            "100",
+            num,
         )
         # 点击（
         order.click_button(
@@ -835,15 +1096,10 @@ class TestOrderPage:
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
         sleep(1)
-        # 定位第一行计划数量
-        ordercode = order.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[10]'
-        ).text
-        ordername = order.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")][1]/td[2]'
-        ).text
-        # 判断第一行计划数量>100 并且 制造订单代码为S1-产品A 并且第二行没有数据
-        assert int(ordercode) > 100 and "1A" in ordername
+        eles1 = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[10]')
+        eles2 = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[2]')
+        assert len(eles1) > 0 and len(eles2) > 0
+        assert all(int(ele) > num for ele in eles1) and all(name in ele for ele in eles2)
         assert not order.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
@@ -956,6 +1212,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
         sleep(1)
         order.click_edi_button()
+        sleep(1)
         after_all_value = adds.batch_acquisition_input(all_value)
         after_checked = order.get_find_element_xpath(
             '//label[text()="非分派对象标志"]/following-sibling::div//label/span').get_attribute("class")
@@ -976,7 +1233,7 @@ class TestOrderPage:
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
         layout = "测试布局A"
 
-        value = ['1A', '1B', '11测试全部数据']
+        value = ['111', '1测试A', '11测试全部数据', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         order.del_all(value)
         orderdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

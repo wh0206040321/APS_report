@@ -51,6 +51,7 @@ def login_to_synchronize():
     list_ = ["系统管理", "单元设置", "配置同步"]
     for v in list_:
         page.click_button(f'(//span[text()="{v}"])[1]')
+    yield driver  # 提供给测试用例使用
     safe_quit(driver)
 
 

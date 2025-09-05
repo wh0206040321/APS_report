@@ -302,6 +302,24 @@ class TestShiftPage:
         assert shiftsel == "RGB(100,255,178)", f"预期{shiftsel}"
         assert not shift.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_shift_textverify(self, login_to_shift):
+        driver = login_to_shift  # WebDriver 实例
+        shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
+        num = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        shift.click_add_button()  # 检查点击添加
+        # 输入班次代码
+        shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', num)
+        # 点击确定
+        shift.click_button(
+            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        adddata = shift.get_find_element_xpath(
+            f'(//span[text()="{num}"])[1]/ancestor::tr[1]/td[2]'
+        )
+        assert adddata.text == num, f"预期数据是{num}，实际得到{adddata}"
+        assert not shift.has_fail_message()
+
     @allure.story("添加数据成功")
     # @pytest.mark.run(order=1)
     def test_shift_addsuccess(self, login_to_shift):
@@ -773,7 +791,7 @@ class TestShiftPage:
         shift = ShiftPage(driver)  # 用 driver 初始化 ShiftPage
         layout = "测试布局A"
 
-        value = ['11测试全部数据', '111', '1测试A']
+        value = ['11测试全部数据', '111', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         shift.del_all(value)
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

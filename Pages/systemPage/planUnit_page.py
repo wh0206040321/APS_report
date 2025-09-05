@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.base_page import BasePage
+from Pages.itemsPage.adds_page import AddsPages
 
 
 class PlanUnitPage(BasePage):
@@ -76,8 +77,39 @@ class PlanUnitPage(BasePage):
         sleep(1)
 
     def click_all_button(self, name):
-        """点击添加按钮."""
-        self.click(By.XPATH, f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 toolbar-container"]//p[text()="{name}"]')
+        """点击按钮."""
+        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 toolbar-container"]//p[text()="{name}"]')
 
-    def add_plan_unit(self,):
+    def add_plan_unit(self, name, module):
         """添加计划单元."""
+        add = AddsPages(self.driver)
+        self.click_all_button("新增")
+        list_ = [
+            '(//label[text()="计划单元"])[1]/parent::div//input',
+            '(//label[text()="计划单元名称"])[1]/parent::div//input',
+        ]
+        add.batch_modify_input(list_, name)
+
+        list_sel = [
+            {"select": '(//label[text()="模板名称"])[1]/parent::div//div[@class="ivu-select-selection"]',
+             "value": f'//li[text()="{module}"]'},
+        ]
+        add.batch_modify_select_input(list_sel)
+
+    def select_input(self, name):
+        """选择输入框."""
+        self.enter_texts('//div[div[p[text()="计划单元"]]]//input', name)
+
+    def click_sel_button(self):
+        """点击查询按钮."""
+        self.click_button('//p[text()="查询"]')
+
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
+
+    def upload_file(self, file_path):
+        upload_input = self.get_find_element_xpath('(//input[@type="file"])[2]')
+        upload_input.send_keys(file_path)

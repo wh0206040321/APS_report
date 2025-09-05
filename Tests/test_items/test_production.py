@@ -449,6 +449,48 @@ class TestProductionPage:
         )
         assert not production.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_production_textverify(self, login_to_production):
+        driver = login_to_production  # WebDriver 实例
+        production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        num = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        production.click_add_button()
+        name = "1测试C订单"
+        # 点击工作代码对话框
+        production.click_button('//label[text()="工作代码"]/following-sibling::div//i')
+        # 在订单代码输入框中输入“1测试C订单”
+        production.enter_texts(
+            '(//div[./p[text()="订单代码"]])[2]/parent::div//input',
+            name,
+        )
+
+        production.click_button(
+            f'//table[.//tr[./td[3]//span[text()="{name}:2"]]]//td[3]//span[text()="{name}:2"]'
+        )
+        # 点击确认按钮
+        production.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
+        production.enter_texts(
+            '//label[text()="报工数量"]/following-sibling::div//input',
+            num,
+        )
+        production.enter_texts(
+            '//label[text()="异常原因"]/following-sibling::div//input',
+            num,
+        )
+        production.click_button(
+            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="返回"]')
+        num_ = production.get_find_element_xpath(
+            '//label[text()="报工数量"]/following-sibling::div//input'
+        ).get_attribute("value")
+        text_ = production.get_find_element_xpath(
+            '//label[text()="异常原因"]/following-sibling::div//input'
+        ).get_attribute("value")
+        assert num_ == '9999999999' and text_ == name
+        assert not production.has_fail_message()
+
     @allure.story("添加测试数据")
     # @pytest.mark.run(order=1)
     def test_production_add4(self, login_to_production):

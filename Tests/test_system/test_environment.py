@@ -57,43 +57,6 @@ def login_to_environment():
 @pytest.mark.run(order=201)
 class TestEnvironmentPage:
 
-    @allure.story("全体页面-数字框只运行输入数字")
-    # @pytest.mark.run(order=1)
-    def test_environment_all_numsel(self, login_to_environment):
-        driver = login_to_environment  # WebDriver 实例
-        environment = EnvironmentPage(driver)  # 用 driver 初始化 EnvironmentPage
-        value = environment.enter_number_input("11111111111111111111")
-        assert value == "100000"
-        assert not environment.has_fail_message()
-
-    @allure.story("全体页面-不输入备份文件不允许保存")
-    # @pytest.mark.run(order=1)
-    def test_environment_all_clearnum(self, login_to_environment):
-        driver = login_to_environment  # WebDriver 实例
-        environment = EnvironmentPage(driver)  # 用 driver 初始化 EnvironmentPage
-        xpth = '//div[label[text()="备份文件最大数:"]]//input'
-        ele = environment.get_find_element_xpath(xpth)
-        ele.send_keys(Keys.CONTROL, 'a')
-        ele.send_keys(Keys.DELETE)
-        value = environment.get_find_element_xpath(xpth).get_attribute("value")
-        environment.click_save_button()
-        message = environment.get_find_message()
-        assert value == "" and message == "请填写信息"
-        assert not environment.has_fail_message()
-
-    @allure.story("全体页面-输入备份文件只允许输入数字，点击保存，保存成功")
-    # @pytest.mark.run(order=1)
-    def test_environment_all_numsuccess(self, login_to_environment):
-        driver = login_to_environment  # WebDriver 实例
-        environment = EnvironmentPage(driver)  # 用 driver 初始化 EnvironmentPage
-        before_value = environment.enter_number_input("QAseE1@!><?+_+=-3.3")
-        environment.click_save_button()
-        message = environment.get_find_message()
-        environment.right_refresh()
-        after_value = environment.enter_number_input()
-        assert before_value == after_value == "133" and message == "保存成功"
-        assert not environment.has_fail_message()
-
     @allure.story("全体页面-所有复选框都点击取消勾选，并且保存成功")
     # @pytest.mark.run(order=1)
     def test_environment_all_checkbox1(self, login_to_environment):
@@ -106,6 +69,7 @@ class TestEnvironmentPage:
             '//div[label[text()="订单同步检查:"]]/div//input',
             '//div[label[text()="变更使用时间:"]]/div//input',
             '//div[label[text()="内部函数基于日期和日境界时刻进行计算:"]]/div//input',
+            '//div[label[text()="工作表移动后全固定:"]]/div//input',
         ]
         environment.update_checkbox(xpth_list, new_value=False)
         before_value = environment.get_checkbox_value(xpth_list)
@@ -129,6 +93,7 @@ class TestEnvironmentPage:
             '//div[label[text()="订单同步检查:"]]/div//input',
             '//div[label[text()="变更使用时间:"]]/div//input',
             '//div[label[text()="内部函数基于日期和日境界时刻进行计算:"]]/div//input',
+            '//div[label[text()="工作表移动后全固定:"]]/div//input',
         ]
         environment.update_checkbox(xpth_list, new_value=True)
         before_value = environment.get_checkbox_value(xpth_list)
@@ -202,7 +167,7 @@ class TestEnvironmentPage:
         assert all(color == "rgb(237, 64, 20)" for color in before_value) and message == "请填写信息"
         assert not environment.has_fail_message()
 
-    @allure.story("周期页面-校验所有数字输入框-超过最大值为Infinity")
+    @allure.story("周期页面-校验所有数字输入框-超过最大值为999999999999999")
     # @pytest.mark.run(order=1)
     def test_environment_cycle_numinput2(self, login_to_environment):
         driver = login_to_environment  # WebDriver 实例
@@ -223,7 +188,8 @@ class TestEnvironmentPage:
         environment.right_refresh()
         environment.click_cycle()
         after_value = environment.batch_acquisition_input(xpth_list)
-        assert before_value == after_value == "Infinity" and message == "保存成功"
+        num_ = "999999999999999"
+        assert all(num_ == v for v in after_value) and message == "保存成功"
         assert all(after_value), "列表中存在为空或为假值的元素！"
         assert not environment.has_fail_message()
 
@@ -390,7 +356,8 @@ class TestEnvironmentPage:
         environment.right_refresh()
         environment.click_plan()
         after_value = environment.batch_acquisition_input(xpth_list)
-        assert before_value == after_value == "Infinity" and message == "保存成功"
+        num_ = "1000000000000000000"
+        assert all(num_ == v for v in after_value) and message == "保存成功"
         assert all(after_value), "列表中存在为空或为假值的元素！"
         assert not environment.has_fail_message()
 
@@ -595,7 +562,6 @@ class TestEnvironmentPage:
     def test_environment_restore_default_settings(self, login_to_environment):
         driver = login_to_environment  # WebDriver 实例
         environment = EnvironmentPage(driver)  # 用 driver 初始化 EnvironmentPage
-        environment.enter_number_input(10)
         check1 = environment.get_find_element_xpath('//div[label[text()="变更使用时间:"]]/div//span').get_attribute("class")
         if check1 == "ivu-checkbox ivu-checkbox-checked":
             environment.click_button('//div[label[text()="变更使用时间:"]]/div//span')

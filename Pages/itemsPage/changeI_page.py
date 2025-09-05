@@ -96,6 +96,22 @@ class ChangeI(BasePage):
         except NoSuchElementException:
             return None
 
+    def del_data(self):
+        self.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        self.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        # 定位第一行
+        self.click_button(
+            '//table[@class="vxe-table--body"]//tr[1]/td[2]'
+        )
+        self.click_del_button()  # 点击删除
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        sleep(1)
+
     def add_input_all(self, num):
         """输入框全部输入保存"""
         if num != "":

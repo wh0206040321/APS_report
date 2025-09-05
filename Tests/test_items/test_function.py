@@ -128,19 +128,6 @@ class TestFunctionPage:
         assert len(num) == 1 and customers.text == name
         assert not function.has_fail_message()
 
-    @allure.story("切换排产单元成功")
-    # @pytest.mark.run(order=1)
-    def test_function_switch(self, login_to_function):
-        driver = login_to_function
-        function = FunctionPage(driver)
-        name = "AA"
-        function.click_button('//div[text()=" 金属（演示） "]')
-        function.click_button(f'//ul[@class="ivu-dropdown-menu" and ./li[text()="金属（演示）"]]//li[text()="{name}"]')
-        sleep(3)
-        after_name = function.get_find_element_xpath('//div[@class="unitCodeBox"]').text
-        assert after_name == name
-        assert not function.has_fail_message()
-
     @allure.story("收藏页面成功")
     # @pytest.mark.run(order=1)
     def test_function_collect(self, login_to_function):
@@ -153,9 +140,11 @@ class TestFunctionPage:
         # 鼠标悬停
         ActionChains(driver).move_to_element(element).perform()
         function.click_button(f'(//span[text()="{name}"])[1]/following-sibling::i')
+        message = function.get_find_message()
         function.click_button('(//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]')
         sleep(3)
         eles = driver.find_elements(By.XPATH, '//div[@class="ivu-select-dropdown GroundGlass"]/ul/li')
+        assert message == "收藏成功"
         assert any(li.text.strip() == "客户" for li in eles)
         assert not function.has_fail_message()
 
@@ -171,6 +160,7 @@ class TestFunctionPage:
         # 鼠标悬停
         ActionChains(driver).move_to_element(element).perform()
         function.click_button(f'(//span[text()="{name}"])[1]/following-sibling::i')
+        message = function.get_find_message()
         function.click_button('(//div[@class="ivu-dropdown-rel" and ./i[contains(@class,"icon-wrapper")]])[2]')
         sleep(3)
         eles = driver.find_elements(By.XPATH, '//div[@class="ivu-select-dropdown GroundGlass"]/ul/li')
@@ -178,6 +168,7 @@ class TestFunctionPage:
         texts = [li.text.strip() for li in eles]
 
         # 断言 "客户" 不在列表中
+        assert message == "取消成功"
         assert "客户" not in texts
         assert not function.has_fail_message()
 

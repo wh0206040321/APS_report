@@ -265,6 +265,27 @@ class TestResourcePage:
         assert resourcedata == name, f"预期{resourcedata}"
         assert not resource.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_resource_textverify(self, login_to_resource):
+        driver = login_to_resource  # WebDriver 实例
+        resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
+        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        resource.add_test_resource(name)
+        resource.enter_texts('(//label[text()="显示顺序"])[1]/parent::div//input', name)
+        # 点击确定
+        resource.click_button(
+            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        sleep(1)
+        adddata = resource.get_find_element_xpath(
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
+        ).text
+        num_ = resource.get_find_element_xpath(
+            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[9]'
+        ).text
+        assert adddata == name and num_ == '9999999999', f"预期数据是{name}，实际得到{adddata}"
+        assert not resource.has_fail_message()
+
     @allure.story("添加测试数据成功")
     # @pytest.mark.run(order=1)
     def test_resource_addsuccess1(self, login_to_resource):
@@ -1081,7 +1102,7 @@ class TestResourcePage:
         resource = ResourcePage(driver)  # 用 driver 初始化 resourcePage
         layout = "测试布局A"
 
-        value = ['111', '11测试全部数据', '1测试A']
+        value = ['111', '11测试全部数据', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         resource.del_all(value, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

@@ -155,12 +155,13 @@ class TestMasterPage:
         assert not master.has_fail_message()
 
     @allure.story(
-        "添加工艺产能信息，只填写物料，工序选定器和工序编号，输入指令，新增成功"
+        "添加工艺产能信息，只填写物料，工序选定器和工序编号，输入指令，新增成功,校验文本框"
     )
     # @pytest.mark.run(order=3)
     def test_master_addserial2(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
         # 清空之前的共享数据
         SharedDataUtil.clear_data()
         master.click_add_button()
@@ -187,7 +188,7 @@ class TestMasterPage:
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
-            "1",
+            name,
         )
         # 点击下拉框
         master.click_button(
@@ -226,6 +227,9 @@ class TestMasterPage:
         addtext = master.get_find_element_xpath(
             f'//tr[.//td[2]//span[text()="{item}"]]/td[9]'
         ).text
+        text_ = master.get_find_element_xpath(
+            f'//tr[.//td[2]//span[text()="{item}"]]/td[5]'
+        ).text
         # 获取重复弹窗文字
         error_popup = driver.find_elements(
             By.XPATH, '//div[text()=" 记录已存在,请检查！ "]'
@@ -233,6 +237,7 @@ class TestMasterPage:
         SharedDataUtil.save_data(
             {"item": item}
         )
+        assert text_ == name
         assert item == adddata and addtext == "输入指令" and len(error_popup) == 0
         assert not master.has_fail_message()
 

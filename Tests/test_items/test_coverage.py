@@ -317,6 +317,98 @@ class TestCoveragePage:
         assert value_list[0] == "" and value_list[1] == end
         assert not coverage.has_fail_message()
 
+    @allure.story("校验数字文本框和文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_coverage_textverify(self, login_to_coverage):
+        driver = login_to_coverage  # WebDriver 实例
+        coverage = Coverage(driver)  # 用 driver 初始化 Coverage
+        start = "2027/08/21 00:00:00"
+        end = "2028/07/21 00:00:00"
+        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+        coverage.click_add_button()
+
+        # 点击资源
+        coverage.click_button(
+            '//div[@id="2ssy7pog-1nb7"]//i'
+        )
+        # 勾选框
+        random_int = random.randint(1, 8)
+        sleep(1)
+        coverage.click_button(f'(//span[@class="vxe-cell--checkbox"])[{random_int}]')
+        sleep(1)
+        coverage.click_button(
+            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+        )
+        sleep(1)
+        # 获取勾选的资源代码
+        resource = coverage.get_find_element_xpath(
+            '//div[@id="2ssy7pog-1nb7"]//input'
+        ).get_attribute("value")
+
+        coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
+
+        # 时序
+        coverage.enter_texts(
+            '//div[@id="tg89jocr-6to2"]//input', f"{start};{end}"
+        )
+        chronology = coverage.get_find_element_xpath(
+            '//div[@id="tg89jocr-6to2"]//input'
+        ).get_attribute("value")
+
+        # 资源量
+        coverage.enter_texts('//div[@id="k0z05daz-8tok"]//input', "4")
+        resources = coverage.get_find_element_xpath(
+            '//div[@id="k0z05daz-8tok"]//input'
+        ).get_attribute("value")
+        # 校验文本框
+        coverage.enter_texts('//div[@id="9la8xi09-07ws"]//input', name)
+        coverage.enter_texts('//div[@id="luvfyssv-uxe2"]//input', name)
+        sleep(1)
+        coverage.click_button(
+            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+        )
+        driver.execute_script("document.body.style.zoom='0.6'")
+        sleep(1)
+        coverage.click_button(
+            '//span[text()=" 更新时间"]/following-sibling::div'
+        )
+        sleep(1)
+        coverage.click_button(
+            '//span[text()=" 更新时间"]/following-sibling::div'
+        )
+        sleep(1)
+        addcoverage = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[2]'
+        ).text
+        addstart = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[3]'
+        ).text
+        addend = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[4]'
+        ).text
+        addchronology = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
+        ).text
+        addresources = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[8]'
+        ).text
+        text_ = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[12]'
+        ).text
+        num_ = coverage.get_find_element_xpath(
+            f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[5]'
+        ).text
+        assert (
+                resource == addcoverage
+                and start == addstart
+                and end == addend
+                and chronology == addchronology
+                and resources == addresources
+                and text_ == name
+                and num_ == '9999999999'
+        )
+        assert not coverage.has_fail_message()
+
     @allure.story("添加数据成功")
     # @pytest.mark.run(order=1)
     def test_coverage_addweeksuccess1(self, login_to_coverage):

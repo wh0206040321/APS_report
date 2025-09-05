@@ -130,6 +130,7 @@ class PersonalPage(BasePage):
         self.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
         self.click_button('(//span[text()="环境设置"])[1]')  # 点击环境设置
         radio = self.get_find_element('//label[text()=" 服务器"]/span')
+        sleep(1)
         if name == 'web' or name == 'ip':
             # 选择服务器类型并保存
             if radio.get_attribute('class') == 'ivu-radio':
@@ -196,5 +197,6 @@ class PersonalPage(BasePage):
                 display.click()
         # 点击确定按钮保存设置
         self.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
+        sleep(1)
         style = self.get_find_element('//div[@class="menuTitle"]').get_attribute("style")
         return style
