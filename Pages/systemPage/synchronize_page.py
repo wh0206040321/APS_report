@@ -11,7 +11,6 @@ from Pages.base_page import BasePage
 from Utils.data_driven import DateDriver
 
 
-
 class SynchronizePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数

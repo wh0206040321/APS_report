@@ -2,7 +2,7 @@ from time import sleep
 from datetime import datetime
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -78,7 +78,7 @@ class PlanUnitPage(BasePage):
 
     def click_all_button(self, name):
         """点击按钮."""
-        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 toolbar-container"]//p[text()="{name}"]')
+        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
 
     def add_plan_unit(self, name, module):
         """添加计划单元."""
@@ -113,3 +113,48 @@ class PlanUnitPage(BasePage):
     def upload_file(self, file_path):
         upload_input = self.get_find_element_xpath('(//input[@type="file"])[2]')
         upload_input.send_keys(file_path)
+
+    def del_all(self, value=[]):
+        for index, v in enumerate(value, start=1):
+            try:
+                xpath = '//p[text()="计划单元"]/ancestor::div[2]//input'
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                sleep(0.5)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+                self.click_all_button("删除")  # 点击删除
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+                sleep(1)
+            except NoSuchElementException:
+                print(f"未找到元素: {v}")
+            except Exception as e:
+                print(f"操作 {v} 时出错: {str(e)}")
+
+    def del_layout(self, layout):
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+
+        self.click_button(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+        )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        sleep(2)
+        # 点击确认删除的按钮
+        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')

@@ -201,11 +201,28 @@ class PsiPage(BasePage):
         delete_icon.click()
 
     def del_data(self, value=[]):
+        """
+        删除数据项
+
+        该函数通过遍历提供的xpath列表，对每个数据项执行删除操作。
+        主要流程包括：点击数据项、点击删除按钮、确认删除对话框。
+
+        参数:
+            value (list): 包含xpath表达式的列表，用于定位要删除的数据项
+
+        返回值:
+            无返回值
+        """
+        # 遍历xpath列表，对每个数据项执行删除操作
         for index, xpath in enumerate(value, start=1):
             try:
+                # 点击数据项
                 self.click_button(xpath)
+                # 点击删除按钮
                 self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//input)[1]')
+                # 点击关闭图标
                 self.click_button(f'(//i[@class="ivu-icon ivu-icon-md-close"])[{index}]')
+                # 点击确认删除按钮
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")

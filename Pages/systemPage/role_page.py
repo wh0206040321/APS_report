@@ -78,7 +78,7 @@ class RolePage(BasePage):
 
     def click_all_button(self, name):
         """点击按钮."""
-        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 toolbar-container"]//p[text()="{name}"]')
+        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
 
     def add_role(self, name, module):
         """添加角色管理."""
@@ -97,7 +97,7 @@ class RolePage(BasePage):
         add.batch_modify_select_input(list_sel)
 
     def update_role(self, before_name, after_name, module):
-        """添加角色管理."""
+        """修改角色管理."""
         add = AddsPages(self.driver)
         self.select_input(before_name)
         sleep(1)
@@ -110,7 +110,7 @@ class RolePage(BasePage):
 
         list_sel = [
             {"select": '//div[label[text()="计划单元名称"]]//div[@class="ivu-select-selection"]',
-             "value": f'//li[text()="{module}"]'},
+             "value": f'//ul[@class="ivu-select-dropdown-list"]/li[text()="{module}"]'},
         ]
         add.batch_modify_select_input(list_sel)
 
@@ -128,3 +128,20 @@ class RolePage(BasePage):
         code = [ele.text for ele in eles]
         return code
 
+    def hover(self, name=""):
+        # 悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//span[@class="position-absolute font12 right10"]'
+        )
+        ActionChains(self.driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//ul/li[contains(text(),"{name}")]'
+            ))
+        )
+
+        # 3️⃣ 再点击图标
+        delete_icon.click()

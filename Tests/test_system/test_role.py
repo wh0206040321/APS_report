@@ -62,7 +62,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_addfail1(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         add = AddsPages(driver)
         list_ = [
             '//div[label[text()="角色代码"]]//input',
@@ -78,13 +78,13 @@ class TestRolePage:
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
         assert all(value == expected_color for value in value_list)
-        assert not add.has_fail_message()
+        assert not role.has_fail_message()
 
     @allure.story("点击只输入角色代码点击保存，不允许保存")
     # @pytest.mark.run(order=1)
     def test_role_addfail2(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         add = AddsPages(driver)
         name = "1测试角色代码1"
         list_ = [
@@ -100,13 +100,13 @@ class TestRolePage:
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
         assert all(value == expected_color for value in value_list)
-        assert not add.has_fail_message()
+        assert not role.has_fail_message()
 
     @allure.story("点击输入角色代码和名称点击保存，不允许保存")
     # @pytest.mark.run(order=1)
     def test_role_addfail3(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         add = AddsPages(driver)
         name = "1测试角色代码1"
         list_ = [
@@ -122,13 +122,13 @@ class TestRolePage:
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
         assert all(value == expected_color for value in value_list)
-        assert not add.has_fail_message()
+        assert not role.has_fail_message()
 
     @allure.story("添加数据不选择菜单不允许添加")
     # @pytest.mark.run(order=1)
     def test_role_addfail4(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         name = "1测试角色代码1"
         module = "1测试A"
         role.add_role(name, module)
@@ -142,7 +142,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_success1(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
         name = "1测试角色代码1"
         module = "1测试A"
@@ -185,7 +185,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_success2(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
         name = "1测试角色代码2"
         module = "1测试计划单元小日程"
@@ -229,7 +229,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_addrepeat(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         name = "1测试角色代码2"
         module = "1测试计划单元CTB"
         role.add_role(name, module)
@@ -245,7 +245,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_addtestdata(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
         name = "1测试角色代码3"
         module = "1测试计划单元CTB"
@@ -288,7 +288,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_updatedata1(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
         before_name = "1测试角色代码3"
         after_name = "修改角色名称"
@@ -317,7 +317,7 @@ class TestRolePage:
     # @pytest.mark.run(order=1)
     def test_role_updatedata2(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 PlanUnitPage
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
         before_name = "1测试角色代码3"
         after_name = "修改角色名称"
@@ -351,4 +351,173 @@ class TestRolePage:
         num_ = len(role.finds_elements(By.XPATH, f'//div[@class="listDivCon"]/div'))
         swich_name = role.get_find_element_xpath(f'//div[@class="ivu-dropdown-rel"]/div').text
         assert len(ele) == 1 and message == "保存成功" and num_ == 1 and swich_name == module and te == "需求管理"
+        assert not role.has_fail_message()
+
+    @allure.story("查询1测试角色代码2成功")
+    # @pytest.mark.run(order=1)
+    def test_role_select1(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        name = "1测试角色代码2"
+        role.select_input(name)
+        sleep(1)
+        eles = role.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        list_ = [ele.text for ele in eles]
+        assert all(text == name for text in list_), f"表格内容不符合预期，实际值: {list_}"
+        assert not role.has_fail_message()
+
+    @allure.story("过滤条件查询，一个不选，显示正常")
+    # @pytest.mark.run(order=1)
+    def test_role_select2(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//i')
+        sleep(1)
+        eles = role.get_find_element_xpath('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
+            "class")
+        if eles == "ivu-checkbox ivu-checkbox-checked":
+            role.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+        sleep(1)
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//input')
+        eles = role.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        assert len(eles) == 0
+        assert not role.has_fail_message()
+
+    @allure.story("过滤条件查询，设置包含条件查询成功")
+    # @pytest.mark.run(order=1)
+    def test_role_select3(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        name = "1测试"
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//i')
+        role.hover("包含")
+        sleep(1)
+        role.select_input(name)
+        sleep(1)
+        eles = role.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        sleep(1)
+        list_ = [ele.text for ele in eles]
+        assert all(name in text for text in list_)
+        assert not role.has_fail_message()
+
+    @allure.story("过滤条件查询，设置符合开头查询成功")
+    # @pytest.mark.run(order=1)
+    def test_role_select4(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        name = "1测试"
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//i')
+        role.hover("符合开头")
+        sleep(1)
+        role.select_input(name)
+        sleep(1)
+        eles = role.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        sleep(1)
+        list_ = [ele.text for ele in eles]
+        assert all(str(item).startswith(name) for item in list_)
+        assert not role.has_fail_message()
+
+    @allure.story("过滤条件查询，设置符合结尾查询成功")
+    # @pytest.mark.run(order=1)
+    def test_role_select5(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        name = "2"
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//i')
+        role.hover("符合结尾")
+        sleep(1)
+        role.select_input(name)
+        sleep(1)
+        eles = role.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        sleep(1)
+        list_ = [ele.text for ele in eles]
+        assert all(str(item).endswith(name) for item in list_)
+        assert not role.has_fail_message()
+
+    @allure.story("清除筛选效果成功")
+    # @pytest.mark.run(order=1)
+    def test_role_clear(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        name = "3"
+        sleep(1)
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//i')
+        role.hover("包含")
+        sleep(1)
+        role.select_input(name)
+        sleep(1)
+        role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//i')
+        role.hover("清除所有筛选条件")
+        sleep(1)
+        ele = role.get_find_element_xpath('//div[p[text()="角色代码"]]/following-sibling::div//i').get_attribute("class")
+        assert ele == "vxe-icon-funnel suffixIcon"
+        assert not role.has_fail_message()
+
+    @allure.story("点击取消不会修改数据")
+    # @pytest.mark.run(order=1)
+    def test_role_cancel(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        before_name = "1测试角色代码3"
+        after_name = "修改角色名称"
+        module = "1测试计划单元标准"
+        role.update_role(before_name, before_name, module)
+        role.click_all_button("取消")
+        role.right_refresh()
+        eles = role.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{after_name}"]')
+        assert len(eles) == 1
+        assert not role.has_fail_message()
+
+    @allure.story("点击查询成功")
+    # @pytest.mark.run(order=1)
+    def test_role_clickselect(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        name = "1测试"
+        # 点击查询
+        role.click_sel_button()
+        sleep(1)
+        # 定位名称输入框
+        element_to_double_click = driver.find_element(
+            By.XPATH,
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
+        )
+        # 创建一个 ActionChains 对象
+        actions = ActionChains(driver)
+        # 双击命令
+        actions.double_click(element_to_double_click).perform()
+        sleep(1)
+        # 点击物料代码
+        role.click_button('//div[text()="角色代码" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击比较关系框
+        role.click_button(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
+        )
+        sleep(1)
+        # 点击=
+        role.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+        sleep(1)
+        # 点击输入数值
+        role.enter_texts(
+            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
+            name,
+        )
+        sleep(1)
+
+        # 点击确认
+        role.click_button(
+            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
+        )
+        sleep(1)
+        # 定位第一行是否为name
+        unitcode = role.get_find_element_xpath(
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        unitcode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert unitcode == name and len(unitcode2) == 0
         assert not role.has_fail_message()

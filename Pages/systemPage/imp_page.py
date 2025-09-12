@@ -77,14 +77,30 @@ class ImpPage(BasePage):
 
     def click_impall_button(self, name):
         """点击导入页面各种按钮"""
-        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 toolbar-container"]//p[text()="{name}"]')
+        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
 
     def del_all(self, value=[]):
         """批量删除"""
         for v in value:
-            self.click_button('//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 toolbar-container"]//input[@class="ivu-select-input"]')
+            self.click_button('//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]')
             self.click_button(f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{v}"]')
             self.click_impall_button("删除")
             self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
         self.click_impall_button("保存")
+
+    def add_imp(self, name):
+        """添加导入方案"""
+        self.click_impall_button("新增")
+        self.enter_texts('//div[label[text()="名称"]]//input', name)
+        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+
+    def copy_(self, name='', copy_name=''):
+        """复制导入方案"""
+        self.click_impall_button("复制")
+        if name != '':
+            self.click_button('//div[label[text()="源方案"]]//input[@type="text"]')
+            self.click_button(f'(//ul/li[text()="{name}"])[2]')
+        if copy_name != '':
+            self.enter_texts('//div[label[text()="目的方案"]]//input[@type="text"]', copy_name)
+        self.click_button('(//div[@class="ivu-modal-footer"]//span[text()="确定"])[2]')

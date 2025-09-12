@@ -56,7 +56,7 @@ def login_to_synchronize():
 
 
 @allure.feature("配置同步页用例")
-@pytest.mark.run(order=204)
+@pytest.mark.run(order=208)
 class TestSynchronizePage:
 
     @allure.story("不勾选单元点击同步弹出错误提示")
@@ -78,7 +78,7 @@ class TestSynchronizePage:
             "1测试psi1",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(psi_names, plan_names, "1")
         synchronize.click_synchronize_button()
@@ -103,7 +103,7 @@ class TestSynchronizePage:
             "1测试psi1",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(psi_names, plan_names, "1")
         synchronize.click_synchronize_button()
@@ -129,7 +129,7 @@ class TestSynchronizePage:
             "1测试psi2",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(psi_names, plan_names, "1")
         synchronize.click_synchronize_button()
@@ -155,8 +155,8 @@ class TestSynchronizePage:
             "1测试psi3",
         ]
         plan_names = [
-            "AA",
-            "H",
+            "1测试计划单元标准",
+            "1测试A",
         ]
         synchronize.click_checkbox_value(psi_names, plan_names, "1")
         synchronize.click_synchronize_button()
@@ -191,8 +191,8 @@ class TestSynchronizePage:
             "1测试psi3",
         ]
         plan_names = [
-            "AA",
-            "H",
+            "1测试计划单元标准",
+            "1测试A",
         ]
         synchronize.click_checkbox_value(psi_names, plan_names, "1")
         synchronize.click_synchronize_button()
@@ -225,7 +225,7 @@ class TestSynchronizePage:
             "排产方案(订单级)同步1",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(plan_name, plan_names, "2")
         synchronize.click_synchronize_button()
@@ -250,7 +250,7 @@ class TestSynchronizePage:
             "排产方案(订单级)同步1",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(plan_name, plan_names, "2")
         synchronize.click_synchronize_button()
@@ -276,7 +276,7 @@ class TestSynchronizePage:
             "排产方案(订单级)同步2",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(plan_name, plan_names, "2")
         synchronize.click_synchronize_button()
@@ -302,8 +302,8 @@ class TestSynchronizePage:
             "排产方案(订单级)同步3",
         ]
         plan_names = [
-            "AA",
-            "H",
+            "1测试计划单元标准",
+            "1测试A",
         ]
         synchronize.click_checkbox_value(plan_name, plan_names, "2")
         synchronize.click_synchronize_button()
@@ -338,8 +338,8 @@ class TestSynchronizePage:
             "排产方案(订单级)同步3",
         ]
         plan_names = [
-            "AA",
-            "H",
+            "1测试计划单元标准",
+            "1测试A",
         ]
         synchronize.click_checkbox_value(plan_name, plan_names, "2")
         synchronize.click_synchronize_button()
@@ -369,10 +369,10 @@ class TestSynchronizePage:
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         import_name = [
-            "同步导入1",
+            "1同步导入1",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(import_name, plan_names, "3")
         synchronize.click_synchronize_button()
@@ -395,10 +395,10 @@ class TestSynchronizePage:
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         import_name = [
-            "同步导入1",
+            "1同步导入1",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(import_name, plan_names, "3")
         synchronize.click_synchronize_button()
@@ -421,11 +421,11 @@ class TestSynchronizePage:
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         import_name = [
-            "同步导入1",
-            "同步导入2",
+            "1同步导入1",
+            "1同步导入2",
         ]
         plan_names = [
-            "AA",
+            "1测试计划单元标准",
         ]
         synchronize.click_checkbox_value(import_name, plan_names, "3")
         synchronize.click_synchronize_button()
@@ -451,8 +451,8 @@ class TestSynchronizePage:
             "同步导入3",
         ]
         plan_names = [
-            "AA",
-            "H",
+            "1测试计划单元标准",
+            "1测试A",
         ]
         synchronize.click_checkbox_value(import_name, plan_names, "3")
         synchronize.click_synchronize_button()
@@ -484,13 +484,13 @@ class TestSynchronizePage:
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         import_name = [
-            "同步导入1",
-            "同步导入2",
-            "同步导入3",
+            "1同步导入1",
+            "1同步导入2",
+            "1同步导入3",
         ]
         plan_names = [
-            "AA",
-            "H",
+            "1测试计划单元标准",
+            "1测试A",
         ]
         synchronize.click_checkbox_value(import_name, plan_names, "3")
         synchronize.click_synchronize_button()
@@ -541,9 +541,9 @@ class TestSynchronizePage:
 
         import_list = ["数据接口底座", "DBLinK", "导入设置"]
         import_name = [
-            "同步导入1",
-            "同步导入2",
-            "同步导入3",
+            "1同步导入1",
+            "1同步导入2",
+            "1同步导入3",
         ]
         for v in import_list:
             synchronize.click_button(f'(//span[text()="{v}"])[1]')
