@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="审核日志"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="d-flex"]//span[text()="查询"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[6]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[8]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = [<selenium.webdriver.remote.webelement.WebElement (session="67a552a8053029520194183e966384a8", element="f.291097D16EAA74FBD0CD54F3A7A8A808.d.7DB17DD2E0507827C87CF1082591FE3D.e.80")>, <selenium.webdriver.remote.webelement.WebElement (session="67a552a8053029520194183e966384a8", element="f.291097D16EAA74FBD0CD54F3A7A8A808.d.7DB17DD2E0507827C87CF1082591FE3D.e.81")>, <selenium.webdriver.remote.webelement.WebElement (session="67a552a8053029520194183e966384a8", element="f.291097D16EAA74FBD0CD54F3A7A8A808.d.7DB17DD2E0507827C87CF1082591FE3D.e.82")>]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1944990725072

@@ -96,7 +96,8 @@ class SynchronizePage(BasePage):
         menu_paths = {
             1: ["系统管理", "单元设置", "PSI设置"],
             2: ["计划运行", "方案管理", "计划方案管理"],
-            3: ["数据接口底座", "DBLinK", "导入设置"]
+            3: ["计划运行", "方案管理", "物控方案管理"],
+            4: ["数据接口底座", "DBLinK", "导入设置"]
         }
 
         for menu in menu_paths.get(num, []):
@@ -183,6 +184,11 @@ class SynchronizePage(BasePage):
                 "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
             },
             "3": {
+                "section_xpath": '//div[text()=" 物控方案 "]',
+                "input_xpath": '//div[p[text()="物控方案"]]/following-sibling::div//input',
+                "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
+            },
+            "4": {
                 "section_xpath": '//div[text()=" 数据导入 "]',
                 "input_xpath": '//div[p[text()="数据导入方案名称"]]/following-sibling::div//input',
                 "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'

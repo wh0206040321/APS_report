@@ -2,7 +2,7 @@ from time import sleep
 from datetime import datetime
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -230,12 +230,18 @@ class PsiPage(BasePage):
                 print(f"操作 {xpath} 时出错: {str(e)}")
 
     def del_all(self, value=[]):
-        for index, xpath in enumerate(value, start=1):
+        for index, v in enumerate(value, start=1):
             try:
-                self.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{xpath}"]')
+                xpath = '//p[text()="PSI名称"]/ancestor::div[2]//input'
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                sleep(0.5)
+                self.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{v}"]')
                 self.click_button_psi("删除")  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             except NoSuchElementException:
-                print(f"未找到元素: {xpath}")
+                print(f"未找到元素: {v}")
             except Exception as e:
-                print(f"操作 {xpath} 时出错: {str(e)}")
+                print(f"操作 {v} 时出错: {str(e)}")

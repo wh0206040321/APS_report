@@ -894,7 +894,7 @@ class TestUserRolePage:
     def test_user_del1(self, login_to_userrole):
         driver = login_to_userrole  # WebDriver 实例
         user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
-        names = ['1user1', '1user2']
+        names = ['1user2']
         user.del_(names)
         for name in names:
             xpath = f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name}"]'

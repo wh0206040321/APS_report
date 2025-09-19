@@ -14,6 +14,7 @@ from selenium.common.exceptions import WebDriverException
 from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.sched_page import SchedPage
 from Pages.systemPage.imp_page import ImpPage
+from Pages.systemPage.planUnit_page import PlanUnitPage
 from Pages.systemPage.psi_page import PsiPage
 from Pages.systemPage.synchronize_page import SynchronizePage
 from Pages.itemsPage.login_page import LoginPage
@@ -374,16 +375,16 @@ class TestSynchronizePage:
         plan_names = [
             "1测试计划单元标准",
         ]
-        synchronize.click_checkbox_value(import_name, plan_names, "3")
+        synchronize.click_checkbox_value(import_name, plan_names, "4")
         synchronize.click_synchronize_button()
         synchronize.click_synchronize_pop(True)
         message = synchronize.get_find_message()
-        synchronize.switch_plane(plan_names[0], 3)
+        synchronize.switch_plane(plan_names[0], 4)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -400,16 +401,16 @@ class TestSynchronizePage:
         plan_names = [
             "1测试计划单元标准",
         ]
-        synchronize.click_checkbox_value(import_name, plan_names, "3")
+        synchronize.click_checkbox_value(import_name, plan_names, "4")
         synchronize.click_synchronize_button()
         synchronize.click_synchronize_pop(True)
         message = synchronize.get_find_message()
-        synchronize.switch_plane(plan_names[0], 3)
+        synchronize.switch_plane(plan_names[0], 4)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -427,16 +428,16 @@ class TestSynchronizePage:
         plan_names = [
             "1测试计划单元标准",
         ]
-        synchronize.click_checkbox_value(import_name, plan_names, "3")
+        synchronize.click_checkbox_value(import_name, plan_names, "4")
         synchronize.click_synchronize_button()
         synchronize.click_synchronize_pop(True)
         message = synchronize.get_find_message()
-        synchronize.switch_plane(plan_names[0], 3)
+        synchronize.switch_plane(plan_names[0], 4)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -448,31 +449,32 @@ class TestSynchronizePage:
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         import_name = [
-            "同步导入3",
+            "1同步导入3",
         ]
         plan_names = [
             "1测试计划单元标准",
             "1测试A",
         ]
-        synchronize.click_checkbox_value(import_name, plan_names, "3")
+        synchronize.click_checkbox_value(import_name, plan_names, "4")
         synchronize.click_synchronize_button()
         synchronize.click_synchronize_pop(True)
         message = synchronize.get_find_message()
-        synchronize.switch_plane(plan_names[0], 3)
+        synchronize.switch_plane(plan_names[0], 4)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
+        synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         synchronize.click_button(f'//div[contains(text(),"{plan_names[0]}")]')
-        synchronize.switch_plane(plan_names[1], 3, js=False)
+        synchronize.switch_plane(plan_names[1], 4, js=False)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -492,31 +494,32 @@ class TestSynchronizePage:
             "1测试计划单元标准",
             "1测试A",
         ]
-        synchronize.click_checkbox_value(import_name, plan_names, "3")
+        synchronize.click_checkbox_value(import_name, plan_names, "4")
         synchronize.click_synchronize_button()
         synchronize.click_synchronize_pop(True)
         message = synchronize.get_find_message()
-        synchronize.switch_plane(plan_names[0], 3)
+        synchronize.switch_plane(plan_names[0], 4)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
+        synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         synchronize.click_button(f'//div[contains(text(),"{plan_names[0]}")]')
-        synchronize.switch_plane(plan_names[1], 3, js=False)
+        synchronize.switch_plane(plan_names[1], 4, js=False)
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//ul/li[text()="{name}"]'
+                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
         assert not synchronize.has_fail_message()
 
-    @allure.story("删除psi，计划方案，导入设置所有数据成功")
+    @allure.story("删除psi，计划方案，导入设置，计划单元所有数据成功")
     # @pytest.mark.run(order=1)
     def test_synchronize_delall(self, login_to_synchronize):
         driver = login_to_synchronize  # WebDriver 实例
@@ -524,6 +527,7 @@ class TestSynchronizePage:
         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
         imp = ImpPage(driver)
         sched = SchedPage(driver)
+        unit = PlanUnitPage(driver)
         synchronize.click_button('(//span[text()="PSI设置"])[1]')
         psi_name = ["1测试psi1","1测试psi2","1测试psi3"]
         psi.del_all(psi_name)
@@ -549,3 +553,14 @@ class TestSynchronizePage:
             synchronize.click_button(f'(//span[text()="{v}"])[1]')
         imp.del_all(import_name)
         sleep(1)
+
+        unit_list = ["系统管理", "系统设置", "计划单元"]
+        unit_name = [
+            "1测试计划单元标准",
+        ]
+        for v in unit_list:
+            synchronize.click_button(f'(//span[text()="{v}"])[1]')
+        unit.del_all(unit_name)
+        ele = synchronize.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not synchronize.has_fail_message()
