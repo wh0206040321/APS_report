@@ -1,0 +1,3 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //li[text()="金属（演示）"] 未在 10 秒内变为可点击
