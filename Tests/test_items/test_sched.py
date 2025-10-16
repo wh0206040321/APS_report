@@ -62,13 +62,9 @@ class TestSchedPage:
         sched.click_add_schedbutton()  # 点击添加方案
 
         sched.click_ok_schedbutton()  # 点击确定
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = sched.get_error_message()
         # 检查元素是否包含子节点
-        assert message.text == "请输入"
+        assert message == "请输入"
         assert not sched.has_fail_message()
 
     @allure.story("添加方案管理信息 只填写复制方案 不允许提交")
@@ -84,13 +80,9 @@ class TestSchedPage:
         sched.click_button('//li[text()="排产方案（工序级）"]')
 
         sched.click_ok_schedbutton()  # 点击确定
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = sched.get_error_message()
         # 检查元素是否包含子节点
-        assert message.text == "请输入"
+        assert message == "请输入"
         assert not sched.has_fail_message()
 
     @allure.story("添加方案管理信息 添加重复 不允许提交")
@@ -105,13 +97,9 @@ class TestSchedPage:
         )
 
         sched.click_ok_schedbutton()  # 点击确定
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = sched.get_error_message()
         # 检查元素是否包含子节点
-        assert message.text == "计划方案已存在"
+        assert message == "计划方案已存在"
         assert not sched.has_fail_message()
 
     @allure.story("添加复制方案成功")
@@ -216,14 +204,10 @@ class TestSchedPage:
             '(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[1]/label[1]'
         )
         sched.click_add_commandbutton()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = sched.get_error_message()
         # 检查元素是否包含子节点
         sleep(1)
-        assert message.text == "请选择操作的行"
+        assert message == "请选择操作的行"
         assert not sched.has_fail_message()
 
     @allure.story("添加命令成功")
@@ -681,14 +665,10 @@ class TestSchedPage:
         sched.click_button('(//i[@class="ivu-icon ivu-icon-md-add"])[2]')
 
         sched.click_ok_button()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = sched.get_error_message()
         # 检查元素是否包含子节点
         sleep(1)
-        assert message.text == "请把信息填写完整"
+        assert message == "请把信息填写完整"
         assert not sched.has_fail_message()
 
     @allure.story("属性设置-分派失败时(资源锁定制约)")

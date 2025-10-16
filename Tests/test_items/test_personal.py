@@ -107,10 +107,11 @@ class TestPersonalPage:
     # @pytest.mark.run(order=1)
     def test_personal_editpassword5(self, login_to_personal):
         driver = login_to_personal  # WebDriver 实例
+        text = " 不能包含+: , [ < > ' )  / ，]符号 "
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
         password = [f"{DateDriver.password}", "Qw12+>3", "Qw12+>3"]
         personal.edit_password(password[0], password[1], password[2])
-        ele = driver.find_elements(By.XPATH, '//p[text()=" 密码中不能包含特殊字符 "]')
+        ele = driver.find_elements(By.XPATH, f'//p[text()="{text}"]')
         assert len(ele) == 1
         assert not personal.has_fail_message()
 
@@ -165,7 +166,7 @@ class TestPersonalPage:
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
         password = [f"{DateDriver.password}1", "Qq123456", "Qq123456"]
         personal.edit_password(password[0], password[1], password[2])
-        message = personal.get_find_message().text
+        message = personal.get_error_message()
         assert message == "修改失败"
         assert not personal.has_fail_message()
 
@@ -247,7 +248,7 @@ class TestPersonalPage:
             personal.click_button('(//div[@class="w-b-80"])[1]/div[2]')
             personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
 
-        message = personal.get_find_message().text
+        message = personal.get_find_message()
         sleep(2)
         format = personal.get_find_element('(//span[text()="需求管理"])[1]')
         assert "m-l-2" == format.get_attribute("class") and message == "保存成功"
@@ -267,7 +268,7 @@ class TestPersonalPage:
             personal.click_button('(//div[@class="w-b-80"])[1]/div[1]')
             personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
 
-        message = personal.get_find_message().text
+        message = personal.get_find_message()
         sleep(2)
         format = personal.get_find_element('(//span[text()="需求管理" and contains(@class,"listSpan")])').get_attribute("class")
         assert "launchTemplate" in ele2 and "listSpan" in format and message == "保存成功"
@@ -544,7 +545,7 @@ class TestPersonalPage:
         driver = login_to_personal  # WebDriver 实例
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
         text = personal.switch_language("English")
-        assert text == "search"
+        assert text == "Search"
         assert not personal.has_fail_message()
 
     @allure.story("切换系统语言-日语")
@@ -617,6 +618,6 @@ class TestPersonalPage:
         if radio.get_attribute('class') == "ivu-radio":
             radio.click()
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        message = personal.get_find_message().text
+        message = personal.get_find_message()
         assert message == "保存成功"
         assert not personal.has_fail_message()

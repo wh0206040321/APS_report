@@ -84,7 +84,16 @@ class MasterPage(BasePage):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+            )
+        )
+        return message.text
+
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
             )
         )
         return message.text
@@ -193,7 +202,7 @@ class MasterPage(BasePage):
 
     def add_layout(self, layout):
         """添加布局."""
-        self.click_button('//div[@class="newDropdown"]//i')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加新布局"]')
         self.enter_texts(
             '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"

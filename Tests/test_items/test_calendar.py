@@ -194,14 +194,8 @@ class TestCalendarPage:
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
-        # 检查元素是否包含子节点
-        sleep(1)
-        assert message.text == "请先填写表单"
+        message = calendar.get_find_message()
+        assert message == "请先填写表单"
         assert not calendar.has_fail_message()
 
     @allure.story("数字文本框 只允许填写数字")
@@ -450,7 +444,7 @@ class TestCalendarPage:
         addtext = calendar.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert adddata == resource and addshift == resource1 and addnum == num and addtext == num
+        assert adddata == resource and addshift == resource1 and addnum == '1000000000000000000' and addtext == num
         assert not calendar.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")

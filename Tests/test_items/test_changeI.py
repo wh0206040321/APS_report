@@ -440,7 +440,7 @@ class TestChangeIPage:
         text_ = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert addresource == resource and additem1 == item1 and additem2 == item2 and '9999999999' == num_ and text_ == num
+        assert addresource == resource and additem1 == item1 and additem2 == item2 and '1000000000000000000' == num_ and text_ == num
         assert not change.has_fail_message()
 
     @allure.story("删除数据成功")
@@ -647,24 +647,24 @@ class TestChangeIPage:
         change = ChangeI(driver)  # 用 driver 初始化 changeI
         code1 = SharedDataUtil.load_data().get("resource")
         code2 = SharedDataUtil.load_data().get("item1")
-        # 定位第一行
-        change.click_button(
-             f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
-        )
         changedata1 = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
+        # 定位第一行
+        change.click_button(
+            f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
+        )
         change.click_del_button()  # 点击删除
         change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        # 定位
-        changedata = change.get_find_element_xpath(
-            '(//span[contains(text(),"条记录")])[1]'
-        ).text
         sleep(1)
         ele = driver.find_elements(
             By.XPATH,
              f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
+        # 定位
+        changedata = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
         assert (
                 changedata != changedata1 and
                 len(ele) == 0

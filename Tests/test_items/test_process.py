@@ -147,21 +147,21 @@ class TestProcessPage:
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
 
         process.click_add_button()  # 检查点击添加
-        # 表示顺序数字框输入文字字母符号数字
+        # 显示顺序数字框输入文字字母符号数字
         element = process.get_find_element_xpath(
-            '(//label[text()="表示顺序"])[1]/parent::div//input'
+            '(//label[text()="显示顺序"])[1]/parent::div//input'
         )
         # 全选后删除
         element.send_keys(Keys.CONTROL + "a")
         element.send_keys(Keys.DELETE)
         sleep(1)
         process.enter_texts(
-            '(//label[text()="表示顺序"])[1]/parent::div//input', "e1.文字abc。？~1_2+3"
+            '(//label[text()="显示顺序"])[1]/parent::div//input', "e1.文字abc。？~1_2+3"
         )
         sleep(1)
-        # 获取表示顺序数字框
+        # 获取显示顺序数字框
         processnum = process.get_find_element_xpath(
-            '(//label[text()="表示顺序"])[1]/parent::div//input'
+            '(//label[text()="显示顺序"])[1]/parent::div//input'
         ).get_attribute("value")
         assert processnum == "1123", f"预期{processnum}"
         assert not process.has_fail_message()
@@ -555,7 +555,7 @@ class TestProcessPage:
         assert all(name in ele for ele in eles)
         assert not process.has_fail_message()
 
-    @allure.story("表示顺序>60")
+    @allure.story("显示顺序>60")
     # @pytest.mark.run(order=1)
     def test_process_selectsuccess1(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
@@ -574,8 +574,8 @@ class TestProcessPage:
         # 双击命令
         actions.double_click(element_to_double_click).perform()
         sleep(1)
-        # 点击表示顺序
-        process.click_button('//div[text()="表示顺序" and contains(@optid,"opt_")]')
+        # 点击显示顺序
+        process.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         process.click_button(
@@ -602,7 +602,7 @@ class TestProcessPage:
         assert all(int(ele) > num for ele in eles)
         assert not process.has_fail_message()
 
-    @allure.story("查询工序名包含1并且表示顺序>60")
+    @allure.story("查询工序名包含1并且显示顺序>60")
     # @pytest.mark.run(order=1)
     def test_process_selectsuccess2(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
@@ -701,7 +701,7 @@ class TestProcessPage:
         process.click_button(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
-        process.click_button('//div[text()="表示顺序" and contains(@optid,"opt_")]')
+        process.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         process.click_button(
@@ -733,7 +733,7 @@ class TestProcessPage:
         assert all(int(ele) > num for ele in eles1) and all(name in ele for ele in eles2)
         assert not process.has_fail_message()
 
-    @allure.story("查询工序名包含1或表示顺序>60")
+    @allure.story("查询工序名包含1或显示顺序>60")
     # @pytest.mark.run(order=1)
     def test_process_selectsuccess3(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
@@ -833,7 +833,7 @@ class TestProcessPage:
         process.click_button(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
-        process.click_button('//div[text()="表示顺序" and contains(@optid,"opt_")]')
+        process.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         process.click_button(

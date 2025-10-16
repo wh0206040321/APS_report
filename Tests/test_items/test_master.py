@@ -82,7 +82,7 @@ class TestMasterPage:
         master.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-        message = master.get_find_message()
+        message = master.get_error_message()
         # 检查元素是否包含子节点
         assert message == "请根据必填项填写信息"
         assert not master.has_fail_message()
@@ -105,7 +105,7 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        message = master.get_find_message()
+        message = master.get_error_message()
         # 检查元素是否包含子节点
         assert message == "请根据必填项填写信息"
         assert not master.has_fail_message()
@@ -149,7 +149,7 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        message = master.get_find_message()
+        message = master.get_error_message()
         # 检查元素是否包含子节点
         assert message == "请根据必填项填写信息"
         assert not master.has_fail_message()
@@ -449,7 +449,7 @@ class TestMasterPage:
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
         item = SharedDataUtil.load_data()["item"]
-        master.delete_material( item)
+        master.delete_material(item)
 
         # 断言元素已经不存在
         final_eles = driver.find_elements(

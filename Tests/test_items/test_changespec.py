@@ -659,15 +659,15 @@ class TestChangeSpecPage:
         ).text
         change.click_del_button()  # 点击删除
         change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        # 定位
-        changedata = change.get_find_element_xpath(
-            '(//span[contains(text(),"条记录")])[1]'
-        ).text
         sleep(1)
         ele = driver.find_elements(
             By.XPATH,
             f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
+        # 定位
+        changedata = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
         assert (
                 changedata != changedata1 and
                 len(ele) == 0
@@ -1036,17 +1036,9 @@ class TestChangeSpecPage:
         ).text
         change.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]')
-        change.click_del_button()
-        # 点击确定
-        # 找到共同的父元素
-        parent = change.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        change.click_del_button()  # 点击删除
+        change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        sleep(1)
         # 定位
         changedata = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'

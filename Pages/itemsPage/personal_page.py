@@ -44,10 +44,19 @@ class PersonalPage(BasePage):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
         )
-        return message
+        return message.text
+
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
 
     def edit_password(self, old_password, new_password, confirm_password):
         """

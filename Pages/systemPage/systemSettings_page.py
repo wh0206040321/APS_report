@@ -11,7 +11,7 @@ from Pages.base_page import BasePage
 from Utils.data_driven import DateDriver
 
 
-class SynchronizePage(BasePage):
+class SystemSettingsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -34,7 +34,7 @@ class SynchronizePage(BasePage):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
         )
         return message.text
@@ -48,13 +48,13 @@ class SynchronizePage(BasePage):
         )
         return message.text
 
-    def right_refresh(self, name="配置同步"):
+    def right_refresh(self, name="系统表示设置"):
         """右键刷新."""
         but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
         but.click()
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()
-        self.click_button('//li[text()="刷新"]')
+        self.click_button('//li[text()=" 刷新"]')
         self.wait_for_loading_to_disappear()
 
     # 等待加载遮罩消失
@@ -76,144 +76,39 @@ class SynchronizePage(BasePage):
         )
         sleep(1)
 
-    def click_synchronize_button(self):
-        """点击同步按钮."""
-        self.click_button('//p[text()="同步"]')
+    def log_out (self):
+        """退出登录"""
+        self.click_button('//div[@class="flex-alignItems-center"]')
+        self.click_button('//ul/li/div[text()=" 注销 "]')
 
-    def switch_plane(self, name, num, js=True):
-        """切换计划方案。"""
-        if js:
-            plan = DateDriver()
-            self.click_button(f'//div[contains(text(),"{plan.planning}")]')
+    def click_save_button(self):
+        """点击保存按钮."""
+        self.click_button(' //button[span[text()="保存"]]')
 
-        self.click_button(f'//ul/li[text()="{name}"]')
-        WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element_located(
-                (By.XPATH, '//div[@class="loadingbox"]')
-            )
-        )
-        sleep(1)
-        menu_paths = {
-            1: ["系统管理", "单元设置", "PSI设置"],
-            2: ["计划运行", "方案管理", "计划方案管理"],
-            3: ["计划运行", "方案管理", "物控方案管理"],
-            4: ["数据接口底座", "DBLinK", "导入设置"]
-        }
-
-        for menu in menu_paths.get(num, []):
-            self.click_button(f'(//span[text()="{menu}"])[1]')
-
-    # def click_checkbox_value(self, name1=[], name2=[], num=""):
-    #     """批量勾选复选框"""
-    #     if num == "1":
-    #         self.click_button('//div[text()=" PSI设置 "]')
-    #         for index, value in enumerate(name1, start=1):
-    #             try:
-    #                 ele = self.get_find_element_xpath('//div[p[text()="PSI名称"]]/following-sibling::div//input')
-    #                 ele.send_keys(Keys.CONTROL, 'a')
-    #                 ele.send_keys(Keys.DELETE)
-    #                 self.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', value)
-    #                 self.click_button(f'(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span')
-    #             except NoSuchElementException:
-    #                 print(f"未找到元素: {value}")
-    #             except Exception as e:
-    #                 print(f"操作 {value} 时出错: {str(e)}")
-    #     elif num == "2":
-    #         self.click_button('//div[text()=" 计划方案 "]')
-    #         for index, value in enumerate(name1, start=1):
-    #             try:
-    #                 ele = self.get_find_element_xpath('//div[p[text()="计划方案名称"]]/following-sibling::div//input')
-    #                 ele.send_keys(Keys.CONTROL, 'a')
-    #                 ele.send_keys(Keys.DELETE)
-    #                 self.enter_texts('//div[p[text()="计划方案名称"]]/following-sibling::div//input', value)
-    #                 self.click_button(f'(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span')
-    #             except NoSuchElementException:
-    #                 print(f"未找到元素: {value}")
-    #             except Exception as e:
-    #                 print(f"操作 {value} 时出错: {str(e)}")
-    #     elif num == "3":
-    #         self.click_button('//div[text()=" 数据导入 "]')
-    #         for index, value in enumerate(name1, start=1):
-    #             try:
-    #                 ele = self.get_find_element_xpath('//div[p[text()="数据导入方案名称"]]/following-sibling::div//input')
-    #                 ele.send_keys(Keys.CONTROL, 'a')
-    #                 ele.send_keys(Keys.DELETE)
-    #                 self.enter_texts('//div[p[text()="数据导入方案名称"]]/following-sibling::div//input', value)
-    #                 self.click_button(f'(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span')
-    #             except NoSuchElementException:
-    #                 print(f"未找到元素: {value}")
-    #             except Exception as e:
-    #                 print(f"操作 {value} 时出错: {str(e)}")
-    #
-    #     for index, value in enumerate(name2, start=1):
-    #         try:
-    #             ele = self.get_find_element_xpath(f'(//div[p[text()="计划单元"]]/following-sibling::div//input)[{num}]')
-    #             ele.send_keys(Keys.CONTROL, 'a')
-    #             ele.send_keys(Keys.DELETE)
-    #             self.enter_texts(f'(//div[p[text()="计划单元"]]/following-sibling::div//input)[{num}]', value)
-    #             self.click_button(f'(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span')
-    #         except NoSuchElementException:
-    #             print(f"未找到元素: {value}")
-    #         except Exception as e:
-    #             print(f"操作 {value} 时出错: {str(e)}")
-
-    def handle_checkbox_interaction(self, input_xpath, value, click_xpath):
-        try:
-            ele = self.get_find_element_xpath(input_xpath)
-            ele.send_keys(Keys.CONTROL, 'a')
-            ele.send_keys(Keys.DELETE)
-            self.enter_texts(input_xpath, value)
-            self.click_button(click_xpath)
-        except NoSuchElementException:
-            print(f"未找到元素: {value}")
-        except Exception as e:
-            print(f"操作 {value} 时出错: {str(e)}")
-
-    def click_checkbox_value(self, name1=[], name2=[], num=""):
-        """批量勾选复选框"""
-
-        config = {
-            "1": {
-                "section_xpath": '//div[text()=" PSI设置 "]',
-                "input_xpath": '//div[p[text()="PSI名称"]]/following-sibling::div//input',
-                "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
-            },
-            "2": {
-                "section_xpath": '//div[text()=" 计划方案 "]',
-                "input_xpath": '//div[p[text()="计划方案名称"]]/following-sibling::div//input',
-                "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
-            },
-            "3": {
-                "section_xpath": '//div[text()=" 物控方案 "]',
-                "input_xpath": '//div[p[text()="物控方案"]]/following-sibling::div//input',
-                "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
-            },
-            "4": {
-                "section_xpath": '//div[text()=" 数据导入 "]',
-                "input_xpath": '//div[p[text()="数据导入方案名称"]]/following-sibling::div//input',
-                "click_xpath_template": '(//tr[td[3]//span[text()="{value}"]])[1]/td[2]/div/span'
-            }
-        }
-
-        if num in config:
-            section = config[num]
-            self.click_button(section["section_xpath"])
-            for value in name1:
-                self.handle_checkbox_interaction(
-                    input_xpath=section["input_xpath"],
-                    value=value,
-                    click_xpath=section["click_xpath_template"].format(value=value)
-                )
-
-        # 处理计划单元部分
-        for value in name2:
-            input_xpath = f'(//div[p[text()="计划单元"]]/following-sibling::div//input)[{num}]'
-            click_xpath = f'//tr[td[3]//span[text()="{value}"]]/td[2]/div/span'
-            self.handle_checkbox_interaction(input_xpath, value, click_xpath)
-
-    def click_synchronize_pop(self, button: bool = True):
-        """点击同步弹窗确定按钮."""
-        if button:
-            self.click_button('//div[div[text()="将同步数据到目的计划单元, 是否继续?"]]/following-sibling::div//span[text()="确定"]')
+    def upload_file(self, file_path, num):
+        if num == 1:
+            upload_input = self.get_find_element_xpath('(//input[@type="file"])[1]')
+            upload_input.send_keys(file_path)
         else:
-            self.click_button('//div[div[text()="将同步数据到目的计划单元, 是否继续?"]]/following-sibling::div//span[text()="取消"]')
+            upload_input = self.get_find_element_xpath('(//input[@type="file"])[2]')
+            upload_input.send_keys(file_path)
+
+    def del_icon(self, name):
+        # 1️⃣ 悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//div[p[text()=" {name}: "]]//div[@class="demo-upload-list"]'
+        )
+        ActionChains(self.driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待删除图标可见
+        delete_icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//i[@class="ivu-icon ivu-icon-ios-trash-outline"]'
+            ))
+        )
+
+        # 3️⃣ 点击删除图标并确认删除操作
+        delete_icon.click()
+        self.click_button('(//div[@class="ivu-modal-confirm-footer"])[1]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()

@@ -105,7 +105,7 @@ class TestPreviewPlanPage:
         if ele_resource1 == resource1 and ele_resource2 == resource2:
             sleep(2)
             previewPlan.click_button(
-                '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[2]'
+                '//table[@class="vxe-table--header"]//th[2]/div/span/span'
             )
             sleep(1)
             previewPlan.click_del_button()

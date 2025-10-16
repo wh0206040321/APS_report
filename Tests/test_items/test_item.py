@@ -1031,7 +1031,7 @@ class TestItemPage:
             for i in range(1, 6)
         ]
         num_xpath_list2 = [
-            f'//label[text()="自定义数字{i}"]/following-sibling::div//input'
+            f'//label[text()="自定义数值{i}"]/following-sibling::div//input'
             for i in range(1, 21)
         ]
         num_xpath_list3 = [
@@ -1112,7 +1112,7 @@ class TestItemPage:
         item.del_all(value, xpath='//p[text()="物料代码"]/ancestor::div[2]//input')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:3]
+            for v in value[:4]
         ]
         item.del_layout(layout)
         sleep(2)

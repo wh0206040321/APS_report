@@ -96,10 +96,9 @@ class TestDeleteStart:
 
             # 检查获取到的资源信息是否与共享数据中的资源信息一致
             if ele_resource1 == resource1 and ele_resource2 == resource2:
-                # 如果一致，则选择第二个复选框
                 sleep(2)
                 previewPlan.click_button(
-                    '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[2]'
+                    '//table[@class="vxe-table--header"]//th[2]/div/span/span'
                 )
                 sleep(1)
                 # 点击删除按钮，并确认删除操作

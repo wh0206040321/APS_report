@@ -78,9 +78,9 @@ class TestProductionPage:
         production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
         # 获取提示信息
-        message = production.get_find_message()
+        message = production.get_error_message()
         # 断言提示信息为“请先填写表单”
-        assert message.text == "请先填写表单"
+        assert message == "请先填写表单"
         assert not production.has_fail_message()
 
     @allure.story("添加工作代码 不填写报告数量 不允许提交")
@@ -116,9 +116,9 @@ class TestProductionPage:
         production.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
 
         # 获取提示信息
-        message = production.get_find_message()
+        message = production.get_error_message()
         # 断言提示信息为“请先填写表单”
-        assert message.text == "请先填写表单"
+        assert message == "请先填写表单"
         assert not production.has_fail_message()
 
     @allure.story("添加工作代码 修改资源会弹出提示，并且表格颜色发生改变")
@@ -288,35 +288,35 @@ class TestProductionPage:
         )
         assert not production.has_fail_message()
 
-    # @allure.story(
-    #     "弹出是否删除工作，点击取消不会删除数据"
-    # )
-    # # @pytest.mark.run(order=1)
-    # def test_production_canceldelete(self, login_to_production):
-    #     driver = login_to_production  # WebDriver 实例
-    #     production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-    #     name = "1测试C订单"
-    #     num = "100"
-    #     production.click_button(
-    #         f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
-    #     )
-    #     production.click_del_button()
-    #     sleep(1)
-    #     text = production.get_find_element_xpath(
-    #         '//p[text()="当前工作已【结束】，是否需要修改成【开始生产】？"]'
-    #     ).text
-    #     # 点击是
-    #     production.click_button('//div[@class="el-message-box__header"]/button')
-    #     sleep(1)
-    #     ele = driver.find_elements(
-    #         By.XPATH,
-    #         f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]',
-    #     )
-    #     assert (
-    #             text == "当前工作已【结束】，是否需要修改成【开始生产】？"
-    #             and len(ele) == 1
-    #     )
-    #     assert not production.has_fail_message()
+    @allure.story(
+        "弹出是否删除工作，点击取消不会删除数据"
+    )
+    # @pytest.mark.run(order=1)
+    def test_production_canceldelete(self, login_to_production):
+        driver = login_to_production  # WebDriver 实例
+        production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        name = "1测试C订单"
+        num = "100"
+        production.click_button(
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
+        )
+        production.click_del_button()
+        sleep(1)
+        text = production.get_find_element_xpath(
+            '//p[text()="当前工作已【结束】，是否需要修改成【开始生产】？"]'
+        ).text
+        # 点击是
+        production.click_button('//div[@class="el-message-box__header"]/button')
+        sleep(1)
+        ele = driver.find_elements(
+            By.XPATH,
+            f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]',
+        )
+        assert (
+                text == "当前工作已【结束】，是否需要修改成【开始生产】？"
+                and len(ele) == 1
+        )
+        assert not production.has_fail_message()
 
     @allure.story(
         "删除超出的报工数量点击删除弹出弹窗，点击是报工状态会变为开始生产，数据会删除"
@@ -488,7 +488,7 @@ class TestProductionPage:
         text_ = production.get_find_element_xpath(
             '//label[text()="异常原因"]/following-sibling::div//input'
         ).get_attribute("value")
-        assert num_ == '9999999999' and text_ == name
+        assert num_ == '1000000000000000000' and text_ == name
         assert not production.has_fail_message()
 
     @allure.story("添加测试数据")

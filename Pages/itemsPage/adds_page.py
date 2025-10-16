@@ -166,7 +166,7 @@ class AddsPages(BasePage):
 
     def add_layout(self, layout):
         """添加布局."""
-        self.click_button('//div[@class="newDropdown"]//i')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加新布局"]')
         self.enter_texts(
             '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
@@ -202,7 +202,7 @@ class AddsPages(BasePage):
         """
         进入设置页面
         """
-        self.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
         self.click_button('//div[text()=" 显示设置 "]')
         ele = self.get_find_element_xpath('(//div[@class="vxe-table--body-wrapper body--wrapper"])[4]')
         self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", ele)

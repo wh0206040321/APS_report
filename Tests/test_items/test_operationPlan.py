@@ -62,13 +62,9 @@ class TestOperationPlanPage:
             driver
         )  # 用 operationPlan 初始化 operationPlanPage
         operationPlan.click_selebutton()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = operationPlan.get_error_message()
         # 检查元素是否包含子节点
-        assert message.text == "请选择时间段和资源"
+        assert message == "请选择时间段和资源"
         assert not operationPlan.has_fail_message()
 
     @allure.story("不勾选资源选择时间段，点击查询 不允许查询")
@@ -85,13 +81,9 @@ class TestOperationPlanPage:
         operationPlan.click_button('(//em[text()="28"])[last()]')
         operationPlan.click_okbutton()
         operationPlan.click_selebutton()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = operationPlan.get_error_message()
         # 检查元素是否包含子节点
-        assert message.text == "请选择时间段和资源"
+        assert message == "请选择时间段和资源"
         assert not operationPlan.has_fail_message()
 
     @allure.story("勾选资源，不选择时间段，点击查询 不允许查询")
@@ -106,13 +98,9 @@ class TestOperationPlanPage:
             '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-unchecked"])[3]'
         )
         operationPlan.click_selebutton()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = operationPlan.get_error_message()
         # 检查元素是否包含子节点
-        assert message.text == "请选择时间段和资源"
+        assert message == "请选择时间段和资源"
         assert not operationPlan.has_fail_message()
 
     @allure.story("勾选资源，勾选时间段，点击查询 查询成功,发布指示成功")

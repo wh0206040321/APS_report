@@ -280,7 +280,7 @@ class TestStartPage:
                 sleep(1)
             page.click_button('//p[text()="保存"]')  # 点击保存
             sleep(3)
-            list_ = [ "计划运行", "计划计算"]
+            list_ = ["计划运行", "计划计算"]
             for v in list_:
                 page.click_button(f'(//span[text()="{v}"])[1]')
 
@@ -290,7 +290,7 @@ class TestStartPage:
                 (By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
             )
         )
-        sleep(2)
+        sleep(3)
         dropdown_arrow.click()
 
         # 等待第一个方案标签可点击后点击选择

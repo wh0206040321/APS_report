@@ -30,12 +30,12 @@ class SettingPage(BasePage):
 
     def add_layout(self):
         """添加布局."""
-        self.click_button('//div[@class="newDropdown"]//i')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加新布局"]')
 
     def add_layout_ok(self, layout):
         """添加布局."""
-        self.click_button('//div[@class="newDropdown"]//i')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加新布局"]')
         self.enter_texts(
             '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
@@ -97,21 +97,30 @@ class SettingPage(BasePage):
 
     def add_pivot_table(self):
         """添加透视表."""
-        self.click_button('//div[@class="newDropdown"]//i')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加透视表"]')
 
     def click_setting_button(self):
         """点击设置按钮."""
-        self.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[1]')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
 
     def get_find_message(self):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
         )
-        return message
+        return message.text
+
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
 
     def click_ref_button(self):
         """点击刷新按钮."""
@@ -119,7 +128,7 @@ class SettingPage(BasePage):
 
     def add_statistics(self, num='', data="", name="", code1='', code2='', code3=''):
         """添加统计."""
-        self.click_button('(//i[@class="icon-wrapper el-tooltip font21 line-height-15 m-r-12"])[2]')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
         self.click_button('//div[./span[text()=" 统计 "]]//i')
         self.click_button(f'//h2[text()="图表"]/following-sibling::div/div[{num}]')
         if data:  # 如果 data 不为空，则输入
@@ -168,7 +177,7 @@ class SettingPage(BasePage):
 
     def add_lable(self, name=''):
         """添加标签."""
-        self.click_button('//i[@class="icon-wrapper el-tooltip font15 line-height-15 m-r-12"]')
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
         self.click_button('(//i[@class="el-tooltip ivu-icon ivu-icon-md-add"])[2]')
         if name:
             self.enter_texts('//div[text()="标签名："]/following-sibling::div/input', f"{name}")

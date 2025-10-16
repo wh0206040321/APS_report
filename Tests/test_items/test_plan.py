@@ -111,13 +111,9 @@ class TestPlanPage:
             plan.click_button(f'(//span[text()="{v}"])[1]')
         sleep(1)
         plan.click_plan()
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
-            )
-        )
+        message = plan.get_find_message()
         # 检查元素是否包含子节点
-        assert message.text == "请选择计划方案"
+        assert message == "请选择计划方案"
         assert not plan.has_fail_message()
 
     @allure.story("方案管理中计划方案组合框显示关闭，不显示该方案")

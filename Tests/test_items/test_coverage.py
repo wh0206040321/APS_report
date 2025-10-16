@@ -405,7 +405,7 @@ class TestCoveragePage:
                 and chronology == addchronology
                 and resources == addresources
                 and text_ == name
-                and num_ == '9999999999'
+                and num_ == '1000000000000000000'
         )
         assert not coverage.has_fail_message()
 
@@ -921,11 +921,11 @@ class TestCoveragePage:
         assert not coverage.has_fail_message()
 
     @allure.story("修改覆盖日历资源成功")
-    # @pytest.mark.run(order=1)
+    # @pytest.mark.run(ordr=1)
     def test_coverage_editcodesuccess(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-
+        sleep(3)
         # 定位第一行
         coverage.click_button(
             '(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]'
@@ -972,7 +972,7 @@ class TestCoveragePage:
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
         layout = "测试布局A"
-
+        sleep(3)
         # 定位第一行
         coverage.click_button(
             '(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]'

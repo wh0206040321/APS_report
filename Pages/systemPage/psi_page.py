@@ -111,7 +111,7 @@ class PsiPage(BasePage):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
         )
         return message.text
@@ -131,7 +131,7 @@ class PsiPage(BasePage):
         but.click()
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()
-        self.click_button('//li[text()="刷新"]')
+        self.click_button('//li[text()=" 刷新"]')
         self.wait_for_loading_to_disappear()
 
     # 等待加载遮罩消失

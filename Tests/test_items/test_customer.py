@@ -147,18 +147,18 @@ class TestCustomerPage:
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
         customer.click_add_button()  # 检查点击添加
         ele = customer.get_find_element_xpath(
-            '(//label[text()="表示顺序"])[1]/parent::div//input'
+            '(//label[text()="显示顺序"])[1]/parent::div//input'
         )
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
-        # 表示顺序输入文字字母符号数字
+        # 显示顺序输入文字字母符号数字
         customer.enter_texts(
-            '(//label[text()="表示顺序"])[1]/parent::div//input', "e1文字abc。+？~1._2+3"
+            '(//label[text()="显示顺序"])[1]/parent::div//input', "e1文字abc。+？~1._2+3"
         )
         sleep(1)
-        # 获取表示顺序框
+        # 获取显示顺序框
         customernum = customer.get_find_element_xpath(
-            '(//label[text()="表示顺序"])[1]/parent::div//input'
+            '(//label[text()="显示顺序"])[1]/parent::div//input'
         ).get_attribute("value")
         assert customernum == "1123", f"预期{customernum}"
         assert not customer.has_fail_message()
@@ -189,7 +189,7 @@ class TestCustomerPage:
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
         name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
         customer.add_test_data(name)
-        customer.enter_texts('//label[text()="表示顺序"]/parent::div//input', name)
+        customer.enter_texts('//label[text()="显示顺序"]/parent::div//input', name)
         # 点击确定
         customer.click_button(
             '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
@@ -200,7 +200,7 @@ class TestCustomerPage:
         num_ = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[5]'
         ).text
-        assert adddata == name and num_ == '9999999999', f"预期数据是{name}，实际得到{adddata}"
+        assert adddata == name and num_ == '1000000000000000000', f"预期数据是{name}，实际得到{adddata}"
         assert not customer.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -346,7 +346,7 @@ class TestCustomerPage:
         assert customerdata == name, f"预期{customerdata}"
         assert not customer.has_fail_message()
 
-    @allure.story("修改客户名称，显示颜色，表示顺序")
+    @allure.story("修改客户名称，显示颜色，显示顺序")
     # @pytest.mark.run(order=1)
     def test_customer_editnamesuccess(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
@@ -380,20 +380,20 @@ class TestCustomerPage:
             '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
         ).text
 
-        # 修改表示顺序
+        # 修改显示顺序
         ele = customer.get_find_element_xpath(
-            '(//label[text()="表示顺序"])[1]/parent::div//input'
+            '(//label[text()="显示顺序"])[1]/parent::div//input'
         )
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
-        # 表示顺序输入文字字母符号数字
+        # 显示顺序输入文字字母符号数字
         customer.enter_texts(
-            '(//label[text()="表示顺序"])[1]/parent::div//input', "66"
+            '(//label[text()="显示顺序"])[1]/parent::div//input', "66"
         )
         sleep(1)
-        # 获取表示顺序框
+        # 获取显示顺序框
         customernum = customer.get_find_element_xpath(
-            '(//label[text()="表示顺序"])[1]/parent::div//input'
+            '(//label[text()="显示顺序"])[1]/parent::div//input'
         ).get_attribute("value")
         # 点击确定
         customer.click_button(
@@ -586,7 +586,7 @@ class TestCustomerPage:
         assert all(name == v for v in eles)
         assert not customer.has_fail_message()
 
-    @allure.story("查询表示顺序<10")
+    @allure.story("查询显示顺序<10")
     # @pytest.mark.run(order=1)
     def test_customer_selectsuccess1(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
@@ -605,7 +605,7 @@ class TestCustomerPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击客户优先度
-        customer.click_button('//div[text()="表示顺序" and contains(@optid,"opt_")]')
+        customer.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         customer.click_button(
@@ -632,7 +632,7 @@ class TestCustomerPage:
         assert all(int(v) < 10 for v in eles)
         assert not customer.has_fail_message()
 
-    @allure.story("查询客户名称包含美并且表示顺序<10")
+    @allure.story("查询客户名称包含美并且显示顺序<10")
     # @pytest.mark.run(order=1)
     def test_customer_selectsuccess2(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
@@ -729,7 +729,7 @@ class TestCustomerPage:
         customer.click_button(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
-        customer.click_button('//div[text()="表示顺序" and contains(@optid,"opt_")]')
+        customer.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         customer.click_button(
@@ -764,7 +764,7 @@ class TestCustomerPage:
         )
         assert not customer.has_fail_message()
 
-    @allure.story("查询客户名称以美开头或表示顺序>10")
+    @allure.story("查询客户名称以美开头或显示顺序>10")
     # @pytest.mark.run(order=1)
     def test_customer_selectsuccess3(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
@@ -863,7 +863,7 @@ class TestCustomerPage:
         customer.click_button(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]'
         )
-        customer.click_button('//div[text()="表示顺序" and contains(@optid,"opt_")]')
+        customer.click_button('//div[text()="显示顺序" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         customer.click_button(

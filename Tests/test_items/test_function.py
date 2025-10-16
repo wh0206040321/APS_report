@@ -72,7 +72,7 @@ class TestFunctionPage:
         function.click_button(f'//div[@class="scroll-body"]//div[text()=" {data_list[2]} "]')
         # 右键点击
         ActionChains(driver).context_click(item).perform()
-        function.click_button('//li[text()="关闭其他"]')
+        function.click_button('//li[text()=" 关闭其他"]')
         eles = driver.find_elements(By.XPATH, f'//div[@class="scroll-body"]/div')
         assert len(eles) == 2
         assert not function.has_fail_message()
@@ -88,7 +88,7 @@ class TestFunctionPage:
         function.click_button(f'//div[@class="scroll-body"]//div[text()=" {data_list[2]} "]')
         # 右键点击
         ActionChains(driver).context_click(item).perform()
-        function.click_button('//li[text()="关闭所有"]')
+        function.click_button('//li[text()=" 关闭所有"]')
         eles = driver.find_elements(By.XPATH, f'//div[@class="scroll-body"]/div')
         assert len(eles) == 1
         assert not function.has_fail_message()
@@ -108,7 +108,7 @@ class TestFunctionPage:
         )
         # 右键点击
         ActionChains(driver).context_click(item).perform()
-        function.click_button('//li[text()="刷新"]')
+        function.click_button('//li[text()=" 刷新"]')
         itemtext = function.get_find_element_xpath(
             '//p[text()="物料代码"]/ancestor::div[2]//input'
         ).text

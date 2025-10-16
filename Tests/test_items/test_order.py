@@ -1112,11 +1112,10 @@ class TestOrderPage:
         order.click_add_button()
         custom_xpath_list = [
             f'//label[text()="自定义字符{i}"]/following-sibling::div//input'
-            for i in range(1, 51) if i != 3
+            for i in range(1, 51)
         ]
         text_list = [
             '//label[text()="订单代码"]/following-sibling::div//input',
-            '//label[text()="指定产线"]/following-sibling::div//input',
             '//label[text()="关联订单组"]/following-sibling::div//input',
             '//label[text()="备注"]/following-sibling::div//input',
         ]
