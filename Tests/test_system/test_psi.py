@@ -64,7 +64,7 @@ class TestPSIPage:
         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
         psi.click_button_psi("新增")
         psi.click_button_psi("保存")
-        message = psi.get_find_message()
+        message = psi.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not psi.has_fail_message()
 
@@ -76,7 +76,7 @@ class TestPSIPage:
         name = "1测试psi1"
         psi.add_psi(name=name, condition=False,method=False)
         psi.click_button_psi("保存")
-        message = psi.get_find_message()
+        message = psi.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not psi.has_fail_message()
 
@@ -88,7 +88,7 @@ class TestPSIPage:
         name = "1测试psi1"
         psi.add_psi(name=name, method=False)
         psi.click_button_psi("保存")
-        message = psi.get_find_message()
+        message = psi.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not psi.has_fail_message()
 
@@ -100,7 +100,7 @@ class TestPSIPage:
         name = "1测试psi1"
         psi.add_psi(name=name, condition=False)
         psi.click_button_psi("保存")
-        message = psi.get_find_message()
+        message = psi.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not psi.has_fail_message()
 
@@ -246,7 +246,7 @@ class TestPSIPage:
         name = "1测试psi1"
         psi.add_psi(name=name)
         psi.click_button_psi("保存")
-        message = psi.get_find_message()
+        message = psi.get_error_message()
         assert message == "名称不能重复"
         assert not psi.has_fail_message()
 
@@ -291,7 +291,7 @@ class TestPSIPage:
         psi.click_button_psi("编辑")
         psi.enter_text(By.XPATH, '//div[p[text()="PSI名称: "]]//input', name1)
         psi.click_button_psi("保存")
-        message = psi.get_find_message()
+        message = psi.get_error_message()
         assert message == "名称不能重复"
         assert not psi.has_fail_message()
 

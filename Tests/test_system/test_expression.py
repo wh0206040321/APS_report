@@ -66,7 +66,7 @@ class TestSExpressionPage:
         expression.click_all_button("新增")
         sleep(1)
         expression.click_all_button("保存")
-        message = expression.get_find_message()
+        message = expression.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not expression.has_fail_message()
 
@@ -80,7 +80,7 @@ class TestSExpressionPage:
         expression.click_all_button("新增")
         expression.enter_texts('//div[p[text()="名称: "]]//input', name)
         expression.click_all_button("保存")
-        message = expression.get_find_message()
+        message = expression.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not expression.has_fail_message()
 
@@ -96,7 +96,7 @@ class TestSExpressionPage:
         expression.click_button('//div[p[text()="分类: "]]//input[@type="text"]')
         expression.click_button('//li[text()="图棒显示颜色"]')
         expression.click_all_button("保存")
-        message = expression.get_find_message()
+        message = expression.get_error_message()
         assert message == "请填写完整的信息才能提交"
         assert not expression.has_fail_message()
 
@@ -133,7 +133,7 @@ class TestSExpressionPage:
         expression.click_button('//li[text()="图棒显示颜色"]')
         expression.enter_texts('//div[p[text()="表达式: "]]//textarea', name)
         expression.click_all_button("保存")
-        message = expression.get_find_message()
+        message = expression.get_error_message()
         assert message == "不允许添加重复的表达式名称"
         assert not expression.has_fail_message()
 
@@ -195,7 +195,7 @@ class TestSExpressionPage:
         expression.click_all_button("编辑")
         expression.enter_texts('//div[p[text()="名称: "]]//input', afert_name)
         expression.click_all_button("保存")
-        message = expression.get_find_message()
+        message = expression.get_error_message()
         expression.select_input_expression(afert_name)
         assert message == "不允许添加重复的表达式名称"
         assert not expression.has_fail_message()

@@ -38,11 +38,11 @@ class ImpPage(BasePage):
         )
         return message.text
 
-    def get_message(self):
-        """获取信息"""
+    def get_error_message(self):
+        """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
             )
         )
         return message.text

@@ -66,7 +66,7 @@ class TestSynchronizePage:
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         synchronize.click_synchronize_button()
-        message = synchronize.get_find_message()
+        message = synchronize.get_error_message()
         assert message == "请勾选当前和目的计划单元"
         assert not synchronize.has_fail_message()
 

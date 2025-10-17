@@ -72,7 +72,7 @@ class TestSMenuPage:
         menu.click_all_button("新增")
         sleep(1)
         menu.click_confirm()
-        message = menu.get_find_message()
+        message = menu.get_error_message()
         assert layout == name
         assert message == "校验不通过，请检查标红的表单字段！"
         assert not menu.has_fail_message()
@@ -87,7 +87,7 @@ class TestSMenuPage:
         menu.click_all_button("新增")
         menu.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
         menu.click_confirm()
-        message = menu.get_find_message()
+        message = menu.get_error_message()
         assert message == "校验不通过，请检查标红的表单字段！"
         assert not menu.has_fail_message()
 
@@ -102,7 +102,7 @@ class TestSMenuPage:
         menu.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
         menu.enter_texts('//div[@id="t4svyhz8-n3vp"]//input', name)
         menu.click_confirm()
-        message = menu.get_find_message()
+        message = menu.get_error_message()
         assert message == "校验不通过，请检查标红的表单字段！"
         assert not menu.has_fail_message()
 
@@ -695,7 +695,7 @@ class TestSMenuPage:
         assert not menu.has_fail_message()
         print(f"符合条件的行数：{valid_count}")
 
-    @allure.story("过滤查组件名称成功")
+    @allure.story("过滤查组件代码成功")
     # @pytest.mark.run(order=1)
     def test_menu_select1(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例

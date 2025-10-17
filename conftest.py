@@ -223,7 +223,7 @@ def pytest_sessionfinish(session, exitstatus):
                 logging.info(f"✅ 存在关键文件：{file}")
 
         # ✅ 添加并提交 docs/
-        subprocess.run(["git", "add", "D:\PycharmProjects\APS\docs"], check=True)
+        subprocess.run(["git", "add", str(Path("docs").resolve())], check=True)
 
         # ✅ 提交变更（忽略无变更错误）
         subprocess.run(["git", "commit", "-m", "自动更新 Allure 报告"], check=False)
@@ -232,7 +232,11 @@ def pytest_sessionfinish(session, exitstatus):
         subprocess.run(["git", "commit", "--allow-empty", "-m", "强制触发 GitHub Pages 构建"], check=False)
 
         # ✅ 推送到远程
-        subprocess.run(["git", "push", "origin", "main"], check=True)
+        result = subprocess.run(["git", "push", "origin", "main"], capture_output=True, text=True)
+        if result.returncode != 0:
+            logging.warning(f"🚨 Git push 失败：{result.stderr}")
+        else:
+            logging.info("✅ Git push 成功")
 
         logging.info("✅ Allure 报告已自动部署到 GitHub Pages")
 

@@ -236,7 +236,7 @@ class TestEnvironmentPage:
         )
         delete_icon.click()
         environment.click_save_button()
-        message = environment.get_find_message()
+        message = environment.get_error_message()
         before_value = environment.get_find_element_xpath('//div[label[text()="工作日的起始时间:"]]//input').value_of_css_property("border-color")
         assert before_value == "rgb(237, 64, 20)" and message == "请填写信息"
         assert not environment.has_fail_message()
@@ -332,7 +332,7 @@ class TestEnvironmentPage:
         environment.batch_modify_input(xpth_list, value)
         div_xpth_list = [item.replace("//input", "//input/ancestor::div[2]") for item in xpth_list]
         environment.click_save_button()
-        message = environment.get_find_message()
+        message = environment.get_error_message()
         before_value = environment.get_border_color(div_xpth_list)
         assert all(color == "rgb(237, 64, 20)" for color in before_value) and message == "请填写信息"
         assert not environment.has_fail_message()

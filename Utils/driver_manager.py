@@ -5,12 +5,12 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from Utils.path_helper import get_report_dir
-
+from selenium.webdriver.chrome.options import Options
 # 全局存储所有 WebDriver 实例
 all_driver_instances = {}
 
 
-def create_driver(driver_path: str) -> webdriver.Chrome:
+def create_driver(driver_path: str, options: Optional[Options] = None) -> webdriver.Chrome:
     """
     根据指定的驱动路径创建一个Chrome浏览器实例。
 
@@ -20,12 +20,13 @@ def create_driver(driver_path: str) -> webdriver.Chrome:
     返回:
     - webdriver.Chrome: 创建的Chrome浏览器实例。
     """
-    # 设置Chrome浏览器的选项
-    options = webdriver.ChromeOptions()
-    options.add_argument("--disable-gpu")  # 禁用GPU加速，适用于服务器环境
-    options.add_argument("--no-sandbox")  # 禁用沙盒模式，适用于多用户环境
-    options.add_argument("--disable-dev-shm-usage")  # 解决Linux环境下的性能问题
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])  # 禁用日志打印
+    # 如果未传入 options，则使用默认配置
+    if options is None:
+        options = webdriver.ChromeOptions()
+        options.add_argument("--disable-gpu")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
     # 创建Chrome驱动服务
     service = Service(driver_path)

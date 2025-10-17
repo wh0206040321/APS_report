@@ -53,6 +53,15 @@ class EnvironmentPage(BasePage):
         )
         return message.text
 
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
+
     def right_refresh(self, name="环境设置"):
         """右键刷新."""
         but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')

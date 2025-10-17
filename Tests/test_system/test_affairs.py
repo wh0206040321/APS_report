@@ -124,7 +124,7 @@ class TestAffairsPage:
         affairs.click_add_affairs(name="测试事务模版1", type="服务", button=False)
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "请把信息填写完整"
         assert not affairs.has_fail_message()
 
@@ -186,7 +186,7 @@ class TestAffairsPage:
         affairs.enter_texts('//div[p[text()="自定义服务:"]]//input', "htt1")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == '自定义值需以http或https开头'
         assert not affairs.has_fail_message()
 
@@ -238,7 +238,7 @@ class TestAffairsPage:
         affairs.click_add_affairs(type="存储过程", button=False)
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "请把信息填写完整"
         assert not affairs.has_fail_message()
 
@@ -252,7 +252,7 @@ class TestAffairsPage:
         affairs.click_button('//li[text()="APS_MP_Holiday"]')
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "请把信息填写完整"
         assert not affairs.has_fail_message()
 
@@ -308,7 +308,7 @@ class TestAffairsPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "名称重复"
         assert not affairs.has_fail_message()
 
@@ -324,7 +324,7 @@ class TestAffairsPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "名称重复"
         assert not affairs.has_fail_message()
 
@@ -427,7 +427,7 @@ class TestAffairsPage:
         affairs.enter_texts('//div[label[text()="事务名称"]]//input', "测试事务模版5")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "名称重复"
         assert not affairs.has_fail_message()
 
@@ -602,7 +602,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="一次", time="一次")
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -616,7 +616,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天", time="1")
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -630,7 +630,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天", time="2")
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -644,7 +644,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="周", time="周")
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -658,7 +658,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="月", time="月")
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -786,7 +786,7 @@ class TestAffairsPage:
         affairs.click_next()
         value = affairs.add_process_affairs(name=process_name, add=True)
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         ele1 = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{process_name}"]')
         affairs.click_process()
@@ -809,7 +809,7 @@ class TestAffairsPage:
         value1 = affairs.add_process_affairs(add=False, sel=sel1)
         value2 = affairs.add_process_affairs(add=False, sel=sel2)
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         ele1 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
@@ -834,7 +834,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_save()
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "名称重复"
         assert not affairs.has_fail_message()
 
@@ -847,7 +847,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_next()
-        mes = affairs.get_find_message()
+        mes = affairs.get_error_message()
         assert mes == "名称重复"
         assert not affairs.has_fail_message()
 
@@ -872,7 +872,7 @@ class TestAffairsPage:
         affairs.click_next()
         value1 = affairs.add_process_affairs(add=False, sel=sel)
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         ele1 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
@@ -1063,7 +1063,7 @@ class TestAffairsPage:
         affairs.enter_texts('//div[label[text()="名称"]]/div//input', before_)
         affairs.enter_texts('//div[label[text()="分类"]]/div//input', "修改分类")
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         affairs.click_process_update(before_)
@@ -1088,7 +1088,7 @@ class TestAffairsPage:
         affairs.click_button('//td[@class="available today"]//span')
         affairs.click_button('//div[@class="el-picker-panel__footer"]/button[2]')
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         affairs.click_process_update(name)
@@ -1112,7 +1112,7 @@ class TestAffairsPage:
         affairs.enter_texts('//div[label[text()="事务名称"]]//input', aff)
         affairs.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         eles = affairs.finds_elements(By.XPATH, f'(//table[@class="el-table__body"])[1]//tr[td[2]/div[text()="{name}"]]//div[@class="flow-direction"]/div')
@@ -1135,7 +1135,7 @@ class TestAffairsPage:
         affairs.click_button('(//i[@class="el-icon-edit"])[1]')
         affairs.enter_texts('//div[label[text()="事务名称"]]//input', aff)
         affairs.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         assert message == "重复命名！"
         assert not affairs.has_fail_message()
 
@@ -1152,7 +1152,7 @@ class TestAffairsPage:
         affairs.click_next()
         affairs.click_button('(//i[@class="el-icon-delete"])[1]')
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         eles = affairs.finds_elements(By.XPATH,
@@ -1175,7 +1175,7 @@ class TestAffairsPage:
         affairs.click_next()
         affairs.add_process_affairs(add=False, sel=aff)
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
         eles = affairs.finds_elements(By.XPATH,
@@ -1196,7 +1196,7 @@ class TestAffairsPage:
         affairs.click_process_update(name)
         affairs.enter_texts('//div[label[text()="名称"]]/div//input', before_)
         affairs.click_save()
-        message = affairs.get_message()
+        message = affairs.get_find_message()
         assert message == "重复命名！"
         assert not affairs.has_fail_message()
 

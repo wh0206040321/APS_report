@@ -160,7 +160,7 @@ class TestUserRolePage:
         user.click_button('//div[@class="ivu-date-picker-cells"]/span[@class="ivu-date-picker-cells-cell ivu-date-picker-cells-cell-today ivu-date-picker-cells-focused"]')
         sleep(0.5)
         user.click_all_button("保存")
-        message = user.get_find_message()
+        message = user.get_error_message()
         assert message == "请选择角色"
         assert not user.has_fail_message()
 
@@ -652,7 +652,7 @@ class TestUserRolePage:
         table_sy = user.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{name}"]]/td[6]//span[1]').get_attribute("class")
         if table_sy == 'vxe-checkbox--icon vxe-icon-checkbox-unchecked':
             user.click_all_button('解除当前锁定')
-            message = user.get_find_message()
+            message = user.get_error_message()
             assert message == "用户未锁定"
         else:
             assert 1 == 0
@@ -715,7 +715,7 @@ class TestUserRolePage:
         table_sy = user.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{name}"]]/td[6]//span[1]').get_attribute("class")
         if table_sy == 'vxe-checkbox--icon vxe-icon-checkbox-unchecked':
             user.click_all_button('解除所有锁定')
-            message = user.get_find_message()
+            message = user.get_error_message()
             assert message == "用户未锁定"
         else:
             assert 1 == 0

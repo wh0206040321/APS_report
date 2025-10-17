@@ -66,7 +66,7 @@ class TestImpPage:
         imp = ImpPage(driver)  # 用 driver 初始化 ImpPage
         imp.click_impall_button("新增")
         imp.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        message = imp.get_find_message()
+        message = imp.get_error_message()
         assert message == "请输入方案且不能与其他方案相同"
         assert not imp.has_fail_message()
 
@@ -104,7 +104,7 @@ class TestImpPage:
         imp = ImpPage(driver)  # 用 driver 初始化 ImpPage
         name = "1导入设置方案"
         imp.add_imp(name)
-        message = imp.get_find_message()
+        message = imp.get_error_message()
         assert message == "请输入方案且不能与其他方案相同"
         assert not imp.has_fail_message()
 
@@ -121,7 +121,7 @@ class TestImpPage:
         imp.click_impall_button("编辑")
         sleep(1)
         imp.click_impall_button("保存")
-        message = imp.get_find_message()
+        message = imp.get_error_message()
         assert message == "请选择导入节点"
         assert not imp.has_fail_message()
 
@@ -252,7 +252,7 @@ class TestImpPage:
         name = "1导入设置方案"
         copyname = '1同步导入1'
         imp.copy_(name=name, copy_name=name)
-        message = imp.get_find_message()
+        message = imp.get_error_message()
         assert message == '请输入方案且不能与其他方案相同'
         assert not imp.has_fail_message()
 
