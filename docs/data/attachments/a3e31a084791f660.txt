@@ -1,6 +1,0 @@
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物品"])[1]

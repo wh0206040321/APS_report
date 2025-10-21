@@ -1,0 +1,16 @@
+[32mINFO    [0m root:test_personal.py:32 [INFO] 正在导航到 URL: http://wkawka.vicp.net:27890
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[text()=" 个人设置 "]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //label[text()="悬浮"]/span
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1596236582720
+[32mINFO    [0m root:test_personal.py:32 [INFO] 正在导航到 URL: http://wkawka.vicp.net:27890
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[text()=" 个人设置 "]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //label[text()="悬浮"]/span
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1596228371744
