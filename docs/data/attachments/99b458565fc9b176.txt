@@ -1,0 +1,45 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[div[span[text()=" 组件代码"]]]/div[3]//i
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2748348290752
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[div[span[text()=" 组件代码"]]]/div[3]//i
+[33mWARNING [0m root:base_page.py:61 点击失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e4aa6f65+78965]
+	GetHandleVerifier [0x0x7ff6e4aa6fc0+79056]
+	(No symbol) [0x0x7ff6e4839dda]
+	(No symbol) [0x0x7ff6e48417c1]
+	(No symbol) [0x0x7ff6e484482c]
+	(No symbol) [0x0x7ff6e48448ff]
+	(No symbol) [0x0x7ff6e4892877]
+	(No symbol) [0x0x7ff6e48919b8]
+	(No symbol) [0x0x7ff6e4883635]
+	(No symbol) [0x0x7ff6e48b866a]
+	(No symbol) [0x0x7ff6e4882b56]
+	(No symbol) [0x0x7ff6e48b8880]
+	(No symbol) [0x0x7ff6e48e0dbe]
+	(No symbol) [0x0x7ff6e48b8443]
+	(No symbol) [0x0x7ff6e4881311]
+	(No symbol) [0x0x7ff6e48820a3]
+	GetHandleVerifier [0x0x7ff6e4d5e26d+2926461]
+	GetHandleVerifier [0x0x7ff6e4d58993+2903715]
+	GetHandleVerifier [0x0x7ff6e4d76aed+3026941]
+	GetHandleVerifier [0x0x7ff6e4ac16fe+187406]
+	GetHandleVerifier [0x0x7ff6e4ac96ef+220159]
+	GetHandleVerifier [0x0x7ff6e4aafaf4+114692]
+	GetHandleVerifier [0x0x7ff6e4aafca9+115129]
+	GetHandleVerifier [0x0x7ff6e4a964d8+10728]
+	BaseThreadInitThunk [0x0x7ffee1537374+20]
+	RtlUserThreadStart [0x0x7ffee1a7cc91+33]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2748343915984

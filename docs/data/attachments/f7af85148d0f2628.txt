@@ -1,0 +1,142 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试A"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //span[text()="1测试A"]，等待超时 10s
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试B"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //span[text()="1测试B"]，等待超时 10s
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试C"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //span[text()="1测试C"]，等待超时 10s
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="工艺产能"])[1]
+[33mWARNING [0m root:base_page.py:58 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[.//span[text()="1测试C"]]/td[2]//span[text()="1测试C"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //tr[.//span[text()="1测试C"]]/td[2]//span[text()="1测试C"]，等待超时 10s
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[text()="新增工艺产能"])[2]/parent::div//i[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //span[text()=" 物料代码： "]/parent::div//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试C"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[last()]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="m-b-10 ivu-btn ivu-btn-default"])[3]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[1]/div[3]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="m-b-10 ivu-btn ivu-btn-default"])[5]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试A"]]/td[2]//span[text()="1测试A"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[last()]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="m-b-10 ivu-btn ivu-btn-default"])[7]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[8]/td//span[@class="vxe-cell--checkbox"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[last()]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="m-b-10 ivu-btn ivu-btn-default"])[3]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[2]/td[3]//input[@placeholder="请选择"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[2]/div[3]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[.//div[text()=" 输入指令 "] and @class="ivu-tabs-nav"]//div[text()=" 输入指令 "]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="m-b-10 ivu-btn ivu-btn-default"])[5]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试B"]]/td[2]//span[text()="1测试B"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="m-b-10 ivu-btn ivu-btn-default"])[7]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[3]/td//span[@class="vxe-cell--checkbox"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[last()]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="制造订单"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试C订单"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //span[text()="1测试C订单"]，等待超时 10s
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //label[text()="物料"]/parent::div/div//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="vxe-table--body-wrapper body--wrapper"]//table//tr/td[3]//span[text()="1测试C"])[1]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = (//div[@class="vxe-table--body-wrapper body--wrapper"]//table//tr/td[3]//span[text()="1测试C"])[1] 未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="vxe-table--body-wrapper body--wrapper"]//table//tr/td[3]//span[text()="1测试C"])[2]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]/button[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//label[text()="交货期"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-dropdown ivu-date-picker-transfer setZindex"]//div[@class="ivu-date-picker-header"]//span[@class="ivu-picker-panel-icon-btn ivu-date-picker-next-btn ivu-date-picker-next-btn-arrow"]/i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-dropdown ivu-date-picker-transfer setZindex"]//div[@class="ivu-date-picker-cells"]//em[text()="20"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-dropdown ivu-date-picker-transfer setZindex"]//div[@class="ivu-picker-confirm"]//button[3]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//label[text()="计划数量"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[5]/button[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计算工作台"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划计算"])[1]
+[33mWARNING [0m root:base_page.py:61 点击失败：Message: element not interactable
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e4aa6f65+78965]
+	GetHandleVerifier [0x0x7ff6e4aa6fc0+79056]
+	(No symbol) [0x0x7ff6e4839c0c]
+	(No symbol) [0x0x7ff6e48917fd]
+	(No symbol) [0x0x7ff6e48832a4]
+	(No symbol) [0x0x7ff6e48b866a]
+	(No symbol) [0x0x7ff6e4882b56]
+	(No symbol) [0x0x7ff6e48b8880]
+	(No symbol) [0x0x7ff6e48e0dbe]
+	(No symbol) [0x0x7ff6e48b8443]
+	(No symbol) [0x0x7ff6e4881311]
+	(No symbol) [0x0x7ff6e48820a3]
+	GetHandleVerifier [0x0x7ff6e4d5e26d+2926461]
+	GetHandleVerifier [0x0x7ff6e4d58993+2903715]
+	GetHandleVerifier [0x0x7ff6e4d76aed+3026941]
+	GetHandleVerifier [0x0x7ff6e4ac16fe+187406]
+	GetHandleVerifier [0x0x7ff6e4ac96ef+220159]
+	GetHandleVerifier [0x0x7ff6e4aafaf4+114692]
+	GetHandleVerifier [0x0x7ff6e4aafca9+115129]
+	GetHandleVerifier [0x0x7ff6e4a964d8+10728]
+	BaseThreadInitThunk [0x0x7ffee1537374+20]
+	RtlUserThreadStart [0x0x7ffee1a7cc91+33]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试A"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试B"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试C"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="工艺产能"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[.//span[text()="1测试C"]]/td[2]//span[text()="1测试C"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="制造订单"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //span[text()="1测试C订单"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计算工作台"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="计划计算"])[1]
+[33mWARNING [0m root:base_page.py:61 点击失败：Message: element not interactable
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e4aa6f65+78965]
+	GetHandleVerifier [0x0x7ff6e4aa6fc0+79056]
+	(No symbol) [0x0x7ff6e4839c0c]
+	(No symbol) [0x0x7ff6e48917fd]
+	(No symbol) [0x0x7ff6e48832a4]
+	(No symbol) [0x0x7ff6e48b866a]
+	(No symbol) [0x0x7ff6e4882b56]
+	(No symbol) [0x0x7ff6e48b8880]
+	(No symbol) [0x0x7ff6e48e0dbe]
+	(No symbol) [0x0x7ff6e48b8443]
+	(No symbol) [0x0x7ff6e4881311]
+	(No symbol) [0x0x7ff6e48820a3]
+	GetHandleVerifier [0x0x7ff6e4d5e26d+2926461]
+	GetHandleVerifier [0x0x7ff6e4d58993+2903715]
+	GetHandleVerifier [0x0x7ff6e4d76aed+3026941]
+	GetHandleVerifier [0x0x7ff6e4ac16fe+187406]
+	GetHandleVerifier [0x0x7ff6e4ac96ef+220159]
+	GetHandleVerifier [0x0x7ff6e4aafaf4+114692]
+	GetHandleVerifier [0x0x7ff6e4aafca9+115129]
+	GetHandleVerifier [0x0x7ff6e4a964d8+10728]
+	BaseThreadInitThunk [0x0x7ffee1537374+20]
+	RtlUserThreadStart [0x0x7ffee1a7cc91+33]
