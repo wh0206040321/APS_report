@@ -1,0 +1,16 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//span[text()="模块管理"])[1]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[p[text()="模块代码"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="ACDAA"]]]/td[2]
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //tr[./td[2][.//span[text()="ACDAA"]]]/td[2] 未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon" and ./div[text()=" 测试布局A "]]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]//i
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = (//li[text()="删除布局"])[1]
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2182297202992
