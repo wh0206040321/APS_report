@@ -158,9 +158,10 @@ class Coverage(BasePage):
             self.click_button('//span[text()="请选择"]/following-sibling::i')
             self.click_button('//span[text()="RGB(100,255,178)"]')
 
-            for index in range(1, 7):
-                if index == 2 or index == 4 or index == 5 or index == 6:
-                    self.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[{index}]', num)
+            self.enter_texts('//div[@id="9la8xi09-07ws"]//input', num)
+            self.enter_texts('//div[@id="k0z05daz-8tok"]//input', num)
+            self.enter_texts('//div[@id="luvfyssv-uxe2"]//input', num)
+            self.enter_texts('//div[@id="6ofb26y9-tous"]//input', num)
 
             sel = self.get_find_element_xpath('//div[@class="checkBoxComp position-absolute"]/label/span')
             if sel.get_attribute("class") == "ivu-checkbox":

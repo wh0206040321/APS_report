@@ -56,6 +56,11 @@ class AffairsPage(BasePage):
         self.click_button('//li[text()=" 刷新"]')
         self.wait_for_loading_to_disappear()
 
+    def click_confirm_button(self):
+        """点击确认按钮."""
+        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()
+
     # 等待加载遮罩消失
     def wait_for_loading_to_disappear(self, timeout=10):
         """
@@ -69,8 +74,9 @@ class AffairsPage(BasePage):
         以此判断加载遮罩是否消失。
         """
         WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located(
-                (By.XPATH, '//div[contains(@class, "el-loading-mask") and not(contains(@style, "display: none"))]')
+            lambda d: (
+                d.find_element(By.CLASS_NAME, "el-loading-mask").value_of_css_property("display") == "none"
+                if d.find_elements(By.CLASS_NAME, "el-loading-mask") else True
             )
         )
         sleep(1)
@@ -125,13 +131,20 @@ class AffairsPage(BasePage):
         :param edi: 删除按钮的文本内容，默认为"删除"
         :return: 无返回值
         """
-        # 查找包含指定名称的表格行中的删除按钮元素
-        eles = self.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[contains(text(),"{name}")]]]/td[last()]//span[text()="{edi}"]')
-        # 遍历找到的删除按钮并点击，然后确认删除操作
-        for ele in eles:
-            sleep(0.5)
+        while True:
+            # 查找当前页面中符合条件的删除按钮
+            eles = self.finds_elements(By.XPATH,
+                                       f'//table[@class="el-table__body"]//tr[td[2][div[contains(text(),"{name}")]]]/td[last()]//span[text()="{edi}"]')
+
+            if not eles:
+                print("所有目标项已删除完毕")
+                break  # 没有匹配项，退出循环
+
+            # 删除第一个匹配项
+            ele = eles[0]
+            sleep(2)
             ele.click()
-            sleep(0.5)
+            sleep(1)
             self.click_button('//div[@class="el-message-box__btns"]/button[2]')
 
     def hover(self, name="", edi=""):
@@ -169,7 +182,7 @@ class AffairsPage(BasePage):
         self.click_button(f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]/td[last()]//span[text()="编辑"]')
 
     def add_process_affairs(self, add: bool = True, name="", sel=""):
-        """点击添加事务"""
+        """点击添加流程"""
         self.click_button('//div[text()="添加下一个事务 "]/i')
         if add:
             self.click_button('//div[@class="layout" and button[span[text()="新建事务"]]]/button')
@@ -280,6 +293,7 @@ class AffairsPage(BasePage):
             self.enter_texts('//div[label[text()="分类"]]/div//input', type)
         if frequency:
             self.click_button('//div[label[text()="频率"]]/div//i')
+            sleep(1)
             if frequency == "一次":
                 self.click_button(f'//li[span[text()="{frequency}"]]')
                 if time:
@@ -289,6 +303,7 @@ class AffairsPage(BasePage):
             elif frequency == "每天":
                 self.click_button(f'//li[span[text()="{frequency}"]]')
                 self.click_button('//div[label[text()="执行设置"]]/div//i')
+                sleep(1)
                 if time == "1":
                     self.click_button('//li[span[text()="每天执行一次"]]')
                     self.click_button('(//input[@placeholder="开始日期"])[2]')
@@ -303,6 +318,7 @@ class AffairsPage(BasePage):
 
             elif frequency == "周":
                 self.click_button(f'//li[span[text()="{frequency}"]]')
+                sleep(1)
                 if time:
                     self.click_button('//div[label[text()="按周"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up"]')
                     self.click_button('//li[span[text()="星期三"]]')
@@ -312,7 +328,7 @@ class AffairsPage(BasePage):
                 if time:
                     self.click_button('//div[label[text()="按月"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up"]')
                     self.click_button('//li[span[text()="3"]]')
-                    self.click_button('//div[label[text()="按周"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up is-reverse"]')
+                    self.click_button('//div[label[text()="按月"]]/div//i[@class="el-select__caret el-input__icon el-icon-arrow-up is-reverse"]')
 
     def select_all(self, affairs="", enable="", process="", button: bool = True):
         """查询所有."""

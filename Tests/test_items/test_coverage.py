@@ -345,7 +345,7 @@ class TestCoveragePage:
             '//div[@id="2ssy7pog-1nb7"]//input'
         ).get_attribute("value")
 
-        coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
+        coverage.enter_texts(f'//div[@id="9la8xi09-07ws"]//input', 3)
 
         # 时序
         coverage.enter_texts(
@@ -405,7 +405,7 @@ class TestCoveragePage:
                 and chronology == addchronology
                 and resources == addresources
                 and text_ == name
-                and num_ == '1000000000000000000'
+                and num_ == '99999999999'
         )
         assert not coverage.has_fail_message()
 
@@ -436,7 +436,7 @@ class TestCoveragePage:
             '//div[@id="2ssy7pog-1nb7"]//input'
         ).get_attribute("value")
 
-        coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
+        coverage.enter_texts(f'//div[@id="9la8xi09-07ws"]//input', 3)
 
         # 时序
         coverage.enter_texts(
@@ -696,7 +696,7 @@ class TestCoveragePage:
         resource = coverage.get_find_element_xpath(
             '//div[@id="2ssy7pog-1nb7"]//input'
         ).get_attribute("value")
-        coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
+        coverage.enter_texts(f'//div[@id="9la8xi09-07ws"]//input', 3)
 
         # 时序
         coverage.enter_texts(
@@ -775,7 +775,7 @@ class TestCoveragePage:
         resource = coverage.get_find_element_xpath(
             '//div[@id="2ssy7pog-1nb7"]//input'
         ).get_attribute("value")
-        coverage.enter_texts(f'(//input[@class="ivu-input ivu-input-default"])[2]', 3)
+        coverage.enter_texts(f'//div[@id="9la8xi09-07ws"]//input', 3)
 
         # 时序
         coverage.enter_texts(

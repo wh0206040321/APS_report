@@ -165,13 +165,13 @@ class CustomerPage(BasePage):
             # 显示颜色
             self.click_button('//span[text()="RGB(100,255,178)"]')
             ele = self.get_find_element_xpath(
-                '(//label[text()="表示顺序"])[1]/parent::div//input'
+                '(//label[text()="显示顺序"])[1]/parent::div//input'
             )
             ele.send_keys(Keys.CONTROL, "a")
             ele.send_keys(Keys.DELETE)
             # 显示顺序框输入文字字母符号数字
             self.enter_texts(
-                '(//label[text()="表示顺序"])[1]/parent::div//input', f"{num}"
+                '(//label[text()="显示顺序"])[1]/parent::div//input', f"{num}"
             )
             self.enter_texts('(//label[text()="备注"])[1]/parent::div//input', f"{name}")
             prefixes = ["自定义字符", "自定义数字"]  # 二种前缀

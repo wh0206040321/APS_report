@@ -378,6 +378,7 @@ class TestPSIPage:
         psi.hover("符合开头")
         sleep(1)
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
+        sleep(1)
         eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
@@ -394,6 +395,7 @@ class TestPSIPage:
         psi.hover("符合结尾")
         sleep(1)
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
+        sleep(1)
         eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
@@ -427,6 +429,7 @@ class TestPSIPage:
         name1 = "11"
         psi.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         psi.click_button_psi("编辑")
+        sleep(1)
         psi.enter_text(By.XPATH, '//div[p[text()="PSI名称: "]]//input', name1)
         psi.click_button_psi("取消")
         psi.right_refresh()
@@ -458,16 +461,16 @@ class TestPSIPage:
         assert message == "保存成功"
         assert not psi.has_fail_message()
 
-    # @allure.story("删除数据成功")
-    # # @pytest.mark.run(order=1)
-    # def test_psi_del(self, login_to_psi):
-    #     driver = login_to_psi  # WebDriver 实例
-    #     psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
-    #     list_ = ["1测试psi1", "1测试psi2", "1测试psi3"]
-    #     psi.del_all(list_)
-    #     message = psi.get_find_message()
-    #     psi.right_refresh()
-    #     eles2 = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]')
-    #     assert not eles2
-    #     assert message == "删除成功！"
-    #     assert not psi.has_fail_message()
+    @allure.story("删除数据成功")
+    # @pytest.mark.run(order=1)
+    def test_psi_del(self, login_to_psi):
+        driver = login_to_psi  # WebDriver 实例
+        psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
+        list_ = ["1测试psi1", "1测试psi2", "1测试psi3"]
+        psi.del_all(list_)
+        message = psi.get_find_message()
+        psi.right_refresh()
+        eles2 = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]')
+        assert not eles2
+        assert message == "删除成功！"
+        assert not psi.has_fail_message()

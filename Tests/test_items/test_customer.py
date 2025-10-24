@@ -200,7 +200,7 @@ class TestCustomerPage:
         num_ = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[5]'
         ).text
-        assert adddata == name and num_ == '1000000000000000000', f"预期数据是{name}，实际得到{adddata}"
+        assert adddata == name and num_ == '99999999999', f"预期数据是{name}，实际得到{adddata}"
         assert not customer.has_fail_message()
 
     @allure.story("添加数据成功")

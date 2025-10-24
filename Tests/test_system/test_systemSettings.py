@@ -274,7 +274,7 @@ class TestSystemSettingsPage:
         assert maeessage == "保存成功" and len(ele) == 0
         assert not settings.has_fail_message()
 
-    @allure.story("校验数字文本框最大只能输入1000000000000000000")
+    @allure.story("校验数字文本框最大只能输入99999999999")
     # @pytest.mark.run(order=1)
     def test_systemSettings_inputnum1(self, login_to_systemSettings):
         driver = login_to_systemSettings  # WebDriver 实例
@@ -283,7 +283,7 @@ class TestSystemSettingsPage:
         settings.click_save_button()
         maeessage = settings.get_find_message()
         ele = settings.get_find_element_xpath('//div[p[text()=" 禁用不登录账户（天）: "]]//input').get_attribute("value")
-        assert maeessage == "保存成功" and ele == '1000000000000000000'
+        assert maeessage == "保存成功" and ele == '99999999999'
         ele = settings.get_find_element_xpath('//div[p[text()=" 禁用不登录账户（天）: "]]//input')
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
@@ -322,7 +322,7 @@ class TestSystemSettingsPage:
         settings.click_save_button()
         maeessage = settings.get_find_message()
         ele = settings.get_find_element_xpath('//div[p[text()=" 数据库命令超时时间: "]]//input').get_attribute("value")
-        assert maeessage == "保存成功" and ele == '1000000000000000000'
+        assert maeessage == "保存成功" and ele == '99999999999'
         ele = settings.get_find_element_xpath('//div[p[text()=" 数据库命令超时时间: "]]//input')
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)

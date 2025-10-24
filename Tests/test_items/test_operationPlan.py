@@ -115,7 +115,7 @@ class TestOperationPlanPage:
         # 搜索框输入资源代码
         operationPlan.enter_texts(
             '(//div[./p[text()="资源代码"]]/following-sibling::div//input)[1]',
-            f"{resource1}",
+            resource1
         )
         # 勾选资源
         sleep(1)
@@ -139,7 +139,7 @@ class TestOperationPlanPage:
         # 搜索框输入资源代码
         operationPlan.enter_texts(
             '(//div[./p[text()="资源代码"]]/following-sibling::div//input)[1]',
-            f"{resource2}",
+            resource2,
         )
         sleep(1)
         # 勾选资源

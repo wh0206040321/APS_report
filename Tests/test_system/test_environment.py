@@ -162,12 +162,12 @@ class TestEnvironmentPage:
         environment.batch_modify_input(xpth_list, value)
         div_xpth_list = [item.replace("//input", "//input/ancestor::div[2]") for item in xpth_list]
         environment.click_save_button()
-        message = environment.get_find_message()
+        message = environment.get_error_message()
         before_value = environment.get_border_color(div_xpth_list)
         assert all(color == "rgb(237, 64, 20)" for color in before_value) and message == "请填写信息"
         assert not environment.has_fail_message()
 
-    @allure.story("周期页面-校验所有数字输入框-超过最大值为999999999999999")
+    @allure.story("周期页面-校验所有数字输入框-超过最大值为99999999999")
     # @pytest.mark.run(order=1)
     def test_environment_cycle_numinput2(self, login_to_environment):
         driver = login_to_environment  # WebDriver 实例
@@ -188,7 +188,7 @@ class TestEnvironmentPage:
         environment.right_refresh()
         environment.click_cycle()
         after_value = environment.batch_acquisition_input(xpth_list)
-        num_ = "999999999999999"
+        num_ = "99999999999"
         assert all(num_ == v for v in after_value) and message == "保存成功"
         assert all(after_value), "列表中存在为空或为假值的元素！"
         assert not environment.has_fail_message()
@@ -337,7 +337,7 @@ class TestEnvironmentPage:
         assert all(color == "rgb(237, 64, 20)" for color in before_value) and message == "请填写信息"
         assert not environment.has_fail_message()
 
-    @allure.story("排程页面-校验所有数字输入框-超过最大值为Infinity")
+    @allure.story("排程页面-校验所有数字输入框-超过最大值为99999999999")
     # @pytest.mark.run(order=1)
     def test_environment_plan_numinput2(self, login_to_environment):
         driver = login_to_environment  # WebDriver 实例
@@ -356,7 +356,8 @@ class TestEnvironmentPage:
         environment.right_refresh()
         environment.click_plan()
         after_value = environment.batch_acquisition_input(xpth_list)
-        num_ = "1000000000000000000"
+        num_ = "99999999999"
+        print(v for v in after_value)
         assert all(num_ == v for v in after_value) and message == "保存成功"
         assert all(after_value), "列表中存在为空或为假值的元素！"
         assert not environment.has_fail_message()

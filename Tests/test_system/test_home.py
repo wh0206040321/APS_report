@@ -58,6 +58,21 @@ def login_to_home():
 @pytest.mark.run(order=200)
 class TestHomePage:
 
+    @allure.story("添加测试模版")
+    # @pytest.mark.run(order=1)
+    def test_home_save_template_11(self, login_to_home):
+        driver = login_to_home  # WebDriver 实例
+        home = HomePage(driver)  # 用 driver 初始化 HomePage
+        driver.execute_script("document.body.style.zoom='0.6'")
+        sleep(1)
+        home.clear_all_button("确定")
+        home.drag_component(index="4")
+        text = home.click_save_template_button(name="初始模版使用", button="确定")
+        home.click_save_button()
+        message = home.get_find_message()
+        assert text == 1 and message == "保存成功"
+        assert not home.has_fail_message()
+
     @allure.story("新增一个组件成功")
     # @pytest.mark.run(order=1)
     def test_home_add_success(self, login_to_home):
@@ -176,16 +191,13 @@ class TestHomePage:
     def test_home_add_template_repeat(self, login_to_home):
         driver = login_to_home  # WebDriver 实例
         home = HomePage(driver)  # 用 driver 初始化 HomePage
+        home.wait_for_loading_to_disappear()
         home.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[2]')
         home.enter_texts('//div[text()=" 名称 "]/following-sibling::div//input', "测试模版confirm")
         home.click_button(
             f'//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        message = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="el-message el-message--error"]//p')
-            )
-        )
-        assert message.text == "模板已存在"
+        message = home.get_error_message()
+        assert message == "模板已存在"
         assert not home.has_fail_message()
 
     @allure.story("切换模版点击取消不会更新模版")
@@ -227,6 +239,7 @@ class TestHomePage:
     def test_home_switch_template3(self, login_to_home):
         driver = login_to_home  # WebDriver 实例
         home = HomePage(driver)  # 用 driver 初始化 HomePage
+        home.wait_for_loading_to_disappear()
         home.drag_component(name="表格")
         home.click_template()
         home.click_save_button()
@@ -342,7 +355,7 @@ class TestHomePage:
         driver = login_to_home  # WebDriver 实例
         home = HomePage(driver)  # 用 driver 初始化 HomePage
         PersonalPage(driver).go_setting_page()
-        sleep(3)
+        home.wait_for_loading_to_disappear()
         elem1 = len(driver.find_elements(By.XPATH, '//div[p[text()=" 主页启动模板: "]]/div/div[contains(@class,"demo-upload-list")]'))
         home.click_button('//div[@class="demo-drawer-footer"]//span[text()="取消"]')
         home.click_template()
@@ -386,12 +399,12 @@ class TestHomePage:
         if sty != "display: none;":
             home.click_button('//div[span[text()=" 测试模版2confirm "]]/span[text()=" 加载模板 "]')
             home.click_button('//div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]')
-            home.wait_for_loading_to_disappear()
+        home.wait_for_loading_to_disappear()
         num = home.count_div_elements()
         home.click_save_button()
         home.get_find_message()
         PersonalPage(driver).go_setting_page()
-        sleep(3)
+        home.wait_for_loading_to_disappear()
         home.click_button('//div[p[text()=" 主页启动模板: "]]/div/div[contains(@class,"demo-upload-list")][last()]')
         home.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button')
         home.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
@@ -417,7 +430,7 @@ class TestHomePage:
         if sty != "display: none;":
             home.click_button('//div[span[text()=" 测试模版2confirm "]]/span[text()=" 加载模板 "]')
             home.click_button('//div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]')
-            home.wait_for_loading_to_disappear()
+        home.wait_for_loading_to_disappear()
         home.click_button('//div[text()=" 页面设置 "]')
         value = home.get_find_element_xpath(
             '//div[p[text()="关联角色"]]/div//input').get_attribute("value")
@@ -446,7 +459,7 @@ class TestHomePage:
         if sty != "display: none;":
             home.click_button('//div[span[text()=" 测试模版2confirm "]]/span[text()=" 加载模板 "]')
             home.click_button('//div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]')
-            home.wait_for_loading_to_disappear()
+        home.wait_for_loading_to_disappear()
         num = home.count_div_elements()
         home.click_save_button()
         home.get_find_message()
@@ -462,7 +475,7 @@ class TestHomePage:
     def test_home_savete(self, login_to_home):
         driver = login_to_home  # WebDriver 实例
         home = HomePage(driver)  # 用 driver 初始化 HomePage
-        name = "清空"
+        name = "初始模版使用"
         home.click_template()
         home.click_button(f'//div[./span[text()=" {name} "]]/span[text()=" 加载模板 "]')
         home.click_button(

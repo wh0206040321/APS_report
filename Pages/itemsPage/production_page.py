@@ -65,6 +65,30 @@ class ProductionPage(BasePage):
         )
         return message.text
 
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'vxe-loading'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+                )
+            )
+        except TimeoutException:
+            print("等待超时：第二个加载动画未消失，但继续执行后续操作")
+        except NoSuchElementException:
+            print("找不到目标元素，但继续执行后续操作")
+        sleep(1)
+
     def add_layout(self, layout):
         """添加布局."""
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')

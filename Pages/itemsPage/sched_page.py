@@ -86,7 +86,6 @@ class SchedPage(BasePage):
         except NoSuchElementException:
             return None
 
-
     def get_find_message(self):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
@@ -109,6 +108,7 @@ class SchedPage(BasePage):
         """获取保存之后的值"""
         self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])[1]')
         self.click_save_button()
+        self.get_find_message()
         self.driver.refresh()
         sleep(1)
         self.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')

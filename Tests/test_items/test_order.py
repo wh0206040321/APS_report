@@ -130,7 +130,6 @@ class TestOrderPage:
             '(//label[text()="交货期"])[1]/parent::div//input'
         )
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
-        sleep(1)
         border_color = inputdate_box.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
         # 判断上一步默认启动该布局成功
@@ -167,7 +166,6 @@ class TestOrderPage:
             '(//label[text()="物料"])[1]/parent::div//input'
         )
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
-        sleep(1)
         border_color = input_box.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
         assert (
@@ -309,16 +307,14 @@ class TestOrderPage:
         order.enter_texts('(//label[text()="计划数量"])[1]/parent::div//input', name)
 
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        order.click_confirm_button()
         adddata = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
         num_ = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[10]'
         ).text
-        assert adddata == name and num_ == '9999999999'
+        assert adddata == name and num_ == '99999999999'
         assert not order.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -357,9 +353,7 @@ class TestOrderPage:
         order.enter_texts('(//label[text()="计划数量"])[1]/parent::div//input', "200")
 
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        order.click_confirm_button()
         adddata = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -394,9 +388,7 @@ class TestOrderPage:
         )
 
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        order.click_confirm_button()
 
         # 获取重复弹窗文字
         error_popup = order.get_find_element_xpath(
@@ -455,9 +447,7 @@ class TestOrderPage:
         )
 
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        order.click_confirm_button()
         adddata = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -478,9 +468,7 @@ class TestOrderPage:
         # 制造订单代码输入111
         order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', "111")
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        order.click_confirm_button()
         # 获取重复弹窗文字
         error_popup = order.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -508,10 +496,8 @@ class TestOrderPage:
             '(//label[text()="订单代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
-        sleep(3)
+        order.click_confirm_button()
+        sleep(1)
         # 定位表格内容
         orderdata = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
@@ -532,10 +518,7 @@ class TestOrderPage:
         # 制造订单代码输入
         order.enter_texts('(//label[text()="订单代码"])[1]/parent::div//input', name)
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
-        sleep(1)
+        order.click_confirm_button()
         # 定位表格内容
         orderdata = order.get_find_element_xpath(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]').text
         assert orderdata == name, f"预期{orderdata}"
@@ -581,10 +564,7 @@ class TestOrderPage:
         ).get_attribute("value")
 
         # 点击确定
-        order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
-        sleep(1)
+        order.click_confirm_button()
         # 定位表格内容
         orderitem = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]/ancestor::tr/td[5]/div'
@@ -1236,7 +1216,7 @@ class TestOrderPage:
         order.del_all(value)
         orderdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:3]
+            for v in value[:4]
         ]
         order.del_loyout(layout)
         sleep(2)

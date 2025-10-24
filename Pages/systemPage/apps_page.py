@@ -11,7 +11,7 @@ from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
 
 
-class AppPage(BasePage):
+class AppsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -116,6 +116,52 @@ class AppPage(BasePage):
         """点击确定"""
         self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
+    def click_save_button(self):
+        """点击保存按钮."""
+        self.click_button('//div[@class="d-flex m-l--7 "]/div[1]')
+
+    def click_apps_button(self):
+        """点击应用管理"""
+        self.click_button('//div[@class="scroll-outer"]//div[text()=" 应用管理 "]')
+        self.right_refresh()
+
+    def click_save_template_button(self, name, button: bool = True):
+        """点击保存模版按钮."""
+        self.click_button('//div[@class="d-flex m-l--7 "]/div[2]')
+        self.enter_texts('//div[label[text()="名称"]]//input[@placeholder="请输入"]', name)
+        if button:
+            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        try:
+            self.get_find_message()
+        except TimeoutException:
+            pass
+
+    def go_template(self):
+        """
+        进入模版管理页面
+        """
+        self.click_button('(//div[@class="ivu-tabs"])[1]/div[1]//div[text()=" 模板 "]')
+        # ele = self.finds_elements(By.XPATH, f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{name}")]]')
+
+    def get_template_num(self, name):
+        """
+        获取实际模版数量
+        """
+        ele = self.finds_elements(By.XPATH, f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{name}")]]')
+        return len(ele)
+
+    def drag_component(self, name=""):
+        """
+        拖拽组件到画布区域。
+        """
+        # 定位拖拽源和目标元素
+        source = self.get_find_element_xpath(f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[text()="{name}"]]')  # 拖拽起点元素
+        target = self.get_find_element_xpath('//div[@id="canvasBox"]')  # 拖拽目标元素
+
+        # 执行拖拽操作
+        sleep(2)
+        ActionChains(self.driver).drag_and_drop(source, target).perform()
+
     def del_all(self, xpath, value=[]):
         for index, v in enumerate(value, start=1):
             try:
@@ -164,9 +210,9 @@ class AppPage(BasePage):
             self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
 
         try:
-            self.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        except:
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        except:
+            self.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
 
     def del_layout(self, layout):
         # 获取目标 div 元素，这里的目标是具有特定文本的 div

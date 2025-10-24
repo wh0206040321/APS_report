@@ -5,7 +5,7 @@ from time import sleep
 
 import allure
 import pytest
-from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import WebDriverException, TimeoutException
 from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -438,7 +438,7 @@ class TestChangeRPage:
         text_ = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert addresource == resource and additem1 == item1 and additem2 == item2 and '9999999999' == num_ and text_ == num
+        assert addresource == resource and additem1 == item1 and additem2 == item2 and '99999999999' == num_ and text_ == num
         assert not change.has_fail_message()
 
     @allure.story("删除数据成功")
@@ -796,7 +796,6 @@ class TestChangeRPage:
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-
         assert not change.has_fail_message()
 
     @allure.story("修改资源切换资源成功")
@@ -1008,11 +1007,11 @@ class TestChangeRPage:
         before_all_value = adds.batch_acquisition_input(all_value)
         changeR.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        sleep(1)
+        changeR.get_find_message()
         driver.refresh()
-        sleep(3)
+        changeR.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
-        sleep(2)
+        changeR.wait_for_loading_to_disappear()
         changeR.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )
@@ -1055,7 +1054,7 @@ class TestChangeRPage:
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]')
         changeR.click_del_button()
         changeR.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        sleep(2)
+        changeR.wait_for_loading_to_disappear()
         # 定位
         changedata = changeR.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
@@ -1087,9 +1086,17 @@ class TestChangeRPage:
         index = all_children.index(target_div)
         print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
         sleep(2)
-        changeR.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
+        try:
+            changeR.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        except TimeoutException:
+            changeR.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            )
+            changeR.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
         # 根据目标 div 的位置，点击对应的“删除布局”按钮
         changeR.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)

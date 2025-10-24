@@ -309,7 +309,7 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         mes = affairs.get_error_message()
-        assert mes == "名称重复"
+        assert mes == "事务已存在"
         assert not affairs.has_fail_message()
 
     @allure.story("事务模版-添加模版数据重复")
@@ -325,7 +325,7 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         mes = affairs.get_error_message()
-        assert mes == "名称重复"
+        assert mes == "事务已存在"
         assert not affairs.has_fail_message()
 
     @allure.story("事务模版-添加全部成功")
@@ -347,9 +347,10 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
         affairs.enter_texts('//div[label[text()="事务描述"]]//input', name)
-        swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]//div[@role="switch"]').get_attribute("class")
-        if swich == "el-switch":
-            affairs.click_button('//div[label[text()="推送"]]//div[@role="switch"]')
+        swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute("class")
+        sleep(1)
+        if "ivu-switch-checked" not in swich:
+            affairs.click_button('//div[label[text()="推送"]]/div/div/span')
 
         checked = affairs.get_find_element_xpath('//label[span[text()="站内"]]/span[1]').get_attribute("class")
         if checked == 'el-checkbox__input':
@@ -362,10 +363,9 @@ class TestAffairsPage:
         affairs.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]//span[text()="确定"]')
         sleep(1)
         before_list = affairs.batch_acquisition_input(xpth_list)
-        before_swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]//div[@role="switch"]').get_attribute("class")
+        before_swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute("class")
         before_checked = affairs.get_find_element_xpath('//label[span[text()="站内"]]/span[1]').get_attribute("class")
-        affairs.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         affairs.right_refresh()
@@ -373,7 +373,7 @@ class TestAffairsPage:
         driver.execute_script("arguments[0].scrollIntoView();", element)
         affairs.hover(name=name, edi="编辑")
         after_list = affairs.batch_acquisition_input(xpth_list)
-        after_swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]//div[@role="switch"]').get_attribute(
+        after_swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute(
             "class")
         after_checked = affairs.get_find_element_xpath('//label[span[text()="站内"]]/span[1]').get_attribute("class")
         assert len(ele) == 1 and value == type
@@ -412,7 +412,7 @@ class TestAffairsPage:
                 count += 1
         affairs.input_text(name)
         sleep(3)
-        elements = affairs.finds_elements(By.XPATH, '//div[@template-card__desc"]/div')
+        elements = affairs.finds_elements(By.XPATH, '//div[@class="template-card__desc"]/div')
         assert count == len(elements)
         assert not affairs.has_fail_message()
 
@@ -428,7 +428,7 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
         mes = affairs.get_error_message()
-        assert mes == "名称重复"
+        assert mes == "事务已存在"
         assert not affairs.has_fail_message()
 
     @allure.story("事务模版-修改事务名称成功")
@@ -436,35 +436,19 @@ class TestAffairsPage:
     def test_affairs_template_updatname(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        name = "测试事务模版6"
-        affairs.hover(name=name, edi="编辑")
+        before_name = "测试事务模版6"
+        after_name = "测试事务模版7"
+        affairs.hover(name=before_name, edi="编辑")
         affairs.get_find_element_xpath('//div[label[text()="事务名称"]]//input').clear()
-        affairs.enter_texts('//div[label[text()="事务名称"]]//input', "测试事务模版7")
+        affairs.enter_texts('//div[label[text()="事务名称"]]//input', after_name)
         type = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
+        message = affairs.get_find_message()
+        ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{after_name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
+        assert message == "编辑成功！"
         assert len(ele) == 1 and value == type
-        assert not affairs.has_fail_message()
-
-    @allure.story("事务模版-切换事务类型，配置参数刷新")
-    # @pytest.mark.run(order=1)
-    def test_affairs_template_updattype(self, login_to_affairs):
-        driver = login_to_affairs  # WebDriver 实例
-        affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        name = "测试事务模版7"
-        type = "服务"
-        affairs.hover(name=name, edi="编辑")
-        affairs.click_button('//div[label[text()="事务类型"]]//input')
-        affairs.click_button(f'//span[text()="{type}"]')
-        sleep(1)
-        type_ = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
-        before_parameter = affairs.get_find_element_xpath('//div[label[text()="配置参数"]]//input')
-        affairs.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        ele = affairs.get_find_element_xpath(f'//div[label[text()="配置参数"]]//div[@class="el-form-item__error"]').text
-        assert ele == "请输入配置参数" and type_ == type and before_parameter == ''
         assert not affairs.has_fail_message()
 
     @allure.story("事务模版-切换事务类型，修改配置参数成功")
@@ -473,22 +457,51 @@ class TestAffairsPage:
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         name = "测试事务模版7"
-        type = "服务"
+        type = "存储过程"
         affairs.hover(name=name, edi="编辑")
         affairs.click_button('//div[label[text()="事务类型"]]//input')
         affairs.click_button(f'//span[text()="{type}"]')
+        affairs.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(1)
-        type_ = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
         affairs.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
-        affairs.click_button('//div[text()=" 自定义 "]')
-        affairs.enter_texts('//div[p[text()="自定义服务:"]]//input', "https")
+        affairs.click_button('//div[p[text()="存储过程列表:"]]//i')
+        affairs.click_button('//li[text()="APS_MP_Holiday"]')
+        num = len(driver.find_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr'))
+        for i in range(1, 1 + num):
+            affairs.enter_texts(f'//table[@class="vxe-table--body"]//tr[{i}]/td[3]//input', "1")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
+        type_ = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
+        sleep(2)
+        before_parameter = affairs.get_find_element_xpath('//div[label[text()="配置参数"]]//input').get_attribute("value")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        affairs.get_find_message()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
-        assert len(ele) == 1 and value == type_
+        assert len(ele) == 1 and value == type_ and 'APS_MP_Holiday' in before_parameter
+        assert not affairs.has_fail_message()
+
+    @allure.story("事务模版-切换事务类型，配置参数刷新")
+    # @pytest.mark.run(order=1)
+    def test_affairs_template_updattype(self, login_to_affairs):
+        driver = login_to_affairs  # WebDriver 实例
+        affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        name = "测试事务模版7"
+        type = "接口"
+        affairs.hover(name=name, edi="编辑")
+        affairs.click_button('//div[label[text()="事务类型"]]//input')
+        affairs.click_button(f'//span[text()="{type}"]')
+        affairs.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
+        sleep(1)
+        type_ = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
+        sleep(2)
+        before_parameter = affairs.get_find_element_xpath('//div[label[text()="配置参数"]]//input').get_attribute(
+            "value")
+        affairs.click_button(
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        ele = affairs.get_find_element_xpath(f'//div[label[text()="配置参数"]]//div[@class="el-form-item__error"]').text
+        assert ele == "请输入配置参数" and type_ == type and before_parameter == ''
         assert not affairs.has_fail_message()
 
     @allure.story("事务模版-循环删除模版成功")
@@ -561,6 +574,21 @@ class TestAffairsPage:
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         affairs.click_process()
         affairs.add_process(name="测试流程1", type="服务", frequency="每天")
+        container = affairs.get_find_element_xpath(
+            f'//div[@class="dis-flex"]/div[1]'
+        )
+        ActionChains(driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//div[@class="dis-flex"]/div[1]/i[@class="el-input__icon el-range__close-icon el-icon-circle-close"]'
+            ))
+        )
+
+        # 3️⃣ 再点击图标
+        delete_icon.click()
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
@@ -577,7 +605,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
-        assert len(list_) == 1 and list_ == ['请填写时间设置']
+        assert len(list_) == 1 and list_ == ['请填写按周']
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-频率为月，不填写时间设置，不允许保存")
@@ -590,7 +618,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
-        assert len(list_) == 1 and list_ == ['请填写时间设置']
+        assert len(list_) == 1 and list_ == ['请填写按月']
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-频率为一次，填写时间设置，保存成功")
@@ -722,6 +750,21 @@ class TestAffairsPage:
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         affairs.click_process()
         affairs.add_process(name="测试流程1", type="服务", frequency="每天")
+        container = affairs.get_find_element_xpath(
+            f'//div[@class="dis-flex"]/div[1]'
+        )
+        ActionChains(driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//div[@class="dis-flex"]/div[1]/i[@class="el-input__icon el-range__close-icon el-icon-circle-close"]'
+            ))
+        )
+
+        # 3️⃣ 再点击图标
+        delete_icon.click()
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
@@ -738,7 +781,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
-        assert len(list_) == 1 and list_ == ['请填写时间设置']
+        assert len(list_) == 1 and list_ == ['请填写按周']
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-频率为月，不填写时间设置，不允许点击下一步")
@@ -751,7 +794,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
-        assert len(list_) == 1 and list_ == ['请填写时间设置']
+        assert len(list_) == 1 and list_ == ['请填写按月']
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-频率为每天，点击下一步，再返回上一步，数据没有清空")
@@ -767,7 +810,7 @@ class TestAffairsPage:
             '//div[label[text()="间隔执行"]]//input',
         ]
         affairs.click_process()
-        affairs.add_process(name="测试流程1", type="服务", frequency="每天")
+        affairs.add_process(name="测试流程6", type="服务", frequency="每天")
         affairs.click_next()
         affairs.click_button('//button[span[text()="上一步"]]')
         list_ = affairs.batch_acquisition_input(xpth_list)
@@ -783,6 +826,7 @@ class TestAffairsPage:
         process_name = "添加事务模版1"
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天")
+        affairs.click_button('//div[label[text()="是否启用"]]/div/span')
         affairs.click_next()
         value = affairs.add_process_affairs(name=process_name, add=True)
         affairs.click_save()
@@ -790,6 +834,7 @@ class TestAffairsPage:
         affairs.right_refresh()
         ele1 = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{process_name}"]')
         affairs.click_process()
+        affairs.wait_for_loading_to_disappear()
         ele2 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         ele3 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[1]//div[text()="{process_name}"]]')
         assert message == "新增成功！" and len(ele1) == 1 == len(ele2) == len(ele3) and value[1] == process_name
@@ -812,6 +857,7 @@ class TestAffairsPage:
         message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
+        affairs.wait_for_loading_to_disappear()
         ele1 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         # 一次性获取所有匹配的元素
         elements = affairs.finds_elements(
@@ -835,7 +881,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_save()
         mes = affairs.get_error_message()
-        assert mes == "名称重复"
+        assert mes == "流程名称不能重复"
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-添加流程名称点击下一步提示重复")
@@ -848,7 +894,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_next()
         mes = affairs.get_error_message()
-        assert mes == "名称重复"
+        assert mes == "流程名称不能重复"
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-添加全部数据，保存成功")
@@ -932,10 +978,10 @@ class TestAffairsPage:
         for index, row in enumerate(rows, start=1):
             div_class = row.find_element(
                 By.XPATH,
-                './td[6]/div/div'
+                './td[6]/div/span'
             ).get_attribute("class")
 
-            assert "el-switch is-checked" == div_class, (
+            assert "ivu-switch-checked" in div_class, (
                 f"验证失败！第 {index} 行不符合条件\n"
                 f"期望值: '{enable}'\n"
                 f"实际值: '{div_class}'"
@@ -961,10 +1007,10 @@ class TestAffairsPage:
         for index, row in enumerate(rows, start=1):
             div_class = row.find_element(
                 By.XPATH,
-                './td[6]/div/div'
+                './td[6]/div/span'
             ).get_attribute("class")
 
-            assert "el-switch" == div_class, (
+            assert "ivu-switch-checked" not in div_class, (
                 f"验证失败！第 {index} 行不符合条件\n"
                 f"期望值: '{enable}'\n"
                 f"实际值: '{div_class}'"
@@ -1014,9 +1060,9 @@ class TestAffairsPage:
         affairs.select_all(template_name, enable, name)
         td1 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[1]//tr[1]/td[1]//div[@class="flow-direction"]/div').text
         td2 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[1]//tr[1]/td[2]/div').text
-        td6 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[1]//tr[1]/td[6]/div/div').get_attribute("class")
+        td6 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[1]//tr[1]/td[6]/div/span').get_attribute("class")
         ele = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[1]//tr[2]')
-        assert td1 == template_name and td2 == name and td6 == "el-switch is-checked" and len(ele) == 0
+        assert td1 == template_name and td2 == name and td6 == "ivu-switch ivu-switch-checked ivu-switch-default" and len(ele) == 0
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-查询事务流程，开关关闭，流程名称成功")
@@ -1024,14 +1070,14 @@ class TestAffairsPage:
     def test_affairs_process_select6(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        template_name = "添加全部模版成功"
+        template_name = "添加事务模版1"
         enable = "关闭"
-        name = "添加全部成功"
+        name = "测试流程6"
         sleep(1)
         affairs.click_process()
         affairs.select_all(template_name, enable, name)
         ele = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[1]//tr[1]')
-        assert len(ele) == 0
+        assert len(ele) == 1
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-点击重置按钮成功")
@@ -1135,8 +1181,8 @@ class TestAffairsPage:
         affairs.click_button('(//i[@class="el-icon-edit"])[1]')
         affairs.enter_texts('//div[label[text()="事务名称"]]//input', aff)
         affairs.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
-        message = affairs.get_find_message()
-        assert message == "重复命名！"
+        message = affairs.get_error_message()
+        assert message == "事务已存在"
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-删除流程中的事务成功")
@@ -1196,8 +1242,8 @@ class TestAffairsPage:
         affairs.click_process_update(name)
         affairs.enter_texts('//div[label[text()="名称"]]/div//input', before_)
         affairs.click_save()
-        message = affairs.get_find_message()
-        assert message == "重复命名！"
+        message = affairs.get_error_message()
+        assert message == "流程名称不能重复"
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-复制流程成功")
@@ -1250,6 +1296,7 @@ class TestAffairsPage:
         name2 = "添加事务模版"
         affairs.hover(name1, "删除")
         affairs.click_button('//div[@class="el-message-box__btns"]/button[2]')
+        affairs.get_find_message()
         affairs.hover(name2, "删除")
         affairs.click_button('//div[@class="el-message-box__btns"]/button[2]')
         ele1 = affairs.finds_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name1}"]')

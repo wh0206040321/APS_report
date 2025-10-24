@@ -1172,17 +1172,17 @@ class TestSchedPage:
             '(//input[@placeholder="请输入数字"])[2]'
         ).get_attribute("value")
 
-        sched.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
+        sched.click_ok_button()
 
         input_after = sched.get_find_element_xpath(
             '//div[text()="资源选择策略"]/following-sibling::div//p'
-        )
-        sched.click_ok_button()
+        ).text
+        sched.get_after_value(name)
         # 点击对话框
         sched.click_button(
             '(//div[text()="资源选择策略"]/following-sibling::div)[2]//i'
         )
-
+        sched.click_button('//div[text()=" 策略名称222 "]')
         after_input_text = sched.get_find_element_xpath(
             '//div[@class="flex-1"]//input[@class="ivu-select-input"]'
         ).get_attribute("value")
@@ -1192,7 +1192,7 @@ class TestSchedPage:
         assert (
             before_input_text == after_input_text == "AS相同物料优先"
             and before_input_num == after_input_num == "110.8"
-            and input_after.text == "(集合)"
+            and input_after == "(集合)"
         )
         assert not sched.has_fail_message()
 

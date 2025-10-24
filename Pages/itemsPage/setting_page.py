@@ -1,6 +1,6 @@
 from time import sleep
 
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,6 +32,35 @@ class SettingPage(BasePage):
         """添加布局."""
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加新布局"]')
+
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'vxe-loading'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.invisibility_of_element_located(
+                    (By.XPATH,
+                     "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+                )
+            )
+        except TimeoutException:
+            print("等待超时：第二个加载动画未消失，但继续执行后续操作")
+        except NoSuchElementException:
+            print("找不到目标元素，但继续执行后续操作")
+        sleep(1)
+
+    def click_confirm_button(self):
+        """点击确认按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        self.wait_for_loading_to_disappear()
 
     def add_layout_ok(self, layout):
         """添加布局."""
@@ -85,9 +114,17 @@ class SettingPage(BasePage):
         index = all_children.index(target_div)
         print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
 
-        self.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
+        try:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        except TimeoutException:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            )
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
         # 根据目标 div 的位置，点击对应的“删除布局”按钮
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)

@@ -20,6 +20,11 @@ class WarehouseLocationPage(BasePage):
         """点击修改按钮."""
         self.click(By.XPATH, '//p[text()="编辑"]')
 
+    def clear_input(self, xpath):
+        input_element = self.get_find_element_xpath(xpath)
+        print('input_element', input_element)
+        input_element.clear()  # 清空input元素的内容
+
     def filter_method(self, click_xpath):
         """过滤公共方法"""
         sleep(2)
@@ -99,7 +104,7 @@ class WarehouseLocationPage(BasePage):
 
         return values
 
-    def batch_acquisition_input(self, xpath_list=[], val_list=[]):
+    def batch_acquisition_input_list(self, xpath_list=[], val_list=[]):
         """批量获取输入框"""
         values = []
         for index, xpath in enumerate(xpath_list, 1):
@@ -152,6 +157,16 @@ class WarehouseLocationPage(BasePage):
                 )
 
         return values
+
+    def acquisition_input(self, xpath):
+        """获取输入框值"""
+        # 显式等待元素可见（最多等待10秒）
+        element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(("xpath", xpath))
+        )
+        # 获取输入框的值
+        value = element.get_attribute("value")
+        return value
 
     def go_item(self):
         """前往物料页面"""
@@ -236,10 +251,11 @@ class WarehouseLocationPage(BasePage):
         for index, xpath in enumerate(xpath_list, 1):
             try:
                 element = self.get_find_element_xpath(xpath)
+                this_color = element.value_of_css_property("border-color")
                 # 获取输入框的值
-                if color_value != element.value_of_css_property("border-color"):
+                if color_value != this_color:
                     raise NoSuchElementException(
-                        f"边框颜色不对（XPath列表第{index}个）: {xpath}"
+                        f"边框颜色不对{this_color}（XPath列表第{index}个）: {xpath}"
                     )
                     return False
 

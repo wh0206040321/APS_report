@@ -298,9 +298,11 @@ class TestPersonalPage:
         personal.go_setting_page()
         personal.click_button('(//div[@class="w-b-80"])[2]//div[text()=" 默认 "]')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        sleep(2)
+        message = personal.get_find_message()
+        sleep(1)
         after_raw_color = personal.get_find_element('//div[@class="navTop"]').value_of_css_property("background-color")
         after_parsed_color = Color.from_string(after_raw_color).rgb
+        assert message == "保存成功"
         assert before_parsed_color == "rgb(33, 113, 15)" and after_parsed_color == "rgb(50, 66, 85)"
         assert not personal.has_fail_message()
 
@@ -321,7 +323,7 @@ class TestPersonalPage:
         if checkbox.is_selected():
             personal.click_button('//label[text()="展开(默认)"]/span')
             personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-            sleep(2)
+            personal.get_find_message()
             before_element = driver.find_element(By.XPATH, '//ul[@role="menubar"]')
             before_width = before_element.size['width']
             personal.go_setting_page()
@@ -329,9 +331,11 @@ class TestPersonalPage:
         # 设置为默认展开并确认
         personal.click_button('//label[text()="悬浮"]/span')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        sleep(2)
+        message = personal.get_find_message()
+        sleep(1)
         after_element = driver.find_element(By.XPATH, '//ul[@role="menubar"]')
         after_width = after_element.size['width']
+        assert message == "保存成功"
         assert before_width != after_width and int(before_width) > int(after_width), f"before_width:{before_width},after_width:{after_width}"
         assert not personal.has_fail_message()
 
@@ -352,7 +356,8 @@ class TestPersonalPage:
         if checkbox.is_selected():
             personal.click_button('//label[text()="悬浮"]/span')
             personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-            sleep(2)
+            personal.get_find_message()
+            sleep(1)
             before_element = driver.find_element(By.XPATH, '//ul[@role="menubar"]')
             before_width = before_element.size['width']
             personal.go_setting_page()
@@ -360,9 +365,11 @@ class TestPersonalPage:
         # 设置为默认展开并确认
         personal.click_button('//label[text()="展开(默认)"]/span')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        sleep(2)
+        message = personal.get_find_message()
+        sleep(1)
         after_element = driver.find_element(By.XPATH, '//ul[@role="menubar"]')
         after_width = after_element.size['width']
+        assert message == "保存成功"
         assert before_width != after_width and int(before_width) < int(after_width), f"before_width:{before_width},after_width:{after_width}"
         assert not personal.has_fail_message()
 
@@ -378,9 +385,9 @@ class TestPersonalPage:
         personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
         personal.click_button('//li[text()="web服务"]')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-
+        personal.get_find_message()
         personal.go_engine_page(name='web')
-        sleep(2)
+        sleep(1)
         ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
         personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
         # 等待“完成”的文本出现
@@ -410,10 +417,10 @@ class TestPersonalPage:
         personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
         personal.click_button('//li[text()="IP"]')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-
+        personal.get_find_message()
         personal.go_engine_page(name='ip')
         ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
-        sleep(2)
+        sleep(1)
         personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
         # 等待“完成”的文本出现
         success_element = wait.until(
@@ -443,7 +450,7 @@ class TestPersonalPage:
         personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
         personal.click_button('//li[text()="系统设置"]')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-
+        personal.get_find_message()
         personal.go_engine_page(name='system_web')
         # 等待下拉框按钮可点击后点击展开
         dropdown_arrow = wait.until(
@@ -485,7 +492,7 @@ class TestPersonalPage:
         personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
         personal.click_button('//li[text()="系统设置"]')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-
+        personal.get_find_message()
         personal.go_engine_page(name='system_webip')
         ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
         sleep(2)
@@ -518,7 +525,7 @@ class TestPersonalPage:
         personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
         personal.click_button('//li[text()="系统设置"]')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-
+        personal.get_find_message()
         personal.go_engine_page(name='system_ip')
         ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
         sleep(2)

@@ -1,6 +1,6 @@
 from time import sleep
 
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -193,9 +193,17 @@ class ItemPage(BasePage):
         index = all_children.index(target_div)
         print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
 
-        self.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
+        try:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        except TimeoutException:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            )
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
         # 根据目标 div 的位置，点击对应的“删除布局”按钮
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)

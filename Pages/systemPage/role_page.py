@@ -69,8 +69,9 @@ class RolePage(BasePage):
         以此判断加载遮罩是否消失。
         """
         WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located(
-                (By.XPATH, '//div[contains(@class, "el-loading-mask") and not(contains(@style, "display: none"))]')
+            lambda d: (
+                d.find_element(By.CLASS_NAME, "el-loading-mask").value_of_css_property("display") == "none"
+                if d.find_elements(By.CLASS_NAME, "el-loading-mask") else True
             )
         )
         sleep(1)

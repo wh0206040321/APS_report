@@ -134,10 +134,10 @@ class TestSExpressionPage:
         expression.enter_texts('//div[p[text()="表达式: "]]//textarea', name)
         expression.click_all_button("保存")
         message = expression.get_error_message()
-        assert message == "不允许添加重复的表达式名称"
+        assert message == "不可以新增名称和分类相同的数据"
         assert not expression.has_fail_message()
 
-    @allure.story("修改表达式名称成功")
+    @allure.story("修改表达式名称，相当于新增")
     # @pytest.mark.run(order=1)
     def test_expression_updatesuccess1(self, login_to_expression):
         driver = login_to_expression  # WebDriver 实例
@@ -153,51 +153,60 @@ class TestSExpressionPage:
         message = expression.get_find_message()
         expression.select_input_expression(afert_name)
         sleep(1)
-        eles = expression.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
-        assert eles == afert_name
+        eles1 = expression.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
+        expression.select_input_expression(before_name)
+        sleep(1)
+        eles2 = expression.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
+        assert eles1 == afert_name and eles2 == before_name
         assert message == "保存成功"
         assert not expression.has_fail_message()
 
-    @allure.story("修改分类和表达式成功")
+    @allure.story("修改表达式分类，相当于新增")
     # @pytest.mark.run(order=1)
     def test_expression_updatesuccess2(self, login_to_expression):
+        driver = login_to_expression  # WebDriver 实例
+        expression = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        sleep(1)
+        name = '1测试表达式管理1'
+        expression.select_input_expression(name)
+        sleep(1)
+        expression.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
+        expression.click_all_button("编辑")
+        expression.click_button('//div[p[text()="分类: "]]//input[@type="text"]')
+        expression.click_button('//li[text()="分派规则"]')
+        expression.click_all_button("保存")
+        message = expression.get_find_message()
+        expression.select_input_expression(name)
+        sleep(1)
+        eles1 = expression.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]')
+        eles2 = expression.get_find_element_xpath('//table[@class="vxe-table--body"]//tr/td[3]//span[text()="分派规则"]').text
+        assert len(eles1) == 2
+        assert eles2 == "分派规则"
+        assert message == "保存成功"
+        assert not expression.has_fail_message()
+
+    @allure.story("修改表达式成功")
+    # @pytest.mark.run(order=1)
+    def test_expression_updatesuccess3(self, login_to_expression):
         driver = login_to_expression  # WebDriver 实例
         expression = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         sleep(1)
         name = '1测试表达式管理2'
         text = '1111'
         expression.select_input_expression(name)
+        sleep(2)
         expression.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         expression.click_all_button("编辑")
-        expression.click_button('//div[p[text()="分类: "]]//input[@type="text"]')
-        expression.click_button('//li[text()="分派规则"]')
         expression.enter_texts('//div[p[text()="表达式: "]]//textarea', text)
         expression.click_all_button("保存")
         message = expression.get_find_message()
         expression.select_input_expression(name)
         sleep(1)
-        eles = expression.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
-        testarea = expression.get_find_element_xpath('//div[p[text()="表达式: "]]//textarea').get_attribute('value')
-        assert eles == '反派规则' and testarea == text
-        assert message == "保存成功"
-        assert not expression.has_fail_message()
-
-    @allure.story("修改表达式管理重复不允许添加")
-    # @pytest.mark.run(order=1)
-    def test_expression_addrepeat2(self, login_to_expression):
-        driver = login_to_expression  # WebDriver 实例
-        expression = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(1)
-        before_name = '1测试表达式管理2'
-        afert_name = '客户'
-        expression.select_input_expression(before_name)
         expression.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         expression.click_all_button("编辑")
-        expression.enter_texts('//div[p[text()="名称: "]]//input', afert_name)
-        expression.click_all_button("保存")
-        message = expression.get_error_message()
-        expression.select_input_expression(afert_name)
-        assert message == "不允许添加重复的表达式名称"
+        testarea = expression.get_find_element_xpath('//div[p[text()="表达式: "]]//textarea').get_attribute('value')
+        assert testarea == text
+        assert message == "保存成功"
         assert not expression.has_fail_message()
 
     @allure.story("删除表达式成功")
@@ -205,18 +214,16 @@ class TestSExpressionPage:
     def test_expression_del(self, login_to_expression):
         driver = login_to_expression  # WebDriver 实例
         expression = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(1)
-        name = '1测试表达式管理2'
-        expression.select_input_expression(name)
-        expression.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
-        expression.click_all_button("删除")
-        expression.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        message = expression.get_find_message()
-        expression.select_input_expression(name)
-        sleep(1)
-        eles = expression.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr[1]')
-        assert len(eles) == 0
-        assert message == "删除成功"
+        value = ['1测试表达式管理1', '1测试表达式管理1', '1测试表达式管理2']
+        expression.del_all(xpath='//div[div[p[text()="名称"]]]//input', value=value)
+        ele = expression.get_find_element_xpath('//div[div[p[text()="名称"]]]//input')
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        itemdata = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:3]
+        ]
+        assert all(len(elements) == 0 for elements in itemdata)
         assert not expression.has_fail_message()
 
     @allure.story("查询表达式名称成功")

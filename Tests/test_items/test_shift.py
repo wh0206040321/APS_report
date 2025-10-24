@@ -598,7 +598,7 @@ class TestShiftPage:
         shift.click_button(f'(//span[text()="{name}"])[1]')
         # 点击修改按钮
         shift.click_edi_button()
-        sleep(1)
+        sleep(2)
         # 生成随机数
         random_int = random.randint(1, 10)
 

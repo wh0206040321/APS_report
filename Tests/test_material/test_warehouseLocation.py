@@ -11,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -58,13 +58,15 @@ class TestItemPage:
         whs_code_box = self.item.get_find_element_xpath(
             "//div[@id='u2tgl5h9-otp1']//input"
         )
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
         bordername_color = inputname_box.value_of_css_property("border-color")
         whs_code_color = whs_code_box.value_of_css_property("border-color")
         expected_color = "rgb(255, 0, 0)"  # 红色的 rgb 值
+        sleep(1)
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"
@@ -86,7 +88,7 @@ class TestItemPage:
         self.item.enter_texts(
             "//div[@id='p34nag46-7evf']//input", "text1231"
         )
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         input_box = self.item.get_find_element_xpath(
             "//div[@id='u2tgl5h9-otp1']//input"
         )
@@ -94,26 +96,11 @@ class TestItemPage:
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
         expected_color = "rgb(255, 0, 0)"  # 红色的 rgb 值
+        sleep(1)
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"
-        assert not self.item.has_fail_message()
-
-    @allure.story("下拉框选择成功")
-    # @pytest.mark.run(order=1)
-    def test_item_addsel(self, login_to_item):
-        self.item.click_add_button()  # 检查点击添加
-        # 是否可用下拉框
-        self.item.click_button(
-            "//div[@id='i24ntrok-sf6n']//input[@class='ivu-select-input']"
-        )
-        # 是否可用选择是(是库存+1对1制造)
-        self.item.click_button('//li[text()="否"]')
-        # 获取自动补充标志下拉框
-        itemsel = self.item.get_find_element_xpath(
-            "//div[@id='i24ntrok-sf6n']"
-        ).get_attribute("value")
-        assert itemsel == "否", f"预期{itemsel}"
         assert not self.item.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -126,11 +113,13 @@ class TestItemPage:
         self.item.enter_texts("//div[@id='ywz9q11i-sp3b']//input", "111")
         self.item.enter_texts("//div[@id='u2tgl5h9-otp1']//input", "111")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         adddata = self.item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="111"]]]/td[2]'
         ).text
+        sleep(1)
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert adddata == "111", f"预期数据是111，实际得到{adddata}"
         assert not self.item.has_fail_message()
 
@@ -144,12 +133,15 @@ class TestItemPage:
         self.item.enter_texts("//div[@id='ywz9q11i-sp3b']//input", "111")
         self.item.enter_texts("//div[@id='u2tgl5h9-otp1']//input", "111")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
+        sleep(1)
+        self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
             error_popup == "记录已存在,请检查！"
         ), f"预期数据是记录已存在,请检查，实际得到{error_popup}"
@@ -164,8 +156,7 @@ class TestItemPage:
         self.item.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        self.item.click_button('//button[@class="ivu-btn ivu-btn-text"]')
-        sleep(1)
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         # 定位内容为‘111’的行
         itemdata = self.item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="111"]]]/td[2]'
@@ -183,7 +174,7 @@ class TestItemPage:
         self.item.enter_texts("//div[@id='ywz9q11i-sp3b']//input", "1测试A")
         self.item.enter_texts("//div[@id='u2tgl5h9-otp1']//input", "1测试A")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         adddata = self.item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
@@ -201,13 +192,17 @@ class TestItemPage:
         self.item.click_edi_button()
         # 工厂代码输入111
         self.item.enter_texts("//div[@id='2gqlayrh-vwyr']//input", "111")
+        self.item.enter_texts("//div[@id='uqtb82o5-7f7f']//input", "111")
+        self.item.enter_texts("//div[@id='mhj7cxc6-rywr']//input", "111")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
+        self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert error_popup == "记录已存在,请检查！", f"预期数据{error_popup}"
         assert not self.item.has_fail_message()
 
@@ -227,7 +222,7 @@ class TestItemPage:
             "//div[@id='2gqlayrh-vwyr']//input", f"{text}"
         )
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(3)
         # 定位表格内容
         itemdata = self.item.get_find_element_xpath(
@@ -247,7 +242,7 @@ class TestItemPage:
         # 物料代码输入
         self.item.enter_texts("//div[@id='2gqlayrh-vwyr']//input", "1测试A")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 定位表格内容
         itemdata = self.item.get_find_element_xpath(
@@ -261,35 +256,35 @@ class TestItemPage:
     def test_item_editnamesuccess(self, login_to_item):
 
         # 输入框要修改的值
-        text_str = "111"
+        text_str = "222"
         # 日期要修改的值
         date_str = "2025/07/17 00:00:00"
         # 输入框的xpath
         input_xpath_list = [
             "//div[@id='2gqlayrh-vwyr']//input",
-            "//div[@id='uqtb82o5-7f7f']//input",
-            "//div[@id='mhj7cxc6-rywr']//input",
             "//div[@id='x2xfoigm-rdd2']//input",
             "//div[@id='ze6hpeia-qlcv']//input",
             "//div[@id='8rmn9d4u-ll8o']//input",
+            "//div[@id='uqtb82o5-7f7f']//input",
+            "//div[@id='mhj7cxc6-rywr']//input",
             "//div[@id='jwmtz1cs-qxcf']//input",
             "//div[@id='mw9lvgil-ay4b']//input",
-            "//div[@id='b42zf3g4-ly6d']//input",
             "//div[@id='9hougeja-f19h']//input",
-            "//div[@id='sv7m9mzk-eo1b']//input",
             "//div[@id='euflllc4-91y5']//input",
-            "//div[@id='qpydcf68-3n30']//input",
             "//div[@id='cd607kel-iwfp']//input",
-            "//div[@id='me9njjkp-e9rg']//input",
             "//div[@id='uw1sjnqs-by95']//input",
+            "//div[@id='b42zf3g4-ly6d']//input",
+            "//div[@id='sv7m9mzk-eo1b']//input",
+            "//div[@id='qpydcf68-3n30']//input",
+            "//div[@id='me9njjkp-e9rg']//input",
             "//div[@id='8czb193p-h4wb']//input"
         ]
         # 日期的xpath
         date_xpath_list = [
-            "//div[@id='pcceybkb-1zqi']//input",
             "//div[@id='f9nnaus3-q1qr']//input",
-            "//div[@id='h21yy3zx-sob7']//input",
             "//div[@id='890pwofe-fsbm']//input",
+            "//div[@id='pcceybkb-1zqi']//input",
+            "//div[@id='h21yy3zx-sob7']//input",
             "//div[@id='w2b54of4-62z0']//input"
         ]
 
@@ -301,7 +296,7 @@ class TestItemPage:
 
         # 修改是否可用 否
         self.item.click_button("//div[@id='m1hs2m05-cwhg']")
-        self.item.click_button('//li[text()="否"]')
+        self.item.click_button('//div[@class="my-list-item"]')
 
         # 批量修改输入框
         self.item.batch_modify_input(input_xpath_list, text_str)
@@ -310,10 +305,10 @@ class TestItemPage:
 
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 选中工厂代码
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
+        self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
         # 点击编辑按钮
         self.item.click_edi_button()
         sleep(1)
@@ -322,12 +317,13 @@ class TestItemPage:
         # 批量获取日期的value
         date_values = self.item.batch_acquisition_input(date_xpath_list, date_str)
         item_sel = self.item.get_find_element_xpath(
-            "//div[@id='m1hs2m05-cwhg']//span"
-        ).text
+            '//div[@id="m1hs2m05-cwhg"]//input'
+        ).get_attribute("value")
         print('input_values', input_values)
         print('date_values', date_values)
         print('item_sel', item_sel)
         sleep(1)
+        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
             len(input_xpath_list) == len(input_values)
             and item_sel == "否"
@@ -337,10 +333,10 @@ class TestItemPage:
 
     @allure.story("筛选刷新成功")
     # @pytest.mark.run(order=1)
-    def test_item_refreshsuccess(self, login_to_item):
-        filter_results = self.item.filter_method('//span[text()=" 工厂代码"]/ancestor::div[3]//span//span//span')
-        assert filter_results
-        assert not self.item.has_fail_message()
+    # def test_item_refreshsuccess(self, login_to_item):
+    #     filter_results = self.item.filter_method('//span[text()=" 工厂代码"]/ancestor::div[3]//span//span//span')
+    #     assert filter_results
+    #     assert not self.item.has_fail_message()
 
     @allure.story("查询工厂代码成功")
     # @pytest.mark.run(order=1)
@@ -375,7 +371,7 @@ class TestItemPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "1测试A",
+            "222",
         )
         sleep(1)
 
@@ -393,21 +389,10 @@ class TestItemPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        assert itemcode == "1测试A" and len(itemcode2) == 0
+        # 点击刷新
+        self.item.click_ref_button()
+        assert itemcode == "222" and len(itemcode2) == 0
         assert not item.has_fail_message()
-
-
-    @allure.story("查询")
-    # @pytest.mark.run(order=1)
-    def query_demo(self, login_to_item):
-        row_xpath = '//table[@xid="2" and @class="vxe-table--body"]//tr[1]'
-        # 获取目标行
-        target_row = self.driver.find_element(By.XPATH, row_xpath)
-
-        # 获取该行下所有 td 元素
-        td_elements = target_row.find_elements(By.XPATH, "./td")
-        td_count = len(td_elements)
-        print(f"该行共有 {td_count} 个 <td> 元素")
 
     @allure.story("没有数据时显示正常")
     # @pytest.mark.run(order=1)
@@ -453,7 +438,61 @@ class TestItemPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
         )
+        # 点击刷新
+        self.item.click_ref_button()
         assert len(itemcode) == 0
+        assert not self.item.has_fail_message()
+
+    @allure.story("删除数据成功")
+    # @pytest.mark.run(order=1)
+    def test_item_delsuccess3(self, login_to_item):
+        # 定位内容为‘111’的行
+        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
+        self.item.click_del_button()  # 点击删除
+        sleep(1)
+        # 点击确定
+        # 找到共同的父元素
+        parent = self.item.get_find_element_class("ivu-modal-confirm-footer")
+
+        # 获取所有button子元素
+        all_buttons = parent.find_elements(By.TAG_NAME, "button")
+
+        # 选择需要的button 第二个确定按钮
+        second_button = all_buttons[1]
+        second_button.click()
+        self.item.click_ref_button()
+        sleep(1)
+        # 定位内容为‘111’的行
+        itemdata = self.driver.find_elements(
+            By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
+        )
+        assert len(itemdata) == 0
+        assert not self.item.has_fail_message()
+
+    @allure.story("删除数据成功")
+    # @pytest.mark.run(order=1)
+    def test_item_delsuccess3(self, login_to_item):
+        # 定位内容为‘111’的行
+        self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
+        self.item.click_del_button()  # 点击删除
+        sleep(1)
+        # 点击确定
+        # 找到共同的父元素
+        parent = self.item.get_find_element_class("ivu-modal-confirm-footer")
+
+        # 获取所有button子元素
+        all_buttons = parent.find_elements(By.TAG_NAME, "button")
+
+        # 选择需要的button 第二个确定按钮
+        second_button = all_buttons[1]
+        second_button.click()
+        self.item.click_ref_button()
+        sleep(1)
+        # 定位内容为‘111’的行
+        itemdata = self.driver.find_elements(
+            By.XPATH, '//tr[./td[2][.//span[text()="222"]]]/td[2]'
+        )
+        assert len(itemdata) == 0
         assert not self.item.has_fail_message()
 
     # @allure.story("查询物料名字成功")

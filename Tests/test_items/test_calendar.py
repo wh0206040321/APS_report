@@ -76,9 +76,7 @@ class TestCalendarPage:
         inputshift_box = calendar.get_find_element_xpath(
             '(//label[text()="班次"])[1]/parent::div//input'
         )
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -117,9 +115,7 @@ class TestCalendarPage:
         inputshift_box = calendar.get_find_element_xpath(
             '(//label[text()="班次"])[1]/parent::div//input'
         )
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         bordername_color = inputshift_box.value_of_css_property("border-color")
@@ -152,9 +148,7 @@ class TestCalendarPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
 
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -191,9 +185,7 @@ class TestCalendarPage:
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         message = calendar.get_find_message()
         assert message == "请先填写表单"
         assert not calendar.has_fail_message()
@@ -239,7 +231,7 @@ class TestCalendarPage:
         calendar.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
-        sleep(1)
+        sleep(1.5)
         # 获取勾选的资源代码
         resource = calendar.get_find_element_xpath(
             '//label[text()="资源"]/parent::div/div[1]//input[1]'
@@ -271,9 +263,7 @@ class TestCalendarPage:
         )
         # 强制点击
         driver.execute_script("arguments[0].click();", element)
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         calendar.click_button(
             '//p[text()="更新时间"]/following-sibling::div'
         )
@@ -344,9 +334,7 @@ class TestCalendarPage:
         # 点击添加按钮
         calendar.click_button('(//span[text()="添加"])[1]')
 
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
 
         calendar.click_button(
             '//p[text()="更新时间"]/following-sibling::div'
@@ -421,9 +409,7 @@ class TestCalendarPage:
         # 点击添加按钮
         calendar.click_button('(//span[text()="添加"])[1]')
 
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
 
         calendar.click_button(
             '//p[text()="更新时间"]/following-sibling::div'
@@ -444,7 +430,7 @@ class TestCalendarPage:
         addtext = calendar.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert adddata == resource and addshift == resource1 and addnum == '1000000000000000000' and addtext == num
+        assert adddata == resource and addshift == resource1 and addnum == '99999999999' and addtext == num
         assert not calendar.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
@@ -653,9 +639,7 @@ class TestCalendarPage:
             '//label[text()="资源"]/parent::div/div[1]//input[1]'
         ).get_attribute("value")
 
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         sleep(1)
         calendar.click_button(
             '//p[text()="更新时间"]/following-sibling::div'
@@ -709,9 +693,7 @@ class TestCalendarPage:
             '//label[text()="班次"]/parent::div/div[1]//input[1]'
         ).get_attribute("value")
 
-        calendar.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
+        calendar.click_confirm_button()
         sleep(1)
         calendar.click_button(
             '//p[text()="更新时间"]/following-sibling::div'
@@ -748,7 +730,7 @@ class TestCalendarPage:
     def test_calendar_selectcodesuccess(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-        sleep(3)
+        calendar.wait_for_loading_to_disappear()
         ele = calendar.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
         ).text

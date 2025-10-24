@@ -37,6 +37,15 @@ class HomePage(BasePage):
         )
         return message.text
 
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
+
     def right_refresh(self, name="主页设置"):
         """右键刷新."""
         but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
@@ -58,9 +67,10 @@ class HomePage(BasePage):
         检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
         以此判断加载遮罩是否消失。
         """
-        WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located(
-                (By.XPATH, '//div[contains(@class, "el-loading-mask") and not(contains(@style, "display: none"))]')
+        WebDriverWait(self.driver, 30).until(
+            lambda d: (
+                d.find_element(By.CLASS_NAME, "el-loading-mask").value_of_css_property("display") == "none"
+                if d.find_elements(By.CLASS_NAME, "el-loading-mask") else True
             )
         )
         sleep(1)
@@ -95,6 +105,7 @@ class HomePage(BasePage):
 
     def clear_all_button(self, span_text):
         """点击清除所有按钮."""
+        self.wait_for_loading_to_disappear()
         self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[3]')
         self.click_button(
             f'//div[./div[text()="确定要删除所有的组件吗？"]]/following-sibling::div//span[text()="{span_text}"]')
@@ -151,9 +162,9 @@ class HomePage(BasePage):
         self.wait_for_loading_to_disappear()
         self.click_save_button()
         self.wait_for_loading_to_disappear()
+        self.get_find_message()
         self.right_refresh()
         self.click_template()
-
         # 检查删除后的模板数量并返回
         ele = self.driver.find_elements(By.XPATH, f'//div[./span[text()=" {name} "]]')
         return len(ele)

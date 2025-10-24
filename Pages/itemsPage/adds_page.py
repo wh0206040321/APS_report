@@ -32,6 +32,7 @@ class AddsPages(BasePage):
         """批量修改输入框"""
         for xpath in xpath_list:
             try:
+                sleep(0.3)
                 self.enter_texts(xpath, new_value)
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")

@@ -152,6 +152,7 @@ class TestSModulePage:
         add = AddsPages(driver)
         before_name = 'ABCDAA'
         after_name = 'ComponentSystemSet'
+        module.wait_for_loading_to_disappear()
         module.select_input_module(before_name)
         module.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         sleep(1)
@@ -174,6 +175,7 @@ class TestSModulePage:
         add = AddsPages(driver)
         before_name = 'ABCDAA'
         after_name = 'ACDAA'
+        module.wait_for_loading_to_disappear()
         module.select_input_module(before_name)
         module.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         sleep(1)
@@ -248,7 +250,7 @@ class TestSModulePage:
     #     module.select_input_module(before_name)
     #     module.right_refresh('菜单组件')
     #     menutext = module.get_find_element_xpath(
-    #         '//div[div[p[text()="模块代码"]]]//input'
+    #         '//div[p[text()="模块代码"]]/following-sibling::div//input'
     #     ).text
     #     assert menutext == "", f"预期{menutext}"
     #     assert not module.has_fail_message()
@@ -584,7 +586,7 @@ class TestSModulePage:
         assert all(int(ele) > num for ele in eles1) and all(name in ele for ele in eles2)
         assert not module.has_fail_message()
 
-    @allure.story("查询模块名称包含计划或物料优先度≥4")
+    @allure.story("查询模块名称包含计划或排序≥4")
     # @pytest.mark.run(order=1)
     def test_module_selectsuccess3(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
@@ -749,7 +751,7 @@ class TestSModulePage:
     def test_module_select1(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
+        module.wait_for_loading_to_disappear()
         name = "计划"
         module.enter_texts('//div[div[p[text()="模块名称"]]]//input', name)
         sleep(2)
@@ -763,8 +765,8 @@ class TestSModulePage:
     def test_module_select2(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
-        module.click_button('//div[div[p[text()="模块代码"]]]//i')
+        module.wait_for_loading_to_disappear()
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
         sleep(1)
         eles = module.get_find_element_xpath(
             '(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
@@ -772,7 +774,7 @@ class TestSModulePage:
         if eles == "ivu-checkbox ivu-checkbox-checked":
             module.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
         sleep(1)
-        module.click_button('//div[div[p[text()="模块代码"]]]//input')
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//input')
         eles = module.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         assert len(eles) == 0
         assert not module.has_fail_message()
@@ -782,9 +784,9 @@ class TestSModulePage:
     def test_module_select3(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
+        module.wait_for_loading_to_disappear()
         name = "Co"
-        module.click_button('//div[div[p[text()="模块代码"]]]//i')
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
         module.hover("包含")
         sleep(1)
         module.select_input_module(name)
@@ -801,8 +803,8 @@ class TestSModulePage:
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = "Plan"
-        sleep(2)
-        module.click_button('//div[div[p[text()="模块代码"]]]//i')
+        module.wait_for_loading_to_disappear()
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
         module.hover("符合开头")
         sleep(1)
         module.select_input_module(name)
@@ -818,9 +820,9 @@ class TestSModulePage:
     def test_module_select5(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
+        module.wait_for_loading_to_disappear()
         name = "t"
-        module.click_button('//div[div[p[text()="模块代码"]]]//i')
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
         module.hover("符合结尾")
         sleep(1)
         module.select_input_module(name)
@@ -836,18 +838,17 @@ class TestSModulePage:
     def test_module_clear(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(1)
+        module.wait_for_loading_to_disappear()
         name = "3"
-        sleep(1)
-        module.click_button('//div[div[p[text()="模块代码"]]]//i')
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
         module.hover("包含")
         sleep(1)
         module.select_input_module(name)
         sleep(1)
-        module.click_button('//div[div[p[text()="模块代码"]]]//i')
+        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
         module.hover("清除所有筛选条件")
         sleep(1)
-        ele = module.get_find_element_xpath('//div[div[span[text()=" 模块代码"]]]/div[3]//i').get_attribute(
+        ele = module.get_find_element_xpath('//div[p[text()="模块代码"]]/following-sibling::div//i').get_attribute(
             "class")
         assert ele == "vxe-icon-funnel suffixIcon"
         assert not module.has_fail_message()
@@ -859,8 +860,8 @@ class TestSModulePage:
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         layout = "测试布局A"
 
-        value = ['ACDAA']
-        module.del_all(xpath='//div[div[p[text()="模块代码"]]]//input', value=value)
+        value = ['ABCDAA']
+        module.del_all(xpath='//div[p[text()="模块代码"]]/following-sibling::div//input', value=value)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:1]

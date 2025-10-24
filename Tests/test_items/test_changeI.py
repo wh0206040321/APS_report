@@ -440,7 +440,7 @@ class TestChangeIPage:
         text_ = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert addresource == resource and additem1 == item1 and additem2 == item2 and '1000000000000000000' == num_ and text_ == num
+        assert addresource == resource and additem1 == item1 and additem2 == item2 and '99999999999' == num_ and text_ == num
         assert not change.has_fail_message()
 
     @allure.story("删除数据成功")
@@ -1007,12 +1007,12 @@ class TestChangeIPage:
         len_num = len(all_value)
         before_all_value = adds.batch_acquisition_input(all_value)
         changeI.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        sleep(1)
+            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]')
+        changeI.get_find_message()
         driver.refresh()
-        sleep(3)
+        changeI.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
-        sleep(2)
+        changeI.wait_for_loading_to_disappear()
         changeI.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )

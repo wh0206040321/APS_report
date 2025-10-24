@@ -117,7 +117,7 @@ class PersonalPage(BasePage):
 
         # 确认
         self.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        sleep(2)
+        sleep(3)
         # 获取并返回特定元素的文本，用于验证语言是否已成功切换
         ele = self.get_find_element('//div[@class="vxe-pulldown--content"]//input').get_attribute("placeholder")
         return ele
@@ -164,6 +164,7 @@ class PersonalPage(BasePage):
             if radio.get_attribute('class') == 'ivu-radio':
                 radio.click()
             self.click_button('//p[text()="保存"]')
+        self.get_find_message()
         # 进入计划计算页面
         self.click_button('(//span[text()="计划运行"])[1]')  # 点击计划运行
         self.click_button('(//span[text()="计算工作台"])[1]')  # 点击计算工作台
@@ -190,6 +191,7 @@ class PersonalPage(BasePage):
             input_.send_keys(num)
             # 点击确定按钮保存设置
             self.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
+            self.get_find_message()
 
     def go_characters_display(self, name=""):
         # 打开个人设置菜单
@@ -200,12 +202,13 @@ class PersonalPage(BasePage):
         display = self.get_find_element(f'//div[./p[text()=" 组件菜单文字: "]]/div/label[text()="{name}"]/span')
         if name == "显示":
             if display.get_attribute('class') == "ivu-radio":
-                display.click()
+                self.click_button(f'//div[./p[text()=" 组件菜单文字: "]]/div/label[text()="{name}"]')
         else:
             if display.get_attribute('class') != "ivu-radio-input":
-                display.click()
+                self.click_button(f'//div[./p[text()=" 组件菜单文字: "]]/div/label[text()="{name}"]')
         # 点击确定按钮保存设置
         self.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        sleep(1)
+        self.get_find_message()
+        sleep(3)
         style = self.get_find_element('//div[@class="menuTitle"]').get_attribute("style")
         return style

@@ -794,10 +794,9 @@ class TestMasterPage:
         SharedDataUtil.clear_data()
         master.click_add_button()  # 检查点击添加
 
-
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        sleep(2)
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[2]/td[2])[last()]'
         )
@@ -937,7 +936,7 @@ class TestMasterPage:
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
         master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
-        sleep(1)
+        sleep(1.5)
         # 获取物料代码
         item_input = master.get_find_element_xpath(
             '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//input'

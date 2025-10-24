@@ -235,7 +235,7 @@ class TestStartPage:
         else:
             eles = driver.find_elements(
                 By.XPATH,
-                '//tr[.//td[2]//span[text()="1测试C"] and .//td[9]//div[text()=" 使用指令 "]]//td[12]',
+                '//tr[.//td[2]//span[text()="1测试C"] and .//td[9]//div[text()=" 使用指令 "]]//td[11]',
             )
             master_res1 = eles[0].text
             master_res2 = eles[1].text
@@ -259,7 +259,12 @@ class TestStartPage:
         wait = WebDriverWait(driver, 60)
         list_ = ["计划运行", "计算工作台", "计划计算"]
         for v in list_:
+            if v == "计划计算":
+                ele = plan.get_find_element_xpath(f'//li[div/div/span[text()="{list_[1]}"]]').get_attribute('aria-expanded')
+                if ele is None:
+                    plan.click_button(f'//li[div/div/span[text()="{list_[1]}"]]')
             page.click_button(f'(//span[text()="{v}"])[1]')
+            sleep(1)
 
         # 等待遮挡元素消失
         wait.until(

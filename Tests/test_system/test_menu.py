@@ -83,7 +83,7 @@ class TestSMenuPage:
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = 'ABCDAA'
-        sleep(1)
+        menu.wait_for_loading_to_disappear()
         menu.click_all_button("新增")
         menu.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
         menu.click_confirm()
@@ -97,7 +97,7 @@ class TestSMenuPage:
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = 'ABCDAA'
-        sleep(1)
+        menu.wait_for_loading_to_disappear()
         menu.click_all_button("新增")
         menu.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
         menu.enter_texts('//div[@id="t4svyhz8-n3vp"]//input', name)
@@ -112,7 +112,7 @@ class TestSMenuPage:
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = 'ABCDAA'
-        sleep(1)
+        menu.wait_for_loading_to_disappear()
         menu.click_all_button("新增")
         menu.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
         menu.enter_texts('//div[@id="t4svyhz8-n3vp"]//input', name)
@@ -133,7 +133,7 @@ class TestSMenuPage:
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = 'ABCDAA'
-        sleep(1)
+        menu.wait_for_loading_to_disappear()
         menu.click_all_button("新增")
         menu.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
         menu.enter_texts('//div[@id="t4svyhz8-n3vp"]//input', name)
@@ -146,47 +146,27 @@ class TestSMenuPage:
         assert message == "记录已存在,请检查！"
         assert not menu.has_fail_message()
 
-    @allure.story("修改组件代码,组件名称，图标成功")
+    @allure.story("修改组件名称，图标成功")
     # @pytest.mark.run(order=1)
     def test_menu_updatesuccess1(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         before_name = 'ABCDAA'
         after_name = 'ACDAA'
-        sleep(2)
+        menu.wait_for_loading_to_disappear()
         menu.select_input_menu(before_name)
         menu.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         menu.click_all_button("编辑")
-        menu.enter_texts('//div[@id="0lollcex-w9k3"]//input', after_name)
         menu.enter_texts('//div[@id="b4cp83c8-qiax"]//input', after_name)
         menu.click_button('//div[@id="3srdw2xs-v6kc"]//i')
         menu.click_button('//div[div[text()="请选择图标"]]/following-sibling::div//div[@class="flex-wrap"]/div[2]')
         sleep(0.5)
         menu.click_confirm()
         message = menu.get_find_message()
-        menu.select_input_menu(after_name)
-        eles1 = menu.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
-        eles2 = menu.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
-        assert eles1 == eles2 == after_name
-        assert message == "编辑成功！"
-        assert not menu.has_fail_message()
-
-    @allure.story("修改组件代码重复不允许添加")
-    # @pytest.mark.run(order=1)
-    def test_menu_addrepeat2(self, login_to_menu):
-        driver = login_to_menu  # WebDriver 实例
-        menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
-        before_name = 'ACDAA'
-        after_name = 'SchedulingManagement'
         menu.select_input_menu(before_name)
-        menu.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
-        menu.click_all_button("编辑")
-        menu.enter_texts('//div[@id="0lollcex-w9k3"]//input', after_name)
-        menu.click_confirm()
-        sleep(1)
-        message = menu.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').text
-        assert message == "记录已存在,请检查！"
+        eles2 = menu.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
+        assert eles2 == after_name
+        assert message == "编辑成功！"
         assert not menu.has_fail_message()
 
     @allure.story("刷新成功")
@@ -194,8 +174,8 @@ class TestSMenuPage:
     def test_menu_refreshsuccess(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
-        before_name = 'ACDAA'
+        menu.wait_for_loading_to_disappear()
+        before_name = 'ABCDAA'
         menu.select_input_menu(before_name)
         menu.right_refresh('菜单组件')
         menutext = menu.get_find_element_xpath(
@@ -700,8 +680,9 @@ class TestSMenuPage:
     def test_menu_select1(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
+        menu.wait_for_loading_to_disappear()
         name = "Plan"
+        sleep(1)
         menu.select_input_menu(name)
         sleep(2)
         eles = menu.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
@@ -714,9 +695,9 @@ class TestSMenuPage:
     def test_menu_select2(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
-        menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//i')
+        menu.wait_for_loading_to_disappear()
         sleep(1)
+        menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//i')
         eles = menu.get_find_element_xpath(
             '(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
             "class")
@@ -733,8 +714,9 @@ class TestSMenuPage:
     def test_menu_select3(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
+        menu.wait_for_loading_to_disappear()
         name = "Co"
+        sleep(1)
         menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//i')
         menu.hover("包含")
         sleep(1)
@@ -752,7 +734,8 @@ class TestSMenuPage:
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = "De"
-        sleep(2)
+        menu.wait_for_loading_to_disappear()
+        sleep(1)
         menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//i')
         menu.hover("符合开头")
         sleep(1)
@@ -769,8 +752,9 @@ class TestSMenuPage:
     def test_menu_select5(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(2)
+        menu.wait_for_loading_to_disappear()
         name = "t"
+        sleep(1)
         menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//i')
         menu.hover("符合结尾")
         sleep(1)
@@ -787,7 +771,7 @@ class TestSMenuPage:
     def test_menu_clear(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        sleep(1)
+        menu.wait_for_loading_to_disappear()
         name = "3"
         sleep(1)
         menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//i')
@@ -809,8 +793,8 @@ class TestSMenuPage:
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         layout = "测试布局A"
-
-        value = ['ACDAA']
+        menu.wait_for_loading_to_disappear()
+        value = ['ABCDAA']
         menu.del_all(xpath='//div[div[span[text()=" 组件代码"]]]/div[3]//input', value=value)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

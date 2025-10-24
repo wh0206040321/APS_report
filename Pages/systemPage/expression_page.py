@@ -100,7 +100,25 @@ class ExpressionPage(BasePage):
 
     def select_input_module(self, name):
         """选择输入框."""
-        xpath = '//div[div[p[text()="模块代码"]]]//input'
+        xpath = '//div[p[text()="模块代码"]]/following-sibling::div//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+
+    def select_input_language(self, name):
+        """选择输入框."""
+        xpath = '//div[div[span[text()=" 键"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+
+    def select_input_button(self, name):
+        """选择输入框."""
+        xpath = '//div[p[text()="按钮代码"]]/following-sibling::div//input'
         ele = self.get_find_element_xpath(xpath)
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
@@ -137,7 +155,7 @@ class ExpressionPage(BasePage):
     def del_all(self, xpath, value=[]):
         for index, v in enumerate(value, start=1):
             try:
-                sleep(3)
+                sleep(1)
                 ele = self.get_find_element_xpath(xpath)
                 ele.send_keys(Keys.CONTROL, "a")
                 ele.send_keys(Keys.DELETE)

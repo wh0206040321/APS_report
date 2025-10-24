@@ -111,7 +111,7 @@ class TestPlanPage:
             plan.click_button(f'(//span[text()="{v}"])[1]')
         sleep(1)
         plan.click_plan()
-        message = plan.get_find_message()
+        message = plan.get_error_message()
         # 检查元素是否包含子节点
         assert message == "请选择计划方案"
         assert not plan.has_fail_message()
@@ -150,7 +150,7 @@ class TestPlanPage:
         # 等待loading遮罩消失
         wait.until(
             EC.invisibility_of_element_located(
-                (By.CSS_SELECTOR, "div.el-loading-spinner")
+                (By.CLASS_NAME, "vxe-loading")
             )
         )
 
@@ -158,7 +158,15 @@ class TestPlanPage:
         for v in list_:
             plan.click_button(f'(//span[text()="{v}"])[1]')
 
-        plan.click_button('//div[@class="vue-treeselect__control-arrow-container"]')
+        # 等待 el-loading-spinner 消失
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-spinner"))
+        )
+        target = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]'))
+        )
+        sleep(3)
+        target.click()
         ele_input = plan.get_find_element_xpath(
             '//div[@class="vue-treeselect__list"]/div[1]//label'
         )
@@ -200,7 +208,7 @@ class TestPlanPage:
 
         wait.until(
             EC.invisibility_of_element_located(
-                (By.CSS_SELECTOR, "div.el-loading-spinner")
+                (By.CLASS_NAME, "vxe-loading")
             )
         )
 
@@ -208,7 +216,15 @@ class TestPlanPage:
         for v in list_:
             plan.click_button(f'(//span[text()="{v}"])[1]')
 
-        plan.click_button('//div[@class="vue-treeselect__control-arrow-container"]')
+        # 等待 el-loading-spinner 消失
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-spinner"))
+        )
+        target = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]'))
+        )
+        sleep(3)
+        target.click()
         ele_input = plan.get_find_element_xpath(
             '//div[@class="vue-treeselect__list"]/div[1]//label'
         ).text
@@ -233,13 +249,15 @@ class TestPlanPage:
         for v in list_:
             plan.click_button(f'(//span[text()="{v}"])[1]')
 
-        # 等待下拉框按钮可点击后点击展开
-        dropdown_arrow = wait.until(
-            EC.element_to_be_clickable(
-                (By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
-            )
+        # 等待 el-loading-spinner 消失
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-spinner"))
         )
-        dropdown_arrow.click()
+        target = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]'))
+        )
+        sleep(3)
+        target.click()
 
         # 等待第一个方案标签可点击后点击选择
         first_option = wait.until(

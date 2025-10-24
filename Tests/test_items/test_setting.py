@@ -183,7 +183,7 @@ class TestSettingPage:
             '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
         )
         # 点击特定的按钮，这里的 XPath 表达式用于定位页面上的按钮
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
 
         # 获取布局名称的文本元素
         name = setting.get_find_element_xpath(
@@ -226,7 +226,7 @@ class TestSettingPage:
             ActionChains(driver).drag_and_drop(text_element, input_element).perform()
 
         sleep(2)
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
 
         # 获取布局名称的文本元素
         name = setting.get_find_element_xpath(
@@ -277,10 +277,10 @@ class TestSettingPage:
             # 如果未选中，则点击复选框进行选中
             setting.click_button('//div[./div[text()="是否可见:"]]/label/span/span')
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
         else:
             # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
 
         # 获取布局名称的文本元素
         name = setting.get_find_element_xpath(
@@ -305,15 +305,14 @@ class TestSettingPage:
         # 检查复选框是否未被选中
         if checkbox.get_attribute("class") == "ivu-checkbox":
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-            sleep(1)
+            setting.click_confirm_button()
         else:
             # 如果已选中，点击取消选中
             setting.click_button(
                 '//div[text()="是否显示布局:"]/following-sibling::label/span'
             )
             sleep(1)
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
 
         setting.click_ref_button()
         name = setting.get_find_element_xpath(
@@ -377,13 +376,12 @@ class TestSettingPage:
             )
             sleep(1)
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-            sleep(1)
+            setting.click_confirm_button()
         else:
             # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
 
-        sleep(2)
+        sleep(1)
         safe_quit(driver)
         # 重新打开浏览器
         driver_path = DateDriver().driver_path
@@ -419,7 +417,7 @@ class TestSettingPage:
         setting.click_setting_button()
         setting.click_button('//div[text()="表尾内容:"]/following-sibling::div//i')
         setting.click_button('//div[text()="合计"]')
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         name = setting.get_find_element_xpath('(//span[text()="合计"])[2]').text
         assert name == "合计"
@@ -435,7 +433,7 @@ class TestSettingPage:
         setting.click_setting_button()
         setting.click_button('//div[text()="表尾内容:"]/following-sibling::div//i')
         setting.click_button('//div[text()="平均"]')
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         name = setting.get_find_element_xpath('(//span[text()="平均"])[2]').text
         assert name == "平均"
@@ -456,8 +454,8 @@ class TestSettingPage:
         inupt_number.send_keys(Keys.CONTROL, "a")
         inupt_number.send_keys(Keys.DELETE)
         inupt_number.send_keys(f"{num}")
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(1.5)
+        setting.click_confirm_button()
+        sleep(1)
         tr_text = driver.find_elements(
             By.XPATH,
             f'//div[@class="vxe-table--body-wrapper body--wrapper" and @xid="2"]/table//tr[{num}]',
@@ -511,9 +509,7 @@ class TestSettingPage:
         # 输入新的每页显示条数
         inupt_number.send_keys(f"{num}")
         # 点击确定按钮保存设置
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        # 等待1秒以确保设置保存
-        sleep(1)
+        setting.click_confirm_button()
         # 滚动到页面底部以加载所有元素
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         # 等待1秒以确保页面滚动完成
@@ -558,15 +554,15 @@ class TestSettingPage:
         checkbox = setting.get_find_element_xpath(
             '//tr[./td[3] and ./td[.//span[text()="物料名称"]]]/td[6]//span[1]'
         )
-
+        sleep(2)
         # 检查复选框是否已被选中
         if checkbox.get_attribute("class") == "ivu-checkbox ivu-checkbox-checked":
             # 如果复选框选中，则点击取消选中，并保存设置
             checkbox.click()
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
         else:
             # 如果复选框未选中，则直接保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
         sleep(1)
         # 获取设置更改后的物料代码列文本
         before_text = driver.find_elements(
@@ -607,15 +603,15 @@ class TestSettingPage:
             ele.send_keys(Keys.CONTROL, "a")
             ele.send_keys(Keys.DELETE)
             setting.enter_texts(xpath, '2')
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
         else:
             # 如果未选中，点击复选框并确认
             checkbox.click()
             ele.send_keys(Keys.CONTROL, "a")
             ele.send_keys(Keys.DELETE)
             setting.enter_texts(xpath, '2')
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(2)
+            setting.click_confirm_button()
+        sleep(1)
         # 获取设置更改后的物料代码相关文本
         before_text = setting.get_find_element_xpath(
             '//table[.//th[.//p[text()="物料代码"]]]//th[3]//p'
@@ -645,8 +641,7 @@ class TestSettingPage:
         input_text.send_keys(Keys.DELETE)
         input_text.send_keys("测试物料组代码")
 
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(1)
+        setting.click_confirm_button()
         before_text = setting.get_find_element_xpath(
             '//table[.//th[.//p[text()="物料代码"]]]//th[4]//p'
         ).text
@@ -673,8 +668,7 @@ class TestSettingPage:
         input_text.send_keys(Keys.CONTROL, "a")
         input_text.send_keys(Keys.DELETE)
 
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(1)
+        setting.click_confirm_button()
         before_text = setting.get_find_element_xpath(
             '//table[.//th[.//p[text()="物料代码"]]]//th[4]//p'
         ).text
@@ -695,8 +689,7 @@ class TestSettingPage:
         setting.click_button('//div[text()=" 显示设置 "]')
         setting.click_button('//tr[./td[3][.//span[text()="物料优先度"]]]/td[5]//input')
         setting.click_button('//div[text()="求和"]')
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(1)
+        setting.click_confirm_button()
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         text1 = setting.get_find_element_xpath(
             '(//tr[.//span[text()="表尾"]])[2]/td[1]//span'
@@ -726,8 +719,8 @@ class TestSettingPage:
         num.send_keys(Keys.CONTROL, "a")
         num.send_keys(Keys.DELETE)
         num.send_keys("8")
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(3)
+        setting.click_confirm_button()
+        sleep(1)
         before_text = setting.get_find_element_xpath(
             '//table[.//th[.//p[text()="物料代码"]]]//th[9]//p'
         ).text
@@ -753,8 +746,8 @@ class TestSettingPage:
         num.send_keys(Keys.CONTROL, "a")
         num.send_keys(Keys.DELETE)
         num.send_keys("8")
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        sleep(3)
+        setting.click_confirm_button()
+        sleep(1)
         before_text = setting.get_find_element_xpath(
             '//table[.//th[.//p[text()="物料代码"]]]//th[9]//p'
         ).text
@@ -783,7 +776,7 @@ class TestSettingPage:
         setting.click_button('//div[text()="输入框"]')
 
         # 确认输入框点击，进入下一步
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
 
         # 获取表格中特定位置的数据，用于后续的验证
         data = setting.get_find_element_xpath(
@@ -844,7 +837,7 @@ class TestSettingPage:
         setting.click_button('//div[text()="数字输入框"]')
 
         # 确认数字输入框的弹窗，以应用所选条件
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
 
         # 在指定的输入框中输入特殊字符，以测试系统的稳定性和正确性
         setting.enter_texts(
@@ -964,7 +957,7 @@ class TestSettingPage:
         )
 
         # 点击确认按钮
-        setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.click_confirm_button()
 
         # 为特定代码选择P选项
         setting.click_button(
@@ -1353,7 +1346,7 @@ class TestSettingPage:
         # 检查复选框是否未被选中
         if checkbox.get_attribute("class") == "ivu-checkbox":
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
             sleep(1)
         else:
             # 如果已选中，点击取消选中
@@ -1361,7 +1354,7 @@ class TestSettingPage:
                 '//div[text()="是否显示布局:"]/following-sibling::label/span'
             )
             sleep(1)
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
         sleep(2)
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -1425,11 +1418,11 @@ class TestSettingPage:
             )
             sleep(1)
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
             sleep(1)
         else:
             # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
 
         sleep(2)
         safe_quit(driver)
@@ -1625,7 +1618,7 @@ class TestSettingPage:
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.add_statistics(num=1, name=statistics, code2="物料优先度 (itemPriority)", code3="物料种类 (type)")
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
-        message = setting.get_find_message()
+        message = setting.get_error_message()
         assert message == "记录已存在,请检查！"
         assert not setting.has_fail_message()
 
@@ -1966,7 +1959,7 @@ class TestSettingPage:
         else:
             setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
 
-        sleep(1)
+        setting.get_find_message()
         driver.refresh()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         sleep(1)
@@ -1994,12 +1987,12 @@ class TestSettingPage:
         else:
             setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
 
-        sleep(1)
+        setting.get_find_message()
         driver.refresh()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         sleep(1)
         setting.click_button(f'//div[@class="labelItemDIv" and text()="{lable}"]')
-        sleep(2)
+        sleep(3)
         # 定位第一行是否为产品A
         itemcode = setting.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
@@ -2325,13 +2318,12 @@ class TestSettingPage:
             )
             sleep(1)
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-            sleep(1)
+            setting.click_confirm_button()
         else:
             # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.click_confirm_button()
 
-        sleep(2)
+        sleep(1)
         safe_quit(driver)
         # 重新打开浏览器
         driver_path = DateDriver().driver_path

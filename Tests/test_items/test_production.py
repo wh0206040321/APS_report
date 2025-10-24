@@ -432,7 +432,7 @@ class TestProductionPage:
         ).text
         # 点击否
         production.click_button('//div[@class="el-message-box__btns"]/button[1]')
-        sleep(1)
+        production.wait_for_loading_to_disappear()
         ele = driver.find_elements(
             By.XPATH,
             f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]',
@@ -488,7 +488,7 @@ class TestProductionPage:
         text_ = production.get_find_element_xpath(
             '//label[text()="异常原因"]/following-sibling::div//input'
         ).get_attribute("value")
-        assert num_ == '1000000000000000000' and text_ == name
+        assert num_ == '99999999999' and text_ == name
         assert not production.has_fail_message()
 
     @allure.story("添加测试数据")
