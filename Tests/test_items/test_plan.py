@@ -185,6 +185,7 @@ class TestPlanPage:
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
         list_ = ["方案管理", "计划方案管理"]
         for v in list_:
+            sleep(0.5)
             plan.click_button(f'(//span[text()="{v}"])[1]')
         sleep(1)
         # 选择第一个方案

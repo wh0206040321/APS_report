@@ -28,6 +28,24 @@ class AddsPages(BasePage):
         except NoSuchElementException:
             return None
 
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+            )
+        )
+
     def batch_modify_input(self, xpath_list=[], new_value=""):
         """批量修改输入框"""
         for xpath in xpath_list:
@@ -44,6 +62,7 @@ class AddsPages(BasePage):
         for xpath in xpath_list:
             try:
                 self.click_button(xpath)
+                self.wait_for_loading_to_disappear()
                 self.click_button(new_value)
                 sleep(0.2)
                 self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
@@ -53,7 +72,7 @@ class AddsPages(BasePage):
                 print(f"操作 {xpath} 时出错: {str(e)}")
 
     def batch_modify_code_box(self, xpath_list=[], new_value=""):
-        """批量修改代码对话框"""
+        """批量修改代码对话框双击"""
         for xpath in xpath_list:
             try:
                 self.click_button(xpath)

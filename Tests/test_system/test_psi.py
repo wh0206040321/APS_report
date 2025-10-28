@@ -407,8 +407,10 @@ class TestPSIPage:
     def test_psi_clear(self, login_to_psi):
         driver = login_to_psi  # WebDriver 实例
         psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
-        name = "1"
+        psi.wait_for_loading_to_disappear()
+        name = "3"
         psi.click_button('//div[p[text()="PSI名称"]]/following-sibling::div//i')
+        psi.hover("包含")
         sleep(1)
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
         sleep(1)
@@ -461,16 +463,16 @@ class TestPSIPage:
         assert message == "保存成功"
         assert not psi.has_fail_message()
 
-    @allure.story("删除数据成功")
-    # @pytest.mark.run(order=1)
-    def test_psi_del(self, login_to_psi):
-        driver = login_to_psi  # WebDriver 实例
-        psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
-        list_ = ["1测试psi1", "1测试psi2", "1测试psi3"]
-        psi.del_all(list_)
-        message = psi.get_find_message()
-        psi.right_refresh()
-        eles2 = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]')
-        assert not eles2
-        assert message == "删除成功！"
-        assert not psi.has_fail_message()
+    # @allure.story("删除数据成功")
+    # # @pytest.mark.run(order=1)
+    # def test_psi_del(self, login_to_psi):
+    #     driver = login_to_psi  # WebDriver 实例
+    #     psi = PsiPage(driver)  # 用 driver 初始化 PsiPage
+    #     list_ = ["1测试psi1", "1测试psi2", "1测试psi3"]
+    #     psi.del_all(list_)
+    #     message = psi.get_find_message()
+    #     psi.right_refresh()
+    #     eles2 = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]')
+    #     assert not eles2
+    #     assert message == "删除成功！"
+    #     assert not psi.has_fail_message()

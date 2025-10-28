@@ -692,12 +692,12 @@ class TestSettingPage:
         setting.click_confirm_button()
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         text1 = setting.get_find_element_xpath(
-            '(//tr[.//span[text()="表尾"]])[2]/td[1]//span'
+            '(//tr[.//span[text()="合计"]])[2]/td[1]//span'
         ).text
         text2 = setting.get_find_element_xpath(
-            '//tr[.//span[text()="表尾"]]/td[6]//span'
+            '//tr[.//span[text()="合计"]]/td[6]//span'
         ).text
-        assert text1 == "表尾" and text2 != "-"
+        assert text1 == "合计" and text2 != "-"
         assert not setting.has_fail_message()
 
     @allure.story("设置表格布局-改变关联条件列的顺序")
@@ -1315,6 +1315,7 @@ class TestSettingPage:
         sleep(2)
         # 点击确认删除的按钮
         setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        setting.wait_for_loading_to_disappear()
         # 等待一段时间，确保删除操作完成
         sleep(1)
 
@@ -1753,7 +1754,7 @@ class TestSettingPage:
 
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
-
+        sleep(2)
         # 点击三个点
         setting.click_button('//span[text()="统计图1 "]/following-sibling::div')
         # 点击设置
@@ -1779,7 +1780,7 @@ class TestSettingPage:
 
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
-
+        sleep(2)
         # 点击三个点
         setting.click_button('//span[text()="统计图1 "]/following-sibling::div')
         # 点击设置
@@ -1803,7 +1804,7 @@ class TestSettingPage:
         layout = "测试布局A"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
-        i = 2
+        i = 1
         while i <= 13:
             try:
                 element = driver.find_element(By.XPATH, f'//span[text()="统计图{i} "]/following-sibling::div')
@@ -2223,7 +2224,7 @@ class TestSettingPage:
         setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
+        sleep(2)
         driver.refresh()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(

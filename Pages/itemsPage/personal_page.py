@@ -198,7 +198,7 @@ class PersonalPage(BasePage):
         self.go_setting_page()
         radio = self.get_find_element('//label[text()="悬浮"]/span')
         if radio.get_attribute('class') == "ivu-radio":
-            radio.click()
+            self.click_button('//label[text()="悬浮"]')
         display = self.get_find_element(f'//div[./p[text()=" 组件菜单文字: "]]/div/label[text()="{name}"]/span')
         if name == "显示":
             if display.get_attribute('class') == "ivu-radio":

@@ -57,7 +57,6 @@ class PlanUnitPage(BasePage):
         self.click_button('//li[text()=" 刷新"]')
         self.wait_for_loading_to_disappear()
 
-    # 等待加载遮罩消失
     def wait_for_loading_to_disappear(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
@@ -71,10 +70,14 @@ class PlanUnitPage(BasePage):
         """
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located(
-                (By.XPATH, '//div[contains(@class, "el-loading-mask") and not(contains(@style, "display: none"))]')
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
             )
         )
-        sleep(1)
+
+    def click_confirm_button(self):
+        """点击确认按钮."""
+        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])')
 
     def click_all_button(self, name):
         """点击按钮."""

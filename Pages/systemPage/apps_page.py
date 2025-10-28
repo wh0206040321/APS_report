@@ -150,6 +150,16 @@ class AppsPage(BasePage):
         ele = self.finds_elements(By.XPATH, f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{name}")]]')
         return len(ele)
 
+    def delete_template(self, list_xpath=[]):
+        """
+        删除模版
+        """
+        for value in list_xpath:
+            self.click_button(
+                f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{value}")]]/span')
+            self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            self.get_find_message()
+
     def drag_component(self, name=""):
         """
         拖拽组件到画布区域。

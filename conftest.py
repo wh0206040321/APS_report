@@ -1,6 +1,5 @@
 import subprocess
 
-import allure
 import pytest
 import os
 import re
@@ -19,6 +18,9 @@ from Pages.base_page import BasePage
 from pathlib import Path
 
 test_failures = []
+# 存储第一次失败的测试用例
+first_time_failures = {}
+
 # 路径配置
 REPORT_DIR = os.path.abspath("report")
 LOG_DIR = os.path.join(REPORT_DIR, "log")
@@ -77,24 +79,43 @@ def pytest_sessionstart(session):
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     """
-    在每个测试项执行后生成报告，并在测试失败时捕获截图
-
-    参数:
-    item - 当前测试项对象
-    call - 测试执行结果对象
+    在每个测试项执行后生成报告，记录第一次失败
     """
     outcome = yield
     report = outcome.get_result()
 
-    # 当测试报告的执行阶段为调用阶段且测试失败时
-    if report.when == "call" and report.failed:
-        # 获取测试项的名称，并进行文件名的清理
-        test_name = sanitize_filename(item.nodeid.split("::")[-1])
-        # 将失败的测试名称添加到列表中
-        test_failures.append(test_name)
+    test_name = sanitize_filename(item.nodeid.split("::")[-1])
+    test_id = item.nodeid  # 使用完整nodeid作为唯一标识
 
-        # 附加截图发送邮件
-        # 遍历所有driver实例，检查并执行截图操作
+    # 记录第一次执行的结果
+    if report.when == "call":
+        if report.failed:
+            # 如果是第一次失败，记录下来
+            if test_id not in first_time_failures:
+                first_time_failures[test_id] = {
+                    'name': test_name,
+                    'failed': True,
+                    'rerun': False
+                }
+                logger.info(f"📝 记录第一次失败: {test_name}")
+
+            # 如果是重运行时仍然失败
+            elif hasattr(item, 'execution_count') and item.execution_count > 1:
+                first_time_failures[test_id]['rerun'] = True
+                # 只有重运行时也失败才添加到最终失败列表
+                if test_name not in test_failures:
+                    test_failures.append(test_name)
+                    logger.info(f"❌ 重试后仍然失败，记录到最终失败列表: {test_name}")
+        else:
+            # 如果测试通过
+            if test_id in first_time_failures and hasattr(item, 'execution_count') and item.execution_count > 1:
+                # 重试后成功，从第一次失败记录中移除
+                logger.info(f"✅ 重试后成功，不记录失败: {test_name}")
+                if test_id in first_time_failures:
+                    del first_time_failures[test_id]
+
+    # 原有的截图逻辑
+    if report.when == "call" and report.failed:
         for driver in list(all_driver_instances.values()):
             # 检查实例是否为WebDriver类型
             if isinstance(driver, WebDriver):
@@ -142,10 +163,28 @@ def function_driver():
     safe_quit(driver)
 
 
+@pytest.fixture(scope="module")  # 模块级别
+def module_driver():
+    driver_path = DateDriver().driver_path
+    driver = create_driver(driver_path)
+    driver.set_window_size(1920, 1080)
+    yield driver
+    safe_quit(driver)
+
+
 def pytest_sessionfinish(session, exitstatus):
     """
-    pytest 会话结束时自动发送邮件报告，同时自动部署到 GitHub Pages。
+    pytest 会话结束时自动发送邮件报告，同时自动部署到 GitHub Pages
     """
+    # 处理最终失败列表：只包含那些重试后仍然失败的用例
+    final_failures = []
+    for test_id, failure_info in first_time_failures.items():
+        if failure_info['rerun']:  # 只有重试后仍然失败的
+            final_failures.append(failure_info['name'])
+
+    # 更新全局的test_failures
+    global test_failures
+    test_failures = final_failures
 
     # 🚨 判断当前是否为 Git 仓库
     if not Path(".git").exists():
@@ -156,6 +195,7 @@ def pytest_sessionfinish(session, exitstatus):
     docs_dir = Path("docs")
     # ✅ 链接用于邮件
     report_link = "https://wh0206040321.github.io/APS_report/"
+
     # ✅ 生成 Allure 静态报告
     os.system(f"allure generate report/allure_results -o {str(allure_output_dir)} --clean")
 
@@ -163,11 +203,15 @@ def pytest_sessionfinish(session, exitstatus):
     if test_failures:
         # ✅ 去重失败用例
         unique_failures = list(dict.fromkeys(test_failures))
+        failure_count = len(test_failures)
+        total_count = session.testscollected
         failure_items = "".join(f"<li>{name}</li>" for name in unique_failures)
         body = f"""
         <html>
         <body>
             <h2>❌ 以下测试用例执行失败：</h2>
+            <p>总测试用例数量: <strong>{total_count}</strong></p>
+            <p>失败用例数量: <strong>{failure_count}</strong></p>
             <ul>{failure_items}</ul>
             <p>📎 点击下方按钮查看详细测试报告：</p>
             <a href="{report_link}" style="display:inline-block;padding:10px 20px;background:#dc3545;color:#fff;text-decoration:none;border-radius:5px;">查看报告</a>
@@ -254,4 +298,3 @@ def compare_file_counts(src: Path, dst: Path):
             logging.warning(f"↪️ 差异文件：{f}")
     else:
         logging.info("✅ 报告文件完全一致")
-

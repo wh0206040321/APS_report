@@ -191,9 +191,7 @@ class TestCustomerPage:
         customer.add_test_data(name)
         customer.enter_texts('//label[text()="显示顺序"]/parent::div//input', name)
         # 点击确定
-        customer.click_button(
-            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        sleep(1)
+        customer.click_confirm_button()
         adddata = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -211,8 +209,7 @@ class TestCustomerPage:
         name = "111"
         customer.add_test_data(name)
         # 点击确定
-        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        sleep(1)
+        customer.click_confirm_button()
         adddata = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -266,8 +263,7 @@ class TestCustomerPage:
         name = "1测试A"
         customer.add_test_data(name)
         # 点击确定
-        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        sleep(1)
+        customer.click_confirm_button()
         adddata = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -337,8 +333,7 @@ class TestCustomerPage:
         # 客户代码输入
         customer.enter_texts('(//label[text()="客户代码"])[1]/parent::div//input', name)
         # 点击确定
-        customer.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
-        sleep(1)
+        customer.click_confirm_button()
         # 定位表格内容
         customerdata = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
@@ -396,9 +391,7 @@ class TestCustomerPage:
             '(//label[text()="显示顺序"])[1]/parent::div//input'
         ).get_attribute("value")
         # 点击确定
-        customer.click_button(
-            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]'
-        )
+        customer.click_confirm_button()
         sleep(1)
         # 定位表格内容
         customername = customer.get_find_element_xpath(

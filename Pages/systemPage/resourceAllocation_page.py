@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.login_page import LoginPage
-
+from selenium.webdriver import Keys
 
 class ResourceAllocationPage(BasePage):
     def __init__(self, driver):
@@ -83,7 +83,11 @@ class ResourceAllocationPage(BasePage):
 
     def select_input(self, code, name):
         """选择输入框."""
-        self.enter_texts(f'//div[div[p[text()="{code}"]]]//input', name)
+        xpath = f'//div[div[p[text()="{code}"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        self.enter_texts(xpath, name)
 
     def loop_judgment(self, xpath):
         """循环判断"""

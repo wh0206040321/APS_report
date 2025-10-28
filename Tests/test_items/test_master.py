@@ -104,7 +104,7 @@ class TestMasterPage:
         sleep(1)
 
         # 点击确定
-        master.add_ok_button()
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]')
         message = master.get_error_message()
         # 检查元素是否包含子节点
         assert message == "请根据必填项填写信息"
@@ -148,7 +148,7 @@ class TestMasterPage:
         )
 
         # 点击确定
-        master.add_ok_button()
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]')
         message = master.get_error_message()
         # 检查元素是否包含子节点
         assert message == "请根据必填项填写信息"
@@ -220,7 +220,6 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        sleep(1)
         adddata = master.get_find_element_xpath(
             f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
         ).text
@@ -333,7 +332,6 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        sleep(1)
 
         adddata = master.get_find_element_xpath(
             f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
@@ -432,7 +430,6 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        sleep(1)
 
         # 获取重复弹窗文字
         error_popup = master.get_find_element_xpath(
@@ -542,7 +539,6 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        sleep(1)
 
         adddata = master.get_find_element_xpath(
             f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
@@ -871,7 +867,6 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-        sleep(1)
 
         adddata = master.get_find_element_xpath(
             f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]'
@@ -909,7 +904,6 @@ class TestMasterPage:
             '//table[@class="vxe-table--body"]//tr[1]/td[3]//input[@placeholder="请选择"]'
         ).get_attribute("value")
         master.add_ok_button()
-        sleep(1)
         edittext = master.get_find_element_xpath(
             f'//tr[.//td[2]//span[text()="{item}"]]/td[6]'
         ).text
@@ -942,7 +936,6 @@ class TestMasterPage:
             '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//input'
         ).get_attribute("value")
         master.add_ok_button()
-        sleep(1)
         edittext = master.get_find_element_xpath(
             f'//tr[.//td[2]//span[text()="{item}"]]/td[11]'
         ).text
@@ -988,7 +981,6 @@ class TestMasterPage:
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//input'
         ).get_attribute("value")
         master.add_ok_button()
-        sleep(1)
         edittext = master.get_find_element_xpath(
             f'//tr[.//td[2]//span[text()="{item}"]][2]/td[11]'
         ).text

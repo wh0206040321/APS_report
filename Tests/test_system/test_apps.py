@@ -219,6 +219,24 @@ class TestSAppsPage:
         assert num == 1
         assert not apps.has_fail_message()
 
+    @allure.story("删除模版成功")
+    # @pytest.mark.run(order=1)
+    def test_apps_deletetemplate(self, login_to_apps):
+        driver = login_to_apps  # WebDriver 实例
+        apps = AppsPage(driver)  # 用 driver 初始化 ExpressionPage
+        name = "appstest1"
+        values = ['appstest测试模版1', "appstest测试模版2"]
+        apps.wait_for_loading_to_disappear()
+        apps.select_input(name)
+        apps.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+        apps.click_all_button("编辑")
+        apps.go_template()
+        apps.delete_template(values)
+        for value in values:
+            ele = apps.finds_elements(By.XPATH, f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{value}")]]')
+            assert len(ele) == 0
+        assert not apps.has_fail_message()
+
     @allure.story("修改应用点击关闭，弹出弹窗点击无需保存，不保存")
     # @pytest.mark.run(order=1)
     def test_apps_update1(self, login_to_apps):

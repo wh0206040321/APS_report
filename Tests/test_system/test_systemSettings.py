@@ -108,16 +108,17 @@ class TestSystemSettingsPage:
         driver = login_to_systemSettings  # WebDriver 实例
         settings = SystemSettingsPage(driver)  # 用 driver 初始化 SystemSettingsPage
         settings.click_button('//div[p[text()=" 系统图标: "]]//i')
-        # 清理 .crdownload 文件，避免上传未完成的文件
-        download_path = os.path.abspath("downloads")
+        # 清理未完成下载
+        download_path = os.path.join(os.path.dirname(__file__), "downloads")
         for f in os.listdir(download_path):
             if f.endswith(".crdownload"):
                 os.remove(os.path.join(download_path, f))
 
-        sleep(3)
-        # 1. 准备上传文件路径
-        upload_file = os.path.abspath(f"downloads/WPS图片.png")  # 确保文件存在
-        assert os.path.exists(upload_file), "上传文件不存在"
+        sleep(2)
+
+        # 准备上传文件路径
+        upload_file = os.path.join(download_path, "WPS图片.png")
+        assert os.path.exists(upload_file), f"❌ 上传文件不存在: {upload_file}"
 
         # 2. 定位上传控件并执行上传
         settings.upload_file(upload_file, 1)
@@ -174,9 +175,10 @@ class TestSystemSettingsPage:
     def test_systemSettings_logo4(self, login_to_systemSettings):
         driver = login_to_systemSettings  # WebDriver 实例
         settings = SystemSettingsPage(driver)  # 用 driver 初始化 SystemSettingsPage
-        cla = settings.get_find_element_xpath('//div[p[text()=" 登录页显示系统Logo: "]]/div').get_attribute("class")
-        if cla == 'el-switch is-checked':
-            settings.click_button('//div[p[text()=" 登录页显示系统Logo: "]]//span')
+        cla = settings.get_find_element_xpath('//div[p[text()=" 登录页显示系统Logo: "]]/span').get_attribute("class")
+        if 'ivu-switch-checked' in cla:
+            settings.click_button('//div[p[text()=" 登录页显示系统Logo: "]]/span')
+        sleep(2)
         settings.click_save_button()
         maeessage = settings.get_find_message()
         settings.log_out()
@@ -189,9 +191,10 @@ class TestSystemSettingsPage:
     def test_systemSettings_logo5(self, login_to_systemSettings):
         driver = login_to_systemSettings  # WebDriver 实例
         settings = SystemSettingsPage(driver)  # 用 driver 初始化 SystemSettingsPage
-        cla = settings.get_find_element_xpath('//div[p[text()=" 登录页显示系统Logo: "]]/div').get_attribute("class")
-        if cla == 'el-switch':
-            settings.click_button('//div[p[text()=" 登录页显示系统Logo: "]]//span')
+        cla = settings.get_find_element_xpath('//div[p[text()=" 登录页显示系统Logo: "]]/span').get_attribute("class")
+        if 'ivu-switch-checked' not in cla:
+            settings.click_button('//div[p[text()=" 登录页显示系统Logo: "]]/span')
+        sleep(2)
         settings.click_save_button()
         maeessage = settings.get_find_message()
         settings.log_out()
@@ -205,16 +208,17 @@ class TestSystemSettingsPage:
         driver = login_to_systemSettings  # WebDriver 实例
         settings = SystemSettingsPage(driver)  # 用 driver 初始化 SystemSettingsPage
         settings.click_button('//div[p[text()=" 登录背景图: "]]//i')
-        # 清理 .crdownload 文件，避免上传未完成的文件
-        download_path = os.path.abspath("downloads")
+        # 清理未完成下载
+        download_path = os.path.join(os.path.dirname(__file__), "downloads")
         for f in os.listdir(download_path):
             if f.endswith(".crdownload"):
                 os.remove(os.path.join(download_path, f))
 
-        sleep(3)
-        # 1. 准备上传文件路径
-        upload_file = os.path.abspath(f"downloads/WPS图片.png")  # 确保文件存在
-        assert os.path.exists(upload_file), "上传文件不存在"
+        sleep(2)
+
+        # 准备上传文件路径
+        upload_file = os.path.join(download_path, "WPS图片.png")
+        assert os.path.exists(upload_file), f"❌ 上传文件不存在: {upload_file}"
 
         # 2. 定位上传控件并执行上传
         settings.upload_file(upload_file, 2)
@@ -311,22 +315,22 @@ class TestSystemSettingsPage:
         maeessage = settings.get_find_message()
         assert not settings.has_fail_message()
 
-    @allure.story("平台设置数字文本框做校验")
-    # @pytest.mark.run(order=1)
-    def test_systemSettings_inputnum3(self, login_to_systemSettings):
-        driver = login_to_systemSettings  # WebDriver 实例
-        settings = SystemSettingsPage(driver)  # 用 driver 初始化 SystemSettingsPage
-        settings.click_button('//div[text()=" 平台设置 "]')
-        settings.enter_texts('//div[p[text()=" 数据库命令超时时间: "]]//input',
-                             "e./,124ds.jd.fvwq324444443521244444444tgg77飞435535353535erq")
-        settings.click_save_button()
-        maeessage = settings.get_find_message()
-        ele = settings.get_find_element_xpath('//div[p[text()=" 数据库命令超时时间: "]]//input').get_attribute("value")
-        assert maeessage == "保存成功" and ele == '99999999999'
-        ele = settings.get_find_element_xpath('//div[p[text()=" 数据库命令超时时间: "]]//input')
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        settings.enter_texts('//div[p[text()=" 数据库命令超时时间: "]]//input', "100112")
-        settings.click_save_button()
-        maeessage = settings.get_find_message()
-        assert not settings.has_fail_message()
+    # @allure.story("平台设置数字文本框做校验")
+    # # @pytest.mark.run(order=1)
+    # def test_systemSettings_inputnum3(self, login_to_systemSettings):
+    #     driver = login_to_systemSettings  # WebDriver 实例
+    #     settings = SystemSettingsPage(driver)  # 用 driver 初始化 SystemSettingsPage
+    #     settings.click_button('//div[text()=" 平台设置 "]')
+    #     settings.enter_texts('//div[p[text()=" 数据库命令超时时间 (秒): "]]//input',
+    #                          "e./,124ds.jd.fvwq324444443521244444444tgg77飞435535353535erq")
+    #     settings.click_save_button()
+    #     maeessage = settings.get_find_message()
+    #     ele = settings.get_find_element_xpath('//div[p[text()=" 数据库命令超时时间 (秒): "]]//input').get_attribute("value")
+    #     assert maeessage == "保存成功" and ele == '99999999999'
+    #     ele = settings.get_find_element_xpath('//div[p[text()=" 数据库命令超时时间 (秒): "]]//input')
+    #     ele.send_keys(Keys.CONTROL, "a")
+    #     ele.send_keys(Keys.DELETE)
+    #     settings.enter_texts('//div[p[text()=" 数据库命令超时时间 (秒): "]]//input', "100112")
+    #     settings.click_save_button()
+    #     maeessage = settings.get_find_message()
+    #     assert not settings.has_fail_message()

@@ -124,7 +124,7 @@ class TestOrderPage:
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-
+        sleep(2)
         # 交货期输入框
         inputdate_box = order.get_find_element_xpath(
             '(//label[text()="交货期"])[1]/parent::div//input'
@@ -162,6 +162,7 @@ class TestOrderPage:
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
+        sleep(2)
         input_box = order.get_find_element_xpath(
             '(//label[text()="物料"])[1]/parent::div//input'
         )
@@ -214,7 +215,7 @@ class TestOrderPage:
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-        sleep(1)
+        sleep(2)
         input_box = order.get_find_element_xpath(
             '(//label[text()="计划数量"])[1]/parent::div/div[1]/div'
         )

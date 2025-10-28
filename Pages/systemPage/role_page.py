@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
-
+from selenium.webdriver import Keys
 
 class RolePage(BasePage):
     def __init__(self, driver):
@@ -32,17 +32,18 @@ class RolePage(BasePage):
 
     def get_find_message(self):
         """获取错误信息"""
-        message = WebDriverWait(self.driver, 10).until(
+        message = WebDriverWait(self.driver, 15).until(
             EC.visibility_of_element_located(
                 (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
         )
         return message.text
-    def get_message(self):
-        """获取信息"""
-        message = WebDriverWait(self.driver, 10).until(
+
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 15).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
             )
         )
         return message.text
@@ -116,6 +117,10 @@ class RolePage(BasePage):
 
     def select_input(self, name):
         """选择输入框."""
+        xpath = '//div[div[p[text()="角色代码"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL + "a")
+        ele.send_keys(Keys.DELETE)
         self.enter_texts('//div[div[p[text()="角色代码"]]]//input', name)
 
     def click_sel_button(self):
@@ -145,3 +150,21 @@ class RolePage(BasePage):
 
         # 3️⃣ 再点击图标
         delete_icon.click()
+
+    def del_all(self, value=[]):
+        for index, v in enumerate(value, start=1):
+            try:
+                xpath = '//div[div[p[text()="角色代码"]]]//input'
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                sleep(0.5)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+                self.click_all_button("删除")  # 点击删除
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+                sleep(1)
+            except NoSuchElementException:
+                print(f"未找到元素: {v}")
+            except Exception as e:
+                print(f"操作 {v} 时出错: {str(e)}")

@@ -66,7 +66,6 @@ class TestDeleteStart:
         ele = driver.find_elements(
             By.XPATH, f'(//span[text()="{code}"])[1]/ancestor::tr[1]/td[2]'
         )
-        page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
         page.click_button('(//span[text()="工作指示一览"])[1]')
 
         previewPlan = PreviewPlanPage(driver)  # 用 previewPlan 初始化 PreviewPlanPage

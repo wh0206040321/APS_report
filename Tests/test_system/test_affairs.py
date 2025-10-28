@@ -811,6 +811,7 @@ class TestAffairsPage:
         ]
         affairs.click_process()
         affairs.add_process(name="测试流程6", type="服务", frequency="每天")
+        sleep(1)
         affairs.click_next()
         affairs.click_button('//button[span[text()="上一步"]]')
         list_ = affairs.batch_acquisition_input(xpth_list)
@@ -827,6 +828,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_button('//div[label[text()="是否启用"]]/div/span')
+        sleep(1)
         affairs.click_next()
         value = affairs.add_process_affairs(name=process_name, add=True)
         affairs.click_save()

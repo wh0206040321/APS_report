@@ -1,0 +1,1 @@
+{"uuid": "fb7dc7c2-f284-4bc9-9138-50d572db5e04", "children": ["11efae83-b081-4485-b8a3-a58e3b084126"], "befores": [{"name": "login_to_synchronize", "status": "passed", "start": 1761642339704, "stop": 1761642351525}], "afters": [{"name": "login_to_synchronize::0", "status": "passed", "start": 1761642365650, "stop": 1761642367837}], "start": 1761642339704, "stop": 1761642367838}

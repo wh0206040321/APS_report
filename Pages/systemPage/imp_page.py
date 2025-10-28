@@ -83,9 +83,10 @@ class ImpPage(BasePage):
         """批量删除"""
         for v in value:
             self.click_button('//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]')
-            self.click_button(f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{v}"]')
+            self.click_button(f'(//li[text()="{v}"])[1]')
             self.click_impall_button("删除")
             self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            self.get_find_message()
 
         self.click_impall_button("保存")
 

@@ -199,7 +199,7 @@ class TestSButtonPage:
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         add = AddsPages(driver)
-        name = 'Abutton1'
+        name = 'Abutton2'
         button.click_all_button("新增")
         xpath_list = [
             '//div[label[text()="按钮代码"]]//input',
@@ -218,34 +218,34 @@ class TestSButtonPage:
         assert message == "新增成功！"
         assert not button.has_fail_message()
 
-    # @allure.story("修改按钮名称和图标成功")
-    # # @pytest.mark.run(order=1)
-    # def test_button_updatesuccess2(self, login_to_button):
-    #     driver = login_to_button  # WebDriver 实例
-    #     button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-    #     add = AddsPages(driver)
-    #     before_name = 'Abutton1'
-    #     after_name = 'Abutton2'
-    #     button.wait_for_loading_to_disappear()
-    #     button.select_input_button(before_name)
-    #     sleep(1)
-    #     button.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
-    #     button.click_all_button("编辑")
-    #     xpath_list = [
-    #         '//div[@id="wzcyncq8-0i93"]//input',
-    #         '//div[@id="kn72lcng-iorx"]//input',
-    #         '//div[@id="a5cvq73h-aok8"]//input',
-    #     ]
-    #     add.batch_modify_input(xpath_list[:3], after_name)
-    #     button.click_confirm()
-    #     message = button.get_find_message()
-    #     button.select_input_button(after_name)
-    #     eles1 = button.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
-    #     eles2 = button.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[4]').text
-    #     eles3 = button.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[5]').text
-    #     assert eles1 == eles2 == eles3 == after_name
-    #     assert message == "编辑成功！"
-    #     assert not button.has_fail_message()
+    @allure.story("修改按钮名称和图标成功")
+    # @pytest.mark.run(order=1)
+    def test_button_updatesuccess2(self, login_to_button):
+        driver = login_to_button  # WebDriver 实例
+        button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        add = AddsPages(driver)
+        before_name = 'Abutton1'
+        after_name = 'Abutton2'
+        button.wait_for_loading_to_disappear()
+        button.select_input_button(before_name)
+        sleep(1)
+        button.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
+        button.click_all_button("编辑")
+        xpath_list = [
+            '//div[label[text()="按钮名称"]]//input',
+            '//div[label[text()="图标"]]//i[contains(@class,"ivu-ico")]',
+            '(//div[@class="flex-wrap"])[2]/div[2]',
+        ]
+        add.batch_modify_input(xpath_list[0], after_name)
+        add.click_button(xpath_list[1])
+        add.click_button(xpath_list[2])
+        button.click_confirm()
+        message = button.get_find_message()
+        button.select_input_button(after_name)
+        eles1 = button.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
+        assert eles1 == after_name
+        assert message == "编辑成功！"
+        assert not button.has_fail_message()
 
     @allure.story("修改按钮代码不允许重复")
     # @pytest.mark.run(order=1)
@@ -253,20 +253,19 @@ class TestSButtonPage:
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         add = AddsPages(driver)
-        before_name = 'Akey1'
-        after_name = 'Akey2'
+        before_name = 'Abutton1'
         button.wait_for_loading_to_disappear()
         button.select_input_button(before_name)
         sleep(1)
         button.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         button.click_all_button("编辑")
         xpath_list = [
-            '//div[@id="c7h1w27z-lgyo"]//input',
-            '//div[@id="wzcyncq8-0i93"]//input',
-            '//div[@id="kn72lcng-iorx"]//input',
-            '//div[@id="a5cvq73h-aok8"]//input',
+            '//div[label[text()="按钮代码"]]//input',
+            '//div[label[text()="按钮名称"]]//input',
+            '//div[label[text()="图标"]]//i[contains(@class,"ivu-ico")]',
+            '(//div[@class="flex-wrap"])[2]/div[2]',
         ]
-        add.batch_modify_input(xpath_list[:1], after_name)
+        add.batch_modify_input(xpath_list[:1], 'DownLoad')
         button.click_confirm()
         message = button.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').text
         assert message == "记录已存在,请检查！"
@@ -277,7 +276,7 @@ class TestSButtonPage:
     def test_button_selectsuccess(self, login_to_button):
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        name = "Item_Spec1Code"
+        name = "DownLoad"
         # 点击查询
         button.click_all_button("查询")
         sleep(1)
@@ -292,7 +291,7 @@ class TestSButtonPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击物料代码
-        button.click_button('//div[text()="键" and contains(@optid,"opt_")]')
+        button.click_button('//div[text()="按钮代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         button.click_button(
@@ -311,7 +310,7 @@ class TestSButtonPage:
 
         # 点击确认
         button.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[3]'
         )
         sleep(2)
         # 定位第一行是否为name
@@ -346,7 +345,7 @@ class TestSButtonPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击物料代码
-        button.click_button('//div[text()="键" and contains(@optid,"opt_")]')
+        button.click_button('//div[text()="按钮代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         button.click_button(
@@ -365,7 +364,7 @@ class TestSButtonPage:
 
         # 点击确认
         button.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[3]'
         )
         sleep(2)
         itemcode = driver.find_elements(
@@ -381,7 +380,7 @@ class TestSButtonPage:
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
 
-        name = "物料"
+        name = "上传"
         # 点击查询
         button.click_all_button("查询")
         sleep(1)
@@ -396,7 +395,7 @@ class TestSButtonPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击物料名称
-        button.click_button('//div[text()="中文" and contains(@optid,"opt_")]')
+        button.click_button('//div[text()="按钮名称" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         button.click_button(
@@ -415,7 +414,7 @@ class TestSButtonPage:
 
         # 点击确认
         button.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[3]'
         )
         sleep(2)
         eles = button.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
@@ -429,7 +428,7 @@ class TestSButtonPage:
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         button.wait_for_loading_to_disappear()
-        name = "Plan"
+        name = "Sy"
         sleep(1)
         button.select_input_button(name)
         sleep(2)
@@ -445,14 +444,14 @@ class TestSButtonPage:
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         button.wait_for_loading_to_disappear()
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//i')
         eles = button.get_find_element_xpath(
             '(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             button.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//input')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//input')
         eles = button.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         assert len(eles) == 0
         assert not button.has_fail_message()
@@ -463,9 +462,9 @@ class TestSButtonPage:
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         button.wait_for_loading_to_disappear()
-        name = "Plan"
+        name = "Sy"
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//i')
         button.hover("包含")
         sleep(1)
         button.select_input_button(name)
@@ -481,10 +480,10 @@ class TestSButtonPage:
     def test_button_select4(self, login_to_button):
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        name = "Plan"
+        name = "F"
         button.wait_for_loading_to_disappear()
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//i')
         button.hover("符合开头")
         sleep(1)
         button.select_input_button(name)
@@ -501,9 +500,9 @@ class TestSButtonPage:
         driver = login_to_button  # WebDriver 实例
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         button.wait_for_loading_to_disappear()
-        name = "ss"
+        name = "d"
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//i')
         button.hover("符合结尾")
         sleep(1)
         button.select_input_button(name)
@@ -522,15 +521,15 @@ class TestSButtonPage:
         button.wait_for_loading_to_disappear()
         name = "3"
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//i')
         button.hover("包含")
         sleep(1)
         button.select_input_button(name)
         sleep(1)
-        button.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
+        button.click_button('//div[p[text()="按钮代码"]]/following-sibling::div//i')
         button.hover("清除所有筛选条件")
         sleep(1)
-        ele = button.get_find_element_xpath('//div[div[span[text()=" 键"]]]/div[3]//i').get_attribute(
+        ele = button.get_find_element_xpath('//div[p[text()="按钮代码"]]/following-sibling::div//i').get_attribute(
             "class")
         assert ele == "vxe-icon-funnel suffixIcon"
         assert not button.has_fail_message()
@@ -542,14 +541,14 @@ class TestSButtonPage:
         button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         layout = "测试布局A"
         button.wait_for_loading_to_disappear()
-        value = ['Akey1','Akey2']
-        button.del_all(xpath='//div[div[span[text()=" 键"]]]/div[3]//input', value=value)
+        value = ['Abutton1','Abutton2']
+        button.del_all(xpath='//div[p[text()="按钮代码"]]/following-sibling::div//input', value=value)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:1]
         ]
         button.del_layout(layout)
-        sleep(2)
+        sleep(3)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
