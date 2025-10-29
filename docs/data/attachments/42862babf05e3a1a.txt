@@ -1,4 +1,0 @@
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="222"]]]/td[2]
-[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //tr[./td[2][.//span[text()="222"]]]/td[2] 未在 10 秒内变为可点击
-[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="222"]]]/td[2]
-[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //tr[./td[2][.//span[text()="222"]]]/td[2] 未在 10 秒内变为可点击
