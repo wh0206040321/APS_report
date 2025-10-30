@@ -1,7 +1,7 @@
 import random
 from time import sleep
 
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -56,7 +56,7 @@ class Calendar(BasePage):
             return None
 
     def get_find_message(self):
-        """获取错误信息"""
+        """获取正确信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
                 (By.XPATH, '//div[@class="el-message el-message--error"]/p')
@@ -168,4 +168,39 @@ class Calendar(BasePage):
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
             )
             return resource, shift
+
+    def del_layout(self, layout):
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+
+        try:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        except TimeoutException:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            )
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        sleep(2)
+        # 点击确认删除的按钮
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 

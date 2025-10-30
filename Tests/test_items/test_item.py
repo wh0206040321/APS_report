@@ -1077,12 +1077,11 @@ class TestItemPage:
         all_value = text_list + box_input_list + code_input_list + select_input_list + num_list + time_xpath_list
         len_num = len(all_value)
         before_all_value = adds.batch_acquisition_input(all_value)
-        item.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         driver.refresh()
-        sleep(5)
+        item.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
-        sleep(2)
+        sleep(1)
         item.enter_texts(
             '//p[text()="物料代码"]/ancestor::div[2]//input', input_value
         )

@@ -82,7 +82,7 @@ class ProcessPage(BasePage):
             '(//label[text()="显示顺序"])[1]/parent::div//input', f"{number}"
         )
         # 点击确定
-        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
     def add_layout(self, layout):
         """添加布局."""
@@ -160,7 +160,7 @@ class ProcessPage(BasePage):
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
     def add_input_all(self, name, num):
         """输入框全部输入保存"""
@@ -188,4 +188,4 @@ class ProcessPage(BasePage):
             if ele.get_attribute("class") == 'ivu-checkbox':
                 ele.click()
 
-            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')

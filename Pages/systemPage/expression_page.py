@@ -125,6 +125,15 @@ class ExpressionPage(BasePage):
         sleep(0.5)
         self.enter_texts(xpath, name)
 
+    def select_input_dictionary(self, name):
+        """选择输入框."""
+        xpath = '//div[div[span[text()=" 枚举值"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+
     def loop_judgment(self, xpath):
         """循环判断"""
         eles = self.finds_elements(By.XPATH, xpath)
@@ -229,4 +238,4 @@ class ExpressionPage(BasePage):
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')

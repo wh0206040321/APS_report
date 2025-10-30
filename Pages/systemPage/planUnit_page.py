@@ -77,7 +77,7 @@ class PlanUnitPage(BasePage):
 
     def click_confirm_button(self):
         """点击确认按钮."""
-        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])')
+        self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
 
     def click_all_button(self, name):
         """点击按钮."""
@@ -160,4 +160,4 @@ class PlanUnitPage(BasePage):
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')

@@ -41,13 +41,13 @@ class PsiPage(BasePage):
             self.click_button('//div[text()=" 标准登录 "]')
             ele = self.get_find_element_xpath('//span[text()="工作输入指令或工作输出指令"]')
             ActionChains(self.driver).double_click(ele).perform()
-            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         if method:
             self.click_button('(//div[p[text()="筛选方法: "]]//i)[2]')
             self.click_button('//div[text()=" 标准登录 "]')
             ele = self.get_find_element_xpath('//span[text()="分派结束"]')
             ActionChains(self.driver).double_click(ele).perform()
-            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
     def click_data(self, num="", name=""):
         if num == 1:
@@ -230,7 +230,7 @@ class PsiPage(BasePage):
                 print(f"操作 {xpath} 时出错: {str(e)}")
 
     def del_all(self, value=[]):
-        for index, v in enumerate(value, start=1):
+        for index, v in enumerate(value, start=0):
             try:
                 xpath = '//p[text()="PSI名称"]/ancestor::div[2]//input'
                 ele = self.get_find_element_xpath(xpath)

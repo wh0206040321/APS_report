@@ -94,7 +94,7 @@ class ImpPage(BasePage):
         """添加导入方案"""
         self.click_impall_button("新增")
         self.enter_texts('//div[label[text()="名称"]]//input', name)
-        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
     def copy_(self, name='', copy_name=''):
         """复制导入方案"""

@@ -81,7 +81,7 @@ class PersonalPage(BasePage):
         self.enter_text(By.XPATH, '//input[@placeholder="确认密码"]', confirm_password)
 
         # 确认密码修改
-        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
     def go_setting_page(self):
         """

@@ -172,7 +172,7 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
@@ -210,7 +210,7 @@ class TestMasterPage:
         # 获取物料名称
         master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
         random_int = random.randint(1, 4)
-        sleep(1)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
@@ -271,7 +271,7 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
@@ -318,6 +318,7 @@ class TestMasterPage:
             '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[5]//i',
         )
         random_int = random.randint(1, 8)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
@@ -469,7 +470,7 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
@@ -529,6 +530,7 @@ class TestMasterPage:
         # 点击对话框按钮 获取资源名称
         master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
         random_int = random.randint(1, 8)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
@@ -648,6 +650,7 @@ class TestMasterPage:
         )
         master.del_serial2()
         master.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        master.wait_for_loading_to_disappear()
         input_after = master.get_find_element_xpath(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input'
         ).get_attribute("value")

@@ -1,6 +1,7 @@
 import random
 from time import sleep
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
@@ -54,12 +55,42 @@ class Coverage(BasePage):
         except NoSuchElementException:
             return None
 
-    def get_error_message(self, xpath):
-        """获取错误消息元素，返回该元素。如果元素未找到，返回None。"""
-        try:
-            return self.find_element(By.XPATH, xpath)
-        except NoSuchElementException:
-            return None
+    def get_find_message(self):
+        """获取正确信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+            )
+        )
+        return message.text
+
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
+
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+            )
+        )
+
 
     def batch_modify_inputs(self, xpath_value_map: dict):
         """通过字典批量修改输入框（键为XPath，值为输入内容）"""
@@ -171,6 +202,6 @@ class Coverage(BasePage):
             selClass = self.get_find_element_xpath('//div[@class="checkBoxComp position-absolute"]/label/span').get_attribute("class")
 
             self.click_button(
-                '//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]'
+                '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
             )
             return resource, selClass, start, end

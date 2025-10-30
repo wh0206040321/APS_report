@@ -74,7 +74,7 @@ class TestCoveragePage:
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         ).text
         coverage.click_add_button()
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 资源
         resource_box = coverage.get_find_element_xpath(
@@ -133,7 +133,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -154,7 +154,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -175,7 +175,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -196,7 +196,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -217,7 +217,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         key_list = list(xpath_value_map.keys())
@@ -243,7 +243,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         value_list = add.batch_acquisition_input(xpath_list)
@@ -274,7 +274,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取表示顺序数字框
         value_list = add.batch_acquisition_input(xpath_list)
@@ -305,7 +305,7 @@ class TestCoveragePage:
         coverage.click_add_button()  # 检查点击添加
         # 输入文本
         add.batch_modify_inputs(xpath_value_map)
-        coverage.click_button('//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        coverage.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 获取当前时间
         current_time = datetime.now()
         # 格式化为 年/月/日 的字符串
@@ -369,7 +369,7 @@ class TestCoveragePage:
         coverage.enter_texts('//div[@id="luvfyssv-uxe2"]//input', name)
         sleep(1)
         coverage.click_button(
-            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         driver.execute_script("document.body.style.zoom='0.6'")
         sleep(1)
@@ -409,7 +409,7 @@ class TestCoveragePage:
                 and chronology == addchronology
                 and resources == addresources
                 and text_ == name
-                and num_ == '99999999999'
+                and num_ == '10000'
         )
         assert not coverage.has_fail_message()
 
@@ -434,11 +434,6 @@ class TestCoveragePage:
         coverage.click_button(
             '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
-        sleep(1)
-        # 获取勾选的资源代码
-        resource = coverage.get_find_element_xpath(
-            '//div[@id="2ssy7pog-1nb7"]//input'
-        ).get_attribute("value")
 
         coverage.enter_texts(f'//div[@id="9la8xi09-07ws"]//input', 3)
 
@@ -446,21 +441,26 @@ class TestCoveragePage:
         coverage.enter_texts(
             '//div[@id="tg89jocr-6to2"]//input', f"{start};{end}"
         )
-        chronology = coverage.get_find_element_xpath(
-            '//div[@id="tg89jocr-6to2"]//input'
-        ).get_attribute("value")
 
         # 资源量
         coverage.enter_texts('//div[@id="k0z05daz-8tok"]//input', "4")
+        sleep(1)
+        # 获取勾选的资源代码
+        resource = coverage.get_find_element_xpath(
+            '//div[@id="2ssy7pog-1nb7"]//input'
+        ).get_attribute("value")
+        chronology = coverage.get_find_element_xpath(
+            '//div[@id="tg89jocr-6to2"]//input'
+        ).get_attribute("value")
         resources = coverage.get_find_element_xpath(
             '//div[@id="k0z05daz-8tok"]//input'
         ).get_attribute("value")
 
         sleep(1)
         coverage.click_button(
-            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
+        coverage.wait_for_loading_to_disappear()
         coverage.click_button(
             '//span[text()=" 更新时间"]/following-sibling::div'
         )
@@ -644,7 +644,7 @@ class TestCoveragePage:
     def test_coverage_delall(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-        sleep(1)
+        coverage.wait_for_loading_to_disappear(coverage)
         coverage.click_button('//span[text()=" 更新时间"]/following-sibling::div')
         sleep(1)
         coverage.click_button('//span[text()=" 更新时间"]/following-sibling::div')
@@ -654,17 +654,8 @@ class TestCoveragePage:
         ).text
         coverage.click_button('(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]')
         coverage.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = coverage.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        coverage.get_find_message()
         sleep(1)
         coveragerdata = coverage.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
@@ -718,9 +709,9 @@ class TestCoveragePage:
 
         sleep(1)
         coverage.click_button(
-            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
+        coverage.wait_for_loading_to_disappear()
         coverage.click_button(
             '//span[text()=" 更新时间"]/following-sibling::div'
         )
@@ -797,9 +788,9 @@ class TestCoveragePage:
 
         sleep(1)
         coverage.click_button(
-            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
+        coverage.wait_for_loading_to_disappear()
         coverage.click_button(
             '//span[text()=" 更新时间"]/following-sibling::div'
         )
@@ -862,7 +853,7 @@ class TestCoveragePage:
     def test_coverage_refreshsuccess(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-        sleep(3)
+        coverage.wait_for_loading_to_disappear()
         # 覆盖日历筛选框输入123
         coverage.enter_texts(
             '//div[span[text()=" 资源代码"]]/following-sibling::div//input',
@@ -929,7 +920,7 @@ class TestCoveragePage:
     def test_coverage_editcodesuccess(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-        sleep(3)
+        coverage.wait_for_loading_to_disappear()
         # 定位第一行
         coverage.click_button(
             '(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]'
@@ -954,9 +945,9 @@ class TestCoveragePage:
         ).get_attribute("value")
 
         coverage.click_button(
-            '(//div[@class="h-40px flex-justify-end vxe-modal-footer1 flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
+        coverage.wait_for_loading_to_disappear()
         coverage.click_button(
             '//span[text()=" 更新时间"]/following-sibling::div'
         )
@@ -976,7 +967,7 @@ class TestCoveragePage:
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
         layout = "测试布局A"
-        sleep(3)
+        coverage.wait_for_loading_to_disappear()
         # 定位第一行
         coverage.click_button(
             '(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]'
@@ -986,7 +977,7 @@ class TestCoveragePage:
         ).text
         coverage.click_del_button()  # 点击删除
         coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        # 定位第一行
+        coverage.get_find_message()
         sleep(1)
         coveragedata = coverage.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'

@@ -163,6 +163,7 @@ class SynchronizePage(BasePage):
             ele.send_keys(Keys.CONTROL, 'a')
             ele.send_keys(Keys.DELETE)
             self.enter_texts(input_xpath, value)
+            sleep(1)
             self.click_button(click_xpath)
         except NoSuchElementException:
             print(f"未找到元素: {value}")

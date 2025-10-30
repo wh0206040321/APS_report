@@ -106,7 +106,7 @@ class SchedPage(BasePage):
 
     def get_after_value(self, name):
         """获取保存之后的值"""
-        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])[1]')
+        self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[1]')
         self.click_save_button()
         self.get_find_message()
         self.driver.refresh()

@@ -353,6 +353,8 @@ class TestSettingPage:
 
         setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+        setting.get_find_message()
+        setting.wait_for_loading_to_disappear()
         sleep(1)
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

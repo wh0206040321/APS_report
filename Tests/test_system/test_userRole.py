@@ -907,6 +907,7 @@ class TestUserRolePage:
             EC.invisibility_of_element_located((By.XPATH, "//div[@class='el-loading-mask']"))
         )
         user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name)
+        sleep(1)
         user.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name}"]')
         user.click_all_button("删除")
         user.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')

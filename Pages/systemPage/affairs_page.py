@@ -217,7 +217,7 @@ class AffairsPage(BasePage):
             self.click_button(f'//span[text()="{type}"]')
             self.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
         if button:
-            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
     def get_border_color(self, xpath_list=[], text_value=""):
         """获取边框颜色"""

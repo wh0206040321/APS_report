@@ -130,7 +130,7 @@ class AppsPage(BasePage):
         self.click_button('//div[@class="d-flex m-l--7 "]/div[2]')
         self.enter_texts('//div[label[text()="名称"]]//input[@placeholder="请输入"]', name)
         if button:
-            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         try:
             self.get_find_message()
         except TimeoutException:
@@ -249,4 +249,4 @@ class AppsPage(BasePage):
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')

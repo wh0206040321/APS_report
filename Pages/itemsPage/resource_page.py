@@ -123,7 +123,7 @@ class ResourcePage(BasePage):
         self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
     def del_all(self, value=[], xpath=""):
-        for index, v in enumerate(value, start=1):
+        for index, v in enumerate(value, start=0):
             try:
                 ele = self.get_find_element_xpath(xpath)
                 ele.send_keys(Keys.CONTROL, "a")
@@ -163,4 +163,4 @@ class ResourcePage(BasePage):
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')

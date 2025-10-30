@@ -1034,7 +1034,7 @@ class TestCustomerPage:
         customer.del_all(value)
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:3]
+            for v in value[:4]
         ]
         customer.del_layout(layout)
         sleep(2)

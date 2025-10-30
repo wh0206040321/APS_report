@@ -236,6 +236,7 @@ class AddsPages(BasePage):
                 '(//div[@class="vxe-table--fixed-left-wrapper"])[2]//table[@class="vxe-table--body"]//tr[last()]//div').text
         sleep(0.5)
         self.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()
         return num
 
     def batch_order_time_input(self, xpath_list=[]):

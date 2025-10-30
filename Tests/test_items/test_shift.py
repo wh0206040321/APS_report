@@ -233,11 +233,8 @@ class TestShiftPage:
         shift.click_button(
             '//label[text()="时间"]/ancestor::div[1]//div[@class="left"]/parent::div/div[2]/button'
         )
-        data = driver.find_elements(
-            By.XPATH,
-            '(//span[text()="时间"])[2]/ancestor::table/parent::div/parent::div/div[2]/table//tr[1]',
-        )
-        assert len(data) == 0
+        message = shift.get_error_message()
+        assert message == "开始时间不能大于、等于结束时间"
         assert not shift.has_fail_message()
 
     @allure.story("第一个时间数字框不允许超过第二个时间数字框  添加成功")
@@ -283,7 +280,7 @@ class TestShiftPage:
         )
 
         data = shift.get_find_element_xpath(
-            '(//span[text()="时间"])[1]/ancestor::table/parent::div/parent::div/div[2]/table//tr[1]//td[1]'
+            '//table[@class="vxe-table--body"]//tr[td[3]//button]/td[1]'
         )
         assert data.text == "1"
         assert not shift.has_fail_message()
@@ -316,8 +313,7 @@ class TestShiftPage:
         # 输入班次代码
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', num)
         # 点击确定
-        shift.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        shift.click_confirm()
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{num}"])[1]/ancestor::tr[1]/td[2]'
         )
@@ -334,7 +330,7 @@ class TestShiftPage:
         # 输入班次代码
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', {name})
         # 点击确定
-        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        shift.click_confirm()
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         )
@@ -431,7 +427,7 @@ class TestShiftPage:
         ).text
 
         # 点击确定
-        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        shift.click_confirm()
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[3]'
         ).text
@@ -479,8 +475,7 @@ class TestShiftPage:
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', f"{text}")
         # 点击确定
-        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        shift.click_confirm()
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath(
             f'(//span[contains(text(),"{name}")])[1]'
@@ -501,8 +496,7 @@ class TestShiftPage:
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
         # 点击确定
-        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        shift.click_confirm()
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath('(//span[text()="1测试A"])[1]').text
         assert shiftdata == name, f"预期{shiftdata}"
@@ -584,8 +578,7 @@ class TestShiftPage:
         ).text
 
         # 点击确定
-        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        shift.click_confirm()
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[3]'
         ).text
@@ -615,8 +608,7 @@ class TestShiftPage:
             '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
         ).text
         # 点击确定
-        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        shift.click_confirm()
         shiftautoGenerateFlag = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr/td[4]/div'
         ).text
@@ -799,7 +791,7 @@ class TestShiftPage:
         shift.del_all(value)
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:3]
+            for v in value[:4]
         ]
         shift.del_layout(layout)
         sleep(2)

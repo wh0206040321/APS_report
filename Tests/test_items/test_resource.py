@@ -1110,7 +1110,7 @@ class TestResourcePage:
         resource.del_all(value, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:3]
+            for v in value[:4]
         ]
         resource.del_loyout(layout)
         sleep(2)

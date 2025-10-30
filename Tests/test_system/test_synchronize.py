@@ -390,7 +390,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -416,7 +416,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -443,7 +443,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -480,7 +480,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -509,7 +509,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')
@@ -519,7 +519,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         assert message == "同步成功"
@@ -538,8 +538,12 @@ class TestSynchronizePage:
         user = UserRolePage(driver)
         username = DateDriver().username
         synchronize.click_button('(//span[text()="PSI设置"])[1]')
+        sleep(1)
         psi_name = ["1测试psi1", "1测试psi2", "1测试psi3"]
         psi.del_all(psi_name)
+        for v in psi_name:
+            eles = synchronize.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{v}"]')
+            assert len(eles) == 0, f"未删除{v}"
 
         plan_list =["计划运行", "方案管理", "计划方案管理"]
 
@@ -551,6 +555,9 @@ class TestSynchronizePage:
             "排产方案(订单级)同步3",
         ]
         sched.del_all_sched(plan_name)
+        for v in plan_name:
+            eles = synchronize.finds_elements(By.XPATH, f'(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="{v}"]')
+            assert len(eles) == 0, f"未删除{v}"
 
         import_list = ["数据接口底座", "DBLinK", "导入设置"]
         import_name = [
@@ -561,7 +568,14 @@ class TestSynchronizePage:
         for v in import_list:
             synchronize.click_button(f'(//span[text()="{v}"])[1]')
         imp.del_all(import_name)
-        sleep(1)
+        imp.click_button(
+            '//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]')
+        for v in import_list:
+            eles = synchronize.finds_elements(By.XPATH,
+                                              f'(//ul[@class="ivu-select-dropdown-list"])[1]/li[text()="{v}"]')
+            assert len(eles) == 0, f"未删除{v}"
+        imp.click_button(
+            '//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]')
 
         role_list = ["系统管理", "系统设置", "用户权限管理"]
         for v in role_list:
@@ -606,6 +620,7 @@ class TestSynchronizePage:
             synchronize.click_button(f'(//span[text()="{v}"])[1]')
         unit.right_refresh()
         unit.del_all(unit_name)
+        unit.get_find_message()
         ele = synchronize.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not synchronize.has_fail_message()

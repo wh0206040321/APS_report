@@ -1,36 +1,19 @@
 from time import sleep
+from datetime import datetime
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.base_page import BasePage
+from Pages.itemsPage.adds_page import AddsPages
 
 
-class ChangeR(BasePage):
+class OtherPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
-
-    def click_add_button(self):
-        """点击添加按钮."""
-        self.click(By.XPATH, '//p[text()="新增"]')
-
-    def click_edi_button(self):
-        """点击修改按钮."""
-        self.click(By.XPATH, '//p[text()="编辑"]')
-
-    def click_del_button(self):
-        """点击删除按钮."""
-        self.click(By.XPATH, '//p[text()="删除"]')
-
-    def click_sel_button(self):
-        """点击查询按钮."""
-        self.click(By.XPATH, '//p[text()="查询"]')
-
-    def click_ref_button(self):
-        """点击刷新按钮."""
-        self.click(By.XPATH, '//p[text()="刷新"]')
 
     def enter_texts(self, xpath, text):
         """输入文字."""
@@ -44,13 +27,6 @@ class ChangeR(BasePage):
         """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
         try:
             return self.find_element(By.XPATH, xpath)
-        except NoSuchElementException:
-            return None
-
-    def get_find_element_class(self, classname):
-        """获取用户头像元素，返回该元素。如果元素未找到，返回None。"""
-        try:
-            return self.find_element(By.CLASS_NAME, classname)
         except NoSuchElementException:
             return None
 
@@ -72,22 +48,16 @@ class ChangeR(BasePage):
         )
         return message.text
 
-    def del_data(self):
-        self.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
-        sleep(1)
-        self.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
-        # 定位第一行
-        self.click_button(
-            '//table[@class="vxe-table--body"]//tr[1]/td[2]'
-        )
-        self.click_del_button()  # 点击删除
-        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+    def right_refresh(self, name):
+        """右键刷新."""
+        but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
+        but.click()
+        # 右键点击
+        ActionChains(self.driver).context_click(but).perform()
+        self.click_button('//li[text()=" 刷新"]')
         self.wait_for_loading_to_disappear()
 
+    # 等待加载遮罩消失
     def wait_for_loading_to_disappear(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
@@ -101,10 +71,92 @@ class ChangeR(BasePage):
         """
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located(
-                (By.XPATH,
-                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+                (By.XPATH, '//div[contains(@class, "el-loading-mask") and not(contains(@style, "display: none"))]')
             )
         )
+        sleep(1)
+
+    def click_all_button(self, name):
+        """点击按钮."""
+        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
+
+    def select_input(self, name):
+        """选择输入框."""
+        xpath = '//div[div[p[text()="名称"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
+
+    def hover(self, name=""):
+        # 悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//span[@class="position-absolute font12 right10"]'
+        )
+        ActionChains(self.driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//ul/li[contains(text(),"{name}")]'
+            ))
+        )
+        # 3️⃣ 再点击图标
+        delete_icon.click()
+
+    def click_confirm(self):
+        """点击确定"""
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+
+    def click_registration_button(self, download_button='', value=''):
+        """点击注册按钮"""
+        self.click_button('//button[span[text()="注册"]]')
+        if download_button:
+            self.click_button('//button[span[text()="下载申请文件"]]')
+        if value:
+            self.enter_texts('//textarea[@placeholder="请输入"]', value)
+        self.click_confirm()
+
+    def click_encryption_decryption(self, encryption_value='', decryption_value='', key=''):
+        """点击加密解密按钮"""
+        if encryption_value:
+            self.enter_texts('//div[label[text()="加密内容"]]//input', encryption_value)
+            self.enter_texts('(//div[label[text()="密钥"]])[1]//input', key)
+            self.click_button('//button[span[text()="加密"]]')
+        if decryption_value:
+            self.enter_texts('//div[label[text()="解密内容"]]//input', decryption_value)
+            self.enter_texts('(//div[label[text()="密钥"]])[2]//input', key)
+            self.click_button('//button[span[text()="解密"]]')
+
+    def click_modeldesign_button(self, name):
+        """点击模型设计按钮"""
+        self.click_button(f'//header[@class="el-header"]//p[text()="{name}"]')
+
+    def del_all(self, xpath, value=[]):
+        for index, v in enumerate(value, start=1):
+            try:
+                sleep(1)
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                sleep(0.5)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+                self.click_all_button("删除")  # 点击删除
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+                sleep(1)
+            except NoSuchElementException:
+                print(f"未找到元素: {v}")
+            except Exception as e:
+                print(f"操作 {v} 时出错: {str(e)}")
 
     def add_layout(self, layout):
         """添加布局."""
@@ -134,10 +186,10 @@ class ChangeR(BasePage):
         if checkbox2.get_attribute("class") == "ivu-checkbox":
             # 如果未选中，则点击复选框进行选中
             self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
-            # 点击确定按钮保存设置
-            self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
+
+        try:
+            self.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+        except:
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
     def del_layout(self, layout):
@@ -158,17 +210,9 @@ class ChangeR(BasePage):
         index = all_children.index(target_div)
         print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
 
-        try:
-            self.click_button(
-                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-            )
-        except TimeoutException:
-            self.click_button(
-                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-            )
-            self.click_button(
-                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-            )
+        self.click_button(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+        )
         # 根据目标 div 的位置，点击对应的“删除布局”按钮
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)

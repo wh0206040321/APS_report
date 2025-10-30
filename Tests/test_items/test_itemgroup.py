@@ -227,9 +227,7 @@ class TestItemGroupPage:
         item.add_test_item_group(name)
         item.enter_texts('(//label[text()="物料优先度"])[1]/parent::div//input', name)
         # 点击确定
-        item.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         adddata = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -253,8 +251,7 @@ class TestItemGroupPage:
         ele.send_keys(Keys.DELETE)
         ele.send_keys("70")
         # 点击确定
-        item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         adddata = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -310,8 +307,7 @@ class TestItemGroupPage:
         name = "1测试A"
         item.add_test_item_group(name)
         # 点击确定
-        item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         adddata = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -359,8 +355,7 @@ class TestItemGroupPage:
             '(//label[text()="物料组代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         # 定位表格内容
         itemdata = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
@@ -381,8 +376,7 @@ class TestItemGroupPage:
         # 物料组代码输入
         item.enter_texts('(//label[text()="物料组代码"])[1]/parent::div//input', name)
         # 点击确定
-        item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         # 定位表格内容
         itemdata = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
@@ -446,10 +440,7 @@ class TestItemGroupPage:
             '(//label[text()="关联条件"])[1]/parent::div//input'
         ).get_attribute("value")
         # 点击确定
-        item.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
-        sleep(1)
+        item.click_confirm()
         # 定位表格内容
         itemname = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[3]/div'
@@ -1084,13 +1075,11 @@ class TestItemGroupPage:
         all_value = text_list + box_input_list + code_input_list + select_input_list + num_list + time_xpath_list
         len_num = len(all_value)
         before_all_value = adds.batch_acquisition_input(all_value)
-        item.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        sleep(1)
+        item.click_confirm()
         driver.refresh()
-        sleep(4)
+        item.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
-        sleep(2)
+        sleep(1)
         item.enter_texts(
             '//p[text()="物料组代码"]/ancestor::div[2]//input', input_value
         )
@@ -1121,7 +1110,7 @@ class TestItemGroupPage:
         item.del_all(value, xpath='//p[text()="物料组代码"]/ancestor::div[2]//input')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:3]
+            for v in value[:4]
         ]
         item.del_layout(layout)
         sleep(2)

@@ -75,7 +75,7 @@ class CustomerPage(BasePage):
 
     def click_confirm_button(self):
         """点击确认按钮."""
-        self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
 
     def add_test_data(self, name):
@@ -175,7 +175,7 @@ class CustomerPage(BasePage):
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        self.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
     def add_input_all(self, name, num):
         """输入框全部输入保存"""
@@ -210,4 +210,4 @@ class CustomerPage(BasePage):
                         value = str(num)  # 假设 num 是数字，转为字符串
                         self.enter_texts(xpath, value)
 
-            self.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')

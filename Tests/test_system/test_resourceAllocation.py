@@ -270,9 +270,10 @@ class TestResourceAllocationPage:
         for v in list_:
             allocation.click_button(f'(//span[text()="{v}"])[1]')
         resource_ = ['1测试资源同步数据1', '1测试资源同步数据2']
-        resource.del_all(resource_, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
+        sleep(1)
+        resource.del_all(value=resource_, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
 
-        role_list = ["系统管理", "系统设置", "用户权限管理"]
+        role_list = ["系统管理", "系统设置"]
         for v in role_list:
             allocation.click_button(f'(//span[text()="{v}"])[1]')
 
@@ -283,12 +284,11 @@ class TestResourceAllocationPage:
             eles = user.finds_elements(By.XPATH, xpath)
             assert len(eles) == 0, f"用户 {name} 未成功删除"
 
-        role_list = ["系统设置", "角色管理"]
+        role_list = ["角色管理"]
         role_name = [
             "1测试角色代码1",
         ]
         for v in role_list:
-            sleep(1)
             allocation.click_button(f'(//span[text()="{v}"])[1]')
         role.del_all(role_name)
 
