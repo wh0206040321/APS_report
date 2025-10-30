@@ -1,0 +1,6 @@
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex1"]/input
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[@class="ivu-select-head-flex1"]/input 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1920307333872
+[32mINFO    [0m root:base_page.py:43 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex1"]/input
+[33mWARNING [0m root:base_page.py:49 ❌ 点击超时：元素 xpath = //div[@class="ivu-select-head-flex1"]/input 未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1920305080416
