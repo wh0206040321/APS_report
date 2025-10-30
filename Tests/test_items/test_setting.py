@@ -19,37 +19,41 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_setting():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    # 初始化 driver
-    driver = create_driver(date_driver.driver_path)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        # 初始化 driver
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
-    page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
-    page.click_button('(//span[text()="物品"])[1]')  # 点击物品
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
+        page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
+        page.click_button('(//span[text()="物品"])[1]')  # 点击物品
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("标准应用设置测试用例")
@@ -1314,7 +1318,7 @@ class TestSettingPage:
         setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         setting.wait_for_loading_to_disappear()
         # 等待一段时间，确保删除操作完成
         sleep(1)
@@ -1482,7 +1486,7 @@ class TestSettingPage:
         setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
         # 点击确认删除的按钮
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         # 等待一段时间，确保删除操作完成
         sleep(1)
 
@@ -2182,7 +2186,7 @@ class TestSettingPage:
 
         sleep(2)
         setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)
@@ -2221,7 +2225,7 @@ class TestSettingPage:
 
         sleep(2)
         setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(2)
@@ -2364,7 +2368,7 @@ class TestSettingPage:
         setting.hover(first_long_name)
         setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(1)
-        setting.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
+        setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)

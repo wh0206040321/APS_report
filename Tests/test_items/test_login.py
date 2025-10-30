@@ -10,17 +10,20 @@ from Utils.driver_manager import create_driver, safe_quit
 
 @pytest.fixture
 def login_pa():
-    """初始化并返回 LoginPage 对象"""
-    date_driver = DateDriver()
-    driver = create_driver(date_driver.driver_path)
+    driver = None
+    try:
+        """初始化并返回 LoginPage 对象"""
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path)
 
-    # 初始化页面
-    page = LoginPage(driver)
-    page.navigate_to(date_driver.url)
+        # 初始化页面
+        page = LoginPage(driver)
+        page.navigate_to(date_driver.url)
 
-    yield page
-
-    safe_quit(driver)
+        yield page
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("登录页面测试用例")

@@ -21,37 +21,41 @@ from Utils.shared_data_util import SharedDataUtil
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_changeR():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    # 初始化 driver
-    driver = create_driver(date_driver.driver_path)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        # 初始化 driver
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
-    page.click_button('(//span[text()="计划切换定义"])[1]')  # 点击计划切换定义
-    page.click_button('(//span[text()="资源切换"])[1]')  # 点击资源切换
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
+        page.click_button('(//span[text()="计划切换定义"])[1]')  # 点击计划切换定义
+        page.click_button('(//span[text()="资源切换"])[1]')  # 点击资源切换
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("资源切换表测试用例")
@@ -482,7 +486,7 @@ class TestChangeRPage:
         )
         # 勾选框
         random_int = random.randint(1, 6)
-        sleep(1)
+        sleep(2)
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         sleep(1)
         change.click_button(
@@ -501,7 +505,7 @@ class TestChangeRPage:
         change.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
-
+        sleep(2)
         # 获取勾选的资源
         resource = change.get_find_element_xpath(
             '(//label[text()="资源"])[1]/parent::div//input'
@@ -528,7 +532,6 @@ class TestChangeRPage:
         change.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )
-
         # 保存数据
         SharedDataUtil.save_data(
             {"resource": resource, "item1": item1, "item2": item2}
@@ -548,7 +551,7 @@ class TestChangeRPage:
 
     @allure.story("添加数据重复")
     # @pytest.mark.run(order=1)
-    def test_changeR_addrepe(self, login_to_changeR):
+    def test_changeR_addrepeat(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         code1 = SharedDataUtil.load_data().get("resource")
@@ -1070,44 +1073,12 @@ class TestChangeRPage:
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
         layout = "测试布局A"
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = changeR.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        )
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = changeR.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
-        )
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+        changeR.del_layout(layout)
         sleep(2)
-        try:
-            changeR.click_button(
-                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-            )
-        except TimeoutException:
-            changeR.click_button(
-                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-            )
-            changeR.click_button(
-                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-            )
-        # 根据目标 div 的位置，点击对应的“删除布局”按钮
-        changeR.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        sleep(2)
-        # 点击确认删除的按钮
-        changeR.click_button('//button[@class="ivu-btn ivu-btn-primary ivu-btn-large"]')
-        # 等待一段时间，确保删除操作完成
-        sleep(1)
-
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
+        assert 0 == len(after_layout)
         assert 0 == len(after_layout)
         assert not changeR.has_fail_message()

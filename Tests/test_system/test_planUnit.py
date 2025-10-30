@@ -25,45 +25,49 @@ import os
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_planUnit():
-    """初始化并返回 driver"""
-    download_path = os.path.abspath("downloads")
-    os.makedirs(download_path, exist_ok=True)
-    options = Options()
-    options.add_argument("--allow-running-insecure-content")
-    options.add_experimental_option("prefs", {
-        "download.prompt_for_download": False,
-        "download.default_directory": download_path,
-        "safebrowsing.enabled": False
-    })
-    date_driver = DateDriver()
-    driver = create_driver(date_driver.driver_path, options)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        download_path = os.path.abspath("downloads")
+        os.makedirs(download_path, exist_ok=True)
+        options = Options()
+        options.add_argument("--allow-running-insecure-content")
+        options.add_experimental_option("prefs", {
+            "download.prompt_for_download": False,
+            "download.default_directory": download_path,
+            "safebrowsing.enabled": False
+        })
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path, options)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    list_ = ["系统管理", "系统设置", "计划单元"]
-    for v in list_:
-        page.click_button(f'(//span[text()="{v}"])[1]')
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        list_ = ["系统管理", "系统设置", "计划单元"]
+        for v in list_:
+            page.click_button(f'(//span[text()="{v}"])[1]')
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("计划单元页用例")
@@ -89,7 +93,7 @@ class TestPlanUnitPage:
             '(//label[text()="计划单元名称"])[1]/parent::div//input',
             '(//label[text()="模板名称"])[1]/parent::div//div[@class="ivu-select-selection"]',
         ]
-        unit.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])')
+        unit.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         sleep(1)
         value_list = add.get_border_color(list_)
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
@@ -112,7 +116,7 @@ class TestPlanUnitPage:
         ]
         unit.enter_texts('(//label[text()="计划单元"])[1]/parent::div//input', name)
         unit.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])')
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         sleep(1)
         value_list = add.get_border_color(list_)
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
@@ -134,7 +138,7 @@ class TestPlanUnitPage:
         unit.enter_texts('(//label[text()="计划单元"])[1]/parent::div//input', name)
         unit.enter_texts('(//label[text()="计划单元名称"])[1]/parent::div//input', name)
         unit.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])')
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         sleep(1)
         value_list = add.get_border_color(list_)
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
@@ -196,7 +200,7 @@ class TestPlanUnitPage:
         module = "标准"
         unit.add_plan_unit(name, module)
         unit.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"])')
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         ele = unit.finds_elements(By.XPATH, '//div[text()=" 记录已存在,请检查！ "]')
         assert len(ele) == 1
         assert not unit.has_fail_message()

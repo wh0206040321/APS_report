@@ -19,41 +19,45 @@ from Utils.shared_data_util import SharedDataUtil
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_personal():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    driver = create_driver(date_driver.driver_path)
-    shared_data = SharedDataUtil.load_data()
-    password = shared_data.get("password")
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path)
+        shared_data = SharedDataUtil.load_data()
+        password = shared_data.get("password")
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    logging.info(f"[INFO] 正在导航到 URL: {url}")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        logging.info(f"[INFO] 正在导航到 URL: {url}")
 
-    # 🔁 添加重试机制（最多 3 次）
-    for attempt in range(3):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_attempt_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次导航失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("导航失败多次，中止测试")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
-    page.enter_username(date_driver.username)
-    if password is not None:
-        page.enter_password(password)
-    else:
-        page.enter_password(date_driver.password)
-    page.select_planning_unit(date_driver.planning)
-    page.click_login_button()
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        # 🔁 添加重试机制（最多 3 次）
+        for attempt in range(3):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_attempt_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次导航失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("导航失败多次，中止测试")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
+        page.enter_username(date_driver.username)
+        if password is not None:
+            page.enter_password(password)
+        else:
+            page.enter_password(date_driver.password)
+        page.select_planning_unit(date_driver.planning)
+        page.click_login_button()
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("个人设置测试用例")

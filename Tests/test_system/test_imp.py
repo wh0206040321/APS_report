@@ -23,36 +23,40 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_imp():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    driver = create_driver(date_driver.driver_path)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    list_ = ["数据接口底座", "DBLinK", "导入设置"]
-    for v in list_:
-        page.click_button(f'(//span[text()="{v}"])[1]')
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        list_ = ["数据接口底座", "DBLinK", "导入设置"]
+        for v in list_:
+            page.click_button(f'(//span[text()="{v}"])[1]')
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("导入设置页用例")
@@ -65,7 +69,7 @@ class TestImpPage:
         driver = login_to_imp  # WebDriver 实例
         imp = ImpPage(driver)  # 用 driver 初始化 ImpPage
         imp.click_impall_button("新增")
-        imp.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        imp.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         message = imp.get_error_message()
         assert message == "请输入方案且不能与其他方案相同"
         assert not imp.has_fail_message()
@@ -142,7 +146,7 @@ class TestImpPage:
         ActionChains(driver).context_click(ele).perform()
         imp.click_button('//li[text()="映射编辑"]')
         sleep(1)
-        imp.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        imp.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         imp.click_impall_button("保存")
         message = imp.get_find_message()
         eles = imp.finds_elements(By.XPATH, f'//ul[@class="ivu-tree-children"]//span[@class="valueSpan" and text()="{kh}"]')
@@ -185,7 +189,7 @@ class TestImpPage:
         imp.click_button('//li[text()="映射编辑"]')
         sleep(1)
         imp.click_button(
-            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         imp.click_impall_button("保存")
         message = imp.get_find_message()
         imp.click_button('//span[text()=" 执行方案"]')

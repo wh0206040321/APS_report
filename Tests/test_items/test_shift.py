@@ -20,37 +20,41 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_shift():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    # 初始化 driver
-    driver = create_driver(date_driver.driver_path)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        # 初始化 driver
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
-    page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
-    page.click_button('(//span[text()="班次"])[1]')  # 点击班次
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
+        page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
+        page.click_button('(//span[text()="班次"])[1]')  # 点击班次
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("班次表测试用例")
@@ -74,7 +78,7 @@ class TestShiftPage:
             '(//label[text()="代码"])[1]/parent::div//input'
         )
 
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -313,7 +317,7 @@ class TestShiftPage:
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', num)
         # 点击确定
         shift.click_button(
-            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{num}"])[1]/ancestor::tr[1]/td[2]'
         )
@@ -330,7 +334,7 @@ class TestShiftPage:
         # 输入班次代码
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', {name})
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         )
@@ -347,7 +351,7 @@ class TestShiftPage:
         # 输入班次代码
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 等待弹窗出现（最多等10秒）
         error_popup = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(
@@ -427,7 +431,7 @@ class TestShiftPage:
         ).text
 
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[3]'
         ).text
@@ -448,7 +452,7 @@ class TestShiftPage:
         sleep(1)
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 等待弹窗出现（最多等10秒）
         error_popup = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(
@@ -475,7 +479,7 @@ class TestShiftPage:
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', f"{text}")
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath(
@@ -497,7 +501,7 @@ class TestShiftPage:
         # 班次代码输入
         shift.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         shiftdata = shift.get_find_element_xpath('(//span[text()="1测试A"])[1]').text
@@ -580,7 +584,7 @@ class TestShiftPage:
         ).text
 
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         adddata = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[3]'
@@ -611,7 +615,7 @@ class TestShiftPage:
             '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
         ).text
         # 点击确定
-        shift.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        shift.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         shiftautoGenerateFlag = shift.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr/td[4]/div'

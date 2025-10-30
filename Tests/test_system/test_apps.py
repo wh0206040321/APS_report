@@ -21,36 +21,40 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_apps():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    driver = create_driver(date_driver.driver_path)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    list_ = ["系统管理", "系统设置", "应用管理"]
-    for v in list_:
-        page.click_button(f'(//span[text()="{v}"])[1]')
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        list_ = ["系统管理", "系统设置", "应用管理"]
+        for v in list_:
+            page.click_button(f'(//span[text()="{v}"])[1]')
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("应用管理页用例")
@@ -213,7 +217,7 @@ class TestSAppsPage:
             f'//div[label[text()="名称"]]//input[@placeholder="请输入"]'
         ).get_attribute("value")
         apps.enter_texts('//div[label[text()="名称"]]//input[@placeholder="请输入"]', afert_name)
-        apps.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         num = apps.get_template_num(afert_name)
         assert before_name1 == before_name
         assert num == 1

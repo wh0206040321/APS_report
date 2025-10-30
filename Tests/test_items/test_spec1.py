@@ -20,37 +20,41 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 @pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_spec1():
-    """初始化并返回 driver"""
-    date_driver = DateDriver()
-    # 初始化 driver
-    driver = create_driver(date_driver.driver_path)
-    driver.implicitly_wait(3)
+    driver = None
+    try:
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        # 初始化 driver
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
 
-    # 初始化登录页面
-    page = LoginPage(driver)  # 初始化登录页面
-    url = date_driver.url
-    print(f"[INFO] 正在导航到 URL: {url}")
-    # 尝试访问 URL，捕获连接错误
-    for attempt in range(2):
-        try:
-            page.navigate_to(url)
-            break
-        except WebDriverException as e:
-            capture_screenshot(driver, f"login_fail_{attempt + 1}")
-            logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
-            driver.refresh()
-            sleep(date_driver.URL_RETRY_WAIT)
-    else:
-        logging.error("连接失败多次，测试中止")
-        safe_quit(driver)
-        raise RuntimeError("无法连接到登录页面")
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        url = date_driver.url
+        print(f"[INFO] 正在导航到 URL: {url}")
+        # 尝试访问 URL，捕获连接错误
+        for attempt in range(2):
+            try:
+                page.navigate_to(url)
+                break
+            except WebDriverException as e:
+                capture_screenshot(driver, f"login_fail_{attempt + 1}")
+                logging.warning(f"第 {attempt + 1} 次连接失败: {e}")
+                driver.refresh()
+                sleep(date_driver.URL_RETRY_WAIT)
+        else:
+            logging.error("连接失败多次，测试中止")
+            safe_quit(driver)
+            raise RuntimeError("无法连接到登录页面")
 
-    page.login(date_driver.username, date_driver.password, date_driver.planning)
-    page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
-    page.click_button('(//span[text()="计划生产特征"])[1]')  # 点击计划生产特征
-    page.click_button('(//span[text()="生产特征1"])[1]')  # 点击生产特征1
-    yield driver  # 提供给测试用例使用
-    safe_quit(driver)
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
+        page.click_button('(//span[text()="计划生产特征"])[1]')  # 点击计划生产特征
+        page.click_button('(//span[text()="生产特征1"])[1]')  # 点击生产特征1
+        yield driver  # 提供给测试用例使用
+    finally:
+        if driver:
+            safe_quit(driver)
 
 
 @allure.feature("生产特征表测试用例")
@@ -71,7 +75,7 @@ class TestSpecPage:
         input_box = spec.get_find_element_xpath(
             '(//label[text()="代码"])[1]/parent::div//input'
         )
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
@@ -132,7 +136,7 @@ class TestSpecPage:
         spec.enter_texts('(//label[text()="显示顺序"])[1]/parent::div//input', name)
         # 点击确定
         spec.click_button(
-            '//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
@@ -151,7 +155,7 @@ class TestSpecPage:
         name = "111"
         spec.add_test_data(name)
         # 点击确定
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
@@ -169,7 +173,7 @@ class TestSpecPage:
         spec.click_add_button()  # 检查点击添加
 
         # 点击确定
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -218,7 +222,7 @@ class TestSpecPage:
             '(//label[text()="显示顺序"])[1]/parent::div//input', "20"
         )
         # 点击确定
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
@@ -239,7 +243,7 @@ class TestSpecPage:
         # 物料代码输入111
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
@@ -267,7 +271,7 @@ class TestSpecPage:
             '(//label[text()="代码"])[1]/parent::div//input', f"{text}"
         )
         # 点击确定
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(3)
         # 定位表格内容
         specdata = spec.get_find_element_xpath(
@@ -289,7 +293,7 @@ class TestSpecPage:
         # 代码输入
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
         # 点击确定
-        spec.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="确定"]')
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         specdata = spec.get_find_element_xpath(
