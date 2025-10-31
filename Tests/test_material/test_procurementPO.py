@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.login_page import LoginPage
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -130,6 +130,15 @@ class TestItemPage:
     @allure.story("添加采购PO信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
     def test_warehouselocation_addfail(self, login_to_item):
+        sleep(3)
+        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+        if len(find_layout) == 0:
+            layout = "测试布局A"
+            self.item.add_layout(layout)
+            # 获取布局名称的文本元素
+            name = self.item.get_find_element_xpath(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            ).text
         # 点击新增按钮
         self.item.click_add_button()
         # # 清空数字输入框
@@ -412,7 +421,7 @@ class TestItemPage:
 
         # 批量修改输入框
         self.item.batch_modify_input(self.all_input_edit_xpath_list, text_str)
-        self.item.batch_modify_input(all_date_edit_xpath_list, date_str)
+        self.item.batch_modify_input(self.all_date_edit_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -611,6 +620,7 @@ class TestItemPage:
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
     def test_item_delsuccess3(self, login_to_item):
+        layout_name = "测试布局A"
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -627,9 +637,21 @@ class TestItemPage:
         second_button.click()
         self.item.click_ref_button()
         sleep(1)
+        layout = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
+        print('layout', len(layout))
+        if len(layout) > 1:
+            self.item.del_layout(layout_name)
         # 定位内容为‘111’的行
         itemdata = self.driver.find_elements(
             By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
         )
         assert len(itemdata) == 0
         assert not self.item.has_fail_message()
+
+    @allure.story("测试")
+    # @pytest.mark.run(order=1)
+    def test_demo_delsuccess3(self, login_to_item):
+        sleep(5)
+        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+        print('layout', len(find_layout))
+        input()

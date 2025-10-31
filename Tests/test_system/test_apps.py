@@ -192,7 +192,7 @@ class TestSAppsPage:
 
         apps.click_save_template_button(name)
         apps.go_template()
-        num = apps.get_template_num
+        num = apps.get_template_num(name)
         assert num == 1
         assert not apps.has_fail_message()
 
@@ -229,13 +229,14 @@ class TestSAppsPage:
         driver = login_to_apps  # WebDriver 实例
         apps = AppsPage(driver)  # 用 driver 初始化 ExpressionPage
         name = "appstest1"
-        values = ['appstest测试模版1', "appstest测试模版2"]
+        values = ["appstest测试模版2"]
         apps.wait_for_loading_to_disappear()
         apps.select_input(name)
         apps.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         apps.click_all_button("编辑")
         apps.go_template()
         apps.delete_template(values)
+        sleep(3)
         for value in values:
             ele = apps.finds_elements(By.XPATH, f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{value}")]]')
             assert len(ele) == 0

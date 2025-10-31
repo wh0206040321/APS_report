@@ -29,7 +29,7 @@ class WarehouseLocationPage(BasePage):
         """过滤公共方法"""
         sleep(2)
         self.click_button(click_xpath)
-        sleep(1)
+        sleep(2)
         self.click_button('//div[@class="filterInput"]//following-sibling::label')
         sleep(1)
         item_code = self.driver.find_elements(
@@ -43,6 +43,75 @@ class WarehouseLocationPage(BasePage):
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
         )
         return len(item_code) == 0 and len(item_code2) > 0
+
+    def add_layout(self, layout):
+        """添加布局."""
+        self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
+        self.click_button('//li[text()="添加新布局"]')
+        self.enter_texts(
+            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
+        )
+        checkbox1 = self.get_find_element_xpath(
+            '//div[text()="是否默认启动:"]/following-sibling::label/span'
+        )
+
+        # 检查复选框是否未被选中
+        if checkbox1.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            self.click_button(
+                '//div[text()="是否默认启动:"]/following-sibling::label/span'
+            )
+        sleep(1)
+
+        self.click_button('(//div[text()=" 显示设置 "])[1]')
+        # 获取是否可见选项的复选框元素
+        checkbox2 = self.get_find_element_xpath(
+            '(//div[./div[text()="是否可见:"]])[1]/label/span'
+        )
+        # 检查复选框是否未被选中
+        if checkbox2.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
+            # 点击确定按钮保存设置
+            self.click_button('//div[@class="h-100 setTableTwo"]/following-sibling::div/button[2]')
+        else:
+            # 如果已选中，直接点击确定按钮保存设置
+            self.click_button('//div[@class="h-100 setTableTwo"]/following-sibling::div/button[2]')
+
+    def del_layout(self, layout):
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = self.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+
+        try:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        except TimeoutException:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            )
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+        sleep(2)
+        # 点击确认删除的按钮
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
     def click_del_button(self):
         """点击删除按钮."""
@@ -240,11 +309,6 @@ class WarehouseLocationPage(BasePage):
             )
         )
         return message
-
-    def add_layout(self):
-        """添加布局."""
-        self.click_button('//div[@class="newDropdown"]//i')
-        self.click_button('//li[text()="添加新布局"]')
 
     def add_none(self, xpath_list=[], color_value=""):
         """新增弹窗(有必填项)不填写信息，不允许提交公共方法."""

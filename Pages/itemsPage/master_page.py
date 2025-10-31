@@ -148,6 +148,7 @@ class MasterPage(BasePage):
         """选择物料代码"""
         # 填写订物料代码
         self.click_button('//span[text()=" 物料代码： "]/parent::div//i')
+        self.wait_for_loading_to_disappear()
         self.click_button(
             f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{test_item}"]'
         )
@@ -159,6 +160,7 @@ class MasterPage(BasePage):
         wait = WebDriverWait(self.driver, 3)
         # 循环删除元素直到不存在
         while True:
+            self.wait_for_loading_to_disappear()
             eles = self.driver.find_elements(
                 By.XPATH,
                 f'//tr[.//span[text()="{test_item}"]]/td[2]//span[text()="{test_item}"]',

@@ -193,7 +193,7 @@ class ItemPage(BasePage):
                 self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
                 self.click_del_button()  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-                sleep(1)
+                self.wait_for_loading_to_disappear()
             except NoSuchElementException:
                 print(f"未找到元素: {v}")
             except Exception as e:

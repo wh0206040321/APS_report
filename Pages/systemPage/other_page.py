@@ -89,6 +89,15 @@ class OtherPage(BasePage):
         sleep(0.5)
         self.enter_texts(xpath, name)
 
+    def select_input_online(self, name):
+        """选择输入框."""
+        xpath = '//div[div[span[text()=" 用户代码"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+
     def loop_judgment(self, xpath):
         """循环判断"""
         eles = self.finds_elements(By.XPATH, xpath)
@@ -115,6 +124,10 @@ class OtherPage(BasePage):
     def click_confirm(self):
         """点击确定"""
         self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+
+    def click_del_confirm(self):
+        """点击确定"""
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
     def click_registration_button(self, download_button='', value=''):
         """点击注册按钮"""

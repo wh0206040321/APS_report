@@ -232,7 +232,7 @@ class TestSButtonPage:
         after_name = 'Abutton2'
         button.wait_for_loading_to_disappear()
         button.select_input_button(before_name)
-        sleep(1)
+        button.wait_for_loading_to_disappear()
         button.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
         button.click_all_button("编辑")
         xpath_list = [
@@ -246,6 +246,7 @@ class TestSButtonPage:
         button.click_confirm()
         message = button.get_find_message()
         button.select_input_button(after_name)
+        button.wait_for_loading_to_disappear()
         eles1 = button.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
         assert eles1 == after_name
         assert message == "编辑成功！"
@@ -314,7 +315,7 @@ class TestSButtonPage:
 
         # 点击确认
         button.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[3]'
+            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
         )
         sleep(2)
         # 定位第一行是否为name
@@ -368,7 +369,7 @@ class TestSButtonPage:
 
         # 点击确认
         button.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[3]'
+            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
         )
         sleep(2)
         itemcode = driver.find_elements(
@@ -418,7 +419,7 @@ class TestSButtonPage:
 
         # 点击确认
         button.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[3]'
+            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
         )
         sleep(2)
         eles = button.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')

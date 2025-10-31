@@ -1757,10 +1757,11 @@ class TestSettingPage:
         layout = "测试布局A"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
+        setting.wait_for_el_loading_mask()
 
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
-        sleep(2)
+        sleep(1)
         # 点击三个点
         setting.click_button('//span[text()="统计图1 "]/following-sibling::div')
         # 点击设置
@@ -1783,10 +1784,10 @@ class TestSettingPage:
         statistics = "统计图13"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
-
+        setting.wait_for_el_loading_mask()
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
-        sleep(2)
+        sleep(1)
         # 点击三个点
         setting.click_button('//span[text()="统计图1 "]/following-sibling::div')
         # 点击设置
@@ -2225,7 +2226,7 @@ class TestSettingPage:
         print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
         setting.hover(layout)
 
-        sleep(2)
+        sleep(3)
         setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 

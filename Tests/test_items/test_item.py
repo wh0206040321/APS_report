@@ -317,7 +317,7 @@ class TestItemPage:
         item.enter_texts('(//label[text()="物料代码"])[1]/parent::div//input', "111")
         # 点击确定
         item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        sleep(2)
         # 获取重复弹窗文字
         error_popup = item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -509,6 +509,7 @@ class TestItemPage:
         item.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
+        item.wait_for_loading_to_disappear()
         sleep(1)
         # 定位第一行是否为name
         itemcode = item.get_find_element_xpath(
@@ -1112,7 +1113,7 @@ class TestItemPage:
             for v in value[:4]
         ]
         item.del_layout(layout)
-        sleep(2)
+        item.wait_for_loading_to_disappear()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

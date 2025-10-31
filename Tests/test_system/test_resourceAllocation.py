@@ -273,7 +273,7 @@ class TestResourceAllocationPage:
         sleep(1)
         resource.del_all(value=resource_, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
 
-        role_list = ["系统管理", "系统设置"]
+        role_list = ["系统管理", "用户权限管理"]
         for v in role_list:
             allocation.click_button(f'(//span[text()="{v}"])[1]')
 

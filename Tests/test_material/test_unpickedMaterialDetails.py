@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.login_page import LoginPage
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -160,6 +160,11 @@ class TestItemPage:
     @allure.story("添加未领料明细信息，有多个必填只填写一项，不允许提交")
     # @pytest.mark.run(order=2)
     def test_item_addcodefail(self, login_to_item):
+        sleep(3)
+        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+        if len(find_layout) == 0:
+            layout = "测试布局A"
+            self.item.add_layout(layout)
         # 点击新增按钮
         self.item.click_add_button()
         # 输入第一个必填项
@@ -635,6 +640,10 @@ class TestItemPage:
         second_button.click()
         self.item.click_ref_button()
         sleep(1)
+        layout = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
+        layout_name = "测试布局A"
+        if len(layout) > 1:
+            self.item.del_layout(layout_name)
         # 定位内容为‘111’的行
         itemdata = self.driver.find_elements(
             By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'

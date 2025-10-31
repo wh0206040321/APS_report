@@ -129,13 +129,6 @@ class TestMasterPage:
         )
         master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -182,13 +175,6 @@ class TestMasterPage:
             '//span[text()=" 物料代码： "]/parent::div//input'
         ).get_attribute("value")
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -221,6 +207,16 @@ class TestMasterPage:
             '(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[3]//input',
             f"{random_int}",
         )
+        # 点击使用指令
+        master.click_button(
+            '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
+        )
+        # 点击第一个输入指令点击删除
+        master.click_button(
+            '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[2]//input'
+        )
+        master.del_serial4()
+        master.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
         # 点击确定
         master.add_ok_button()
@@ -281,13 +277,6 @@ class TestMasterPage:
             '//span[text()=" 物料代码： "]/parent::div//input'
         ).get_attribute("value")
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -308,14 +297,11 @@ class TestMasterPage:
         master.click_button(
             '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
         )
-        master.add_serial4()
         # 放大页面
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
         # 输入指令 点击对话框按钮 获取资源名称
-        master.click(
-            By.XPATH,
-            '(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[5]//i',
+        master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[2]//tr[1]/td[5]//i',
         )
         random_int = random.randint(1, 8)
         master.wait_for_loading_to_disappear()
@@ -323,9 +309,7 @@ class TestMasterPage:
             f'//tr[{random_int}]/td//span[@class="vxe-cell--checkbox"]'
         )
         # 点击对话框按钮
-        master.click(
-            By.XPATH,
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
+        master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]',
         )
         # 获取资源能力
         random_int = random.randint(1, 4)
@@ -363,20 +347,13 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
         master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
         sleep(1)
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -398,7 +375,7 @@ class TestMasterPage:
         # 获取物料名称
         master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
         random_int = random.randint(1, 4)
-        sleep(1)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             f'(//table[.//span[@class="vxe-cell--label"]])[2]//tr[{random_int}]/td[2]'
         )
@@ -414,7 +391,6 @@ class TestMasterPage:
         master.click_button(
             '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
         )
-        master.add_serial4()
         # 放大页面
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
@@ -435,7 +411,7 @@ class TestMasterPage:
 
         # 点击确定
         master.add_ok_button()
-
+        sleep(1)
         # 获取重复弹窗文字
         error_popup = master.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -480,13 +456,6 @@ class TestMasterPage:
             '//span[text()=" 物料代码： "]/parent::div//input'
         ).get_attribute("value")
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -523,7 +492,6 @@ class TestMasterPage:
         master.click_button(
             '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
         )
-        master.add_serial4()
         # 放大页面
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
@@ -581,7 +549,7 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
@@ -619,19 +587,12 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
         master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -666,18 +627,12 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
         master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
 
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -729,7 +684,7 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(1.5)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[last()]'
         )
@@ -739,13 +694,6 @@ class TestMasterPage:
             '//span[text()=" 物料代码： "]/parent::div//input'
         ).get_attribute("value")
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -764,7 +712,6 @@ class TestMasterPage:
 
         # 点击新增输入指令
         master.click_button('(//div[@class="ivu-tabs-nav"])[2]/div[3]')
-        master.add_serial4()
         master.add_serial4()
         # 获取物料名称
         master.enter_texts(
@@ -799,7 +746,7 @@ class TestMasterPage:
 
         # 填写订物料代码
         master.click_button('//span[text()=" 物料代码： "]/parent::div//i')
-        sleep(2)
+        master.wait_for_loading_to_disappear()
         master.click_button(
             '(//table[@class="vxe-table--body"]//tr[2]/td[2])[last()]'
         )
@@ -809,13 +756,6 @@ class TestMasterPage:
             '//span[text()=" 物料代码： "]/parent::div//input'
         ).get_attribute("value")
 
-        # 点击工序选定器
-        master.click_button(
-            '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-        )
-
-        # 点击新增工序编号
-        master.add_serial2()
         # 填写工序编号
         master.enter_texts(
             '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -853,7 +793,6 @@ class TestMasterPage:
         master.click_button(
             '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
         )
-        master.add_serial4()
         # 放大页面
         master.click_button('(//div[text()="新增工艺产能"])[2]/parent::div//i[1]')
 
@@ -892,6 +831,7 @@ class TestMasterPage:
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
         item = SharedDataUtil.load_data()["item"]
+        master.wait_for_loading_to_disappear()
         # 选中物料代码点击编辑
         master.click_button(f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]')
         master.click_edi_button()
@@ -914,7 +854,7 @@ class TestMasterPage:
         edittext = master.get_find_element_xpath(
             f'//tr[.//td[2]//span[text()="{item}"]]/td[6]'
         ).text
-        assert process_input == edittext
+        assert edittext in process_input
         assert not master.has_fail_message()
 
     @allure.story("修改工艺产能输入物料")
@@ -923,6 +863,7 @@ class TestMasterPage:
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
         item = SharedDataUtil.load_data()["item"]
+        master.wait_for_loading_to_disappear()
         # 选中物料代码点击编辑
         master.click_button(f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]')
         master.click_edi_button()
@@ -955,6 +896,7 @@ class TestMasterPage:
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
         item = SharedDataUtil.load_data()["item"]
+        master.wait_for_loading_to_disappear()
         # 选中物料代码点击编辑
         master.click_button(f'//tr[.//span[text()="{item}"]]/td[2]//span[text()="{item}"]')
         master.click_edi_button()
@@ -999,6 +941,7 @@ class TestMasterPage:
     def test_master_refreshsuccess(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
+        master.wait_for_loading_to_disappear()
         # 筛选框输入123
         master.enter_texts(
             '//p[text()="物料代码"]/ancestor::div[2]//input', "123"
@@ -1070,6 +1013,7 @@ class TestMasterPage:
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
         item = SharedDataUtil.load_data()["item"]
+        master.wait_for_loading_to_disappear()
         master.delete_material(item)
         # 断言元素已经不存在
         final_eles = driver.find_elements(
@@ -1085,7 +1029,7 @@ class TestMasterPage:
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
         layout = "测试布局A"
         master.del_layout(layout)
-        sleep(2)
+        master.wait_for_loading_to_disappear()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

@@ -110,7 +110,7 @@ class TestSDateBasePage:
         data.select_input_database("表代码", code)
         data.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]//span[text()="{code}"]')
         data.click_all_button("编辑")
-        sleep(1)
+        sleep(2)
         eles = data.finds_elements(By.XPATH, f'(//table[@class="vxe-table--body"])[3]//tr/td[2]')
         assert len(eles) == 2
         assert message == "保存成功"
@@ -138,7 +138,7 @@ class TestSDateBasePage:
         data.select_input_database("表代码", code)
         data.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]//span[text()="{code}"]')
         data.click_all_button("编辑")
-        sleep(1)
+        sleep(2)
         eles = data.get_find_element_xpath(
             f'(//table[@class="vxe-table--body"])[3]//tr/td[2]//span[text()="{code + name}"]').text
         elesint = data.get_find_element_xpath(
@@ -149,7 +149,7 @@ class TestSDateBasePage:
 
     @allure.story("编辑字段代码成功")
     # @pytest.mark.run(order=1)
-    def test_database_editfield(self, login_to_database):
+    def test_database_editsuccess(self, login_to_database):
         driver = login_to_database  # WebDriver 实例
         data = DateBasePage(driver)  # 用 driver 初始化 DateBasePage
         add = AddsPages(driver)
@@ -171,7 +171,7 @@ class TestSDateBasePage:
         data.select_input_database("表代码", code)
         data.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]//span[text()="{code}"]')
         data.click_all_button("编辑")
-        sleep(1)
+        sleep(2)
         eles = data.get_find_element_xpath(f'(//table[@class="vxe-table--body"])[3]//tr/td[2]//span[text()="{code+name}"]').text
         elesint = data.get_find_element_xpath(f'(//table[@class="vxe-table--body"])[3]//tr[td[3][//span[text()="{code+name}"]]]/td[4]').text
         assert eles == code+name and elesint == 'int'
@@ -188,6 +188,7 @@ class TestSDateBasePage:
         data.add_table_code(button_name='编辑', code=code, field_code=code+name, fieldbutton_name='删除')
         message = data.get_find_message()
         data.right_refresh()
+        sleep(1)
         data.select_input_database("表代码", code)
         sleep(1)
         data.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]//span[text()="{code}"]')
@@ -359,7 +360,7 @@ class TestSDateBasePage:
 
     @allure.story("删除表数据成功")
     # @pytest.mark.run(order=1)
-    def test_database_delfield(self, login_to_database):
+    def test_database_delfieldtable(self, login_to_database):
         driver = login_to_database  # WebDriver 实例
         data = DateBasePage(driver)  # 用 driver 初始化 DateBasePage
         code = 'AAtest1'

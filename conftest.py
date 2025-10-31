@@ -205,6 +205,8 @@ def pytest_sessionfinish(session, exitstatus):
         unique_failures = list(dict.fromkeys(test_failures))
         failure_count = len(test_failures)
         total_count = session.testscollected
+        pass_count = total_count - failure_count
+        pass_rate = round((pass_count / total_count) * 100, 2)  # 保留两位小数
         failure_items = "".join(f"<li>{name}</li>" for name in unique_failures)
         body = f"""
         <html>
@@ -212,6 +214,7 @@ def pytest_sessionfinish(session, exitstatus):
             <h2>❌ 以下测试用例执行失败：</h2>
             <p>总测试用例数量: <strong>{total_count}</strong></p>
             <p>失败用例数量: <strong>{failure_count}</strong></p>
+            <p>通过率: <strong>{pass_rate}%</strong></p>
             <ul>{failure_items}</ul>
             <p>📎 点击下方按钮查看详细测试报告：</p>
             <a href="{report_link}" style="display:inline-block;padding:10px 20px;background:#dc3545;color:#fff;text-decoration:none;border-radius:5px;">查看报告</a>
@@ -220,10 +223,15 @@ def pytest_sessionfinish(session, exitstatus):
         """
         subject = "✅ 自动化测试执行完毕 - 失败汇总"
     else:
+        total_count = session.testscollected
+        pass_rate = 100.0
         body = f"""
         <html>
         <body>
             <h2>🎉 恭喜！本轮测试全部通过，无失败用例。</h2>
+            <p>总测试用例数量: <strong>{total_count}</strong></p>
+            <p>失败用例数量: <strong>0</strong></p>
+            <p>通过率: <strong>{pass_rate}%</strong></p>
             <p>📎 点击下方按钮查看完整测试报告：</p>
             <a href="{report_link}" style="display:inline-block;padding:10px 20px;background:#28a745;color:#fff;text-decoration:none;border-radius:5px;">查看报告</a>
         </body>

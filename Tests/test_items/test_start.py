@@ -79,13 +79,6 @@ class TestStartPage:
             master.go_item_dialog("1测试C")
             sleep(1)
 
-            # 点击工序选定器
-            master.click_button(
-                '//table[.//div[@class="vxe-input type--text size--mini is--controls"]]//tr[1]/td[2]//input'
-            )
-
-            # 点击新增工序编号
-            master.add_serial2()
             # 填写工序编号
             master.enter_texts(
                 '//table[.//div[@class="vxe-input type--number size--mini"]]//tr[1]/td[2]//input',
@@ -106,7 +99,7 @@ class TestStartPage:
             master.add_serial3()
             # 获取物料名称
             master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
-            sleep(1)
+            master.wait_for_loading_to_disappear()
             master.click_button(
                 '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试A"]]/td[2]//span[text()="1测试A"]'
             )
@@ -122,7 +115,6 @@ class TestStartPage:
             master.click_button(
                 '//div[.//div[text()=" 使用指令 "] and @class="ivu-tabs-nav"]//div[text()=" 使用指令 "]'
             )
-            master.add_serial4()
 
             # 使用指令 点击对话框按钮 获取资源名称
             master.click_button('(//table[.//div[@class="vxe-input type--text size--mini is--controls"]])[3]//tr[1]/td[5]//i')
@@ -170,7 +162,7 @@ class TestStartPage:
             master.add_serial3()
             # 获取物料名称
             master.click_button('(//table[.//div[@class="vxe-input type--number size--mini"]])[2]//tr[1]/td[2]//i')
-            sleep(1)
+            master.wait_for_loading_to_disappear()
             master.click_button(
                 '(//table[.//span[@class="vxe-cell--label"]])[2]//tr[.//span[text()="1测试B"]]/td[2]//span[text()="1测试B"]'
             )
