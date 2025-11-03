@@ -40,11 +40,6 @@ def login_to_item():
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):
-        sleep(3)
-        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
-        if len(find_layout) == 0:
-            layout = "测试布局A"
-            self.item.add_layout(layout)
         self.driver = login_to_item
         self.item = WarehouseLocationPage(self.driver)
         # 必填新增输入框xpath
@@ -170,6 +165,11 @@ class TestItemPage:
     @allure.story("添加供应商配额信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
     def test_warehouselocation_addfail(self, login_to_item):
+        sleep(3)
+        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+        if len(find_layout) == 0:
+            layout = "测试布局A"
+            self.item.add_layout(layout)
         # 点击新增按钮
         self.item.click_add_button()
         # 点击确定

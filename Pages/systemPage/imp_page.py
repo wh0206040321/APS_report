@@ -2,7 +2,7 @@ from time import sleep
 from datetime import datetime
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -29,6 +29,14 @@ class ImpPage(BasePage):
         except NoSuchElementException:
             return None
 
+    def click_all_button(self, name):
+        """点击按钮."""
+        self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
+
+    def click_confirm(self):
+        """点击确定"""
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+
     def get_find_message(self):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
@@ -46,6 +54,14 @@ class ImpPage(BasePage):
             )
         )
         return message.text
+
+    def select_input(self, name):
+        """选择输入框."""
+        xpath = '//div[p[text()="接口名称"]]/following-sibling::div//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL + "a")
+        ele.send_keys(Keys.DELETE)
+        self.enter_texts('//div[p[text()="接口名称"]]/following-sibling::div//input', name)
 
     def right_refresh(self, name="导入设置"):
         """右键刷新."""
@@ -78,6 +94,24 @@ class ImpPage(BasePage):
     def click_impall_button(self, name):
         """点击导入页面各种按钮"""
         self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
+
+    def hover(self, name=""):
+        # 悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//span[@class="position-absolute font12 right10"]'
+        )
+        ActionChains(self.driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//ul/li[contains(text(),"{name}")]'
+            ))
+        )
+
+        # 3️⃣ 再点击图标
+        delete_icon.click()
 
     def del_all(self, value=[]):
         """批量删除"""
