@@ -137,7 +137,7 @@ class TestSpecPage:
         # 点击确定
         spec.click_button(
             '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        spec.wait_for_loading_to_disappear()
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -156,7 +156,7 @@ class TestSpecPage:
         spec.add_test_data(name)
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        spec.wait_for_loading_to_disappear()
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -174,6 +174,7 @@ class TestSpecPage:
 
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        sleep(2)
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -223,7 +224,7 @@ class TestSpecPage:
         )
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        spec.wait_for_loading_to_disappear()
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -244,7 +245,7 @@ class TestSpecPage:
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        sleep(2)
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -272,7 +273,7 @@ class TestSpecPage:
         )
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(3)
+        spec.wait_for_loading_to_disappear()
         # 定位表格内容
         specdata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'
@@ -294,7 +295,7 @@ class TestSpecPage:
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        spec.wait_for_loading_to_disappear()
         # 定位表格内容
         specdata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
@@ -336,10 +337,8 @@ class TestSpecPage:
             '//div[label[text()="显示颜色"]]/div//span[@class="ivu-select-selected-value"]'
         ).text
         # 点击确定
-        spec.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
-        sleep(1)
+        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        spec.wait_for_loading_to_disappear()
         # 定位表格内容
         itemname = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[3]/div'

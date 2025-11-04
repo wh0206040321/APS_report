@@ -563,7 +563,7 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        rows = driver.find_elements(By.XPATH, f"//table[.//tr[td[3]//span[text()='{code1}']]]//tr")
+        rows = driver.find_elements(By.XPATH, f"//table[.//tr[td[2][contains(@class,'col--checkbox')]]]//tr")
         for index, row in enumerate(rows, start=1):
             td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
             if f"{code1}" == td3_text:

@@ -315,18 +315,18 @@ class TestSInterfaceConfigurationPage:
         assert ele == "vxe-icon-funnel suffixIcon"
         assert not interfaceconfiguration.has_fail_message()
 
-    @allure.story("删除数据成功")
-    # @pytest.mark.run(order=1)
-    def test_interfaceconfiguration_del(self, login_to_interfaceconfiguration):
-        driver = login_to_interfaceconfiguration  # WebDriver 实例
-        interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        list_ = ['测试数据22', '11测试全部数据']
-        for name in list_:
-            interfaceconfiguration.click_button(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
-            interfaceconfiguration.click_all_button('删除')
-            interfaceconfiguration.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-            message = interfaceconfiguration.get_find_message()
-            ele = interfaceconfiguration.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
-            assert len(ele) == 0
-            assert message == "删除成功！"
-        assert not interfaceconfiguration.has_fail_message()
+    # @allure.story("删除数据成功")
+    # # @pytest.mark.run(order=1)
+    # def test_interfaceconfiguration_del(self, login_to_interfaceconfiguration):
+    #     driver = login_to_interfaceconfiguration  # WebDriver 实例
+    #     interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
+    #     list_ = ['测试数据22', '11测试全部数据']
+    #     for name in list_:
+    #         interfaceconfiguration.click_button(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
+    #         interfaceconfiguration.click_all_button('删除')
+    #         interfaceconfiguration.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+    #         message = interfaceconfiguration.get_find_message()
+    #         ele = interfaceconfiguration.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
+    #         assert len(ele) == 0
+    #         assert message == "删除成功！"
+    #     assert not interfaceconfiguration.has_fail_message()

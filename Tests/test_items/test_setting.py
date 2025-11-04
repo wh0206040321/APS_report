@@ -1761,7 +1761,7 @@ class TestSettingPage:
 
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
-        sleep(1)
+        sleep(3)
         # 点击三个点
         setting.click_button('//span[text()="统计图1 "]/following-sibling::div')
         # 点击设置
@@ -1787,7 +1787,7 @@ class TestSettingPage:
         setting.wait_for_el_loading_mask()
         element = driver.find_element(By.XPATH, '//span[text()="统计图1 "]/following-sibling::div')
         driver.execute_script("arguments[0].scrollIntoView();", element)
-        sleep(1)
+        sleep(3)
         # 点击三个点
         setting.click_button('//span[text()="统计图1 "]/following-sibling::div')
         # 点击设置

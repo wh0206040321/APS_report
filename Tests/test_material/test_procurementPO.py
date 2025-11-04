@@ -648,10 +648,10 @@ class TestItemPage:
         assert len(itemdata) == 0
         assert not self.item.has_fail_message()
 
-    @allure.story("测试")
-    # @pytest.mark.run(order=1)
-    def test_demo_delsuccess3(self, login_to_item):
-        sleep(5)
-        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
-        print('layout', len(find_layout))
-        input()
+    # @allure.story("测试")
+    # # @pytest.mark.run(order=1)
+    # def test_demo_delsuccess3(self, login_to_item):
+    #     sleep(5)
+    #     find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+    #     print('layout', len(find_layout))
+    #     input()
