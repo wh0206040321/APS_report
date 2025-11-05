@@ -136,6 +136,7 @@ class ProcessPage(BasePage):
                 print(f"操作 {v} 时出错: {str(e)}")
 
     def del_layout(self, layout):
+        sleep(2)
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = self.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

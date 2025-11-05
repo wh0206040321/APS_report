@@ -9,9 +9,10 @@ from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.master_page import MasterPage
 from Pages.itemsPage.order_page import OrderPage
 from Pages.itemsPage.previewPlan_page import PreviewPlanPage
+from Pages.itemsPage.spec1_page import Spec1Page
 from Utils.data_driven import DateDriver
 from Utils.shared_data_util import SharedDataUtil
-from Utils.driver_manager import create_driver
+from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @allure.feature("删除添加的物品，添加的工艺产能，添加的制造订单,删除工作指示测试用例")
@@ -113,3 +114,28 @@ class TestDeleteStart:
         )
         assert len(ele) == 0 and len(ele_none) == 0
         assert not item.has_fail_message()
+        safe_quit(driver)
+
+    @allure.story("删除生产特征数据")
+    # @pytest.mark.run(order=1)
+    def test_delete_spce(self):
+        """初始化并返回 driver"""
+        date_driver = DateDriver()
+        driver = create_driver(date_driver.driver_path)
+        driver.implicitly_wait(3)
+        spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
+
+        # 初始化登录页面
+        page = LoginPage(driver)  # 初始化登录页面
+        page.navigate_to(date_driver.url)  # 导航到登录页面
+        page.login(date_driver.username, date_driver.password, date_driver.planning)
+        spec.click_button(f'(//span[text()="计划管理"])[1]')
+        spec.click_button(f'(//span[text()="计划生产特征"])[1]')
+        for i in range(2, 11):
+            spec.click_button(f'(//span[text()="生产特征{i}"])[1]')
+            spec.del_spec_data(f'1修改生产特征{i}')
+            ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="1修改生产特征{i}"]]]/td[2]')
+            assert len(ele) == 0, f'删除失败,1修改生产特征{i}'
+            spec.click_button(f'//div[div[text()=" 生产特征{i} "]]/span')
+            sleep(1)
+

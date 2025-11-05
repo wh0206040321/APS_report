@@ -644,7 +644,7 @@ class TestCoveragePage:
     def test_coverage_delall(self, login_to_coverage):
         driver = login_to_coverage  # WebDriver 实例
         coverage = Coverage(driver)  # 用 driver 初始化 Coverage
-        coverage.wait_for_loading_to_disappear(coverage)
+        coverage.wait_for_loading_to_disappear()
         coverage.click_button('//span[text()=" 更新时间"]/following-sibling::div')
         sleep(1)
         coverage.click_button('//span[text()=" 更新时间"]/following-sibling::div')

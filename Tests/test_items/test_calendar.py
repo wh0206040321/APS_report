@@ -190,7 +190,7 @@ class TestCalendarPage:
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
         )
         calendar.click_confirm_button()
-        message = calendar.get_find_message()
+        message = calendar.get_error_message()
         assert message == "请先填写表单"
         assert not calendar.has_fail_message()
 

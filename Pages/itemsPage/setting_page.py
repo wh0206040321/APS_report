@@ -33,6 +33,12 @@ class SettingPage(BasePage):
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
         self.click_button('//li[text()="添加新布局"]')
 
+    def loop_judgment(self, xpath):
+        """循环判断"""
+        eles = self.finds_elements(By.XPATH, xpath)
+        code = [ele.text for ele in eles]
+        return code
+
     def wait_for_loading_to_disappear(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
@@ -160,6 +166,7 @@ class SettingPage(BasePage):
     def click_setting_button(self):
         """点击设置按钮."""
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
+        sleep(2)
 
     def get_find_message(self):
         """获取错误信息"""

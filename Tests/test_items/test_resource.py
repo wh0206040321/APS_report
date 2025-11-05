@@ -1072,12 +1072,12 @@ class TestResourcePage:
         len_num = len(all_value)
         before_all_value = adds.batch_acquisition_input(all_value)
         resource.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        sleep(3)
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        resource.get_find_message()
         driver.refresh()
-        sleep(5)
+        resource.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
-        sleep(2)
+        resource.wait_for_loading_to_disappear()
         resource.enter_texts(
             '//p[text()="资源代码"]/ancestor::div[2]//input', input_value
         )

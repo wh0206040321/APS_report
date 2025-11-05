@@ -94,6 +94,7 @@ class TestSDateBasePage:
         data = DateBasePage(driver)  # 用 driver 初始化 DateBasePage
         name = 'AAtest1'
         data.add_table_code(button_name='新增', code=name, field_code=name, fieldbutton_name='添加')
+        sleep(2)
         message = data.get_find_element_xpath('//div[text()=" 表已存在 "]').text
         assert message == "表已存在"
         assert not data.has_fail_message()

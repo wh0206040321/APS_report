@@ -128,6 +128,7 @@ class TestSAppsPage:
 
         apps.enter_texts(xpath_list[4], "1")
         apps.click_save_button()
+        apps.wait_for_el_loading_mask()
         message = apps.get_find_message()
         apps.click_apps_button()
         apps.select_input(name)
@@ -257,6 +258,7 @@ class TestSAppsPage:
         apps.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="无需保存"]')
         sleep(1)
         apps.select_input(name)
+        apps.wait_for_loading_to_disappear()
         ele = apps.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
         assert ele == name
         assert not apps.has_fail_message()

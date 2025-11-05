@@ -8,7 +8,6 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
 from Pages.itemsPage.item_page import ItemPage
 from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.master_page import MasterPage
@@ -313,3 +312,4 @@ class TestStartPage:
 
         assert success_element.text == "完成"
         assert not item.has_fail_message()
+        safe_quit(driver)

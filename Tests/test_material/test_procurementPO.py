@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.itemsPage.login_page import LoginPage
+from Pages.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -69,62 +69,92 @@ class TestItemPage:
         # 全部新增输入框xpath
         self.all_input_add_xpath_list = [
             "//div[@id='p34nag46-7evf']//input",
+            "//div[@id='hpjqsv1m-5607']//input",
+            "//div[@id='z0h20cps-xzrs']//input",
+            "//div[@id='7z1rv7fs-trb6']//input",
+            "//div[@id='hguo4esk-gii0']//input",
             "//div[@id='ywz9q11i-sp3b']//input",
             "//div[@id='u2tgl5h9-otp1']//input",
             "//div[@id='izykzohi-1l5u']//input",
             "//div[@id='ctfddy1k-hbmj']//input",
-            "//div[@id='7z1rv7fs-trb6']//input",
+            "//div[@id='0t8pfkrw-y5i1']//input",
             "//div[@id='u9i1q4uf-3oli']//input",
-            "//div[@id='1xvizeqn-gffj']//input",
-            "//div[@id='e67g7odw-v396']//input",
-            "//div[@id='z0h20cps-xzrs']//input",
-            "//div[@id='35lc2nk6-812s']//input",
-            "//div[@id='hguo4esk-gii0']//input",
             "//div[@id='989l7loi-6nc4']//input",
+            "//div[@id='pqpntuk9-60n4']//input",
+            "//div[@id='e67g7odw-v396']//input",
             "//div[@id='8nwpr6jl-sqt5']//input",
-            "//div[@id='z0pnhx2y-7qx3']//input",
             "//div[@id='izx0sysf-otie']//input",
-            "//div[@id='0t8pfkrw-y5i1']//input"
+            "//div[@id='1xvizeqn-gffj']//input",
+            "//div[@id='35lc2nk6-812s']//input",
+            "//div[@id='z0pnhx2y-7qx3']//input"
         ]
         # 全部新增日期xpath
         self.all_date_add_xpath_list = [
-            "//div[@id='dlmc4h3z-eofa']//input",
-            "//div[@id='l7p1eln5-w34j']//input",
-            "//div[@id='54xpaxv5-kcvd']//input",
             "//div[@id='dsosvk7u-fg07']//input",
+            "//div[@id='dlmc4h3z-eofa']//input",
+            "//div[@id='54xpaxv5-kcvd']//input",
+            "//div[@id='l7p1eln5-w34j']//input",
             "//div[@id='fyqeuxkw-hani']//input",
             "//div[@id='7pwkrz9l-r5zu']//input",
             "//div[@id='qucmz24h-wri3']//input"
         ]
         # 全部编辑输入框xpath
         self.all_input_edit_xpath_list = [
-            "//div[@id='p34nag46-7evf']//input",
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='u2tgl5h9-otp1']//input",
-            "//div[@id='izykzohi-1l5u']//input",
-            "//div[@id='ctfddy1k-hbmj']//input",
-            "//div[@id='7z1rv7fs-trb6']//input",
-            "//div[@id='u9i1q4uf-3oli']//input",
-            "//div[@id='1xvizeqn-gffj']//input",
-            "//div[@id='e67g7odw-v396']//input",
-            "//div[@id='z0h20cps-xzrs']//input",
-            "//div[@id='35lc2nk6-812s']//input",
-            "//div[@id='hguo4esk-gii0']//input",
-            "//div[@id='989l7loi-6nc4']//input",
-            "//div[@id='8nwpr6jl-sqt5']//input",
-            "//div[@id='z0pnhx2y-7qx3']//input",
-            "//div[@id='izx0sysf-otie']//input",
-            "//div[@id='0t8pfkrw-y5i1']//input"
+            "//div[@id='ug791p78-5sad']//input",
+            "//div[@id='1jwjvvg6-cfv5']//input",
+            "//div[@id='2sur8z1i-2kk4']//input",
+            "//div[@id='il6wlw6c-2o9k']//input",
+            "//div[@id='5431krpn-692v']//input",
+            "//div[@id='j6017pvv-ni5c']//input",
+            "//div[@id='v98ax0rc-ux5e']//input",
+            "//div[@id='g37toij2-6zmz']//input",
+            "//div[@id='cilq6ovd-r7zb']//input",
+            "//div[@id='4f9ktj5s-u0lr']//input",
+            "//div[@id='nvfzew65-zmlm']//input",
+            "//div[@id='i7rr5um5-j69w']//input",
+            "//div[@id='bqv2hc61-xdpj']//input",
+            "//div[@id='gufy4514-u43r']//input",
+            "//div[@id='yv3z11hg-qque']//input",
+            "//div[@id='mhbqie1c-5pvv']//input"
+        ]
+        # 全部编辑输入框xpath
+        self.all_input_edit_xpath_list2 = [
+            "//div[@id='ug791p78-5sad']//input",
+            "//div[@id='1jwjvvg6-cfv5']//input",
+            "//div[@id='3k5z4af4-o0d6']//input",
+            "//div[@id='2sur8z1i-2kk4']//input",
+            "//div[@id='il6wlw6c-2o9k']//input",
+            "//div[@id='dwamqntv-bxj8']//input",
+            "//div[@id='5431krpn-692v']//input",
+            "//div[@id='j6017pvv-ni5c']//input",
+            "//div[@id='uvo2vcb7-0hxb']//input",
+            "//div[@id='v98ax0rc-ux5e']//input",
+            "//div[@id='g37toij2-6zmz']//input",
+            "//div[@id='cilq6ovd-r7zb']//input",
+            "//div[@id='4f9ktj5s-u0lr']//input",
+            "//div[@id='nvfzew65-zmlm']//input",
+            "//div[@id='i7rr5um5-j69w']//input",
+            "//div[@id='bqv2hc61-xdpj']//input",
+            "//div[@id='gufy4514-u43r']//input",
+            "//div[@id='yv3z11hg-qque']//input",
+            "//div[@id='mhbqie1c-5pvv']//input"
         ]
         # 全部编辑日期xpath
         self.all_date_edit_xpath_list = [
-            "//div[@id='dlmc4h3z-eofa']//input",
-            "//div[@id='l7p1eln5-w34j']//input",
-            "//div[@id='54xpaxv5-kcvd']//input",
-            "//div[@id='dsosvk7u-fg07']//input",
-            "//div[@id='fyqeuxkw-hani']//input",
-            "//div[@id='7pwkrz9l-r5zu']//input",
-            "//div[@id='qucmz24h-wri3']//input"
+            "//div[@id='fx8qo5nx-kr43']//input",
+            "//div[@id='q9p0cubs-ljlv']//input",
+            "//div[@id='xrj0plcb-u2vd']//input",
+            "//div[@id='ggko8cn8-ibx2']//input",
+            "//div[@id='8sqjycyq-kkj7']//input"
+        ]
+        self.all_date_edit_xpath_list2 = [
+            "//div[@id='fx8qo5nx-kr43']//input",
+            "//div[@id='f42ha83d-oevo']//input",
+            "//div[@id='q9p0cubs-ljlv']//input",
+            "//div[@id='x7c4efku-0hgb']//input",
+            "//div[@id='xrj0plcb-u2vd']//input",
+            "//div[@id='ggko8cn8-ibx2']//input",
+            "//div[@id='8sqjycyq-kkj7']//input"
         ]
 
     @allure.story("添加采购PO信息 不填写数据点击确认 不允许提交")
@@ -321,18 +351,52 @@ class TestItemPage:
 
         # 输入框要修改的值
         text_str = "333"
-        date_str = "2025/07/23 00:00:00"
+        date_str = "2025/07/25 00:00:00"
         # 输入框的xpath
 
-
+        sleep(4)
         # 选中刚刚新增的测试数据
         self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
         # 点击修改按钮
         self.item.click_edi_button()
         sleep(1)
+        ele = self.item.get_find_element_xpath(
+            "//div[@id='dwamqntv-bxj8']//input"
+        )
+        # 清空数字输入框
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
+
+        ele2 = self.item.get_find_element_xpath(
+            "//div[@id='uvo2vcb7-0hxb']//input"
+        )
+        # 清空数字输入框
+        ele2.send_keys(Keys.CONTROL, "a")
+        ele2.send_keys(Keys.BACK_SPACE)
+
+        ele3 = self.item.get_find_element_xpath(
+            "//div[@id='3k5z4af4-o0d6']//input"
+        )
+        # 清空数字输入框
+        ele3.send_keys(Keys.CONTROL, "a")
+        ele3.send_keys(Keys.BACK_SPACE)
+
+        ele4 = self.item.get_find_element_xpath(
+            "//div[@id='x7c4efku-0hgb']//input"
+        )
+        # 清空数字输入框
+        ele4.send_keys(Keys.CONTROL, "a")
+        ele4.send_keys(Keys.BACK_SPACE)
+
+        ele5 = self.item.get_find_element_xpath(
+            "//div[@id='f42ha83d-oevo']//input"
+        )
+        # 清空数字输入框
+        ele5.send_keys(Keys.CONTROL, "a")
+        ele5.send_keys(Keys.BACK_SPACE)
 
         # 批量修改输入框
-        self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
+        # self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
         self.item.batch_modify_input(self.req_date_edit_xpath_list, date_str)
 
         sleep(1)
@@ -412,7 +476,7 @@ class TestItemPage:
         # 输入框要修改的值
         text_str = "111"
         date_str = "2025/07/23 00:00:00"
-
+        sleep(3)
         # 选中编辑数据
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
         # 点击修改按钮
@@ -446,7 +510,7 @@ class TestItemPage:
     @allure.story("删除测试数据成功")
     # @pytest.mark.run(order=1)
     def test_item_delsuccess2(self, login_to_item):
-
+        sleep(4)
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -473,7 +537,8 @@ class TestItemPage:
     @allure.story("过滤刷新成功")
     # @pytest.mark.run(order=1)
     def test_item_refreshsuccess(self, login_to_item):
-        filter_results = self.item.filter_method('//span[text()=" 交付单号"]/ancestor::div[3]//span//span//span')
+        sleep(4)
+        filter_results = self.item.filter_method('//span[text()=" PO编码"]/ancestor::div[3]//span//span//span')
         print('filter_results', filter_results)
         assert filter_results
         assert not self.item.has_fail_message()
@@ -487,7 +552,12 @@ class TestItemPage:
         date_str = "2025/07/17 00:00:00"
         self.item.click_add_button()  # 点击添加
         sleep(1)
-
+        ele = self.item.get_find_element_xpath(
+            "//div[@id='ywz9q11i-sp3b']//input"
+        )
+        # 清空数字输入框
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
         # 批量修改输入框
         self.item.batch_modify_input(self.all_input_add_xpath_list, text_str)
         # 批量修改日期
@@ -495,7 +565,7 @@ class TestItemPage:
 
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[4]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 选中物料代码
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
@@ -503,9 +573,9 @@ class TestItemPage:
         self.item.click_edi_button()
         sleep(1)
         # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(self.all_input_edit_xpath_list, text_str)
+        input_values = self.item.batch_acquisition_input(self.all_input_edit_xpath_list2, text_str)
         # 批量获取日期的value
-        date_values = self.item.batch_acquisition_input(self.all_date_edit_xpath_list, date_str)
+        date_values = self.item.batch_acquisition_input(self.all_date_edit_xpath_list2, date_str)
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
@@ -534,7 +604,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击工厂代码
-        item.click_button('//div[text()="PO明细编号" and contains(@optid,"opt_")]')
+        item.click_button('//div[text()="PO编码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         item.click_button(
@@ -586,7 +656,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击交付单号
-        self.item.click_button('//div[text()="PO明细编号" and contains(@optid,"opt_")]')
+        self.item.click_button('//div[text()="PO编码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         self.item.click_button(
@@ -621,6 +691,7 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_item_delsuccess3(self, login_to_item):
         layout_name = "测试布局A"
+        sleep(4)
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -651,7 +722,6 @@ class TestItemPage:
     # @allure.story("测试")
     # # @pytest.mark.run(order=1)
     # def test_demo_delsuccess3(self, login_to_item):
-    #     sleep(5)
     #     find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
     #     print('layout', len(find_layout))
     #     input()

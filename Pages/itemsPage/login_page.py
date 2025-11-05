@@ -32,7 +32,7 @@ class LoginPage(BasePage):
         self.enter_username(username)
         self.enter_password(password)
         self.select_planning_unit(planning_unit)
-        sleep(1.7)
+        sleep(2)
         self.click_login_button()
 
     def click_login_button(self):
