@@ -59,7 +59,7 @@ def login_to_master():
 
 
 @allure.feature("工艺产能表测试用例")
-@pytest.mark.run(order=16)
+@pytest.mark.run(order=17)
 class TestMasterPage:
 
     @allure.story("添加布局")

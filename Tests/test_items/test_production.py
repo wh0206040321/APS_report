@@ -54,7 +54,7 @@ def login_to_production():
 
 
 @allure.feature("生产报工测试用例")
-@pytest.mark.run(order=22)
+@pytest.mark.run(order=23)
 class TestProductionPage:
 
     @allure.story("添加布局")

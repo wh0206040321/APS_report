@@ -67,7 +67,7 @@ def login_to_plan():
 
 
 @allure.feature("计划计算测试用例")
-@pytest.mark.run(order=18)
+@pytest.mark.run(order=19)
 class TestPlanPage:
     @allure.story("引擎启动为本地")
     # @pytest.mark.run(order=1)

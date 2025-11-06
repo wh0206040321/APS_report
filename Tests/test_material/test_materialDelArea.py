@@ -7,7 +7,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -29,14 +28,14 @@ def login_to_item():
     page.navigate_to(DateDriver().url)  # 导航到登录页面
     page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
     page.click_button('(//span[text()="物控管理"])[1]')  # 点击计划管理
-    page.click_button('(//span[text()="物控业务数据"])[1]')  # 点击物控业务数据
-    page.click_button('(//span[text()="未领料明细"])[1]')  # 点击未领料明细
+    page.click_button('(//span[text()="物控基础数据"])[1]')  # 点击计划基础数据
+    page.click_button('(//span[text()="收货场所"])[1]')  # 点击收货场所
     yield driver  # 提供给测试用例使用
     safe_quit(driver)
 
 
-@allure.feature("未领料明细测试用例")
-@pytest.mark.run(order=119)
+@allure.feature("收货场所测试用例")
+@pytest.mark.run(order=117)
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):
@@ -44,100 +43,41 @@ class TestItemPage:
         self.item = WarehouseLocationPage(self.driver)
         # 必填新增输入框xpath
         self.req_input_add_xpath_list = [
-            "//div[@id='p34nag46-7evf']//input",
-            "//div[@id='x1k7t87i-tvc3']//input",
-            "//div[@id='hpjqsv1m-5607']//input",
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='ctfddy1k-hbmj']//input"
+            "//div[@id='lfqwszyk-n29u']//input",
+            "//div[@id='323e9o6g-i39o']//input"
         ]
-
-
         # 必填编辑输入框xpath
         self.req_input_edit_xpath_list = [
-            "//div[@id='ussqi6lp-i5fr']//input",
-            "//div[@id='fl0a8inz-uh4o']//input",
-            "//div[@id='r8dhdfqi-ve3c']//input",
-            "//div[@id='se82vf66-ebfr']//input",
-            "//div[@id='r7rwvvdm-22lu']//input"
+            "//div[@id='09w4bb17-u8r1']//input",
+            "//div[@id='h28itby9-4l9e']//input"
         ]
-
-        # 必填新增日期xpath
-        self.req_date_add_xpath_list = ["//div[@id='8xprmwmu-m2yq']//input"]
-        # 必填编辑日期xpath
-        self.req_date_edit_xpath_list = ["//div[@id='zc1uqf4r-q3xt']//input"]
 
         # 全部新增输入框xpath
         self.all_input_add_xpath_list = [
-            "//div[@id='p34nag46-7evf']//input",
-            "//div[@id='x1k7t87i-tvc3']//input",
-            "//div[@id='hpjqsv1m-5607']//input",
-            "//div[@id='z0h20cps-xzrs']//input",
-            "//div[@id='7z1rv7fs-trb6']//input",
-            "//div[@id='hguo4esk-gii0']//input",
-            "//div[@id='13j55ae1-8hj2']//input",
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='u2tgl5h9-otp1']//input",
-            "//div[@id='izykzohi-1l5u']//input",
-            "//div[@id='ctfddy1k-hbmj']//input",
-            "//div[@id='0t8pfkrw-y5i1']//input",
-            "//div[@id='poxayyhi-9bss']//input",
-            "//div[@id='zxc6ccwu-bnwe']//input",
-            "//div[@id='15qig6pt-sj1x']//input",
-            "//div[@id='vtxj45fl-aisi']//input",
-            "//div[@id='owcpuvmy-it09']//input",
-            "//div[@id='er1s533b-0paw']//input",
-            "//div[@id='bq6dy8uc-2f58']//input",
-            "//div[@id='f4s9lqcm-b3vk']//input",
-            "//div[@id='xieapx7h-udjh']//input"
+            "//div[@id='lfqwszyk-n29u']//input",
+            "//div[@id='323e9o6g-i39o']//input",
+            "//div[@id='c3qzeqy5-zl5z']//input"
         ]
         # 全部编辑输入框xpath
         self.all_input_edit_xpath_list = [
-            "//div[@id='ussqi6lp-i5fr']//input",
-            "//div[@id='fl0a8inz-uh4o']//input",
-            "//div[@id='r8dhdfqi-ve3c']//input",
-            "//div[@id='t3tv1oxv-dgc6']//input",
-            "//div[@id='kyzo1s4p-s9qv']//input",
-            "//div[@id='x0v94abv-0en5']//input",
-            "//div[@id='iglrzcet-x3or']//input",
-            "//div[@id='se82vf66-ebfr']//input",
-            "//div[@id='qu5zsxnf-r7vh']//input",
-            "//div[@id='9x2vb5q4-rstw']//input",
-            "//div[@id='r7rwvvdm-22lu']//input",
-            "//div[@id='pt3n9vaq-8b6s']//input",
-            "//div[@id='o6lqwfig-bj2p']//input",
-            "//div[@id='p8qb4p0l-erzk']//input",
-            "//div[@id='dibx5y1y-dl0t']//input",
-            "//div[@id='hoa0sycc-38nt']//input",
-            "//div[@id='h9ijyoca-5hp4']//input",
-            "//div[@id='15gs2i1b-dx71']//input",
-            "//div[@id='k0zrdo8s-ph3t']//input",
-            "//div[@id='iua4t01i-6hsw']//input",
-            "//div[@id='o980k4fe-2y4a']//input"
-        ]
-        # 全部新增日期xpath
-        self.all_date_add_xpath_list = [
-            "//div[@id='ivzp0tp3-1gv1']//input",
-            "//div[@id='286ikb30-1smd']//input",
-            "//div[@id='nbhi76gx-mgte']//input",
-            "//div[@id='qflptks0-ih0r']//input",
-            "//div[@id='590jff7w-u7gr']//input",
-            "//div[@id='8xprmwmu-m2yq']//input",
-            "//div[@id='14hiitwt-1xmq']//input"
-        ]
-        # 全部编辑日期xpath
-        self.all_date_edit_xpath_list = [
-            "//div[@id='ubx7lg4c-x5hz']//input",
-            "//div[@id='htlt8ouo-yec3']//input",
-            "//div[@id='rhvit36u-0mqj']//input",
-            "//div[@id='qrlbmg4p-wytp']//input",
-            "//div[@id='jpiq1g64-lvd6']//input",
-            "//div[@id='zc1uqf4r-q3xt']//input",
-            "//div[@id='iu2qnneh-z5p3']//input"
+            "//div[@id='09w4bb17-u8r1']//input",
+            "//div[@id='h28itby9-4l9e']//input",
+            "//div[@id='kaclahjx-tpv5']//input"
         ]
 
-    @allure.story("添加未领料明细信息 不填写数据点击确认 不允许提交")
+    @allure.story("添加收货场所信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_addfail(self, login_to_item):
+    def test_materialDelArea_addfail(self, login_to_item):
+        sleep(3)
+        divs = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
+        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+        if len(find_layout) == 0 and len(divs) > 1:
+            layout = "测试布局A"
+            self.item.add_layout(layout)
+            # 获取布局名称的文本元素
+            name = self.item.get_find_element_xpath(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            ).text
         # 点击新增按钮
         self.item.click_add_button()
         # 点击确定
@@ -146,37 +86,24 @@ class TestItemPage:
         # 声明必填项的xpath和判断的边框颜色
         color_value = "rgb(255, 0, 0)"
         # 获取必填项公共方法判断颜色的结果
-        val = self.item.add_none([
-            "//div[@id='p34nag46-7evf']//input",
-            "//div[@id='x1k7t87i-tvc3']//input",
-            "//div[@id='hpjqsv1m-5607']//input",
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='ctfddy1k-hbmj']//div[1]"
-        ], color_value)
+        val = self.item.add_none(self.req_input_add_xpath_list, color_value)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert val
         assert not self.item.has_fail_message()
 
-    @allure.story("添加未领料明细信息，有多个必填只填写一项，不允许提交")
+    @allure.story("添加收货场所信息，有多个必填只填写一项，不允许提交")
     # @pytest.mark.run(order=2)
-    def test_unpickedMaterialDetails_addcodefail(self, login_to_item):
-        sleep(3)
-        divs = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
-        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
-        if len(find_layout) == 0 and len(divs) > 1:
-            layout = "测试布局A"
-            self.item.add_layout(layout)
+    def test_materialDelArea_addcodefail(self, login_to_item):
         # 点击新增按钮
         self.item.click_add_button()
         # 输入第一个必填项
-        self.item.enter_texts("//div[@id='p34nag46-7evf']//input", "text1231")
+        self.item.enter_texts("//div[@id='lfqwszyk-n29u']//input", "text1231")
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 声明必填项的xpath和判断的边框颜色
         xpath_list = [
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='x1k7t87i-tvc3']//input"
+            "//div[@id='323e9o6g-i39o']//input"
         ]
         color_value = "rgb(255, 0, 0)"
         # 获取必填项公共方法判断颜色的结果
@@ -187,7 +114,7 @@ class TestItemPage:
 
     @allure.story("添加必填数据成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_addsuccess(self, login_to_item):
+    def test_materialDelArea_addsuccess(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
         # 输入框要修改的值
@@ -196,7 +123,6 @@ class TestItemPage:
         sleep(1)
         # 批量修改输入框
         self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -209,20 +135,16 @@ class TestItemPage:
         sleep(1)
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        # 批量获取日期选择框的value
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
-
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-                len(self.req_input_add_xpath_list) == len(input_values) and
-                len(self.req_date_add_xpath_list) == len(input_values2)
+                len(self.req_input_add_xpath_list) == len(input_values)
         )
         assert not self.item.has_fail_message()
 
     @allure.story("添加数据重复")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_addrepeat(self, login_to_item):
+    def test_materialDelArea_addrepeat(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
 
@@ -233,7 +155,6 @@ class TestItemPage:
         sleep(1)
         # 批量修改输入框
         self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -252,7 +173,7 @@ class TestItemPage:
 
     @allure.story("取消删除数据")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_delcancel(self, login_to_item):
+    def test_materialDelArea_delcancel(self, login_to_item):
 
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
@@ -270,7 +191,7 @@ class TestItemPage:
 
     @allure.story("添加测试数据")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_addsuccess1(self, login_to_item):
+    def test_materialDelArea_addsuccess1(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
         # 输入框要修改的值
@@ -280,7 +201,6 @@ class TestItemPage:
         sleep(1)
         # 批量修改输入框
         self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -293,24 +213,19 @@ class TestItemPage:
         sleep(1)
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        # 批量获取日期选择框的value
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
-
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-                len(self.req_input_add_xpath_list) == len(input_values) and
-                len(self.req_date_add_xpath_list) == len(input_values2)
+                len(self.req_input_add_xpath_list) == len(input_values)
         )
         assert not self.item.has_fail_message()
 
     @allure.story("修改测试数据成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_editcodesuccess(self, login_to_item):
+    def test_materialDelArea_editcodesuccess(self, login_to_item):
 
         # 输入框要修改的值
         text_str = "333"
-        date_str = "2025/07/23 00:00:00"
         # 输入框的xpath
 
 
@@ -319,16 +234,9 @@ class TestItemPage:
         # 点击修改按钮
         self.item.click_edi_button()
         sleep(1)
-        ele = self.item.get_find_element_xpath(
-            "//div[@id='r7rwvvdm-22lu']//input"
-        )
-        # 清空数字输入框
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        sleep(1)
+
         # 批量修改输入框
         self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_edit_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -341,18 +249,16 @@ class TestItemPage:
         sleep(1)
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-                len(self.req_input_edit_xpath_list) == len(input_values) and
-                len(self.req_date_edit_xpath_list) == len(input_values2)
+                len(self.req_input_edit_xpath_list) == len(input_values)
         )
         assert not self.item.has_fail_message()
 
     @allure.story("修改数据重复")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_editrepeat(self, login_to_item):
+    def test_materialDelArea_editrepeat(self, login_to_item):
 
         # 选中1测试A工厂代码
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
@@ -376,7 +282,7 @@ class TestItemPage:
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_delsuccess1(self, login_to_item):
+    def test_materialDelArea_delsuccess1(self, login_to_item):
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -402,7 +308,7 @@ class TestItemPage:
 
     @allure.story("编辑全部选项成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_editnamesuccess(self, login_to_item):
+    def test_materialDelArea_editnamesuccess(self, login_to_item):
 
         # 输入框要修改的值
         text_str = "111"
@@ -413,17 +319,9 @@ class TestItemPage:
         # 点击修改按钮
         self.item.click_edi_button()
         sleep(1)
-        ele = self.item.get_find_element_xpath(
-            "//div[@id='r7rwvvdm-22lu']//input"
-        )
-        # 清空数字输入框
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        sleep(1)
 
         # 批量修改输入框
         self.item.batch_modify_input(self.all_input_edit_xpath_list, text_str)
-        self.item.batch_modify_input(self.all_date_edit_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -436,18 +334,16 @@ class TestItemPage:
         sleep(1)
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(self.all_input_edit_xpath_list, text_str)
-        input_values2 = self.item.batch_acquisition_input(self.all_date_edit_xpath_list, date_str)
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-            len(self.all_input_edit_xpath_list) == len(input_values) and
-            len(self.all_date_edit_xpath_list) == len(input_values2)
+            len(self.all_input_edit_xpath_list) == len(input_values)
         )
         assert not self.item.has_fail_message()
 
     @allure.story("删除测试数据成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_delsuccess2(self, login_to_item):
+    def test_materialDelArea_delsuccess2(self, login_to_item):
 
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
@@ -474,16 +370,16 @@ class TestItemPage:
 
     @allure.story("过滤刷新成功")
     # @pytest.mark.run(order=1)
-    # def test_unpickedMaterialDetails_refreshsuccess(self, login_to_item):
-    #
-    #     filter_results = self.item.filter_method('//span[text()=" 需求来源编码"]/ancestor::div[3]//span//span//span')
-    #     print('filter_results', filter_results)
-    #     assert filter_results
-    #     assert not self.item.has_fail_message()
+    def test_materialDelArea_refreshsuccess(self, login_to_item):
+
+        filter_results = self.item.filter_method('//span[text()=" 收货地代码"]/ancestor::div[3]//span//span//span')
+        print('filter_results', filter_results)
+        assert filter_results
+        assert not self.item.has_fail_message()
 
     @allure.story("新增全部数据测试")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_add_success(self, login_to_item):
+    def test_materialDelArea_add_success(self, login_to_item):
         # 输入框要修改的值
         text_str = "111"
         # 日期要修改的值
@@ -493,8 +389,6 @@ class TestItemPage:
 
         # 批量修改输入框
         self.item.batch_modify_input(self.all_input_add_xpath_list, text_str)
-        # 批量修改日期
-        self.item.batch_modify_input(self.all_date_add_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -507,19 +401,16 @@ class TestItemPage:
         sleep(1)
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(self.all_input_edit_xpath_list, text_str)
-        # 批量获取日期的value
-        date_values = self.item.batch_acquisition_input(self.all_date_edit_xpath_list, date_str)
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
                 len(self.all_input_add_xpath_list) == len(input_values)
-                and len(self.all_date_add_xpath_list) == len(date_values)
         )
         assert not self.item.has_fail_message()
 
     @allure.story("查询测试数据成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_selectcodesuccess(self, login_to_item):
+    def test_materialDelArea_selectcodesuccess(self, login_to_item):
         driver = login_to_item  # WebDriver 实例
         item = WarehouseLocationPage(driver)  # 用 driver 初始化 ItemPage
 
@@ -537,7 +428,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击工厂代码
-        item.click_button('//div[text()="需求来源编码" and contains(@optid,"opt_")]')
+        item.click_button('//div[text()="收货地代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         item.click_button(
@@ -575,7 +466,7 @@ class TestItemPage:
 
     @allure.story("没有数据时显示正常")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_selectnodatasuccess(self, login_to_item):
+    def test_materialDelArea_selectnodatasuccess(self, login_to_item):
 
         # 点击查询
         self.item.click_sel_button()
@@ -591,7 +482,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击交付单号
-        self.item.click_button('//div[text()="需求来源编码" and contains(@optid,"opt_")]')
+        self.item.click_button('//div[text()="收货地代码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         self.item.click_button(
@@ -624,7 +515,7 @@ class TestItemPage:
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
-    def test_unpickedMaterialDetails_delsuccess3(self, login_to_item):
+    def test_materialDelArea_delsuccess3(self, login_to_item):
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -642,9 +533,8 @@ class TestItemPage:
         self.item.click_ref_button()
         sleep(1)
         layout = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
-        layout_name = "测试布局A"
         if len(layout) > 1:
-            self.item.del_layout(layout_name)
+            self.item.del_layout("测试布局A")
         # 定位内容为‘111’的行
         itemdata = self.driver.find_elements(
             By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'

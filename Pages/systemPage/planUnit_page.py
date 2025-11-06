@@ -78,6 +78,8 @@ class PlanUnitPage(BasePage):
     def click_confirm_button(self):
         """点击确认按钮."""
         self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
+        self.wait_for_loading_to_disappear()
+        sleep(1)
 
     def click_all_button(self, name):
         """点击按钮."""
@@ -161,3 +163,4 @@ class PlanUnitPage(BasePage):
         sleep(2)
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()

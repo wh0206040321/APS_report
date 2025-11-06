@@ -132,7 +132,10 @@ class TestSpecPage:
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
-        spec.add_spec_data(name)
+        spec.click_add_button()  # 检查点击添加
+        # 输入代码
+        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
+        spec.enter_texts('(//label[text()="名称"])[1]/parent::div//input', name)
         spec.enter_texts('(//label[text()="显示顺序"])[1]/parent::div//input', name)
         # 点击确定
         spec.click_button(
@@ -154,9 +157,6 @@ class TestSpecPage:
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         name = "111"
         spec.add_spec_data(name)
-        # 点击确定
-        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        spec.wait_for_loading_to_disappear()
         adddata = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]'
         ).text
@@ -170,11 +170,6 @@ class TestSpecPage:
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         name = "111"
         spec.add_spec_data(name)
-        spec.click_add_button()  # 检查点击添加
-
-        # 点击确定
-        spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(2)
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -208,7 +203,10 @@ class TestSpecPage:
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         name = "1测试A"
-        spec.add_spec_data(name)
+        spec.click_add_button()  # 检查点击添加
+        # 输入代码
+        spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
+        spec.enter_texts('(//label[text()="名称"])[1]/parent::div//input', name)
         # 显示颜色下拉框
         spec.click_button('(//label[text()="显示颜色"])[1]/parent::div//i')
         # 显示颜色
@@ -245,7 +243,7 @@ class TestSpecPage:
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', "111")
         # 点击确定
         spec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(2)
+        sleep(1)
         # 获取重复弹窗文字
         error_popup = spec.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -644,7 +642,7 @@ class TestSpecPage:
         spec.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
-        sleep(1)
+        sleep(3)
         specname = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         speccode = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(specname) > 0 and len(speccode) > 0
@@ -950,13 +948,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -977,6 +976,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -993,13 +995,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1020,6 +1023,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -1036,13 +1042,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1063,6 +1070,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -1079,13 +1089,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1106,6 +1117,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -1122,13 +1136,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1149,6 +1164,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -1165,13 +1183,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1192,6 +1211,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -1208,13 +1230,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1235,6 +1258,9 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()
 
@@ -1251,13 +1277,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1279,6 +1306,9 @@ class TestSpecPage:
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
         assert not spec.has_fail_message()
 
     @allure.story("生产特征10增删查改")
@@ -1294,13 +1324,14 @@ class TestSpecPage:
         add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
         add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
         add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
-        if len(add1) == 0:
-            spec.add_spec_data(list_name[0])
-        if len(add2) == 0 and len(add3) == 0:
+        if len(add2) == 0:
             spec.add_spec_data(list_name[1])
-        ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_spec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
         ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
-        assert len(ele0) == len(ele1) == 1
+        assert len(ele1) == 1
 
         edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
         if len(edit) == 0:
@@ -1321,5 +1352,8 @@ class TestSpecPage:
 
         spec.del_spec_data(after_name)
         ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not spec.has_fail_message()

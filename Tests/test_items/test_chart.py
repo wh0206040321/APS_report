@@ -56,7 +56,7 @@ def login_to_chart():
 
 
 @allure.feature("资源甘特图测试用例")
-@pytest.mark.run(order=23)
+@pytest.mark.run(order=24)
 class TestChartPage:
     @allure.story("校验文本框成功")
     # @pytest.mark.run(order=1)

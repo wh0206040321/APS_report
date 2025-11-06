@@ -1223,12 +1223,212 @@ class TestOrderPage:
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]
         ]
-        order.del_loyout(layout)
-        sleep(2)
+        order.del_layout(layout)
+        sleep(5)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
         assert all(len(elements) == 0 for elements in orderdata)
         assert 0 == len(after_layout)
+        assert not order.has_fail_message()
+
+    @allure.story("销售订单增删查改")
+    # @pytest.mark.run(order=1)
+    def test_order_salesorder(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        list_name = ['11销售订单', '11销售订单测试']
+        after_name = '11修改销售订单'
+        order.click_button('//div[text()=" 制造订单 "]')
+        order.click_button('//div[div[text()=" 制造订单 "]]/span')
+        order.click_order_page('销售订单')
+        add1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            order.add_order_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            order.add_order_data(list_name[0])
+            ele0 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            order.edit_order_data(list_name[0], after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        order.select_order_data(after_name)
+        speccode = order.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        order.del_order_data(after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        # 点击获取需求不报错
+        order.click_button('//p[text()="获取需求"]')
+        order.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        message = order.get_find_message()
+        assert message == "成功"
+
+        ele = order.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not order.has_fail_message()
+
+    @allure.story("销售订单增删查改")
+    # @pytest.mark.run(order=1)
+    def test_order_salesorder(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        list_name = ['11销售订单', '11销售订单测试']
+        after_name = '11修改销售订单'
+        order.click_button('//div[text()=" 制造订单 "]')
+        order.click_button('//div[div[text()=" 制造订单 "]]/span')
+        order.click_order_page('销售订单')
+        add1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            order.add_order_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            order.add_order_data(list_name[0])
+            ele0 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            order.edit_order_data(list_name[0], after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        order.select_order_data(after_name)
+        speccode = order.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        order.del_order_data(after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        # 点击获取需求不报错
+        order.click_button('//p[text()="获取需求"]')
+        order.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        message = order.get_find_message()
+        assert message == "成功"
+
+        ele = order.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not order.has_fail_message()
+
+    @allure.story("盘点库存增删查改")
+    # @pytest.mark.run(order=1)
+    def test_order_inventorycount(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        list_name = ['11盘点库存', '11盘点库存测试']
+        after_name = '11修改盘点库存'
+        order.click_button('//div[text()=" 制造订单 "]')
+        order.click_button('//div[div[text()=" 制造订单 "]]/span')
+        order.click_order_page('盘点库存')
+        add1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            order.add_order_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            order.add_order_data(list_name[0])
+            ele0 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            order.edit_order_data(list_name[0], after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        order.select_order_data(after_name)
+        speccode = order.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        order.del_order_data(after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = order.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not order.has_fail_message()
+
+    @allure.story("调整库存增删查改")
+    # @pytest.mark.run(order=1)
+    def test_order_adjustinventory(self, login_to_order):
+        driver = login_to_order  # WebDriver 实例
+        order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        list_name = ['11调整库存', '11调整库存测试']
+        after_name = '11修改调整库存'
+        order.click_button('//div[text()=" 制造订单 "]')
+        order.click_button('//div[div[text()=" 制造订单 "]]/span')
+        order.click_order_page('调整库存')
+        add1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            order.add_order_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            order.add_order_data(list_name[0])
+            ele0 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            order.edit_order_data(list_name[0], after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        order.select_order_data(after_name)
+        speccode = order.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        order.del_order_data(after_name)
+        ele = order.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = order.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
         assert not order.has_fail_message()

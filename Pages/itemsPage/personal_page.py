@@ -143,11 +143,13 @@ class PersonalPage(BasePage):
         if name == 'web' or name == 'ip':
             # 选择服务器类型并保存
             if radio.get_attribute('class') == 'ivu-radio':
+                sleep(2)
                 radio.click()
             self.click_button('//p[text()="保存"]')
         elif name == 'system_webip':
             # 选择本地并设置web服务，然后保存
             if radio.get_attribute('class') != 'ivu-radio':
+                sleep(2)
                 self.click_button('//label[text()=" 本地"]/span')
             self.click_button('//input[@placeholder="请选择"]')
             self.click_button('//span[text()="web服务"]')
@@ -155,6 +157,7 @@ class PersonalPage(BasePage):
         elif name == 'system_ip':
             # 选择本地并设置IP，然后保存
             if radio.get_attribute('class') != 'ivu-radio':
+                sleep(2)
                 self.click_button('//label[text()=" 本地"]/span')
             self.click_button('//input[@placeholder="请选择"]')
             self.click_button('//span[text()="IP"]')
@@ -162,6 +165,7 @@ class PersonalPage(BasePage):
         elif name == 'system_web':
             # 直接保存当前配置，适用于web服务配置
             if radio.get_attribute('class') == 'ivu-radio':
+                sleep(2)
                 radio.click()
             self.click_button('//p[text()="保存"]')
         self.get_find_message()

@@ -1067,3 +1067,426 @@ class TestChangeSpecPage:
         assert 0 == len(after_layout)
         assert not change.has_fail_message()
 
+    @allure.story("生产特征2切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec2(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征22', '1测试生产特征2']
+        after_name = '1修改生产特征22'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(2)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征3切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec3(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征33', '1测试生产特征3']
+        after_name = '1修改生产特征33'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(3)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征4切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec4(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征44', '1测试生产特征4']
+        after_name = '1修改生产特征44'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(4)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征5切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec5(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征55', '1测试生产特征5']
+        after_name = '1修改生产特征55'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(5)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征6切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec6(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征66', '1测试生产特征6']
+        after_name = '1修改生产特征66'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(6)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征7切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec7(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征77', '1测试生产特征7']
+        after_name = '1修改生产特征77'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(7)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征8切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec8(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征88', '1测试生产特征8']
+        after_name = '1修改生产特征88'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(8)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征9切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec9(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征99', '1测试生产特征9']
+        after_name = '1修改生产特征99'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(9)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+
+    @allure.story("生产特征10切换增删查改")
+    # @pytest.mark.run(order=1)
+    def test_changespec_changespec10(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        spec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        list_name = ['1测试生产特征100', '1测试生产特征10']
+        after_name = '1修改生产特征10'
+        spec.click_button('//div[text()=" 生产特征1切换 "]')
+        spec.click_button('//div[div[text()=" 生产特征1切换 "]]/span')
+        spec.click_changespec_num(10)
+        add1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+        add2 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        add3 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(add2) == 0:
+            spec.add_changespec_data(list_name[1])
+        if len(add1) == 0 and len(add3) == 0:
+            spec.add_changespec_data(list_name[0])
+            ele0 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[0]}"]]]/td[2]')
+            assert len(ele0) == 1
+        ele1 = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{list_name[1]}"]]]/td[2]')
+        assert len(ele1) == 1
+
+        edit = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        if len(edit) == 0:
+            spec.edit_changespec_data(list_name[0], after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 1
+
+        spec.select_changespec_data(after_name)
+        speccode = spec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+        ).text
+        # 定位第二行没有数据
+        speccode2 = driver.find_elements(
+            By.XPATH,
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+        )
+        assert speccode == after_name and len(speccode2) == 0
+
+        spec.del_changespec_data(after_name)
+        ele = spec.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{after_name}"]]]/td[2]')
+        assert len(ele) == 0
+
+        ele = spec.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
+        assert not spec.has_fail_message()
+

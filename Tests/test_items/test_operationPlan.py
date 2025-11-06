@@ -56,7 +56,7 @@ def login_to_operationPlan():
 
 
 @allure.feature("工作指示发布表测试用例")
-@pytest.mark.run(order=20)
+@pytest.mark.run(order=21)
 class TestOperationPlanPage:
     @allure.story("不勾选资源不点击时间，点击查询 不允许查询")
     # @pytest.mark.run(order=1)

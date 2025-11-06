@@ -248,7 +248,6 @@ class TestPlanUnitPage:
         sty1 = unit.get_find_element_xpath('(//label[text()="计划单元"])[1]/parent::div//input').get_attribute("disabled")
         sty2 = unit.get_find_element_xpath('(//label[text()="模板名称"])[1]/parent::div//div[@class="ivu-select-selection"]//input[@type="text"]').get_attribute("disabled")
         unit.click_confirm_button()
-        unit.wait_for_loading_to_disappear()
         ele = unit.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{name}"]]/td[3]')
         assert sty1 == sty2 == 'true'
         assert ele.text == '修改计划单元名称'
@@ -257,7 +256,6 @@ class TestPlanUnitPage:
         sleep(1)
         unit.enter_texts('//label[text()="计划单元名称"]/parent::div//input', name)
         unit.click_confirm_button()
-        unit.wait_for_loading_to_disappear()
         ele = unit.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{name}"]]/td[3]')
         assert ele.text == name
         assert not unit.has_fail_message()

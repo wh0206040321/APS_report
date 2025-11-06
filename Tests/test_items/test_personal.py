@@ -61,7 +61,7 @@ def login_to_personal():
 
 
 @allure.feature("个人设置测试用例")
-@pytest.mark.run(order=27)
+@pytest.mark.run(order=28)
 class TestPersonalPage:
     @allure.story("修改密码不符合标准")
     # @pytest.mark.run(order=1)
@@ -456,13 +456,16 @@ class TestPersonalPage:
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
         personal.get_find_message()
         personal.go_engine_page(name='system_web')
-        # 等待下拉框按钮可点击后点击展开
-        dropdown_arrow = wait.until(
-            EC.element_to_be_clickable(
-                (By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]')
-            )
+
+        # 等待 el-loading-spinner 消失
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-spinner"))
         )
-        dropdown_arrow.click()
+        target = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//div[@class="vue-treeselect__control-arrow-container"]'))
+        )
+        sleep(3)
+        target.click()
 
         # 等待第一个方案标签可点击后点击选择
         first_option = wait.until(

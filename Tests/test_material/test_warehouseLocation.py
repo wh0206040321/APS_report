@@ -46,8 +46,9 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_warehouselocation_addfail(self, login_to_item):
         sleep(3)
+        divs = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
         find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
-        if len(find_layout) == 0:
+        if len(find_layout) == 0 and len(divs) > 1:
             layout = "测试布局A"
             self.item.add_layout(layout)
         self.item.click_add_button()
@@ -85,7 +86,7 @@ class TestItemPage:
 
     @allure.story("添加仓库库位信息，只填写工厂代码，不填写仓库编码，不允许提交")
     # @pytest.mark.run(order=2)
-    def test_item_addcodefail(self, login_to_item):
+    def test_warehouselocation_addcodefail(self, login_to_item):
         # driver = login_to_item  # WebDriver 实例
         # item = WarehouseLocationPage(driver)  # 用 driver 初始化 ItemPage
 
@@ -110,7 +111,7 @@ class TestItemPage:
 
     @allure.story("添加数据成功")
     # @pytest.mark.run(order=1)
-    def test_item_addsuccess(self, login_to_item):
+    def test_warehouselocation_addsuccess(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
         # 输入工厂代码
@@ -130,7 +131,7 @@ class TestItemPage:
 
     @allure.story("添加数据重复")
     # @pytest.mark.run(order=1)
-    def test_item_addrepeat(self, login_to_item):
+    def test_warehouselocation_addrepeat(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
         # 输入物料代码
@@ -154,7 +155,7 @@ class TestItemPage:
 
     @allure.story("取消删除数据")
     # @pytest.mark.run(order=1)
-    def test_item_delcancel(self, login_to_item):
+    def test_warehouselocation_delcancel(self, login_to_item):
 
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
@@ -171,7 +172,7 @@ class TestItemPage:
 
     @allure.story("添加测试数据")
     # @pytest.mark.run(order=1)
-    def test_item_addsuccess1(self, login_to_item):
+    def test_warehouselocation_addsuccess1(self, login_to_item):
 
         self.item.click_add_button()  # 检查点击添加
         # 输入工厂代码
@@ -189,7 +190,7 @@ class TestItemPage:
 
     @allure.story("修改工厂代码重复")
     # @pytest.mark.run(order=1)
-    def test_item_editrepeat(self, login_to_item):
+    def test_warehouselocation_editrepeat(self, login_to_item):
 
         # 选中1测试A工厂代码
         self.item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
@@ -213,7 +214,7 @@ class TestItemPage:
 
     @allure.story("修改工厂代码成功")
     # @pytest.mark.run(order=1)
-    def test_item_editcodesuccess(self, login_to_item):
+    def test_warehouselocation_editcodesuccess(self, login_to_item):
         # 选中1测试A物料代码
         self.item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
         # 点击修改按钮
@@ -238,7 +239,7 @@ class TestItemPage:
 
     @allure.story("把修改后的物料代码改回来")
     # @pytest.mark.run(order=1)
-    def test_item_editcodesuccess2(self, login_to_item):
+    def test_warehouselocation_editcodesuccess2(self, login_to_item):
 
         # 选中1测试A物料代码
         self.item.click_button('//tr[./td[2][.//span[contains(text(),"1测试A")]]]/td[2]')
@@ -258,7 +259,7 @@ class TestItemPage:
 
     @allure.story("编辑全部选项成功")
     # @pytest.mark.run(order=1)
-    def test_item_editnamesuccess(self, login_to_item):
+    def test_warehouselocation_editnamesuccess(self, login_to_item):
 
         # 输入框要修改的值
         text_str = "222"
@@ -338,14 +339,14 @@ class TestItemPage:
 
     @allure.story("筛选刷新成功")
     # @pytest.mark.run(order=1)
-    # def test_item_refreshsuccess(self, login_to_item):
+    # def test_warehouselocation_refreshsuccess(self, login_to_item):
     #     filter_results = self.item.filter_method('//span[text()=" 工厂代码"]/ancestor::div[3]//span//span//span')
     #     assert filter_results
     #     assert not self.item.has_fail_message()
 
     @allure.story("查询工厂代码成功")
     # @pytest.mark.run(order=1)
-    def test_item_selectcodesuccess(self, login_to_item):
+    def test_warehouselocation_selectcodesuccess(self, login_to_item):
         driver = login_to_item  # WebDriver 实例
         item = WarehouseLocationPage(driver)  # 用 driver 初始化 ItemPage
 
@@ -401,7 +402,7 @@ class TestItemPage:
 
     @allure.story("没有数据时显示正常")
     # @pytest.mark.run(order=1)
-    def test_item_selectnodatasuccess(self, login_to_item):
+    def test_warehouselocation_selectnodatasuccess(self, login_to_item):
 
         # 点击查询
         self.item.click_sel_button()
@@ -450,7 +451,7 @@ class TestItemPage:
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
-    def test_item_delsuccess3(self, login_to_item):
+    def test_warehouselocation_delsuccess3(self, login_to_item):
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -476,7 +477,7 @@ class TestItemPage:
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
-    def test_item_delsuccess3(self, login_to_item):
+    def test_warehouselocation_delsuccess3(self, login_to_item):
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
@@ -502,7 +503,7 @@ class TestItemPage:
 
     # @allure.story("查询物料名字成功")
     # @pytest.mark.run(order=1)
-    # def test_item_selectnamesuccess(self, login_to_item):
+    # def test_warehouselocation_selectnamesuccess(self, login_to_item):
     #     driver = login_to_item  # WebDriver 实例
     #     item = ItemPage(driver)  # 用 driver 初始化 ItemPage
     #
@@ -556,7 +557,7 @@ class TestItemPage:
 
     # @allure.story("查询物料优先度>60")
     # @pytest.mark.run(order=1)
-    # def test_item_selectsuccess1(self, login_to_item):
+    # def test_warehouselocation_selectsuccess1(self, login_to_item):
     #     driver = login_to_item  # WebDriver 实例
     #     item = ItemPage(driver)  # 用 driver 初始化 ItemPage
     #
@@ -609,7 +610,7 @@ class TestItemPage:
 
     # @allure.story("查询物料名称包含材料并且物料优先度>70")
     # @pytest.mark.run(order=1)
-    # def test_item_selectsuccess2(self, login_to_item):
+    # def test_warehouselocation_selectsuccess2(self, login_to_item):
     #     driver = login_to_item  # WebDriver 实例
     #     item = ItemPage(driver)  # 用 driver 初始化 ItemPage
     #
@@ -749,7 +750,7 @@ class TestItemPage:
 
     # @allure.story("查询物料名称包含材料或物料优先度>70")
     # @pytest.mark.run(order=1)
-    # def test_item_selectsuccess3(self, login_to_item):
+    # def test_warehouselocation_selectsuccess3(self, login_to_item):
     #     driver = login_to_item  # WebDriver 实例
     #     item = ItemPage(driver)  # 用 driver 初始化 ItemPage
     #
@@ -889,7 +890,7 @@ class TestItemPage:
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
-    def test_item_delsuccess(self, login_to_item):
+    def test_warehouselocation_delsuccess(self, login_to_item):
 
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
@@ -916,7 +917,7 @@ class TestItemPage:
 
     @allure.story("删除测试数据成功")
     # @pytest.mark.run(order=1)
-    def test_item_delsuccess1(self, login_to_item):
+    def test_warehouselocation_delsuccess1(self, login_to_item):
 
         # 定位内容为‘1测试A’的行
         self.item.click_button('//tr[./td[2][.//span[text()="1测试A"]]]/td[2]')
@@ -943,7 +944,7 @@ class TestItemPage:
 
     @allure.story("新增全部数据测试")
     # @pytest.mark.run(order=1)
-    def test_item_add_success(self, login_to_item):
+    def test_warehouselocation_add_success(self, login_to_item):
         # 输入框要修改的值
         text_str = "111"
         # 日期要修改的值
@@ -1018,7 +1019,7 @@ class TestItemPage:
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
-    def test_item_delsuccess(self, login_to_item):
+    def test_warehouselocation_delsuccess(self, login_to_item):
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除

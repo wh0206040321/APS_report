@@ -65,6 +65,24 @@ class ProcessPage(BasePage):
         code = [ele.text for ele in eles]
         return code
 
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+            )
+        )
+
     def adds_process(self, name, number):
         self.click_add_button()  # 检查点击添加
         # 输入工序代码
@@ -162,6 +180,7 @@ class ProcessPage(BasePage):
         sleep(2)
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()
 
     def add_input_all(self, name, num):
         """输入框全部输入保存"""

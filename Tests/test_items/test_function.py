@@ -50,7 +50,7 @@ def login_to_function():
 
 
 @allure.feature("导航栏测试用例")
-@pytest.mark.run(order=26)
+@pytest.mark.run(order=27)
 class TestFunctionPage:
     @allure.story("关闭导航栏页面成功")
     # @pytest.mark.run(order=1)

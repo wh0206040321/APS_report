@@ -1007,6 +1007,7 @@ class TestCoveragePage:
         sleep(2)
         # 点击确认删除的按钮
         coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        coverage.wait_for_loading_to_disappear()
         # 等待一段时间，确保删除操作完成
         sleep(1)
 

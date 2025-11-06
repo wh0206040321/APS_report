@@ -210,6 +210,7 @@ class AffairsPage(BasePage):
     def click_add_affairs(self, name="", type="", button: bool = True):
         """点击新增事务"""
         self.click_button('//div[@id="pane-air"]//span[text()="新建事务"]')
+        sleep(3)
         if name:
             self.enter_texts('//div[label[text()="事务名称"]]//input', name)
         if type:

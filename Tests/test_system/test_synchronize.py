@@ -470,7 +470,7 @@ class TestSynchronizePage:
         for name in import_name:
             elements = synchronize.finds_elements(
                 By.XPATH,
-                f'//div[@class="d-alIt-ba cursor-pointer m-l-22 col-black font14"]//li[text()="{name}"]'
+                f'(//li[text()="{name}"])[1]'
             )
             assert len(elements) == 1, f"未找到或找到多个{name}"
         synchronize.click_button('//input[@class="ivu-select-input" and @placeholder="请选择"]')

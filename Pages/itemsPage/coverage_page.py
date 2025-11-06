@@ -91,7 +91,6 @@ class Coverage(BasePage):
             )
         )
 
-
     def batch_modify_inputs(self, xpath_value_map: dict):
         """通过字典批量修改输入框（键为XPath，值为输入内容）"""
         for xpath, value in xpath_value_map.items():

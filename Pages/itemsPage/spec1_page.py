@@ -82,11 +82,11 @@ class Spec1Page(BasePage):
         )
         return message.text
 
-    def get_message(self):
-        """获取信息"""
+    def get_error_message(self):
+        """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
             )
         )
         return message.text
@@ -174,6 +174,7 @@ class Spec1Page(BasePage):
         sleep(2)
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()
 
     def add_input_all(self, name, num):
         """输入框全部输入保存"""
@@ -233,10 +234,12 @@ class Spec1Page(BasePage):
 
     def del_spec_data(self, name):
         """删除数据."""
-        self.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
-        self.click_del_button()  # 检查点击删除
-        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        self.wait_for_loading_to_disappear()
+        eles = self.finds_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
+        if len(eles) == 1:
+            self.click_button(f'//tr[./td[2][.//span[text()="{name}"]]]/td[2]')
+            self.click_del_button()  # 检查点击删除
+            self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            self.wait_for_loading_to_disappear()
 
     def select_spec_data(self, name):
         """查询数据."""

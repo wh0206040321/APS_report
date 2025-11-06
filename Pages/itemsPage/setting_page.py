@@ -156,7 +156,7 @@ class SettingPage(BasePage):
         sleep(2)
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        sleep(1)
+        self.wait_for_loading_to_disappear()
 
     def add_pivot_table(self):
         """添加透视表."""

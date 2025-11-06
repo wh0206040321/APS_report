@@ -114,7 +114,7 @@ class TestSDictionaryPage:
         dictionary.select_input_dictionary(name)
         ele = dictionary.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
         assert ele == name
-        assert message == "保存成功"
+        assert message == "新增成功！"
         assert not dictionary.has_fail_message()
 
     @allure.story("添加同一个分类枚举值，枚举值不同，添加成功")
@@ -140,7 +140,7 @@ class TestSDictionaryPage:
         ele = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]').text
         assert len(eles) == 2
         assert ele == name
-        assert message == "保存成功"
+        assert message == "新增成功！"
         assert not dictionary.has_fail_message()
 
     @allure.story("不允许添加重复枚举值和名称")
@@ -170,6 +170,7 @@ class TestSDictionaryPage:
         dictionary = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         sleep(1)
         name = '1字典1'
+        dictionary.wait_for_loading_to_disappear()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
         dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         dictionary.click_all_button("编辑")
@@ -189,16 +190,17 @@ class TestSDictionaryPage:
         dictionary = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         sleep(1)
         name = '1字典3'
+        dictionary.wait_for_loading_to_disappear()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
         dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         dictionary.click_all_button("编辑")
         dictionary.enter_texts('//div[@id="t5rmb5q4-17fw"]//input', '修改分列')
         dictionary.click_confirm()
-        # message = dictionary.get_find_message()
+        message = dictionary.get_find_message()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="修改分列"])[1]')
         ele = dictionary.get_find_element_xpath(
             f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text
-        # assert message == "编辑成功！"
+        assert message == "编辑成功！"
         assert ele == name
         assert not dictionary.has_fail_message()
 

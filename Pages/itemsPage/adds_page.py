@@ -224,6 +224,7 @@ class AddsPages(BasePage):
         """
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
         self.click_button('//div[text()=" 显示设置 "]')
+        sleep(5)
         ele = self.get_find_element_xpath('(//div[@class="vxe-table--body-wrapper body--wrapper"])[4]')
         self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", ele)
         sleep(1)
