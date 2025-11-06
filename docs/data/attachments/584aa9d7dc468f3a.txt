@@ -1,0 +1,4 @@
+[33mWARNING [0m urllib3.connectionpool:connectionpool.py:868 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPConnectionPool(host='localhost', port=56789): Read timed out. (read timeout=120)")': /session/7ae6db67d8331aebd0f7a4a1ad04df97
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2461864862880
+[33mWARNING [0m urllib3.connectionpool:connectionpool.py:868 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPConnectionPool(host='localhost', port=57085): Read timed out. (read timeout=120)")': /session/fa4bade69086ba314bde0cd469561115
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2461866615776
