@@ -597,18 +597,18 @@ class TestCalendarPage:
         calendar.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]/td[2]'
         )
-        calendardata1 = calendar.get_find_element_xpath(
+        before_data = calendar.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         calendar.click_del_button()  # 点击删除
         calendar.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(1)
-        calendardata = calendar.get_find_element_xpath(
+        after_data = calendar.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-            calendardata != calendardata1
-        ), f"删除后的数据{calendardata}，删除前的数据{calendardata1}"
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not calendar.has_fail_message()
 
     @allure.story("修改生产日历资源成功")

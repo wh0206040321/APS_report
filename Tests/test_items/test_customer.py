@@ -316,7 +316,7 @@ class TestCustomerPage:
         )
         # 点击确定
         customer.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        customer.wait_for_loading_to_disappear()
         # 定位表格内容
         customerdata = customer.get_find_element_xpath(
             f'//tr[./td[2][.//span[contains(text(),"{name}")]]]/td[2]'

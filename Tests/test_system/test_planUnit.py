@@ -154,8 +154,9 @@ class TestPlanUnitPage:
         name = "1测试计划单元标准"
         module = "标准"
         unit.add_plan_unit(name, module)
-        unit.click_confirm_button()
+        unit.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         unit.get_find_message()
+        unit.wait_for_loading_to_disappear()
         unit.select_input(name)
         ele = unit.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         assert len(ele) == 1
@@ -169,8 +170,9 @@ class TestPlanUnitPage:
         name = "1测试计划单元CTB"
         module = "CTB"
         unit.add_plan_unit(name, module)
-        unit.click_confirm_button()
+        unit.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         unit.get_find_message()
+        unit.wait_for_loading_to_disappear()
         unit.select_input(name)
         ele = unit.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         assert len(ele) == 1
@@ -184,8 +186,9 @@ class TestPlanUnitPage:
         name = "1测试计划单元小日程"
         module = "小日程"
         unit.add_plan_unit(name, module)
-        unit.click_confirm_button()
+        unit.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         unit.get_find_message()
+        unit.wait_for_loading_to_disappear()
         unit.select_input(name)
         ele = unit.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         assert len(ele) == 1
@@ -227,8 +230,9 @@ class TestPlanUnitPage:
         name = "1测试A"
         module = "标准"
         unit.add_plan_unit(name, module)
-        unit.click_confirm_button()
+        unit.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         unit.get_find_message()
+        unit.wait_for_loading_to_disappear()
         unit.select_input(name)
         ele = unit.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         assert len(ele) == 1

@@ -58,7 +58,7 @@ def login_to_worktasks():
 
 
 @allure.feature("工作和任务表测试用例")
-@pytest.mark.run(order=16)
+@pytest.mark.run(order=19)
 class TestWorkTasksPage:
     @allure.story("工作明细页面编辑制造数量成功")
     # @pytest.mark.run(order=1)
@@ -109,6 +109,7 @@ class TestWorkTasksPage:
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
         assert wordcode == name and len(wordcode2) == 0
+        assert not word.has_fail_message()
 
     @allure.story("工作明细页面过滤条件查询，设置包含条件查询成功")
     # @pytest.mark.run(order=1)
@@ -161,6 +162,7 @@ class TestWorkTasksPage:
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[6]',
         )
         assert wordcode == name and len(wordcode2) == 0
+        assert not task.has_fail_message()
 
     @allure.story("任务明细页面过滤条件查询，设置包含条件查询成功")
     # @pytest.mark.run(order=1)
@@ -214,6 +216,7 @@ class TestWorkTasksPage:
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[4]',
         )
         assert wordcode == name and len(wordcode2) == 0
+        assert not word.has_fail_message()
 
     @allure.story("工作需求明细页面过滤条件查询，设置包含条件查询成功")
     # @pytest.mark.run(order=1)

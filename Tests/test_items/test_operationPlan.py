@@ -56,7 +56,7 @@ def login_to_operationPlan():
 
 
 @allure.feature("工作指示发布表测试用例")
-@pytest.mark.run(order=21)
+@pytest.mark.run(order=22)
 class TestOperationPlanPage:
     @allure.story("不勾选资源不点击时间，点击查询 不允许查询")
     # @pytest.mark.run(order=1)
@@ -168,7 +168,7 @@ class TestOperationPlanPage:
         operationPlan.click_inputbutton()
         # 选择当前日期（点击带有 today 和 focused 样式的日期单元格）
         operationPlan.click_button(
-            '//span[@class="ivu-date-picker-cells-cell ivu-date-picker-cells-cell-today ivu-date-picker-cells-focused"]'
+            '//span[contains(@class,"ivu-date-picker-cells-cell-today")]/preceding-sibling::span[1]'
         )
         # 点击下月按钮
         operationPlan.click_button('(//span[@class="ivu-picker-panel-icon-btn ivu-date-picker-next-btn ivu-date-picker-next-btn-arrow"])[2]/i')

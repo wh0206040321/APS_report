@@ -649,7 +649,7 @@ class TestCoveragePage:
         sleep(1)
         coverage.click_button('//span[text()=" 更新时间"]/following-sibling::div')
         sleep(1)
-        coveragedata1 = coverage.get_find_element_xpath(
+        before_data = coverage.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         coverage.click_button('(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]')
@@ -657,12 +657,12 @@ class TestCoveragePage:
         coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         coverage.get_find_message()
         sleep(1)
-        coveragerdata = coverage.get_find_element_xpath(
+        after_data = coverage.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                coveragerdata != coveragedata1
-        ), f"删除后的数据{coveragerdata}，删除前的数据{coveragedata1}"
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not coverage.has_fail_message()
 
     @allure.story("添加测试数据")
@@ -972,14 +972,14 @@ class TestCoveragePage:
         coverage.click_button(
             '(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]'
         )
-        coveragedata1 = coverage.get_find_element_xpath(
+        before_data = coverage.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         coverage.click_del_button()  # 点击删除
         coverage.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         coverage.get_find_message()
         sleep(1)
-        coveragedata = coverage.get_find_element_xpath(
+        after_data = coverage.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
@@ -1016,6 +1016,6 @@ class TestCoveragePage:
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
         assert (
-            coveragedata != coveragedata1 and 0 == len(after_layout)
-        ), f"删除后的数据{coveragedata}，删除前的数据{coveragedata1}"
+                len(before_data) == len(after_data) + 1 and 0 == len(after_layout)
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not coverage.has_fail_message()

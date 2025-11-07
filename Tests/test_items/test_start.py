@@ -19,7 +19,7 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @allure.feature("添加物品，添加工艺产能，添加制造订单测试用例")
-@pytest.mark.run(order=20)
+@pytest.mark.run(order=21)
 class TestStartPage:
     @allure.story("添加物品，添加工艺产能，添加制造订单进行排产")
     # @pytest.mark.run(order=1)

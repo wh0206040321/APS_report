@@ -56,7 +56,7 @@ def login_to_sched():
 
 
 @allure.feature("方案管理表测试用例")
-@pytest.mark.run(order=18)
+@pytest.mark.run(order=17)
 class TestSchedPage:
     @allure.story("添加方案管理信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)

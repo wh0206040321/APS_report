@@ -149,8 +149,8 @@ class WorkTasksPage(BasePage):
         )
         sleep(1)
 
-        # 点击确认
-        self.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
+        try:
+            self.click_button(f'(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        except Exception as e:
+            self.click_button(f'(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')
         sleep(3)

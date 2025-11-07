@@ -452,16 +452,16 @@ class TestChangeIPage:
     def test_changeI_delsuccess1(self, login_to_changeI):
         driver = login_to_changeI  # WebDriver 实例
         change = ChangeI(driver)  # 用 driver 初始化 changeI
-        changedata1 = change.get_find_element_xpath(
+        before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         change.del_data()
-        changedata = change.get_find_element_xpath(
+        after_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -651,7 +651,7 @@ class TestChangeIPage:
         change = ChangeI(driver)  # 用 driver 初始化 changeI
         code1 = SharedDataUtil.load_data().get("resource")
         code2 = SharedDataUtil.load_data().get("item1")
-        changedata1 = change.get_find_element_xpath(
+        before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         # 定位第一行
@@ -666,13 +666,13 @@ class TestChangeIPage:
              f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
         # 定位
-        changedata = change.get_find_element_xpath(
+        after_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1 and
-                len(ele) == 0
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+                len(ele) == 0 and
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("取消删除数据")
@@ -955,18 +955,18 @@ class TestChangeIPage:
         driver = login_to_changeI  # WebDriver 实例
         changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
         sleep(1)
-        changedata1 = changeI.get_find_element_xpath(
+        before_data = changeI.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         changeI.del_data()
         changeI.del_data()
         # 定位
-        changedata = changeI.get_find_element_xpath(
+        after_data = changeI.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+                len(before_data) == len(after_data) + 2
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not changeI.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
@@ -1045,17 +1045,17 @@ class TestChangeIPage:
     def test_changeI_deleteall(self, login_to_changeI):
         driver = login_to_changeI  # WebDriver 实例
         changeI = ChangeI(driver)  # 用 driver 初始化 ChangeI
-        changedata1 = changeI.get_find_element_xpath(
+        before_data = changeI.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         changeI.del_data()
         # 定位
-        changedata = changeI.get_find_element_xpath(
+        after_data = changeI.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not changeI.has_fail_message()
 
     @allure.story("删除布局成功")

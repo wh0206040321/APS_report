@@ -61,7 +61,7 @@ def login_to_personal():
 
 
 @allure.feature("个人设置测试用例")
-@pytest.mark.run(order=28)
+@pytest.mark.run(order=29)
 class TestPersonalPage:
     @allure.story("修改密码不符合标准")
     # @pytest.mark.run(order=1)

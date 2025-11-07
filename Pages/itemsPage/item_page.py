@@ -46,6 +46,7 @@ class ItemPage(BasePage):
         self.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         self.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
         self.click_button('(//span[text()="物品"])[1]')  # 点击物品
+        self.wait_for_loading_to_disappear()
 
     def add_item(self, material_code, material_name):
         """添加物料信息.start.py页面使用"""
@@ -65,16 +66,8 @@ class ItemPage(BasePage):
             f'(//span[text()="{material_code}"])[1]/ancestor::tr[1]/td[2]'
         )
         self.click_del_button()  # 点击删除
-        # 点击确定
-        # 找到共同的父元素
-        parent = self.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.get_find_message()
 
     def check_item_exists(self, item_name):
         """检查物料是否存在."""

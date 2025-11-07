@@ -55,7 +55,7 @@ def login_to_previewPlan():
 
 
 @allure.feature("工作指示一览表测试用例")
-@pytest.mark.run(order=22)
+@pytest.mark.run(order=23)
 class TestPreviewPlanPage:
     @allure.story("工作指示发布成功，工作指示一览显示成功")
     # @pytest.mark.run(order=1)

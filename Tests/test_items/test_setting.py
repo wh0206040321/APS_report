@@ -57,7 +57,7 @@ def login_to_setting():
 
 
 @allure.feature("标准应用设置测试用例")
-@pytest.mark.run(order=26)
+@pytest.mark.run(order=27)
 class TestSettingPage:
     @allure.story("不填写布局名称，添加失败")
     # @pytest.mark.run(order=1)

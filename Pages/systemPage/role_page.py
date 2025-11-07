@@ -55,10 +55,10 @@ class RolePage(BasePage):
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()
         self.click_button('//li[text()=" 刷新"]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
 
     # 等待加载遮罩消失
-    def wait_for_loading_to_disappear(self, timeout=10):
+    def wait_for_el_loading_mask(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
 
@@ -101,14 +101,15 @@ class RolePage(BasePage):
         """修改角色管理."""
         add = AddsPages(self.driver)
         self.select_input(before_name)
-        sleep(1)
+        sleep(2)
         self.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
         self.click_all_button("编辑")
+        sleep(1)
         list_ = [
             '//div[label[text()="角色名称"]]//input',
         ]
         add.batch_modify_input(list_, after_name)
-
+        sleep(1)
         list_sel = [
             {"select": '//div[label[text()="计划单元名称"]]//div[@class="ivu-select-selection"]',
              "value": f'//ul[@class="ivu-select-dropdown-list"]/li[text()="{module}"]'},

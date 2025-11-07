@@ -16,7 +16,7 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
 @allure.feature("删除添加的物品，添加的工艺产能，添加的制造订单,删除工作指示测试用例")
-@pytest.mark.run(order=25)
+@pytest.mark.run(order=26)
 class TestDeleteStart:
     @allure.story("删除添加的物品，添加的工艺产能，添加的制造订单,删除工作指示")
     # @pytest.mark.run(order=1)
@@ -60,6 +60,7 @@ class TestDeleteStart:
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
         page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
         page.click_button('(//span[text()="制造订单"])[1]')  # 点击制造订单
+        item.wait_for_loading_to_disappear()
         code = "1测试C"
         order.delete_order(code)
         order.click_ref_button()
@@ -78,7 +79,7 @@ class TestDeleteStart:
         resource2 = shared_data.get("master_res2")
 
         # 等待2秒，以确保数据加载完成
-        sleep(2)
+        item.wait_for_loading_to_disappear()
 
         # 输入订单代码
         previewPlan.enter_texts(
@@ -106,6 +107,7 @@ class TestDeleteStart:
                 previewPlan.click_button(
                     '//div[@class="ivu-modal-confirm-footer"]/button[2]'
                 )
+                item.get_find_message()
 
         # 等待1秒后，检查订单代码为"1测试C订单"的行是否已删除
         sleep(1)

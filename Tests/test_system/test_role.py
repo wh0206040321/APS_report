@@ -293,6 +293,7 @@ class TestRolePage:
     def test_role_updatedata1(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
         role = RolePage(driver)  # 用 driver 初始化 RolePage
+        role.wait_for_el_loading_mask()
         date_driver = DateDriver()
         before_name = "1测试角色代码3"
         after_name = "修改角色名称"
@@ -301,7 +302,9 @@ class TestRolePage:
         sleep(2)
         role.click_all_button("保存")
         message = role.get_find_message()
+        sleep(1)
         role.select_input(before_name)
+        sleep(1)
         ele = role.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{after_name}"]')
 
         driver.refresh()
@@ -323,6 +326,7 @@ class TestRolePage:
     def test_role_updatedata2(self, login_to_role):
         driver = login_to_role  # WebDriver 实例
         role = RolePage(driver)  # 用 driver 初始化 RolePage
+        role.wait_for_el_loading_mask()
         date_driver = DateDriver()
         before_name = "1测试角色代码3"
         module = "1测试计划单元标准"
@@ -335,8 +339,9 @@ class TestRolePage:
         num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
         for i in range(1, num+1):
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
-
+        sleep(1)
         role.enter_texts('//input[@placeholder="请输入关键字筛选"]', '需求管理')
+        sleep(2)
         role.click_button('//div[@class="ivu-tree"]/ul[1]//label/span')
         te = role.get_find_element_xpath('//div[@class="ivu-tree"]/ul[1]//span[@class="font14"]').text
         role.click_all_button("保存")
@@ -364,14 +369,16 @@ class TestRolePage:
         before_name = "1测试角色代码3"
         after_name = "修改角色名称"
         module = "1测试计划单元标准"
+        role.wait_for_el_loading_mask()
         role.select_input(before_name)
         sleep(1)
         role.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
         sleep(1)
         role.click_all_button("编辑")
-        sleep(1)
+        sleep(3)
         num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
         for i in range(1, num + 1):
+            sleep(0.1)
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
 
         role.click_all_button("保存")

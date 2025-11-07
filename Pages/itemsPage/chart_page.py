@@ -23,6 +23,7 @@ class ChartPage(BasePage):
 
     def click_add_button(self):
         """点击添加按钮."""
+        self.wait_for_el_loading_mask()
         self.click_button('//a[@title="添加"]')
 
     def get_find_element_xpath(self, xpath):
@@ -32,7 +33,7 @@ class ChartPage(BasePage):
         except NoSuchElementException:
             return None
 
-    def wait_for_loading_to_disappear(self, timeout=10):
+    def wait_for_el_loading_mask(self, timeout=15):
         """
         显式等待加载遮罩元素消失。
 
@@ -51,7 +52,19 @@ class ChartPage(BasePage):
         )
         sleep(1)
 
-    def clicl_confirm_button(self):
+    def click_resource_confirm_button(self):
         """点击确认按钮."""
         self.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
+
+    def click_order_confirm_button(self):
+        """点击确认按钮."""
+        self.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+        self.wait_for_el_loading_mask()
+
+    def click_close_page(self, name):
+        """点击关闭页面."""
+        self.click_button('//div[text()=" 资源甘特图 "]')
+        self.click_button('//div[div[text()=" 资源甘特图 "]]/span')
+        self.click_button(f'(//span[text()="{name }"])[1]')
+        self.wait_for_el_loading_mask()

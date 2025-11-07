@@ -452,16 +452,16 @@ class TestChangeSpecPage:
     def test_changespec_delsuccess1(self, login_to_changespec):
         driver = login_to_changespec  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        changedata1 = change.get_find_element_xpath(
+        before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         change.del_data()
-        changedata = change.get_find_element_xpath(
+        after_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -658,7 +658,7 @@ class TestChangeSpecPage:
         change.click_button(
             f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
-        changedata1 = change.get_find_element_xpath(
+        before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         change.click_del_button()  # 点击删除
@@ -669,13 +669,13 @@ class TestChangeSpecPage:
             f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
         # 定位
-        changedata = change.get_find_element_xpath(
+        after_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1 and
+                len(before_data) == len(after_data) + 1 and
                 len(ele) == 0
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("取消删除数据")
@@ -1035,7 +1035,7 @@ class TestChangeSpecPage:
             '//div[p[text()="更新时间"]]/div[1]'
         )
         sleep(1)
-        changedata1 = change.get_find_element_xpath(
+        before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         change.click_button(
@@ -1044,12 +1044,12 @@ class TestChangeSpecPage:
         change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         sleep(1)
         # 定位
-        changedata = change.get_find_element_xpath(
+        after_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                changedata != changedata1
-        ), f"删除后的数据{changedata}，删除前的数据{changedata1}"
+                len(before_data) == len(after_data) + 1
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("删除布局成功")
