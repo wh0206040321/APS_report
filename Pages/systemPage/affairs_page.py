@@ -172,6 +172,7 @@ class AffairsPage(BasePage):
     def click_process(self):
         """点击流程"""
         self.click_button('//div[@id="tab-flow"]')
+        sleep(2)
 
     def click_process_log(self):
         """点击流程日志"""

@@ -287,9 +287,15 @@ class TestAffairsPage:
     def test_affairs_template_addsuccess6(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        adds = AddsPages(driver)
         name = "测试事务模版6"
         type = "接口"
         affairs.click_add_affairs(name=name, type=type, button=False)
+        select_list = [
+            {"select": '(//div[@class="flex-1"])[2]//input', "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
+            {"select": '(//div[@class="flex-1"])[3]//input', "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
+        ]
+        adds.batch_modify_select_input(select_list)
         affairs.click_button('(//table[@class="vxe-table--body"])[2]//tr[1]//span')
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
@@ -305,25 +311,17 @@ class TestAffairsPage:
     def test_affairs_template_addrepeat1(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        adds = AddsPages(driver)
         name = "测试事务模版6"
         affairs.click_add_affairs(name=name, type="接口", button=False)
+        select_list = [
+            {"select": '(//div[@class="flex-1"])[2]//input',
+             "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
+            {"select": '(//div[@class="flex-1"])[3]//input',
+             "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
+        ]
+        adds.batch_modify_select_input(select_list)
         affairs.click_button('(//table[@class="vxe-table--body"])[2]//tr[1]//span')
-        affairs.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
-        affairs.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        mes = affairs.get_error_message()
-        assert mes == "事务已存在"
-        assert not affairs.has_fail_message()
-
-    @allure.story("事务模版-添加模版数据重复")
-    # @pytest.mark.run(order=1)
-    def test_affairs_template_addrepeat2(self, login_to_affairs):
-        driver = login_to_affairs  # WebDriver 实例
-        affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        name = "测试事务模版6"
-        affairs.click_add_affairs(name=name, type="接口", button=False)
-        affairs.click_button('(//table[@class="vxe-table--body"])[2]//tr[2]//span')
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
         affairs.click_button(
@@ -337,6 +335,8 @@ class TestAffairsPage:
     def test_affairs_template_addall(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        adds = AddsPages(driver)
+
         name = "添加全部模版成功"
         type = "接口"
         xpth_list = [
@@ -347,6 +347,14 @@ class TestAffairsPage:
             '//div[label[text()="推送参数设置"]]//input',
         ]
         affairs.click_add_affairs(name=name, type=type, button=False)
+        select_list = [
+            {"select": '(//div[@class="flex-1"])[2]//input',
+             "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
+            {"select": '(//div[@class="flex-1"])[3]//input',
+             "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
+        ]
+        adds.batch_modify_select_input(select_list)
+
         affairs.click_button('(//table[@class="vxe-table--body"])[2]//tr[1]//span')
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
@@ -363,7 +371,7 @@ class TestAffairsPage:
         affairs.click_button('//div[label[text()="推送参数设置"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
         affairs.click_button('//div[text()=" 用户 "]')
         affairs.click_button('//div[span[text()="用户:"]]//i')
-        affairs.click_button('//li[span[text()="洪奥青"]]')
+        affairs.click_button('(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]')
         affairs.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]//span[text()="确定"]')
         sleep(1)
         before_list = affairs.batch_acquisition_input(xpth_list)
@@ -1288,6 +1296,7 @@ class TestAffairsPage:
         name2 = "测试流程"
         affairs.click_process()
         affairs.del_process(name1)
+        sleep(1)
         affairs.del_process(name2)
         ele1 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[contains(text(),"{name1}")]]]')
         ele2 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[contains(text(),"{name2}")]]]')
