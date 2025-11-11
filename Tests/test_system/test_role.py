@@ -367,7 +367,6 @@ class TestRolePage:
         role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
         before_name = "1测试角色代码3"
-        after_name = "修改角色名称"
         module = "1测试计划单元标准"
         role.wait_for_el_loading_mask()
         role.select_input(before_name)
@@ -376,10 +375,10 @@ class TestRolePage:
         sleep(1)
         role.click_all_button("编辑")
         sleep(3)
-        num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
+        num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span[@class="ivu-checkbox"]'))
         for i in range(1, num + 1):
             sleep(0.1)
-            role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
+            role.click_button(f'(//div[@class="ivu-tree"]//li/label/span[@class="ivu-checkbox"])[{i}]')
 
         role.click_all_button("保存")
         message = role.get_find_message()
@@ -408,6 +407,7 @@ class TestRolePage:
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             role.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            role.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         role.click_button('//div[p[text()="角色代码"]]/following-sibling::div//input')
         eles = role.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')

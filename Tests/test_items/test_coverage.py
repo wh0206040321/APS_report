@@ -661,7 +661,7 @@ class TestCoveragePage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                len(before_data) == len(after_data) + 1
+                before_data != after_data
         ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not coverage.has_fail_message()
 

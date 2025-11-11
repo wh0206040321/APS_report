@@ -878,6 +878,7 @@ class TestSAppsPage:
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             apps.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            apps.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         apps.click_button('//div[div[p[text()="应用代码"]]]//input')
         eles = apps.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')

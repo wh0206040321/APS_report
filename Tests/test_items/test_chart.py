@@ -49,6 +49,8 @@ def login_to_chart():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划可视化图表"])[1]')  # 点击计划可视化图表
         page.click_button('(//span[text()="资源甘特图"])[1]')  # 点击资源甘特图
+        chart = ChartPage(driver)
+        chart.wait_for_el_loading_mask()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -174,7 +176,8 @@ class TestChartPage:
         chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
         chart.click_button('//a[@title="设置"]')
         chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
-        chart.click_button('(//span[@class="ivu-select-selected-value"])[2]')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
         chart.click_button('(//li[text()="显示顺序"])[1]')
         chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
         chart.click_button('(//li[text()="升序"])[1]')
@@ -193,7 +196,8 @@ class TestChartPage:
         chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
         chart.click_button('//a[@title="设置"]')
         chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
-        chart.click_button('(//span[@class="ivu-select-selected-value"])[2]')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
         chart.click_button('(//li[text()="资源代码顺序"])[1]')
         chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
         chart.click_button('(//li[text()="降序"])[1]')
@@ -751,7 +755,8 @@ class TestChartPage:
         chart.click_close_page('订单甘特图')
         chart.click_button('//a[@title="设置"]')
         chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
-        chart.click_button('(//span[@class="ivu-select-selected-value"])[2]')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
         chart.click_button('(//li[text()="显示顺序"])[1]')
         chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
         chart.click_button('(//li[text()="升序"])[1]')
@@ -771,7 +776,8 @@ class TestChartPage:
         chart.click_close_page('订单甘特图')
         chart.click_button('//a[@title="设置"]')
         chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
-        chart.click_button('(//span[@class="ivu-select-selected-value"])[2]')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
         chart.click_button('(//li[text()="订单优先度顺序"])[1]')
         chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
         chart.click_button('(//li[text()="降序"])[1]')
@@ -910,4 +916,907 @@ class TestChartPage:
         assert "ivu-switch ivu-switch-checked ivu-switch-small" in button.get_attribute(
             "class"
         )
+        assert not chart.has_fail_message()
+
+    @allure.story("校验文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_textverify(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+        chart.click_order_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == name:
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+                )
+            )
+        )
+        assert element.text == name
+        assert not chart.has_fail_message()
+
+    @allure.story("添加布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_addlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', "测试布局")
+        chart.click_order_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == "测试布局":
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]',
+                )
+            )
+        )
+        assert element.text == "测试布局"
+        assert not chart.has_fail_message()
+
+    @allure.story("修改布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_editlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        wait = WebDriverWait(driver, 10)
+        chart.click_close_page('订单关联甘特图')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]'
+        )
+        chart.click_button('//a[@title="设置"]')
+        input_text = chart.get_find_element_xpath(
+            '//label[text()="布局名称"]/following-sibling::div//input'
+        )
+        input_text.send_keys(Keys.CONTROL + "a")
+        input_text.send_keys(Keys.DELETE)
+        chart.enter_texts(
+            '//label[text()="布局名称"]/following-sibling::div//input', "测试布局修改"
+        )
+        chart.click_order_confirm_button()
+        sleep(1)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+                )
+            )
+        )
+        assert element.text == "测试布局修改"
+        assert not chart.has_fail_message()
+
+    @allure.story("删除布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_deletelayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]/span'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_order_confirm_button()
+        ele = driver.find_elements(
+            By.XPATH,
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+        )
+        assert len(ele) == 0
+        assert not chart.has_fail_message()
+
+    @allure.story("排序方案可选择-显示顺序-升序")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_sort1(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
+        chart.click_button('(//li[text()="显示顺序"])[1]')
+        chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
+        chart.click_button('(//li[text()="升序"])[1]')
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        chart.wait_for_el_loading_mask()
+        ele = chart.get_find_element_xpath(
+            '//label[text()="排序方法"]/following-sibling::div//input'
+        )
+        assert "ME.DisplayOrder,a" in ele.get_attribute("value")
+        assert not chart.has_fail_message()
+
+    @allure.story("排序方案可选择-资源代码顺序-降序")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_sort2(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
+        chart.click_button('(//li[text()="订单优先度顺序"])[1]')
+        chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
+        chart.click_button('(//li[text()="降序"])[1]')
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        chart.wait_for_el_loading_mask()
+        ele = chart.get_find_element_xpath(
+            '//label[text()="排序方法"]/following-sibling::div//input'
+        )
+        assert "ME.Priority,d" in ele.get_attribute("value")
+        assert not chart.has_fail_message()
+
+    @allure.story("筛选方法可使用")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_filter(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//label[text()="筛选方法"]/following-sibling::div//i')
+        ele = chart.get_find_element_xpath('//span[text()="添加覆盖日历。"]')
+        action = ActionChains(driver)
+        action.double_click(ele)
+        action.perform()
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        chart.wait_for_el_loading_mask()
+        ele = chart.get_find_element_xpath(
+            '//label[text()="筛选方法"]/following-sibling::div//input'
+        )
+        assert (
+                "AddOCalendar(Me.OperationMainRes,#2006/10/01 00:00:00#,#2006/10/15 00:00:00#,1)"
+                in ele.get_attribute("value")
+        )
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮显示文字开关可关闭")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_button1(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        if (
+                button.get_attribute("class")
+                == "ivu-switch ivu-switch-checked ivu-switch-small"
+        ):
+            chart.click_button(
+                '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-small" in button.get_attribute("class")
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮显示文字开关可开启")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_button2(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        if button.get_attribute("class") == "ivu-switch ivu-switch-small":
+            chart.click_button(
+                '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+        sleep(1)
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-checked ivu-switch-small" in button.get_attribute(
+            "class"
+        )
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮自动刷新开关可关闭")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_button3(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        if (
+                button.get_attribute("class")
+                == "ivu-switch ivu-switch-checked ivu-switch-small"
+        ):
+            chart.click_button(
+                '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+        sleep(1)
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-small" in button.get_attribute("class")
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮自动刷新开关可开启")
+    # @pytest.mark.run(order=1)
+    def test_orderAssociationChart_button4(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('订单关联甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        if button.get_attribute("class") == "ivu-switch ivu-switch-small":
+            chart.click_button(
+                '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+        sleep(1)
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-checked ivu-switch-small" in button.get_attribute(
+            "class"
+        )
+        assert not chart.has_fail_message()
+
+    @allure.story("校验文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_textverify(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+        chart.click_order_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == name:
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+                )
+            )
+        )
+        assert element.text == name
+        assert not chart.has_fail_message()
+
+    @allure.story("添加布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_addlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', "测试布局")
+        chart.click_order_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == "测试布局":
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]',
+                )
+            )
+        )
+        assert element.text == "测试布局"
+        assert not chart.has_fail_message()
+
+    @allure.story("修改布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_editlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        wait = WebDriverWait(driver, 10)
+        chart.click_close_page('负荷甘特图')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]'
+        )
+        chart.click_button('//a[@title="设置"]')
+        input_text = chart.get_find_element_xpath(
+            '//label[text()="布局名称"]/following-sibling::div//input'
+        )
+        input_text.send_keys(Keys.CONTROL + "a")
+        input_text.send_keys(Keys.DELETE)
+        chart.enter_texts(
+            '//label[text()="布局名称"]/following-sibling::div//input', "测试布局修改"
+        )
+        chart.click_order_confirm_button()
+        sleep(1)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+                )
+            )
+        )
+        assert element.text == "测试布局修改"
+        assert not chart.has_fail_message()
+
+    @allure.story("删除布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_deletelayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]/span'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_order_confirm_button()
+        ele = driver.find_elements(
+            By.XPATH,
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+        )
+        assert len(ele) == 0
+        assert not chart.has_fail_message()
+
+    @allure.story("排序方案可选择-显示顺序-升序")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_sort1(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
+        chart.click_button('(//li[text()="显示顺序"])[1]')
+        chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
+        chart.click_button('(//li[text()="升序"])[1]')
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        chart.wait_for_el_loading_mask()
+        ele = chart.get_find_element_xpath(
+            '//label[text()="排序方法"]/following-sibling::div//input'
+        )
+        assert "ME.DisplayOrder,a" in ele.get_attribute("value")
+        assert not chart.has_fail_message()
+
+    @allure.story("排序方案可选择-资源代码顺序-降序")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_sort2(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
+        chart.click_button('//div[@class="right"]/button[2]')
+        chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
+        chart.click_button('(//li[text()="订单优先度顺序"])[1]')
+        chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
+        chart.click_button('(//li[text()="降序"])[1]')
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        chart.wait_for_el_loading_mask()
+        ele = chart.get_find_element_xpath(
+            '//label[text()="排序方法"]/following-sibling::div//input'
+        )
+        assert "ME.Priority,d" in ele.get_attribute("value")
+        assert not chart.has_fail_message()
+
+    @allure.story("筛选方法可使用")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_filter(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//label[text()="筛选方法"]/following-sibling::div//i')
+        ele = chart.get_find_element_xpath('//span[text()="添加覆盖日历。"]')
+        action = ActionChains(driver)
+        action.double_click(ele)
+        action.perform()
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
+        chart.wait_for_el_loading_mask()
+        ele = chart.get_find_element_xpath(
+            '//label[text()="筛选方法"]/following-sibling::div//input'
+        )
+        assert (
+                "AddOCalendar(Me.OperationMainRes,#2006/10/01 00:00:00#,#2006/10/15 00:00:00#,1)"
+                in ele.get_attribute("value")
+        )
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮显示文字开关可关闭")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_button1(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        if (
+                button.get_attribute("class")
+                == "ivu-switch ivu-switch-checked ivu-switch-small"
+        ):
+            chart.click_button(
+                '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-small" in button.get_attribute("class")
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮显示文字开关可开启")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_button2(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        if button.get_attribute("class") == "ivu-switch ivu-switch-small":
+            chart.click_button(
+                '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+        sleep(1)
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="按钮显示文字"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-checked ivu-switch-small" in button.get_attribute(
+            "class"
+        )
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮自动刷新开关可关闭")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_button3(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        if (
+                button.get_attribute("class")
+                == "ivu-switch ivu-switch-checked ivu-switch-small"
+        ):
+            chart.click_button(
+                '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+        sleep(1)
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-small" in button.get_attribute("class")
+        assert not chart.has_fail_message()
+
+    @allure.story("按钮自动刷新开关可开启")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_button4(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        if button.get_attribute("class") == "ivu-switch ivu-switch-small":
+            chart.click_button(
+                '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+            )
+        chart.click_order_confirm_button()
+        sleep(1)
+        chart.click_button('//a[@title="设置"]')
+        button = chart.get_find_element_xpath(
+            '(//label[text()="自动刷新"]/following-sibling::div//span)[1]'
+        )
+        assert "ivu-switch ivu-switch-checked ivu-switch-small" in button.get_attribute(
+            "class"
+        )
+        assert not chart.has_fail_message()
+
+    @allure.story("显示表格成功")
+    # @pytest.mark.run(order=1)
+    def test_loadChart_displaytable(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('负荷甘特图')
+
+        chart.click_button('//a[@title="显示表格"]')
+        ele = chart.get_find_element_xpath(
+            '//table[@class="vxe-table--header"]//tr/th[1]'
+        ).text
+        assert ele == "序号"
+
+    @allure.story("校验文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_psiChart_textverify(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('PSI透视表')
+        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+        chart.click_resource_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == name:
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+                )
+            )
+        )
+        assert element.text == name
+        assert not chart.has_fail_message()
+
+    @allure.story("添加布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_psiChart_addlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('PSI透视表')
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', "测试布局")
+        chart.click_button('//label[text()="空白"]')
+        chart.click_resource_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == "测试布局":
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]',
+                )
+            )
+        )
+        assert element.text == "测试布局"
+        assert not chart.has_fail_message()
+
+    # @allure.story("修改布局名称成功")
+    # # @pytest.mark.run(order=1)
+    # def test_psiChart_editlayout(self, login_to_chart):
+    #     driver = login_to_chart  # WebDriver 实例
+    #     chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+    #     wait = WebDriverWait(driver, 10)
+    #     chart.click_close_page('PSI透视表')
+    #     chart.click_button(
+    #         '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]'
+    #     )
+    #     chart.click_button('//a[@title="设置"]')
+    #     input_text = chart.get_find_element_xpath(
+    #         '//label[text()="布局名称"]/following-sibling::div//input'
+    #     )
+    #     input_text.send_keys(Keys.CONTROL + "a")
+    #     input_text.send_keys(Keys.DELETE)
+    #     chart.enter_texts(
+    #         '//label[text()="布局名称"]/following-sibling::div//input', "测试布局修改"
+    #     )
+    #     chart.click_resource_confirm_button()
+    #     sleep(1)
+    #     element = wait.until(
+    #         EC.presence_of_element_located(
+    #             (
+    #                 By.XPATH,
+    #                 '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+    #             )
+    #         )
+    #     )
+    #     assert element.text == "测试布局修改"
+    #     assert not chart.has_fail_message()
+
+    @allure.story("设置数据源，不填写数据")
+    # @pytest.mark.run(order=1)
+    def test_psiChart_psi1(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('PSI透视表')
+        chart.click_button('//a[@title="设置"]')
+        chart.click_button('//button[span[text()="设置"]]')
+        chart.click_button('//input[@placeholder="请选择"]')
+        chart.click_button('//li[text()="APS_Item "]')
+        # chart.enter_texts('//input[@placeholder="请选择"]', 'APS_Item')
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
+        sleep(2)
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+        message = chart.get_find_message()
+        ele = chart.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert message == "保存成功"
+        assert len(ele) == 0
+
+    @allure.story("设置数据源，填写数据成功")
+    # @pytest.mark.run(order=1)
+    def test_psiChart_psi2(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('PSI透视表')
+        chart.click_button('//a[@title="设置"]')
+        # chart.click_button('//button[span[text()="设置"]]')
+        # chart.click_button('//input[@placeholder="请选择"]')
+        # chart.click_button('//li[text()="APS_Item "]')
+        # chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
+        text_elements = [
+            '//div[span[text()=" Code(物料代码) "]]',
+            '//div[span[text()=" Name(物料名称) "]]',
+            '//div[span[text()=" Type(物料种类) "]]',
+        ]
+
+        input_elements = [
+            '(//div[@class="axis"])[1]',
+            '(//div[@class="axis"])[2]',
+            '(//div[@class="axis"])[3]',
+        ]
+
+        # 使用循环进行拖放操作
+        for text_xpath, input_xpath in zip(text_elements, input_elements):
+            text_element = chart.get_find_element_xpath(text_xpath)
+            input_element = chart.get_find_element_xpath(input_xpath)
+            ActionChains(driver).drag_and_drop(text_element, input_element).perform()
+
+        sleep(2)
+        chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[2]')
+        message = chart.get_find_message()
+        ele = chart.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert message == "保存成功"
+        assert len(ele) == 0
+
+    @allure.story("删除布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_psiChart_deletelayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('PSI透视表')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]/span'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_resource_confirm_button()
+        sleep(1)
+        ele = driver.find_elements(
+            By.XPATH,
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]',
+        )
+        assert len(ele) == 0
+        assert not chart.has_fail_message()
+
+    @allure.story("校验文本框成功")
+    # @pytest.mark.run(order=1)
+    def test_workSequenceChart_textverify(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('工作顺序表')
+        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+        chart.click_resource_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == name:
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+                )
+            )
+        )
+        assert element.text == name
+        assert not chart.has_fail_message()
+
+    @allure.story("添加布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_workSequenceChart_addlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('工作顺序表')
+        chart.click_add_button()
+        chart.enter_texts('//input[@placeholder="请输入名称"]', "测试布局")
+        chart.click_order_confirm_button()
+        eles = driver.find_elements(
+            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+        )
+        i = 0
+        while i < len(eles):
+            if eles[i].text == "测试布局":
+                break
+            i += 1
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]',
+                )
+            )
+        )
+        assert element.text == "测试布局"
+        assert not chart.has_fail_message()
+
+    @allure.story("修改布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_workSequenceChart_editlayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        wait = WebDriverWait(driver, 10)
+        chart.click_close_page('工作顺序表')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局"]'
+        )
+        chart.click_button('//a[@title="设置"]')
+        input_text = chart.get_find_element_xpath(
+            '//label[text()="布局名称"]/following-sibling::div//input'
+        )
+        input_text.send_keys(Keys.CONTROL + "a")
+        input_text.send_keys(Keys.DELETE)
+        chart.enter_texts(
+            '//label[text()="布局名称"]/following-sibling::div//input', "测试布局修改"
+        )
+        chart.click_order_confirm_button()
+        sleep(1)
+        element = wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+                )
+            )
+        )
+        assert element.text == "测试布局修改"
+        assert not chart.has_fail_message()
+
+    @allure.story("删除布局名称成功")
+    # @pytest.mark.run(order=1)
+    def test_workSequenceChart_deletelayout(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('工作顺序表')
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_button(
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]/span'
+        )
+        chart.wait_for_el_loading_mask()
+        chart.click_order_confirm_button()
+        sleep(1)
+        ele = driver.find_elements(
+            By.XPATH,
+            '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
+        )
+        assert len(ele) == 0
+        assert not chart.has_fail_message()
+
+    @allure.story("计划评估对比不选数据点击查询")
+    # @pytest.mark.run(order=1)
+    def test_planEvaluationChart_select1(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('计划评估对比')
+        chart.click_button('//button//span[text()="重置选择"]')
+        sleep(1)
+        chart.click_button('//button//span[text()="查询"]')
+        message = chart.get_error_message()
+        assert message == "请选择版本和指标"
+        assert not chart.has_fail_message()
+
+    @allure.story("计划评估对比点击查询成功")
+    # @pytest.mark.run(order=1)
+    def test_planEvaluationChart_select2(self, login_to_chart):
+        driver = login_to_chart  # WebDriver 实例
+        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+        chart.click_close_page('计划评估对比')
+        chart.click_button('//button//span[text()="重置选择"]')
+        sleep(1)
+        chart.click_button('//div[@id="s6zctuz5-ki6s"]//i')
+        chart.click_button('(//div[@class="vxe-list--body"])[2]/div[1]')
+        chart.click_button('//span[text()="计划指标对比分析"]')
+
+        chart.click_button('//div[@id="pn3920a4-o9ru"]//i')
+        sleep(2)
+        ele1 = chart.get_find_element_xpath('(//div[@class="vxe-list--body"])[2]/div[2]/span').text
+        chart.click_button('(//div[@class="vxe-list--body"])[2]/div[2]')
+        chart.click_button('//span[text()="计划指标对比分析"]')
+
+        chart.click_button('//button//span[text()="查询"]')
+        chart.wait_for_el_loading_mask()
+        sleep(1)
+        ele2 = chart.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[1]').text
+        assert ele1 == ele2
         assert not chart.has_fail_message()

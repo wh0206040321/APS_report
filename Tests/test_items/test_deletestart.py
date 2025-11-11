@@ -166,7 +166,7 @@ class TestDeleteStart:
             sleep(1)
         safe_quit(driver)
 
-    @allure.story("删除销售订单，盘点库存，调整库存数据")
+    @allure.story("删除计划需求，盘点库存，调整库存数据")
     # @pytest.mark.run(order=1)
     def test_delete_orders(self):
         """初始化并返回 driver"""
@@ -181,7 +181,7 @@ class TestDeleteStart:
         page.login(date_driver.username, date_driver.password, date_driver.planning)
         spec.click_button(f'(//span[text()="计划管理"])[1]')
         spec.click_button(f'(//span[text()="计划业务数据"])[1]')
-        list_ = ['销售订单', '盘点库存', '调整库存']
+        list_ = ['计划需求', '盘点库存', '调整库存']
         for i in range(0, 3):
             spec.click_button(f'(//span[text()="{list_[i]}"])[1]')
             spec.del_spec_data(f'11{list_[i]}测试')

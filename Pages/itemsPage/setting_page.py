@@ -84,7 +84,11 @@ class SettingPage(BasePage):
 
     def click_confirm_button(self):
         """点击确认按钮."""
-        self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        try:
+            self.click_button('(//div[@class="demo-drawer-footer"])[3]//span[text()="确定"]')
+        except Exception:
+            # 如果第一个点不了，就点另一个
+            self.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
 
     def add_layout_ok(self, layout):

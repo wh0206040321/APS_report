@@ -707,6 +707,7 @@ class TestSMenuPage:
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             menu.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            menu.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         menu.click_button('//div[div[span[text()=" 组件代码"]]]/div[3]//input')
         eles = menu.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')

@@ -153,6 +153,7 @@ class TestsInterfaceExecutionPage:
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             interface.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            interface.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         interface.click_button('//div[p[text()="接口名称"]]/following-sibling::div//input')
         eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')

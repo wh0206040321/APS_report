@@ -777,6 +777,7 @@ class TestSModulePage:
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             module.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            module.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//input')
         eles = module.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')

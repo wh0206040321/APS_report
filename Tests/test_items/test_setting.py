@@ -935,7 +935,7 @@ class TestSettingPage:
         setting.click_button('//li[text()="APS_Item "]')
 
         # 等待加载
-        sleep(1)
+        sleep(2)
 
         # 输入并选择Type
         setting.enter_texts(
@@ -983,19 +983,10 @@ class TestSettingPage:
         setting.click_button('//div[@class="queryBtn"]/button[1]')
 
         # 等待加载
-        sleep(1)
+        setting.wait_for_loading_to_disappear()
 
-        # 获取并记录P选项的结果
-        Ptext1 = setting.get_find_element_xpath(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr[1]/td[5]'
-        ).text
-
-        # 等待加载
-        sleep(1)
-
-        Ptext2 = setting.get_find_element_xpath(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr[2]/td[5]'
-        ).text
+        eles = setting.loop_judgment('(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr/td[5]')
+        assert all(ele == '完成品' for ele in eles)
 
         # 点击重置按钮
         setting.click_button('//div[@class="queryBtn"]/button[2]')
@@ -1013,24 +1004,13 @@ class TestSettingPage:
         setting.click_button(
             '//div[text()="物料种类"]/following-sibling::div//i[@class="ivu-icon ivu-icon-ios-arrow-down ivu-select-arrow"]'
         )
-
         # 点击查询按钮
         setting.click_button('//div[@class="queryBtn"]/button[1]')
-
         # 等待加载
-        sleep(1)
+        setting.wait_for_loading_to_disappear()
 
-        # 获取并记录I选项的结果
-        Itext1 = setting.get_find_element_xpath(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr[1]/td[5]'
-        ).text
-
-        # 等待加载
-        sleep(1)
-
-        Itext2 = setting.get_find_element_xpath(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr[2]/td[5]'
-        ).text
+        eles = setting.loop_judgment('(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr/td[5]')
+        assert all(ele == '中间品' for ele in eles)
 
         # 点击重置按钮
         setting.click_button('//div[@class="queryBtn"]/button[2]')
@@ -1051,31 +1031,12 @@ class TestSettingPage:
 
         # 点击查询按钮
         setting.click_button('//div[@class="queryBtn"]/button[1]')
-
         # 等待加载
-        sleep(1)
-
-        # 获取并记录M选项的结果
-        Mtext1 = setting.get_find_element_xpath(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr[1]/td[5]'
-        ).text
-
-        # 等待加载
-        sleep(1)
-
-        Mtext2 = setting.get_find_element_xpath(
-            '(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr[2]/td[5]'
-        ).text
-
-        # 断言所有结果一致且符合预期
-        assert (
-            Ptext1 == Ptext2
-            and Itext1 == Itext2
-            and Mtext1 == Mtext2
-            and Ptext1 == "完成品"
-            and Itext1 == "中间品"
-            and Mtext1 == "原材料"
-        )
+        setting.wait_for_loading_to_disappear()
+        eles = setting.loop_judgment('(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]/table//tr/td[5]')
+        assert all(ele == '原材料' for ele in eles)
+        ele = setting.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        assert len(ele) == 0
         assert not setting.has_fail_message()
 
     @allure.story("快速查询两个条件显示正确")

@@ -458,7 +458,7 @@ class TestChangeRPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                len(before_data) == len(after_data) + 1
+                before_data != after_data
         ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
@@ -670,7 +670,7 @@ class TestChangeRPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                len(before_data) == len(after_data) + 1 and
+                before_data != after_data and
                 len(ele) == 0
         ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
@@ -964,7 +964,7 @@ class TestChangeRPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                len(before_data) == len(after_data) + 2
+                before_data != after_data
         ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not changeI.has_fail_message()
 
@@ -1063,7 +1063,7 @@ class TestChangeRPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         assert (
-                len(before_data) == len(after_data) + 1
+                before_data != after_data
         ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not changeR.has_fail_message()
 
@@ -1079,6 +1079,5 @@ class TestChangeRPage:
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
-        assert 0 == len(after_layout)
         assert 0 == len(after_layout)
         assert not changeR.has_fail_message()

@@ -236,7 +236,12 @@ class AddsPages(BasePage):
             num = self.get_find_element_xpath(
                 '(//div[@class="vxe-table--fixed-left-wrapper"])[2]//table[@class="vxe-table--body"]//tr[last()]//div').text
         sleep(0.5)
-        self.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
+        try:
+            self.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
+        except Exception:
+            # 如果第一个点不了，就点另一个
+            self.click_button('(//div[@class="demo-drawer-footer"])[3]//span[text()="确定"]')
+
         self.wait_for_loading_to_disappear()
         return num
 

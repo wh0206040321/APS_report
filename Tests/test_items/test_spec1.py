@@ -776,7 +776,7 @@ class TestSpecPage:
         spec.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
-        sleep(1)
+        spec.wait_for_loading_to_disappear()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 
