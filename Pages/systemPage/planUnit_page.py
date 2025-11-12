@@ -121,6 +121,7 @@ class PlanUnitPage(BasePage):
     def del_all(self, value=[]):
         for index, v in enumerate(value, start=1):
             try:
+                self.wait_for_loading_to_disappear()
                 xpath = '//p[text()="计划单元"]/ancestor::div[2]//input'
                 ele = self.get_find_element_xpath(xpath)
                 ele.send_keys(Keys.CONTROL, "a")

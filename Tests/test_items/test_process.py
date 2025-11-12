@@ -210,6 +210,7 @@ class TestProcessPage:
         name = "111"
         num = "60"
         process.adds_process(name, num)
+        sleep(2)
         # 获取重复弹窗文字
         error_popup = process.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'

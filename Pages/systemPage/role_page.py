@@ -93,7 +93,7 @@ class RolePage(BasePage):
 
         list_sel = [
             {"select": '//div[label[text()="计划单元名称"]]//div[@class="ivu-select-selection"]',
-             "value": f'//li[text()="{module}"]'},
+             "value": f'//div[label[text()="计划单元名称"]]//li[text()="{module}"]'},
         ]
         add.batch_modify_select_input(list_sel)
 

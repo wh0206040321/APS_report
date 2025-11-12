@@ -150,6 +150,20 @@ class TestSMenuPage:
         assert message == "记录已存在,请检查！"
         assert not menu.has_fail_message()
 
+    @allure.story("修改重复需求来源编码不允许修改")
+    # @pytest.mark.run(order=1)
+    def test_menu_update(self, login_to_materialRequirementsDefinition):
+        driver = login_to_menu  # WebDriver 实例
+        menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        value = "ABCDAA"
+        menu.select_input_menu(value)
+        menu.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{value}"]')
+        menu.click_all_button("编辑")
+        sleep(2)
+        ele = menu.get_find_element_xpath('//div[@id="0lollcex-w9k3"]//input')
+        assert not ele.is_enabled()
+        assert not menu.has_fail_message()
+
     @allure.story("修改组件名称，图标成功")
     # @pytest.mark.run(order=1)
     def test_menu_updatesuccess1(self, login_to_menu):

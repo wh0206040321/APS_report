@@ -114,6 +114,9 @@ class UserRolePage(BasePage):
 
     def select_input(self, name):
         """选择输入框."""
+        ele = self.get_find_element_xpath('//div[div[p[text()="用户代码"]]]//input')
+        ele.send_keys(Keys.CONTROL, 'a')
+        ele.send_keys(Keys.DELETE)
         self.enter_texts('//div[div[p[text()="用户代码"]]]//input', name)
 
     def click_sel_button(self):

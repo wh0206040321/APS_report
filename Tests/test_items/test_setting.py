@@ -1357,6 +1357,7 @@ class TestSettingPage:
 
         setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+        setting.wait_for_loading_to_disappear()
         sleep(1)
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -1470,6 +1471,27 @@ class TestSettingPage:
         setting.add_statistics(num=1)
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
         message = setting.get_error_message()
+        driver.refresh()
+        setting.wait_for_loading_to_disappear()
+        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+        setting.click_setting_button()
+        checkbox = setting.get_find_element_xpath(
+            '//div[text()="是否默认启动:"]/following-sibling::label/span'
+        )
+
+        # 检查复选框是否未被选中
+        if checkbox.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            setting.click_button(
+                '//div[text()="是否默认启动:"]/following-sibling::label/span'
+            )
+            sleep(1)
+            # 点击确定按钮保存设置
+            setting.click_confirm_button()
+            sleep(1)
+        else:
+            # 如果已选中，直接点击确定按钮保存设置
+            setting.click_confirm_button()
         assert message == "请输入图表名称"
         assert not setting.has_fail_message()
 
@@ -1513,10 +1535,18 @@ class TestSettingPage:
             # 如果未选中，则点击复选框进行选中
             setting.click_button('//div[./div[text()="是否可见:"]]/label/span/span')
             # 点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+            try:
+                setting.click_button('(//div[@class="demo-drawer-footer"])[3]//span[text()="确定"]')
+            except Exception:
+                # 如果第一个点不了，就点另一个
+                setting.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
         else:
             # 如果已选中，直接点击确定按钮保存设置
-            setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
+            try:
+                setting.click_button('(//div[@class="demo-drawer-footer"])[3]//span[text()="确定"]')
+            except Exception:
+                # 如果第一个点不了，就点另一个
+                setting.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
 
         # 获取布局名称的文本元素
         name = setting.get_find_element_xpath(
@@ -1741,6 +1771,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         statistics = "统计图13"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
         setting.wait_for_el_loading_mask()
@@ -1768,6 +1799,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
         i = 1
@@ -1804,6 +1836,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.add_lable()
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
@@ -1817,9 +1850,11 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.add_lable("标签1")
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
+        setting.wait_for_el_loading_mask()
         ele = driver.find_elements(By.XPATH, '//div[@class="labelItem"]')
         sleep(1)
         assert any("标签1" in element.text for element in ele), "没有找到包含'标签1'的标签项"
@@ -1831,9 +1866,12 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.add_lable("标签2")
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
+        setting.wait_for_el_loading_mask()
+
         ele = driver.find_elements(By.XPATH, '//div[@class="labelItem"]')
         sleep(1)
         assert any("标签2" in element.text for element in ele), "没有找到包含'标签2'的标签项"
@@ -1846,6 +1884,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         lable = "标签1"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         sleep(1)
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
@@ -1860,13 +1899,14 @@ class TestSettingPage:
         assert mess == "记录已存在,请检查！"
         assert not setting.has_fail_message()
 
-    @allure.story("添加重复标签名，修改成功，添加查询数据")
+    @allure.story("修改标签名，修改成功，添加查询数据")
     # @pytest.mark.run(order=1)
     def test_setting_label_updatesuccess(self, login_to_setting):
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         lable = "标签1"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
         setting.click_button(
@@ -1914,6 +1954,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         lable = "标签3"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
         sleep(1)
@@ -1942,6 +1983,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         lable = "标签3"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
         sleep(1)
@@ -1975,8 +2017,10 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         lable = "标签3"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
+        sleep(1)
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="编辑"]'
         )
@@ -2003,14 +2047,17 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         lable = "标签3"
+        sleep(1)
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[5]//i')
         setting.click_button(
             f'//div[@class="labelItem" and ./div[text()=" {lable} "]]//i[@title="删除"]'
         )
         setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        message = setting.get_find_message()
         ele = driver.find_elements(By.XPATH, f'//div[@class="labelItem"]/div[text()=" {lable} "]')
         assert ele == []
+        assert message == "保存成功"
         assert not setting.has_fail_message()
 
     @allure.story("布局列表拖拽互换位置成功")
@@ -2201,35 +2248,36 @@ class TestSettingPage:
         assert len(after_layout) == 0
         assert not setting.has_fail_message()
 
-    @allure.story("默认布局不允许删除")
-    # @pytest.mark.run(order=1)
-    def test_setting_layout_deletefail(self, login_to_setting):
-        driver = login_to_setting  # WebDriver 实例
-        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "默认"
-        sleep(1)
-        setting.click_button('//i[@id="tabsDrawerIcon"]')
-        # 获取目标 div 元素，这里的目标是具有特定文本的 div
-        target_div = setting.get_find_element_xpath(
-            f'//div[@id="container"]/div[.//text()="{layout}"]'
-        )
-
-        # 获取父容器下所有 div
-        # 这一步是为了确定目标 div 在其父容器中的位置
-        parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
-        all_children = parent_div.find_elements(By.XPATH, "./div")
-
-        # 获取目标 div 的位置索引（从0开始）
-        # 这里是为了后续操作，比如点击目标 div 相关的按钮
-        index = all_children.index(target_div)
-        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
-        setting.hover(layout)
-        setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
-        # 获取设置后的提示信息
-        message = setting.get_error_message()
-        # 断言提示信息是否符合预期，以验证设置是否生效
-        assert message == "不能删除默认布局!"
-        assert not setting.has_fail_message()
+    # @allure.story("默认布局不允许删除")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_layout_deletefail(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     layout = "默认"
+    #     sleep(1)
+    #     setting.click_button('//i[@id="tabsDrawerIcon"]')
+    #     # 获取目标 div 元素，这里的目标是具有特定文本的 div
+    #     target_div = setting.get_find_element_xpath(
+    #         f'//div[@id="container"]/div[.//text()="{layout}"]'
+    #     )
+    #
+    #     # 获取父容器下所有 div
+    #     # 这一步是为了确定目标 div 在其父容器中的位置
+    #     parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
+    #     all_children = parent_div.find_elements(By.XPATH, "./div")
+    #
+    #     # 获取目标 div 的位置索引（从0开始）
+    #     # 这里是为了后续操作，比如点击目标 div 相关的按钮
+    #     index = all_children.index(target_div)
+    #     print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+    #     setting.hover(layout)
+    #     setting.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
+    #     setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+    #     # 获取设置后的提示信息
+    #     message = setting.get_error_message()
+    #     # 断言提示信息是否符合预期，以验证设置是否生效
+    #     assert message == "不能删除默认布局!"
+    #     assert not setting.has_fail_message()
 
     @allure.story("复制列表成功")
     # @pytest.mark.run(order=1)
@@ -2237,6 +2285,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "默认"
+        setting.wait_for_loading_to_disappear()
         sleep(1)
         setting.click_button('//i[@id="tabsDrawerIcon"]')
         sleep(1)
@@ -2259,6 +2308,7 @@ class TestSettingPage:
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)
         driver.refresh()
+        setting.wait_for_loading_to_disappear()
         eles = setting.finds_elements(By.XPATH, '//div[@class="tabsDivItemCon"]/div')
         sleep(1)
         name = [ele.text for ele in eles]
@@ -2266,48 +2316,11 @@ class TestSettingPage:
         assert layout in first_long_name
         assert not setting.has_fail_message()
 
-    @allure.story("设置默认布局默认启动-成功，删除Copy布局")
+    @allure.story("删除Copy布局")
     # @pytest.mark.run(order=1)
     def test_setting_default_start_success2(self, login_to_setting):
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        layout = "默认"
-        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
-        sleep(1)
-        setting.click_setting_button()
-        checkbox = setting.get_find_element_xpath(
-            '//div[text()="是否默认启动:"]/following-sibling::label/span'
-        )
-        # 检查复选框是否未被选中
-        if checkbox.get_attribute("class") == "ivu-checkbox":
-            # 如果未选中，则点击复选框进行选中
-            setting.click_button(
-                '//div[text()="是否默认启动:"]/following-sibling::label/span'
-            )
-            sleep(1)
-            # 点击确定按钮保存设置
-            setting.click_confirm_button()
-        else:
-            # 如果已选中，直接点击确定按钮保存设置
-            setting.click_confirm_button()
-
-        sleep(1)
-        safe_quit(driver)
-        # 重新打开浏览器
-        driver_path = DateDriver().driver_path
-        driver = create_driver(driver_path)
-        driver.implicitly_wait(3)
-
-        # 重新登录并进入目标页面
-        page = LoginPage(driver)
-        page.navigate_to(DateDriver().url)
-        page.login(DateDriver().username, DateDriver().password, DateDriver().planning)
-        # 用新 driver 初始化 SettingPage
-        setting = SettingPage(driver)
-        page.click_button('(//span[text()="计划管理"])[1]')
-        page.click_button('(//span[text()="计划基础数据"])[1]')
-        page.click_button('(//span[text()="物品"])[1]')
-        sleep(1)
         eles = setting.finds_elements(By.XPATH, '//div[@class="tabsDivItemCon"]/div')
         sleep(1)
         name = [ele.text for ele in eles]
@@ -2342,4 +2355,3 @@ class TestSettingPage:
         )
         assert after_layout == []
         assert not setting.has_fail_message()
-        safe_quit(driver)

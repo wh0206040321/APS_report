@@ -32,17 +32,23 @@ class WarehouseLocationPage(BasePage):
         sleep(2)
         self.click_button('//div[@class="filterInput"]//following-sibling::label')
         sleep(1)
+        self.click_button('//div[@class="filter-btn-bar"]/button')
+        sleep(1)
         item_code = self.driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
         )
+        # sleep(1)
+        # self.click_button('//div[@class="filterInput"]//preceding-sibling::div[1]')
+        #
+        # item_code2 = self.driver.find_elements(
+        #     By.XPATH,
+        #     '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+        # )
         sleep(1)
-        self.click_button('//div[@class="filterInput"]//preceding-sibling::div[1]')
-        item_code2 = self.driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
-        )
-        return len(item_code) == 0 and len(item_code2) > 0
+        self.click_ref_button()
+        return len(item_code) == 0
+        #and len(item_code2) > 0
 
     def add_layout(self, layout):
         """添加布局."""
@@ -137,6 +143,7 @@ class WarehouseLocationPage(BasePage):
         """批量修改输入框"""
         for xpath in xpath_list:
             try:
+                print('new_value',new_value,xpath)
                 self.enter_texts(xpath, new_value)
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")

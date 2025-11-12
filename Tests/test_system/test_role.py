@@ -154,6 +154,7 @@ class TestRolePage:
         for i in range(1, num+1):
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
         role.click_all_button("保存")
+        role.get_find_message()
         role.right_refresh()
         role.select_input(name)
         sleep(2)
@@ -199,6 +200,7 @@ class TestRolePage:
         role.click_button('//div[@class="ivu-tree"]/ul[1]//label/span')
         te = role.get_find_element_xpath('//div[@class="ivu-tree"]/ul[1]//span[@class="font14"]').text
         role.click_all_button("保存")
+        role.get_find_message()
         role.right_refresh()
         role.select_input(name)
         ele = role.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
@@ -258,6 +260,51 @@ class TestRolePage:
         for i in range(1, num+1):
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
         role.click_all_button("保存")
+        role.get_find_message()
+        role.right_refresh()
+        role.select_input(name)
+        ele = role.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+
+        role.click_button('(//span[text()="用户权限管理"])[1]')
+        role.enter_texts('//div[div[p[text()="用户代码"]]]//input', date_driver.username)
+        sleep(1)
+        role.click_button(f'(//table[@class="vxe-table--body"]//span[text()="{date_driver.username}"])[1]')
+        role.click_all_button("编辑")
+
+        role.select_input(name)
+        sleep(2)
+        role.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]')
+        role.click_all_button("保存")
+        message = role.get_find_message()
+
+        driver.refresh()
+        role.click_button(f'//div[contains(text(),"{date_driver.planning}")]')
+
+        role.click_button(f'//ul/li[text()="{module}"]')
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH, '//div[@class="loadingbox"]')
+            )
+        )
+        num_ = len(role.finds_elements(By.XPATH, f'//div[@class="listDivCon"]/div'))
+        swich_name = role.get_find_element_xpath(f'//div[@class="ivu-dropdown-rel"]/div').text
+        assert len(ele) == 1 and message == "保存成功" and num_ >= 7 and swich_name == module
+        assert not role.has_fail_message()
+
+    @allure.story("添加测试数据")
+    # @pytest.mark.run(order=1)
+    def test_role_addtestdata1(self, login_to_role):
+        driver = login_to_role  # WebDriver 实例
+        role = RolePage(driver)  # 用 driver 初始化 RolePage
+        date_driver = DateDriver()
+        name = "1测试角色代码4"
+        module = "1测试计划单元CTB"
+        role.add_role(name, module)
+        num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
+        for i in range(1, num + 1):
+            role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
+        role.click_all_button("保存")
+        role.get_find_message()
         role.right_refresh()
         role.select_input(name)
         ele = role.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
@@ -328,8 +375,8 @@ class TestRolePage:
         role = RolePage(driver)  # 用 driver 初始化 RolePage
         role.wait_for_el_loading_mask()
         date_driver = DateDriver()
-        before_name = "1测试角色代码3"
-        module = "1测试计划单元标准"
+        before_name = "1测试角色代码4"
+        module = "1测试计划单元CTB"
         role.select_input(before_name)
         sleep(1)
         role.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
@@ -358,42 +405,6 @@ class TestRolePage:
         num_ = len(role.finds_elements(By.XPATH, f'//div[@class="listDivCon"]/div'))
         swich_name = role.get_find_element_xpath(f'//div[@class="ivu-dropdown-rel"]/div').text
         assert message == "保存成功" and num_ == 1 and swich_name == module and te == "需求管理"
-        assert not role.has_fail_message()
-
-    @allure.story("修改菜单成功，并且可切换计划单元")
-    # @pytest.mark.run(order=1)
-    def test_role_updatedata3(self, login_to_role):
-        driver = login_to_role  # WebDriver 实例
-        role = RolePage(driver)  # 用 driver 初始化 RolePage
-        date_driver = DateDriver()
-        before_name = "1测试角色代码3"
-        module = "1测试计划单元标准"
-        role.wait_for_el_loading_mask()
-        role.select_input(before_name)
-        sleep(1)
-        role.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
-        sleep(1)
-        role.click_all_button("编辑")
-        sleep(3)
-        num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span[@class="ivu-checkbox"]'))
-        for i in range(1, num + 1):
-            sleep(0.1)
-            role.click_button(f'(//div[@class="ivu-tree"]//li/label/span[@class="ivu-checkbox"])[{i}]')
-
-        role.click_all_button("保存")
-        message = role.get_find_message()
-        driver.refresh()
-        role.click_button(f'//div[contains(text(),"{date_driver.planning}")]')
-
-        role.click_button(f'//ul/li[text()="{module}"]')
-        WebDriverWait(driver, 10).until(
-            EC.invisibility_of_element_located(
-                (By.XPATH, '//div[@class="loadingbox"]')
-            )
-        )
-        num_ = len(role.finds_elements(By.XPATH, f'//div[@class="listDivCon"]/div'))
-        swich_name = role.get_find_element_xpath(f'//div[@class="ivu-dropdown-rel"]/div').text
-        assert message == "保存成功" and num_ >= 7 and swich_name == module
         assert not role.has_fail_message()
 
     @allure.story("过滤条件查询，一个不选，显示正常")

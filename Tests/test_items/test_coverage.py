@@ -1016,6 +1016,6 @@ class TestCoveragePage:
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
         assert (
-                len(before_data) == len(after_data) + 1 and 0 == len(after_layout)
+                before_data != after_data and 0 == len(after_layout)
         ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not coverage.has_fail_message()

@@ -889,14 +889,28 @@ class TestUserRolePage:
         driver = login_to_userrole  # WebDriver 实例
         user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
         username = DateDriver().username
-        name = "1测试角色代码2"
+        name1 = "1测试角色代码2"
         # 取消当前用户选中的角色
         user.select_input(username)
         user.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{username}"]')
         sleep(1)
         user.click_all_button("编辑")
         sleep(1)
-        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name)
+        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name1)
+        sleep(1)
+        user.click_button('//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox is--checked"]')
+        user.click_all_button("保存")
+        user.get_find_message()
+        user.right_refresh()
+
+        name2 = "1测试角色代码4"
+        # 取消当前用户选中的角色
+        user.select_input(username)
+        user.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{username}"]')
+        sleep(1)
+        user.click_all_button("编辑")
+        sleep(1)
+        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name2)
         sleep(1)
         user.click_button('//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox is--checked"]')
         user.click_all_button("保存")
@@ -907,9 +921,9 @@ class TestUserRolePage:
         WebDriverWait(driver, 10).until(
             EC.invisibility_of_element_located((By.XPATH, "//div[@class='el-loading-mask']"))
         )
-        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name)
+        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name1)
         sleep(1)
-        user.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name}"]')
+        user.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name1}"]')
         user.click_all_button("删除")
         user.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         user.get_find_message()
@@ -917,10 +931,30 @@ class TestUserRolePage:
         WebDriverWait(driver, 10).until(
             EC.invisibility_of_element_located((By.XPATH, "//div[@class='el-loading-mask']"))
         )
-        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name)
-        eles = user.finds_elements(By.XPATH,
-                                   f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name}"]')
-        assert len(eles) == 0
+
+        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name2)
+        sleep(1)
+        user.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name2}"]')
+        user.click_all_button("删除")
+        user.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        user.get_find_message()
+        user.right_refresh('角色管理')
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.XPATH, "//div[@class='el-loading-mask']"))
+        )
+
+        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name1)
+        eles1 = user.finds_elements(By.XPATH,
+                                   f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name1}"]')
+        user.get_find_message()
+        user.right_refresh('角色管理')
+        WebDriverWait(driver, 10).until(
+            EC.invisibility_of_element_located((By.XPATH, "//div[@class='el-loading-mask']"))
+        )
+        user.enter_texts('//div[div[p[text()="角色代码"]]]//input', name2)
+        eles2 = user.finds_elements(By.XPATH,
+                                   f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{name2}"]')
+        assert len(eles1) == 0 and len(eles2) == 0
         assert not user.has_fail_message()
 
     @allure.story("已删除的用户不能登录")
@@ -951,12 +985,13 @@ class TestUserRolePage:
         value = ['1测试计划单元CTB', '1测试计划单元小日程',
                  '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         plan.del_all(value)
+        sleep(2)
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:3]
         ]
         plan.del_layout(layout)
-        sleep(2)
+        sleep(3)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

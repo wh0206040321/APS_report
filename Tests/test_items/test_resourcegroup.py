@@ -419,7 +419,7 @@ class TestResourceGroupPage:
 
         # 点击确定
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        resource.wait_for_loading_to_disappear()
         # 定位表格内容
         resourcename = resource.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr/td[3]/div'
