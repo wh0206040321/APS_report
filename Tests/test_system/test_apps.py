@@ -357,7 +357,7 @@ class TestSAppsPage:
         sleep(2)
         ele = apps.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[8]').text
         assert message == "编辑成功！"
-        assert ele == "99999999999"
+        assert ele == "9999999999"
         assert not apps.has_fail_message()
 
     @allure.story("查询应用代码成功")

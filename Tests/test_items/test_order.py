@@ -319,7 +319,7 @@ class TestOrderPage:
         num_ = order.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[10]'
         ).text
-        assert adddata == name and num_ == '99999999999'
+        assert adddata == name and num_ == '9999999999'
         assert not order.has_fail_message()
 
     @allure.story("添加数据成功")

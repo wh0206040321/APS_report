@@ -67,10 +67,10 @@ class TestsWorkProgressPage:
     def test_workprogress_ref(self, login_to_workprogress):
         driver = login_to_workprogress  # WebDriver 实例
         work = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        work.wait_for_loading_to_disappear()
+        work.wait_for_el_loading_mask()
         work.enter_texts('//div[p[text()="订单代码"]]/following-sibling::div//input', '123')
         work.click_all_button("刷新")
-        work.wait_for_loading_to_disappear()
+        work.wait_for_el_loading_mask()
         text = work.get_find_element_xpath('//div[p[text()="订单代码"]]/following-sibling::div//input').get_attribute('value')
         ele = work.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0 and text == ''
@@ -81,7 +81,7 @@ class TestsWorkProgressPage:
     def test_workprogress_select(self, login_to_workprogress):
         driver = login_to_workprogress  # WebDriver 实例
         work = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        work.wait_for_loading_to_disappear()
+        work.wait_for_el_loading_mask()
         name = "1"
         work.click_button('//div[p[text()="订单代码"]]/following-sibling::div//i')
         work.hover("包含")

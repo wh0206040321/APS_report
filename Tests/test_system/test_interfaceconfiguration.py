@@ -123,7 +123,7 @@ class TestSInterfaceConfigurationPage:
         interfaceconfiguration.click_confirm()
         message = interfaceconfiguration.get_find_message()
         driver.refresh()
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         sleep(1)
 
         text = interfaceconfiguration.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{input_value}"]').text
@@ -197,7 +197,7 @@ class TestSInterfaceConfigurationPage:
         interfaceconfiguration.click_confirm()
         message = interfaceconfiguration.get_find_message()
         driver.refresh()
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         sleep(1)
 
         text = interfaceconfiguration.get_find_element_xpath(
@@ -227,7 +227,7 @@ class TestSInterfaceConfigurationPage:
     def test_interfaceconfiguration_select1(self, login_to_interfaceconfiguration):
         driver = login_to_interfaceconfiguration  # WebDriver 实例
         interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         interfaceconfiguration.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         sleep(1)
         eles = interfaceconfiguration.get_find_element_xpath('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
@@ -246,7 +246,7 @@ class TestSInterfaceConfigurationPage:
     def test_interfaceconfiguration_select2(self, login_to_interfaceconfiguration):
         driver = login_to_interfaceconfiguration  # WebDriver 实例
         interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         name = "1测试"
         interfaceconfiguration.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         interfaceconfiguration.hover("包含")
@@ -264,7 +264,7 @@ class TestSInterfaceConfigurationPage:
     def test_interfaceconfiguration_select3(self, login_to_interfaceconfiguration):
         driver = login_to_interfaceconfiguration  # WebDriver 实例
         interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         name = "1"
         interfaceconfiguration.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         interfaceconfiguration.hover("符合开头")
@@ -282,7 +282,7 @@ class TestSInterfaceConfigurationPage:
     def test_interfaceconfiguration_select4(self, login_to_interfaceconfiguration):
         driver = login_to_interfaceconfiguration  # WebDriver 实例
         interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         name = "2"
         interfaceconfiguration.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         interfaceconfiguration.hover("符合结尾")
@@ -300,7 +300,7 @@ class TestSInterfaceConfigurationPage:
     def test_interfaceconfiguration_clear(self, login_to_interfaceconfiguration):
         driver = login_to_interfaceconfiguration  # WebDriver 实例
         interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interfaceconfiguration.wait_for_loading_to_disappear()
+        interfaceconfiguration.wait_for_el_loading_mask()
         name = "3"
         sleep(1)
         interfaceconfiguration.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')

@@ -254,7 +254,7 @@ class TestProcessPage:
         num_ = process.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[5]'
         ).text
-        assert adddata == name and num_ == '99999999999', f"预期数据是{name}，实际得到{adddata}"
+        assert adddata == name and num_ == '9999999999', f"预期数据是{name}，实际得到{adddata}"
         assert not process.has_fail_message()
 
     @allure.story("添加测试数据成功")

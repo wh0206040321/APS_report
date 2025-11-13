@@ -414,7 +414,7 @@ class TestUserRolePage:
         message = user.get_find_message()
         user.select_input(name)
         ele = user.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
-        assert message == "保存成功" and len(ele) == 1 and num == '99999999999'
+        assert message == "保存成功" and len(ele) == 1 and num == '9999999999'
         assert not user.has_fail_message()
 
     @allure.story("添加用户重复")

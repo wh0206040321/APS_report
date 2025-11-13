@@ -118,6 +118,17 @@ class MaterialControlDefinition(BasePage):
         self.enter_texts(xpath, name)
         sleep(1)
 
+    def select_input_mcd(self, name):
+        """选择供应来源编码输入框."""
+        self.wait_for_loading_to_disappear()
+        xpath = '//div[p[text()="供应来源编码"]]/following-sibling::div//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+        sleep(1)
+
     def double_click_th_dropdown_box(self, xpath_list=[]):
         """双击下拉框并点击下拉值，如果第一次点击不到则再次双击再点击"""
         for idx, d in enumerate(xpath_list, start=1):
@@ -139,6 +150,7 @@ class MaterialControlDefinition(BasePage):
             sleep(1)
 
     def add_data(self, value, num=1):
+        """添加物控需求定义数据."""
         adds = AddsPages(self.driver)
         self.click_all_button("新增")
         sleep(1)
@@ -184,6 +196,55 @@ class MaterialControlDefinition(BasePage):
             "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]//li[8]'
         }]
         self.double_click_th_dropdown_box(last_)
+        self.click_confirm()
+
+    def add_supply_data(self, value, num=1):
+        """添加物控供应定义数据."""
+        adds = AddsPages(self.driver)
+        self.click_all_button("新增")
+        sleep(1)
+        self.click_button('//div[div[text()="标准供应设置-新增"]]//i[@title="最大化"]')
+        input_list = [
+            '//div[div[text()=" 供应来源编码: "]]//input',
+            '//div[div[text()=" 供应来源名称: "]]//input',
+            '//div[div[text()=" 供应来源顺序: "]]//input',
+        ]
+        select_list = [
+            {"select": '//div[div[text()=" 数据库名称: "]]//input[@class="ivu-select-input"]',
+             "value": f'(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[1]/li[{num}]'},
+            {"select": '//div[div[text()=" 表或视图名: "]]//input[@class="ivu-select-input"]',
+             "value": '(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[2]/li[text()="APS_Order"]'},
+        ]
+        fields = [
+            "DataSource",
+            "SupplyCode",
+            "SupplyName",
+            "Bussiness_No",
+            "ItemCode",
+            "SupplyDate",
+            "SupplyQty",
+        ]
+
+        table_list = []
+
+        for i, field in enumerate(fields, start=2):  # 从2开始递增
+            entry = {
+                "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="{field}"]]/td[6]',
+                "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="{field}"]]/td[6]//li[{i}]'
+            }
+            table_list.append(entry)
+
+        adds.batch_modify_select_input(select_list)
+        adds.batch_modify_input(input_list, value)
+        self.double_click_th_dropdown_box(table_list)
+
+        # element = self.get_find_element_xpath('(//div[@class="d-flex"]//div[@class="vxe-table--body-wrapper body--wrapper"])[1]')
+        # self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
+        # last_ = [{
+        #     "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]',
+        #     "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]//li[8]'
+        # }]
+        # self.double_click_th_dropdown_box(last_)
         self.click_confirm()
 
     def del_all(self, xpath, value=[]):

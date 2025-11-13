@@ -370,6 +370,153 @@ class TestSynchronizePage:
         assert message == "同步成功"
         assert not synchronize.has_fail_message()
 
+    # @allure.story("同步单个物控计划方案成功")
+    # # @pytest.mark.run(order=1)
+    # def test_synchronize_all_plan(self, login_to_synchronize):
+    #     driver = login_to_synchronize  # WebDriver 实例
+    #     synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
+    #     plan_name = [
+    #         "物控方案(订单级)同步1",
+    #     ]
+    #     plan_names = [
+    #         "1测试计划单元标准",
+    #     ]
+    #     synchronize.click_checkbox_value(plan_name, plan_names, "3")
+    #     synchronize.click_synchronize_button()
+    #     synchronize.click_synchronize_pop(True)
+    #     message = synchronize.get_find_message()
+    #     synchronize.switch_plane(plan_names[0], 3)
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     assert message == "同步成功"
+    #     assert not synchronize.has_fail_message()
+    #
+    # @allure.story("重复同步同一个计划方案不会报错，会继续同步")
+    # # @pytest.mark.run(order=1)
+    # def test_synchronize_all_repeatplan(self, login_to_synchronize):
+    #     driver = login_to_synchronize  # WebDriver 实例
+    #     synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
+    #     plan_name = [
+    #         "物控方案(订单级)同步1",
+    #     ]
+    #     plan_names = [
+    #         "1测试计划单元标准",
+    #     ]
+    #     synchronize.click_checkbox_value(plan_name, plan_names, "3")
+    #     synchronize.click_synchronize_button()
+    #     synchronize.click_synchronize_pop(True)
+    #     message = synchronize.get_find_message()
+    #     synchronize.switch_plane(plan_names[0], 3)
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     assert message == "同步成功"
+    #     assert not synchronize.has_fail_message()
+    #
+    # @allure.story("同步多个计划方案到一个计划单元成功")
+    # # @pytest.mark.run(order=1)
+    # def test_synchronize_all_plan1(self, login_to_synchronize):
+    #     driver = login_to_synchronize  # WebDriver 实例
+    #     synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
+    #     plan_name = [
+    #         "物控方案(订单级)同步1",
+    #         "物控方案(订单级)同步2",
+    #     ]
+    #     plan_names = [
+    #         "1测试计划单元标准",
+    #     ]
+    #     synchronize.click_checkbox_value(plan_name, plan_names, "3")
+    #     synchronize.click_synchronize_button()
+    #     synchronize.click_synchronize_pop(True)
+    #     message = synchronize.get_find_message()
+    #     synchronize.switch_plane(plan_names[0], 3)
+    #
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     assert message == "同步成功"
+    #     assert not synchronize.has_fail_message()
+    #
+    # @allure.story("同步1个计划方案到多个计划单元成功")
+    # # @pytest.mark.run(order=1)
+    # def test_synchronize_all_plan2(self, login_to_synchronize):
+    #     driver = login_to_synchronize  # WebDriver 实例
+    #     synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
+    #     plan_name = [
+    #         "物控方案(订单级)同步3",
+    #     ]
+    #     plan_names = [
+    #         "1测试计划单元标准",
+    #         "1测试A",
+    #     ]
+    #     synchronize.click_checkbox_value(plan_name, plan_names, "3")
+    #     synchronize.click_synchronize_button()
+    #     synchronize.click_synchronize_pop(True)
+    #     message = synchronize.get_find_message()
+    #     synchronize.switch_plane(plan_names[0], 3)
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     synchronize.click_button(f'//div[contains(text(),"{plan_names[0]}")]')
+    #     synchronize.switch_plane(plan_names[1], 3, js=False)
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     assert message == "同步成功"
+    #     assert not synchronize.has_fail_message()
+    #
+    # @allure.story("同步多个计划方案到多个计划单元成功")
+    # # @pytest.mark.run(order=1)
+    # def test_synchronize_all_plan3(self, login_to_synchronize):
+    #     driver = login_to_synchronize  # WebDriver 实例
+    #     synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
+    #     plan_name = [
+    #         "物控方案(订单级)同步1",
+    #         "物控方案(订单级)同步2",
+    #         "物控方案(订单级)同步3",
+    #     ]
+    #     plan_names = [
+    #         "1测试计划单元标准",
+    #         "1测试A",
+    #     ]
+    #     synchronize.click_checkbox_value(plan_name, plan_names, "3")
+    #     synchronize.click_synchronize_button()
+    #     synchronize.click_synchronize_pop(True)
+    #     message = synchronize.get_find_message()
+    #     synchronize.switch_plane(plan_names[0], 3)
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     synchronize.click_button(f'//div[contains(text(),"{plan_names[0]}")]')
+    #     synchronize.switch_plane(plan_names[1], 3, js=False)
+    #     for name in plan_name:
+    #         elements = synchronize.finds_elements(
+    #             By.XPATH,
+    #             f'//label[text()="{name}"]'
+    #         )
+    #         assert len(elements) == 1, f"未找到或找到多个{name}"
+    #     assert message == "同步成功"
+    #     assert not synchronize.has_fail_message()
+
     @allure.story("同步单个数据导入成功")
     # @pytest.mark.run(order=1)
     def test_synchronize_all_import(self, login_to_synchronize):

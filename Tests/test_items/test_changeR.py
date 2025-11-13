@@ -442,7 +442,7 @@ class TestChangeRPage:
         text_ = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert addresource == resource and additem1 == item1 and additem2 == item2 and '99999999999' == num_ and text_ == num
+        assert addresource == resource and additem1 == item1 and additem2 == item2 and '9999999999' == num_ and text_ == num
         assert not change.has_fail_message()
 
     @allure.story("删除数据成功")

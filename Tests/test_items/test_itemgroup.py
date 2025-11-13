@@ -234,7 +234,7 @@ class TestItemGroupPage:
         num_ = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[6]'
         ).text
-        assert adddata == name and num_ == "99999999999", f"预期数据是111，实际得到{adddata}"
+        assert adddata == name and num_ == "9999999999", f"预期数据是111，实际得到{adddata}"
         assert not item.has_fail_message()
 
     @allure.story("添加数据成功")

@@ -78,7 +78,7 @@ class TestsInterfaceExecutionPage:
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
         wait = WebDriverWait(driver, 120)  # 最长等待 120 秒
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         interface.click_button('//table[@class="vxe-table--header"]//th[1]/div/span[@class="vxe-cell--title"]')
         sleep(1)
         interface.click_button('//button[span[text()="接口执行"]]')
@@ -96,7 +96,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_export(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         interface.click_button('//button[span[text()="导出"]]')
         ele = interface.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
@@ -107,7 +107,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_parameter(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         interface.click_button('//button[span[text()="接口参数"]]')
         text = interface.finds_elements(By.XPATH, '//div[text()="接口参数编辑"]')
         ele = interface.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
@@ -119,10 +119,10 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_data(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         interface.click_button('//button[span[text()="接口数据"]]')
         interface.click_button('//button[span[text()="查询"]]')
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         ele = interface.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not interface.has_fail_message()
@@ -132,10 +132,10 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_log(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         interface.click_button('//button[span[text()="运行日志"]]')
         interface.click_button('//button[span[text()="查询"]]')
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         ele = interface.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not interface.has_fail_message()
@@ -146,7 +146,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_select1(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         interface.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         sleep(1)
         eles = interface.get_find_element_xpath('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
@@ -165,7 +165,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_select2(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         name = "1测试"
         interface.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         interface.hover("包含")
@@ -183,7 +183,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_select3(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         name = "1"
         interface.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         interface.hover("符合开头")
@@ -201,7 +201,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_select4(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         name = "2"
         interface.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         interface.hover("符合结尾")
@@ -219,7 +219,7 @@ class TestsInterfaceExecutionPage:
     def test_interfaceexecution_clear(self, login_to_interfaceexecution):
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interface.wait_for_loading_to_disappear()
+        interface.wait_for_el_loading_mask()
         name = "3"
         sleep(1)
         interface.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')

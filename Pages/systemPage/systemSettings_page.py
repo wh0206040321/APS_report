@@ -55,10 +55,10 @@ class SystemSettingsPage(BasePage):
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()
         self.click_button('//li[text()=" 刷新"]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
 
     # 等待加载遮罩消失
-    def wait_for_loading_to_disappear(self, timeout=10):
+    def wait_for_el_loading_mask(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
 
@@ -111,4 +111,4 @@ class SystemSettingsPage(BasePage):
         # 3️⃣ 点击删除图标并确认删除操作
         delete_icon.click()
         self.click_button('(//div[@class="ivu-modal-confirm-footer"])[1]//span[text()="确定"]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()

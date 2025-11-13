@@ -70,10 +70,10 @@ class ImpPage(BasePage):
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()
         self.click_button('//li[text()=" 刷新"]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
 
     # 等待加载遮罩消失
-    def wait_for_loading_to_disappear(self, timeout=10):
+    def wait_for_el_loading_mask(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
 

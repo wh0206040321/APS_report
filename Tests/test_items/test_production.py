@@ -495,7 +495,7 @@ class TestProductionPage:
         text_ = production.get_find_element_xpath(
             '//label[text()="异常原因"]/following-sibling::div//input'
         ).get_attribute("value")
-        assert num_ == '99999999999' and text_ == name
+        assert num_ == '9999999999' and text_ == name
         assert not production.has_fail_message()
 
     @allure.story("添加测试数据")

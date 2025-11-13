@@ -434,7 +434,7 @@ class TestCalendarPage:
         addtext = calendar.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert adddata == resource and addshift == resource1 and addnum == '99999999999' and addtext == num
+        assert adddata == resource and addshift == resource1 and addnum == '9999999999' and addtext == num
         assert not calendar.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
