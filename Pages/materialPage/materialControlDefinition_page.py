@@ -247,6 +247,27 @@ class MaterialControlDefinition(BasePage):
         # self.double_click_th_dropdown_box(last_)
         self.click_confirm()
 
+    def click_select_mcr(self, code="", data=""):
+        """点击物控计算履历 查找."""
+        if code:
+            self.click_button('//div[span[text()="物控计算单号:"]]//input[@class="ivu-select-input"]')
+            self.click_button(f'//div[span[text()="物控计算单号:"]]//ul[@class="ivu-select-dropdown-list"]/li[{code}]')
+            sleep(0.5)
+        if data:
+            self.click_button('//div[span[text()="物控方案名称:"]]//input[@class="ivu-select-input"]')
+            sleep(2)
+            self.click_button(f'//div[span[text()="物控方案名称:"]]//ul[@class="ivu-select-dropdown-list"]/li[{data}]')
+            sleep(0.5)
+        self.click_button('//button[span[text()="查询"]]')
+        self.wait_for_loading_to_disappear()
+
+    def click_details(self, name):
+        """点击物控计算履历 详情."""
+        self.click_button(f'//button[span[text()="详情"]]')
+        self.click_button(f'(//div[@class="ivu-tabs-nav"])[2]/div[text()=" {name} "]')
+        self.click_button('(//button[span[text()="查询"]])[2]')
+        self.wait_for_loading_to_disappear()
+
     def del_all(self, xpath, value=[]):
         for index, v in enumerate(value, start=1):
             try:

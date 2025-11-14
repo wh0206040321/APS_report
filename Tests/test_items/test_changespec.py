@@ -1038,11 +1038,12 @@ class TestChangeSpecPage:
         before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
+        change.wait_for_loading_to_disappear()
         change.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]')
         change.click_del_button()  # 点击删除
         change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        sleep(1)
+        change.wait_for_loading_to_disappear()
         # 定位
         after_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'

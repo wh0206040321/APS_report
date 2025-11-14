@@ -58,7 +58,7 @@ def login_to_materialControlSupplyDefinition():
 
 
 @allure.feature("物控供应定义页用例")
-@pytest.mark.run(order=181)
+@pytest.mark.run(order=151)
 class TestSMaterialControlSupplyDefinitionPage:
 
     @allure.story("新增直接点击保存不允许添加")
@@ -219,7 +219,8 @@ class TestSMaterialControlSupplyDefinitionPage:
         sel_value = material.get_find_element_xpath('//div[span[text()=" 供应来源编码: "]]//input[@class="ivu-select-input"]').get_attribute("value")
         material.wait_for_loading_to_disappear()
         ele = material.get_find_element_xpath(f'(//table[@class="vxe-table--body"])[1]//tr[1]/td[2]').text
-        assert sel_value == ele
+        ele1 = material.finds_elements(By.XPATH, f'(//table[@class="vxe-table--body"])[1]//tr[2]/td[2]')
+        assert sel_value == ele and len(ele1) == 0
         assert not material.has_fail_message()
 
     @allure.story("查询数据库名称成功")
@@ -235,8 +236,8 @@ class TestSMaterialControlSupplyDefinitionPage:
         sel_value = material.get_find_element_xpath(
             '//div[span[text()="数据库名称: "]]//input[@class="ivu-select-input"]').get_attribute("value")
         material.wait_for_loading_to_disappear()
-        ele = material.get_find_element_xpath(f'(//table[@class="vxe-table--body"])[1]//tr[1]/td[5]').text
-        assert sel_value == ele
+        eles = material.loop_judgment(f'(//table[@class="vxe-table--body"])[1]//tr/td[5]')
+        assert all(sel_value == ele for ele in eles)
         assert not material.has_fail_message()
 
     @allure.story("过滤查供应来源编码成功")

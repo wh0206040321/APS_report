@@ -49,6 +49,9 @@ def login_to_sched():
         page.click_button('(//span[text()="计划运行"])[1]')  # 点击计划运行
         page.click_button('(//span[text()="方案管理"])[1]')  # 点击方案管理
         page.click_button('(//span[text()="计划方案管理"])[1]')  # 点击计划方案管理
+        sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        sched.wait_for_el_loading_mask()
+        sleep(1)
         yield driver  # 提供给测试用例使用
     finally:
         if driver:

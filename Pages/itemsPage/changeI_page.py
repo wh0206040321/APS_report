@@ -127,6 +127,7 @@ class ChangeI(BasePage):
         self.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )
+        sleep(2)
         # 定位第一行
         self.click_button(
             '//table[@class="vxe-table--body"]//tr[1]/td[2]'

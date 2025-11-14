@@ -152,7 +152,7 @@ class TestSMenuPage:
 
     @allure.story("修改重复需求来源编码不允许修改")
     # @pytest.mark.run(order=1)
-    def test_menu_update(self, login_to_materialRequirementsDefinition):
+    def test_menu_update(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         value = "ABCDAA"

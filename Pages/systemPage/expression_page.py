@@ -106,6 +106,7 @@ class ExpressionPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(1)
 
     def select_input_language(self, name):
         """选择输入框."""

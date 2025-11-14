@@ -148,14 +148,12 @@ class TestSModulePage:
         assert len(ele) == 1
         assert not module.has_fail_message()
 
-    @allure.story("修改重复不允许修改")
+    @allure.story("修改对话框按钮代码禁用")
     # @pytest.mark.run(order=1)
-    def test_module_updatereaped(self, login_to_module):
+    def test_module_updateenabled(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        add = AddsPages(driver)
         before_name = 'ABCDAA'
-        after_name = 'ComponentSystemSet'
         module.wait_for_loading_to_disappear()
         module.select_input_module(before_name)
         module.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
@@ -165,13 +163,12 @@ class TestSModulePage:
             '//div[label[text()="模块代码"]]//input',
             '//div[label[text()="模块名称"]]//input',
         ]
-        add.batch_modify_input(xpath_list[:2], after_name)
-        module.click_confirm()
-        ele = module.finds_elements(By.XPATH, '//div[text()=" 记录已存在,请检查！ "]')
-        assert len(ele) == 1
+        sleep(1)
+        ele = module.get_find_element_xpath(xpath_list[0])
+        assert not ele.is_enabled()
         assert not module.has_fail_message()
 
-    @allure.story("修改模块代码和模块名称成功成功")
+    @allure.story("修改模块名称和排序成功")
     # @pytest.mark.run(order=1)
     def test_module_updatesuccess(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
@@ -185,15 +182,17 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[label[text()="模块代码"]]//input',
             '//div[label[text()="模块名称"]]//input',
+            '//div[label[text()="排序"]]//input',
         ]
-        add.batch_modify_input(xpath_list[:2], after_name)
+        add.batch_modify_input(xpath_list[:1], after_name)
+        module.enter_texts(xpath_list[1], "33")
         module.click_confirm()
         message = module.get_find_message()
         module.select_input_module(after_name)
-        ele = module.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
-        assert message == "编辑成功！" and ele == after_name
+        ele1 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[1]/td[3]//span[text()="{xpath_list[0]}"]').text
+        ele2 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[1]/td[5]//span[text()="{xpath_list[1]}"]').text
+        assert message == "编辑成功！" and ele1 == after_name and ele2 == "33"
         assert not module.has_fail_message()
 
     # @allure.story("设置菜单成功")

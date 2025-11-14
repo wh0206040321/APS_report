@@ -233,14 +233,14 @@ class PsiPage(BasePage):
         for index, v in enumerate(value, start=0):
             try:
                 xpath = '//p[text()="PSI名称"]/ancestor::div[2]//input'
-                ele = self.get_find_element_xpath(xpath)
-                ele.send_keys(Keys.CONTROL, "a")
-                ele.send_keys(Keys.DELETE)
                 self.enter_texts(xpath, v)
                 sleep(0.5)
                 self.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{v}"]')
                 self.click_button_psi("删除")  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
             except NoSuchElementException:
                 print(f"未找到元素: {v}")
             except Exception as e:

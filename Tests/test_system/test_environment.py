@@ -192,7 +192,7 @@ class TestEnvironmentPage:
         environment.right_refresh()
         environment.click_cycle()
         after_value = environment.batch_acquisition_input(xpth_list)
-        num_ = "9999999999"
+        num_ = "999999999999999"
         assert all(num_ == v for v in after_value) and message == "保存成功"
         assert all(after_value), "列表中存在为空或为假值的元素！"
         assert not environment.has_fail_message()

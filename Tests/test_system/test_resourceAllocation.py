@@ -292,6 +292,7 @@ class TestResourceAllocationPage:
         for v in role_list:
             allocation.click_button(f'(//span[text()="{v}"])[1]')
         role.del_all(role_name)
+        role.get_find_message()
 
         unit_list = ["计划单元"]
         unit_name = [
