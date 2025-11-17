@@ -61,7 +61,7 @@ def login_to_materialCalculateResume():
 
 
 @allure.feature("物控计算履历页用例")
-@pytest.mark.run(order=154)
+@pytest.mark.run(order=144)
 class TestSMaterialCalculateResumePage:
 
     @allure.story("点击查询物控计算单号成功")

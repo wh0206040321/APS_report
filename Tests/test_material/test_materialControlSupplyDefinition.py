@@ -58,7 +58,7 @@ def login_to_materialControlSupplyDefinition():
 
 
 @allure.feature("物控供应定义页用例")
-@pytest.mark.run(order=151)
+@pytest.mark.run(order=141)
 class TestSMaterialControlSupplyDefinitionPage:
 
     @allure.story("新增直接点击保存不允许添加")

@@ -69,6 +69,7 @@ class TestDeleteStart:
             By.XPATH, f'(//span[text()="{code}"])[1]/ancestor::tr[1]/td[2]'
         )
         page.click_button('(//span[text()="工作指示一览"])[1]')
+        item.wait_for_loading_to_disappear()
 
         previewPlan = PreviewPlanPage(driver)  # 用 previewPlan 初始化 PreviewPlanPage
         # 加载共享数据

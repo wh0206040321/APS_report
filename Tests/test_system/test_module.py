@@ -91,8 +91,8 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("新增")
         xpath_list = [
-            '//div[label[text()="模块代码"]]//input',
-            '//div[label[text()="模块名称"]]//input',
+            '//div[@id="i8jh37dc-1wyr"]//input',
+            '//div[@id="cantp8xp-kz7i"]//input',
         ]
         add.batch_modify_input(xpath_list, name)
         module.click_confirm()
@@ -110,10 +110,10 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("新增")
         xpath_list = [
-            '//div[label[text()="模块代码"]]//input',
-            '//div[label[text()="模块名称"]]//input',
-            '//div[label[text()="图标"]]//i[contains(@class,"ivu-ico")]',
-            '(//div[@class="flex-wrap"])[2]/div[1]',
+            '//div[@id="i8jh37dc-1wyr"]//input',
+            '//div[@id="cantp8xp-kz7i"]//input',
+            '//div[@id="8rj7fu5c-tec3"]//i',
+            '//div[@class="flex-wrap"]/div[1]',
         ]
         add.batch_modify_input(xpath_list[:2], name)
         module.click_button(xpath_list[2])
@@ -135,10 +135,10 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("新增")
         xpath_list = [
-            '//div[label[text()="模块代码"]]//input',
-            '//div[label[text()="模块名称"]]//input',
-            '//div[label[text()="图标"]]//i[contains(@class,"ivu-ico")]',
-            '(//div[@class="flex-wrap"])[2]/div[1]',
+            '//div[@id="i8jh37dc-1wyr"]//input',
+            '//div[@id="cantp8xp-kz7i"]//input',
+            '//div[@id="8rj7fu5c-tec3"]//i',
+            '//div[@class="flex-wrap"]/div[1]',
         ]
         add.batch_modify_input(xpath_list[:2], name)
         module.click_button(xpath_list[2])
@@ -160,8 +160,8 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[label[text()="模块代码"]]//input',
-            '//div[label[text()="模块名称"]]//input',
+            '//div[@id="i8jh37dc-1wyr"]//input',
+            '//div[@id="cantp8xp-kz7i"]//input',
         ]
         sleep(1)
         ele = module.get_find_element_xpath(xpath_list[0])
@@ -182,7 +182,7 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[label[text()="模块名称"]]//input',
+            '//div[@id="cantp8xp-kz7i"]//input',
             '//div[label[text()="排序"]]//input',
         ]
         add.batch_modify_input(xpath_list[:1], after_name)
@@ -253,7 +253,7 @@ class TestSModulePage:
     #     module.select_input_module(before_name)
     #     module.right_refresh('菜单组件')
     #     menutext = module.get_find_element_xpath(
-    #         '//div[p[text()="模块代码"]]/following-sibling::div//input'
+    #         '//div[div[span[text()=" 模块代码"]]]//input'
     #     ).text
     #     assert menutext == "", f"预期{menutext}"
     #     assert not module.has_fail_message()
@@ -297,7 +297,7 @@ class TestSModulePage:
 
         # 点击确认
         module.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
         )
         sleep(2)
         # 定位第一行是否为name
@@ -351,7 +351,7 @@ class TestSModulePage:
 
         # 点击确认
         module.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
         )
         sleep(2)
         itemcode = driver.find_elements(
@@ -401,7 +401,7 @@ class TestSModulePage:
 
         # 点击确认
         module.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
         )
         sleep(2)
         eles = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
@@ -449,7 +449,7 @@ class TestSModulePage:
 
         # 点击确认
         module.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
         )
         sleep(2)
         eles = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
@@ -580,7 +580,7 @@ class TestSModulePage:
 
         # 点击确认
         module.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
         )
         sleep(2)
         eles1 = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
@@ -714,7 +714,7 @@ class TestSModulePage:
 
         # 点击确认
         module.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
+            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
         )
         sleep(1)
         # 获取目标表格第2个 vxe 表格中的所有数据行
@@ -756,7 +756,7 @@ class TestSModulePage:
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         module.wait_for_loading_to_disappear()
         name = "计划"
-        module.enter_texts('//div[div[p[text()="模块名称"]]]//input', name)
+        module.enter_texts('//div[div[span[text()=" 模块名称"]]]//input', name)
         sleep(2)
         eles = module.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         list_ = [ele.text for ele in eles]
@@ -769,7 +769,7 @@ class TestSModulePage:
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         module.wait_for_loading_to_disappear()
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         sleep(1)
         eles = module.get_find_element_xpath(
             '(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
@@ -778,7 +778,7 @@ class TestSModulePage:
             module.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
             module.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//input')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//input')
         eles = module.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         assert len(eles) == 0
         assert not module.has_fail_message()
@@ -790,7 +790,7 @@ class TestSModulePage:
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         module.wait_for_loading_to_disappear()
         name = "Co"
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         module.hover("包含")
         sleep(1)
         module.select_input_module(name)
@@ -808,7 +808,7 @@ class TestSModulePage:
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         name = "Plan"
         module.wait_for_loading_to_disappear()
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         module.hover("符合开头")
         sleep(1)
         module.select_input_module(name)
@@ -826,7 +826,7 @@ class TestSModulePage:
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         module.wait_for_loading_to_disappear()
         name = "t"
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         module.hover("符合结尾")
         sleep(1)
         module.select_input_module(name)
@@ -844,15 +844,15 @@ class TestSModulePage:
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         module.wait_for_loading_to_disappear()
         name = "3"
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         module.hover("包含")
         sleep(1)
         module.select_input_module(name)
         sleep(1)
-        module.click_button('//div[p[text()="模块代码"]]/following-sibling::div//i')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         module.hover("清除所有筛选条件")
         sleep(1)
-        ele = module.get_find_element_xpath('//div[p[text()="模块代码"]]/following-sibling::div//i').get_attribute(
+        ele = module.get_find_element_xpath('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]').get_attribute(
             "class")
         assert ele == "vxe-icon-funnel suffixIcon"
         assert not module.has_fail_message()
@@ -865,7 +865,7 @@ class TestSModulePage:
         layout = "测试布局A"
 
         value = ['ABCDAA']
-        module.del_all(xpath='//div[p[text()="模块代码"]]/following-sibling::div//input', value=value)
+        module.del_all(xpath='//div[div[span[text()=" 模块代码"]]]//input', value=value)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:1]

@@ -35,7 +35,7 @@ def login_to_item():
 
 
 @allure.feature("收货班次测试用例")
-@pytest.mark.run(order=118)
+@pytest.mark.run(order=107)
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):

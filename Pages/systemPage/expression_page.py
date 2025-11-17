@@ -100,7 +100,7 @@ class ExpressionPage(BasePage):
 
     def select_input_module(self, name):
         """选择输入框."""
-        xpath = '//div[p[text()="模块代码"]]/following-sibling::div//input'
+        xpath = '//div[div[span[text()=" 模块代码"]]]//input'
         ele = self.get_find_element_xpath(xpath)
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)

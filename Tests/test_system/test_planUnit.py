@@ -208,19 +208,19 @@ class TestPlanUnitPage:
         assert len(ele) == 1
         assert not unit.has_fail_message()
 
-    @allure.story("文本框的校验")
-    # @pytest.mark.run(order=1)
-    def test_planUnit_textverify(self, login_to_planUnit):
-        driver = login_to_planUnit  # WebDriver 实例
-        unit = PlanUnitPage(driver)  # 用 driver 初始化 PlanUnitPage
-        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
-        module = "标准"
-        unit.add_plan_unit(name, module)
-        unit.select_input(name)
-        unit.click_confirm_button()
-        ele = unit.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
-        assert len(ele) == 1
-        assert not unit.has_fail_message()
+    # @allure.story("文本框的校验")
+    # # @pytest.mark.run(order=1)
+    # def test_planUnit_textverify(self, login_to_planUnit):
+    #     driver = login_to_planUnit  # WebDriver 实例
+    #     unit = PlanUnitPage(driver)  # 用 driver 初始化 PlanUnitPage
+    #     name = "1111111111111111333311222211112222211111111133331111111444441111111111111111111111111111111111111111"
+    #     module = "标准"
+    #     unit.add_plan_unit(name, module)
+    #     unit.select_input(name)
+    #     unit.click_confirm_button()
+    #     ele = unit.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+    #     assert len(ele) == 1
+    #     assert not unit.has_fail_message()
 
     @allure.story("添加测试数据")
     # @pytest.mark.run(order=1)

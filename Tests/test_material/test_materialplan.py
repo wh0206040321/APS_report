@@ -56,7 +56,7 @@ def login_to_materialplan():
 
 
 @allure.feature("物控计算测试用例")
-@pytest.mark.run(order=153)
+@pytest.mark.run(order=143)
 class TestMaterialPlanPage:
     @allure.story("不输入计划方案，点击执行不成功")
     # @pytest.mark.run(order=1)

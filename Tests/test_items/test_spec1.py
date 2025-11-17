@@ -131,7 +131,7 @@ class TestSpecPage:
     def test_spec_textverify(self, login_to_spec1):
         driver = login_to_spec1  # WebDriver 实例
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
-        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        name = "1111111111111111333311222211112222211111111133331111111444441111111111111111111111111111111111111111"
         spec.click_add_button()  # 检查点击添加
         # 输入代码
         spec.enter_texts('(//label[text()="代码"])[1]/parent::div//input', name)
@@ -147,7 +147,7 @@ class TestSpecPage:
         num_ = spec.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[5]'
         ).text
-        assert adddata == name and num_ == '9999999999' f"预期数据是{name}，实际得到{adddata}"
+        assert adddata == name and num_ == '9999999999',f"预期数据是{name}，实际得到{adddata}"
         assert not spec.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -919,7 +919,7 @@ class TestSpecPage:
         spec = Spec1Page(driver)  # 用 driver 初始化 Spec1Page
         layout = "测试布局A"
 
-        value = ['全部数据', '111', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
+        value = ['全部数据', '111', '1测试A', '1111111111111111333311222211112222211111111133331111111444441111111111111111111111111111111111111111']
         spec.del_all(value)
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

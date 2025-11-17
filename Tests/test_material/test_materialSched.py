@@ -59,7 +59,7 @@ def login_to_materialSched():
 
 
 @allure.feature("物控方案管理表测试用例")
-@pytest.mark.run(order=152)
+@pytest.mark.run(order=142)
 class TestMaterialSchedPage:
     @allure.story("添加物控方案管理信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)

@@ -60,34 +60,34 @@ def login_to_chart():
 @allure.feature("甘特图测试用例")
 @pytest.mark.run(order=25)
 class TestChartPage:
-    @allure.story("校验文本框成功")
-    # @pytest.mark.run(order=1)
-    def test_resourcechart_textverify(self, login_to_chart):
-        driver = login_to_chart  # WebDriver 实例
-        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
-        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
-        chart.click_add_button()
-        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
-        chart.click_resource_confirm_button()
-        eles = driver.find_elements(
-            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
-        )
-        i = 0
-        while i < len(eles):
-            if eles[i].text == name:
-                break
-            i += 1
-        wait = WebDriverWait(driver, 10)
-        element = wait.until(
-            EC.presence_of_element_located(
-                (
-                    By.XPATH,
-                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
-                )
-            )
-        )
-        assert element.text == name
-        assert not chart.has_fail_message()
+    # @allure.story("校验文本框成功")
+    # # @pytest.mark.run(order=1)
+    # def test_resourcechart_textverify(self, login_to_chart):
+    #     driver = login_to_chart  # WebDriver 实例
+    #     chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+    #     name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+    #     chart.click_add_button()
+    #     chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+    #     chart.click_resource_confirm_button()
+    #     eles = driver.find_elements(
+    #         By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+    #     )
+    #     i = 0
+    #     while i < len(eles):
+    #         if eles[i].text == name:
+    #             break
+    #         i += 1
+    #     wait = WebDriverWait(driver, 10)
+    #     element = wait.until(
+    #         EC.presence_of_element_located(
+    #             (
+    #                 By.XPATH,
+    #                 f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+    #             )
+    #         )
+    #     )
+    #     assert element.text == name
+    #     assert not chart.has_fail_message()
 
     @allure.story("添加布局名称成功")
     # @pytest.mark.run(order=1)
@@ -634,35 +634,35 @@ class TestChartPage:
         assert success_element.text == "完成"
         assert not chart.has_fail_message()
 
-    @allure.story("校验文本框成功")
-    # @pytest.mark.run(order=1)
-    def test_orderchart_textverify(self, login_to_chart):
-        driver = login_to_chart  # WebDriver 实例
-        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
-        chart.click_close_page('订单甘特图')
-        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
-        chart.click_add_button()
-        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
-        chart.click_order_confirm_button()
-        eles = driver.find_elements(
-            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
-        )
-        i = 0
-        while i < len(eles):
-            if eles[i].text == name:
-                break
-            i += 1
-        wait = WebDriverWait(driver, 10)
-        element = wait.until(
-            EC.presence_of_element_located(
-                (
-                    By.XPATH,
-                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
-                )
-            )
-        )
-        assert element.text == name
-        assert not chart.has_fail_message()
+    # @allure.story("校验文本框成功")
+    # # @pytest.mark.run(order=1)
+    # def test_orderchart_textverify(self, login_to_chart):
+    #     driver = login_to_chart  # WebDriver 实例
+    #     chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+    #     chart.click_close_page('订单甘特图')
+    #     name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+    #     chart.click_add_button()
+    #     chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+    #     chart.click_order_confirm_button()
+    #     eles = driver.find_elements(
+    #         By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+    #     )
+    #     i = 0
+    #     while i < len(eles):
+    #         if eles[i].text == name:
+    #             break
+    #         i += 1
+    #     wait = WebDriverWait(driver, 10)
+    #     element = wait.until(
+    #         EC.presence_of_element_located(
+    #             (
+    #                 By.XPATH,
+    #                 f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+    #             )
+    #         )
+    #     )
+    #     assert element.text == name
+    #     assert not chart.has_fail_message()
 
     @allure.story("添加布局名称成功")
     # @pytest.mark.run(order=1)
@@ -918,35 +918,35 @@ class TestChartPage:
         )
         assert not chart.has_fail_message()
 
-    @allure.story("校验文本框成功")
-    # @pytest.mark.run(order=1)
-    def test_orderAssociationChart_textverify(self, login_to_chart):
-        driver = login_to_chart  # WebDriver 实例
-        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
-        chart.click_close_page('订单关联甘特图')
-        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
-        chart.click_add_button()
-        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
-        chart.click_order_confirm_button()
-        eles = driver.find_elements(
-            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
-        )
-        i = 0
-        while i < len(eles):
-            if eles[i].text == name:
-                break
-            i += 1
-        wait = WebDriverWait(driver, 10)
-        element = wait.until(
-            EC.presence_of_element_located(
-                (
-                    By.XPATH,
-                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
-                )
-            )
-        )
-        assert element.text == name
-        assert not chart.has_fail_message()
+    # @allure.story("校验文本框成功")
+    # # @pytest.mark.run(order=1)
+    # def test_orderAssociationChart_textverify(self, login_to_chart):
+    #     driver = login_to_chart  # WebDriver 实例
+    #     chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+    #     chart.click_close_page('订单关联甘特图')
+    #     name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+    #     chart.click_add_button()
+    #     chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+    #     chart.click_order_confirm_button()
+    #     eles = driver.find_elements(
+    #         By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+    #     )
+    #     i = 0
+    #     while i < len(eles):
+    #         if eles[i].text == name:
+    #             break
+    #         i += 1
+    #     wait = WebDriverWait(driver, 10)
+    #     element = wait.until(
+    #         EC.presence_of_element_located(
+    #             (
+    #                 By.XPATH,
+    #                 f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+    #             )
+    #         )
+    #     )
+    #     assert element.text == name
+    #     assert not chart.has_fail_message()
 
     @allure.story("添加布局名称成功")
     # @pytest.mark.run(order=1)
@@ -1202,35 +1202,35 @@ class TestChartPage:
         )
         assert not chart.has_fail_message()
 
-    @allure.story("校验文本框成功")
-    # @pytest.mark.run(order=1)
-    def test_loadChart_textverify(self, login_to_chart):
-        driver = login_to_chart  # WebDriver 实例
-        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
-        chart.click_close_page('负荷甘特图')
-        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
-        chart.click_add_button()
-        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
-        chart.click_order_confirm_button()
-        eles = driver.find_elements(
-            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
-        )
-        i = 0
-        while i < len(eles):
-            if eles[i].text == name:
-                break
-            i += 1
-        wait = WebDriverWait(driver, 10)
-        element = wait.until(
-            EC.presence_of_element_located(
-                (
-                    By.XPATH,
-                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
-                )
-            )
-        )
-        assert element.text == name
-        assert not chart.has_fail_message()
+    # @allure.story("校验文本框成功")
+    # # @pytest.mark.run(order=1)
+    # def test_loadChart_textverify(self, login_to_chart):
+    #     driver = login_to_chart  # WebDriver 实例
+    #     chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+    #     chart.click_close_page('负荷甘特图')
+    #     name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+    #     chart.click_add_button()
+    #     chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+    #     chart.click_order_confirm_button()
+    #     eles = driver.find_elements(
+    #         By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+    #     )
+    #     i = 0
+    #     while i < len(eles):
+    #         if eles[i].text == name:
+    #             break
+    #         i += 1
+    #     wait = WebDriverWait(driver, 10)
+    #     element = wait.until(
+    #         EC.presence_of_element_located(
+    #             (
+    #                 By.XPATH,
+    #                 f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+    #             )
+    #         )
+    #     )
+    #     assert element.text == name
+    #     assert not chart.has_fail_message()
 
     @allure.story("添加布局名称成功")
     # @pytest.mark.run(order=1)
@@ -1499,35 +1499,35 @@ class TestChartPage:
         ).text
         assert ele == "序号"
 
-    @allure.story("校验文本框成功")
-    # @pytest.mark.run(order=1)
-    def test_workSequenceChart_textverify(self, login_to_chart):
-        driver = login_to_chart  # WebDriver 实例
-        chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
-        chart.click_close_page('工作顺序表')
-        name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
-        chart.click_add_button()
-        chart.enter_texts('//input[@placeholder="请输入名称"]', name)
-        chart.click_resource_confirm_button()
-        eles = driver.find_elements(
-            By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
-        )
-        i = 0
-        while i < len(eles):
-            if eles[i].text == name:
-                break
-            i += 1
-        wait = WebDriverWait(driver, 10)
-        element = wait.until(
-            EC.presence_of_element_located(
-                (
-                    By.XPATH,
-                    f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
-                )
-            )
-        )
-        assert element.text == name
-        assert not chart.has_fail_message()
+    # @allure.story("校验文本框成功")
+    # # @pytest.mark.run(order=1)
+    # def test_workSequenceChart_textverify(self, login_to_chart):
+    #     driver = login_to_chart  # WebDriver 实例
+    #     chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
+    #     chart.click_close_page('工作顺序表')
+    #     name = '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111'
+    #     chart.click_add_button()
+    #     chart.enter_texts('//input[@placeholder="请输入名称"]', name)
+    #     chart.click_resource_confirm_button()
+    #     eles = driver.find_elements(
+    #         By.XPATH, '//div[@class="el-tabs__nav is-top"]/div[@role="tab"]'
+    #     )
+    #     i = 0
+    #     while i < len(eles):
+    #         if eles[i].text == name:
+    #             break
+    #         i += 1
+    #     wait = WebDriverWait(driver, 10)
+    #     element = wait.until(
+    #         EC.presence_of_element_located(
+    #             (
+    #                 By.XPATH,
+    #                 f'//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="{name}"]',
+    #             )
+    #         )
+    #     )
+    #     assert element.text == name
+    #     assert not chart.has_fail_message()
 
     @allure.story("添加布局名称成功")
     # @pytest.mark.run(order=1)

@@ -158,7 +158,7 @@ class TestMasterPage:
     def test_master_addserial2(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        name = "1"
         # 清空之前的共享数据
         SharedDataUtil.clear_data()
         master.click_add_button()

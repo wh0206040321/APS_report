@@ -35,7 +35,7 @@ def login_to_item():
 
 
 @allure.feature("物料员测试用例")
-@pytest.mark.run(order=102)
+@pytest.mark.run(order=109)
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):

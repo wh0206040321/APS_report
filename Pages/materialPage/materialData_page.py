@@ -11,7 +11,7 @@ from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
 
 
-class MaterialControlDefinition(BasePage):
+class MaterialDataPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -125,10 +125,10 @@ class MaterialControlDefinition(BasePage):
         """点击确定"""
         self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
-    def select_input_mrq(self, name):
-        """选择需求来源编码输入框."""
+    def select_input_substitution(self, name):
+        """选择替代场景输入框."""
         self.wait_for_loading_to_disappear()
-        xpath = '//div[p[text()="需求来源编码"]]/following-sibling::div//input'
+        xpath = '//div[div[span[text()=" 替代场景"]]]//input'
         ele = self.get_find_element_xpath(xpath)
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
@@ -136,154 +136,87 @@ class MaterialControlDefinition(BasePage):
         self.enter_texts(xpath, name)
         sleep(1)
 
-    def select_input_mcd(self, name):
-        """选择供应来源编码输入框."""
+    def click_select_button(self):
+        """点击选择按钮."""
+        self.click_button('//div[@id="8quvzg1r-ahmn"]//button')
         self.wait_for_loading_to_disappear()
-        xpath = '//div[p[text()="供应来源编码"]]/following-sibling::div//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
-        sleep(1)
 
-    def double_click_th_dropdown_box(self, xpath_list=[]):
-        """双击下拉框并点击下拉值，如果第一次点击不到则再次双击再点击"""
-        for idx, d in enumerate(xpath_list, start=1):
-            # 第一次双击
-            ActionChains(self.driver).double_click(self.get_find_element_xpath(d['select'])).perform()
-            sleep(0.5)
-            try:
-                # 尝试点击 value
-                self.click_button(d['value'])
-            except Exception:
-                # 如果点击不到，再次双击并重试
-                self.click_button(d['select'])
-                sleep(0.5)
-                self.click_button(d['value'])
-
+    def loop_click(self, count):
+        """
+        循环点击方法
+        :param driver: Selenium WebDriver
+        :param count: 循环次数（即 my-list-item 下标最大值）
+        """
+        for i in range(1, count + 1):
+            # 第一步：点击输入框
+            self.click_button('//div[@id="d6hm28lu-jl64"]//input')
             sleep(1)
-            # 点击备注输入框
-            self.click_button('//div[div[text()="备注:"]]//input')
+            # 第二步：点击 my-list-item[i]
+            list_item_xpath = f'(//div[@class="el-scrollbar"])[last()]//div[@class="my-list-item"][{i}]'
+            self.click_button(list_item_xpath)
+            sleep(1)
+            # 第三步：点击确认按钮
+            self.click_button('//div[@id="d9i00fi8-vwtd"]/i')
             sleep(1)
 
-    def add_data(self, value, num=1):
-        """添加物控需求定义数据."""
+            print(f"第 {i} 次循环完成")
+
+    def add_material_substitution(self, num, name=""):
+        """添加物料替代"""
         adds = AddsPages(self.driver)
+        select_list1 = [{"select": '//div[@id="h0590xfj-jemd"]//input',
+                        "value": f'(//div[@class="el-scrollbar"])[last()]//div[@class="my-list-item"][{num}]'},
+                       {"select": '//div[@id="gid148zp-0f98"]//input',
+                        "value": '(//div[@class="el-scrollbar"]//span[text()="*"])[last()]'}]
+        select_list2 = [{"select": '//div[@id="ho29oiq5-qhal"]//input',
+                         "value": f'(//div[@class="el-scrollbar"])[last()]//div[@class="my-list-item"][{num}]'},
+                        {"select": '//div[@id="db2x9abu-154j"]//input',
+                         "value": '(//div[@class="el-scrollbar"])[last()]//div[@class="my-list-item"][1]'}]
         self.click_all_button("新增")
-        sleep(1)
-        self.click_button('//div[div[text()="标准需求设置-新增"]]//i[@title="最大化"]')
-        input_list = [
-            '//div[div[text()=" 需求来源编码: "]]//input',
-            '//div[div[text()=" 需求来源名称: "]]//input',
-        ]
-        select_list = [
-            {"select": '//div[div[text()=" 数据库名称: "]]//input[@class="ivu-select-input"]',
-             "value": f'(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[1]/li[{num}]'},
-            {"select": '//div[div[text()=" 表或视图名: "]]//input[@class="ivu-select-input"]',
-             "value": '(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[2]/li[text()="APS_Order"]'},
-        ]
-        fields = [
-            "DataSource",
-            "OrderCode",
-            "ItemCode",
-            "PlanStartTime",
-            "PlanQty",
-            "BomVersion",
-        ]
-
-        table_list = []
-
-        for i, field in enumerate(fields, start=2):  # 从2开始递增
-            entry = {
-                "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="{field}"]]/td[6]',
-                "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="{field}"]]/td[6]//li[{i}]'
-            }
-            table_list.append(entry)
-
-        self.click_button('//label[span[text()="制造"]]')
-        adds.batch_modify_select_input(select_list)
-        adds.batch_modify_input(input_list, value)
-        self.double_click_th_dropdown_box(table_list)
-
-        element = self.get_find_element_xpath('(//div[@class="d-flex"]//div[@class="vxe-table--body-wrapper body--wrapper"])[1]')
-        self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
-
-        last_ = [{
-            "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]',
-            "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]//li[8]'
-        }]
-        self.double_click_th_dropdown_box(last_)
-        self.click_confirm()
-
-    def add_supply_data(self, value, num=1):
-        """添加物控供应定义数据."""
-        adds = AddsPages(self.driver)
-        self.click_all_button("新增")
-        sleep(1)
-        self.click_button('//div[div[text()="标准供应设置-新增"]]//i[@title="最大化"]')
-        input_list = [
-            '//div[div[text()=" 供应来源编码: "]]//input',
-            '//div[div[text()=" 供应来源名称: "]]//input',
-            '//div[div[text()=" 供应来源顺序: "]]//input',
-        ]
-        select_list = [
-            {"select": '//div[div[text()=" 数据库名称: "]]//input[@class="ivu-select-input"]',
-             "value": f'(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[1]/li[{num}]'},
-            {"select": '//div[div[text()=" 表或视图名: "]]//input[@class="ivu-select-input"]',
-             "value": '(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[2]/li[text()="APS_Order"]'},
-        ]
-        fields = [
-            "DataSource",
-            "SupplyCode",
-            "SupplyName",
-            "Bussiness_No",
-            "ItemCode",
-            "SupplyDate",
-            "SupplyQty",
-        ]
-
-        table_list = []
-
-        for i, field in enumerate(fields, start=2):  # 从2开始递增
-            entry = {
-                "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="{field}"]]/td[6]',
-                "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="{field}"]]/td[6]//li[{i}]'
-            }
-            table_list.append(entry)
-
-        adds.batch_modify_select_input(select_list)
-        adds.batch_modify_input(input_list, value)
-        self.double_click_th_dropdown_box(table_list)
-
-        # element = self.get_find_element_xpath('(//div[@class="d-flex"]//div[@class="vxe-table--body-wrapper body--wrapper"])[1]')
-        # self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
-        # last_ = [{
-        #     "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]',
-        #     "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]//li[8]'
-        # }]
-        # self.double_click_th_dropdown_box(last_)
-        self.click_confirm()
-
-    def click_select_mcr(self, code="", data=""):
-        """点击物控计算履历 查找."""
-        if code:
-            self.click_button('//div[span[text()="物控计算单号:"]]//input[@class="ivu-select-input"]')
-            self.click_button(f'//div[span[text()="物控计算单号:"]]//ul[@class="ivu-select-dropdown-list"]/li[{code}]')
-            sleep(0.5)
-        if data:
-            self.click_button('//div[span[text()="物控方案名称:"]]//input[@class="ivu-select-input"]')
+        if name:
+            self.wait_for_loading_to_disappear()
+            sleep(1)
+            self.click_button('//div[@id="88tcogwz-ptbs"]//label[text()=" 成组替代"]')
+            sleep(3)
+            adds.batch_modify_select_input(select_list1)
+            self.click_button('//div[@id="sj42kd3w-8l59"]/i')
             sleep(2)
-            self.click_button(f'//div[span[text()="物控方案名称:"]]//ul[@class="ivu-select-dropdown-list"]/li[{data}]')
-            sleep(0.5)
-        self.click_button('//button[span[text()="查询"]]')
-        self.wait_for_loading_to_disappear()
+            # 定位目标区域
+            target = self.driver.find_element(By.XPATH, '(//div[@class="vxe-table--body-wrapper body--wrapper"])[7]//table')
 
-    def click_details(self, name):
-        """点击物控计算履历 详情."""
-        self.click_button(f'//button[span[text()="详情"]]')
-        self.click_button(f'(//div[@class="ivu-tabs-nav"])[2]/div[text()=" {name} "]')
-        self.click_button('(//button[span[text()="查询"]])[2]')
+            # 循环拖拽两个源元素
+            sources = [
+                self.driver.find_element(By.XPATH, '(//table[@class="vxe-table--body"]//tr[1]/td[1])[3]'),
+                self.driver.find_element(By.XPATH, '(//table[@class="vxe-table--body"]//tr[2]/td[1])[3]')
+            ]
+
+            for source in sources:
+                actions = ActionChains(self.driver)
+                actions.click_and_hold(source).pause(0.5).move_to_element(target).pause(0.5).release().perform()
+                sleep(1)  # 给前端一点反应时间
+
+            self.loop_click(num)
+
+        else:
+            adds.batch_modify_select_input(select_list1)
+            self.click_button('//div[@id="sj42kd3w-8l59"]/i')
+            adds.batch_modify_select_input(select_list2)
+
+        self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+
+    def click_flagdata(self):
+        """点击更新时间."""
+        self.wait_for_loading_to_disappear()
+        self.click_button('//span[text()=" 更新时间"]/following-sibling::div')
+        sleep(1.5)
+        self.click_button('//span[text()=" 更新时间"]/following-sibling::div')
+        sleep(1.5)
+
+    def click_update(self):
+        self.click_flagdata()
+        self.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
+        sleep(1)
+        self.click_all_button("编辑")
         self.wait_for_loading_to_disappear()
 
     def del_all(self, xpath, value=[]):
@@ -332,6 +265,13 @@ class MaterialControlDefinition(BasePage):
         if checkbox2.get_attribute("class") == "ivu-checkbox":
             # 如果未选中，则点击复选框进行选中
             self.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
+
+        num = self.get_find_element_xpath(
+            '//tr[./td[3][.//span[text()="更新时间"]]]/td[7]//input'
+        )
+        num.send_keys(Keys.CONTROL, "a")
+        num.send_keys(Keys.DELETE)
+        num.send_keys("10")
 
         try:
             self.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')

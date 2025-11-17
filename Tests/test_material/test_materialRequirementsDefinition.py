@@ -58,7 +58,7 @@ def login_to_materialRequirementsDefinition():
 
 
 @allure.feature("物控需求定义页用例")
-@pytest.mark.run(order=150)
+@pytest.mark.run(order=140)
 class TestSMaterialRequirementsDefinitionPage:
 
     @allure.story("新增直接点击保存不允许添加")

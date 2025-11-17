@@ -36,7 +36,7 @@ def login_to_item():
 
 
 @allure.feature("供应商配额测试用例")
-@pytest.mark.run(order=117)
+@pytest.mark.run(order=105)
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):

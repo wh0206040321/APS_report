@@ -866,7 +866,7 @@ class TestSettingPage:
         setting.click_button('//div[@class="queryBtn"]/button[1]')
 
         # 等待查询结果加载，确保数据展示正确
-        sleep(1)
+        setting.wait_for_loading_to_disappear()
 
         # 获取查询结果中第一行的特定数据
         num = setting.loop_judgment(
@@ -874,7 +874,7 @@ class TestSettingPage:
         )
 
         # 断言查询结果中的数据均为0，以验证查询功能的准确性
-        assert all(name == ele for ele in num)
+        assert all('0' == ele for ele in num)
         assert not setting.has_fail_message()
 
     @allure.story("校验数字文本框和文本框成功")
