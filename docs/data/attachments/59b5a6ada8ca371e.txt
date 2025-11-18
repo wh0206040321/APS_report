@@ -1,0 +1,84 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="多语言资源"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 键"]]]/div[3]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="Akey1"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 键"]]]/div[3]//input
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff702b86f65+78965]
+	GetHandleVerifier [0x0x7ff702b86fc0+79056]
+	(No symbol) [0x0x7ff702919dda]
+	(No symbol) [0x0x7ff7029217c1]
+	(No symbol) [0x0x7ff70292482c]
+	(No symbol) [0x0x7ff7029248ff]
+	(No symbol) [0x0x7ff7029724ed]
+	(No symbol) [0x0x7ff70296564e]
+	(No symbol) [0x0x7ff70299866a]
+	(No symbol) [0x0x7ff702962b56]
+	(No symbol) [0x0x7ff702998880]
+	(No symbol) [0x0x7ff7029c0dbe]
+	(No symbol) [0x0x7ff702998443]
+	(No symbol) [0x0x7ff702961311]
+	(No symbol) [0x0x7ff7029620a3]
+	GetHandleVerifier [0x0x7ff702e3e26d+2926461]
+	GetHandleVerifier [0x0x7ff702e38993+2903715]
+	GetHandleVerifier [0x0x7ff702e56aed+3026941]
+	GetHandleVerifier [0x0x7ff702ba16fe+187406]
+	GetHandleVerifier [0x0x7ff702ba96ef+220159]
+	GetHandleVerifier [0x0x7ff702b8faf4+114692]
+	GetHandleVerifier [0x0x7ff702b8fca9+115129]
+	GetHandleVerifier [0x0x7ff702b764d8+10728]
+	BaseThreadInitThunk [0x0x7ff8e0e67374+20]
+	RtlUserThreadStart [0x0x7ff8e18bcc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff702b86f65+78965]
+	GetHandleVerifier [0x0x7ff702b86fc0+79056]
+	(No symbol) [0x0x7ff702919dda]
+	(No symbol) [0x0x7ff7029217c1]
+	(No symbol) [0x0x7ff702924bbc]
+	(No symbol) [0x0x7ff7029c2096]
+	(No symbol) [0x0x7ff70299866a]
+	(No symbol) [0x0x7ff7029c0dbe]
+	(No symbol) [0x0x7ff702998443]
+	(No symbol) [0x0x7ff702961311]
+	(No symbol) [0x0x7ff7029620a3]
+	GetHandleVerifier [0x0x7ff702e3e26d+2926461]
+	GetHandleVerifier [0x0x7ff702e38993+2903715]
+	GetHandleVerifier [0x0x7ff702e56aed+3026941]
+	GetHandleVerifier [0x0x7ff702ba16fe+187406]
+	GetHandleVerifier [0x0x7ff702ba96ef+220159]
+	GetHandleVerifier [0x0x7ff702b8faf4+114692]
+	GetHandleVerifier [0x0x7ff702b8fca9+115129]
+	GetHandleVerifier [0x0x7ff702b764d8+10728]
+	BaseThreadInitThunk [0x0x7ff8e0e67374+20]
+	RtlUserThreadStart [0x0x7ff8e18bcc91+33]
+
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon" and ./div[text()=" 测试布局A "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]//i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//li[text()="删除布局"])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1216696779488
