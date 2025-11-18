@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from Pages.materialPage.warehouseLocation_page import WarehouseLocationPage
-from Pages.login_page import LoginPage
+from Pages.itemsPage.login_page import LoginPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, all_driver_instances
 
@@ -36,7 +36,7 @@ def login_to_item():
 
 
 @allure.feature("在途库存测试用例")
-@pytest.mark.run(order=104)
+@pytest.mark.run(order=116)
 class TestItemPage:
     @pytest.fixture(autouse=True)
     def setup(self, login_to_item):
