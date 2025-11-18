@@ -126,7 +126,8 @@ class TestSMenuPage:
         menu.click_confirm()
         message = menu.get_find_message()
         menu.select_input_menu(name)
-        eles = menu.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
+        sleep(1)
+        eles = menu.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text
         assert eles == name
         assert message == "新增成功！"
         assert not menu.has_fail_message()
@@ -155,9 +156,10 @@ class TestSMenuPage:
     def test_menu_update(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        menu.wait_for_loading_to_disappear()
         value = "ABCDAA"
         menu.select_input_menu(value)
-        menu.click_button(f'(//table[@class="vxe-table--body"])[1]//tr/td[2]//span[text()="{value}"]')
+        menu.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{value}"]')
         menu.click_all_button("编辑")
         sleep(2)
         ele = menu.get_find_element_xpath('//div[@id="0lollcex-w9k3"]//input')
@@ -173,7 +175,7 @@ class TestSMenuPage:
         after_name = 'ACDAA'
         menu.wait_for_loading_to_disappear()
         menu.select_input_menu(before_name)
-        menu.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
+        menu.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
         menu.click_all_button("编辑")
         menu.enter_texts('//div[@id="b4cp83c8-qiax"]//input', after_name)
         menu.click_button('//div[@id="3srdw2xs-v6kc"]//i')
@@ -182,7 +184,7 @@ class TestSMenuPage:
         menu.click_confirm()
         message = menu.get_find_message()
         menu.select_input_menu(before_name)
-        eles2 = menu.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
+        eles2 = menu.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[3]').text
         assert eles2 == after_name
         assert message == "编辑成功！"
         assert not menu.has_fail_message()

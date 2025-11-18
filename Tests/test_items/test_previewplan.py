@@ -173,7 +173,7 @@ class TestPreviewPlanPage:
         operationPlan.click_inputbutton()
         # 选择当前日期（点击带有 today 和 focused 样式的日期单元格）
         operationPlan.click_button(
-            '//span[@class="ivu-date-picker-cells-cell ivu-date-picker-cells-cell-today ivu-date-picker-cells-focused"]'
+            '//span[contains(@class,"ivu-date-picker-cells-cell-today")]/preceding-sibling::span[1]'
         )
         # 点击下月按钮
         operationPlan.click_button(

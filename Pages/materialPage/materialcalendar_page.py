@@ -1,13 +1,15 @@
+import random
 from time import sleep
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
+
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from Pages.base_page import BasePage
 
 
-class ProcessPage(BasePage):
+class MaterialCalendar(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -53,18 +55,45 @@ class ProcessPage(BasePage):
         except NoSuchElementException:
             return None
 
-    def get_error_message(self, xpath):
-        """获取错误消息元素，返回该元素。如果元素未找到，返回None。"""
-        try:
-            return self.find_element(By.XPATH, xpath)
-        except NoSuchElementException:
-            return None
+    def get_find_message(self):
+        """获取正确信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
+            )
+        )
+        return message.text
 
-    def loop_judgment(self, xpath):
-        """循环判断"""
-        eles = self.finds_elements(By.XPATH, xpath)
-        code = [ele.text for ele in eles]
-        return code
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
+
+    def click_confirm_button(self):
+        """点击确定按钮."""
+        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]')
+        self.wait_for_loading_to_disappear()
+
+    def click_flagdata(self):
+        """点击更新时间."""
+        self.wait_for_loading_to_disappear()
+        self.click_button('//p[text()="更新时间"]/following-sibling::div')
+        sleep(1)
+        self.click_button('//p[text()="更新时间"]/following-sibling::div')
+        sleep(1)
+
+    def right_refresh(self, name):
+        """右键刷新."""
+        but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
+        but.click()
+        # 右键点击
+        ActionChains(self.driver).context_click(but).perform()
+        self.click_button('//li[text()=" 刷新"]')
+        self.wait_for_loading_to_disappear()
 
     def wait_for_loading_to_disappear(self, timeout=10):
         """
@@ -83,26 +112,6 @@ class ProcessPage(BasePage):
                  "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
             )
         )
-
-    def adds_process(self, name, number):
-        self.click_add_button()  # 检查点击添加
-        # 输入工序代码
-        self.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', f"{name}")
-        self.enter_texts('(//label[text()="工序名"])[1]/parent::div//input', f"{name}")
-        # 显示顺序数字框输入文字字母符号数字
-        element = self.get_find_element_xpath(
-            '(//label[text()="显示顺序"])[1]/parent::div//input'
-        )
-        # 全选后删除
-        element.send_keys(Keys.CONTROL + "a")
-        element.send_keys(Keys.DELETE)
-        sleep(1)
-        self.enter_texts(
-            '(//label[text()="显示顺序"])[1]/parent::div//input', f"{number}"
-        )
-        # 点击确定
-        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        self.wait_for_loading_to_disappear()
 
     def add_layout(self, layout):
         """添加布局."""
@@ -138,25 +147,55 @@ class ProcessPage(BasePage):
             # 如果已选中，直接点击确定按钮保存设置
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
 
-    def del_all(self, value=[]):
-        for index, v in enumerate(value, start=1):
-            try:
-                xpath = '//p[text()="工序代码"]/ancestor::div[2]//input'
-                self.enter_texts(xpath, v)
-                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-                self.click_del_button()  # 点击删除
-                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-                self.wait_for_loading_to_disappear()
-                ele = self.get_find_element_xpath(xpath)
+    def add_input_all(self, num):
+        """输入框全部输入保存"""
+        if num != "":
+            # 点击资源
+            self.click_button(
+                '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
+            )
+            # 勾选框
+            random_int = random.randint(1, 3)
+            sleep(1)
+            self.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+
+            self.click_button(
+                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            )
+            sleep(1)
+            resource = self.get_find_element_xpath('//label[text()="收货场所"][1]/parent::div//input').get_attribute("value")
+
+            # 点击班次
+            self.click_button(
+                '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
+            )
+            # 勾选框
+            random_int1 = random.randint(1, 3)
+            sleep(1)
+            self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+            self.click_button(
+                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            )
+            sleep(1)
+            shift = self.get_find_element_xpath('//label[text()="班次"][1]/parent::div//input').get_attribute("value")
+
+            name = ["优先级", "资源量", "备注"]
+            for index, value in enumerate(name, start=1):
+                ele = self.get_find_element_xpath(f'//label[text()="{value}"][1]/parent::div//input')
                 ele.send_keys(Keys.CONTROL, "a")
                 ele.send_keys(Keys.DELETE)
-            except NoSuchElementException:
-                print(f"未找到元素: {v}")
-            except Exception as e:
-                print(f"操作 {v} 时出错: {str(e)}")
+                ele.send_keys(num)
+
+            self.click_button('(//div[text()=" 星期 "])[1]')
+            self.click_button(
+                '//div[@class="d-flex"]/label/span'
+            )
+            self.click_button(
+                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            )
+            return resource, shift
 
     def del_layout(self, layout):
-        sleep(2)
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = self.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -174,9 +213,17 @@ class ProcessPage(BasePage):
         index = all_children.index(target_div)
         print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
 
-        self.click_button(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
-        )
+        try:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
+        except TimeoutException:
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+            )
+            self.click_button(
+                f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+            )
         # 根据目标 div 的位置，点击对应的“删除布局”按钮
         self.click_button(f'(//li[text()="删除布局"])[{index + 1}]')
         sleep(2)
@@ -184,30 +231,3 @@ class ProcessPage(BasePage):
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
 
-    def add_input_all(self, name, num):
-        """输入框全部输入保存"""
-        if name != "":
-            # 输入代码
-            self.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', f"{name}")
-            self.enter_texts('(//label[text()="工序名"])[1]/parent::div//input', f"{name}")
-            # 显示颜色下拉框
-            self.click_button('(//label[text()="显示颜色"])[1]/parent::div//i')
-            # 显示颜色
-            self.click_button('//span[text()="RGB(100,255,178)"]')
-            ele = self.get_find_element_xpath(
-                '(//label[text()="显示顺序"])[1]/parent::div//input'
-            )
-            ele.send_keys(Keys.CONTROL, "a")
-            ele.send_keys(Keys.DELETE)
-            # 显示顺序框输入文字字母符号数字
-            self.enter_texts(
-                '(//label[text()="显示顺序"])[1]/parent::div//input', f"{num}"
-            )
-            self.enter_texts('(//label[text()="备注"])[1]/parent::div//input', f"{name}")
-            ele = self.get_find_element_xpath(
-                '//label[text()="无效标志"]/following-sibling::div/label/span'
-            )
-            if ele.get_attribute("class") == 'ivu-checkbox':
-                ele.click()
-
-            self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')

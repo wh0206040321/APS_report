@@ -11,7 +11,7 @@ from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
 
 
-class MaterialDataPage(BasePage):
+class MaterialSubstitutionPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -208,9 +208,9 @@ class MaterialDataPage(BasePage):
         """点击更新时间."""
         self.wait_for_loading_to_disappear()
         self.click_button('//span[text()=" 更新时间"]/following-sibling::div')
-        sleep(1.5)
+        sleep(2)
         self.click_button('//span[text()=" 更新时间"]/following-sibling::div')
-        sleep(1.5)
+        sleep(2)
 
     def click_update(self):
         self.click_flagdata()

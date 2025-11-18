@@ -210,7 +210,6 @@ class TestProcessPage:
         name = "111"
         num = "60"
         process.adds_process(name, num)
-        sleep(2)
         # 获取重复弹窗文字
         error_popup = process.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -287,7 +286,7 @@ class TestProcessPage:
         process.enter_texts('(//label[text()="工序代码"])[1]/parent::div//input', "111")
         # 点击确定
         process.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        sleep(2)
         # 获取重复弹窗文字
         error_popup = process.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
@@ -315,6 +314,7 @@ class TestProcessPage:
         )
         # 点击确定
         process.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        process.wait_for_loading_to_disappear()
         sleep(1)
         # 定位表格内容
         processdata = process.get_find_element_xpath(
@@ -339,6 +339,7 @@ class TestProcessPage:
         )
         # 点击确定
         process.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        process.wait_for_loading_to_disappear()
         sleep(1)
         # 定位表格内容
         processdata = process.get_find_element_xpath(
@@ -381,6 +382,7 @@ class TestProcessPage:
         ).text
         # 点击确定
         process.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        process.wait_for_loading_to_disappear()
         sleep(1)
         # 定位表格内容
         processname = process.get_find_element_xpath(

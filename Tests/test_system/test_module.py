@@ -120,8 +120,9 @@ class TestSModulePage:
         module.click_button(xpath_list[3])
         module.click_confirm()
         message = module.get_find_message()
+        module.wait_for_loading_to_disappear()
         module.select_input_module(name)
-        ele = module.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
+        ele = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text
         assert message == "新增成功！" and ele == name
         assert not module.has_fail_message()
 
@@ -156,16 +157,16 @@ class TestSModulePage:
         before_name = 'ABCDAA'
         module.wait_for_loading_to_disappear()
         module.select_input_module(before_name)
-        module.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
+        module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[@id="i8jh37dc-1wyr"]//input',
-            '//div[@id="cantp8xp-kz7i"]//input',
+            '//div[@id="2ac152wb-18ae"]//input',
+            '//div[@id="h95qavco-ll5z"]//input',
         ]
-        sleep(1)
-        ele = module.get_find_element_xpath(xpath_list[0])
-        assert not ele.is_enabled()
+        sleep(2)
+        ele = module.get_find_element_xpath(xpath_list[0]).get_attribute("readonly")
+        assert ele == "true" or ele == "readonly"
         assert not module.has_fail_message()
 
     @allure.story("修改模块名称和排序成功")
@@ -182,16 +183,20 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[@id="cantp8xp-kz7i"]//input',
-            '//div[label[text()="排序"]]//input',
+            '//div[@id="h95qavco-ll5z"]//input',
+            '//div[@id="lzd9u38e-i7eq"]//input',
         ]
         add.batch_modify_input(xpath_list[:1], after_name)
+        n = module.get_find_element_xpath(xpath_list[1])
+        n.send_keys(Keys.CONTROL, "a")
+        n.send_keys(Keys.DELETE)
         module.enter_texts(xpath_list[1], "33")
         module.click_confirm()
         message = module.get_find_message()
-        module.select_input_module(after_name)
-        ele1 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[1]/td[3]//span[text()="{xpath_list[0]}"]').text
-        ele2 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[1]/td[5]//span[text()="{xpath_list[1]}"]').text
+        module.select_input_module(before_name)
+        sleep(2)
+        ele1 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[3]').text
+        ele2 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[5]').text
         assert message == "编辑成功！" and ele1 == after_name and ele2 == "33"
         assert not module.has_fail_message()
 
@@ -843,13 +848,14 @@ class TestSModulePage:
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         module.wait_for_loading_to_disappear()
+        sleep(1)
         name = "3"
         module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
         module.hover("包含")
         sleep(1)
         module.select_input_module(name)
         sleep(1)
-        module.click_button('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]')
+        module.click_button('(//div[div[span[text()=" 模块代码"]]]//i)[2]')
         module.hover("清除所有筛选条件")
         sleep(1)
         ele = module.get_find_element_xpath('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]').get_attribute(
@@ -862,6 +868,8 @@ class TestSModulePage:
     def test_module_delsuccess(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+
+        module.wait_for_loading_to_disappear()
         layout = "测试布局A"
 
         value = ['ABCDAA']

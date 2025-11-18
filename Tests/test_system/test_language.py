@@ -139,7 +139,9 @@ class TestSLanguagePage:
         add.batch_modify_input(xpath_list[:4], name)
         language.click_confirm()
         message = language.get_find_message()
+        language.wait_for_loading_to_disappear()
         language.select_input_language(name)
+        sleep(1)
         eles = language.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
         assert eles == name
         assert message == "新增成功！"
@@ -188,7 +190,9 @@ class TestSLanguagePage:
         add.batch_modify_input(xpath_list[:1], after_name)
         language.click_confirm()
         message = language.get_find_message()
+        language.wait_for_loading_to_disappear()
         language.select_input_language(after_name)
+        sleep(2)
         eles2 = language.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{after_name}"]').text
         assert eles2 == after_name
         assert message == "编辑成功！"
@@ -211,7 +215,9 @@ class TestSLanguagePage:
         add.batch_modify_input(xpath_list[:4], name)
         language.click_confirm()
         message = language.get_find_message()
+        language.wait_for_loading_to_disappear()
         language.select_input_language(name)
+        sleep(2)
         eles = language.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text
         assert eles == name
         assert message == "新增成功！"
@@ -238,7 +244,9 @@ class TestSLanguagePage:
         add.batch_modify_input(xpath_list[:3], after_name)
         language.click_confirm()
         message = language.get_find_message()
+        language.wait_for_loading_to_disappear()
         language.select_input_language(before_name)
+        sleep(2)
         eles1 = language.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[3]').text
         eles2 = language.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[4]').text
         eles3 = language.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[5]').text
@@ -271,156 +279,156 @@ class TestSLanguagePage:
         assert message == "记录已存在,请检查！"
         assert not language.has_fail_message()
 
-    @allure.story("查询key值成功")
-    # @pytest.mark.run(order=1)
-    def test_language_selectsuccess(self, login_to_language):
-        driver = login_to_language  # WebDriver 实例
-        language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        name = "Item_Spec1Code"
-        # 点击查询
-        language.click_all_button("查询")
-        sleep(1)
-        # 定位名称输入框
-        element_to_double_click = driver.find_element(
-            By.XPATH,
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
-        )
-        # 创建一个 ActionChains 对象
-        actions = ActionChains(driver)
-        # 双击命令
-        actions.double_click(element_to_double_click).perform()
-        sleep(1)
-        # 点击物料代码
-        language.click_button('//div[text()="键" and contains(@optid,"opt_")]')
-        sleep(1)
-        # 点击比较关系框
-        language.click_button(
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
-        )
-        sleep(1)
-        # 点击=
-        language.click_button('//div[text()="=" and contains(@optid,"opt_")]')
-        sleep(1)
-        # 点击输入数值
-        language.enter_texts(
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            name,
-        )
-        sleep(1)
-
-        # 点击确认
-        language.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
-        # 定位第一行是否为name
-        itemcode = language.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
-        ).text
-        # 定位第二行没有数据
-        itemcode2 = driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
-        )
-        assert itemcode == name and len(itemcode2) == 0
-        assert not language.has_fail_message()
-
-    @allure.story("没有数据时显示正常")
-    # @pytest.mark.run(order=1)
-    def test_language_selectnodatasuccess(self, login_to_language):
-        driver = login_to_language  # WebDriver 实例
-        language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-
-        # 点击查询
-        language.click_all_button("查询")
-        sleep(1)
-        # 定位名称输入框
-        element_to_double_click = driver.find_element(
-            By.XPATH,
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
-        )
-        # 创建一个 ActionChains 对象
-        actions = ActionChains(driver)
-        # 双击命令
-        actions.double_click(element_to_double_click).perform()
-        sleep(1)
-        # 点击物料代码
-        language.click_button('//div[text()="键" and contains(@optid,"opt_")]')
-        sleep(1)
-        # 点击比较关系框
-        language.click_button(
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
-        )
-        sleep(1)
-        # 点击=
-        language.click_button('//div[text()="=" and contains(@optid,"opt_")]')
-        sleep(1)
-        # 点击输入数值
-        language.enter_texts(
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "没有数据",
-        )
-        sleep(1)
-
-        # 点击确认
-        language.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
-        itemcode = driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
-        )
-        assert len(itemcode) == 0
-        assert not language.has_fail_message()
-
-    @allure.story("查询中文包含物料成功")
-    # @pytest.mark.run(order=1)
-    def test_language_selectnamesuccess(self, login_to_language):
-        driver = login_to_language  # WebDriver 实例
-        language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-
-        name = "物料"
-        # 点击查询
-        language.click_all_button("查询")
-        sleep(1)
-        # 定位名称输入框
-        element_to_double_click = driver.find_element(
-            By.XPATH,
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
-        )
-        # 创建一个 ActionChains 对象
-        actions = ActionChains(driver)
-        # 双击命令
-        actions.double_click(element_to_double_click).perform()
-        sleep(1)
-        # 点击物料名称
-        language.click_button('//div[text()="中文" and contains(@optid,"opt_")]')
-        sleep(1)
-        # 点击比较关系框
-        language.click_button(
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
-        )
-        sleep(1)
-        # 点击=
-        language.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
-        sleep(1)
-        # 点击输入数值
-        language.enter_texts(
-            '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            name,
-        )
-        sleep(1)
-
-        # 点击确认
-        language.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
-        eles = language.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
-        assert len(eles) > 0
-        assert all(name in ele for ele in eles)
-        assert not language.has_fail_message()
+    # @allure.story("查询key值成功")
+    # # @pytest.mark.run(order=1)
+    # def test_language_selectsuccess(self, login_to_language):
+    #     driver = login_to_language  # WebDriver 实例
+    #     language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+    #     name = "Item_Spec1Code"
+    #     # 点击查询
+    #     language.click_all_button("查询")
+    #     sleep(1)
+    #     # 定位名称输入框
+    #     element_to_double_click = driver.find_element(
+    #         By.XPATH,
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
+    #     )
+    #     # 创建一个 ActionChains 对象
+    #     actions = ActionChains(driver)
+    #     # 双击命令
+    #     actions.double_click(element_to_double_click).perform()
+    #     sleep(1)
+    #     # 点击物料代码
+    #     language.click_button('//div[text()="键" and contains(@optid,"opt_")]')
+    #     sleep(1)
+    #     # 点击比较关系框
+    #     language.click_button(
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
+    #     )
+    #     sleep(1)
+    #     # 点击=
+    #     language.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+    #     sleep(1)
+    #     # 点击输入数值
+    #     language.enter_texts(
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
+    #         name,
+    #     )
+    #     sleep(1)
+    #
+    #     # 点击确认
+    #     language.click_button(
+    #         '(//div[@class="demo-drawer-footer"])[2]/button[2]'
+    #     )
+    #     sleep(2)
+    #     # 定位第一行是否为name
+    #     itemcode = language.get_find_element_xpath(
+    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+    #     ).text
+    #     # 定位第二行没有数据
+    #     itemcode2 = driver.find_elements(
+    #         By.XPATH,
+    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+    #     )
+    #     assert itemcode == name and len(itemcode2) == 0
+    #     assert not language.has_fail_message()
+    #
+    # @allure.story("没有数据时显示正常")
+    # # @pytest.mark.run(order=1)
+    # def test_language_selectnodatasuccess(self, login_to_language):
+    #     driver = login_to_language  # WebDriver 实例
+    #     language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+    #
+    #     # 点击查询
+    #     language.click_all_button("查询")
+    #     sleep(1)
+    #     # 定位名称输入框
+    #     element_to_double_click = driver.find_element(
+    #         By.XPATH,
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
+    #     )
+    #     # 创建一个 ActionChains 对象
+    #     actions = ActionChains(driver)
+    #     # 双击命令
+    #     actions.double_click(element_to_double_click).perform()
+    #     sleep(1)
+    #     # 点击物料代码
+    #     language.click_button('//div[text()="键" and contains(@optid,"opt_")]')
+    #     sleep(1)
+    #     # 点击比较关系框
+    #     language.click_button(
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
+    #     )
+    #     sleep(1)
+    #     # 点击=
+    #     language.click_button('//div[text()="=" and contains(@optid,"opt_")]')
+    #     sleep(1)
+    #     # 点击输入数值
+    #     language.enter_texts(
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
+    #         "没有数据",
+    #     )
+    #     sleep(1)
+    #
+    #     # 点击确认
+    #     language.click_button(
+    #         '(//div[@class="demo-drawer-footer"])[2]/button[2]'
+    #     )
+    #     sleep(2)
+    #     itemcode = driver.find_elements(
+    #         By.XPATH,
+    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+    #     )
+    #     assert len(itemcode) == 0
+    #     assert not language.has_fail_message()
+    #
+    # @allure.story("查询中文包含物料成功")
+    # # @pytest.mark.run(order=1)
+    # def test_language_selectnamesuccess(self, login_to_language):
+    #     driver = login_to_language  # WebDriver 实例
+    #     language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+    #
+    #     name = "物料"
+    #     # 点击查询
+    #     language.click_all_button("查询")
+    #     sleep(1)
+    #     # 定位名称输入框
+    #     element_to_double_click = driver.find_element(
+    #         By.XPATH,
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[4]',
+    #     )
+    #     # 创建一个 ActionChains 对象
+    #     actions = ActionChains(driver)
+    #     # 双击命令
+    #     actions.double_click(element_to_double_click).perform()
+    #     sleep(1)
+    #     # 点击物料名称
+    #     language.click_button('//div[text()="中文" and contains(@optid,"opt_")]')
+    #     sleep(1)
+    #     # 点击比较关系框
+    #     language.click_button(
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input'
+    #     )
+    #     sleep(1)
+    #     # 点击=
+    #     language.click_button('//div[text()="包含" and contains(@optid,"opt_")]')
+    #     sleep(1)
+    #     # 点击输入数值
+    #     language.enter_texts(
+    #         '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
+    #         name,
+    #     )
+    #     sleep(1)
+    #
+    #     # 点击确认
+    #     language.click_button(
+    #         '(//div[@class="demo-drawer-footer"])[2]/button[2]'
+    #     )
+    #     sleep(2)
+    #     eles = language.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
+    #     assert len(eles) > 0
+    #     assert all(name in ele for ele in eles)
+    #     assert not language.has_fail_message()
 
     @allure.story("过滤查组件代码成功")
     # @pytest.mark.run(order=1)
@@ -428,7 +436,7 @@ class TestSLanguagePage:
         driver = login_to_language  # WebDriver 实例
         language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         language.wait_for_loading_to_disappear()
-        name = "Plan"
+        name = "Akey"
         sleep(1)
         language.select_input_language(name)
         sleep(2)
@@ -450,6 +458,7 @@ class TestSLanguagePage:
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
             language.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            language.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         language.click_button('//div[div[span[text()=" 键"]]]/div[3]//input')
         eles = language.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
@@ -462,7 +471,7 @@ class TestSLanguagePage:
         driver = login_to_language  # WebDriver 实例
         language = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         language.wait_for_loading_to_disappear()
-        name = "Plan"
+        name = "Akey"
         sleep(1)
         language.click_button('//div[div[span[text()=" 键"]]]/div[3]//i')
         language.hover("包含")

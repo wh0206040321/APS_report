@@ -780,7 +780,6 @@ class TestSynchronizePage:
             synchronize.click_button(f'(//span[text()="{v}"])[1]')
         unit.right_refresh()
         unit.del_all(unit_name)
-        unit.get_find_message()
         ele = synchronize.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0
         assert not synchronize.has_fail_message()

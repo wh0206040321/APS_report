@@ -1336,7 +1336,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试透视表B"
-        sleep(1)
+        sleep(2)
         setting.click_button('//i[@id="tabsDrawerIcon"]')
 
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
@@ -1358,6 +1358,7 @@ class TestSettingPage:
         setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         setting.wait_for_loading_to_disappear()
+        setting.get_find_message()
         sleep(1)
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

@@ -256,114 +256,114 @@ class TestSMaterialRequirementsDefinitionPage:
     # @pytest.mark.run(order=1)
     def test_materialRequirementsDefinition_select2(self, login_to_materialRequirementsDefinition):
         driver = login_to_materialRequirementsDefinition  # WebDriver 实例
-        button = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
-        button.wait_for_loading_to_disappear()
+        material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
+        material.wait_for_loading_to_disappear()
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
-        eles = button.get_find_element_xpath(
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
+        eles = material.get_find_element_xpath(
             '(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
             "class")
         if eles == "ivu-checkbox ivu-checkbox-checked":
-            button.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
-            button.click_button('//div[@class="filter-btn-bar"]/button')
+            material.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
+            material.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//input')
-        eles = button.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//input')
+        eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         assert len(eles) == 0
-        assert not button.has_fail_message()
+        assert not material.has_fail_message()
 
     @allure.story("过滤条件查询，设置包含条件查询成功")
     # @pytest.mark.run(order=1)
     def test_materialRequirementsDefinition_select3(self, login_to_materialRequirementsDefinition):
         driver = login_to_materialRequirementsDefinition  # WebDriver 实例
-        button = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
-        button.wait_for_loading_to_disappear()
+        material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
+        material.wait_for_loading_to_disappear()
         name = "2"
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
-        button.hover("包含")
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
+        material.hover("包含")
         sleep(1)
-        button.select_input_mrq(name)
+        material.select_input_mrq(name)
         sleep(1)
-        eles = button.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert all(name in text for text in list_)
-        assert not button.has_fail_message()
+        assert not material.has_fail_message()
 
     @allure.story("过滤条件查询，设置符合开头查询成功")
     # @pytest.mark.run(order=1)
     def test_materialRequirementsDefinition_select4(self, login_to_materialRequirementsDefinition):
         driver = login_to_materialRequirementsDefinition  # WebDriver 实例
-        button = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
+        material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
         name = "2"
-        button.wait_for_loading_to_disappear()
+        material.wait_for_loading_to_disappear()
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
-        button.hover("符合开头")
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
+        material.hover("符合开头")
         sleep(1)
-        button.select_input_mrq(name)
+        material.select_input_mrq(name)
         sleep(1)
-        eles = button.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert all(str(item).startswith(name) for item in list_)
-        assert not button.has_fail_message()
+        assert not material.has_fail_message()
 
     @allure.story("过滤条件查询，设置符合结尾查询成功")
     # @pytest.mark.run(order=1)
     def test_materialRequirementsDefinition_select5(self, login_to_materialRequirementsDefinition):
         driver = login_to_materialRequirementsDefinition  # WebDriver 实例
-        button = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
-        button.wait_for_loading_to_disappear()
+        material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
+        material.wait_for_loading_to_disappear()
         name = "2"
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
-        button.hover("符合结尾")
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
+        material.hover("符合结尾")
         sleep(1)
-        button.select_input_mrq(name)
+        material.select_input_mrq(name)
         sleep(1)
-        eles = button.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert all(str(item).endswith(name) for item in list_)
-        assert not button.has_fail_message()
+        assert not material.has_fail_message()
 
     @allure.story("清除筛选效果成功")
     # @pytest.mark.run(order=1)
     def test_materialRequirementsDefinition_clear(self, login_to_materialRequirementsDefinition):
         driver = login_to_materialRequirementsDefinition  # WebDriver 实例
-        button = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
-        button.wait_for_loading_to_disappear()
+        material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
+        material.wait_for_loading_to_disappear()
         name = "3"
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
-        button.hover("包含")
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
+        material.hover("包含")
         sleep(1)
-        button.select_input_mrq(name)
+        material.select_input_mrq(name)
         sleep(1)
-        button.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
-        button.hover("清除所有筛选条件")
+        material.click_button('//div[p[text()="需求来源编码"]]/following-sibling::div//i')
+        material.hover("清除所有筛选条件")
         sleep(1)
-        ele = button.get_find_element_xpath('//div[p[text()="需求来源编码"]]/following-sibling::div//i').get_attribute(
+        ele = material.get_find_element_xpath('//div[p[text()="需求来源编码"]]/following-sibling::div//i').get_attribute(
             "class")
         assert ele == "vxe-icon-funnel suffixIcon"
-        assert not button.has_fail_message()
+        assert not material.has_fail_message()
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
     def test_materialRequirementsDefinition_delsuccess(self, login_to_materialRequirementsDefinition):
         driver = login_to_materialRequirementsDefinition  # WebDriver 实例
-        button = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
+        material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
 
-        button.wait_for_loading_to_disappear()
+        material.wait_for_loading_to_disappear()
         value = ['1测试数据1','1测试数据2','2测试数据2']
-        button.del_all(xpath='//div[p[text()="需求来源编码"]]/following-sibling::div//input', value=value)
-        button.right_refresh(name='物控需求定义')
+        material.del_all(xpath='//div[p[text()="需求来源编码"]]/following-sibling::div//input', value=value)
+        material.right_refresh(name='物控需求定义')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:1]
         ]
 
         assert all(len(elements) == 0 for elements in itemdata)
-        assert not button.has_fail_message()
+        assert not material.has_fail_message()
