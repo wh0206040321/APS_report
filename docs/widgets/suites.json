@@ -1,1 +1,1 @@
-{"total":3,"items":[{"uid":"e75a11712ef63dfcccf62eb968db3a06","name":"Tests.test_system","statistic":{"failed":32,"broken":33,"skipped":0,"passed":392,"unknown":0,"total":457}},{"uid":"cadd6ca0c3c3db92463d9f6571af457d","name":"Tests.test_items","statistic":{"failed":6,"broken":12,"skipped":0,"passed":609,"unknown":0,"total":627}},{"uid":"e6e187ee37bb16924f3385ea09142ffd","name":"Tests.test_material","statistic":{"failed":0,"broken":21,"skipped":0,"passed":225,"unknown":0,"total":246}}]}
+{"total":0,"items":[]}
