@@ -11,7 +11,7 @@ from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
 
 
-class ExpressionPage(BasePage):
+class MaterialPlanData(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -74,7 +74,6 @@ class ExpressionPage(BasePage):
                  "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
             )
         )
-        sleep(1)
 
     # 等待加载遮罩消失
     def wait_for_el_loading_mask(self, timeout=10):
@@ -95,64 +94,17 @@ class ExpressionPage(BasePage):
         )
         sleep(1)
 
+    def click_select_button(self):
+        """点击查询按钮."""
+        self.click_button(f'//button[span[text()="查询"]]')
+
+    def click_export_button(self):
+        """点击导出按钮."""
+        self.click_button(f'//button[span[text()="导出"]]')
+
     def click_all_button(self, name):
         """点击按钮."""
         self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
-
-    def select_input_expression(self, name):
-        """选择输入框."""
-        xpath = '//div[div[p[text()="名称"]]]//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
-
-    def select_input_menu(self, name):
-        """选择输入框."""
-        xpath = '//div[div[span[text()=" 组件代码"]]]//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
-
-    def select_input_module(self, name):
-        """选择输入框."""
-        xpath = '//div[div[span[text()=" 模块代码"]]]//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
-        sleep(1)
-
-    def select_input_language(self, name):
-        """选择输入框."""
-        xpath = '//div[div[span[text()=" 键"]]]//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
-
-    def select_input_button(self, name):
-        """选择输入框."""
-        xpath = '//div[p[text()="按钮代码"]]/following-sibling::div//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
-
-    def select_input_dictionary(self, name):
-        """选择输入框."""
-        xpath = '//div[div[span[text()=" 枚举值"]]]//input'
-        ele = self.get_find_element_xpath(xpath)
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.DELETE)
-        sleep(0.5)
-        self.enter_texts(xpath, name)
 
     def loop_judgment(self, xpath):
         """循环判断"""
@@ -180,6 +132,28 @@ class ExpressionPage(BasePage):
     def click_confirm(self):
         """点击确定"""
         self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+
+    def select_input_mrq(self, name):
+        """选择需求来源编码输入框."""
+        self.wait_for_loading_to_disappear()
+        xpath = '//div[p[text()="需求来源编码"]]/following-sibling::div//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+        sleep(1)
+
+    def select_input_mcd(self, name):
+        """选择供应来源编码输入框."""
+        self.wait_for_loading_to_disappear()
+        xpath = '//div[p[text()="供应来源编码"]]/following-sibling::div//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.DELETE)
+        sleep(0.5)
+        self.enter_texts(xpath, name)
+        sleep(1)
 
     def del_all(self, xpath, value=[]):
         for index, v in enumerate(value, start=1):
@@ -232,7 +206,6 @@ class ExpressionPage(BasePage):
             self.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         except:
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
-        self.wait_for_loading_to_disappear()
 
     def del_layout(self, layout):
         # 获取目标 div 元素，这里的目标是具有特定文本的 div

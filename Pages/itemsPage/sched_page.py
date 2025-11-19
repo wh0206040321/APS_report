@@ -129,7 +129,6 @@ class SchedPage(BasePage):
         """获取保存之后的值"""
         self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[1]')
         self.click_save_button()
-        self.get_find_message()
         self.driver.refresh()
         sleep(1)
         self.click_button(f'//ul[@visible="visible"]//ul//span[text()="{name}"]')

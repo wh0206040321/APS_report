@@ -162,8 +162,8 @@ class TestSMenuPage:
         menu.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{value}"]')
         menu.click_all_button("编辑")
         sleep(2)
-        ele = menu.get_find_element_xpath('//div[@id="0lollcex-w9k3"]//input')
-        assert not ele.is_enabled()
+        ele = menu.get_find_element_xpath('//div[@id="0lollcex-w9k3"]//input').get_attribute("readonly")
+        assert ele == "true" or ele == "readonly"
         assert not menu.has_fail_message()
 
     @allure.story("修改组件名称，图标成功")

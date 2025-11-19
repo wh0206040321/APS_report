@@ -219,6 +219,8 @@ class TestSAppsPage:
         ).get_attribute("value")
         apps.enter_texts('//div[label[text()="名称"]]//input[@placeholder="请输入"]', afert_name)
         apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        apps.get_find_message()
+        sleep(2)
         num = apps.get_template_num(afert_name)
         assert before_name1 == before_name
         assert num == 1
@@ -968,12 +970,12 @@ class TestSAppsPage:
 
         value = ['appstest1']
         apps.del_all(xpath='//div[p[text()="应用代码"]]/following-sibling::div//input', value=value)
+        apps.del_layout(layout)
+        sleep(2)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:1]
         ]
-        apps.del_layout(layout)
-        sleep(2)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

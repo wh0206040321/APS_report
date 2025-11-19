@@ -154,10 +154,9 @@ class MaterialCalendar(BasePage):
             self.click_button(
                 '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
             )
+            self.wait_for_loading_to_disappear()
             # 勾选框
-            random_int = random.randint(1, 3)
-            sleep(1)
-            self.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+            self.click_button(f'//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span')
 
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
@@ -170,9 +169,8 @@ class MaterialCalendar(BasePage):
                 '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
             )
             # 勾选框
-            random_int1 = random.randint(1, 3)
-            sleep(1)
-            self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+            self.wait_for_loading_to_disappear()
+            self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[1]')
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
             )

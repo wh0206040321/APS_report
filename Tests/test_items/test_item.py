@@ -429,10 +429,7 @@ class TestItemPage:
             '(//label[text()="关联条件"])[1]/parent::div//input'
         ).get_attribute("value")
         # 点击确定
-        item.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-        )
-        sleep(1)
+        item.click_confirm()
         # 定位表格内容
         itemname = item.get_find_element_xpath(
             f'//tr[./td[2][.//span[text()="{name}"]]]/td[3]/div'

@@ -140,7 +140,6 @@ class TestsInterfaceExecutionPage:
         assert len(ele) == 0
         assert not interface.has_fail_message()
 
-
     @allure.story("过滤条件查询，一个不选，显示正常")
     # @pytest.mark.run(order=1)
     def test_interfaceexecution_select1(self, login_to_interfaceexecution):
@@ -175,6 +174,7 @@ class TestsInterfaceExecutionPage:
         eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        assert len(list_) > 0
         assert all(name in text for text in list_)
         assert not interface.has_fail_message()
 
@@ -193,6 +193,7 @@ class TestsInterfaceExecutionPage:
         eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        assert len(list_) > 0
         assert all(str(item).startswith(name) for item in list_)
         assert not interface.has_fail_message()
 
@@ -211,6 +212,7 @@ class TestsInterfaceExecutionPage:
         eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        assert len(list_) > 0
         assert all(str(item).endswith(name) for item in list_)
         assert not interface.has_fail_message()
 

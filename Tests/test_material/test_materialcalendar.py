@@ -221,6 +221,7 @@ class TestMaterialCalendarPage:
         calendar.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
+        calendar.wait_for_loading_to_disappear()
         calendar.click_button('//table[@class="vxe-table--header"]//th[2]//span[@class="vxe-cell--checkbox"]')
         sleep(1)
         calendar.click_button(
@@ -236,10 +237,8 @@ class TestMaterialCalendarPage:
         calendar.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
-        # 勾选框
-        random_int1 = random.randint(1, 2)
-        sleep(1)
-        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        calendar.wait_for_loading_to_disappear()
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[1]')
         sleep(1)
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -288,9 +287,8 @@ class TestMaterialCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 3)
-        sleep(1)
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+        calendar.wait_for_loading_to_disappear()
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span')
 
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -306,9 +304,9 @@ class TestMaterialCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 3)
+        calendar.wait_for_loading_to_disappear()
         sleep(1)
-        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[1]')
 
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -363,9 +361,8 @@ class TestMaterialCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 3)
-        sleep(1)
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+        calendar.wait_for_loading_to_disappear()
+        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span')
 
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -381,10 +378,9 @@ class TestMaterialCalendarPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 3)
-        sleep(1)
+        calendar.wait_for_loading_to_disappear()
         calendar.click_button(
-            f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
+            f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[1]')
 
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -642,7 +638,7 @@ class TestMaterialCalendarPage:
         )
 
         # 勾选框
-        random_int = random.randint(1, 3)
+        random_int = random.randint(1, 2)
         sleep(1)
         calendar.click_button(
             '//span[@class="vxe-checkbox--icon iconfont icon-fuxuankuangdaiding"]'

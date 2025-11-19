@@ -534,7 +534,6 @@ class TestMaterialSchedPage:
         assert all_value1 == all_value2 and after_value in before_value
         assert not sched.has_fail_message()
 
-
     @allure.story("删除测试方案")
     # @pytest.mark.run(order=1)
     def test_materialsched_delsched3(self, login_to_materialSched):

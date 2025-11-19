@@ -2,7 +2,7 @@ import random
 from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -73,6 +73,23 @@ class Calendar(BasePage):
         )
         return message.text
 
+    def click_flagdata(self):
+        """点击更新时间."""
+        self.wait_for_loading_to_disappear()
+        self.click_button('//p[text()="更新时间"]/following-sibling::div')
+        sleep(1)
+        self.click_button('//p[text()="更新时间"]/following-sibling::div')
+        sleep(1)
+
+    def right_refresh(self, name):
+        """右键刷新."""
+        but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
+        but.click()
+        # 右键点击
+        ActionChains(self.driver).context_click(but).perform()
+        self.click_button('//li[text()=" 刷新"]')
+        self.wait_for_loading_to_disappear()
+
     def click_confirm_button(self):
         """点击确定按钮."""
         self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]')
@@ -141,7 +158,7 @@ class Calendar(BasePage):
             random_int = random.randint(1, 5)
             sleep(1)
             self.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
-
+            self.wait_for_loading_to_disappear()
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
             )
@@ -155,6 +172,7 @@ class Calendar(BasePage):
             # 勾选框
             random_int1 = random.randint(1, 2)
             sleep(1)
+            self.wait_for_loading_to_disappear()
             self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[{random_int1}]')
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'

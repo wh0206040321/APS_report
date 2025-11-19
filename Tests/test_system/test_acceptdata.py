@@ -70,7 +70,7 @@ class TestSAcceptDataPage:
         acceptdata.click_all_button("新增")
         acceptdata.click_confirm()
         message = acceptdata.get_error_message()
-        assert message == "请填写数据"
+        assert message == "请填写信息"
         assert not acceptdata.has_fail_message()
 
     @allure.story("只填写源数据和目的系统点击新增不允许保存")
@@ -89,7 +89,7 @@ class TestSAcceptDataPage:
             acceptdata.click_button(xpath)
         acceptdata.click_confirm()
         message = acceptdata.get_error_message()
-        assert message == "请填写数据"
+        assert message == "请填写信息"
         assert not acceptdata.has_fail_message()
 
     @allure.story("添加数据成功")
@@ -292,6 +292,7 @@ class TestSAcceptDataPage:
         eles = acceptdata.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        assert len(list_) > 0
         assert all(name in text for text in list_)
         assert not acceptdata.has_fail_message()
 
@@ -310,6 +311,7 @@ class TestSAcceptDataPage:
         eles = acceptdata.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        assert len(list_) > 0
         assert all(str(item).startswith(name) for item in list_)
         assert not acceptdata.has_fail_message()
 
@@ -328,6 +330,7 @@ class TestSAcceptDataPage:
         eles = acceptdata.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        assert len(list_) > 0
         assert all(str(item).endswith(name) for item in list_)
         assert not acceptdata.has_fail_message()
 

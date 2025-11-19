@@ -162,7 +162,8 @@ class TestChartPage:
         )
         chart.wait_for_el_loading_mask()
         chart.click_resource_confirm_button()
-        ele = driver.find_elements(
+        sleep(1)
+        ele = chart.finds_elements(
             By.XPATH,
             '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
         )
@@ -1346,7 +1347,7 @@ class TestChartPage:
         chart.click_button('//label[text()="排序方法"]/following-sibling::div//i')
         chart.click_button('//div[@class="right"]/button[2]')
         chart.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]//i')
-        chart.click_button('(//li[text()="订单优先度顺序"])[1]')
+        chart.click_button('(//li[text()="自定义字符1"])[1]')
         chart.click_button('(//span[@class="ivu-select-selected-value"])[3]')
         chart.click_button('(//li[text()="降序"])[1]')
         chart.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[3]')
@@ -1354,7 +1355,7 @@ class TestChartPage:
         ele = chart.get_find_element_xpath(
             '//label[text()="排序方法"]/following-sibling::div//input'
         )
-        assert "ME.Priority,d" in ele.get_attribute("value")
+        assert "ME.UserStr1,d" in ele.get_attribute("value")
         assert not chart.has_fail_message()
 
     @allure.story("筛选方法可使用")
