@@ -235,7 +235,7 @@ class TestItemPage:
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
-        find_layout = self.driver.find_elements(By.XPATH, "//div[@id='ex4ltcja-03ly']//input")
+        find_layout = self.driver.find_elements(By.XPATH, "//div[@id='pu1pmnxq-m04t']//input")
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
                 len(find_layout) == 0
@@ -314,29 +314,17 @@ class TestItemPage:
         # 点击修改按钮
         self.item.click_edi_button()
         sleep(1)
+
+        self.item.click_button("//div[@id='2jxvas8y-5a79']//i")
+        self.item.click_button("//div[@id='2jxvas8y-5a79']//i")
+
         ele = self.item.get_find_element_xpath(
-            "//div[@id='ex4ltcja-03ly']//input"
+            "//div[@id='86pxmzzh-teuf']//input"
         )
         # 清空数字输入框
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.BACK_SPACE)
 
-        ele2 = self.item.get_find_element_xpath(
-            "//div[@id='r6rn7bzl-sm8u']//input"
-        )
-        # 清空数字输入框
-        ele2.send_keys(Keys.CONTROL, "a")
-        ele2.send_keys(Keys.BACK_SPACE)
-        self.item.click_button("//div[@id='r6rn7bzl-sm8u']//i")
-        self.item.click_button("//div[@id='r6rn7bzl-sm8u']//i")
-
-
-        ele3 = self.item.get_find_element_xpath(
-            "//div[@id='4p6ljyj2-u4h2']//input"
-        )
-        # 清空数字输入框
-        ele3.send_keys(Keys.CONTROL, "a")
-        ele3.send_keys(Keys.BACK_SPACE)
 
         self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
         sleep(2)
@@ -371,7 +359,7 @@ class TestItemPage:
         self.item.click_edi_button()
         sleep(1)
         ele = self.item.get_find_element_xpath(
-            "//div[@id='ex4ltcja-03ly']//input"
+            "//div[@id='pu1pmnxq-m04t']//input"
         )
         # 清空数字输入框
         ele.send_keys(Keys.CONTROL, "a")
@@ -383,7 +371,7 @@ class TestItemPage:
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
-        find_layout = self.driver.find_elements(By.XPATH, "//div[@id='ex4ltcja-03ly']//input")
+        find_layout = self.driver.find_elements(By.XPATH, "//div[@id='pu1pmnxq-m04t']//input")
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
@@ -430,29 +418,17 @@ class TestItemPage:
         self.item.click_edi_button()
         sleep(1)
 
+        self.item.click_button("//div[@id='2jxvas8y-5a79']//i")
+        self.item.click_button("//div[@id='2jxvas8y-5a79']//i")
+
         ele = self.item.get_find_element_xpath(
-            "//div[@id='ex4ltcja-03ly']//input"
+            "//div[@id='86pxmzzh-teuf']//input"
         )
         # 清空数字输入框
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.BACK_SPACE)
 
-        ele2 = self.item.get_find_element_xpath(
-            "//div[@id='r6rn7bzl-sm8u']//input"
-        )
-        # 清空数字输入框
-        ele2.send_keys(Keys.CONTROL, "a")
-        ele2.send_keys(Keys.BACK_SPACE)
 
-        ele3 = self.item.get_find_element_xpath(
-            "//div[@id='4p6ljyj2-u4h2']//input"
-        )
-        # 清空数字输入框
-        ele3.send_keys(Keys.CONTROL, "a")
-        ele3.send_keys(Keys.BACK_SPACE)
-
-        self.item.click_button("//div[@id='r6rn7bzl-sm8u']//i")
-        self.item.click_button("//div[@id='r6rn7bzl-sm8u']//i")
 
         # 批量修改输入框
         self.item.batch_modify_input(self.all_input_edit_xpath_list, text_str)
@@ -626,7 +602,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击物料代码
-        self.item.click_button('//div[text()="物料员代码" and contains(@optid,"opt_")]')
+        self.item.click_button('//div[text()="在途库存单据号" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         self.item.click_button(

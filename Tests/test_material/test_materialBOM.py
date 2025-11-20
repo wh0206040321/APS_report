@@ -650,7 +650,7 @@ class TestItemPage:
         actions.double_click(element_to_double_click).perform()
         sleep(1)
         # 点击交付单号
-        self.item.click_button('//div[text()="产品编号" and contains(@optid,"opt_")]')
+        self.item.click_button('//div[text()="产品编码" and contains(@optid,"opt_")]')
         sleep(1)
         # 点击比较关系框
         self.item.click_button(

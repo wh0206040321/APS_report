@@ -114,27 +114,36 @@ class TestItemPage:
         )
         self.item.click_button("//div[@id='rpfclioo-7p50']//i")
         sleep(2)
-        self.item.click_button('(//span[text()="钟锦鹏"])[1]')
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[2]/td[2]')
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[6]')
 
         self.item.click_button("//div[@id='04m2qyfz-z28h']//i")
         sleep(2)
-        self.item.click_button('(//span[text()="333"])[1]')
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[2]/td[2]')
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[6]')
+        ele1 = self.item.get_find_element_xpath(
+            "//div[@id='rpfclioo-7p50']//input"
+        ).get_attribute("value")
+        ele2 = self.item.get_find_element_xpath(
+            "//div[@id='04m2qyfz-z28h']//input"
+        ).get_attribute("value")
+        ele3 = self.item.get_find_element_xpath(
+            "//div[@id='lo2km34z-5dbg']//input"
+        ).get_attribute("value")
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         adddata = self.item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="zhongjingpeng"]]]/td[2]'
+            f'//tr[./td[2][.//span[text()="{ele1}"]]]/td[2]'
         ).text
         adddata2 = self.item.get_find_element_xpath(
-            '//tr[./td[3][.//span[text()="333"]]]/td[3]'
+            f'//tr[./td[3][.//span[text()="{ele2}"]]]/td[3]'
         ).text
         adddata3 = self.item.get_find_element_xpath(
             '//tr[./td[4][.//span[text()="666"]]]/td[4]'
         ).text
 
-        assert adddata == "zhongjingpeng" and adddata2 == "333" and adddata3 == "666", f"预期数据是333，实际得到{adddata}"
+        assert adddata == ele1 and adddata2 == ele2 and adddata3 == ele3
         assert not self.item.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -143,18 +152,24 @@ class TestItemPage:
 
         self.item.click_add_button()  # 检查点击添加
         # 输入供应商代码
-        self.item.enter_texts("//div[@id='rpfclioo-7p50']//input", "zhongjingpeng")
-        self.item.enter_texts("//div[@id='04m2qyfz-z28h']//input", "333")
-        self.item.enter_texts("//div[@id='lo2km34z-5dbg']//input", "666")
-        # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
-        sleep(1)
+        self.item.enter_texts(
+            "//div[@id='lo2km34z-5dbg']//input", "666"
+        )
+        self.item.click_button("//div[@id='rpfclioo-7p50']//i")
+        sleep(2)
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[2]/td[2]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[6]')
+
+        self.item.click_button("//div[@id='04m2qyfz-z28h']//i")
+        sleep(2)
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[2]/td[2]')
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[6]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        sleep(3)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
-        self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
             error_popup == "记录已存在,请检查！"
         ), f"预期数据是记录已存在,请检查，实际得到{error_popup}"
@@ -165,7 +180,10 @@ class TestItemPage:
     def test_materialDelUserMap_delcancel(self, login_to_item):
 
         # 定位内容为‘111’的行
-        self.item.click_button('//span[text()="333"]')
+        ele = self.item.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1])[1]/td[2]'
+        ).text
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[1]/td[2]')
         self.item.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
@@ -173,9 +191,9 @@ class TestItemPage:
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = self.item.get_find_element_xpath(
-            '//tr[./td[2][.//span[text()="333"]]]/td[1]'
+            '(//table[@class="vxe-table--body"]//tr[1])[1]/td[2]'
         ).text
-        assert itemdata == "333", f"预期{itemdata}"
+        assert itemdata == ele, f"预期{itemdata}"
         assert not self.item.has_fail_message()
 
     @allure.story("添加测试数据")
@@ -211,10 +229,12 @@ class TestItemPage:
         self.item.click_edi_button()
         # 用户弹窗
         self.item.click_button("//div[@id='2pj1qda7-bju3']//i")
-        sleep(2)
-        self.item.click_button('(//span[text()="钟锦鹏"])[1]')
+        self.item.wait_for_loading_to_disappear()
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[2]/td[2]')
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[6]')
-        self.item.enter_texts("//div[@id='kwy45no3-x5iq']//input", "333")
+        self.item.click_button("//div[@id='kwy45no3-x5iq']//i")
+        self.item.wait_for_loading_to_disappear()
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[1])[2]/td[2]')
         # 物料员弹窗
         # self.item.click_button("//div[@id='kwy45no3-x5iq']//i")
         # sleep(2)
@@ -222,14 +242,13 @@ class TestItemPage:
         # self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
 
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
-        sleep(1)
+        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[6]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        sleep(2)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
-        self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert error_popup == "记录已存在,请检查！", f"预期数据{error_popup}"
         assert not self.item.has_fail_message()
 
@@ -274,7 +293,7 @@ class TestItemPage:
         ]
 
         # 选中工厂代码
-        self.item.click_button('//tr[./td[2][.//span[text()="zhongjingpeng"]]]/td[2]')
+        self.item.click_button('//tr[./td[2][.//span[text()="zhong11"]]]/td[2]')
         # 点击修改按钮
         self.item.click_edi_button()
         sleep(1)
@@ -303,7 +322,8 @@ class TestItemPage:
     @allure.story("筛选")
     # @pytest.mark.run(order=1)
     def test_materialDelUserMap_refreshsuccess(self, login_to_item):
-
+        self.item.wait_for_loading_to_disappear()
+        sleep(1)
         # 用户筛选框输入111
         self.item.enter_texts(
             '//span[text()=" 用户"]/ancestor::div[3]//input', "111"
@@ -511,8 +531,16 @@ class TestItemPage:
         if len(layout) > 1:
             self.item.del_layout("测试布局A")
         # 定位内容为‘test111’的行
-        itemdata = self.driver.find_elements(
+
+        self.item.click_button('//tr[td[4][.//span[text()="666"]]]/td[2]')
+        self.item.click_del_button()
+        self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.item.wait_for_loading_to_disappear()
+        itemdata1 = self.driver.find_elements(
             By.XPATH, '//tr[./td[2][.//span[text()="test111"]]]/td[2]'
         )
-        assert len(itemdata) == 0
+        itemdata2 = self.driver.find_elements(
+            By.XPATH, '//tr[td[4][.//span[text()="666"]]]/td[2]'
+        )
+        assert len(itemdata1) == 0 and len(itemdata2) == 0
         assert not self.item.has_fail_message()

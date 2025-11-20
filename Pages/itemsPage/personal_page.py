@@ -138,13 +138,15 @@ class PersonalPage(BasePage):
         self.click_button('(//span[text()="系统管理"])[1]')  # 点击系统管理
         self.click_button('(//span[text()="单元设置"])[1]')  # 点击单元设置
         self.click_button('(//span[text()="环境设置"])[1]')  # 点击环境设置
+        sleep(2)
         radio = self.get_find_element('//label[text()=" 服务器"]/span')
         sleep(1)
         if name == 'web' or name == 'ip':
             # 选择服务器类型并保存
-            if radio.get_attribute('class') == 'ivu-radio':
-                sleep(2)
-                radio.click()
+            if 'ivu-radio-checked' in radio.get_attribute('class'):
+                sleep(1)
+                self.click_button('//label[text()=" 本地"]/span')
+                sleep(1)
             self.click_button('//p[text()="保存"]')
         elif name == 'system_webip':
             # 选择本地并设置web服务，然后保存
@@ -173,6 +175,7 @@ class PersonalPage(BasePage):
         self.click_button('(//span[text()="计划运行"])[1]')  # 点击计划运行
         self.click_button('(//span[text()="计算工作台"])[1]')  # 点击计算工作台
         self.click_button('(//span[text()="计划计算"])[1]')  # 点击计划计算
+        sleep(3)
 
     def go_exit(self, num=""):
         """

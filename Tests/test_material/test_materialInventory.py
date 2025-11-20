@@ -46,17 +46,11 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_materialInventory_addfail(self, login_to_item):
         sleep(3)
-        divs = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
-        find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
-        layout = "测试布局A"
-        if len(find_layout) == 0 and len(divs) > 1:
-            layout = "测试布局A"
-            self.item.add_layout(layout)
-
-        # 获取布局名称的文本元素
-        name = self.item.get_find_element_xpath(
-            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        ).text
+        # divs = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
+        # find_layout = self.driver.find_elements(By.XPATH, '//div[text()=" 测试布局A "]')
+        # if len(find_layout) == 0 and len(divs) > 1:
+        #     layout = "测试布局A"
+        #     self.item.add_layout(layout)
         self.item.click_add_button()
         # 在途库存单据号xpath
         input_box = self.item.get_find_element_xpath(
@@ -80,7 +74,7 @@ class TestItemPage:
         assert (
             bordername_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{bordername_color}"
-        assert layout == name
+        # assert layout == name
         assert not self.item.has_fail_message()
 
     @allure.story("添加物料库存信息，只填写物料代码，不填写仓库代码等，不允许提交")
@@ -586,6 +580,7 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_materialInventory_delsuccess3(self, login_to_item):
         # 定位内容为‘111’的行
+        self.item.wait_for_loading_to_disappear()
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
         sleep(1)

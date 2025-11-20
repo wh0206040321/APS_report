@@ -14,7 +14,7 @@ from selenium.common.exceptions import WebDriverException, StaleElementReference
 
 from Pages.itemsPage.adds_page import AddsPages
 from Pages.itemsPage.login_page import LoginPage
-from Pages.materialPage.materialData_page import MaterialSubstitutionPage
+from Pages.materialPage.materialSubstitution_page import MaterialSubstitutionPage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 

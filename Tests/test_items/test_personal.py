@@ -377,84 +377,12 @@ class TestPersonalPage:
         assert before_width != after_width and int(before_width) < int(after_width), f"before_width:{before_width},after_width:{after_width}"
         assert not personal.has_fail_message()
 
-    @allure.story("打开引擎为web服务")
+    @allure.story("环境设置为服务器，个人设置本地引擎打开方式ip和web服务禁止选中")
     # @pytest.mark.run(order=1)
     def test_personal_openengine1(self, login_to_personal):
         driver = login_to_personal  # WebDriver 实例
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        wait = WebDriverWait(driver, 100)
-
-        personal.go_setting_page()
-
-        personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
-        personal.click_button('//li[text()="web服务"]')
-        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        personal.get_find_message()
-        personal.go_engine_page(name='web')
-        sleep(1)
-        ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
-        personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
-        # 等待“完成”的文本出现
-        success_element = wait.until(
-            EC.presence_of_element_located(
-                (By.XPATH, '(//div[@class="d-flex"])[3]/p[text()=" 完成 "]')
-            )
-        )
-        # 等待 2s，如果有 Alert，就接受掉
-        try:
-            WebDriverWait(driver, 2).until(EC.alert_is_present())
-            driver.switch_to.alert.accept()
-        except TimeoutException:
-            pass  # alert 未出现
-        assert success_element.text == "完成"
-        assert len(ele) == 1
-
-    @allure.story("打开引擎为IP")
-    # @pytest.mark.run(order=1)
-    def test_personal_openengine2(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        wait = WebDriverWait(driver, 100)
-
-        personal.go_setting_page()
-
-        personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
-        personal.click_button('//li[text()="IP"]')
-        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        personal.get_find_message()
-        personal.go_engine_page(name='ip')
-        ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
-        sleep(1)
-        personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
-        # 等待“完成”的文本出现
-        success_element = wait.until(
-            EC.presence_of_element_located(
-                (By.XPATH, '(//div[@class="d-flex"])[3]/p[text()=" 完成 "]')
-            )
-        )
-        # 等待 2s，如果有 Alert，就接受掉
-        try:
-            WebDriverWait(driver, 2).until(EC.alert_is_present())
-            driver.switch_to.alert.accept()
-        except TimeoutException:
-            pass  # alert 未出现
-        assert success_element.text == "完成"
-        assert len(ele) == 1
-        assert not personal.has_fail_message()
-
-    @allure.story("打开引擎为系统设置-服务器")
-    # @pytest.mark.run(order=1)
-    def test_personal_openengine3(self, login_to_personal):
-        driver = login_to_personal  # WebDriver 实例
-        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        wait = WebDriverWait(driver, 100)
-
-        personal.go_setting_page()
-
-        personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
-        personal.click_button('//li[text()="系统设置"]')
-        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
-        personal.get_find_message()
+        wait = WebDriverWait(driver, 20)
         personal.go_engine_page(name='system_web')
 
         # 等待 el-loading-spinner 消失
@@ -472,11 +400,49 @@ class TestPersonalPage:
             EC.element_to_be_clickable(
                 (
                     By.XPATH,
-                    '//div[@class="vue-treeselect__list"]/div[.]//label[text()="均衡排产"]',
+                    '//div[@class="vue-treeselect__list"]/div[1]',
                 )
             )
         )
         first_option.click()
+
+        # 执行计划
+        personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
+
+        # 等待“完成”的文本出现
+        success_element = wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, '(//div[@class="d-flex"])[3]/p[text()=" 完成 "]')
+            )
+        )
+
+        personal.go_setting_page()
+
+        personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
+        personal.click_button('//li[text()="web服务"]')
+        sleep(1)
+        ele1 = personal.get_find_element('//li[text()="web服务"]').get_attribute("class")
+        ele2 = personal.get_find_element('//li[text()="IP"]').get_attribute("class")
+        assert success_element.text == "完成"
+        assert "ivu-select-item-disabled" in ele1 and "ivu-select-item-disabled" in ele2
+        assert not personal.has_fail_message()
+
+    @allure.story("打开引擎为web服务")
+    # @pytest.mark.run(order=1)
+    def test_personal_openengine2(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        wait = WebDriverWait(driver, 20)
+        personal.go_engine_page(name='web')
+        personal.go_setting_page()
+
+        personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
+        personal.click_button('//li[text()="web服务"]')
+        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
+        personal.get_find_message()
+
+        sleep(1)
+        ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
         personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
         # 等待“完成”的文本出现
         success_element = wait.until(
@@ -484,7 +450,45 @@ class TestPersonalPage:
                 (By.XPATH, '(//div[@class="d-flex"])[3]/p[text()=" 完成 "]')
             )
         )
+        # 等待 2s，如果有 Alert，就接受掉
+        try:
+            WebDriverWait(driver, 5).until(EC.alert_is_present())
+            driver.switch_to.alert.accept()
+        except TimeoutException:
+            pass  # alert 未出现
         assert success_element.text == "完成"
+        assert len(ele) == 1
+
+    @allure.story("打开引擎为IP")
+    # @pytest.mark.run(order=1)
+    def test_personal_openengine3(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        wait = WebDriverWait(driver, 20)
+        personal.go_engine_page(name='ip')
+        personal.go_setting_page()
+
+        personal.click_button('//p[text()=" 本地引擎打开方式: "]/following-sibling::div//i')
+        personal.click_button('//li[text()="IP"]')
+        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
+        personal.get_find_message()
+        ele = driver.find_elements(By.XPATH, '//span[text()=" 引擎启动方式:本地 "]')
+        sleep(1)
+        personal.click_button('//button[@class="m-l-10 ivu-btn ivu-btn-primary"]')
+        # 等待“完成”的文本出现
+        success_element = wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, '(//div[@class="d-flex"])[3]/p[text()=" 完成 "]')
+            )
+        )
+        # 等待 2s，如果有 Alert，就接受掉
+        try:
+            WebDriverWait(driver, 5).until(EC.alert_is_present())
+            driver.switch_to.alert.accept()
+        except TimeoutException:
+            pass  # alert 未出现
+        assert success_element.text == "完成"
+        assert len(ele) == 1
         assert not personal.has_fail_message()
 
     @allure.story("打开引擎为系统设置-web服务器")

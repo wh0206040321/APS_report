@@ -54,17 +54,17 @@ class TestItemPage:
 
         # 必填编辑输入框xpath
         self.req_input_edit_xpath_list = [
-            "//div[@id='sxr6cq9e-kpn1']//input",
-            "//div[@id='ozsgcc0w-5pa9']//input",
-            "//div[@id='1cxww9yr-7o6l']//input",
-            "//div[@id='lff1478f-xf8a']//input",
-            "//div[@id='t1s95ezs-m6kt']//input"
+            "//div[@id='damcfda2-oe7o']//input",
+            "//div[@id='v2l8tntf-y9pg']//input",
+            "//div[@id='lbd3660j-ig7h']//input",
+            "//div[@id='fmrc3ptk-8axb']//input",
+            "//div[@id='m8qs4wf2-was2']//input"
         ]
 
         # 必填新增日期xpath
         self.req_date_add_xpath_list = ["//div[@id='8xprmwmu-m2yq']//input"]
         # 必填编辑日期xpath
-        self.req_date_edit_xpath_list = ["//div[@id='eedxaf78-yjdh']//input"]
+        self.req_date_edit_xpath_list = ["//div[@id='hcru2bmw-b16s']//input"]
 
         # 全部新增输入框xpath
         self.all_input_add_xpath_list = [
@@ -88,31 +88,33 @@ class TestItemPage:
             "//div[@id='er1s533b-0paw']//input",
             "//div[@id='bq6dy8uc-2f58']//input",
             "//div[@id='f4s9lqcm-b3vk']//input",
-            "//div[@id='xieapx7h-udjh']//input"
+            "//div[@id='xieapx7h-udjh']//input",
+            "//div[@id='xj8pyn8a-5vpd']//input"
         ]
         # 全部编辑输入框xpath
         self.all_input_edit_xpath_list = [
-            "//div[@id='sxr6cq9e-kpn1']//input",
-            "//div[@id='1cxww9yr-7o6l']//input",
-            "//div[@id='lff1478f-xf8a']//input",
-            "//div[@id='wjeg1kr2-8v19']//input",
-            "//div[@id='3bncuxa9-7hm8']//input",
-            "//div[@id='rmgkp6y7-9425']//input",
-            "//div[@id='2yjv3ab5-3669']//input",
-            "//div[@id='ozsgcc0w-5pa9']//input",
-            "//div[@id='8vg3l5d4-e7tm']//input",
-            "//div[@id='ek6l9cmz-4ay9']//input",
-            "//div[@id='t1s95ezs-m6kt']//input",
-            "//div[@id='8vejefb1-s44u']//input",
-            "//div[@id='2ib76w2m-lgtw']//input",
-            "//div[@id='8s31n9gk-c5a1']//input",
-            "//div[@id='1gb58wa3-p5iq']//input",
-            "//div[@id='rsbau0ll-lzci']//input",
-            "//div[@id='877j3e8d-mujf']//input",
-            "//div[@id='r40hlyym-bnql']//input",
-            "//div[@id='cbrzw6wl-sarb']//input",
-            "//div[@id='9482um2i-fup4']//input",
-            "//div[@id='cm25dz2g-qmfs']//input"
+            "//div[@id='damcfda2-oe7o']//input",
+            "//div[@id='lbd3660j-ig7h']//input",
+            "//div[@id='fmrc3ptk-8axb']//input",
+            "//div[@id='mkxgkcy4-ufaz']//input",
+            "//div[@id='9h42oaeg-to1h']//input",
+            "//div[@id='povom9fb-xygl']//input",
+            "//div[@id='tjaj2bbw-haej']//input",
+            "//div[@id='v2l8tntf-y9pg']//input",
+            "//div[@id='o5gwab1x-h4pk']//input",
+            "//div[@id='q57wbq1q-82d8']//input",
+            "//div[@id='m8qs4wf2-was2']//input",
+            "//div[@id='zmeif7gz-sg34']//input",
+            "//div[@id='nbuisbk1-f4fn']//input",
+            "//div[@id='ec9ksply-hgof']//input",
+            "//div[@id='xc1bzoiy-zmjz']//input",
+            "//div[@id='pr6k9av1-8f1h']//input",
+            "//div[@id='lbxmmvxf-1p2w']//input",
+            "//div[@id='z5quuitt-gmxg']//input",
+            "//div[@id='37t9zegs-0i7q']//input",
+            "//div[@id='6f6k8hhu-icws']//input",
+            "//div[@id='8hgeuwak-6xxb']//input",
+            "//div[@id='pq8m5tvz-r38p']//input"
         ]
         # 全部新增日期xpath
         self.all_date_add_xpath_list = [
@@ -126,13 +128,13 @@ class TestItemPage:
         ]
         # 全部编辑日期xpath
         self.all_date_edit_xpath_list = [
-            "//div[@id='km7burff-5djo']//input",
-            "//div[@id='7d2g9a3w-t30q']//input",
-            "//div[@id='178gsb6h-059i']//input",
-            "//div[@id='67usyn9u-w79i']//input",
-            "//div[@id='yx4ioe2w-2v91']//input",
-            "//div[@id='eedxaf78-yjdh']//input",
-            "//div[@id='aom3ko9y-psh3']//input"
+            "//div[@id='ryydhx59-gnf3']//input",
+            "//div[@id='gc5gxcc3-weg2']//input",
+            "//div[@id='78q3rl5h-umi7']//input",
+            "//div[@id='kervd06s-4d8i']//input",
+            "//div[@id='tz7izyxz-ulz0']//input",
+            "//div[@id='hcru2bmw-b16s']//input",
+            "//div[@id='ez35ymkg-x4io']//input"
         ]
 
     @allure.story("添加未领料明细信息 不填写数据点击确认 不允许提交")
@@ -195,6 +197,12 @@ class TestItemPage:
         text_str = "111"
         date_str = "2025/07/23 00:00:00"
         sleep(1)
+        # ele = self.item.get_find_element_xpath(
+        #     "//div[@id='xj8pyn8a-5vpd']//input"
+        # )
+        # # 清空数字输入框
+        # ele.send_keys(Keys.CONTROL, "a")
+        # ele.send_keys(Keys.BACK_SPACE)
         # 批量修改输入框
         self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
         self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
@@ -415,7 +423,7 @@ class TestItemPage:
         self.item.click_edi_button()
         sleep(1)
         ele = self.item.get_find_element_xpath(
-            "//div[@id='t1s95ezs-m6kt']//input"
+            "//div[@id='m8qs4wf2-was2']//input"
         )
         # 清空数字输入框
         ele.send_keys(Keys.CONTROL, "a")

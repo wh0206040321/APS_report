@@ -1,6 +1,7 @@
 import random
 from time import sleep
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -361,3 +362,37 @@ class WarehouseLocationPage(BasePage):
                     f"获取输入框值时发生错误（XPath列表第{index}个）: {str(e)}"
                 )
         return True
+
+    def del_all(self, value=[], xpath=""):
+        for index, v in enumerate(value, start=1):
+            try:
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
+                self.enter_texts(xpath, v)
+                self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+                self.click_del_button()  # 点击删除
+                self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+                self.wait_for_loading_to_disappear()
+            except NoSuchElementException:
+                print(f"未找到元素: {v}")
+            except Exception as e:
+                print(f"操作 {v} 时出错: {str(e)}")
+
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+            )
+        )

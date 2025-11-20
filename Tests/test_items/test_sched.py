@@ -442,6 +442,7 @@ class TestSchedPage:
             '//label[text()="选择复制的方案"]/following-sibling::div/div'
         )  # 点击下拉框
         sched.click_button('//li[text()="排产方案(订单级)"]')
+        sleep(1)
         sched.click_ok_schedbutton()  # 点击确定
         sched.click_save_button()  # 点击保存
         sleep(1)

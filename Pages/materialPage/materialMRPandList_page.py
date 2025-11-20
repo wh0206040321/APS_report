@@ -11,7 +11,7 @@ from Pages.base_page import BasePage
 from Pages.itemsPage.adds_page import AddsPages
 
 
-class MaterialPlanData(BasePage):
+class MaterialMRPAndList(BasePage):
     def __init__(self, driver):
         super().__init__(driver)  # 调用基类构造函数
 
@@ -96,11 +96,11 @@ class MaterialPlanData(BasePage):
 
     def click_select_button(self):
         """点击查询按钮."""
-        self.click_button(f'//button[span[text()="查询"]]')
+        self.click_button(f'//button//span[text()="查询"]')
 
     def click_export_button(self):
         """点击导出按钮."""
-        self.click_button(f'//button[span[text()="导出"]]')
+        self.click_button(f'//button//span[text()="导出"]')
 
     def click_all_button(self, name):
         """点击按钮."""

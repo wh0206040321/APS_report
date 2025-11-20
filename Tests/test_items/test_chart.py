@@ -162,7 +162,8 @@ class TestChartPage:
         )
         chart.wait_for_el_loading_mask()
         chart.click_resource_confirm_button()
-        sleep(1)
+        chart.wait_for_el_loading_mask()
+        sleep(2)
         ele = chart.finds_elements(
             By.XPATH,
             '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
@@ -741,6 +742,8 @@ class TestChartPage:
         )
         chart.wait_for_el_loading_mask()
         chart.click_order_confirm_button()
+        chart.wait_for_el_loading_mask()
+        sleep(2)
         ele = driver.find_elements(
             By.XPATH,
             '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
@@ -1025,6 +1028,8 @@ class TestChartPage:
         )
         chart.wait_for_el_loading_mask()
         chart.click_order_confirm_button()
+        chart.wait_for_el_loading_mask()
+        sleep(2)
         ele = driver.find_elements(
             By.XPATH,
             '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
@@ -1309,6 +1314,8 @@ class TestChartPage:
         )
         chart.wait_for_el_loading_mask()
         chart.click_order_confirm_button()
+        chart.wait_for_el_loading_mask()
+        sleep(2)
         ele = driver.find_elements(
             By.XPATH,
             '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',
@@ -1606,7 +1613,8 @@ class TestChartPage:
         )
         chart.wait_for_el_loading_mask()
         chart.click_order_confirm_button()
-        sleep(1)
+        chart.wait_for_el_loading_mask()
+        sleep(2)
         ele = driver.find_elements(
             By.XPATH,
             '//div[@class="el-tabs__nav is-top"]/div[@role="tab" and text()="测试布局修改"]',

@@ -41,6 +41,7 @@ class TestItemPage:
     def setup(self, login_to_item):
         self.driver = login_to_item
         self.item = WarehouseLocationPage(self.driver)
+        self.item.wait_for_loading_to_disappear()
 
     @allure.story("添加信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
@@ -100,7 +101,7 @@ class TestItemPage:
         self.item.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = self.item.get_find_element_xpath(
