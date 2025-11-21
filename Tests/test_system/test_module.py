@@ -855,7 +855,7 @@ class TestSModulePage:
         sleep(1)
         module.select_input_module(name)
         sleep(1)
-        module.click_button('(//div[div[span[text()=" 模块代码"]]]//i)[2]')
+        module.click_button('//div[div[span[text()=" 模块代码"]]]/div[3]//i')
         module.hover("清除所有筛选条件")
         sleep(1)
         ele = module.get_find_element_xpath('//div[div[span[text()=" 模块代码"]]]//i[@class="vxe-icon-funnel suffixIcon"]').get_attribute(

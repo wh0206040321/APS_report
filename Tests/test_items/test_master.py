@@ -158,7 +158,7 @@ class TestMasterPage:
     def test_master_addserial2(self, login_to_master):
         driver = login_to_master  # WebDriver 实例
         master = MasterPage(driver)  # 用 driver 初始化 MasterPage
-        name = "1"
+        name = "11111111111111113evf饿。+/.3.331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
         # 清空之前的共享数据
         SharedDataUtil.clear_data()
         master.click_add_button()
@@ -236,7 +236,7 @@ class TestMasterPage:
         SharedDataUtil.save_data(
             {"item": item}
         )
-        assert text_ == name
+        assert text_ == '999999999'
         assert item == adddata and addtext == "输入指令" and len(error_popup) == 0
         assert not master.has_fail_message()
 

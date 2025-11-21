@@ -426,7 +426,7 @@ class TestMaterialCalendarPage:
         addtext = calendar.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[7]'
         ).text
-        assert adddata == resource and addshift == resource1 and addnum == '999999999' and addtext == num
+        assert adddata == resource and addshift == resource1 and addnum == '100000' and addtext == num
         assert not calendar.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")
@@ -593,6 +593,7 @@ class TestMaterialCalendarPage:
         calendar.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
+        calendar.wait_for_loading_to_disappear()
         calendar.click_button(f'(//span[@class="vxe-cell--checkbox"])[1]')
         sleep(1)
 

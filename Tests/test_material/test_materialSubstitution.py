@@ -315,7 +315,7 @@ class TestSMaterialSubstitutionPage:
         material = MaterialSubstitutionPage(driver)  # 用 driver 初始化 MaterialSubstitutionPage
         material.wait_for_loading_to_disappear()
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         eles = material.get_find_element_xpath(
             '(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
             "class")
@@ -323,7 +323,7 @@ class TestSMaterialSubstitutionPage:
             material.click_button('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span')
             material.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         assert len(eles) == 0
         assert not material.has_fail_message()
@@ -336,7 +336,7 @@ class TestSMaterialSubstitutionPage:
         material.wait_for_loading_to_disappear()
         name = "ECN"
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         material.hover("包含")
         sleep(1)
         material.select_input_substitution(name)
@@ -355,7 +355,7 @@ class TestSMaterialSubstitutionPage:
         name = "常规"
         material.wait_for_loading_to_disappear()
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         material.hover("符合开头")
         sleep(1)
         material.select_input_substitution(name)
@@ -374,7 +374,7 @@ class TestSMaterialSubstitutionPage:
         material.wait_for_loading_to_disappear()
         name = "同步替代"
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         material.hover("符合结尾")
         sleep(1)
         material.select_input_substitution(name)
@@ -393,15 +393,15 @@ class TestSMaterialSubstitutionPage:
         material.wait_for_loading_to_disappear()
         name = "3"
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         material.hover("包含")
         sleep(1)
         material.select_input_substitution(name)
         sleep(1)
-        material.click_button('(//div[div[span[text()=" 替代场景"]]]//i)[2]')
+        material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         material.hover("清除所有筛选条件")
         sleep(1)
-        ele = material.get_find_element_xpath('(//div[div[span[text()=" 替代场景"]]]//i)[2]').get_attribute(
+        ele = material.get_find_element_xpath('//div[div[span[text()=" 替代场景"]]]/div[3]//i').get_attribute(
             "class")
         assert ele == "vxe-icon-funnel suffixIcon"
         assert not material.has_fail_message()

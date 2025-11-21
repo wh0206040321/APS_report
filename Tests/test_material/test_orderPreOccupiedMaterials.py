@@ -616,6 +616,7 @@ class TestItemPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
         )
+        self.item.click_ref_button()
         assert len(itemcode) == 0
         assert not self.item.has_fail_message()
 
@@ -623,6 +624,7 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_orderPreOccupiedMaterials_delsuccess3(self, login_to_item):
         # 定位内容为‘111’的行
+        self.item.wait_for_loading_to_disappear()
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
         sleep(1)

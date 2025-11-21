@@ -194,6 +194,7 @@ class TestImpPage:
         message = imp.get_find_message()
         imp.click_button('//span[text()=" 执行方案"]')
         imp.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        sleep(3)
         eles1 = imp.finds_elements(By.XPATH,
                                    f'//ul[@class="ivu-tree-children"]//span[@class="valueSpan" and text()="{kh}"]')
         eles2 = imp.finds_elements(By.XPATH,

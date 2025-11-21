@@ -329,8 +329,14 @@ class TestItemPage:
         self.item.click_edi_button()
         sleep(1)
         ele = self.item.get_find_element_xpath(
-            "//div[@id='t1s95ezs-m6kt']//input"
+            "//div[@id='damcfda2-oe7o']//input"
         )
+        ele1 = self.item.get_find_element_xpath(
+            "//div[@id='m8qs4wf2-was2']//input"
+        )
+        ele.send_keys(Keys.CONTROL, "a")
+        ele.send_keys(Keys.BACK_SPACE)
+        sleep(1)
         # 清空数字输入框
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.BACK_SPACE)
@@ -338,6 +344,8 @@ class TestItemPage:
         # 批量修改输入框
         self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
         self.item.batch_modify_input(self.req_date_edit_xpath_list, date_str)
+        input_values1 = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
+        input_date1 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
 
         sleep(1)
         # 点击确定
@@ -350,12 +358,12 @@ class TestItemPage:
         sleep(1)
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
+        input_date = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
         sleep(1)
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-                len(self.req_input_edit_xpath_list) == len(input_values) and
-                len(self.req_date_edit_xpath_list) == len(input_values2)
+                input_values1 == input_values and
+                input_date1 == input_date
         )
         assert not self.item.has_fail_message()
 

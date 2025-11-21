@@ -810,6 +810,15 @@ class TestChangeSpecPage:
     def test_changespec_editcodesuccess(self, login_to_changespec):
         driver = login_to_changespec  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        change.wait_for_loading_to_disappear()
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
         # 定位第一行
         change.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
@@ -862,6 +871,15 @@ class TestChangeSpecPage:
     def test_changespec_editprioritizationsuccess(self, login_to_changespec):
         driver = login_to_changespec  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        change.wait_for_loading_to_disappear()
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        change.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
         # 定位第一行
         change.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
@@ -950,6 +968,23 @@ class TestChangeSpecPage:
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
         )
         assert changeRcode.text == after
+        assert not change.has_fail_message()
+
+    @allure.story("删除数据成功")
+    # @pytest.mark.run(order=1)
+    def test_changespec_delsuccess3(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        before_data = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        change.del_data()
+        after_data = change.get_find_element_xpath(
+            '(//span[contains(text(),"条记录")])[1]'
+        ).text
+        assert (
+                before_data != after_data
+        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("输入全部数据，添加保存成功")

@@ -171,6 +171,7 @@ class MaterialCalendar(BasePage):
             # 勾选框
             self.wait_for_loading_to_disappear()
             self.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]//span[@class="vxe-cell--checkbox"])[1]')
+            sleep(1)
             self.click_button(
                 '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
             )

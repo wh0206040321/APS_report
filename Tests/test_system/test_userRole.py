@@ -404,7 +404,7 @@ class TestUserRolePage:
     def test_user_verify10(self, login_to_userrole):
         driver = login_to_userrole  # WebDriver 实例
         user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
-        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
+        name = "1111111111111111333311222211112222211111111133331111111444441111111111111111111111111111111111111111"
         password = 'Qw123456'
         role = '1测试角色代码2'
         user.add_user(name, password, role)
@@ -415,6 +415,19 @@ class TestUserRolePage:
         user.select_input(name)
         ele = user.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         assert message == "保存成功" and len(ele) == 1 and num == '100000'
+        assert not user.has_fail_message()
+
+    @allure.story("校验数字文本框和文本框")
+    # @pytest.mark.run(order=1)
+    def test_user_delverify10(self, login_to_userrole):
+        driver = login_to_userrole  # WebDriver 实例
+        user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
+        name = ["1111111111111111333311222211112222211111111133331111111444441111111111111111111111111111111111111111"]
+        user.del_(name)
+        message = user.get_find_message()
+        user.select_input(name)
+        ele = user.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+        assert message == "删除成功！" and len(ele) == 0
         assert not user.has_fail_message()
 
     @allure.story("添加用户重复")

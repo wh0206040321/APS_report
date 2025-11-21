@@ -118,6 +118,7 @@ class UserRolePage(BasePage):
         ele.send_keys(Keys.CONTROL, 'a')
         ele.send_keys(Keys.DELETE)
         self.enter_texts('//div[div[p[text()="用户代码"]]]//input', name)
+        sleep(1)
 
     def click_sel_button(self):
         """点击查询按钮."""

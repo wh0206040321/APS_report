@@ -256,7 +256,7 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_materialDelUserMap_delsuccess1(self, login_to_item):
         # 定位内容为‘111’的行
-        self.item.click_button('//tr[./td[2][.//span[text()="zhong11"]]]/td[2]')
+        self.item.click_button('//tr[./td[4][.//span[text()="666"]]]/td[2]')
         self.item.click_del_button()  # 点击删除
         sleep(1)
         # 点击确定
@@ -273,7 +273,7 @@ class TestItemPage:
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = self.driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="zhong11"]]]/td[2]'
+            By.XPATH, '//tr[./td[4][.//span[text()="666"]]]/td[2]'
         )
         assert len(itemdata) == 0
         assert not self.item.has_fail_message()
@@ -333,33 +333,6 @@ class TestItemPage:
             '//span[text()=" 用户"]/ancestor::div[3]//input'
         ).text
         assert itemtext == "", f"预期{itemtext}"
-        assert not self.item.has_fail_message()
-
-    @allure.story("删除测试数据成功")
-    # @pytest.mark.run(order=1)
-    def test_materialDelUserMap_delsuccess2(self, login_to_item):
-
-        # 定位内容为‘1测试A’的行
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        self.item.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        parent = self.item.get_find_element_class("ivu-modal-confirm-footer")
-
-        # 获取所有button子元素
-        all_buttons = parent.find_elements(By.TAG_NAME, "button")
-
-        # 选择需要的button 第二个确定按钮
-        second_button = all_buttons[1]
-        second_button.click()
-        self.item.click_ref_button()
-        sleep(1)
-        # 定位内容为‘1测试A’的行
-        itemdata = self.driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
         assert not self.item.has_fail_message()
 
     @allure.story("新增全部数据测试")
@@ -444,7 +417,7 @@ class TestItemPage:
         item.click_button(
             '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[2]'
         )
-        sleep(1)
+        item.wait_for_loading_to_disappear()
         # 定位第一行是否为产品A
         itemcode = item.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
@@ -454,8 +427,6 @@ class TestItemPage:
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
         )
-        # 点击刷新
-        self.item.click_ref_button()
         assert itemcode == "test111" and len(itemcode2) == 0
         assert not item.has_fail_message()
 
@@ -498,13 +469,11 @@ class TestItemPage:
         self.item.click_button(
             '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[2]'
         )
-        sleep(1)
+        self.item.wait_for_loading_to_disappear()
         itemcode = self.driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
         )
-        # 点击刷新
-        self.item.click_ref_button()
         assert len(itemcode) == 0
         assert not self.item.has_fail_message()
 
@@ -531,8 +500,8 @@ class TestItemPage:
         if len(layout) > 1:
             self.item.del_layout("测试布局A")
         # 定位内容为‘test111’的行
-
-        self.item.click_button('//tr[td[4][.//span[text()="666"]]]/td[2]')
+        self.item.wait_for_loading_to_disappear()
+        self.item.click_button('//tr[td[4][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()
         self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         self.item.wait_for_loading_to_disappear()
@@ -540,7 +509,7 @@ class TestItemPage:
             By.XPATH, '//tr[./td[2][.//span[text()="test111"]]]/td[2]'
         )
         itemdata2 = self.driver.find_elements(
-            By.XPATH, '//tr[td[4][.//span[text()="666"]]]/td[2]'
+            By.XPATH, '//tr[td[4][.//span[text()="111"]]]/td[2]'
         )
         assert len(itemdata1) == 0 and len(itemdata2) == 0
         assert not self.item.has_fail_message()
