@@ -582,7 +582,15 @@ class TestMaterialCalendarPage:
     def test_materialcalendar_editcodesuccess(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
-
+        calendar.wait_for_loading_to_disappear()
+        calendar.click_button(
+            '//p[text()="更新时间"]/following-sibling::div'
+        )
+        sleep(1)
+        calendar.click_button(
+            '//p[text()="更新时间"]/following-sibling::div'
+        )
+        sleep(1)
         # 定位第一行
         calendar.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]/td[2]'

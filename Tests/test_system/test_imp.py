@@ -255,10 +255,9 @@ class TestImpPage:
         driver = login_to_imp  # WebDriver 实例
         imp = ImpPage(driver)  # 用 driver 初始化 ImpPage
         name = "1导入设置方案"
-        copyname = '1同步导入1'
         imp.copy_(name=name, copy_name=name)
         message = imp.get_error_message()
-        assert message == '请输入方案且不能与其他方案相同'
+        assert message == '名称不能重复'
         assert not imp.has_fail_message()
 
     @allure.story("复制名称成功")

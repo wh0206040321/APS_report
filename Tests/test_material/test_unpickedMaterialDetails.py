@@ -210,7 +210,7 @@ class TestItemPage:
         sleep(1)
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
-        sleep(1)
+        self.item.wait_for_loading_to_disappear()
         # 选中新增行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         # 点击编辑按钮

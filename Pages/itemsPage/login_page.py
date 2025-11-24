@@ -3,7 +3,8 @@ from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from Pages.base_page import BasePage
 
 
@@ -34,6 +35,7 @@ class LoginPage(BasePage):
         self.select_planning_unit(planning_unit)
         sleep(0.2)
         self.click_login_button()
+        sleep(1)
 
     def click_login_button(self):
         self.click_button('//button[contains(@class, "ivu-btn-primary")]')
@@ -51,3 +53,40 @@ class LoginPage(BasePage):
             return self.find_element(By.XPATH, xpath)
         except NoSuchElementException:
             return None
+
+    def wait_for_loading_to_disappear(self, timeout=10):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
+            )
+        )
+
+    def wait_for_el_loading_mask(self, timeout=15):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            lambda d: (
+                d.find_element(By.CLASS_NAME, "el-loading-mask").value_of_css_property("display") == "none"
+                if d.find_elements(By.CLASS_NAME, "el-loading-mask") else True
+            )
+        )
+        sleep(1)

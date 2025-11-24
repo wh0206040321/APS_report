@@ -481,6 +481,19 @@ class TestUserRolePage:
         page = LoginPage(driver)
         name = '1user2'
         password = 'Qw1234561'
+        user.select_input(name)
+        sleep(1)
+        user.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+        sleep(1)
+        user.click_all_button("编辑")
+        sleep(1)
+        sy = user.get_find_element_xpath('(//div[label[text()="是否锁定"]]/div//span)[1]').get_attribute("class")
+        if 'ivu-checkbox-checked' not in sy:
+            user.click_button('(//div[label[text()="是否锁定"]]/div//span)[1]')
+        user.click_all_button("保存")
+        sleep(1)
+        message = user.get_find_message()
+
         user.click_button('//div[@class="flex-alignItems-center"]')
         user.click_button('//ul/li/div[text()=" 注销 "]')
         page.login(name, password, '1测试计划单元小日程')
@@ -491,7 +504,7 @@ class TestUserRolePage:
             sleep(1)
         user.click_button('//button[span[text()="关闭"]]')
         page.login(name, 'Qw123456', '1测试计划单元小日程')
-        ele_err = user.finds_elements(By.XPATH, f'//div[@class="ivu-modal-body"]//div[text()=" 用户名或密码无效 "]')
+        ele_err = user.finds_elements(By.XPATH, f'//div[@class="ivu-modal-body"]//div[text()=" 账户被锁定,请稍后再试. "]')
         assert 1 == len(ele_err)
         assert not user.has_fail_message()
 
@@ -500,6 +513,8 @@ class TestUserRolePage:
     def test_user_lock2(self, login_to_userrole):
         driver = login_to_userrole  # WebDriver 实例
         user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
+        page = LoginPage(driver)
+        password = 'Qw1234561'
         name = '1user2'
         user.select_input(name)
         sleep(1)
@@ -507,9 +522,9 @@ class TestUserRolePage:
         sleep(1)
         user.click_all_button("编辑")
         sleep(1)
-        sy = user.get_find_element_xpath('//div[label[text()="是否锁定"]]/div//span').get_attribute("class")
-        if sy != 'ivu-checkbox ivu-checkbox-checked':
-            user.click_button('//div[label[text()="是否锁定"]]/div//span')
+        sy = user.get_find_element_xpath('(//div[label[text()="是否锁定"]]/div//span)[1]').get_attribute("class")
+        if 'ivu-checkbox-checked' in sy:
+            user.click_button('(//div[label[text()="是否锁定"]]/div//span)[1]')
         sleep(1)
         user.click_all_button("保存")
         message = user.get_find_message()
@@ -519,13 +534,25 @@ class TestUserRolePage:
         table_sy = user.get_find_element_xpath(
             f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{name}"]]/td[6]//span[1]').get_attribute(
             "class")
-        if table_sy == 'vxe-checkbox--icon vxe-icon-checkbox-checked-fill':
-            user.click_all_button('解除当前锁定')
-            user.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-            message = user.get_find_message()
-            assert message == "修改成功"
+        if 'vxe-icon-checkbox-unchecked' in table_sy:
+            assert 1 == 1
         else:
             assert 1 == 0
+
+        user.click_button('//div[@class="flex-alignItems-center"]')
+        user.click_button('//ul/li/div[text()=" 注销 "]')
+        page.login(name, password, '1测试计划单元小日程')
+        for i in range(6):
+            user.click_button('//button[span[text()="关闭"]]')
+            sleep(1)
+            page.click_login_button()
+            sleep(1)
+        user.click_button('//button[span[text()="关闭"]]')
+        page.login(name, 'Qw123456', '1测试计划单元小日程')
+        profile_icon = user.get_find_element_xpath(
+            f'//div[text()=" 1测试计划单元小日程 "]'
+        )
+        assert profile_icon.is_displayed()
         assert not user.has_fail_message()
 
     @allure.story("设置用户禁用成功")

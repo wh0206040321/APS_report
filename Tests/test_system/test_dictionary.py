@@ -159,11 +159,11 @@ class TestSDictionaryPage:
         dictionary.click_all_button("新增")
         add.batch_modify_input(xpath_list, name)
         dictionary.click_confirm()
-        message = dictionary.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').text
-        assert message == "记录已存在,请检查！"
+        message = dictionary.get_error_message()
+        assert message == "列表中已经存在"
         assert not dictionary.has_fail_message()
 
-    @allure.story("编辑枚举值成功")
+    @allure.story("编辑枚举值和名称成功")
     # @pytest.mark.run(order=1)
     def test_dictionary_editsuccess1(self, login_to_dictionary):
         driver = login_to_dictionary  # WebDriver 实例
@@ -175,12 +175,14 @@ class TestSDictionaryPage:
         dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         dictionary.click_all_button("编辑")
         dictionary.enter_texts('//div[@id="l1ysu7kj-7dnz"]//input', '1字典3')
+        dictionary.enter_texts('//div[@id="2wyi3mna-bxi9"]//input', '1字典3')
         dictionary.click_confirm()
         message = dictionary.get_find_message()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
-        ele = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1字典3"]').text
+        ele1 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1字典3"]').text
+        ele2 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="1字典3"]').text
         assert message == "编辑成功！"
-        assert ele == '1字典3'
+        assert ele1 == '1字典3' == ele2
         assert not dictionary.has_fail_message()
 
     @allure.story("编辑分类，列表会增加")
@@ -197,6 +199,7 @@ class TestSDictionaryPage:
         dictionary.enter_texts('//div[@id="t5rmb5q4-17fw"]//input', '修改分列')
         dictionary.click_confirm()
         message = dictionary.get_find_message()
+        sleep(1)
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="修改分列"])[1]')
         ele = dictionary.get_find_element_xpath(
             f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text

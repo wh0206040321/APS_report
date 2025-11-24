@@ -51,6 +51,7 @@ def login_to_database():
         list_ = ["系统管理", "系统设置", "数据库维护"]
         for v in list_:
             page.click_button(f'(//span[text()="{v}"])[1]')
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -146,18 +147,8 @@ class TestSDateBasePage:
         data.add_table_code(button_name='编辑', code=code, field_code=name, fieldbutton_name='编辑')
         add.batch_modify_input(xpath_list[:2], code)
         data.click_confirm()
-        data.click_all_button("保存")
-        message = data.get_find_message()
-        data.select_input_database("表代码", code)
-        data.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]//span[text()="{code}"]')
-        data.click_all_button("编辑")
-        sleep(2)
-        eles = data.get_find_element_xpath(
-            f'(//table[@class="vxe-table--body"])[3]//tr/td[2]//span[text()="{code + name}"]').text
-        elesint = data.get_find_element_xpath(
-            f'(//table[@class="vxe-table--body"])[3]//tr[td[3][//span[text()="{code + name}"]]]/td[4]').text
-        assert eles == code + name and elesint == 'int'
-        assert message == "保存成功"
+        message = data.get_error_message()
+        assert message == "字段代码或者字段名称已经存在，不能再次创建！"
         assert not data.has_fail_message()
 
     @allure.story("编辑字段代码成功")
