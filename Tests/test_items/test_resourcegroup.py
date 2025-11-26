@@ -491,12 +491,12 @@ class TestResourceGroupPage:
         sleep(1)
         # 定位第一行是否为111
         resourcecode = resource.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         resourcecode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert resourcecode == "111" and len(resourcecode2) == 0
         assert not resource.has_fail_message()
@@ -545,7 +545,7 @@ class TestResourceGroupPage:
         sleep(1)
         resourcecode = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
         )
         assert len(resourcecode) == 0
         assert not resource.has_fail_message()

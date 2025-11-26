@@ -944,7 +944,7 @@ class TestChangeIPage:
         sleep(1)
         # 定位第一行
         changeIcode = changeI.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         assert changeIcode == ele
         assert not changeI.has_fail_message()

@@ -926,7 +926,7 @@ class TestChangeSpecPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         sleep(2)
         after = change.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]'
         ).text
         # 点击查询
         change.click_sel_button()
@@ -965,7 +965,7 @@ class TestChangeSpecPage:
         sleep(1)
         # 定位第一行是否为开料
         changeRcode = change.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         )
         assert changeRcode.text == after
         assert not change.has_fail_message()
@@ -1133,12 +1133,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1180,12 +1180,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1227,12 +1227,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1274,12 +1274,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1321,12 +1321,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1368,12 +1368,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1415,12 +1415,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1462,12 +1462,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1509,12 +1509,12 @@ class TestChangeSpecPage:
 
         spec.select_changespec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 

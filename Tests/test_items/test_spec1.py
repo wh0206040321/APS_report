@@ -412,12 +412,12 @@ class TestSpecPage:
         sleep(1)
         # 定位第一行是否为111
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == name and len(speccode2) == 0
         assert not spec.has_fail_message()
@@ -466,7 +466,7 @@ class TestSpecPage:
         sleep(1)
         itemcode = driver.find_elements(
             By.XPATH,
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]',
         )
         assert len(itemcode) == 0
         assert not spec.has_fail_message()
@@ -965,12 +965,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1012,12 +1012,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1059,12 +1059,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1106,12 +1106,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1153,12 +1153,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1200,12 +1200,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1247,12 +1247,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 
@@ -1294,12 +1294,12 @@ class TestSpecPage:
 
         spec.select_spec_data(after_name)
         speccode = spec.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         speccode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert speccode == after_name and len(speccode2) == 0
 

@@ -101,12 +101,12 @@ class TestWorkTasksPage:
         name = word.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]/td[2]').text
         word.select_data(code='工作代码', name=name)
         wordcode = word.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         wordcode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert wordcode == name and len(wordcode2) == 0
         assert not word.has_fail_message()
@@ -154,7 +154,7 @@ class TestWorkTasksPage:
         name = task.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]/td[6]').text
         task.select_data(code='工作编号', name=name)
         wordcode = task.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[6]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[6]'
         ).text
         # 定位第二行没有数据
         wordcode2 = driver.find_elements(

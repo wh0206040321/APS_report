@@ -747,7 +747,7 @@ class TestMaterialCalendarPage:
         sleep(2)
         # 定位第一行
         calendarcode = calendar.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         assert calendarcode == ele
         assert not calendar.has_fail_message()

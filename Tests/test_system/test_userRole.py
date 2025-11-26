@@ -488,6 +488,8 @@ class TestUserRolePage:
         user.click_all_button("编辑")
         sleep(1)
         sy = user.get_find_element_xpath('(//div[label[text()="是否锁定"]]/div//span)[1]').get_attribute("class")
+        user.click_button('//div[label[text()="指定登录方式"]]//div[@class="ivu-select-selection"]')
+        user.click_button('//ul/li[text()="全部"]')
         if 'ivu-checkbox-checked' not in sy:
             user.click_button('(//div[label[text()="是否锁定"]]/div//span)[1]')
         user.click_all_button("保存")

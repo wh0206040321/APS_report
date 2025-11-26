@@ -943,7 +943,7 @@ class TestChangeRPage:
         sleep(1)
         # 定位第一行
         changeRcode = changeR.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         )
         assert changeRcode.text == ele
         assert not changeR.has_fail_message()

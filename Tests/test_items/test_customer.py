@@ -476,12 +476,12 @@ class TestCustomerPage:
         sleep(1)
         # 定位第一行是否为111
         customercode = customer.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         customercode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert customercode == name and len(customercode2) == 0
         assert not customer.has_fail_message()
@@ -530,7 +530,7 @@ class TestCustomerPage:
         sleep(1)
         customercode = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
         )
         assert len(customercode) == 0
         assert not customer.has_fail_message()

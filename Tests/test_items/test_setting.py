@@ -1192,13 +1192,13 @@ class TestSettingPage:
         setting.click_button('(//div[@class="demo-drawer-footer"])[5]/button[2]')
         # 断言布局名称与预期相符
         time = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body" and .//tr[@class="vxe-body--row"]]//tr[2]/td[9]'
+            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
         ).text
         setting.enter_texts('//div[@class="ivu-date-picker-rel"]//input', time)
         setting.click_button('//div[@class="queryBtn"]/button[1]')
         sleep(1)
         after_time = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body" and .//tr[@class="vxe-body--row"]]//tr[1]/td[9]'
+            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[1]/td[9]'
         ).text
 
         assert name == layout and time == after_time
@@ -1227,12 +1227,12 @@ class TestSettingPage:
         setting.click_button('//div[text()="日期范围"]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[5]/button[2]')
         time1 = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body" and .//tr[@class="vxe-body--row"]]//tr[2]/td[9]'
+            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
         ).text
         sleep(1)
         setting.click_button('//p[text()="交货期"]/following-sibling::div[1]')
         time2 = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body" and .//tr[@class="vxe-body--row"]]//tr[2]/td[9]'
+            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
         ).text
         if time1 > time2:
             time = time2 + " - " + time1
@@ -1243,10 +1243,10 @@ class TestSettingPage:
         setting.click_button('//div[@class="queryBtn"]/button[1]')
         sleep(1)
         after_time1 = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body" and .//tr[@class="vxe-body--row"]]//tr[1]/td[9]'
+            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[1]/td[9]'
         ).text
         after_time2 = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body" and .//tr[@class="vxe-body--row"]]//tr[2]/td[9]'
+            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
         ).text
 
         # 删除导航栏物品页面

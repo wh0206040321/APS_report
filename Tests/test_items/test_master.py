@@ -997,12 +997,12 @@ class TestMasterPage:
         sleep(1)
         # 定位第一行是
         ordercode = master.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 第二行数据
         notext = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert ordercode == item and len(notext) == 0
         assert not master.has_fail_message()

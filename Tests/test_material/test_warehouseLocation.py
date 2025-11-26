@@ -387,12 +387,12 @@ class TestItemPage:
         sleep(1)
         # 定位第一行是否为产品A
         itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         itemcode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert itemcode == "222" and len(itemcode2) == 0
         assert not item.has_fail_message()
@@ -439,7 +439,7 @@ class TestItemPage:
         sleep(1)
         itemcode = self.driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
         )
         assert len(itemcode) == 0
         assert not self.item.has_fail_message()
@@ -514,12 +514,12 @@ class TestItemPage:
     #     sleep(1)
     #     # 定位第一行是否为M1
     #     itemcode = item.get_find_element_xpath(
-    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[3]'
+    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[3]'
     #     ).text
     #     # 定位第二行没有数据
     #     itemcode2 = driver.find_elements(
     #         By.XPATH,
-    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[3]',
+    #         '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[3]',
     #     )
     #     assert itemcode == "M1" and len(itemcode2) == 0
     #     assert not item.has_fail_message()

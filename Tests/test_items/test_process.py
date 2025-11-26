@@ -455,12 +455,12 @@ class TestProcessPage:
         sleep(1)
         # 定位第一行是否为111
         processcode = process.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         processcode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert processcode == name and len(processcode2) == 0
         assert not process.has_fail_message()
@@ -510,7 +510,7 @@ class TestProcessPage:
         # 定位第一行是否为
         processcode = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
         )
         assert len(processcode) == 0
         assert not process.has_fail_message()

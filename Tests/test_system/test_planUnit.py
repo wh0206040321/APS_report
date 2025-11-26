@@ -308,12 +308,12 @@ class TestPlanUnitPage:
         sleep(1)
         # 定位第一行是否为name
         unitcode = unit.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         unitcode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert unitcode == name and len(unitcode2) == 0
         assert not unit.has_fail_message()
@@ -362,7 +362,7 @@ class TestPlanUnitPage:
         sleep(1)
         unitcode = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
         )
         assert len(unitcode) == 0
         assert not unit.has_fail_message()

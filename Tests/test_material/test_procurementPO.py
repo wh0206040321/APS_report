@@ -640,12 +640,12 @@ class TestItemPage:
         sleep(2)
         # 定位第一行是否为产品A
         itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
         # 定位第二行没有数据
         itemcode2 = driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][2]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
         )
         assert itemcode == "111" and len(itemcode2) == 0
         assert not item.has_fail_message()
@@ -692,7 +692,7 @@ class TestItemPage:
         sleep(3)
         itemcode = self.driver.find_elements(
             By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
+            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
         )
         # 点击刷新
         self.item.click_ref_button()
