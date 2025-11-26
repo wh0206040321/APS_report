@@ -235,10 +235,12 @@ class TestItemPage:
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
-        find_layout = self.driver.find_elements(By.XPATH, "//div[@id='pu1pmnxq-m04t']//input")
+        # 获取重复弹窗文字
+        error_popup = self.item.finds_elements(By.XPATH, '//div[text()=" 记录已存在,请检查！ "]')
+        self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-                len(find_layout) == 0
+                len(error_popup) == 1
         )
         assert not self.item.has_fail_message()
 
@@ -371,11 +373,11 @@ class TestItemPage:
         # 点击确定
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
-        find_layout = self.driver.find_elements(By.XPATH, "//div[@id='pu1pmnxq-m04t']//input")
-        sleep(1)
+        error_popup = self.item.finds_elements(By.XPATH, '//div[text()=" 记录已存在,请检查！ "]')
+        self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-                len(find_layout) == 1
+                len(error_popup) == 1
         )
         assert not self.item.has_fail_message()
 
@@ -396,8 +398,9 @@ class TestItemPage:
         # 选择需要的button 第二个确定按钮
         second_button = all_buttons[1]
         second_button.click()
+        self.item.get_find_message()
         self.item.click_ref_button()
-        sleep(1)
+        self.item.wait_for_loading_to_disappear()
         # 定位内容为‘111’的行
         itemdata = self.driver.find_elements(
             By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'

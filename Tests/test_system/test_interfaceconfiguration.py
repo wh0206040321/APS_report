@@ -126,7 +126,7 @@ class TestSInterfaceConfigurationPage:
         interfaceconfiguration.wait_for_el_loading_mask()
         sleep(1)
 
-        text = interfaceconfiguration.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{input_value}"]').text
+        text = interfaceconfiguration.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{input_value}"]').text
         assert text == input_value
         assert message == "新增成功！"
         assert not interfaceconfiguration.has_fail_message()
@@ -201,7 +201,7 @@ class TestSInterfaceConfigurationPage:
         sleep(1)
 
         text = interfaceconfiguration.get_find_element_xpath(
-            f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{input_value}"]').text
+            f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{input_value}"]').text
         assert text == input_value
         assert message == "新增成功！"
         assert not interfaceconfiguration.has_fail_message()
@@ -211,13 +211,13 @@ class TestSInterfaceConfigurationPage:
     def test_interfaceconfiguration_update1(self, login_to_interfaceconfiguration):
         driver = login_to_interfaceconfiguration  # WebDriver 实例
         interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        interfaceconfiguration.click_button('//table[@class="vxe-table--body"]//tr/td[3]//span[text()="测试数据22"]')
+        interfaceconfiguration.click_button('//table[@class="vxe-table--body"]//tr/td[4]//span[text()="测试数据22"]')
         interfaceconfiguration.click_all_button('编辑')
         interfaceconfiguration.enter_texts('//div[label[text()="访问地址:"]]//input[@type="text"]', '访问地址11')
         interfaceconfiguration.click_confirm()
         message = interfaceconfiguration.get_find_message()
         ele = interfaceconfiguration.get_find_element_xpath(
-            '//table[@class="vxe-table--body"]//tr[td[3]//span[text()="测试数据22"]]/td[9]').text
+            '//table[@class="vxe-table--body"]//tr[td[4]//span[text()="测试数据22"]]/td[5]').text
         assert ele == '访问地址11'
         assert message == "编辑成功！"
         assert not interfaceconfiguration.has_fail_message()
@@ -253,7 +253,7 @@ class TestSInterfaceConfigurationPage:
         sleep(1)
         interfaceconfiguration.select_input(name)
         sleep(1)
-        eles = interfaceconfiguration.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
+        eles = interfaceconfiguration.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[4]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert len(list_) > 0
@@ -272,7 +272,7 @@ class TestSInterfaceConfigurationPage:
         sleep(1)
         interfaceconfiguration.select_input(name)
         sleep(1)
-        eles = interfaceconfiguration.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
+        eles = interfaceconfiguration.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[4]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert len(list_) > 0
@@ -291,7 +291,7 @@ class TestSInterfaceConfigurationPage:
         sleep(1)
         interfaceconfiguration.select_input(name)
         sleep(1)
-        eles = interfaceconfiguration.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
+        eles = interfaceconfiguration.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[4]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert len(list_) > 0
@@ -326,11 +326,11 @@ class TestSInterfaceConfigurationPage:
     #     interfaceconfiguration = ImpPage(driver)  # 用 driver 初始化 ImpPage
     #     list_ = ['测试数据22', '11测试全部数据']
     #     for name in list_:
-    #         interfaceconfiguration.click_button(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
+    #         interfaceconfiguration.click_button(f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{name}"]')
     #         interfaceconfiguration.click_all_button('删除')
     #         interfaceconfiguration.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
     #         message = interfaceconfiguration.get_find_message()
-    #         ele = interfaceconfiguration.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
+    #         ele = interfaceconfiguration.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{name}"]')
     #         assert len(ele) == 0
     #         assert message == "删除成功！"
     #     assert not interfaceconfiguration.has_fail_message()

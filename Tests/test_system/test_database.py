@@ -196,6 +196,7 @@ class TestSDateBasePage:
         data.select_input_database("表代码", code)
         sleep(1)
         data.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]//span[text()="{code}"]')
+        sleep(3)
         data.click_all_button("编辑")
         sleep(2)
         eles = data.finds_elements(By.XPATH, f'(//table[@class="vxe-table--body"])[3]//tr/td[2]')

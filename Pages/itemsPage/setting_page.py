@@ -90,6 +90,7 @@ class SettingPage(BasePage):
             # 如果第一个点不了，就点另一个
             self.click_button('(//div[@class="demo-drawer-footer"])[2]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
 
     def add_layout_ok(self, layout):
         """添加布局."""
@@ -170,7 +171,7 @@ class SettingPage(BasePage):
     def click_setting_button(self):
         """点击设置按钮."""
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
-        sleep(2)
+        sleep(3)
 
     def get_find_message(self):
         """获取错误信息"""

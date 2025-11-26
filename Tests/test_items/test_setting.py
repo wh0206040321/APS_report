@@ -636,6 +636,7 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+        setting.wait_for_loading_to_disappear()
         # 查找包含物料代码的表格，并获取相关文本
         after_text = setting.get_find_element_xpath(
             '//table[.//th[.//p[text()="物料代码"]]]//th[4]//p'

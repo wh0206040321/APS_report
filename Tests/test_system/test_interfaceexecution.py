@@ -79,7 +79,7 @@ class TestsInterfaceExecutionPage:
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
         wait = WebDriverWait(driver, 120)  # 最长等待 120 秒
         interface.wait_for_el_loading_mask()
-        interface.click_button('//table[@class="vxe-table--header"]//th[1]/div/span[@class="vxe-cell--title"]')
+        interface.click_button('//table[@class="vxe-table--header"]//th[2]/div/span[@class="vxe-cell--title"]')
         sleep(1)
         interface.click_button('//button[span[text()="接口执行"]]')
         wait.until(
@@ -108,6 +108,7 @@ class TestsInterfaceExecutionPage:
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
         interface.wait_for_el_loading_mask()
+        interface.mover_right()
         interface.click_button('//button[span[text()="接口参数"]]')
         text = interface.finds_elements(By.XPATH, '//div[text()="接口参数编辑"]')
         ele = interface.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
@@ -120,6 +121,7 @@ class TestsInterfaceExecutionPage:
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
         interface.wait_for_el_loading_mask()
+        interface.mover_right()
         interface.click_button('//button[span[text()="接口数据"]]')
         interface.click_button('//button[span[text()="查询"]]')
         interface.wait_for_el_loading_mask()
@@ -133,6 +135,7 @@ class TestsInterfaceExecutionPage:
         driver = login_to_interfaceexecution  # WebDriver 实例
         interface = ImpPage(driver)  # 用 driver 初始化 ImpPage
         interface.wait_for_el_loading_mask()
+        interface.mover_right()
         interface.click_button('//button[span[text()="运行日志"]]')
         interface.click_button('//button[span[text()="查询"]]')
         interface.wait_for_el_loading_mask()
@@ -171,7 +174,7 @@ class TestsInterfaceExecutionPage:
         sleep(1)
         interface.select_input(name)
         sleep(1)
-        eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
+        eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[5]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert len(list_) > 0
@@ -190,7 +193,7 @@ class TestsInterfaceExecutionPage:
         sleep(1)
         interface.select_input(name)
         sleep(1)
-        eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
+        eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[5]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert len(list_) > 0
@@ -209,7 +212,7 @@ class TestsInterfaceExecutionPage:
         sleep(1)
         interface.select_input(name)
         sleep(1)
-        eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[3]')
+        eles = interface.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[5]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         assert len(list_) > 0
@@ -245,11 +248,11 @@ class TestsInterfaceExecutionPage:
         interface.click_button('(//span[text()="接口配置分发"])[1]')
         list_ = ['测试数据22', '11测试全部数据']
         for name in list_:
-            interface.click_button(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
+            interface.click_button(f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{name}"]')
             interface.click_all_button('删除')
             interface.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             message = interface.get_find_message()
-            ele = interface.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
+            ele = interface.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{name}"]')
             assert len(ele) == 0
             assert message == "删除成功！"
         assert not interface.has_fail_message()

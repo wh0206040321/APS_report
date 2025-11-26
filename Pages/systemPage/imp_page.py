@@ -139,3 +139,10 @@ class ImpPage(BasePage):
         if copy_name != '':
             self.enter_texts('//div[label[text()="目的方案"]]//input[@type="text"]', copy_name)
         self.click_button('(//div[@class="ivu-modal-footer"]//span[text()="确定"])[2]')
+
+    def mover_right(self):
+        """右移"""
+        element = self.get_find_element_xpath('(//div[@class="vxe-table--body-wrapper body--wrapper"])[2]')
+        # 滚动到最右边
+        self.driver.execute_script("arguments[0].scrollLeft = arguments[0].scrollWidth;", element)
+        sleep(1)

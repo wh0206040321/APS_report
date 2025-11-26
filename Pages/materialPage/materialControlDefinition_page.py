@@ -153,14 +153,17 @@ class MaterialControlDefinition(BasePage):
             # 第一次双击
             ActionChains(self.driver).double_click(self.get_find_element_xpath(d['select'])).perform()
             sleep(0.5)
-            try:
-                # 尝试点击 value
-                self.click_button(d['value'])
-            except Exception:
-                # 如果点击不到，再次双击并重试
-                self.click_button(d['select'])
-                sleep(0.5)
-                self.click_button(d['value'])
+            for attempt in range(4):  # 最多尝试4次
+                try:
+                    self.click_button(d['value'])
+                    break  # 成功就退出循环
+                except Exception:
+                    # 如果失败，先点击 select 再等待
+                    self.click_button(d['select'])
+                    sleep(0.5)
+            else:
+                # 如果三次都失败，可以在这里抛出异常或记录日志
+                raise RuntimeError(f"无法点击 {d['value']} after 3 attempts")
 
             sleep(1)
             # 点击备注输入框
@@ -207,8 +210,8 @@ class MaterialControlDefinition(BasePage):
         self.double_click_th_dropdown_box(table_list)
 
         element = self.get_find_element_xpath('(//div[@class="d-flex"]//div[@class="vxe-table--body-wrapper body--wrapper"])[1]')
-        self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
-
+        # self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
+        self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollTop + 100;", element)
         last_ = [{
             "select": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]',
             "value": f'//div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ReleaseMat"]]/td[6]//li[8]'
@@ -234,12 +237,12 @@ class MaterialControlDefinition(BasePage):
              "value": '(//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[2]/li[text()="APS_Order"]'},
         ]
         fields = [
-            "DataSource",
-            "SupplyCode",
-            "SupplyName",
             "Bussiness_No",
+            "DataSource",
             "ItemCode",
+            "SupplyCode",
             "SupplyDate",
+            "SupplyName",
             "SupplyQty",
         ]
 

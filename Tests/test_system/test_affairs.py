@@ -473,7 +473,7 @@ class TestAffairsPage:
         affairs.hover(name=name, edi="编辑")
         affairs.click_button('//div[label[text()="事务类型"]]//input')
         affairs.click_button(f'//span[text()="{type}"]')
-        affairs.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        affairs.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"确定")]')
         sleep(1)
         affairs.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
         affairs.click_button('//div[p[text()="存储过程列表:"]]//i')
@@ -483,6 +483,7 @@ class TestAffairsPage:
             affairs.enter_texts(f'//table[@class="vxe-table--body"]//tr[{i}]/td[3]//input', "1")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
+        sleep(3)
         type_ = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
         sleep(2)
         before_parameter = affairs.get_find_element_xpath('//div[label[text()="配置参数"]]//input').get_attribute("value")
@@ -502,18 +503,18 @@ class TestAffairsPage:
         name = "测试事务模版7"
         type = "接口"
         affairs.hover(name=name, edi="编辑")
+        type1 = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
         affairs.click_button('//div[label[text()="事务类型"]]//input')
         affairs.click_button(f'//span[text()="{type}"]')
-        affairs.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
-        sleep(1)
-        type_ = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
+        affairs.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"取消")]')
         sleep(2)
-        before_parameter = affairs.get_find_element_xpath('//div[label[text()="配置参数"]]//input').get_attribute(
-            "value")
+        type2 = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
         affairs.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        ele = affairs.get_find_element_xpath(f'//div[label[text()="配置参数"]]//div[@class="el-form-item__error"]').text
-        assert ele == "请输入配置参数" and type_ == type and before_parameter == ''
+        affairs.get_find_message()
+        ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
+        value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
+        assert type1 == type2 ==value and value != type
         assert not affairs.has_fail_message()
 
     @allure.story("事务模版-循环删除模版成功")

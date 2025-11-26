@@ -143,13 +143,11 @@ class TestItemPage:
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(1)
         # 获取重复弹窗文字
-        error_popup = self.item.get_find_element_xpath(
-            '//div[text()=" 记录已存在,请检查！ "]'
-        ).text
+        error_popup = self.item.finds_elements(By.XPATH,'//div[text()=" 记录已存在,请检查！ "]')
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
         assert (
-            error_popup == "记录已存在,请检查！"
+            len(error_popup) == 1
         ), f"预期数据是记录已存在,请检查，实际得到{error_popup}"
         assert not self.item.has_fail_message()
 
@@ -258,17 +256,19 @@ class TestItemPage:
         self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
         sleep(2)
         # 获取重复弹窗文字
-        error_popup = self.item.get_find_element_xpath(
+        error_popup = self.item.finds_elements(By.XPATH,
             '//div[text()=" 记录已存在,请检查！ "]'
-        ).text
+        )
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
         self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
-        assert error_popup == "记录已存在,请检查！", f"预期数据{error_popup}"
+        assert len(error_popup) == 1, f"预期数据{error_popup}"
         assert not self.item.has_fail_message()
 
     @allure.story("删除数据成功")
     # @pytest.mark.run(order=1)
     def test_materialInventory_delsuccess1(self, login_to_item):
+        self.driver.refresh()
+        self.item.wait_for_loading_to_disappear()
         # 定位内容为‘111’的行
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
         self.item.click_del_button()  # 点击删除

@@ -302,21 +302,23 @@ class WarehouseLocationPage(BasePage):
         except NoSuchElementException:
             return None
 
-    def get_error_message(self, xpath):
-        """获取错误消息元素，返回该元素。如果元素未找到，返回None。"""
-        try:
-            return self.find_element(By.XPATH, xpath)
-        except NoSuchElementException:
-            return None
-
     def get_find_message(self):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
-                (By.XPATH, '//div[@class="ivu-message"]//span')
+                (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
         )
-        return message
+        return message.text
+
+    def get_error_message(self):
+        """获取错误信息"""
+        message = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, '//div[@class="el-message el-message--error"]/p')
+            )
+        )
+        return message.text
 
     def add_none(self, xpath_list=[], color_value=""):
         """新增弹窗(有必填项)不填写信息，不允许提交公共方法."""
