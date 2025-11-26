@@ -1,0 +1,66 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="模块管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7a3eb6f65+78965]
+	GetHandleVerifier [0x0x7ff7a3eb6fc0+79056]
+	(No symbol) [0x0x7ff7a3c49dda]
+	(No symbol) [0x0x7ff7a3c517c1]
+	(No symbol) [0x0x7ff7a3c5482c]
+	(No symbol) [0x0x7ff7a3c548ff]
+	(No symbol) [0x0x7ff7a3ca24ed]
+	(No symbol) [0x0x7ff7a3c9564e]
+	(No symbol) [0x0x7ff7a3cc866a]
+	(No symbol) [0x0x7ff7a3c92b56]
+	(No symbol) [0x0x7ff7a3cc8880]
+	(No symbol) [0x0x7ff7a3cf0dbe]
+	(No symbol) [0x0x7ff7a3cc8443]
+	(No symbol) [0x0x7ff7a3c91311]
+	(No symbol) [0x0x7ff7a3c920a3]
+	GetHandleVerifier [0x0x7ff7a416e26d+2926461]
+	GetHandleVerifier [0x0x7ff7a4168993+2903715]
+	GetHandleVerifier [0x0x7ff7a4186aed+3026941]
+	GetHandleVerifier [0x0x7ff7a3ed16fe+187406]
+	GetHandleVerifier [0x0x7ff7a3ed96ef+220159]
+	GetHandleVerifier [0x0x7ff7a3ebfaf4+114692]
+	GetHandleVerifier [0x0x7ff7a3ebfca9+115129]
+	GetHandleVerifier [0x0x7ff7a3ea64d8+10728]
+	BaseThreadInitThunk [0x0x7ffd261d7374+20]
+	RtlUserThreadStart [0x0x7ffd2797cc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7a3eb6f65+78965]
+	GetHandleVerifier [0x0x7ff7a3eb6fc0+79056]
+	(No symbol) [0x0x7ff7a3c49dda]
+	(No symbol) [0x0x7ff7a3c517c1]
+	(No symbol) [0x0x7ff7a3c54bbc]
+	(No symbol) [0x0x7ff7a3cf2096]
+	(No symbol) [0x0x7ff7a3cc866a]
+	(No symbol) [0x0x7ff7a3cf0dbe]
+	(No symbol) [0x0x7ff7a3cc8443]
+	(No symbol) [0x0x7ff7a3c91311]
+	(No symbol) [0x0x7ff7a3c920a3]
+	GetHandleVerifier [0x0x7ff7a416e26d+2926461]
+	GetHandleVerifier [0x0x7ff7a4168993+2903715]
+	GetHandleVerifier [0x0x7ff7a4186aed+3026941]
+	GetHandleVerifier [0x0x7ff7a3ed16fe+187406]
+	GetHandleVerifier [0x0x7ff7a3ed96ef+220159]
+	GetHandleVerifier [0x0x7ff7a3ebfaf4+114692]
+	GetHandleVerifier [0x0x7ff7a3ebfca9+115129]
+	GetHandleVerifier [0x0x7ff7a3ea64d8+10728]
+	BaseThreadInitThunk [0x0x7ffd261d7374+20]
+	RtlUserThreadStart [0x0x7ffd2797cc91+33]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2237069592224
