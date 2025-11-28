@@ -147,11 +147,13 @@ class TestRolePage:
         driver = login_to_role  # WebDriver 实例
         role = RolePage(driver)  # 用 driver 初始化 RolePage
         date_driver = DateDriver()
+        role.wait_for_el_loading_mask()
         name = "1测试角色代码1"
         module = "1测试A"
         role.add_role(name, module)
         num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
         for i in range(1, num+1):
+            sleep(0.5)
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
         role.click_all_button("保存")
         role.get_find_message()

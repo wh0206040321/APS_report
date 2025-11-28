@@ -234,7 +234,7 @@ class PsiPage(BasePage):
             try:
                 xpath = '//p[text()="PSI名称"]/ancestor::div[2]//input'
                 self.enter_texts(xpath, v)
-                sleep(0.5)
+                sleep(1)
                 self.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{v}"]')
                 self.click_button_psi("删除")  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')

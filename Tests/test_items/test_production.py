@@ -195,7 +195,7 @@ class TestProductionPage:
         production.click_del_button()
 
         production.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        sleep(1)
+        production.wait_for_loading_to_disappear()
         ele = driver.find_elements(By.XPATH, f'//tr[./td[9]//span[text()="{name}"]]')
 
         assert len(ele) == 0

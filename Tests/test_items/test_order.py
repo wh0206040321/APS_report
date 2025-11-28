@@ -128,7 +128,7 @@ class TestOrderPage:
         order.click_button(
             '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
         )
-        sleep(2)
+        sleep(3)
         # 交货期输入框
         inputdate_box = order.get_find_element_xpath(
             '(//label[text()="交货期"])[1]/parent::div//input'

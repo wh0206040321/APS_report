@@ -85,6 +85,7 @@ class TestSystemSettingsPage:
         ele = settings.get_find_element_xpath('//div[p[text()=" 商标名称: "]]//input')
         ele.send_keys(Keys.CONTROL + "a")
         ele.send_keys(Keys.DELETE)
+        sleep(1)
         settings.click_save_button()
         maeessage = settings.get_find_message()
         settings.log_out()

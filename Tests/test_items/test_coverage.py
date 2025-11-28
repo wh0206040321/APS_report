@@ -408,7 +408,7 @@ class TestCoveragePage:
                 and end == addend
                 and chronology == addchronology
                 and resources == addresources
-                and text_ == name
+                and text_ == name[:100]
                 and num_ == '9999999999'
         )
         assert not coverage.has_fail_message()

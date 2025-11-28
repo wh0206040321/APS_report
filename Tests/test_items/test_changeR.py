@@ -660,6 +660,7 @@ class TestChangeRPage:
         ).text
         change.click_del_button()  # 点击删除
         change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        change.wait_for_loading_to_disappear()
         sleep(1)
         ele = driver.find_elements(
             By.XPATH,

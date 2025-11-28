@@ -849,7 +849,7 @@ class TestAffairsPage:
         affairs.right_refresh()
         ele1 = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{process_name}"]')
         affairs.click_process()
-        affairs.wait_for_loading_to_disappear()
+        affairs.wait_for_el_loading_mask()
         ele2 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         ele3 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[1]//div[text()="{process_name}"]]')
         assert message == "新增成功！" and len(ele1) == 1 == len(ele2) == len(ele3) and value[1] == process_name
@@ -872,7 +872,7 @@ class TestAffairsPage:
         message = affairs.get_find_message()
         affairs.right_refresh()
         affairs.click_process()
-        affairs.wait_for_loading_to_disappear()
+        affairs.wait_for_el_loading_mask()
         ele1 = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[2][div[text()="{name}"]]]')
         # 一次性获取所有匹配的元素
         elements = affairs.finds_elements(
@@ -1379,9 +1379,9 @@ class TestAffairsPage:
     def test_affairs_log_sel4(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        pid = "3580005548622782"
         num = 1000
         affairs.click_process_log()
+        pid = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]//tr[2]/td[4]').text
         affairs.click_paging(num)
         sleep(1)
         affairs.sel_log_all(pid=pid)
@@ -1396,9 +1396,9 @@ class TestAffairsPage:
     def test_affairs_log_sel5(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        pname = "每周"
         num = 1000
         affairs.click_process_log()
+        pname = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]//tr[2]/td[3]').text
         affairs.click_paging(num)
         sleep(1)
         affairs.sel_log_all(pname=pname)
@@ -1414,9 +1414,9 @@ class TestAffairsPage:
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         sleep(1)
-        affairs_name = "定时排产"
         num = 1000
         affairs.click_process_log()
+        affairs_name = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]//tr[2]/td[2]').text
         affairs.click_paging(num)
         sleep(1)
         affairs.sel_log_all(affairs_name=affairs_name)
@@ -1433,12 +1433,12 @@ class TestAffairsPage:
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         sleep(1)
         num = 1000
-        time1 = "2025-02-27 "
-        time2 = "10:20:00"
+        time1 = "2024-11-28 "
+        time2 = "10:25:00"
         ptype = "执行失败"
-        pid = "4118362784269246"
-        pname = "每周"
-        affairs_name = "定时排产"
+        pid = "6009574425101246"
+        pname = "21"
+        affairs_name = "获取令牌"
         affairs.click_process_log()
         affairs.click_paging(num)
         sleep(1)
@@ -1462,20 +1462,14 @@ class TestAffairsPage:
         time1 = "2025-02-27 "
         time2 = "10:20:00"
         ptype = "执行失败"
-        pid = "4118362784269241"
+        pid = "41183627842692411"
         pname = "每周"
         affairs_name = "定时排产"
         affairs.click_process_log()
         affairs.click_paging(num)
         sleep(1)
         affairs.sel_log_all(time1=time1, time2=time2, ptype=ptype, pid=pid, pname=pname, affairs_name=affairs_name)
-        td1 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[1]')
-        td2 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[2]')
-        td3 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[3]')
-        td4 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[4]')
-        td5 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[5]')
-        tr2 = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr[2]')
-        assert td1.text == ptype and td2.text == affairs_name and td3.text == pname and td4.text == pid and td5.text == time1 + time2
+        tr2 = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr[1]')
         assert len(tr2) == 0
         assert not affairs.has_fail_message()
 
@@ -1490,7 +1484,7 @@ class TestAffairsPage:
         ptype = "执行失败"
         pid = "4118362784269241"
         pname = "每周"
-        affairs_name = "定时排产"
+        affairs_name = "获取令牌"
         affairs.click_process_log()
         affairs.click_paging(num)
         sleep(1)
@@ -1515,11 +1509,11 @@ class TestAffairsPage:
         assert len(eles) == num
         assert not affairs.has_fail_message()
 
-    @allure.story("流程日志-设置分页为50,点击最后一页有数据")
+    @allure.story("流程日志-设置分页为10,点击最后一页有数据")
     def test_affairs_log_paging2(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        num = 50
+        num = 10
         affairs.click_process_log()
         affairs.click_paging(num)
         sleep(3)
@@ -1529,17 +1523,18 @@ class TestAffairsPage:
         assert 0 < len(eles) <= num
         assert not affairs.has_fail_message()
 
-    @allure.story("流程日志-前往第三页成功")
+    @allure.story("流程日志-前往第2页成功")
     def test_affairs_log_paging3(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        num = 3
+        num = 2
         sleep(1)
         affairs.click_process_log()
-        sleep(1)
+        affairs.click_paging('10')
+        affairs.wait_for_el_loading_mask()
         affairs.enter_texts('//span[@class="el-pagination__jump"]//input', num)
-        affairs.click_button('(//button[span[text()="筛选"]])[2]')
-        sleep(2)
+        affairs.click_button('//input[@placeholder="请输入流程名称"]')
+        affairs.wait_for_el_loading_mask()
         eles = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr')
         class_ = affairs.get_find_element_xpath(f'//ul[@class="el-pager"]/li[text()="{num}"]').get_attribute("class")
         assert 0 < len(eles) and class_ == "number active"

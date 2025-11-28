@@ -136,7 +136,7 @@ class AppsPage(BasePage):
 
     def click_save_button(self):
         """点击保存按钮."""
-        self.click_button('//div[@class="d-flex m-l--7 "]/div[1]')
+        self.click_button('//div[@class="d-flex background-color-fff"]/div[1]')
 
     def click_apps_button(self):
         """点击应用管理"""
@@ -145,7 +145,7 @@ class AppsPage(BasePage):
 
     def click_save_template_button(self, name, button: bool = True):
         """点击保存模版按钮."""
-        self.click_button('//div[@class="d-flex m-l--7 "]/div[2]')
+        self.click_button('//div[@class="d-flex background-color-fff"]/div[2]')
         self.enter_texts('//div[label[text()="名称"]]//input[@placeholder="请输入"]', name)
         if button:
             self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')

@@ -305,6 +305,7 @@ class TestPlanUnitPage:
         unit.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
+        unit.wait_for_loading_to_disappear()
         sleep(1)
         # 定位第一行是否为name
         unitcode = unit.get_find_element_xpath(
@@ -359,6 +360,7 @@ class TestPlanUnitPage:
         unit.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
+        unit.wait_for_loading_to_disappear()
         sleep(1)
         unitcode = driver.find_elements(
             By.XPATH,
@@ -409,6 +411,7 @@ class TestPlanUnitPage:
         unit.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
+        unit.wait_for_loading_to_disappear()
         sleep(1)
         eles = unit.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles) > 0
@@ -540,6 +543,7 @@ class TestPlanUnitPage:
         unit.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
+        unit.wait_for_loading_to_disappear()
         sleep(1)
         eles1 = unit.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[4]')
         eles2 = unit.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
@@ -674,6 +678,7 @@ class TestPlanUnitPage:
         unit.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
+        unit.wait_for_loading_to_disappear()
         sleep(1)
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'

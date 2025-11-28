@@ -213,7 +213,7 @@ class TestSAppsPage:
         apps.click_button(f'(//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"{before_name}")]]//span[text()=" 加载模板 "]')
         apps.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         apps.go_template()
-        apps.click_button('//div[@class="d-flex m-l--7 "]/div[3]')
+        apps.click_button('//div[@class="d-flex background-color-fff"]/div[3]')
         before_name1 = apps.get_find_element_xpath(
             f'//div[label[text()="名称"]]//input[@placeholder="请输入"]'
         ).get_attribute("value")

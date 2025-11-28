@@ -54,15 +54,15 @@ class AffairsPage(BasePage):
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()
         self.click_button('//li[text()=" 刷新"]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
 
     def click_confirm_button(self):
         """点击确认按钮."""
         self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
-        self.wait_for_loading_to_disappear()
+        self.wait_for_el_loading_mask()
 
     # 等待加载遮罩消失
-    def wait_for_loading_to_disappear(self, timeout=10):
+    def wait_for_el_loading_mask(self, timeout=10):
         """
         显式等待加载遮罩元素消失。
 
@@ -146,6 +146,7 @@ class AffairsPage(BasePage):
             ele.click()
             sleep(1)
             self.click_button('//div[@class="el-message-box__btns"]/button[2]')
+            self.wait_for_el_loading_mask()
 
     def hover(self, name="", edi=""):
         # 悬停模版容器触发图标显示
@@ -177,6 +178,7 @@ class AffairsPage(BasePage):
     def click_process_log(self):
         """点击流程日志"""
         self.click_button('//div[@id="tab-log"]')
+        self.wait_for_el_loading_mask()
 
     def click_process_update(self, name):
         """点击编辑流程"""
