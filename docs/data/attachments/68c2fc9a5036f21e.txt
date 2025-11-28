@@ -1,0 +1,49 @@
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2213754466992
+[33mWARNING [0m root:test_button.py:42 第 1 次连接失败: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7fd7c6f65+78965]
+	GetHandleVerifier [0x0x7ff7fd7c6fc0+79056]
+	(No symbol) [0x0x7ff7fd559dda]
+	(No symbol) [0x0x7ff7fd55684f]
+	(No symbol) [0x0x7ff7fd547529]
+	(No symbol) [0x0x7ff7fd5492e1]
+	(No symbol) [0x0x7ff7fd547846]
+	(No symbol) [0x0x7ff7fd5472a6]
+	(No symbol) [0x0x7ff7fd546f6a]
+	(No symbol) [0x0x7ff7fd544b38]
+	(No symbol) [0x0x7ff7fd5453bc]
+	(No symbol) [0x0x7ff7fd55dd8a]
+	(No symbol) [0x0x7ff7fd601afe]
+	(No symbol) [0x0x7ff7fd5d866a]
+	(No symbol) [0x0x7ff7fd600dbe]
+	(No symbol) [0x0x7ff7fd5d8443]
+	(No symbol) [0x0x7ff7fd5a1311]
+	(No symbol) [0x0x7ff7fd5a20a3]
+	GetHandleVerifier [0x0x7ff7fda7e26d+2926461]
+	GetHandleVerifier [0x0x7ff7fda78993+2903715]
+	GetHandleVerifier [0x0x7ff7fda96aed+3026941]
+	GetHandleVerifier [0x0x7ff7fd7e16fe+187406]
+	GetHandleVerifier [0x0x7ff7fd7e96ef+220159]
+	GetHandleVerifier [0x0x7ff7fd7cfaf4+114692]
+	GetHandleVerifier [0x0x7ff7fd7cfca9+115129]
+	GetHandleVerifier [0x0x7ff7fd7b64d8+10728]
+	BaseThreadInitThunk [0x0x7ffe121c7374+20]
+	RtlUserThreadStart [0x0x7ffe133dcc91+33]
+
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="工具栏按钮管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[p[text()="按钮代码"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //table[@class="vxe-table--body"]//tr//td[2]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2213753857856
