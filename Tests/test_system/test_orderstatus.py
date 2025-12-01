@@ -67,10 +67,10 @@ class TestsOrderStatusPage:
     def test_orderstatus_ref(self, login_to_orderstatus):
         driver = login_to_orderstatus  # WebDriver 实例
         order = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        order.wait_for_el_loading_mask()
+        order.wait_for_loading_to_disappear()
         order.enter_texts('//div[p[text()="订单代码"]]/following-sibling::div//input', '123')
         order.click_all_button("刷新")
-        order.wait_for_el_loading_mask()
+        order.wait_for_loading_to_disappear()
         text = order.get_find_element_xpath('//div[p[text()="订单代码"]]/following-sibling::div//input').get_attribute('value')
         ele = order.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
         assert len(ele) == 0 and text == ''
@@ -81,7 +81,7 @@ class TestsOrderStatusPage:
     def test_orderstatus_select(self, login_to_orderstatus):
         driver = login_to_orderstatus  # WebDriver 实例
         order = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        order.wait_for_el_loading_mask()
+        order.wait_for_loading_to_disappear()
         name = "1"
         order.click_button('//div[p[text()="订单代码"]]/following-sibling::div//i')
         order.hover("包含")

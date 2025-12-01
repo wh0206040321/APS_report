@@ -63,10 +63,7 @@ class ChartPage(BasePage):
         以此判断加载遮罩是否消失。
         """
         WebDriverWait(self.driver, timeout).until(
-            lambda d: (
-                d.find_element(By.CLASS_NAME, "el-loading-mask").value_of_css_property("display") == "none"
-                if d.find_elements(By.CLASS_NAME, "el-loading-mask") else True
-            )
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
         )
         sleep(1)
 

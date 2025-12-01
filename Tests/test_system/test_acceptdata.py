@@ -131,7 +131,7 @@ class TestSAcceptDataPage:
         acceptdata.click_confirm()
         message = acceptdata.get_find_message()
         driver.refresh()
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         sleep(1)
 
         text = acceptdata.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{input_value}"]').text
@@ -221,7 +221,7 @@ class TestSAcceptDataPage:
         acceptdata.click_confirm()
         message = acceptdata.get_find_message()
         driver.refresh()
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         sleep(1)
 
         text = acceptdata.get_find_element_xpath(
@@ -263,7 +263,7 @@ class TestSAcceptDataPage:
     def test_acceptdata_select1(self, login_to_acceptdata):
         driver = login_to_acceptdata  # WebDriver 实例
         acceptdata = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         acceptdata.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         sleep(1)
         eles = acceptdata.get_find_element_xpath('(//div[@class="vxe-pulldown--panel-wrapper"])//label/span').get_attribute(
@@ -282,7 +282,7 @@ class TestSAcceptDataPage:
     def test_acceptdata_select2(self, login_to_acceptdata):
         driver = login_to_acceptdata  # WebDriver 实例
         acceptdata = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         name = "1测试"
         acceptdata.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         acceptdata.hover("包含")
@@ -301,7 +301,7 @@ class TestSAcceptDataPage:
     def test_acceptdata_select3(self, login_to_acceptdata):
         driver = login_to_acceptdata  # WebDriver 实例
         acceptdata = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         name = "1"
         acceptdata.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         acceptdata.hover("符合开头")
@@ -320,7 +320,7 @@ class TestSAcceptDataPage:
     def test_acceptdata_select4(self, login_to_acceptdata):
         driver = login_to_acceptdata  # WebDriver 实例
         acceptdata = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         name = "2"
         acceptdata.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')
         acceptdata.hover("符合结尾")
@@ -339,7 +339,7 @@ class TestSAcceptDataPage:
     def test_acceptdata_clear(self, login_to_acceptdata):
         driver = login_to_acceptdata  # WebDriver 实例
         acceptdata = ImpPage(driver)  # 用 driver 初始化 ImpPage
-        acceptdata.wait_for_el_loading_mask()
+        acceptdata.wait_for_loading_to_disappear()
         name = "3"
         sleep(1)
         acceptdata.click_button('//div[p[text()="接口名称"]]/following-sibling::div//i')

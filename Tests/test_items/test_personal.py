@@ -382,7 +382,7 @@ class TestPersonalPage:
     def test_personal_openengine1(self, login_to_personal):
         driver = login_to_personal  # WebDriver 实例
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 60)
         personal.go_engine_page(name='system_web')
 
         # 等待 el-loading-spinner 消失

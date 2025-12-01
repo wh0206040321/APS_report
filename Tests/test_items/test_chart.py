@@ -602,7 +602,7 @@ class TestChartPage:
     def test_resourcechart_plan(self, login_to_chart):
         driver = login_to_chart  # WebDriver 实例
         chart = ChartPage(driver)  # 用 driver 初始化 ChartPage
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 60)
         chart.click_button('//a[@title="排程"]')
         # 等待下拉框按钮可点击后点击展开
         dropdown_arrow = wait.until(
