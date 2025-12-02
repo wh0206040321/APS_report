@@ -163,7 +163,7 @@ class TestSMaterialControlSupplyDefinitionPage:
         material = MaterialControlDefinition(driver)  # 用 driver 初始化 MaterialControlDefinition
         value = "1测试数据1"
         material.add_supply_data(value)
-        sleep(1)
+        sleep(2)
         message = material.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').text
         assert message == "记录已存在,请检查！"
         assert not material.has_fail_message()

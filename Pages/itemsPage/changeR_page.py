@@ -89,6 +89,15 @@ class ChangeR(BasePage):
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
 
+    def click_flagdata(self):
+        self.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+        sleep(1)
+        self.click_button(
+            '//div[p[text()="更新时间"]]/div[1]'
+        )
+
     def wait_for_loading_to_disappear(self, timeout=10):
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located(
@@ -170,6 +179,7 @@ class ChangeR(BasePage):
     def click_changespec_num(self, num):
         """点击指定生产特征数字"""
         self.click_button(f'(//span[text()="生产特征{num}切换"])[1]')
+        self.wait_for_loading_to_disappear()
 
     def click_all_button(self, name):
         """点击按钮."""

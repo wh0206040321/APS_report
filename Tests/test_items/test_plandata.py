@@ -167,15 +167,17 @@ class TestPlanDataPage:
         driver = login_to_plandata  # WebDriver 实例
         information = WorkTasksPage(driver)  # 用 driver 初始化 WorkTasksPage
         information.click_button('(//span[text()="日计划报表"])[1]')
-        information.wait_for_loading_to_disappear()
+        information.wait_for_loading_el_skeleton()
         information.click_button('//div[@id="1hfwxqtn-j5mr"]//input')
         information.click_button('(//div[@class="my-list vxe-list"])[3]//span[1]')
         information.click_button('//div[@id="4whnlvxq-9gwo"]/button')
         sleep(3)
         name = information.get_find_element_xpath('//div[@id="1hfwxqtn-j5mr"]//span[@class="el-select__tags-text"]').text
+        eles = driver.find_elements(By.XPATH,
+                                    '(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[2]')
 
-        eles = information.loop_judgment('(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[2]')
-        assert all(name == re for re in eles)
+        values = [e.get_attribute("textContent").strip() for e in eles]
+        assert all(v == name for v in values)
         assert not information.has_fail_message()
 
     @allure.story("日计划报表页面物料代码查询成功")
@@ -184,7 +186,7 @@ class TestPlanDataPage:
         driver = login_to_plandata  # WebDriver 实例
         information = WorkTasksPage(driver)  # 用 driver 初始化 WorkTasksPage
         information.click_button('(//span[text()="日计划报表"])[1]')
-        information.wait_for_loading_to_disappear()
+        information.wait_for_loading_el_skeleton()
         information.click_button('//div[@id="7aqg845h-0cy0"]//input')
         information.click_button('(//div[@class="my-list vxe-list"])[3]//span[1]')
         information.click_button('//div[@id="4whnlvxq-9gwo"]/button')
@@ -192,17 +194,18 @@ class TestPlanDataPage:
         name = information.get_find_element_xpath(
             '//div[@id="7aqg845h-0cy0"]//span[@class="el-select__tags-text"]').text
 
-        eles = information.loop_judgment('(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[4]')
-        assert all(name == re for re in eles)
+        eles = driver.find_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[4]')
+        values = [e.get_attribute("textContent").strip() for e in eles]
+        assert all(v == name for v in values)
         assert not information.has_fail_message()
 
-    @allure.story("日计划报表页面物料代码查询成功")
+    @allure.story("日计划报表页面订单代码查询成功")
     # @pytest.mark.run(order=1)
     def test_dailyPlan_select3(self, login_to_plandata):
         driver = login_to_plandata  # WebDriver 实例
         information = WorkTasksPage(driver)  # 用 driver 初始化 WorkTasksPage
         information.click_button('(//span[text()="日计划报表"])[1]')
-        information.wait_for_loading_to_disappear()
+        information.wait_for_loading_el_skeleton()
         information.click_button('//div[@id="1zkjq6u8-nfal"]//input')
         information.click_button('(//div[@class="my-list vxe-list"])[3]//span[1]')
         information.click_button('//div[@id="4whnlvxq-9gwo"]/button')
@@ -210,8 +213,38 @@ class TestPlanDataPage:
         name = information.get_find_element_xpath(
             '//div[@id="1zkjq6u8-nfal"]//span[@class="el-select__tags-text"]').text
 
-        eles = information.loop_judgment('(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[3]')
-        assert all(name == re for re in eles)
+        eles = driver.find_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[3]')
+        values = [e.get_attribute("textContent").strip() for e in eles]
+        assert all(v == name for v in values)
+        assert not information.has_fail_message()
+
+    @allure.story("日计划报表页面资源代码和物料代码查询成功")
+    # @pytest.mark.run(order=1)
+    def test_dailyPlan_select4(self, login_to_plandata):
+        driver = login_to_plandata  # WebDriver 实例
+        information = WorkTasksPage(driver)  # 用 driver 初始化 WorkTasksPage
+        information.click_button('(//span[text()="日计划报表"])[1]')
+        information.wait_for_loading_el_skeleton()
+        information.click_button('//div[@id="1hfwxqtn-j5mr"]//input')
+        information.click_button('(//div[@class="my-list vxe-list"])[3]//span[1]')
+
+        information.click_button('//div[@id="7aqg845h-0cy0"]//input')
+        information.click_button('(//div[@class="my-list vxe-list"])[3]//span[1]')
+
+        information.click_button('//div[@id="4whnlvxq-9gwo"]/button')
+        sleep(3)
+        name1 = information.get_find_element_xpath(
+            '//div[@id="1hfwxqtn-j5mr"]//span[@class="el-select__tags-text"]').text
+        name2 = information.get_find_element_xpath(
+            '//div[@id="7aqg845h-0cy0"]//span[@class="el-select__tags-text"]').text
+
+        eles1 = driver.find_elements(By.XPATH,
+                                    '(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[2]')
+        eles2 = driver.find_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr[position() < last()]/td[4]')
+        values1 = [e.get_attribute("textContent").strip() for e in eles1]
+        values2 = [e.get_attribute("textContent").strip() for e in eles2]
+        for v1, v2 in zip(values1, values2):
+            assert v1 == name1 and v2 == name2, f"行不匹配: v1={v1}, v2={v2}, 期望=({name1}, {name2})"
         assert not information.has_fail_message()
 
     @allure.story("日计划报表页面点击按工作按订单成功")
@@ -220,7 +253,7 @@ class TestPlanDataPage:
         driver = login_to_plandata  # WebDriver 实例
         information = WorkTasksPage(driver)  # 用 driver 初始化 WorkTasksPage
         information.click_button('(//span[text()="日计划报表"])[1]')
-        information.wait_for_loading_to_disappear()
+        information.wait_for_loading_el_skeleton()
         information.click_button('//div[text()=" 按工作 "]')
         sleep(1)
         ele1 = information.get_find_element_xpath('(//table[@class="vxe-table--header"])[3]//tr/th[2]').text

@@ -52,6 +52,7 @@ def login_to_order():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
         page.click_button('(//span[text()="制造订单"])[1]')  # 点击制造订单
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -89,7 +90,7 @@ class TestOrderPage:
         )
 
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(1)
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
@@ -122,11 +123,11 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(3)
         # 交货期输入框
@@ -164,7 +165,7 @@ class TestOrderPage:
 
         # 点击确定
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(2)
         input_box = order.get_find_element_xpath(
@@ -198,7 +199,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 填写交货期
@@ -217,7 +218,7 @@ class TestOrderPage:
 
         # 点击确定
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(2)
         input_box = order.get_find_element_xpath(
@@ -293,7 +294,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 填写交货期
@@ -339,7 +340,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 填写交货期
@@ -382,7 +383,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 填写交货期
@@ -441,7 +442,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{random_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 填写交货期
@@ -547,7 +548,7 @@ class TestOrderPage:
             f'(//div[@class="vxe-grid--table-container"]//tr[{randomitem_int}]/td[2])[2]'
         )
         order.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
         sleep(1)
         edititem = order.get_find_element_xpath(

@@ -67,6 +67,15 @@ class WorkTasksPage(BasePage):
         )
         sleep(1)
 
+    def wait_for_loading_el_skeleton(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 '//div[@class="el-skeleton is-animated"]')
+            )
+        )
+        sleep(1)
+
     def click_all_button(self, name):
         """点击按钮."""
         self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')

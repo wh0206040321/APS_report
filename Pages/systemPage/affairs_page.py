@@ -344,6 +344,7 @@ class AffairsPage(BasePage):
         """点击分页."""
         self.click_button('//div[@class="el-select el-select--mini"]//input')
         self.click_button(f'//ul[@class="el-scrollbar__view el-select-dropdown__list"]//span[text()="{num}条/页"]')
+        self.wait_for_el_loading_mask()
 
     def get_log_time(self):
         """获取日志时间."""
@@ -388,4 +389,5 @@ class AffairsPage(BasePage):
             self.click_button(f'(//button[span[text()="筛选"]])[2]')
         else:
             self.click_button(f'(//button[span[text()="重置筛选条件"]])[2]')
-        sleep(3)
+        sleep(1)
+        self.wait_for_el_loading_mask()

@@ -36,6 +36,11 @@ class AddsPages(BasePage):
             )
         )
 
+    def wait_for_el_loading_mask(self, timeout=15):
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
+        )
+
     def batch_modify_input(self, xpath_list=[], new_value=""):
         """批量修改输入框"""
         for xpath in xpath_list:
@@ -213,6 +218,7 @@ class AddsPages(BasePage):
         进入设置页面
         """
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
+        self.wait_for_el_loading_mask()
         self.click_button('//div[text()=" 显示设置 "]')
         sleep(5)
         ele = self.get_find_element_xpath('(//div[@class="vxe-table--body-wrapper body--wrapper"])[4]')

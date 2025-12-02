@@ -43,6 +43,7 @@ def login_to_function():
             raise RuntimeError("无法连接到登录页面")
 
         page.login(date_driver.username, date_driver.password, date_driver.planning)
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:

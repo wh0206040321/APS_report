@@ -47,6 +47,7 @@ def login_to_production():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划业务数据"])[1]')  # 点击计划业务数据
         page.click_button('(//span[text()="生产报工"])[1]')  # 点击生产报工
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:

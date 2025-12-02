@@ -58,7 +58,8 @@ class OrderPage(BasePage):
 
     def click_confirm_button(self):
         """点击确定按钮."""
-        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]')
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        sleep(1)
         self.wait_for_loading_to_disappear()
 
     def wait_for_loading_to_disappear(self, timeout=10):

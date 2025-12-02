@@ -120,6 +120,22 @@ class WarehouseLocationPage(BasePage):
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
 
+    def wait_for_el_loading_mask(self, timeout=15):
+        """
+        显式等待加载遮罩元素消失。
+
+        参数:
+        - timeout (int): 超时时间，默认为10秒。
+
+        该方法通过WebDriverWait配合EC.invisibility_of_element_located方法，
+        检查页面上是否存在class中包含'el-loading-mask'且style中不包含'display: none'的div元素，
+        以此判断加载遮罩是否消失。
+        """
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
+        )
+        sleep(1)
+
     def click_del_button(self):
         """点击删除按钮."""
         self.click(By.XPATH, '//p[text()="删除"]')
@@ -127,6 +143,7 @@ class WarehouseLocationPage(BasePage):
     def click_sel_button(self):
         """点击查询按钮."""
         self.click(By.XPATH, '//p[text()="查询"]')
+        self.wait_for_el_loading_mask()
 
     def click_ref_button(self):
         """点击刷新按钮."""

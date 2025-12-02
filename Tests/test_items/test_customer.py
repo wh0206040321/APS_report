@@ -51,6 +51,7 @@ def login_to_customer():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
         page.click_button('(//span[text()="客户"])[1]')  # 点击客户
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -752,7 +753,7 @@ class TestCustomerPage:
         customer.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
-        sleep(1)
+        sleep(2)
         name = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         code = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(code) > 0 and len(name) > 0

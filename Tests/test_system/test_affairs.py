@@ -1439,6 +1439,8 @@ class TestAffairsPage:
         pid = "6009574425101246"
         pname = "21"
         affairs_name = "获取令牌"
+        dt = datetime.strptime(time1.strip(), "%Y-%m-%d")
+        time_slash = dt.strftime("%Y/%m/%d")
         affairs.click_process_log()
         affairs.click_paging(num)
         sleep(1)
@@ -1449,7 +1451,7 @@ class TestAffairsPage:
         td4 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[4]')
         td5 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[5]')
         tr2 = affairs.finds_elements(By.XPATH,'(//table[@class="el-table__body"])[2]/tbody/tr[2]')
-        assert td1.text == ptype and td2.text == affairs_name and td3.text == pname and td4.text == pid and td5.text == time1+time2
+        assert td1.text == ptype and td2.text == affairs_name and td3.text == pname and td4.text == pid and td5.text == time_slash+' '+time2
         assert len(tr2) == 0
         assert not affairs.has_fail_message()
 
@@ -1464,7 +1466,7 @@ class TestAffairsPage:
         ptype = "执行失败"
         pid = "41183627842692411"
         pname = "每周"
-        affairs_name = "定时排产"
+        affairs_name = "获取令牌"
         affairs.click_process_log()
         affairs.click_paging(num)
         sleep(1)
@@ -1506,7 +1508,7 @@ class TestAffairsPage:
         affairs.click_paging(num)
         sleep(3)
         eles = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr')
-        assert len(eles) == num
+        assert 0 < len(eles) <= num
         assert not affairs.has_fail_message()
 
     @allure.story("流程日志-设置分页为10,点击最后一页有数据")

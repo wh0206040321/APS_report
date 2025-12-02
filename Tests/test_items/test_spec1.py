@@ -51,6 +51,7 @@ def login_to_spec1():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划生产特征"])[1]')  # 点击计划生产特征
         page.click_button('(//span[text()="生产特征1"])[1]')  # 点击生产特征1
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:

@@ -51,6 +51,7 @@ def login_to_resource():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
         page.click_button('(//span[text()="资源"])[1]')  # 点击资源
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -225,6 +226,7 @@ class TestResourcePage:
         # 点击确定
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
+        resource.wait_for_loading_to_disappear()
         adddata = resource.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
@@ -281,6 +283,7 @@ class TestResourcePage:
         resource.click_button(
             '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
+        resource.wait_for_loading_to_disappear()
         adddata = resource.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
@@ -300,6 +303,7 @@ class TestResourcePage:
         # 点击确定
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
+        resource.wait_for_loading_to_disappear()
         adddata = resource.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
         ).text
@@ -350,6 +354,7 @@ class TestResourcePage:
         # 点击确定
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
+        resource.wait_for_loading_to_disappear()
         # 定位表格内容
         resourcedata = resource.get_find_element_xpath(
             f'(//span[contains(text(),"{name}")])[1]'
@@ -374,6 +379,7 @@ class TestResourcePage:
         # 点击确定
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
+        resource.wait_for_loading_to_disappear()
         # 定位表格内容
         resourcedata = resource.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]'
@@ -418,6 +424,7 @@ class TestResourcePage:
         # 点击确定
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
+        resource.wait_for_loading_to_disappear()
         # 定位表格内容
         resourcename = resource.get_find_element_xpath(
             f'(//span[text()="{name}"])[1]/ancestor::tr/td[3]/div'

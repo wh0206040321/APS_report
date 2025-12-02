@@ -168,7 +168,7 @@ class TestStartPage:
             try:
                 master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]/button[1]')
             except:
-                master.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]')
+                master.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
 
             # 获取物料数量
             random_num2 = random.randint(1, 100)
@@ -213,8 +213,8 @@ class TestStartPage:
             )
 
             # 点击确定
-            confirm_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
-            backup_xpath = '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            confirm_xpath = '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
+            backup_xpath = '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
 
             if master.is_clickable(confirm_xpath):
                 master.click_button(confirm_xpath)

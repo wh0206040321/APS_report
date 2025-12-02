@@ -52,6 +52,7 @@ def login_to_itemgroup():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划基础数据"])[1]')  # 点击计划基础数据
         page.click_button('(//span[text()="物品组"])[1]')  # 点击物品组
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -432,7 +433,7 @@ class TestItemGroupPage:
         actions.double_click(element_to_double_click).perform()
         # 点击确认
         item.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
         # 获取代码设计器文本框
         sleep(1)

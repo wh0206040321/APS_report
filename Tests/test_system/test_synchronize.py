@@ -372,7 +372,7 @@ class TestSynchronizePage:
 
     @allure.story("同步单个物控计划方案成功")
     # @pytest.mark.run(order=1)
-    def test_synchronize_all_plan(self, login_to_synchronize):
+    def test_synchronize_all_materialplan(self, login_to_synchronize):
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         plan_name = [
@@ -397,7 +397,7 @@ class TestSynchronizePage:
 
     @allure.story("重复同步同一个计划方案不会报错，会继续同步")
     # @pytest.mark.run(order=1)
-    def test_synchronize_all_repeatplan(self, login_to_synchronize):
+    def test_synchronize_all_materialrepeatplan(self, login_to_synchronize):
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         plan_name = [
@@ -422,7 +422,7 @@ class TestSynchronizePage:
 
     @allure.story("同步多个计划方案到一个计划单元成功")
     # @pytest.mark.run(order=1)
-    def test_synchronize_all_plan1(self, login_to_synchronize):
+    def test_synchronize_all_materialplan1(self, login_to_synchronize):
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         plan_name = [
@@ -449,7 +449,7 @@ class TestSynchronizePage:
 
     @allure.story("同步1个计划方案到多个计划单元成功")
     # @pytest.mark.run(order=1)
-    def test_synchronize_all_plan2(self, login_to_synchronize):
+    def test_synchronize_all_materialplan2(self, login_to_synchronize):
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         plan_name = [
@@ -483,7 +483,7 @@ class TestSynchronizePage:
 
     @allure.story("同步多个计划方案到多个计划单元成功")
     # @pytest.mark.run(order=1)
-    def test_synchronize_all_plan3(self, login_to_synchronize):
+    def test_synchronize_all_materialplan3(self, login_to_synchronize):
         driver = login_to_synchronize  # WebDriver 实例
         synchronize = SynchronizePage(driver)  # 用 driver 初始化 SynchronizePage
         plan_name = [

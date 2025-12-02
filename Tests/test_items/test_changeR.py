@@ -52,6 +52,7 @@ def login_to_changeR():
         page.click_button('(//span[text()="计划管理"])[1]')  # 点击计划管理
         page.click_button('(//span[text()="计划切换定义"])[1]')  # 点击计划切换定义
         page.click_button('(//span[text()="资源切换"])[1]')  # 点击资源切换
+        page.wait_for_loading_to_disappear()
         yield driver  # 提供给测试用例使用
     finally:
         if driver:
@@ -74,7 +75,7 @@ class TestChangeRPage:
         ).text
         changeR.click_add_button()
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         # 资源
         inputresource_box = changeR.get_find_element_xpath(
@@ -119,12 +120,10 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 前资源
@@ -137,7 +136,7 @@ class TestChangeRPage:
         )
 
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
@@ -165,12 +164,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -178,17 +176,16 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击确定
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
@@ -209,10 +206,10 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.wait_for_loading_to_disappear()
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前资源
@@ -220,12 +217,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -233,12 +229,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         sleep(1)
@@ -251,7 +246,7 @@ class TestChangeRPage:
 
         # 点击确定
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(1)
         time = changeR.get_find_element_xpath(
@@ -274,10 +269,9 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前资源
@@ -285,12 +279,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -298,12 +291,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
         sleep(1)
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         sleep(1)
@@ -316,7 +308,7 @@ class TestChangeRPage:
 
         # 点击确定
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(1)
         time = changeR.get_find_element_xpath(
@@ -365,10 +357,10 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前资源
@@ -376,12 +368,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -389,14 +380,13 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
-
+        sleep(1)
         # 获取勾选的资源
         resource = change.get_find_element_xpath(
             '(//label[text()="资源"])[1]/parent::div//input'
@@ -416,16 +406,10 @@ class TestChangeRPage:
         change.enter_texts('(//label[text()="备注"])[1]/parent::div//input', num)
 
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
-        change.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
-        sleep(1)
-        change.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
+        change.wait_for_loading_to_disappear()
+        change.click_flagdata()
 
         addresource = change.get_find_element_xpath(
             f'(//span[text()="{resource}"])[1]/ancestor::tr[1]/td[2]'
@@ -450,6 +434,7 @@ class TestChangeRPage:
     def test_changeR_delsuccess1(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        change.click_flagdata()
         before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
         ).text
@@ -474,10 +459,10 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前资源
@@ -485,12 +470,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        sleep(2)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -498,12 +482,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
         sleep(2)
         # 获取勾选的资源
@@ -522,16 +505,10 @@ class TestChangeRPage:
         sleep(1)
 
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
-        change.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
-        sleep(1)
-        change.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
+        change.wait_for_loading_to_disappear()
+        change.click_flagdata()
         # 保存数据
         SharedDataUtil.save_data(
             {"resource": resource, "item1": item1, "item2": item2}
@@ -563,6 +540,7 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
+        change.wait_for_loading_to_disappear()
         rows = driver.find_elements(By.XPATH, f"//table[.//tr[td[2][contains(@class,'col--checkbox')]]]//tr")
         for index, row in enumerate(rows, start=1):
             td3_text = row.find_elements(By.TAG_NAME, "td")[2].text.strip()
@@ -577,7 +555,7 @@ class TestChangeRPage:
                 target_element.click()
                 break  # 如果只处理第一个匹配行，可以 break
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前生产特征
@@ -585,6 +563,7 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         sleep(3)
+        change.wait_for_loading_to_disappear()
         # 勾选框
         rows = driver.find_elements(By.XPATH,
                                     f'(//div[@class="vxe-table--body-wrapper body--wrapper" and .//table[.//tr[td[3]//span[text()="{code2}"]]]])[2]//table//tr')
@@ -605,7 +584,7 @@ class TestChangeRPage:
                     target_element.click()
 
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后生产特征
@@ -613,6 +592,7 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         sleep(3)
+        change.wait_for_loading_to_disappear()
         # 勾选框
         rows = driver.find_elements(By.XPATH,
                                     f'(//div[@class="vxe-table--body-wrapper body--wrapper" and .//table[.//tr[td[3]//span[text()="{code2}"]]]])[2]//table//tr')
@@ -633,11 +613,11 @@ class TestChangeRPage:
                     target_element.click()
 
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         sleep(1)
         eles = driver.find_elements(By.XPATH, '//div[text()=" 记录已存在,请检查！ "]')
@@ -651,9 +631,10 @@ class TestChangeRPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         code1 = SharedDataUtil.load_data().get("resource")
         code2 = SharedDataUtil.load_data().get("item1")
+        change.click_flagdata()
         # 定位第一行
         change.click_button(
-            f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
+            f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
         before_data = change.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'
@@ -664,7 +645,7 @@ class TestChangeRPage:
         sleep(1)
         ele = driver.find_elements(
             By.XPATH,
-            f'//table[@xid="2" and @class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
+            f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{code1}"] and td[3]//span[text()="{code2}"]]//td[2]'
         )
         # 定位
         after_data = change.get_find_element_xpath(
@@ -725,10 +706,10 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前资源
@@ -736,12 +717,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -749,27 +729,26 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-
+        change.wait_for_loading_to_disappear()
         change.click_add_button()
         # 点击资源
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[2]')
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击前资源
@@ -777,12 +756,11 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
         # 勾选框
-        random_int = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
 
         # 点击后资源
@@ -790,15 +768,14 @@ class TestChangeRPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
         # 勾选框
-        random_int1 = random.randint(1, 6)
-        sleep(1)
-        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
+        change.wait_for_loading_to_disappear()
+        change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
         change.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         assert not change.has_fail_message()
 
@@ -807,6 +784,7 @@ class TestChangeRPage:
     def test_changer_editcodesuccess(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        changeR.click_flagdata()
         # 定位第一行
         changeR.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
@@ -819,17 +797,16 @@ class TestChangeRPage:
         )
 
         # 勾选框
-        random_int = random.randint(1, 6)
         changeR.click_button(
             '(//span[@class="vxe-checkbox--icon iconfont icon-fuxuankuangdaiding"])[2]'
         )
         changeR.click_button(
             '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-checked-fill"])[2]'
         )
-        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
+        changeR.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[3]')
 
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]/button[1]'
+            '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
         sleep(1)
         # 获取勾选的资源代码
@@ -838,9 +815,9 @@ class TestChangeRPage:
         ).get_attribute("value")
 
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
+        changeR.wait_for_loading_to_disappear()
         changeR.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )
@@ -859,6 +836,7 @@ class TestChangeRPage:
     def test_changer_editprioritizationsuccess(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        changeR.click_flagdata()
         # 定位第一行
         changeR.click_button(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]'
@@ -882,9 +860,9 @@ class TestChangeRPage:
         ).get_attribute("value")
 
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]/button[1]'
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
-        sleep(1)
+        changeR.wait_for_loading_to_disappear()
         changeR.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )
@@ -903,7 +881,6 @@ class TestChangeRPage:
     def test_changer_selectcodesuccess(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        sleep(3)
         ele = changeR.get_find_element_xpath(
             '//table[@xid=2 and @class="vxe-table--body"]//tr[2]/td[2]'
         ).text
@@ -959,6 +936,8 @@ class TestChangeRPage:
             '(//span[contains(text(),"条记录")])[1]'
         ).text
         changeI.del_data()
+        changeI.click_ref_button()
+        changeI.wait_for_loading_to_disappear()
         changeI.del_data()
         # 定位
         after_data = changeI.get_find_element_xpath(
@@ -1010,19 +989,13 @@ class TestChangeRPage:
         len_num = len(all_value)
         before_all_value = adds.batch_acquisition_input(all_value)
         changeR.click_button(
-            '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         changeR.get_find_message()
         driver.refresh()
         changeR.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
         changeR.wait_for_loading_to_disappear()
-        changeR.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
-        sleep(1)
-        changeR.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
+        changeR.click_flagdata()
         changeR.click_button(
             f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{resource_value}"]]')
         sleep(1)
@@ -1043,13 +1016,7 @@ class TestChangeRPage:
     def test_changeR_deleteall(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        changeR.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
-        sleep(1)
-        changeR.click_button(
-            '//div[p[text()="更新时间"]]/div[1]'
-        )
+        changeR.click_flagdata()
         sleep(1)
         before_data = changeR.get_find_element_xpath(
             '(//span[contains(text(),"条记录")])[1]'

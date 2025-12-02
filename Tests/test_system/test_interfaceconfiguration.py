@@ -161,8 +161,8 @@ class TestSInterfaceConfigurationPage:
         adds.batch_modify_select_input(select_list)
 
         interfaceconfiguration.click_confirm()
-        message = interfaceconfiguration.get_error_message()
-        assert message == "接口名称不能重复"
+        message = interfaceconfiguration.finds_elements(By.XPATH, '//div[text()=" 接口名称重复定义。 "]')
+        assert len(message) == 1
         assert not interfaceconfiguration.has_fail_message()
 
     @allure.story("添加测试数据成功")
