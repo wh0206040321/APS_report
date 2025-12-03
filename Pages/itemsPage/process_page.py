@@ -27,6 +27,7 @@ class ProcessPage(BasePage):
         """点击查询按钮."""
         self.click(By.XPATH, '//p[text()="查询"]')
 
+
     def click_ref_button(self):
         """点击刷新按钮."""
         self.click(By.XPATH, '//p[text()="刷新"]')

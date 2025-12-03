@@ -405,3 +405,9 @@ class WarehouseLocationPage(BasePage):
                  "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
             )
         )
+
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[2]')
+        sleep(1)
+        self.wait_for_loading_to_disappear()

@@ -474,7 +474,7 @@ class TestCustomerPage:
         customer.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
-        sleep(1)
+        sleep(3)
         # 定位第一行是否为111
         customercode = customer.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -528,7 +528,7 @@ class TestCustomerPage:
         customer.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
-        sleep(1)
+        sleep(2)
         customercode = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
@@ -577,7 +577,7 @@ class TestCustomerPage:
         customer.click_button(
             '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
         )
-        sleep(1)
+        sleep(3)
         eles = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         # 定位第一行是否为111
         assert len(eles) > 0

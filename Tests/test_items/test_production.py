@@ -339,10 +339,9 @@ class TestProductionPage:
             f'//tr[./td[6]//span[text()="{num}"] and ./td[2]//span[text()="{name}:1"]]/td[6]'
         )
         production.click_del_button()
-        sleep(1)
         text = production.get_find_element_xpath(
             '//p[text()="当前工作已【结束】，是否需要修改成【开始生产】？"]'
-        ).text
+        ).get_attribute('innerText')
         # 点击是
         production.click_button('//div[@class="el-message-box__btns"]/button[2]')
         sleep(1)

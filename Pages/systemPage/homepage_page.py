@@ -57,14 +57,15 @@ class HomePage(BasePage):
 
     # 等待加载遮罩消失
     def wait_for_el_loading_mask(self, timeout=10):
+        sleep(1)
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
         )
-        sleep(1)
 
     def click_save_button(self):
         """点击保存按钮."""
         self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[1]')
+        self.wait_for_el_loading_mask()
 
     def click_template(self):
         self.click_button('//div[text()=" 模板 "]')
@@ -74,7 +75,8 @@ class HomePage(BasePage):
         self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[2]')
         if name == "":
             self.click_button(
-                f'//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="{button}"]')
+                f'//div[@class="vxe-modal--footer"]//span[text()="{button}"]')
+            self.wait_for_el_loading_mask()
             message = WebDriverWait(self.driver, 10).until(
                 EC.visibility_of_element_located(
                     (By.XPATH, '//div[@class="el-message el-message--error"]//p')
@@ -84,7 +86,8 @@ class HomePage(BasePage):
         else:
             self.enter_texts('//div[text()=" 名称 "]/following-sibling::div//input', name)
             self.click_button(
-                f'//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]//span[text()="{button}"]')
+                f'//div[@class="vxe-modal--footer"]//span[text()="{button}"]')
+            self.wait_for_el_loading_mask()
             self.click_template()
             eles = self.finds_elements(By.XPATH,
                                        f'//div[@class="flex-column flex-align-items-center overflow-auto b-r-s-dcdee2 flex-1"]//div[@class="flex-j-c-between"]/span[1][text()=" {name} "]')
@@ -96,6 +99,7 @@ class HomePage(BasePage):
         self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[3]')
         self.click_button(
             f'//div[./div[text()="确定要删除所有的组件吗？"]]/following-sibling::div//span[text()="{span_text}"]')
+        sleep(1)
 
     def clear_button(self, span_text):
         """点击清除按钮."""
@@ -148,7 +152,6 @@ class HomePage(BasePage):
         self.click_button('(//div[@class="ivu-modal-confirm-footer"])[2]//span[text()="确定"]')
         self.wait_for_el_loading_mask()
         self.click_save_button()
-        self.wait_for_el_loading_mask()
         self.get_find_message()
         self.right_refresh()
         self.click_template()

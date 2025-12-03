@@ -446,10 +446,7 @@ class TestItemPage:
         sleep(1)
 
         # 点击确认
-        item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[2]'
-        )
-        sleep(1)
+        item.click_select_button()
         # 定位第一行是否为产品A
         itemcode = item.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -500,10 +497,7 @@ class TestItemPage:
         sleep(1)
 
         # 点击确认
-        self.item.click_button(
-            '(//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[2]'
-        )
-        sleep(1)
+        self.item.click_select_button()
         itemcode = self.driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',

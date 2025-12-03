@@ -83,6 +83,12 @@ class PersonalPage(BasePage):
         # 确认密码修改
         self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
+    def wait_for_el_loading_mask(self, timeout=10):
+        sleep(1)
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
+        )
+
     def go_setting_page(self):
         """
         进入个人设置页面。
@@ -96,6 +102,7 @@ class PersonalPage(BasePage):
 
         # 点击文本为"个人设置"的div，进入个人设置页面。
         self.click_button('//div[text()=" 个人设置 "]')
+        self.wait_for_el_loading_mask()
 
     def switch_language(self, language):
         """
