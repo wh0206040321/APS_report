@@ -471,10 +471,7 @@ class TestCustomerPage:
         sleep(1)
 
         # 点击确认
-        customer.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(3)
+        customer.click_select_button()
         # 定位第一行是否为111
         customercode = customer.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -525,10 +522,7 @@ class TestCustomerPage:
         sleep(1)
 
         # 点击确认
-        customer.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(2)
+        customer.click_select_button()
         customercode = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
@@ -574,10 +568,7 @@ class TestCustomerPage:
         sleep(1)
 
         # 点击确认
-        customer.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(3)
+        customer.click_select_button()
         eles = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         # 定位第一行是否为111
         assert len(eles) > 0
@@ -621,10 +612,7 @@ class TestCustomerPage:
         sleep(1)
 
         # 点击确认
-        customer.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        customer.click_select_button()
         eles = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(eles) > 0
         assert all(int(v) < 10 for v in eles)
@@ -750,10 +738,7 @@ class TestCustomerPage:
         sleep(1)
 
         # 点击确认
-        customer.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(2)
+        customer.click_select_button()
         name = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         code = customer.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(code) > 0 and len(name) > 0
@@ -884,11 +869,7 @@ class TestCustomerPage:
         sleep(1)
 
         # 点击确认
-        customer.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        customer.wait_for_loading_to_disappear()
-        sleep(1)
+        customer.click_select_button()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 
@@ -1033,7 +1014,7 @@ class TestCustomerPage:
         layout = "测试布局A"
 
         value = ['全部数据', '111', '1测试A','111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
-        customer.del_all(value)
+        customer.del_all(value, '//p[text()="客户代码"]/ancestor::div[2]//input')
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]

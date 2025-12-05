@@ -450,10 +450,7 @@ class TestProcessPage:
         sleep(1)
 
         # 点击确认
-        process.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(2)
+        process.click_select_button()
         # 定位第一行是否为111
         processcode = process.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -504,10 +501,7 @@ class TestProcessPage:
         sleep(1)
 
         # 点击确认
-        process.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(2)
+        process.click_select_button()
         # 定位第一行是否为
         processcode = driver.find_elements(
             By.XPATH,
@@ -554,10 +548,7 @@ class TestProcessPage:
         sleep(1)
 
         # 点击确认
-        process.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(2)
+        process.click_select_button()
         eles = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles) > 0
         assert all(name in ele for ele in eles)
@@ -601,10 +592,7 @@ class TestProcessPage:
         sleep(1)
 
         # 点击确认
-        process.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        process.click_select_button()
         eles = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(eles) > 0
         assert all(int(ele) > num for ele in eles)
@@ -731,10 +719,7 @@ class TestProcessPage:
 
         sleep(1)
         # 点击确认
-        process.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        process.click_select_button()
         eles1 = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         eles2 = process.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles1) > 0 and len(eles2) > 0
@@ -865,10 +850,7 @@ class TestProcessPage:
         sleep(1)
 
         # 点击确认
-        process.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(3)
+        process.click_select_button()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 
@@ -1032,13 +1014,13 @@ class TestProcessPage:
         layout = "测试布局A"
 
         value = ['111', '11测试全部数据', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
-        process.del_all(value)
+        process.del_all(value, '//p[text()="工序代码"]/ancestor::div[2]//input')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]
         ]
         process.del_layout(layout)
-        sleep(2)
+        sleep(1)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

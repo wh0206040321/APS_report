@@ -285,10 +285,7 @@ class TestSButtonPage:
         sleep(1)
 
         # 点击确认
-        button.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
-        )
-        sleep(2)
+        button.click_select_button()
         # 定位第一行是否为name
         itemcode = button.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -339,10 +336,7 @@ class TestSButtonPage:
         sleep(1)
 
         # 点击确认
-        button.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
-        )
-        sleep(2)
+        button.click_select_button()
         itemcode = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
@@ -389,10 +383,7 @@ class TestSButtonPage:
         sleep(1)
 
         # 点击确认
-        button.click_button(
-            '(//div[@class="demo-drawer-footer"])[3]/button[2]'
-        )
-        sleep(2)
+        button.click_select_button()
         eles = button.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles) > 0
         assert all(name in ele for ele in eles)

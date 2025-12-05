@@ -908,10 +908,7 @@ class TestChangeIPage:
         sleep(1)
 
         # 点击确认
-        changeI.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        changeI.click_select_button()
         # 定位第一行
         changeIcode = changeI.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'

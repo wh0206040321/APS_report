@@ -70,6 +70,12 @@ class PlanUnitPage(BasePage):
         self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
         self.wait_for_loading_to_disappear()
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def click_all_button(self, name):
         """点击按钮."""
         self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
@@ -93,6 +99,7 @@ class PlanUnitPage(BasePage):
     def select_input(self, name):
         """选择输入框."""
         self.enter_texts('//div[div[p[text()="计划单元"]]]//input', name)
+        sleep(0.5)
 
     def click_sel_button(self):
         """点击查询按钮."""
@@ -108,11 +115,10 @@ class PlanUnitPage(BasePage):
         upload_input = self.get_find_element_xpath('(//input[@type="file"])[2]')
         upload_input.send_keys(file_path)
 
-    def del_all(self, value=[]):
+    def del_all(self, value=[], xpath=''):
         for index, v in enumerate(value, start=1):
             try:
                 self.wait_for_loading_to_disappear()
-                xpath = '//p[text()="计划单元"]/ancestor::div[2]//input'
                 self.enter_texts(xpath, v)
                 sleep(0.5)
                 self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
@@ -124,8 +130,14 @@ class PlanUnitPage(BasePage):
                 ele.send_keys(Keys.DELETE)
             except NoSuchElementException:
                 print(f"未找到元素: {v}")
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
             except Exception as e:
                 print(f"操作 {v} 时出错: {str(e)}")
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
 
     def del_layout(self, layout):
         # 获取目标 div 元素，这里的目标是具有特定文本的 div

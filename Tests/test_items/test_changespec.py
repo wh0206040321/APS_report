@@ -943,10 +943,7 @@ class TestChangeSpecPage:
         sleep(1)
 
         # 点击确认
-        change.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        change.click_select_button()
         # 定位第一行是否为开料
         changeRcode = change.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'

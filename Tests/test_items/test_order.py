@@ -636,10 +636,7 @@ class TestOrderPage:
         sleep(1)
 
         # 点击确认
-        order.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        order.click_select_button()
         # 定位第一行是否为1A
         ordercode = order.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -690,10 +687,7 @@ class TestOrderPage:
         sleep(1)
 
         # 点击确认
-        order.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        order.click_select_button()
         itemcode = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
@@ -739,10 +733,7 @@ class TestOrderPage:
         sleep(1)
 
         # 点击确认
-        order.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        order.click_select_button()
         eles = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[2]')
         assert len(eles) > 0
         assert all(name in ele for ele in eles)
@@ -872,10 +863,7 @@ class TestOrderPage:
         sleep(1)
 
         # 点击确认
-        order.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        order.click_select_button()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 
@@ -947,10 +935,7 @@ class TestOrderPage:
         sleep(1)
 
         # 点击确认
-        order.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        order.click_select_button()
         eles = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[10]')
         assert len(eles) > 0
         assert all(int(ele) > num for ele in eles)
@@ -1078,10 +1063,7 @@ class TestOrderPage:
         sleep(1)
 
         # 点击确认
-        order.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        order.click_select_button()
         eles1 = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[10]')
         eles2 = order.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[2]')
         assert len(eles1) > 0 and len(eles2) > 0
@@ -1219,13 +1201,13 @@ class TestOrderPage:
         layout = "测试布局A"
 
         value = ['111', '1测试A', '11测试全部数据', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
-        order.del_all(value)
+        order.del_all(value, '//p[text()="订单代码"]/ancestor::div[2]//input')
         orderdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]
         ]
         order.del_layout(layout)
-        sleep(5)
+        sleep(1)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -1234,13 +1216,13 @@ class TestOrderPage:
         assert 0 == len(after_layout)
         assert not order.has_fail_message()
 
-    @allure.story("销售订单增删查改")
+    @allure.story("计划需求增删查改")
     # @pytest.mark.run(order=1)
     def test_order_salesorder(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
-        list_name = ['11销售订单', '11销售订单测试']
-        after_name = '11修改销售订单'
+        list_name = ['11计划需求', '11计划需求测试']
+        after_name = '11修改计划需求'
         order.click_button('//div[text()=" 制造订单 "]')
         order.click_button('//div[div[text()=" 制造订单 "]]/span')
         order.click_order_page('计划需求')

@@ -407,9 +407,7 @@ class TestSpecPage:
         sleep(1)
 
         # 点击确认
-        spec.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
+        spec.click_select_button()
         sleep(1)
         # 定位第一行是否为111
         speccode = spec.get_find_element_xpath(
@@ -461,10 +459,7 @@ class TestSpecPage:
         sleep(1)
 
         # 点击确认
-        spec.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        spec.click_select_button()
         itemcode = driver.find_elements(
             By.XPATH,
             '(//table[@class="vxe-table--body"])[2]//tr[1]/td[2]',
@@ -510,10 +505,7 @@ class TestSpecPage:
         sleep(1)
 
         # 点击确认
-        spec.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        spec.click_select_button()
         # 定位第一行显示顺序
         speccode = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(speccode) > 0
@@ -640,10 +632,7 @@ class TestSpecPage:
         sleep(1)
 
         # 点击确认
-        spec.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(3)
+        spec.click_select_button()
         specname = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         speccode = spec.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(specname) > 0 and len(speccode) > 0
@@ -774,10 +763,7 @@ class TestSpecPage:
         sleep(1)
 
         # 点击确认
-        spec.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        spec.wait_for_loading_to_disappear()
+        spec.click_select_button()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 
@@ -921,7 +907,7 @@ class TestSpecPage:
         layout = "测试布局A"
 
         value = ['全部数据', '111', '1测试A', '1111111111111111333311222211112222211111111133331111111444441111111111111111111111111111111111111111']
-        spec.del_all(value)
+        spec.del_all(value, '//p[text()="代码"]/ancestor::div[2]//input')
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]

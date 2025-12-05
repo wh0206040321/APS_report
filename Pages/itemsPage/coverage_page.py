@@ -81,6 +81,12 @@ class Coverage(BasePage):
             )
         )
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def batch_modify_inputs(self, xpath_value_map: dict):
         """通过字典批量修改输入框（键为XPath，值为输入内容）"""
         for xpath, value in xpath_value_map.items():

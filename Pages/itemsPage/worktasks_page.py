@@ -88,6 +88,7 @@ class WorkTasksPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(0.5)
 
     def loop_judgment(self, xpath):
         """循环判断"""
@@ -115,6 +116,12 @@ class WorkTasksPage(BasePage):
     def click_confirm(self):
         """点击确定"""
         self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        self.wait_for_loading_to_disappear()
+
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
         self.wait_for_loading_to_disappear()
 
     def select_data(self, code, name):
@@ -150,7 +157,7 @@ class WorkTasksPage(BasePage):
         sleep(1)
 
         try:
-            self.click_button(f'(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+            self.click_select_button()
         except Exception as e:
             self.click_button(f'(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')
         sleep(3)

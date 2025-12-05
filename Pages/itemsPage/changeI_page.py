@@ -109,6 +109,12 @@ class ChangeI(BasePage):
             )
         )
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def click_flagdata(self):
         self.click_button(
             '//div[p[text()="更新时间"]]/div[1]'

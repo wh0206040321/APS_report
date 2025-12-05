@@ -106,6 +106,12 @@ class ChangeR(BasePage):
             )
         )
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def add_layout(self, layout):
         """添加布局."""
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[2]//i')
@@ -247,7 +253,4 @@ class ChangeR(BasePage):
         sleep(1)
 
         # 点击确认
-        self.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(2)
+        self.click_select_button()

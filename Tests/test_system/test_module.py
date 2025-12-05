@@ -301,10 +301,7 @@ class TestSModulePage:
         sleep(1)
 
         # 点击确认
-        module.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
+        module.click_select_button2()
         # 定位第一行是否为name
         itemcode = module.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]'
@@ -355,10 +352,7 @@ class TestSModulePage:
         sleep(1)
 
         # 点击确认
-        module.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
+        module.click_select_button2()
         itemcode = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[@class="vxe-body--row"][1]/td[2]',
@@ -405,10 +399,7 @@ class TestSModulePage:
         sleep(1)
 
         # 点击确认
-        module.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
+        module.click_select_button2()
         eles = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles) > 0
         assert all(name in ele for ele in eles)
@@ -453,10 +444,7 @@ class TestSModulePage:
         sleep(1)
 
         # 点击确认
-        module.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
+        module.click_select_button2()
         eles = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         assert len(eles) > 0
         assert all(int(ele) > num for ele in eles)
@@ -584,10 +572,7 @@ class TestSModulePage:
         sleep(1)
 
         # 点击确认
-        module.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(2)
+        module.click_select_button2()
         eles1 = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[5]')
         eles2 = module.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles1) > 0 and len(eles2) > 0
@@ -718,10 +703,7 @@ class TestSModulePage:
         sleep(1)
 
         # 点击确认
-        module.click_button(
-            '(//div[@class="demo-drawer-footer"])[2]/button[2]'
-        )
-        sleep(1)
+        module.click_select_button2()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 

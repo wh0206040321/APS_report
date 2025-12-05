@@ -907,8 +907,7 @@ class TestCoveragePage:
         sleep(3)
 
         # 点击确认
-        coverage.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(2)
+        coverage.click_select_button()
         # 定位第一行
         coveragecode = coverage.get_find_element_xpath(
             '(//div[@id="canvasGird0"]//table[@class="vxe-table--body"])[1]//tr[1]/td[2]'

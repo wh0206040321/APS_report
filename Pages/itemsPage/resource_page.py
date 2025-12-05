@@ -80,6 +80,12 @@ class ResourcePage(BasePage):
             )
         )
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def add_test_resource(self, name):
         self.click_add_button()  # 检查点击添加
         # 输入代码
@@ -145,18 +151,25 @@ class ResourcePage(BasePage):
     def del_all(self, value=[], xpath=""):
         for index, v in enumerate(value, start=0):
             try:
-                ele = self.get_find_element_xpath(xpath)
-                ele.send_keys(Keys.CONTROL, "a")
-                ele.send_keys(Keys.DELETE)
                 self.enter_texts(xpath, v)
+                sleep(0.5)
                 self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
                 self.click_del_button()  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
                 sleep(1)
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
             except NoSuchElementException:
                 print(f"未找到元素: {v}")
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
             except Exception as e:
                 print(f"操作 {v} 时出错: {str(e)}")
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
 
     def del_layout(self, layout):
         # 获取目标 div 元素，这里的目标是具有特定文本的 div

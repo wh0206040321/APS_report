@@ -64,6 +64,12 @@ class MaterialCalendar(BasePage):
         )
         return message.text
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def get_error_message(self):
         """获取错误信息"""
         message = WebDriverWait(self.driver, 10).until(

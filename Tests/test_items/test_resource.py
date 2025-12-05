@@ -490,10 +490,7 @@ class TestResourcePage:
         sleep(1)
 
         # 点击确认
-        resource.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        resource.click_select_button()
         # 定位第一行是否为111
         resourcecode = resource.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
@@ -544,10 +541,7 @@ class TestResourcePage:
         sleep(1)
 
         # 点击确认
-        resource.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        resource.click_select_button()
         resourcecode = driver.find_elements(
             By.XPATH,
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]',
@@ -593,10 +587,7 @@ class TestResourcePage:
         sleep(1)
 
         # 点击确认
-        resource.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        resource.click_select_button()
         eles = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[3]')
         assert len(eles) > 0
         assert all(name == ele for ele in eles)
@@ -642,10 +633,7 @@ class TestResourcePage:
         sleep(1)
 
         # 点击确认
-        resource.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        resource.click_select_button()
         eles = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[9]')
         assert len(eles) > 0
         assert all(int(ele) > 5 for ele in eles)
@@ -774,10 +762,7 @@ class TestResourcePage:
         sleep(1)
 
         # 点击确认
-        resource.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        resource.click_select_button()
         ele1 = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[9]')
         ele2 = resource.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[4]')
         assert len(ele1) > 0 and len(ele2) > 0
@@ -909,10 +894,7 @@ class TestResourcePage:
         sleep(1)
 
         # 点击确认
-        resource.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        resource.click_select_button()
         # 获取目标表格第2个 vxe 表格中的所有数据行
         xpath_rows = '(//table[contains(@class, "vxe-table--body")])[2]//tr[contains(@class,"vxe-body--row")]'
 

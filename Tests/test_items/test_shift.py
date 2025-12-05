@@ -671,10 +671,7 @@ class TestShiftPage:
         sleep(1)
 
         # 点击确认
-        shift.click_button(
-            '(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]'
-        )
-        sleep(1)
+        shift.click_select_button()
         eles = shift.loop_judgment('(//table[@class="vxe-table--body"])[2]//tr/td[2]')
         assert len(eles) > 0
         assert all(name in ele for ele in eles)
@@ -789,7 +786,7 @@ class TestShiftPage:
         layout = "测试布局A"
 
         value = ['11测试全部数据', '111', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
-        shift.del_all(value)
+        shift.del_all(value, '//p[text()="代码"]/ancestor::div[2]//input')
         data = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]

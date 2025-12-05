@@ -134,6 +134,12 @@ class MasterPage(BasePage):
         except NoSuchElementException:
             return None
 
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
+
     def go_item_dialog(self, test_item):
         """选择物料代码"""
         # 填写订物料代码

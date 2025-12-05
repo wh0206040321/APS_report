@@ -58,13 +58,18 @@ class ExpressionPage(BasePage):
         self.wait_for_loading_to_disappear()
 
     def wait_for_loading_to_disappear(self, timeout=10):
+        sleep(1)
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located(
                 (By.XPATH,
                  "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[2]")
             )
         )
-        sleep(1)
+
+    def click_select_button2(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')
+        self.wait_for_loading_to_disappear()
 
     # 等待加载遮罩消失
     def wait_for_el_loading_mask(self, timeout=10):
@@ -72,6 +77,12 @@ class ExpressionPage(BasePage):
             EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
         )
         sleep(1)
+
+    def click_select_button(self):
+        """点击查询确定按钮."""
+        self.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[3]')
+        sleep(0.5)
+        self.wait_for_loading_to_disappear()
 
     def click_all_button(self, name):
         """点击按钮."""
@@ -85,6 +96,7 @@ class ExpressionPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(0.5)
 
     def select_input_menu(self, name):
         """选择输入框."""
@@ -94,6 +106,7 @@ class ExpressionPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(0.5)
 
     def select_input_module(self, name):
         """选择输入框."""
@@ -113,6 +126,7 @@ class ExpressionPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(0.5)
 
     def select_input_button(self, name):
         """选择输入框."""
@@ -122,6 +136,7 @@ class ExpressionPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(0.5)
 
     def select_input_dictionary(self, name):
         """选择输入框."""
@@ -131,6 +146,7 @@ class ExpressionPage(BasePage):
         ele.send_keys(Keys.DELETE)
         sleep(0.5)
         self.enter_texts(xpath, name)
+        sleep(0.5)
 
     def loop_judgment(self, xpath):
         """循环判断"""
@@ -162,20 +178,25 @@ class ExpressionPage(BasePage):
     def del_all(self, xpath, value=[]):
         for index, v in enumerate(value, start=1):
             try:
-                sleep(1)
-                ele = self.get_find_element_xpath(xpath)
-                ele.send_keys(Keys.CONTROL, "a")
-                ele.send_keys(Keys.DELETE)
                 self.enter_texts(xpath, v)
                 sleep(0.5)
                 self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
                 self.click_all_button("删除")  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-                sleep(1)
+                self.wait_for_loading_to_disappear()
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
             except NoSuchElementException:
                 print(f"未找到元素: {v}")
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
             except Exception as e:
                 print(f"操作 {v} 时出错: {str(e)}")
+                ele = self.get_find_element_xpath(xpath)
+                ele.send_keys(Keys.CONTROL, "a")
+                ele.send_keys(Keys.DELETE)
 
     def add_layout(self, layout):
         """添加布局."""
