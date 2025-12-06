@@ -1,0 +1,87 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="模块管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 模块代码"]]]//input
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7101a6f65+78965]
+	GetHandleVerifier [0x0x7ff7101a6fc0+79056]
+	(No symbol) [0x0x7ff70ff39dda]
+	(No symbol) [0x0x7ff70ff417c1]
+	(No symbol) [0x0x7ff70ff4482c]
+	(No symbol) [0x0x7ff70ff448ff]
+	(No symbol) [0x0x7ff70ff924ed]
+	(No symbol) [0x0x7ff70ff8564e]
+	(No symbol) [0x0x7ff70ffb866a]
+	(No symbol) [0x0x7ff70ff82b56]
+	(No symbol) [0x0x7ff70ffb8880]
+	(No symbol) [0x0x7ff70ffe0dbe]
+	(No symbol) [0x0x7ff70ffb8443]
+	(No symbol) [0x0x7ff70ff81311]
+	(No symbol) [0x0x7ff70ff820a3]
+	GetHandleVerifier [0x0x7ff71045e26d+2926461]
+	GetHandleVerifier [0x0x7ff710458993+2903715]
+	GetHandleVerifier [0x0x7ff710476aed+3026941]
+	GetHandleVerifier [0x0x7ff7101c16fe+187406]
+	GetHandleVerifier [0x0x7ff7101c96ef+220159]
+	GetHandleVerifier [0x0x7ff7101afaf4+114692]
+	GetHandleVerifier [0x0x7ff7101afca9+115129]
+	GetHandleVerifier [0x0x7ff7101964d8+10728]
+	BaseThreadInitThunk [0x0x7ffe121c7374+20]
+	RtlUserThreadStart [0x0x7ffe133dcc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7101a6f65+78965]
+	GetHandleVerifier [0x0x7ff7101a6fc0+79056]
+	(No symbol) [0x0x7ff70ff39dda]
+	(No symbol) [0x0x7ff70ff417c1]
+	(No symbol) [0x0x7ff70ff44bbc]
+	(No symbol) [0x0x7ff70ffe2096]
+	(No symbol) [0x0x7ff70ffb866a]
+	(No symbol) [0x0x7ff70ffe0dbe]
+	(No symbol) [0x0x7ff70ffb8443]
+	(No symbol) [0x0x7ff70ff81311]
+	(No symbol) [0x0x7ff70ff820a3]
+	GetHandleVerifier [0x0x7ff71045e26d+2926461]
+	GetHandleVerifier [0x0x7ff710458993+2903715]
+	GetHandleVerifier [0x0x7ff710476aed+3026941]
+	GetHandleVerifier [0x0x7ff7101c16fe+187406]
+	GetHandleVerifier [0x0x7ff7101c96ef+220159]
+	GetHandleVerifier [0x0x7ff7101afaf4+114692]
+	GetHandleVerifier [0x0x7ff7101afca9+115129]
+	GetHandleVerifier [0x0x7ff7101964d8+10728]
+	BaseThreadInitThunk [0x0x7ffe121c7374+20]
+	RtlUserThreadStart [0x0x7ffe133dcc91+33]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2024909308832
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="模块管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 模块代码"]]]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="ABCDAA"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="2ac152wb-18ae"]//input
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2024911389600
