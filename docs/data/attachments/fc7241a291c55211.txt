@@ -1,0 +1,64 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//input[@type="text"])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"1]
+[33mWARNING [0m root:base_page.py:81 点击失败：Message: invalid selector: Unable to locate an element with the xpath expression //button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"1] because of the following error:
+SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"1]' is not a valid XPath expression.
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff785d56f65+78965]
+	GetHandleVerifier [0x0x7ff785d56fc0+79056]
+	(No symbol) [0x0x7ff785ae9dda]
+	(No symbol) [0x0x7ff785af17c1]
+	(No symbol) [0x0x7ff785af482c]
+	(No symbol) [0x0x7ff785af48ff]
+	(No symbol) [0x0x7ff785b3fb97]
+	(No symbol) [0x0x7ff785b4059c]
+	(No symbol) [0x0x7ff785b93f37]
+	(No symbol) [0x0x7ff785b686af]
+	(No symbol) [0x0x7ff785b90dbe]
+	(No symbol) [0x0x7ff785b68443]
+	(No symbol) [0x0x7ff785b31311]
+	(No symbol) [0x0x7ff785b320a3]
+	GetHandleVerifier [0x0x7ff78600e26d+2926461]
+	GetHandleVerifier [0x0x7ff786008993+2903715]
+	GetHandleVerifier [0x0x7ff786026aed+3026941]
+	GetHandleVerifier [0x0x7ff785d716fe+187406]
+	GetHandleVerifier [0x0x7ff785d796ef+220159]
+	GetHandleVerifier [0x0x7ff785d5faf4+114692]
+	GetHandleVerifier [0x0x7ff785d5fca9+115129]
+	GetHandleVerifier [0x0x7ff785d464d8+10728]
+	BaseThreadInitThunk [0x0x7ffe121c7374+20]
+	RtlUserThreadStart [0x0x7ffe133dcc91+33]
+
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"1]
+[33mWARNING [0m root:base_page.py:81 点击失败：Message: invalid selector: Unable to locate an element with the xpath expression //button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"1] because of the following error:
+SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//button[@type="button" and @class="ivu-btn ivu-btn-primary ivu-btn-long ivu-btn-large"1]' is not a valid XPath expression.
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff785d56f65+78965]
+	GetHandleVerifier [0x0x7ff785d56fc0+79056]
+	(No symbol) [0x0x7ff785ae9dda]
+	(No symbol) [0x0x7ff785af17c1]
+	(No symbol) [0x0x7ff785af482c]
+	(No symbol) [0x0x7ff785af48ff]
+	(No symbol) [0x0x7ff785b3fb97]
+	(No symbol) [0x0x7ff785b4059c]
+	(No symbol) [0x0x7ff785b93f37]
+	(No symbol) [0x0x7ff785b686af]
+	(No symbol) [0x0x7ff785b90dbe]
+	(No symbol) [0x0x7ff785b68443]
+	(No symbol) [0x0x7ff785b31311]
+	(No symbol) [0x0x7ff785b320a3]
+	GetHandleVerifier [0x0x7ff78600e26d+2926461]
+	GetHandleVerifier [0x0x7ff786008993+2903715]
+	GetHandleVerifier [0x0x7ff786026aed+3026941]
+	GetHandleVerifier [0x0x7ff785d716fe+187406]
+	GetHandleVerifier [0x0x7ff785d796ef+220159]
+	GetHandleVerifier [0x0x7ff785d5faf4+114692]
+	GetHandleVerifier [0x0x7ff785d5fca9+115129]
+	GetHandleVerifier [0x0x7ff785d464d8+10728]
+	BaseThreadInitThunk [0x0x7ffe121c7374+20]
+	RtlUserThreadStart [0x0x7ffe133dcc91+33]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1227621411008
