@@ -1,0 +1,53 @@
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：3039393717920
+[33mWARNING [0m conftest:conftest.py:103 [DEBUG] fixture_setup failed: login_to_materialsubstitution
+[32mINFO    [0m conftest:conftest.py:86 [DEBUG] try_capture for Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup, driver_id=3039415969072, alive=True
+[32mINFO    [0m conftest:conftest.py:68 [Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup_3039415969072_20251211_030057.png
+[32mINFO    [0m conftest:conftest.py:90 [DEBUG] 截图成功: Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup_3039415969072_20251211_030057.png
+[32mINFO    [0m conftest:conftest.py:86 [DEBUG] try_capture for Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup, driver_id=3039385044688, alive=True
+[32mINFO    [0m conftest:conftest.py:68 [Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup_3039385044688_20251211_030057.png
+[32mINFO    [0m conftest:conftest.py:90 [DEBUG] 截图成功: Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialSubstitution.py__TestSMaterialSubstitutionPage__test_materialsubstitution_updategroup_3039385044688_20251211_030057.png
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物料替代"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //span[text()=" 更新时间"]/following-sibling::div
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //span[text()=" 更新时间"]/following-sibling::div
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[td[4]//span[text()="成组替代"]]/td[2])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@id="g8b1op6y-vfpx"]/i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//button[not(@disabled)]//span[text()="删除"])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//button[not(@disabled)]//span[text()="删除"])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //table[@class="vxe-table--body"]//tr[td[3]//button]/td[2]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //table[@class="vxe-table--body"]//tr[td[6]//button]/td[2]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //span[text()=" 更新时间"]/following-sibling::div
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //span[text()=" 更新时间"]/following-sibling::div
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //table[@class="vxe-table--body"]//tr[td[4]//span[text()="成组替代"]]/td[7]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //table[@class="vxe-table--body"]//tr[td[4]//span[text()="成组替代"]]/td[10]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //table[@class="vxe-table--body"]//tr[td[4]//span[text()="成组替代"]]/td[6]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：3039395678912
