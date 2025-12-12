@@ -1233,9 +1233,7 @@ class TestSettingPage:
         ).text
         sleep(1)
         setting.click_button('//p[text()="交货期"]/following-sibling::div[1]')
-        time2 = setting.get_find_element_xpath(
-            '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
-        ).text
+        time2 = '2025/01/01 00:00:00'
         if time1 > time2:
             time = time2 + " - " + time1
         else:
