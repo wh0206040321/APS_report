@@ -201,6 +201,7 @@ class AddsPages(BasePage):
         sleep(1)
 
         self.click_button('(//div[text()=" 显示设置 "])[1]')
+        sleep(1)
         # 获取是否可见选项的复选框元素
         checkbox2 = self.get_find_element_xpath(
             '(//div[./div[text()="是否可见:"]])[1]/label/span'
@@ -221,6 +222,7 @@ class AddsPages(BasePage):
         """
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
         self.wait_for_el_loading_mask()
+        sleep(1)
         self.click_button('//div[text()=" 显示设置 "]')
         sleep(5)
         ele = self.get_find_element_xpath('(//div[@class="vxe-table--body-wrapper body--wrapper"])[4]')
