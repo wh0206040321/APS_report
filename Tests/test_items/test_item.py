@@ -1106,7 +1106,8 @@ class TestItemPage:
     def test_item_delsuccess(self, login_to_item):
         driver = login_to_item  # WebDriver 实例
         item = ItemPage(driver)  # 用 driver 初始化 ItemPage
-        item.right_refresh('物品')
+        driver.refresh()
+        item.wait_for_loading_to_disappear()
         layout = "测试布局A"
 
         value = ['111', '11测试全部数据', '1测试A','111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
