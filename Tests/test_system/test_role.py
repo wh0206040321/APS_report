@@ -380,11 +380,11 @@ class TestRolePage:
         before_name = "1测试角色代码4"
         module = "1测试计划单元CTB"
         role.select_input(before_name)
-        sleep(1)
+        sleep(2)
         role.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{before_name}"]')
-        sleep(1)
+        sleep(2)
         role.click_all_button("编辑")
-        sleep(1)
+        sleep(2)
         num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
         for i in range(1, num+1):
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
@@ -409,6 +409,7 @@ class TestRolePage:
         num_ = len(role.finds_elements(By.XPATH, f'//div[@class="listDivCon"]/div'))
         swich_name = role.get_find_element_xpath(f'//div[@class="ivu-dropdown-rel"]/div').get_attribute(
             'innerText')
+        swich_name = swich_name.strip()
         assert message == "保存成功" and num_ == 1 and swich_name == module and te == "需求管理"
         assert not role.has_fail_message()
 
