@@ -970,12 +970,12 @@ class TestSAppsPage:
 
         value = ['appstest1']
         apps.del_all(xpath='//div[p[text()="应用代码"]]/following-sibling::div//input', value=value)
-        apps.del_layout(layout)
         sleep(2)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:1]
         ]
+        apps.del_layout(layout)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
