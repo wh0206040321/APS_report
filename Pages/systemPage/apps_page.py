@@ -32,7 +32,7 @@ class AppsPage(BasePage):
 
     def get_find_message(self):
         """获取错误信息"""
-        message = WebDriverWait(self.driver, 10).until(
+        message = WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located(
                 (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
