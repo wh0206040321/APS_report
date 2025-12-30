@@ -640,7 +640,6 @@ class TestPersonalPage:
     def test_personal_characters_display(self, login_to_personal):
         driver = login_to_personal  # WebDriver 实例
         personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
-
         name = "显示"
         style = personal.go_characters_display(name)
         assert style == ""

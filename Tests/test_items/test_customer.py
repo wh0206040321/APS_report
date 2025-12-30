@@ -598,7 +598,7 @@ class TestCustomerPage:
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
         # 点击查询
         customer.click_sel_button()
-        sleep(1)
+        sleep(2)
         # 定位名称输入框
         element_to_double_click = driver.find_element(
             By.XPATH,

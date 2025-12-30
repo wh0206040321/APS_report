@@ -970,6 +970,7 @@ class TestSAppsPage:
         value = ['appstest1']
         apps.del_all(xpath='//div[p[text()="应用代码"]]/following-sibling::div//input', value=value)
         sleep(2)
+        apps.wait_for_loading_to_disappear()
         apps.del_layout(layout)
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')

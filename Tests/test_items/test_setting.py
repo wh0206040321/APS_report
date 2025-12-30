@@ -1230,7 +1230,7 @@ class TestSettingPage:
         setting.click_button('(//div[@class="demo-drawer-footer"])[5]/button[2]')
         time1 = setting.get_find_element_xpath(
             '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
-        ).text
+        ).get_attribute('innerText')
         sleep(1)
         setting.click_button('//p[text()="交货期"]/following-sibling::div[1]')
         time2 = '2025/01/01 00:00:00'
@@ -1244,10 +1244,10 @@ class TestSettingPage:
         sleep(1)
         after_time1 = setting.get_find_element_xpath(
             '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[1]/td[9]'
-        ).text
+        ).get_attribute('innerText')
         after_time2 = setting.get_find_element_xpath(
             '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
-        ).text
+        ).get_attribute('innerText')
 
         # 删除导航栏物品页面
         setting.click_button(
