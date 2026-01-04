@@ -954,7 +954,7 @@ class TestProcessPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [f'{data_list[0]}', f'{data_list[0]}', '2', f'{data_list[1]}', 'is--checked', f'{data_list[0]}', f'{DateDriver.username}', '2025']
+        bef_text = [f'{data_list[0]}', f'{data_list[0]}', '2', f'{data_list[1]}', 'is--checked', f'{data_list[0]}', f'{DateDriver.username}', '2026']
         process.right_refresh('工序')
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):
@@ -1015,7 +1015,7 @@ class TestProcessPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [code, code, '2', '20', 'is--checked', code, f'{DateDriver.username}', '2025']
+        bef_text = [code, code, '2', '20', 'is--checked', code, f'{DateDriver.username}', '2026']
         process.right_refresh('工序')
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):

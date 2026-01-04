@@ -855,7 +855,7 @@ class TestSpecPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = ['全部数据', '全部数据', '2', '20', '全部数据', f'{DateDriver().username}', '2025', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20']
+        bef_text = ['全部数据', '全部数据', '2', '20', '全部数据', f'{DateDriver().username}', '2026', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20']
         spec.right_refresh('生产特征1')
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):
@@ -905,7 +905,7 @@ class TestSpecPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = ['全部数据', '全部数据', '2', '20', '全部数据', f'{DateDriver().username}', '2025', '20', '20', '20',
+        bef_text = ['全部数据', '全部数据', '2', '20', '全部数据', f'{DateDriver().username}', '2026', '20', '20', '20',
                     '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20', '20',
                     '20', '20']
         spec.right_refresh('生产特征1')
