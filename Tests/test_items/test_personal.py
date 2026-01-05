@@ -635,6 +635,36 @@ class TestPersonalPage:
         input_ = personal.get_find_element('//div[./p[text()=" 不操作自动退出(秒): "]]//input').get_attribute('value')
         assert input_ == "86400"
 
+    @allure.story("页面搜索栏展开收缩-开启")
+    # @pytest.mark.run(order=1)
+    def test_personal_search_open(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        radio = personal.get_find_element('//div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="开启"]/span').get_attribute('class')
+        if 'ivu-radio-checked' not in radio:
+            personal.click_button('//div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="开启"]')
+        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
+        personal.get_find_message()
+        sleep(3)
+        ele = personal.get_find_element('//div[div[@class="vxe-pulldown--content"]//input[@placeholder="搜索"]]').get_attribute('style')
+        assert ele == 'display: none;'
+
+    @allure.story("页面搜索栏展开收缩-关闭")
+    # @pytest.mark.run(order=1)
+    def test_personal_search_close(self, login_to_personal):
+        driver = login_to_personal  # WebDriver 实例
+        personal = PersonalPage(driver)  # 用 driver 初始化 PersonalPage
+        personal.go_setting_page()
+        radio = personal.get_find_element(
+            '//div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="不开启(默认)"]/span').get_attribute('class')
+        if 'ivu-radio-checked' not in radio:
+            personal.click_button('//div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="不开启(默认)"]')
+        personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
+        personal.get_find_message()
+        sleep(3)
+        ele = personal.get_find_element('//div[div[@class="vxe-pulldown--content"]//input[@placeholder="搜索"]]').get_attribute('style')
+        assert ele == ''
+
     @allure.story("组件菜单文字-显示")
     # @pytest.mark.run(order=1)
     def test_personal_characters_display(self, login_to_personal):

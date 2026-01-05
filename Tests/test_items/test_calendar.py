@@ -923,15 +923,15 @@ class TestCalendarPage:
     def test_calendar_shift(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]', '//table[@class="vxe-table--body"]//tr[2]//td[1]']
-        cell1 = calendar.get_find_element_xpath(elements[0])
-        cell1.click()
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])
         ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
         sleep(1)
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
-        num = calendar.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"]//tr/td[2])[2]')
+        num = calendar.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[last()]//tr')
         calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert len(num) == 2
         assert not calendar.has_fail_message()
@@ -941,16 +941,15 @@ class TestCalendarPage:
     def test_calendar_ctrls(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
-                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
-        cell1 = calendar.get_find_element_xpath(elements[0])
-        cell1.click()
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])
         ActionChains(driver).key_down(Keys.CONTROL).click(cell2).key_up(Keys.CONTROL).perform()
         sleep(1)
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
-        num = calendar.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"]//tr/td[2])[2]')
+        num = calendar.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[last()]//tr')
         calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         message = calendar.get_find_message()
         assert len(num) == 2 and message == "保存成功"

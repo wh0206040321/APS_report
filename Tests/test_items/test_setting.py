@@ -458,14 +458,14 @@ class TestSettingPage:
         inupt_number.send_keys(Keys.DELETE)
         inupt_number.send_keys(f"{num}")
         setting.click_confirm_button()
-        sleep(1)
+        sleep(2)
         tr_text = driver.find_elements(
             By.XPATH,
-            f'//div[@class="vxe-table--body-wrapper body--wrapper" and @xid="2"]/table//tr[{num}]',
+            f'(//table[@class="vxe-table--body"])[2]//tr[{num}]',
         )
         tr_none = driver.find_elements(
             By.XPATH,
-            f'//div[@class="vxe-table--body-wrapper body--wrapper" and @xid="2"]/table//tr[{num+1}]',
+            f'(//table[@class="vxe-table--body"])[2]//tr[{num + 1}]',
         )
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         sleep(1)
