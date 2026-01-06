@@ -1,0 +1,68 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[1]//td[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state: Element is not currently interactable and may not be manipulated
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e86c6f65+78965]
+	GetHandleVerifier [0x0x7ff6e86c6fc0+79056]
+	(No symbol) [0x0x7ff6e8459dda]
+	(No symbol) [0x0x7ff6e84617c1]
+	(No symbol) [0x0x7ff6e846482c]
+	(No symbol) [0x0x7ff6e84648ff]
+	(No symbol) [0x0x7ff6e84a60f9]
+	(No symbol) [0x0x7ff6e84d866a]
+	(No symbol) [0x0x7ff6e84a2b56]
+	(No symbol) [0x0x7ff6e84d8880]
+	(No symbol) [0x0x7ff6e8500dbe]
+	(No symbol) [0x0x7ff6e84d8443]
+	(No symbol) [0x0x7ff6e84a1311]
+	(No symbol) [0x0x7ff6e84a20a3]
+	GetHandleVerifier [0x0x7ff6e897e26d+2926461]
+	GetHandleVerifier [0x0x7ff6e8978993+2903715]
+	GetHandleVerifier [0x0x7ff6e8996aed+3026941]
+	GetHandleVerifier [0x0x7ff6e86e16fe+187406]
+	GetHandleVerifier [0x0x7ff6e86e96ef+220159]
+	GetHandleVerifier [0x0x7ff6e86cfaf4+114692]
+	GetHandleVerifier [0x0x7ff6e86cfca9+115129]
+	GetHandleVerifier [0x0x7ff6e86b64d8+10728]
+	BaseThreadInitThunk [0x0x7ff882c97374+20]
+	RtlUserThreadStart [0x0x7ff883bdcc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[1]//td[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state: Element is not currently interactable and may not be manipulated
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6e86c6f65+78965]
+	GetHandleVerifier [0x0x7ff6e86c6fc0+79056]
+	(No symbol) [0x0x7ff6e8459dda]
+	(No symbol) [0x0x7ff6e84617c1]
+	(No symbol) [0x0x7ff6e846482c]
+	(No symbol) [0x0x7ff6e84648ff]
+	(No symbol) [0x0x7ff6e84a60f9]
+	(No symbol) [0x0x7ff6e84d866a]
+	(No symbol) [0x0x7ff6e84a2b56]
+	(No symbol) [0x0x7ff6e84d8880]
+	(No symbol) [0x0x7ff6e8500dbe]
+	(No symbol) [0x0x7ff6e84d8443]
+	(No symbol) [0x0x7ff6e84a1311]
+	(No symbol) [0x0x7ff6e84a20a3]
+	GetHandleVerifier [0x0x7ff6e897e26d+2926461]
+	GetHandleVerifier [0x0x7ff6e8978993+2903715]
+	GetHandleVerifier [0x0x7ff6e8996aed+3026941]
+	GetHandleVerifier [0x0x7ff6e86e16fe+187406]
+	GetHandleVerifier [0x0x7ff6e86e96ef+220159]
+	GetHandleVerifier [0x0x7ff6e86cfaf4+114692]
+	GetHandleVerifier [0x0x7ff6e86cfca9+115129]
+	GetHandleVerifier [0x0x7ff6e86b64d8+10728]
+	BaseThreadInitThunk [0x0x7ff882c97374+20]
+	RtlUserThreadStart [0x0x7ff883bdcc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
