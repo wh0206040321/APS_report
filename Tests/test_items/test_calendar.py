@@ -923,8 +923,8 @@ class TestCalendarPage:
     def test_calendar_shift(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
         calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])
@@ -941,8 +941,8 @@ class TestCalendarPage:
     def test_calendar_ctrls(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
         calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])

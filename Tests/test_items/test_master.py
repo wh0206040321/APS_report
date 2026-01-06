@@ -1248,6 +1248,7 @@ class TestMasterPage:
         num = master.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[last()]//tr')
         master.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         message = master.get_find_message()
+        master.right_refresh('工艺产能')
         assert len(num) == 2 and message == "保存成功"
         assert not master.has_fail_message()
 

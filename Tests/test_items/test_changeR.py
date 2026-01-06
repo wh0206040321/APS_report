@@ -1236,8 +1236,8 @@ class TestChangeRPage:
     def test_changeR_shift(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
         changeR.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = changeR.get_find_element_xpath(elements[1])
@@ -1254,8 +1254,8 @@ class TestChangeRPage:
     def test_changeR_ctrls(self, login_to_changeR):
         driver = login_to_changeR  # WebDriver 实例
         changeR = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
         changeR.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = changeR.get_find_element_xpath(elements[1])

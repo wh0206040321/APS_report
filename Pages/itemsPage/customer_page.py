@@ -28,6 +28,7 @@ class CustomerPage(BasePage):
     def click_sel_button(self):
         """点击查询按钮."""
         self.click(By.XPATH, '//p[text()="查询"]')
+        self.wait_for_el_loading_mask()
 
     def click_ref_button(self):
         """点击刷新按钮."""
