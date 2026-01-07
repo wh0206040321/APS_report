@@ -1,5 +1,6 @@
 import logging
 import random
+from datetime import date
 from time import sleep
 
 import allure
@@ -734,7 +735,7 @@ class TestShiftPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [f'{data_list[0]}', '20:20:20-21:20:20', 'RGB(100,255,178)', f'{data_list[0]}', f'{DateDriver.username}', '2026']
+        bef_text = [f'{data_list[0]}', '20:20:20-21:20:20', 'RGB(100,255,178)', f'{data_list[0]}', f'{DateDriver.username}', date.today().strftime("%Y/%m/%d")]
         shift.right_refresh('班次')
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):
@@ -783,7 +784,7 @@ class TestShiftPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [code, '20:20:20-21:20:20', 'RGB(100,255,178)', code, f'{DateDriver.username}', '2026']
+        bef_text = [code, '20:20:20-21:20:20', 'RGB(100,255,178)', code, f'{DateDriver.username}', date.today().strftime("%Y/%m/%d")]
         shift.right_refresh('班次')
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):

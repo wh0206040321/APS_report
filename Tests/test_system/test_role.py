@@ -158,7 +158,7 @@ class TestRolePage:
         role.add_role(name, module)
         num = len(role.finds_elements(By.XPATH, '//div[@class="ivu-tree"]//li/label/span'))
         for i in range(1, num+1):
-            sleep(0.5)
+            sleep(0.1)
             role.click_button(f'(//div[@class="ivu-tree"]//li/label/span)[{i}]')
         role.click_all_button("保存")
         role.get_find_message()
@@ -199,8 +199,12 @@ class TestRolePage:
             role.click_all_button("保存")
             role.get_find_message()
 
-        role.click_button(f'(//table[@class="vxe-table--body"]//span[text()="{date_driver.username}"])[1]')
         driver.refresh()
+        role.wait_for_loading_to_disappear()
+        role.enter_texts('//div[div[p[text()="用户代码"]]]//input', date_driver.username)
+        role.select_input(name)
+        sleep(1)
+        role.click_button(f'(//table[@class="vxe-table--body"]//span[text()="{date_driver.username}"])[1]')
         role.click_button(f'//div[contains(text(),"{date_driver.planning}")]')
 
         role.click_button(f'//ul/li[text()="{module}"]')

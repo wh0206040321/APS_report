@@ -1,6 +1,7 @@
 import logging
 import random
 import re
+from datetime import date
 from time import sleep
 
 import allure
@@ -495,7 +496,7 @@ class TestCalendarPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [f'{resource}', '*', f'{shift}', f'{data_list}', f'{data_list}', f'{data_list}', f'{DateDriver.username}', '2026']
+        bef_text = [f'{resource}', '*', f'{shift}', f'{data_list}', f'{data_list}', f'{data_list}', f'{DateDriver.username}', date.today().strftime("%Y/%m/%d")]
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):
             if i == 8:
@@ -553,7 +554,7 @@ class TestCalendarPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [f'{resource}', '*', f'{shift}', f'{data_list}', f'{data_list}', f'{data_list}', f'{DateDriver.username}', '2026']
+        bef_text = [f'{resource}', '*', f'{shift}', f'{data_list}', f'{data_list}', f'{data_list}', f'{DateDriver.username}', date.today().strftime("%Y/%m/%d")]
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):
             if i == 8:

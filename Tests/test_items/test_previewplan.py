@@ -116,7 +116,7 @@ class TestPreviewPlanPage:
             sleep(1)
             previewPlan.click_del_button()
             previewPlan.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        sleep(1)
+        previewPlan.wait_for_loading_to_disappear()
         ele_none = driver.find_elements(
             By.XPATH, '//table[.//td[4]//span[text()="1测试C订单"]]/tbody//tr'
         )
@@ -207,7 +207,7 @@ class TestPreviewPlanPage:
         operationPlan.click_button('//p[text()="工作指示发布"]')
         operationPlan.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         operationPlan.get_find_message()
-        sleep(1)
+        operationPlan.wait_for_loading_to_disappear()
         after_text = driver.find_elements(
             By.XPATH, '(//table[@class="vxe-table--body"])[3]/tbody//tr'
         )

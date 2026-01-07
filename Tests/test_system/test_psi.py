@@ -344,7 +344,7 @@ class TestPSIPage:
         name = "1测试psi1"
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
         sleep(1)
-        eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = psi.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr//td[2]')
         list_ = [ele.text for ele in eles]
         psi.right_refresh()
         assert all(text == name for text in list_), f"表格内容不符合预期，实际值: {list_}"
@@ -364,7 +364,7 @@ class TestPSIPage:
             psi.click_button('//div[@class="filter-btn-bar"]/button')
         sleep(1)
         psi.click_button('//div[p[text()="PSI名称"]]/following-sibling::div//input')
-        eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = psi.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr//td[2]')
         psi.right_refresh()
         assert len(eles) == 0
         assert not psi.has_fail_message()
@@ -380,7 +380,7 @@ class TestPSIPage:
         sleep(1)
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
         sleep(1)
-        eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = psi.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         psi.right_refresh()
@@ -398,7 +398,7 @@ class TestPSIPage:
         sleep(1)
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
         sleep(1)
-        eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = psi.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         psi.right_refresh()
@@ -416,7 +416,7 @@ class TestPSIPage:
         sleep(1)
         psi.enter_texts('//div[p[text()="PSI名称"]]/following-sibling::div//input', name)
         sleep(1)
-        eles = psi.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        eles = psi.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[1]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
         psi.right_refresh()

@@ -1,7 +1,7 @@
 import logging
 import random
 import re
-from datetime import datetime
+from datetime import datetime, date
 from time import sleep
 
 import allure
@@ -569,7 +569,7 @@ class TestCoveragePage:
         # 格式化为 年/月/日 的字符串
         formatted_date = current_time.strftime("%Y/%m/%d")
         print(columns_text)
-        bef_text = [f'{resource}', f'{start}', f'{end}', f'{data_list}', f'{selClass}', f'{start};{end}', f'{data_list}', '2026', f'{formatted_date}',
+        bef_text = [f'{resource}', f'{start}', f'{end}', f'{data_list}', f'{selClass}', f'{start};{end}', f'{data_list}', date.today().strftime("%Y/%m/%d"), f'{formatted_date}',
                     '2', f'{data_list}', f'{data_list}',  f'{DateDriver.username}']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text),start=1):
@@ -641,7 +641,7 @@ class TestCoveragePage:
         formatted_date = current_time.strftime("%Y/%m/%d")
         print(columns_text)
         bef_text = [f'{resource}', f'{start}', f'{end}', f'{data_list}', f'{selClass}', f'{start};{end}',
-                    f'{data_list}', '2026', f'{formatted_date}',
+                    f'{data_list}', date.today().strftime("%Y/%m/%d"), f'{formatted_date}',
                     '2', f'{data_list}', f'{data_list}', f'{DateDriver.username}']
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text), start=1):

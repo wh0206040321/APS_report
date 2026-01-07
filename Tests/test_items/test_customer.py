@@ -1,5 +1,6 @@
 import logging
 import random
+from datetime import date
 from time import sleep
 
 import allure
@@ -964,7 +965,7 @@ class TestCustomerPage:
                 columns_text.append(text)
 
         print(columns_text)
-        bef_text = [data_list[0], data_list[0], '2', data_list[1], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[0], f'{DateDriver.username}', '2026']
+        bef_text = [data_list[0], data_list[0], '2', data_list[1], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[0], f'{DateDriver.username}', date.today().strftime("%Y/%m/%d")]
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):
             if i == 26:
@@ -1018,7 +1019,7 @@ class TestCustomerPage:
         bef_text = [data_list[0], data_list[0], '2', data_list[1], data_list[0], data_list[0], data_list[0],
                     data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0], data_list[0],
                     data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1], data_list[1],
-                    data_list[1], data_list[1], data_list[1], data_list[0], f'{DateDriver.username}', '2026']
+                    data_list[1], data_list[1], data_list[1], data_list[0], f'{DateDriver.username}', date.today().strftime("%Y/%m/%d")]
         assert len(columns_text) == len(bef_text), f"长度不一致：actual={len(columns_text)}, expected={len(bef_text)}"
         for i, (a, e) in enumerate(zip(columns_text, bef_text)):
             if i == 26:
