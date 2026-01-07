@@ -1,0 +1,36 @@
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2405738424704
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_expression
+[33mWARNING [0m root:test_expression.py:42 第 1 次连接失败: Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff768646f65+78965]
+	GetHandleVerifier [0x0x7ff768646fc0+79056]
+	(No symbol) [0x0x7ff7683d9dda]
+	(No symbol) [0x0x7ff7683d684f]
+	(No symbol) [0x0x7ff7683c7529]
+	(No symbol) [0x0x7ff7683c92e1]
+	(No symbol) [0x0x7ff7683c7846]
+	(No symbol) [0x0x7ff7683c72a6]
+	(No symbol) [0x0x7ff7683c6f6a]
+	(No symbol) [0x0x7ff7683c4b38]
+	(No symbol) [0x0x7ff7683c53bc]
+	(No symbol) [0x0x7ff7683ddd8a]
+	(No symbol) [0x0x7ff768481afe]
+	(No symbol) [0x0x7ff76845866a]
+	(No symbol) [0x0x7ff768480dbe]
+	(No symbol) [0x0x7ff768458443]
+	(No symbol) [0x0x7ff768421311]
+	(No symbol) [0x0x7ff7684220a3]
+	GetHandleVerifier [0x0x7ff7688fe26d+2926461]
+	GetHandleVerifier [0x0x7ff7688f8993+2903715]
+	GetHandleVerifier [0x0x7ff768916aed+3026941]
+	GetHandleVerifier [0x0x7ff7686616fe+187406]
+	GetHandleVerifier [0x0x7ff7686696ef+220159]
+	GetHandleVerifier [0x0x7ff76864faf4+114692]
+	GetHandleVerifier [0x0x7ff76864fca9+115129]
+	GetHandleVerifier [0x0x7ff7686364d8+10728]
+	BaseThreadInitThunk [0x0x7ff882c97374+20]
+	RtlUserThreadStart [0x0x7ff883bdcc91+33]
+
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2405737765600
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_expression
