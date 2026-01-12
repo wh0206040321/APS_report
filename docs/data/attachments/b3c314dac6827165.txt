@@ -1,0 +1,33 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[2]//td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state: Element is not currently interactable and may not be manipulated
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff690b56f65+78965]
+	GetHandleVerifier [0x0x7ff690b56fc0+79056]
+	(No symbol) [0x0x7ff6908e9dda]
+	(No symbol) [0x0x7ff6908f17c1]
+	(No symbol) [0x0x7ff6908f482c]
+	(No symbol) [0x0x7ff6908f48ff]
+	(No symbol) [0x0x7ff6909360f9]
+	(No symbol) [0x0x7ff69096866a]
+	(No symbol) [0x0x7ff690932b56]
+	(No symbol) [0x0x7ff690968880]
+	(No symbol) [0x0x7ff690990dbe]
+	(No symbol) [0x0x7ff690968443]
+	(No symbol) [0x0x7ff690931311]
+	(No symbol) [0x0x7ff6909320a3]
+	GetHandleVerifier [0x0x7ff690e0e26d+2926461]
+	GetHandleVerifier [0x0x7ff690e08993+2903715]
+	GetHandleVerifier [0x0x7ff690e26aed+3026941]
+	GetHandleVerifier [0x0x7ff690b716fe+187406]
+	GetHandleVerifier [0x0x7ff690b796ef+220159]
+	GetHandleVerifier [0x0x7ff690b5faf4+114692]
+	GetHandleVerifier [0x0x7ff690b5fca9+115129]
+	GetHandleVerifier [0x0x7ff690b464d8+10728]
+	BaseThreadInitThunk [0x0x7ff90e507374+20]
+	RtlUserThreadStart [0x0x7ff91019cc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功

@@ -1,0 +1,41 @@
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_item
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324410678240, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324447859024, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324448631904, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324430455328, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324447843408, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324447858112, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324428981056, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324426308672, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324426283936, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:34
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013434.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_unpickedMaterialDetails.py, driver_id=2324428571360, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_unpickedMaterialDetails.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013435.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_unpickedMaterialDetails.py] 截图时间：2026-01-13 01:34:35
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_unpickedMaterialDetails.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_unpickedMaterialDetails.py_20260113_013435.png
