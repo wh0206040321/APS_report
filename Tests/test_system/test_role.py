@@ -181,9 +181,13 @@ class TestRolePage:
         role.select_input(name)
         sleep(3)
         role.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]')
+        sleep(2)
         role.click_all_button("保存")
         message = role.get_find_message()
+        role.right_refresh('用户权限管理')
 
+        role.wait_for_loading_to_disappear()
+        role.enter_texts('//div[div[p[text()="用户代码"]]]//input', date_driver.username)
         role.click_button(f'(//table[@class="vxe-table--body"]//span[text()="{date_driver.username}"])[1]')
         role.select_input(name)
         sleep(1)
