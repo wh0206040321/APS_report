@@ -1195,8 +1195,18 @@ class TestSettingPage:
         after_time = setting.get_find_element_xpath(
             '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[1]/td[9]'
         ).text
-        setting.right_refresh('制造订单')
         assert name == layout and time == after_time
+        assert not setting.has_fail_message()
+
+    @allure.story("快速查询重置按钮可重置")
+    # @pytest.mark.run(order=1)
+    def test_setting_reset(self, login_to_setting):
+        driver = login_to_setting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_button('//div[@class="queryBtn"]/button[2]')
+        ele = setting.get_find_element_xpath('//div[@class="ivu-date-picker-rel"]//input').get_attribute("value")
+        setting.right_refresh('制造订单')
+        assert ele == ""
         assert not setting.has_fail_message()
 
     @allure.story("设置表格布局-制造订单交货期查询-日期范围")

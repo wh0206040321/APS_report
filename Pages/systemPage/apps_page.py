@@ -258,3 +258,9 @@ class AppsPage(BasePage):
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
+
+    def click_close_button(self):
+        """点击关闭按钮"""
+        self.click_button('//div[div[text()=" 应用设计 "]]/span')
+        self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="无需保存"]')
+        sleep(1)
