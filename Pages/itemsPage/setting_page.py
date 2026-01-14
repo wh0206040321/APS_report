@@ -279,3 +279,12 @@ class SettingPage(BasePage):
         ActionChains(self.driver).context_click(but).perform()
         self.click_button('//li[text()=" 刷新"]')
         self.wait_for_loading_to_disappear()
+
+    def click_right_click_row(self, xpath, name):
+        """右键点击行."""
+        self.click_button(xpath)
+        ele = self.get_find_element_xpath(xpath)
+        ActionChains(self.driver).context_click(ele).perform()
+        self.click_button(f'//li//span[text()="{name}"]')
+        sleep(0.5)
+

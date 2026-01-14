@@ -19,7 +19,7 @@ from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
-@pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
+@pytest.fixture(scope="module")  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_dictionary():
     driver = None
     try:
@@ -71,6 +71,7 @@ class TestSDictionaryPage:
         sleep(1)
         dictionary.click_confirm()
         message = dictionary.get_error_message()
+        dictionary.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == "校验不通过，请检查标红的表单字段！"
         assert not dictionary.has_fail_message()
 
@@ -90,6 +91,7 @@ class TestSDictionaryPage:
         add.batch_modify_input(xpath_list[:1], name)
         dictionary.click_confirm()
         message = dictionary.get_error_message()
+        dictionary.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == "校验不通过，请检查标红的表单字段！"
         assert not dictionary.has_fail_message()
 
@@ -113,6 +115,7 @@ class TestSDictionaryPage:
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
         dictionary.select_input_dictionary(name)
         ele = dictionary.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
+        dictionary.right_refresh('字典')
         assert ele == name
         assert message == "新增成功！"
         assert not dictionary.has_fail_message()
@@ -138,6 +141,7 @@ class TestSDictionaryPage:
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="1字典1"])[1]')
         eles = dictionary.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]')
         ele = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]').text
+        dictionary.right_refresh('字典')
         assert len(eles) == 2
         assert ele == name
         assert message == "新增成功！"
@@ -160,6 +164,7 @@ class TestSDictionaryPage:
         add.batch_modify_input(xpath_list, name)
         dictionary.click_confirm()
         message = dictionary.get_error_message()
+        dictionary.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == "列表中已经存在"
         assert not dictionary.has_fail_message()
 
@@ -181,6 +186,7 @@ class TestSDictionaryPage:
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
         ele1 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1字典3"]').text
         ele2 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="1字典3"]').text
+        dictionary.right_refresh('字典')
         assert message == "编辑成功！"
         assert ele1 == '1字典3' == ele2
         assert not dictionary.has_fail_message()
@@ -203,6 +209,7 @@ class TestSDictionaryPage:
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="修改分列"])[1]')
         ele = dictionary.get_find_element_xpath(
             f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text
+        dictionary.right_refresh('字典')
         assert message == "编辑成功！"
         assert ele == name
         assert not dictionary.has_fail_message()

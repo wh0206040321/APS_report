@@ -1098,6 +1098,7 @@ class TestItemPage:
         updatatime = item.get_find_element_xpath('//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
         today_str = date.today().strftime('%Y/%m/%d')
         item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
+        logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(num) == (int(len_num) + 2)
         assert all(before_all_value), "列表中存在为空或为假值的元素！"
         assert not item.has_fail_message()

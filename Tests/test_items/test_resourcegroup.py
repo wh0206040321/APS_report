@@ -788,6 +788,7 @@ class TestResourceGroupPage:
         today_str = date.today().strftime('%Y/%m/%d')
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         resource.right_refresh('资源组')
+        logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 4) and before_checked == after_checked and before_value == after_value
         assert all(before_all_value), "列表中存在为空或为假值的元素！"
