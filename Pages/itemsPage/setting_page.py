@@ -288,3 +288,33 @@ class SettingPage(BasePage):
         self.click_button(f'//li//span[text()="{name}"]')
         sleep(0.5)
 
+    def realistic_right_click(self, xpath, name):
+        self.click_button(xpath)
+
+        element = self.get_find_element_xpath(xpath)
+
+        # 获取元素位置和大小
+        location = element.location
+        size = element.size
+
+        # 计算中心点坐标
+        center_x = size['width'] // 2
+        center_y = size['height'] // 2
+
+        # ✅ 向左偏移 10 像素，向上偏移 10 像素
+        offset_left = 10
+        offset_up = 10
+
+        center_x -= offset_left  # 向左移动
+        center_y -= offset_up  # 向上移动（Y轴坐标向上是减少）
+
+        # 精确移动到偏移后的位置（左上方）
+        actions = ActionChains(self.driver)
+        actions.move_to_element_with_offset(element, center_x, center_y)
+        actions.pause(0.1)
+        actions.context_click()
+        actions.perform()
+        self.click_button(f'//li//span[text()="{name}"]')
+        sleep(0.5)
+
+

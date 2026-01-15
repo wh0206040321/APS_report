@@ -1102,6 +1102,14 @@ class TestItemGroupPage:
         today_str = date.today().strftime('%Y/%m/%d')
         item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
+        ele = item.finds_elements(By.XPATH,
+                                  f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        if len(ele) == 1:
+            item.click_button(
+                f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+            item.click_del_button()  # 点击删除
+            item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            item.wait_for_loading_to_disappear()
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 2)
         assert all(before_all_value), "列表中存在为空或为假值的元素！"

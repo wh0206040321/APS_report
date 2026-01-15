@@ -83,6 +83,7 @@ class TestTableSettingPage:
         setting.click_right_click_row('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '复制')
         setting.click_button('//p[text()="物料代码"]/ancestor::div[2]//input')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+        sleep(1)
         ele = setting.get_find_element_xpath('//p[text()="物料代码"]/ancestor::div[2]//input').get_attribute('value')
         setting.right_refresh('物品')
         assert ele == '1'
@@ -243,7 +244,6 @@ class TestTableSettingPage:
     def test_tablesetting_invalidresource(self, login_to_tablesetting):
         driver = login_to_tablesetting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        setting.click_button('//div[div[text()=" 资源 "]]/span')
         xpath = '//div[label[text()="无效资源"]]/div/label'
         setting.click_button('(//span[text()="资源"])[1]')
         setting.wait_for_loading_to_disappear()
@@ -303,7 +303,7 @@ class TestTableSettingPage:
             setting.click_button(xpath)
         setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         setting.wait_for_loading_to_disappear()
-        setting.click_right_click_row('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '工序无效')
+        setting.click_right_click_row('(//table[@class="vxe-table--body"]//tr[1]//td[1])', '工序无效')
         sleep(1)
         setting.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
         setting.click_button('//p[text()="编辑"]')
@@ -326,7 +326,7 @@ class TestTableSettingPage:
             setting.click_button(xpath)
         setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         setting.wait_for_loading_to_disappear()
-        setting.click_right_click_row('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '工序无效')
+        setting.click_right_click_row('(//table[@class="vxe-table--body"]//tr[1]//td[1])', '工序无效')
         sleep(1)
         setting.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
         setting.click_button('//p[text()="编辑"]')
@@ -334,5 +334,265 @@ class TestTableSettingPage:
         cla = setting.get_find_element_xpath(xpath).get_attribute('class')
         setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert 'ivu-checkbox-wrapper-checked' not in cla
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键复制编号成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_rightclickcopy(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_button('//div[div[text()=" 工序 "]]/span')
+        setting.click_button('(//span[text()="计划业务数据"])[1]')
+        setting.click_button('(//span[text()="制造订单"])[1]')
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '复制')
+        setting.click_button('//p[text()="订单代码"]/ancestor::div[2]//input')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+        sleep(1)
+        ele = setting.get_find_element_xpath('//p[text()="订单代码"]/ancestor::div[2]//input').get_attribute('value')
+        setting.right_refresh('制造订单')
+        assert ele == '1'
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键隐藏行成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_hiddenrow1(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        after_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '隐藏行')
+        before_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]//td[2]').text
+        assert after_ == before_
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键取消隐藏行成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_unhiderow1(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        after_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]//td[2]').text
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '取消隐藏行')
+        before_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
+        assert after_ == before_
+        assert not setting.has_fail_message()
+
+    @allure.story("订单多选行点击隐藏行成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_hiddenrow2(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        after_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[3]//td[2]').text
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        setting.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = setting.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
+        element = setting.get_find_element_xpath(elements[0])
+
+        # 获取元素位置和大小
+        location = element.location
+        size = element.size
+
+        # 计算中心点坐标
+        center_x = size['width'] // 2
+        center_y = size['height'] // 2
+
+        # ✅ 向左偏移 10 像素，向上偏移 10 像素
+        offset_left = 10
+        offset_up = 10
+
+        center_x -= offset_left  # 向左移动
+        center_y -= offset_up  # 向上移动（Y轴坐标向上是减少）
+
+        # 精确移动到偏移后的位置（左上方）
+        actions = ActionChains(driver)
+        actions.move_to_element_with_offset(element, center_x, center_y)
+        actions.pause(0.1)
+        actions.context_click()
+        actions.perform()
+        setting.click_button(f'//li//span[text()="隐藏行"]')
+        sleep(1)
+        before_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]//td[2]').text
+        assert after_ == before_
+        assert not setting.has_fail_message()
+
+    @allure.story("订单点击图标取消隐藏行成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_unhiderow2(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '隐藏行')
+
+        after_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]//td[2]').text
+        setting.click_button('//span[@class="hiddenRowIcon hiddenRowIcon_Top"]/i')
+        before_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
+        setting.right_refresh('制造订单')
+        assert after_ == before_
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键切换工艺产能成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_switchingmaster(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '切换工艺产能')
+        ele = setting.finds_elements(By.XPATH, '//div[@class="labelTitle"][text()=" 工艺产能 "]')
+        err = setting.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        setting.click_button('//div[div[text()=" 工艺产能 "]]/span')
+        assert len(ele) == 1 and len(err) == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键切换图形制造成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_switchGraphicManufacturing(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '切换图形制造')
+        ele = setting.finds_elements(By.XPATH, '//div[@class="labelTitle"][text()=" 工艺产能图形化 "]')
+        err = setting.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        setting.click_button('//div[div[text()=" 工艺产能图形化 "]]/span')
+        assert len(ele) == 1 and len(err) == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键切换工作")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_switchOrder(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '切换工作')
+        ele = setting.finds_elements(By.XPATH, '//div[@class="labelTitle"][text()=" 工作明细 "]')
+        err = setting.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        setting.click_button('//div[div[text()=" 工作明细 "]]/span')
+        assert len(ele) == 1 and len(err) == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键切换订单+资源甘特图:分派资源")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_switchOrderChart1(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                                      '订单+资源甘特图:分派资源')
+        ele = setting.finds_elements(By.XPATH, '//div[@class="labelTitle"][text()=" 复合图表-订单+资源甘特图 "]')
+        err = setting.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        setting.click_button('//div[div[text()=" 复合图表-订单+资源甘特图 "]]/span')
+        assert len(ele) == 1 and len(err) == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键切换订单+资源甘特图:候补资源")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_switchOrderChart2(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                                      '订单+资源甘特图:候补资源')
+        ele = setting.finds_elements(By.XPATH, '//div[@class="labelTitle"][text()=" 复合图表-订单+资源甘特图 "]')
+        err = setting.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
+        setting.click_button('//div[div[text()=" 复合图表-订单+资源甘特图 "]]/span')
+        assert len(ele) == 1 and len(err) == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键设置非分派对象成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_invalid(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        xpath = '//div[label[text()="非分派对象标志"]]/div/label'
+        setting.wait_for_loading_to_disappear()
+        setting.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        setting.click_button('//p[text()="编辑"]')
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        if 'ivu-checkbox-wrapper-checked' in cla:
+            setting.click_button(xpath)
+        setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        setting.wait_for_loading_to_disappear()
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '非分派对象')
+        sleep(1)
+        setting.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        setting.click_button('//p[text()="编辑"]')
+        setting.wait_for_loading_to_disappear()
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
+        assert 'ivu-checkbox-wrapper-checked' in cla
+        assert not setting.has_fail_message()
+
+    @allure.story("订单右键设置取消设置非分派对象成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_order_effective(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        xpath = '//div[label[text()="非分派对象标志"]]/div/label'
+        setting.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        setting.click_button('//p[text()="编辑"]')
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        if 'ivu-checkbox-wrapper-checked' not in cla:
+            setting.click_button(xpath)
+        setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        setting.wait_for_loading_to_disappear()
+        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '非分派对象')
+        sleep(1)
+        setting.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        setting.click_button('//p[text()="编辑"]')
+        setting.wait_for_loading_to_disappear()
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
+        assert 'ivu-checkbox-wrapper-checked' not in cla
+        assert not setting.has_fail_message()
+
+    @allure.story("复制列头成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_copyColumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_button('//div[div[text()=" 制造订单 "]]/span')
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '复制')
+        setting.click_button('//p[text()="物料代码"]/ancestor::div[2]//input')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+        sleep(1)
+        ele = setting.get_find_element_xpath('//p[text()="物料代码"]/ancestor::div[2]//input').get_attribute('value')
+        setting.right_refresh('物品')
+        assert ele == '1'
+        assert not setting.has_fail_message()
+
+    @allure.story("右键设置固定列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_fixedColumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        xpath = '//tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label'
+        setting.click_setting_button()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        if 'is--checked' in cla:
+            setting.click_button(xpath)
+        setting.click_confirm_button()
+        setting.right_refresh('物品')
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '固定列')
+        setting.click_setting_button()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        ele = setting.get_find_element_xpath(xpath).get_attribute('class')
+        setting.click_confirm_button()
+        assert 'is--checked' in ele
+        assert not setting.has_fail_message()
+
+    @allure.story("右键取消设置固定列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_cancelfixedColumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_setting_button()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        xpath = '//tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label'
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        if 'is--checked' not in cla:
+            setting.click_button(xpath)
+        setting.click_confirm_button()
+        setting.right_refresh('物品')
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '解除固定列')
+        setting.click_setting_button()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        ele = setting.get_find_element_xpath(xpath).get_attribute('class')
+        assert 'is--checked' not in ele
         assert not setting.has_fail_message()
 

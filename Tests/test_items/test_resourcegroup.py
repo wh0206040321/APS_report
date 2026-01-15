@@ -787,7 +787,15 @@ class TestResourceGroupPage:
         after_value = resource.get_find_element_xpath('//label[text()="后资源"]/following-sibling::div//input').get_attribute("value")
         today_str = date.today().strftime('%Y/%m/%d')
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        resource.right_refresh('资源组')
+        ele = resource.finds_elements(By.XPATH,
+                                      f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        if len(ele) == 1:
+            resource.click_button(
+                f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+            resource.click_del_button()  # 点击删除
+            resource.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            resource.wait_for_loading_to_disappear()
+        logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
         logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 4) and before_checked == after_checked and before_value == after_value

@@ -1156,7 +1156,8 @@ class TestSpecPage:
             for v in value[:4]
         ]
         spec.del_layout(layout)
-        sleep(2)
+        spec.right_refresh('生产特征1')
+        sleep(1)
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
