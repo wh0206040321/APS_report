@@ -1110,6 +1110,7 @@ class TestItemGroupPage:
             item.click_del_button()  # 点击删除
             item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             item.wait_for_loading_to_disappear()
+            item.right_refresh('物品组')
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 2)
         assert all(before_all_value), "列表中存在为空或为假值的元素！"

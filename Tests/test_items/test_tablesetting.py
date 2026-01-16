@@ -569,6 +569,10 @@ class TestTableSettingPage:
         setting.click_confirm_button()
         setting.right_refresh('物品')
         setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '固定列')
+        # 保存布局
+        setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[6]//i')
+        setting.get_find_message()
+        setting.right_refresh('物品')
         setting.click_setting_button()
         setting.click_button('//div[text()=" 显示设置 "]')
         ele = setting.get_find_element_xpath(xpath).get_attribute('class')
@@ -589,10 +593,258 @@ class TestTableSettingPage:
             setting.click_button(xpath)
         setting.click_confirm_button()
         setting.right_refresh('物品')
-        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '解除固定列')
+        sleep(2)
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[2]//p', '解除固定列')
+        # 保存布局
+        setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[6]//i')
+        setting.get_find_message()
+        setting.right_refresh('物品')
         setting.click_setting_button()
         setting.click_button('//div[text()=" 显示设置 "]')
         ele = setting.get_find_element_xpath(xpath).get_attribute('class')
+        setting.click_confirm_button()
         assert 'is--checked' not in ele
+        assert not setting.has_fail_message()
+
+    @allure.story("表格设置中设置固定列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_setfixedColumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_setting_button()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        xpath = '//tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label'
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        if 'is--checked' not in cla:
+            setting.click_button(xpath)
+        setting.click_confirm_button()
+        setting.right_refresh('物品')
+        cla = setting.get_find_element_xpath('//table[@class="vxe-table--header"]//tr[1]/th[2]').get_attribute('class')
+        assert 'col--fixed' in cla
+        assert not setting.has_fail_message()
+
+    @allure.story("表格设置中取消设置固定列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_setCancelFixedColumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_setting_button()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        xpath = '//tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label'
+        cla = setting.get_find_element_xpath(xpath).get_attribute('class')
+        if 'is--checked' in cla:
+            setting.click_button(xpath)
+        setting.click_confirm_button()
+        setting.right_refresh('物品')
+        cla = setting.get_find_element_xpath('//table[@class="vxe-table--header"]//tr[1]/th[2]').get_attribute('class')
+        assert 'col--fixed' not in cla
+        assert not setting.has_fail_message()
+
+    @allure.story("表格右键设置表格布局，设置列宽成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_setCancelFixedColumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '表格布局设置')
+        setting.wait_for_el_loading_mask()
+        setting.click_button('//div[text()=" 显示设置 "]')
+        xpath = '//tr[./td[3][.//span[text()="物料代码"]]]/td[8]//input'
+        ele = setting.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL, 'a')
+        ele.send_keys(Keys.DELETE)
+        setting.enter_texts(xpath, '120')
+        setting.click_confirm_button()
+        setting.right_refresh('物品')
+        sty = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr[1]/th[2])[1]/div[1]').get_attribute('style')
+        if sty and 'width:' in sty:
+            # 提取宽度值
+            width_part = sty.split('width:')[1].split(';')[0].strip()
+            width_value = width_part.replace('px', '').strip()
+            logging.info(f"宽度值: {width_value}")
+            assert 120 - 2 == int(width_value)
+        else:
+            logging.info("未找到宽度设置")
+            assert 1 == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("表格右键添加新布局成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_setlayout(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        layout = '右键添加新布局'
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '添加新布局')
+        setting.wait_for_el_loading_mask()
+        sleep(2)
+        setting.enter_texts(
+            '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
+        )
+        sleep(1)
+
+        setting.click_button('(//div[text()=" 显示设置 "])[1]')
+        sleep(1)
+        # 获取是否可见选项的复选框元素
+        checkbox2 = setting.get_find_element_xpath(
+            '(//div[./div[text()="是否可见:"]])[1]/label/span'
+        )
+        # 检查复选框是否未被选中
+        if checkbox2.get_attribute("class") == "ivu-checkbox":
+            # 如果未选中，则点击复选框进行选中
+            setting.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
+            # 点击确定按钮保存设置
+            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        else:
+            # 如果已选中，直接点击确定按钮保存设置
+            setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        message = setting.get_find_message()
+        sleep(1)
+        ele = setting.finds_elements(By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+        assert message == '保存成功' and len(ele) == 1
+        assert not setting.has_fail_message()
+
+    @allure.story("表格右键删除布局成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_setdellayout(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        layout = '右键添加新布局'
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '删除布局')
+        setting.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        message = setting.get_find_message()
+        setting.wait_for_loading_to_disappear()
+        sleep(1)
+        ele = setting.finds_elements(By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+        assert message == '删除成功！' and len(ele) == 0
+        assert not setting.has_fail_message()
+
+    @allure.story("表格右键隐藏列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_hiddencolumn(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        before_name = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[3])[1]//p').text
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '隐藏列')
+        sleep(1)
+        after_name = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p').text
+        assert before_name == after_name
+        assert not setting.has_fail_message()
+
+    @allure.story("表格右键取消隐藏列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_unhideColumn1(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        before_name = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p').text
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '取消隐藏列')
+        sleep(1)
+        after_name = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[3])[1]//p').text
+        assert before_name == after_name
+        assert not setting.has_fail_message()
+
+    @allure.story("点击图标取消隐藏列成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_unhideColumn2(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.right_refresh('物品')
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '隐藏列')
+        before_name = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p').text
+        setting.click_button('//div[@class="colHideIcon" and @style != "display: none;"]/i')
+        sleep(1)
+        after_name = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[3])[1]//p').text
+        assert before_name == after_name
+        assert not setting.has_fail_message()
+
+    @allure.story("右键点击布局列表切换布局成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_unhideColumn2(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        layout = '右键添加切换布局'
+        lay = setting.finds_elements(By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+        if len(lay) == 0:
+            setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '添加新布局')
+            setting.wait_for_el_loading_mask()
+            sleep(2)
+            setting.enter_texts(
+                '//div[text()="当前布局:"]/following-sibling::div//input', f"{layout}"
+            )
+            sleep(1)
+
+            setting.click_button('(//div[text()=" 显示设置 "])[1]')
+            sleep(1)
+            # 获取是否可见选项的复选框元素
+            checkbox2 = setting.get_find_element_xpath(
+                '(//div[./div[text()="是否可见:"]])[1]/label/span'
+            )
+            # 检查复选框是否未被选中
+            if checkbox2.get_attribute("class") == "ivu-checkbox":
+                # 如果未选中，则点击复选框进行选中
+                setting.click_button('(//div[./div[text()="是否可见:"]])[1]/label/span')
+                # 点击确定按钮保存设置
+                setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            else:
+                # 如果已选中，直接点击确定按钮保存设置
+                setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+            setting.get_find_message()
+
+        ele = setting.get_find_element_xpath(f'//div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]').get_attribute(
+            'class')
+        if 'tabsDivActive' in ele:
+            setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
+            setting.wait_for_loading_to_disappear()
+        setting.right_refresh('物品')
+
+        setting.click_button('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p')
+        ele = setting.get_find_element_xpath('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p')
+        ActionChains(setting.driver).context_click(ele).perform()
+
+        container = setting.get_find_element_xpath(
+            f'//li//span[text()="布局列表"]'
+        )
+        sleep(3)
+        ActionChains(driver).move_to_element(container).perform()
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(driver, 5).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//li//span[text()="测试布局A"]'
+            ))
+        )
+        # 3️⃣ 再点击图标
+        delete_icon.click()
+        setting.wait_for_loading_to_disappear()
+        ele = setting.get_find_element_xpath(f'//div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]').get_attribute('class')
+        assert 'tabsDivActive' in ele
+        assert not setting.has_fail_message()
+
+    @allure.story("右键保存布局成功")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_saveLayout(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.enter_texts('//p[text()="物料代码"]/ancestor::div[2]//input', '1')
+        setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '保存布局')
+        setting.get_find_message()
+        setting.wait_for_el_loading_mask()
+        setting.right_refresh('物品')
+        ele = setting.get_find_element_xpath(f'//p[text()="物料代码"]/ancestor::div[2]//input').get_attribute('value')
+        assert ele == '1'
+        assert not setting.has_fail_message()
+
+    @allure.story("删除布局")
+    # @pytest.mark.run(order=1)
+    def test_tablesetting_delLayout(self, login_to_tablesetting):
+        driver = login_to_tablesetting  # WebDriver 实例
+        setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+        setting.del_layout('测试布局A')
+        sleep(1)
+        setting.click_button('//div[@class="tabsDivItemCon"]/div[text()=" 右键添加切换布局 "]')
+        setting.wait_for_loading_to_disappear()
+        setting.del_layout('右键添加切换布局')
+        sleep(1)
+        ele1 = setting.finds_elements(By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]')
+        ele2 = setting.finds_elements(By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" 右键添加切换布局 "]')
+        assert len(ele1) == 0 and len(ele2) == 0
         assert not setting.has_fail_message()
 

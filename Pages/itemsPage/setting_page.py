@@ -163,6 +163,7 @@ class SettingPage(BasePage):
         sleep(2)
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.get_find_message()
         self.wait_for_loading_to_disappear()
 
     def add_pivot_table(self):
@@ -174,7 +175,8 @@ class SettingPage(BasePage):
     def click_setting_button(self):
         """点击设置按钮."""
         self.click_button('//div[@class="toolTabsDiv"]/div[2]/div[3]//i')
-        sleep(3)
+        self.wait_for_el_loading_mask()
+        sleep(1)
 
     def get_find_message(self):
         """获取错误信息"""

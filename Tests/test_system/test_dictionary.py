@@ -114,7 +114,7 @@ class TestSDictionaryPage:
         message = dictionary.get_find_message()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
         dictionary.select_input_dictionary(name)
-        ele = dictionary.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[2]').text
+        ele = dictionary.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]/td[3]').text
         dictionary.right_refresh('字典')
         assert ele == name
         assert message == "新增成功！"
@@ -140,7 +140,7 @@ class TestSDictionaryPage:
         message = dictionary.get_find_message()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="1字典1"])[1]')
         eles = dictionary.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr/td[2]')
-        ele = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]').text
+        ele = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="{name}"]').text
         dictionary.right_refresh('字典')
         assert len(eles) == 2
         assert ele == name
@@ -177,15 +177,15 @@ class TestSDictionaryPage:
         name = '1字典1'
         dictionary.wait_for_loading_to_disappear()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
-        dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+        dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
         dictionary.click_all_button("编辑")
         dictionary.enter_texts('//div[@id="l1ysu7kj-7dnz"]//input', '1字典3')
         dictionary.enter_texts('//div[@id="2wyi3mna-bxi9"]//input', '1字典3')
         dictionary.click_confirm()
         message = dictionary.get_find_message()
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
-        ele1 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="1字典3"]').text
-        ele2 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="1字典3"]').text
+        ele1 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="1字典3"]').text
+        ele2 = dictionary.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr/td[4]//span[text()="1字典3"]').text
         dictionary.right_refresh('字典')
         assert message == "编辑成功！"
         assert ele1 == '1字典3' == ele2
@@ -199,8 +199,8 @@ class TestSDictionaryPage:
         sleep(1)
         name = '1字典3'
         dictionary.wait_for_loading_to_disappear()
-        dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="{name}"])[1]')
-        dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+        dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="1字典1"])[1]')
+        dictionary.click_button(f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
         dictionary.click_all_button("编辑")
         dictionary.enter_texts('//div[@id="t5rmb5q4-17fw"]//input', '修改分列')
         dictionary.click_confirm()
@@ -208,7 +208,7 @@ class TestSDictionaryPage:
         sleep(1)
         dictionary.click_button(f'(//div[@id="o6c3f11v-czxj"]//span[text()="修改分列"])[1]')
         ele = dictionary.get_find_element_xpath(
-            f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]').text
+            f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]').text
         dictionary.right_refresh('字典')
         assert message == "编辑成功！"
         assert ele == name

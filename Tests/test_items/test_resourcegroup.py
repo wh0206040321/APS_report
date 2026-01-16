@@ -795,6 +795,7 @@ class TestResourceGroupPage:
             resource.click_del_button()  # 点击删除
             resource.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             resource.wait_for_loading_to_disappear()
+            resource.right_refresh('资源组')
         logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
         logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
