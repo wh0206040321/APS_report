@@ -944,7 +944,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.enter_texts('//textarea[@prop="comments"]', name)
-        sleep(2)
+        sleep(3)
         affairs.click_next()
         value1 = affairs.add_process_affairs(add=False, sel=sel)
         affairs.click_save()

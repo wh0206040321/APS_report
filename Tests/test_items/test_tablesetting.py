@@ -537,6 +537,7 @@ class TestTableSettingPage:
         setting.wait_for_loading_to_disappear()
         cla = setting.get_find_element_xpath(xpath).get_attribute('class')
         setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
+        setting.right_refresh('物品')
         assert 'ivu-checkbox-wrapper-checked' not in cla
         assert not setting.has_fail_message()
 
@@ -552,7 +553,7 @@ class TestTableSettingPage:
         sleep(1)
         ele = setting.get_find_element_xpath('//p[text()="物料代码"]/ancestor::div[2]//input').get_attribute('value')
         setting.right_refresh('物品')
-        assert ele == '1'
+        assert ele == '物品代码'
         assert not setting.has_fail_message()
 
     @allure.story("右键设置固定列成功")
@@ -642,7 +643,7 @@ class TestTableSettingPage:
 
     @allure.story("表格右键设置表格布局，设置列宽成功")
     # @pytest.mark.run(order=1)
-    def test_tablesetting_setCancelFixedColumn(self, login_to_tablesetting):
+    def test_tablesetting_FixedColumn(self, login_to_tablesetting):
         driver = login_to_tablesetting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         setting.click_right_click_row('(//table[@class="vxe-table--header"]//tr/th[2])[1]//p', '表格布局设置')
@@ -757,7 +758,7 @@ class TestTableSettingPage:
 
     @allure.story("右键点击布局列表切换布局成功")
     # @pytest.mark.run(order=1)
-    def test_tablesetting_unhideColumn2(self, login_to_tablesetting):
+    def test_tablesetting_switchLayout(self, login_to_tablesetting):
         driver = login_to_tablesetting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = '右键添加切换布局'

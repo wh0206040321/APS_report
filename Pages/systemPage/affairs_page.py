@@ -156,10 +156,10 @@ class AffairsPage(BasePage):
     def input_text(self, text):
         """输入文字."""
         xpath = '//input[@placeholder="搜索相关事务名称或描述关键词"]'
-        self.enter_texts(xpath, text)
         ele = self.find_element(By.XPATH, xpath)
         ele.send_keys(Keys.CONTROL, "a")
         ele.send_keys(Keys.DELETE)
+        self.enter_texts(xpath, text)
 
 
     def click_process(self):

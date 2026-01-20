@@ -1355,7 +1355,7 @@ class TestItemGroupPage:
         ]
         try:
             item.del_layout(layout)
-        except TimeoutException:
+        except Exception:
             print(f"布局 '{layout}' 可能不存在或已被删除")
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(

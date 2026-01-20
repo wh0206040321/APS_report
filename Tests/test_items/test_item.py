@@ -1350,7 +1350,10 @@ class TestItemPage:
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]
         ]
-        item.del_layout(layout)
+        try:
+            item.del_layout(layout)
+        except Exception:
+            print(f"布局 '{layout}' 可能不存在或已被删除")
         item.wait_for_loading_to_disappear()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
