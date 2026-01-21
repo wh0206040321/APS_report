@@ -58,13 +58,19 @@ class AffairsPage(BasePage):
 
     def click_confirm_button(self):
         """点击确认按钮."""
-        self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.wait_for_el_loading_mask()
 
     # 等待加载遮罩消失
     def wait_for_el_loading_mask(self, timeout=10):
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
+        )
+        sleep(1)
+
+    def wait_for_loading_wrapper(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located((By.CLASS_NAME, "loading-wrapper"))
         )
         sleep(1)
 
@@ -89,7 +95,7 @@ class AffairsPage(BasePage):
                 try:
                     confirm = WebDriverWait(self.driver, 3).until(
                         EC.visibility_of_element_located(
-                            (By.XPATH, '//div[@class="el-message-box__btns"]//button/span[contains(text(),"确定")]')
+                            (By.XPATH, '(//div[@class="el-message-box__btns"]//button/span[contains(text(),"确定")])[last()]')
                         )
                     )
                     confirm.click()
@@ -98,6 +104,7 @@ class AffairsPage(BasePage):
 
                     # 等待删除操作完成
                     sleep(1)  # 根据实际需要调整等待时间
+                    self.wait_for_el_loading_mask()
 
                 except TimeoutException:
                     print(f"未找到删除确认弹窗，可能已经删除或无需确认: {current_name}")
@@ -199,6 +206,7 @@ class AffairsPage(BasePage):
         sleep(1)
         num = len(self.finds_elements(By.XPATH, '//div[@class="application__name"]/div[@class="name"]'))
         value = self.get_find_element_xpath('//div[@class="application__item activated"]/div[@class="application__name"]/div[@class="name"]').get_attribute('innerText')
+        sleep(1)
         self.click_button('//div[@class="el-dialog__footer"]//span[text()="确定"]')
         return num, value
 
@@ -331,7 +339,7 @@ class AffairsPage(BasePage):
         """查询所有."""
         if affairs:
             self.click_button('//div[label[text()="流程事务:"]]//input')
-            self.click_button(f'//li[@class="el-select-dropdown__item"]//span[text()="{affairs}"]')
+            self.click_button(f'(//li[@class="el-select-dropdown__item"]//span[text()="{affairs}"])[last()]')
         if enable:
             self.click_button('//div[label[text()="是否启用:"]]//input')
             if enable == "全部":
@@ -397,4 +405,10 @@ class AffairsPage(BasePage):
         else:
             self.click_button(f'(//button[span[text()="重置筛选条件"]])[2]')
         sleep(1)
+        self.wait_for_el_loading_mask()
+
+    def click_reset_button(self):
+        """点击重置按钮."""
+        self.click_button('(//button[span[text()="重置筛选条件"]])[2]')
+        self.click_button(f'(//button[span[text()="筛选"]])[2]')
         self.wait_for_el_loading_mask()

@@ -178,7 +178,7 @@ class AppsPage(BasePage):
                 self.click_button(f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
                 self.click_all_button("删除")  # 点击删除
                 self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-                sleep(1)
+                self.get_find_message()
                 self.wait_for_loading_to_disappear()
                 ele = self.get_find_element_xpath(xpath)
                 ele.send_keys(Keys.CONTROL, "a")

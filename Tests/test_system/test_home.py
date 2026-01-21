@@ -481,7 +481,7 @@ class TestHomePage:
             '//div[p[text()="关联角色"]]/div//input').get_attribute("value")
         home.wait_for_el_loading_mask()
         if "admin" in value:
-            home.click_button('//div[p[text()="关联角色"]]//div[span[text()="admin "]]/i')
+            home.click_button('//div[p[normalize-space()="关联角色"]]//i[contains(@class,"ivu-select-arrow")]')
             elem2 = (elem1 - 1)
         else:
             elem2 = elem1
@@ -494,7 +494,7 @@ class TestHomePage:
         assert elem2 == after_eles
         assert not home.has_fail_message()
 
-    @allure.story("主页模版中没有改模版不会显示该模版")
+    @allure.story("主页模版中没有该模版不会显示该模版")
     # @pytest.mark.run(order=1)
     def test_home_default_boot4(self, login_to_home):
         driver = login_to_home  # WebDriver 实例

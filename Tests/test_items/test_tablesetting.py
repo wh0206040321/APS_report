@@ -553,7 +553,7 @@ class TestTableSettingPage:
         sleep(1)
         ele = setting.get_find_element_xpath('//p[text()="物料代码"]/ancestor::div[2]//input').get_attribute('value')
         setting.right_refresh('物品')
-        assert ele == '物品代码'
+        assert ele == '物料代码'
         assert not setting.has_fail_message()
 
     @allure.story("右键设置固定列成功")

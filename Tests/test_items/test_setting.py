@@ -1252,14 +1252,6 @@ class TestSettingPage:
             '//div[@class="single-page"]//table[@class="vxe-table--body"]//tr[2]/td[9]'
         ).get_attribute('innerText')
 
-        # 删除导航栏物品页面
-        setting.click_button(
-            '//div[@class="scroll-body" and .//div[text()=" 物品 "]]//div[./div[text()=" 物品 "]]'
-        )
-        setting.click_button(
-            '//div[@class="scroll-body" and .//div[text()=" 物品 "]]//div[./div[text()=" 物品 "]]/span'
-        )
-        sleep(1)
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

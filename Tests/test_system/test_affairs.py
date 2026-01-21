@@ -20,7 +20,7 @@ from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
-@pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
+@pytest.fixture(scope="module")  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_affairs():
     driver = None
     try:
@@ -146,6 +146,7 @@ class TestAffairsPage:
         type = "服务"
         affairs.click_add_affairs(name=name, type=type, button=False)
         affairs.click_button('//div[text()=" 计划计算 "]')
+        affairs.wait_for_loading_wrapper()
         affairs.click_button('//input[@placeholder="请选择计划单元"]')
         affairs.click_button('//li[text()="金属（演示）" and @class="ivu-select-item"]')
         sleep(1)
@@ -153,8 +154,7 @@ class TestAffairsPage:
         affairs.click_button('//li[text()="均衡排产" and @class="ivu-select-item"]')
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
-        affairs.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         assert len(ele) == 1 and value == type
@@ -169,6 +169,7 @@ class TestAffairsPage:
         type = "服务"
         affairs.click_add_affairs(name=name, type=type, button=False)
         affairs.click_button('//div[text()=" 物控计算 "]')
+        affairs.wait_for_loading_wrapper()
         affairs.click_button('//input[@placeholder="请选择计划单元"]')
         affairs.click_button('//li[text()="金属（演示）" and @class="ivu-select-item"]')
         sleep(1)
@@ -176,8 +177,7 @@ class TestAffairsPage:
         affairs.click_button('//div[p[text()="物控方案名称:"]]//ul[@class="ivu-select-dropdown-list"]/li[1]')
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
-        affairs.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         assert len(ele) == 1 and value == type
@@ -214,8 +214,7 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
         affairs.enter_texts('//div[label[text()="事务描述"]]//input', "自定义事务描述")
-        affairs.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         assert len(ele) == 1 and value == type
@@ -234,8 +233,7 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
         affairs.enter_texts('//div[label[text()="事务描述"]]//input', "自定义事务描述")
-        affairs.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         assert len(ele) == 1 and value == type
@@ -286,8 +284,7 @@ class TestAffairsPage:
             affairs.enter_texts(f'//table[@class="vxe-table--body"]//tr[{i}]/td[3]//input', "1")
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
-        affairs.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         assert len(ele) == 1 and value == type
@@ -310,8 +307,7 @@ class TestAffairsPage:
         affairs.click_button('(//table[@class="vxe-table--body"])[2]//tr[1]//span')
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
-        affairs.click_button(
-            '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
         assert len(ele) == 1 and value == type
@@ -400,6 +396,7 @@ class TestAffairsPage:
         after_swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute(
             "class")
         after_checked = affairs.get_find_element_xpath('//label[span[text()="站内"]]/span[1]').get_attribute("class")
+        affairs.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert len(ele) == 1 and value == type
         assert before_list == after_list and all(before_list)
         assert before_swich == after_swich
@@ -437,6 +434,7 @@ class TestAffairsPage:
         affairs.input_text(name)
         sleep(3)
         elements = affairs.finds_elements(By.XPATH, '//div[@class="template-card__desc"]/div')
+        affairs.right_refresh()
         assert count == len(elements)
         assert not affairs.has_fail_message()
 
@@ -485,7 +483,8 @@ class TestAffairsPage:
         type = "存储过程"
         affairs.hover(name=name, edi="编辑")
         affairs.click_button('//div[label[text()="事务类型"]]//input')
-        affairs.click_button(f'//span[text()="{type}"]')
+        sleep(2)
+        affairs.click_button(f'(//span[text()="{type}"])[last()]')
         affairs.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"确定")]')
         sleep(1)
         affairs.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
@@ -519,7 +518,7 @@ class TestAffairsPage:
         affairs.hover(name=name, edi="编辑")
         type1 = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
         affairs.click_button('//div[label[text()="事务类型"]]//input')
-        affairs.click_button(f'//span[text()="{type}"]')
+        affairs.click_button(f'(//span[text()="{type}"])[last()]')
         affairs.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"取消")]')
         sleep(2)
         type2 = affairs.get_find_element_xpath('//div[label[text()="事务类型"]]//input').get_attribute("value")
@@ -552,6 +551,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 3 and list_ == ['请填写名称', '请填写分类', '请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -565,6 +565,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 2 and list_ == ['请填写分类', '请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -578,6 +579,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -591,6 +593,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写执行时间']
         assert not affairs.has_fail_message()
 
@@ -602,7 +605,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name="测试流程1", type="服务", frequency="每天")
         container = affairs.get_find_element_xpath(
-            f'//div[@class="dis-flex"]/div[1]'
+            f'//div[label[text()="间隔执行"]]//div[@class="dis-flex"]/div[1]'
         )
         ActionChains(driver).move_to_element(container).perform()
 
@@ -610,7 +613,7 @@ class TestAffairsPage:
         delete_icon = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((
                 By.XPATH,
-                f'//div[@class="dis-flex"]/div[1]/i[@class="el-input__icon el-range__close-icon el-icon-circle-close"]'
+                f'//div[label[text()="间隔执行"]]//div[@class="dis-flex"]/div[1]/i[@class="el-input__icon el-range__close-icon el-icon-circle-close"]'
             ))
         )
 
@@ -619,6 +622,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -632,6 +636,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写按周']
         assert not affairs.has_fail_message()
 
@@ -645,6 +650,7 @@ class TestAffairsPage:
         affairs.click_save()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写按月']
         assert not affairs.has_fail_message()
 
@@ -728,6 +734,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 3 and list_ == ['请填写名称', '请填写分类', '请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -741,6 +748,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 2 and list_ == ['请填写分类', '请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -754,6 +762,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -767,6 +776,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写执行时间']
         assert not affairs.has_fail_message()
 
@@ -778,7 +788,7 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.add_process(name="测试流程1", type="服务", frequency="每天")
         container = affairs.get_find_element_xpath(
-            f'//div[@class="dis-flex"]/div[1]'
+            f'//div[label[text()="间隔执行"]]//div[@class="dis-flex"]/div[1]'
         )
         ActionChains(driver).move_to_element(container).perform()
 
@@ -786,7 +796,7 @@ class TestAffairsPage:
         delete_icon = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((
                 By.XPATH,
-                f'//div[@class="dis-flex"]/div[1]/i[@class="el-input__icon el-range__close-icon el-icon-circle-close"]'
+                f'//div[label[text()="间隔执行"]]//div[@class="dis-flex"]/div[1]/i[@class="el-input__icon el-range__close-icon el-icon-circle-close"]'
             ))
         )
 
@@ -795,6 +805,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写间隔执行']
         assert not affairs.has_fail_message()
 
@@ -808,6 +819,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写按周']
         assert not affairs.has_fail_message()
 
@@ -821,6 +833,7 @@ class TestAffairsPage:
         affairs.click_next()
         eles = affairs.finds_elements(By.XPATH, '//div[@class="el-form-item__error"]')
         list_ = [ele.text for ele in eles]
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert len(list_) == 1 and list_ == ['请填写按月']
         assert not affairs.has_fail_message()
 
@@ -842,6 +855,7 @@ class TestAffairsPage:
         affairs.click_next()
         affairs.click_button('//button[span[text()="上一步"]]')
         list_ = affairs.batch_acquisition_input(xpth_list)
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert all(list_)
         assert not affairs.has_fail_message()
 
@@ -910,6 +924,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_save()
         mes = affairs.get_error_message()
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert mes == "流程名称不能重复"
         assert not affairs.has_fail_message()
 
@@ -923,6 +938,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="每天")
         affairs.click_next()
         mes = affairs.get_error_message()
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert mes == "流程名称不能重复"
         assert not affairs.has_fail_message()
 
@@ -955,6 +971,7 @@ class TestAffairsPage:
         affairs.click_process_update(name)
         sleep(1)
         list_ = affairs.batch_acquisition_input(xpth_list)
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert message == "新增成功！"
         assert len(ele1) == 1 and all(list_) and value1[1] == sel
         assert not affairs.has_fail_message()
@@ -964,6 +981,7 @@ class TestAffairsPage:
     def test_affairs_process_select1(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         template_name = "添加事务模版1"
         sleep(1)
         affairs.click_process()
@@ -994,6 +1012,7 @@ class TestAffairsPage:
     def test_affairs_process_select2(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         enable = "开启"
         sleep(1)
         affairs.click_process()
@@ -1023,6 +1042,7 @@ class TestAffairsPage:
     def test_affairs_process_select3(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         enable = "关闭"
         sleep(1)
         affairs.click_process()
@@ -1052,6 +1072,7 @@ class TestAffairsPage:
     def test_affairs_process_select4(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         name = "测试流程7"
         sleep(1)
         affairs.click_process()
@@ -1082,6 +1103,7 @@ class TestAffairsPage:
     def test_affairs_process_select5(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         template_name = "添加全部模版成功"
         enable = "开启"
         name = "添加全部成功"
@@ -1100,6 +1122,7 @@ class TestAffairsPage:
     def test_affairs_process_select6(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         template_name = "添加事务模版1"
         enable = "关闭"
         name = "测试流程6"
@@ -1133,6 +1156,7 @@ class TestAffairsPage:
     def test_affairs_process_update1(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         name = "测试流程7"
         before_ = "测试流程8"
         affairs.click_process()
@@ -1213,6 +1237,8 @@ class TestAffairsPage:
         affairs.enter_texts('//div[label[text()="事务名称"]]//input', aff)
         affairs.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button[1]')
         message = affairs.get_error_message()
+        affairs.click_button('//div[div[text()="编辑"]]//i[@title="关闭"]')
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert message == "事务已存在"
         assert not affairs.has_fail_message()
 
@@ -1274,6 +1300,7 @@ class TestAffairsPage:
         affairs.enter_texts('//div[label[text()="名称"]]/div//input', before_)
         affairs.click_save()
         message = affairs.get_error_message()
+        affairs.click_button('//div[div[text()="流程"]]//i[@title="关闭"]')
         assert message == "流程名称不能重复"
         assert not affairs.has_fail_message()
 
@@ -1302,6 +1329,7 @@ class TestAffairsPage:
             f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]/td[last()]//span[text()="查看"]')
         sleep(1)
         ele = affairs.get_find_element_xpath('//div[@class="log-info-title"]/div').text
+        affairs.click_button('(//button[@aria-label="close 日志详情"]/i)[last()]')
         assert ele == name
         assert not affairs.has_fail_message()
 
@@ -1326,6 +1354,7 @@ class TestAffairsPage:
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         name1 = "添加全部模版成功"
         name2 = "添加事务模版"
+        affairs.click_button('//div[@id="tab-air"]')
         affairs.wait_for_el_loading_mask()
         affairs.hover(name1, "删除")
         affairs.click_button('//div[@class="el-message-box__btns"]/button[2]')
@@ -1355,6 +1384,7 @@ class TestAffairsPage:
 
         time1_dt = datetime.strptime(time1, "%Y-%m-%d").replace(hour=0, minute=0, second=0)
         time2_dt = datetime.strptime(time2, "%Y-%m-%d").replace(hour=0, minute=0, second=0)
+        affairs.click_reset_button()
         assert all(time2_dt <= t <= time1_dt for t in list_), "存在不在范围内的时间"
         assert not affairs.has_fail_message()
 
@@ -1372,6 +1402,7 @@ class TestAffairsPage:
         cells = driver.find_elements(By.XPATH, '(//table[@class="el-table__body"])[2]//tr/td[2]')
         for cell in cells:
             list_.append(cell.text)
+        affairs.click_reset_button()
         assert all(ptype == t for t in list_)
         assert not affairs.has_fail_message()
 
@@ -1389,6 +1420,7 @@ class TestAffairsPage:
         cells = driver.find_elements(By.XPATH, '(//table[@class="el-table__body"])[2]//tr/td[2]')
         for cell in cells:
             list_.append(cell.text)
+        affairs.click_reset_button()
         assert all(ptype == t for t in list_)
         assert not affairs.has_fail_message()
 
@@ -1406,6 +1438,7 @@ class TestAffairsPage:
         cells = driver.find_elements(By.XPATH, '(//table[@class="el-table__body"])[2]//tr/td[5]')
         for cell in cells:
             list_.append(cell.text)
+        affairs.click_reset_button()
         assert all(pid == t for t in list_)
         assert not affairs.has_fail_message()
 
@@ -1423,6 +1456,7 @@ class TestAffairsPage:
         cells = driver.find_elements(By.XPATH, '(//table[@class="el-table__body"])[2]//tr/td[4]')
         for cell in cells:
             list_.append(cell.text)
+        affairs.click_reset_button()
         assert all(pname == t for t in list_)
         assert not affairs.has_fail_message()
 
@@ -1430,11 +1464,9 @@ class TestAffairsPage:
     def test_affairs_log_sel6(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
-        sleep(1)
-        num = 1000
+        affairs.right_refresh()
         affairs.click_process_log()
         sleep(1)
-        affairs.click_paging(num)
         affairs_name_all = affairs.get_find_element_xpath(
             '(//table[@class="el-table__body"])[2]//tr[2]/td[3]').get_attribute("innerText")
         sleep(1)
@@ -1483,6 +1515,7 @@ class TestAffairsPage:
         td5 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[2]/tbody/tr[1]/td[6]').get_attribute(
             "innerText")
         tr2 = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr[2]')
+        affairs.click_reset_button()
         assert td1 == ptype and affairs_name in td2 and td3 == pname and td4 == pid and td5 == time
         assert len(tr2) == 0
         assert not affairs.has_fail_message()
@@ -1507,6 +1540,7 @@ class TestAffairsPage:
         sleep(1)
         affairs.sel_log_all(time1=time1, time2=time2, ptype=ptype, pid=pid, pname=pname, affairs_name=affairs_name)
         tr2 = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr[1]')
+        affairs.click_reset_button()
         assert len(tr2) == 0
         assert not affairs.has_fail_message()
 
@@ -1533,6 +1567,7 @@ class TestAffairsPage:
         input3 = affairs.get_find_element_xpath('//input[@placeholder="请输入流程ID"]').get_attribute("value")
         input4 = affairs.get_find_element_xpath('//input[@placeholder="请输入流程名称"]').get_attribute("value")
         input5 = affairs.get_find_element_xpath('//div[label[text()="事务:"]]//input').get_attribute("value")
+        affairs.click_reset_button()
         assert input1 == input3 == input4 == input5 == "" and input2 == "全部"
         assert not affairs.has_fail_message()
 
@@ -1545,6 +1580,7 @@ class TestAffairsPage:
         affairs.click_paging(num)
         sleep(3)
         eles = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr')
+        affairs.click_reset_button()
         assert 0 < len(eles) <= num
         assert not affairs.has_fail_message()
 
@@ -1559,6 +1595,7 @@ class TestAffairsPage:
         affairs.click_button('//ul[@class="el-pager"]/li[last()]')
         sleep(1)
         eles = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr')
+        affairs.click_reset_button()
         assert 0 < len(eles) <= num
         assert not affairs.has_fail_message()
 
@@ -1576,5 +1613,6 @@ class TestAffairsPage:
         affairs.wait_for_el_loading_mask()
         eles = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[2]/tbody/tr')
         class_ = affairs.get_find_element_xpath(f'//ul[@class="el-pager"]/li[text()="{num}"]').get_attribute("class")
+        affairs.click_reset_button()
         assert 0 < len(eles) and class_ == "number active"
         assert not affairs.has_fail_message()

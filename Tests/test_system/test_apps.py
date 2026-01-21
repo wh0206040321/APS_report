@@ -981,8 +981,7 @@ class TestSAppsPage:
 
         value = ['appstest1']
         apps.del_all(xpath='//div[p[text()="应用代码"]]/following-sibling::div//input', value=value)
-        sleep(2)
-        apps.wait_for_loading_to_disappear()
+        apps.right_refresh()
         try:
             apps.del_layout(layout)
         except Exception:
