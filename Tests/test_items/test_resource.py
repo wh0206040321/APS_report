@@ -1355,15 +1355,16 @@ class TestResourcePage:
 
         value = ['111', '11测试全部数据', '1测试A', '111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111']
         resource.del_all(value, xpath='//p[text()="资源代码"]/ancestor::div[2]//input')
-        data = [
-            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:4]
-        ]
+
         try:
             resource.del_layout(layout)
         except Exception:
             print(f"布局 '{layout}' 可能不存在或已被删除")
         sleep(2)
+        data = [
+            driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:4]
+        ]
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

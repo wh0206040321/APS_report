@@ -855,14 +855,14 @@ class TestPlanUnitPage:
         unit.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
         unit.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
-        unit.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改')
+        unit.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[3])[2]//input', '1没有数据修改')
         ele1 = unit.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[3])[2]//input').get_attribute(
             "value")
         unit.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         unit.get_find_message()
-        unit.select_input('1没有数据修改')
-        ele2 = unit.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+        unit.select_input('1没有数据添加')
+        ele2 = unit.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[3])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2
         unit.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
@@ -896,8 +896,8 @@ class TestPlanUnitPage:
     def test_unit_shift(self, login_to_planUnit):
         driver = login_to_planUnit  # WebDriver 实例
         unit = PlanUnitPage(driver)  # 用 driver 初始化 PlanUnitPage
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         unit.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = unit.get_find_element_xpath(elements[1])
@@ -914,8 +914,8 @@ class TestPlanUnitPage:
     def test_unit_ctrls(self, login_to_planUnit):
         driver = login_to_planUnit  # WebDriver 实例
         unit = PlanUnitPage(driver)  # 用 driver 初始化 PlanUnitPage
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         unit.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = unit.get_find_element_xpath(elements[1])
@@ -928,12 +928,30 @@ class TestPlanUnitPage:
         assert len(num) == 2 and message == "保存成功"
         assert not unit.has_fail_message()
 
+    @allure.story("模拟ctrl+m修改,编辑对话框计划单元和模版名称不可编辑")
+    # @pytest.mark.run(order=1)
+    def test_unit_ctrlMDisabled(self, login_to_planUnit):
+        driver = login_to_planUnit  # WebDriver 实例
+        unit = PlanUnitPage(driver)  # 用 driver 初始化 PlanUnitPage
+        unit.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
+        unit.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        ele1 = unit.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
+            "disabled")
+        ele2 = unit.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[4])[2]//input').get_attribute(
+            "disabled")
+        unit.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
+        assert ele1 and ele2
+        assert not unit.has_fail_message()
+
     @allure.story("下载成功")
     # @pytest.mark.run(order=1)
     def test_unit_download(self, login_to_planUnit):
         driver = login_to_planUnit  # WebDriver 实例
         unit = PlanUnitPage(driver)  # 用 driver 初始化 PlanUnitPage
-        unit.right_refresh()
+        driver.refresh()
         name = "1测试A"
 
         unit.select_input(name)

@@ -70,6 +70,9 @@ class AddsPages(BasePage):
         """批量修改代码对话框双击"""
         for xpath in xpath_list:
             try:
+                sleep(1)
+                self.wait_for_loading_to_disappear()
+                sleep(1)
                 self.click_button(xpath)
                 ActionChains(self.driver).double_click(self.get_find_element_xpath(new_value)).perform()
                 sleep(1)

@@ -664,6 +664,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="一次", time="一次")
         affairs.click_save()
         message = affairs.get_find_message()
+        sleep(1)
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -678,6 +679,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="每天", time="1")
         affairs.click_save()
         message = affairs.get_find_message()
+        sleep(1)
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -692,6 +694,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="每天", time="2")
         affairs.click_save()
         message = affairs.get_find_message()
+        sleep(1)
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -706,6 +709,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="周", time="周")
         affairs.click_save()
         message = affairs.get_find_message()
+        sleep(1)
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -720,6 +724,7 @@ class TestAffairsPage:
         affairs.add_process(name=name, type="服务", frequency="月", time="月")
         affairs.click_save()
         message = affairs.get_find_message()
+        sleep(1)
         ele = affairs.finds_elements(By.XPATH, f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]')
         assert message == "新增成功！" and len(ele) == 1
         assert not affairs.has_fail_message()
@@ -1313,8 +1318,9 @@ class TestAffairsPage:
         affairs.click_process()
         affairs.click_button(f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]/td[last()]//span[text()="复制"]')
         affairs.click_button('//div[@class="ivu-modal-confirm-footer"]/button[2]')
+        affairs.get_find_message()
         sleep(1)
-        ele = affairs.get_find_element_xpath('//table[@class="el-table__body"]//tr[2]/td[3]').text
+        ele = affairs.get_find_element_xpath('//table[@class="el-table__body"]//tr[1]/td[3]').text
         assert name + "_copy1" == ele
         assert not affairs.has_fail_message()
 
@@ -1357,10 +1363,10 @@ class TestAffairsPage:
         affairs.click_button('//div[@id="tab-air"]')
         affairs.wait_for_el_loading_mask()
         affairs.hover(name1, "删除")
-        affairs.click_button('//div[@class="el-message-box__btns"]/button[2]')
+        affairs.click_button('(//div[@class="el-message-box__btns"]/button[2])[last()]')
         affairs.get_find_message()
         affairs.hover(name2, "删除")
-        affairs.click_button('//div[@class="el-message-box__btns"]/button[2]')
+        affairs.click_button('(//div[@class="el-message-box__btns"]/button[2])[last()]')
         ele1 = affairs.finds_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name1}"]')
         sleep(1)
         ele2 = affairs.finds_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name2}"]')
@@ -1371,6 +1377,7 @@ class TestAffairsPage:
     def test_affairs_log_sel1(self, login_to_affairs):
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
+        affairs.right_refresh()
         affairs.click_process_log()
         num = 1000
         affairs.click_paging(num)

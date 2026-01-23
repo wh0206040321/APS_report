@@ -31,7 +31,7 @@ class AffairsPage(BasePage):
 
     def get_find_message(self):
         """获取错误信息"""
-        message = WebDriverWait(self.driver, 10).until(
+        message = WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located(
                 (By.XPATH, '//div[@class="el-message el-message--success"]/p')
             )
@@ -139,7 +139,7 @@ class AffairsPage(BasePage):
             sleep(2)
             ele.click()
             sleep(1)
-            self.click_button('//div[@class="el-message-box__btns"]/button[2]')
+            self.click_button('(//div[@class="el-message-box__btns"]/button[2])[last()]')
             self.wait_for_el_loading_mask()
 
     def hover(self, name="", edi=""):

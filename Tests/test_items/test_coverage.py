@@ -1054,7 +1054,7 @@ class TestCoveragePage:
         before_data = coverage.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
-        coverage.click_button('//p[text()="资源"]/ancestor::div[2]//input')
+        coverage.click_button('//div[div[span[text()=" 资源代码"]]]//input')
         sleep(1)
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
         eles = coverage.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr[2]//td[2]')

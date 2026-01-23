@@ -422,11 +422,12 @@ class TestTableSettingPage:
     def test_tablesetting_order_unhiderow2(self, login_to_tablesetting):
         driver = login_to_tablesetting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
-        setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '隐藏行')
+        # setting.realistic_right_click('(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]', '隐藏行')
 
         after_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[1]//td[2]').text
-        setting.click_button('//span[@class="hiddenRowIcon hiddenRowIcon_Top"]/i')
-        before_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
+        ele = setting.get_find_element_xpath('//span[@class="hiddenRowIcon hiddenRowIcon_Top"]/i')
+        ActionChains(driver).move_to_element(ele).click().perform()
+        before_ = setting.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[3]//td[2]').text
         setting.right_refresh('制造订单')
         assert after_ == before_
         assert not setting.has_fail_message()
