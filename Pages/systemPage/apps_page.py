@@ -48,9 +48,9 @@ class AppsPage(BasePage):
         )
         return message.text
 
-    def right_refresh(self):
+    def right_refresh(self, name='应用管理'):
         """右键刷新."""
-        but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" 应用管理 "]]')
+        but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
         but.click()
         # 右键点击
         ActionChains(self.driver).context_click(but).perform()

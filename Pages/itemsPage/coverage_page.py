@@ -83,6 +83,7 @@ class Coverage(BasePage):
         return message.text
 
     def wait_for_loading_to_disappear(self, timeout=10):
+        sleep(1)
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located(
                 (By.XPATH,

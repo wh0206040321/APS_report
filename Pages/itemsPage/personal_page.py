@@ -149,7 +149,7 @@ class PersonalPage(BasePage):
         """
         list_ = ["系统管理", "单元设置", "环境设置"]
         for v in list_:
-            sleep(0.5)
+            sleep(1)
             self.click_button(f'(//span[text()="{v}"])[1]')
         sleep(2)
         radio = self.get_find_element('//label[text()=" 服务器"]/span')

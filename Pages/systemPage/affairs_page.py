@@ -168,7 +168,6 @@ class AffairsPage(BasePage):
         ele.send_keys(Keys.DELETE)
         self.enter_texts(xpath, text)
 
-
     def click_process(self):
         """点击流程"""
         self.click_button('//div[@id="tab-flow"]')
@@ -182,6 +181,9 @@ class AffairsPage(BasePage):
     def click_process_update(self, name):
         """点击编辑流程"""
         self.click_button(f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]/td[last()]//span[text()="编辑"]')
+        sleep(1)
+        WebDriverWait(self.driver, 20).until(
+            EC.invisibility_of_element_located((By.CSS_SELECTOR, ".vxe-loading.vxe-modal--loading")))
 
     def add_process_affairs(self, add: bool = True, name="", sel=""):
         """点击添加流程"""

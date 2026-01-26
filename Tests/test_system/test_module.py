@@ -206,6 +206,27 @@ class TestSModulePage:
         ele2 = module.get_find_element_xpath(f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[5]').text
         module.right_refresh('模块管理')
         assert message == "编辑成功！" and ele1 == after_name and ele2 == "33"
+        module.select_input_module(before_name)
+        module.click_button('//table[@class="vxe-table--body"]//tr[1]/td[2]')
+        sleep(1)
+        module.click_all_button("编辑")
+        xpath_list = [
+            '//div[@id="h95qavco-ll5z"]//input',
+            '//div[@id="lzd9u38e-i7eq"]//input',
+        ]
+        add.batch_modify_input(xpath_list[:1], before_name)
+        n = module.get_find_element_xpath(xpath_list[1])
+        n.send_keys(Keys.CONTROL, "a")
+        n.send_keys(Keys.DELETE)
+        module.enter_texts(xpath_list[1], "33")
+        module.click_confirm()
+        message = module.get_find_message()
+        module.select_input_module(before_name)
+        sleep(2)
+        ele1 = module.get_find_element_xpath(
+            f'//table[@class="vxe-table--body"]//tr[td[2]//span[text()="{before_name}"]]/td[3]').text
+        module.right_refresh('模块管理')
+        assert message == "编辑成功！" and ele1 == before_name
         assert not module.has_fail_message()
 
     @allure.story("查询模块代码成功")
@@ -877,7 +898,7 @@ class TestSModulePage:
             apps.click_button('//li[text()="ABCDAA"]')
 
             apps.click_button(xpath_list[3])
-            apps.click_button('//div[@class="flex-wrap"]/div[1]')
+            apps.click_button('(//div[@class="flex-wrap"]/div[1])[last()]')
 
             apps.enter_texts(xpath_list[4], "1")
             apps.click_save_button()
@@ -1030,6 +1051,7 @@ class TestSModulePage:
         # 设置权限成功
         role.click_button(f'(//span[text()="角色管理"])[1]')
         role.wait_for_loading_to_disappear()
+        role.right_refresh()
         role.enter_texts('//div[div[p[text()="角色代码"]]]//input', 'admin')
         role.enter_texts('//div[div[p[text()="计划单元名称"]]]//input', date_driver.planning)
         sleep(1)
@@ -1092,7 +1114,6 @@ class TestSModulePage:
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
         add = AddsPages(driver)
-        apps = AppsPage(driver)
         date_driver = DateDriver()
         role = RolePage(driver)
         # 显示菜单
@@ -1185,6 +1206,92 @@ class TestSModulePage:
         ele = module.finds_elements(By.XPATH, f'//div[@class="listDivCon"]/div[last()][span[text()="{menu_name}"]]')
         assert len(ele) == 1
         assert not module.has_fail_message()
+
+    @allure.story("设置2个应用在同一个模块下")
+    # @pytest.mark.run(order=1)
+    def test_module_appmodule(self, login_to_module):
+        driver = login_to_module  # WebDriver 实例
+        module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        apps = AppsPage(driver)
+        app_name = "1新增应用2"
+        apps.click_button('(//span[text()="应用管理"])[1]')
+        apps.wait_for_loading_to_disappear()
+        sleep(1)
+        apps.select_input(app_name)
+        apps.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{app_name}"]')
+        apps.click_all_button("编辑")
+
+        apps.click_button('//div[@class="d-flex"]/div[label[text()="模块名称"]]//input[@type="text"]')
+        apps.click_button('//li[text()="ABCDAA"]')
+
+        apps.click_save_button()
+        message = apps.get_find_message()
+        apps.click_apps_button()
+        assert message == "编辑成功！"
+        driver.refresh()
+        apps.wait_for_loading_to_disappear()
+        apps.click_button(f'(//span[text()="1新增菜单"])[1]')
+        apps.click_button(f'(//span[text()="ABCDAA"])[1]')
+        eles = apps.finds_elements(By.XPATH, '//span[text()="ABCDAA"]/ancestor::li[1]/ul//span[@class="menuItemSpan"]')
+        assert len(eles) == 2
+        assert not apps.has_fail_message()
+
+    @allure.story("设置不显示菜单成功")
+    # @pytest.mark.run(order=1)
+    def test_module_appshow(self, login_to_module):
+        driver = login_to_module  # WebDriver 实例
+        module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        apps = AppsPage(driver)
+        app_name = "1新增应用"
+        apps.select_input(app_name)
+        apps.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{app_name}"]')
+        apps.click_all_button("编辑")
+
+        ele = module.get_find_element_xpath('//div[@class="d-flex"]/div[label[text()="显示菜单"]]/div/label/span').get_attribute("class")
+        if 'ivu-checkbox-checked' in ele:
+            module.click_button('//div[@class="d-flex"]/div[label[text()="显示菜单"]]/div/label/span')
+
+        apps.click_save_button()
+        message = apps.get_find_message()
+        apps.click_apps_button()
+        assert message == "编辑成功！"
+        driver.refresh()
+        apps.wait_for_loading_to_disappear()
+        apps.click_button(f'(//span[text()="1新增菜单"])[1]')
+        apps.click_button(f'(//span[text()="ABCDAA"])[1]')
+        eles = apps.finds_elements(By.XPATH, '//span[text()="ABCDAA"]/ancestor::li[1]/ul//span[@class="menuItemSpan"]')
+        ele = apps.finds_elements(By.XPATH, f'//span[@class="menuItemSpan"][text()="{app_name}"]')
+        assert len(eles) == 1 and len(ele) == 0
+        assert not apps.has_fail_message()
+
+    @allure.story("设置菜单排序成功")
+    # @pytest.mark.run(order=1)
+    def test_module_appsort(self, login_to_module):
+        driver = login_to_module  # WebDriver 实例
+        module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        apps = AppsPage(driver)
+        app_name = "1新增应用"
+        apps.select_input(app_name)
+        apps.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{app_name}"]')
+        apps.click_all_button("编辑")
+
+        ele = module.get_find_element_xpath(
+            '//div[@class="d-flex"]/div[label[text()="显示菜单"]]/div/label/span').get_attribute("class")
+        if 'ivu-checkbox-checked' not in ele:
+            module.click_button('//div[@class="d-flex"]/div[label[text()="显示菜单"]]/div/label/span')
+        apps.enter_texts('//div[@class="d-flex"]/div[label[text()="排序"]]//input', '1000')
+
+        apps.click_save_button()
+        message = apps.get_find_message()
+        apps.click_apps_button()
+        assert message == "编辑成功！"
+        driver.refresh()
+        apps.wait_for_loading_to_disappear()
+        apps.click_button(f'(//span[text()="1新增菜单"])[1]')
+        apps.click_button(f'(//span[text()="ABCDAA"])[1]')
+        eles = apps.get_find_element_xpath('(//span[text()="ABCDAA"]/ancestor::li[1]/ul//span[@class="menuItemSpan"])[2]').text
+        assert eles == app_name
+        assert not apps.has_fail_message()
 
     @allure.story("删除菜单，删除模块，删除应用成功")
     # @pytest.mark.run(order=1)
