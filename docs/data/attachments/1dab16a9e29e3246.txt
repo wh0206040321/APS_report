@@ -1,0 +1,46 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[31m[1mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2338141032688
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_tablesetting
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_items_test_tablesetting.py, driver_id=2338136227120, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_items_test_tablesetting.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_items_test_tablesetting.py_20260127_005609.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_items_test_tablesetting.py] 截图时间：2026-01-27 00:56:09
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_items_test_tablesetting.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_items_test_tablesetting.py_20260127_005609.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_items_test_tablesetting.py, driver_id=2338141948560, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_items_test_tablesetting.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_items_test_tablesetting.py_20260127_005609.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_items_test_tablesetting.py] 截图时间：2026-01-27 00:56:09
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_items_test_tablesetting.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_items_test_tablesetting.py_20260127_005609.png
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[2]//i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[text()=" 显示设置 "])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//div[./div[text()="是否可见:"]])[1]/label/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[./div[text()="是否可见:"]])[1]/label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
