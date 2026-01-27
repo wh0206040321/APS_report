@@ -1,5 +1,0 @@
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//span[text()="系统设置"])[1]/ancestor::li[1]
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
-[31m[1mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
