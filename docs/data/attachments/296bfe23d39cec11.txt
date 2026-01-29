@@ -1,0 +1,132 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c78e6f65+78965]
+	GetHandleVerifier [0x0x7ff7c78e6fc0+79056]
+	(No symbol) [0x0x7ff7c7679dda]
+	(No symbol) [0x0x7ff7c76817c1]
+	(No symbol) [0x0x7ff7c768482c]
+	(No symbol) [0x0x7ff7c76848ff]
+	(No symbol) [0x0x7ff7c76d24ed]
+	(No symbol) [0x0x7ff7c76c564e]
+	(No symbol) [0x0x7ff7c76f866a]
+	(No symbol) [0x0x7ff7c76c2b56]
+	(No symbol) [0x0x7ff7c76f8880]
+	(No symbol) [0x0x7ff7c7720dbe]
+	(No symbol) [0x0x7ff7c76f8443]
+	(No symbol) [0x0x7ff7c76c1311]
+	(No symbol) [0x0x7ff7c76c20a3]
+	GetHandleVerifier [0x0x7ff7c7b9e26d+2926461]
+	GetHandleVerifier [0x0x7ff7c7b98993+2903715]
+	GetHandleVerifier [0x0x7ff7c7bb6aed+3026941]
+	GetHandleVerifier [0x0x7ff7c79016fe+187406]
+	GetHandleVerifier [0x0x7ff7c79096ef+220159]
+	GetHandleVerifier [0x0x7ff7c78efaf4+114692]
+	GetHandleVerifier [0x0x7ff7c78efca9+115129]
+	GetHandleVerifier [0x0x7ff7c78d64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c78e6f65+78965]
+	GetHandleVerifier [0x0x7ff7c78e6fc0+79056]
+	(No symbol) [0x0x7ff7c7679dda]
+	(No symbol) [0x0x7ff7c76817c1]
+	(No symbol) [0x0x7ff7c7684bbc]
+	(No symbol) [0x0x7ff7c7722096]
+	(No symbol) [0x0x7ff7c76f866a]
+	(No symbol) [0x0x7ff7c7720dbe]
+	(No symbol) [0x0x7ff7c76f8443]
+	(No symbol) [0x0x7ff7c76c1311]
+	(No symbol) [0x0x7ff7c76c20a3]
+	GetHandleVerifier [0x0x7ff7c7b9e26d+2926461]
+	GetHandleVerifier [0x0x7ff7c7b98993+2903715]
+	GetHandleVerifier [0x0x7ff7c7bb6aed+3026941]
+	GetHandleVerifier [0x0x7ff7c79016fe+187406]
+	GetHandleVerifier [0x0x7ff7c79096ef+220159]
+	GetHandleVerifier [0x0x7ff7c78efaf4+114692]
+	GetHandleVerifier [0x0x7ff7c78efca9+115129]
+	GetHandleVerifier [0x0x7ff7c78d64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//label[text()="模板名称"])[1]/parent::div//div[@class="ivu-select-selection"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="小日程"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c78e6f65+78965]
+	GetHandleVerifier [0x0x7ff7c78e6fc0+79056]
+	(No symbol) [0x0x7ff7c7679dda]
+	(No symbol) [0x0x7ff7c76817c1]
+	(No symbol) [0x0x7ff7c768482c]
+	(No symbol) [0x0x7ff7c76848ff]
+	(No symbol) [0x0x7ff7c76d24ed]
+	(No symbol) [0x0x7ff7c76c564e]
+	(No symbol) [0x0x7ff7c76f866a]
+	(No symbol) [0x0x7ff7c76c2b56]
+	(No symbol) [0x0x7ff7c76f8880]
+	(No symbol) [0x0x7ff7c7720dbe]
+	(No symbol) [0x0x7ff7c76f8443]
+	(No symbol) [0x0x7ff7c76c1311]
+	(No symbol) [0x0x7ff7c76c20a3]
+	GetHandleVerifier [0x0x7ff7c7b9e26d+2926461]
+	GetHandleVerifier [0x0x7ff7c7b98993+2903715]
+	GetHandleVerifier [0x0x7ff7c7bb6aed+3026941]
+	GetHandleVerifier [0x0x7ff7c79016fe+187406]
+	GetHandleVerifier [0x0x7ff7c79096ef+220159]
+	GetHandleVerifier [0x0x7ff7c78efaf4+114692]
+	GetHandleVerifier [0x0x7ff7c78efca9+115129]
+	GetHandleVerifier [0x0x7ff7c78d64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7c78e6f65+78965]
+	GetHandleVerifier [0x0x7ff7c78e6fc0+79056]
+	(No symbol) [0x0x7ff7c7679dda]
+	(No symbol) [0x0x7ff7c76817c1]
+	(No symbol) [0x0x7ff7c7684bbc]
+	(No symbol) [0x0x7ff7c7722096]
+	(No symbol) [0x0x7ff7c76f866a]
+	(No symbol) [0x0x7ff7c7720dbe]
+	(No symbol) [0x0x7ff7c76f8443]
+	(No symbol) [0x0x7ff7c76c1311]
+	(No symbol) [0x0x7ff7c76c20a3]
+	GetHandleVerifier [0x0x7ff7c7b9e26d+2926461]
+	GetHandleVerifier [0x0x7ff7c7b98993+2903715]
+	GetHandleVerifier [0x0x7ff7c7bb6aed+3026941]
+	GetHandleVerifier [0x0x7ff7c79016fe+187406]
+	GetHandleVerifier [0x0x7ff7c79096ef+220159]
+	GetHandleVerifier [0x0x7ff7c78efaf4+114692]
+	GetHandleVerifier [0x0x7ff7c78efca9+115129]
+	GetHandleVerifier [0x0x7ff7c78d64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//label[text()="模板名称"])[1]/parent::div//div[@class="ivu-select-selection"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="小日程"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
