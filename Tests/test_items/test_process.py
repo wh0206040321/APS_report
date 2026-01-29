@@ -257,16 +257,17 @@ class TestProcessPage:
     def test_process_textverify(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
-        name = "111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"
-        process.adds_process(name, name)
+        name = ["111111111111111133331122221111222221111111113333111111144444111111111111111111111111111111111111111111111111"]
+        process.adds_process(name[0], name[0])
         sleep(1)
         adddata = process.get_find_element_xpath(
-            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[2]'
+            f'(//span[text()="{name[0]}"])[1]/ancestor::tr[1]/td[2]'
         ).text
         num_ = process.get_find_element_xpath(
-            f'(//span[text()="{name}"])[1]/ancestor::tr[1]/td[5]'
+            f'(//span[text()="{name[0]}"])[1]/ancestor::tr[1]/td[5]'
         ).text
-        assert adddata == name and num_ == '9999999999', f"预期数据是{name}，实际得到{adddata}"
+        assert adddata == name[0] and num_ == '9999999999', f"预期数据是{name[0]}，实际得到{adddata}"
+        process.del_all(name[0], '//p[text()="工序代码"]/ancestor::div[2]//input')
         assert not process.has_fail_message()
 
     @allure.story("添加测试数据成功")

@@ -19,7 +19,7 @@ from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
 
-@pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
+@pytest.fixture(scope="module")   # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_materialsubstitution():
     driver = None
     try:
@@ -77,6 +77,7 @@ class TestSMaterialSubstitutionPage:
         sleep(1)
         material.click_confirm()
         message = material.get_error_message()
+        material.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == "校验不通过，请检查标红的表单字段！"
         assert layout == name
         assert not material.has_fail_message()
@@ -93,6 +94,7 @@ class TestSMaterialSubstitutionPage:
         adds.batch_modify_select_input(select_list)
         material.click_confirm()
         message = material.get_error_message()
+        material.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == "校验不通过，请检查标红的表单字段！"
         assert not material.has_fail_message()
 
@@ -159,6 +161,7 @@ class TestSMaterialSubstitutionPage:
     def test_materialsubstitution_updatesingle(self, login_to_materialsubstitution):
         driver = login_to_materialsubstitution  # WebDriver 实例
         material = MaterialSubstitutionPage(driver)  # 用 driver 初始化 MaterialSubstitutionPage
+        material.right_refresh('物料替代')
         material.click_update()
         material.click_button('//div[@id="g8b1op6y-vfpx"]/i')
         material.click_button('//div[@id="db2x9abu-154j"]//input')
@@ -185,6 +188,7 @@ class TestSMaterialSubstitutionPage:
     def test_materialsubstitution_updategroup(self, login_to_materialsubstitution):
         driver = login_to_materialsubstitution  # WebDriver 实例
         material = MaterialSubstitutionPage(driver)  # 用 driver 初始化 MaterialSubstitutionPage
+        material.right_refresh('物料替代')
         material.click_flagdata()
         material.click_button('(//table[@class="vxe-table--body"]//tr[td[4]//span[text()="成组替代"]]/td[2])[1]')
         sleep(1)
@@ -199,7 +203,7 @@ class TestSMaterialSubstitutionPage:
 
         before_data1 = material.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[td[3]//button]/td[2]').text
         before_data2 = material.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[td[6]//button]/td[2]').text
-        material.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+        material.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
 
         material.enter_texts('//div[@id="hji97w60-v76b"]//input', 8)
         material.click_confirm()
@@ -226,6 +230,7 @@ class TestSMaterialSubstitutionPage:
         material.click_select_button()
 
         eles = material.loop_judgment('//table[@class="vxe-table--body"]//tr/td[4]')
+        material.click_reset_button()
         assert all('单料替代' == ele for ele in eles)
         assert not material.has_fail_message()
 
@@ -241,6 +246,7 @@ class TestSMaterialSubstitutionPage:
         name = material.get_find_element_xpath('//div[@id="g7yqlm5y-a4w0"]//input').get_attribute("value")
 
         eles = material.loop_judgment('//table[@class="vxe-table--body"]//tr/td[5]')
+        material.click_reset_button()
         assert all(name == ele for ele in eles)
         assert not material.has_fail_message()
 
@@ -256,6 +262,7 @@ class TestSMaterialSubstitutionPage:
         name = material.get_find_element_xpath('//div[@id="53txfv56-a74l"]//input').get_attribute("value")
 
         eles = material.loop_judgment('//table[@class="vxe-table--body"]//tr/td[7]')
+        material.click_reset_button()
         assert all(name == ele for ele in eles)
         assert not material.has_fail_message()
 
@@ -271,6 +278,7 @@ class TestSMaterialSubstitutionPage:
         name = material.get_find_element_xpath('//div[@id="8dsqasad-wy1m"]//input').get_attribute("value")
 
         eles = material.loop_judgment('//table[@class="vxe-table--body"]//tr/td[10]')
+        material.click_reset_button()
         assert all(name == ele for ele in eles)
         assert not material.has_fail_message()
 
@@ -290,6 +298,8 @@ class TestSMaterialSubstitutionPage:
 
         eles1 = material.loop_judgment('//table[@class="vxe-table--body"]//tr/td[5]')
         eles2 = material.loop_judgment('//table[@class="vxe-table--body"]//tr/td[7]')
+        material.click_reset_button()
+        material.right_refresh('物料替代')
         assert all(name1 == ele for ele in eles1) and all(name2 == ele for ele in eles2)
         assert not material.has_fail_message()
 
@@ -305,6 +315,7 @@ class TestSMaterialSubstitutionPage:
         sleep(2)
         eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[4]')
         list_ = [ele.text for ele in eles]
+        material.right_refresh('物料替代')
         assert all(name in text for text in list_), f"表格内容不符合预期，实际值: {list_}"
         assert not material.has_fail_message()
 
@@ -325,6 +336,7 @@ class TestSMaterialSubstitutionPage:
         sleep(1)
         material.click_button('//div[div[span[text()=" 替代场景"]]]/div[3]//i')
         eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
+        material.right_refresh('物料替代')
         assert len(eles) == 0
         assert not material.has_fail_message()
 
@@ -344,6 +356,7 @@ class TestSMaterialSubstitutionPage:
         eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        material.right_refresh('物料替代')
         assert all(name in text for text in list_)
         assert not material.has_fail_message()
 
@@ -363,6 +376,7 @@ class TestSMaterialSubstitutionPage:
         eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        material.right_refresh('物料替代')
         assert all(str(item).startswith(name) for item in list_)
         assert not material.has_fail_message()
 
@@ -382,6 +396,7 @@ class TestSMaterialSubstitutionPage:
         eles = material.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
+        material.right_refresh('物料替代')
         assert all(str(item).endswith(name) for item in list_)
         assert not material.has_fail_message()
 

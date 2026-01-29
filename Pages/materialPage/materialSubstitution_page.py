@@ -76,6 +76,7 @@ class MaterialSubstitutionPage(BasePage):
     def click_all_button(self, name):
         """点击按钮."""
         self.click_button(f'//div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="{name}"]')
+        self.wait_for_loading_to_disappear()
 
     def loop_judgment(self, xpath):
         """循环判断"""
@@ -119,6 +120,11 @@ class MaterialSubstitutionPage(BasePage):
         """点击选择按钮."""
         self.click_button('//div[@id="8quvzg1r-ahmn"]//button')
         self.wait_for_loading_to_disappear()
+
+    def click_reset_button(self):
+        """点击重置按钮."""
+        self.click_button('//div[@id="wdsiz7gm-p1kk"]//button')
+        sleep(0.5)
 
     def loop_click(self, count):
         """
@@ -165,8 +171,8 @@ class MaterialSubstitutionPage(BasePage):
 
             # 循环拖拽两个源元素
             sources = [
-                self.driver.find_element(By.XPATH, '(//table[@class="vxe-table--body"]//tr[1]/td[1])[3]'),
-                self.driver.find_element(By.XPATH, '(//table[@class="vxe-table--body"]//tr[2]/td[1])[3]')
+                self.driver.find_element(By.XPATH, '(//table[@class="vxe-table--body"]//tr[1]/td[1])[last()]'),
+                self.driver.find_element(By.XPATH, '(//table[@class="vxe-table--body"]//tr[2]/td[1])[last()]')
             ]
 
             for source in sources:

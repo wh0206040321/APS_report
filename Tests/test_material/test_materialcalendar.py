@@ -20,7 +20,7 @@ from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 from Utils.shared_data_util import SharedDataUtil
 
 
-@pytest.fixture  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
+@pytest.fixture(scope="module")  # (scope="class")这个参数表示整个测试类共用同一个浏览器，默认一个用例执行一次
 def login_to_calendar():
     driver = None
     try:
@@ -88,6 +88,7 @@ class TestMaterialCalendarPage:
         border_color = input_box.value_of_css_property("border-color")
         bordername_color = inputshift_box.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
+        calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"
@@ -124,6 +125,7 @@ class TestMaterialCalendarPage:
         sleep(1)
         bordername_color = inputshift_box.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
+        calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert bordername_color == expected_color, f"预期边框颜色为{bordername_color}"
         assert not calendar.has_fail_message()
 
@@ -154,6 +156,7 @@ class TestMaterialCalendarPage:
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值
+        calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert border_color == expected_color, f"预期边框颜色为{border_color}"
         assert not calendar.has_fail_message()
 
@@ -168,7 +171,7 @@ class TestMaterialCalendarPage:
         calendar.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span)[last()]')
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
         )
@@ -183,6 +186,7 @@ class TestMaterialCalendarPage:
         )
         calendar.click_confirm_button()
         message = calendar.get_error_message()
+        calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == "请先填写表单"
         assert not calendar.has_fail_message()
 
@@ -208,6 +212,7 @@ class TestMaterialCalendarPage:
         calendarnum = calendar.get_find_element_xpath(
             '//label[text()="资源量"]/ancestor::div[1]//input[1]'
         ).get_attribute("value")
+        calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert calendarnum == "113", f"预期{calendarnum}"
         assert not calendar.has_fail_message()
 
@@ -289,7 +294,7 @@ class TestMaterialCalendarPage:
         )
         # 勾选框
         calendar.wait_for_loading_to_disappear()
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span)[last()]')
 
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -363,7 +368,7 @@ class TestMaterialCalendarPage:
         )
         # 勾选框
         calendar.wait_for_loading_to_disappear()
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span/span)[last()]')
 
         calendar.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]'
@@ -454,8 +459,6 @@ class TestMaterialCalendarPage:
         )
         sleep(1)
         # 缩放到最小（例如 60%）
-        driver.execute_script("document.body.style.zoom='0.6'")
-        sleep(1)
 
         row_xpath = '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]'
         # 获取目标行
@@ -512,8 +515,6 @@ class TestMaterialCalendarPage:
         )
         sleep(1)
         # 缩放到最小（例如 60%）
-        driver.execute_script("document.body.style.zoom='0.6'")
-        sleep(1)
 
         row_xpath = '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]'
         # 获取目标行
@@ -657,7 +658,7 @@ class TestMaterialCalendarPage:
         calendar.click_button(
             '(//span[@class="vxe-checkbox--icon vxe-icon-checkbox-checked-fill"])[1]'
         )
-        calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
+        calendar.click_button(f'(//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span)[last()]')
         sleep(1)
 
         calendar.click_button(
@@ -747,6 +748,7 @@ class TestMaterialCalendarPage:
         calendarcode = calendar.get_find_element_xpath(
             '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
         ).text
+        calendar.right_refresh('收货日历')
         assert calendarcode == ele
         assert not calendar.has_fail_message()
 

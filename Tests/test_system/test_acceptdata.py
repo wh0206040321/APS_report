@@ -375,6 +375,7 @@ class TestSAcceptDataPage:
             acceptdata.click_all_button('删除')
             acceptdata.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             message = acceptdata.get_find_message()
+            sleep(1)
             ele = acceptdata.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[3]//span[text()="{name}"]')
             assert len(ele) == 0
             assert message == "删除成功！"

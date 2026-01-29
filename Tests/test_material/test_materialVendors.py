@@ -64,14 +64,14 @@ class TestItemPage:
         whs_code_box = self.item.get_find_element_xpath(
             "//div[@id='tnkc4719-huz5']//input"
         )
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
         bordername_color = inputname_box.value_of_css_property("border-color")
         whs_code_color = whs_code_box.value_of_css_property("border-color")
         expected_color = "rgb(255, 0, 0)"  # 红色的 rgb 值
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"
@@ -93,7 +93,7 @@ class TestItemPage:
         self.item.enter_texts(
             "//div[@id='tx0gv6lt-z2dv']//input", "text1231"
         )
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         input_box = self.item.get_find_element_xpath(
             "//div[@id='e4589osf-fgn3']//input"
         )
@@ -101,7 +101,7 @@ class TestItemPage:
         sleep(1)
         border_color = input_box.value_of_css_property("border-color")
         expected_color = "rgb(255, 0, 0)"  # 红色的 rgb 值
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
             border_color == expected_color
         ), f"预期边框颜色为{expected_color}, 但得到{border_color}"
@@ -118,7 +118,7 @@ class TestItemPage:
         self.item.enter_texts("//div[@id='tnkc4719-huz5']//input", "111")
 
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         adddata = self.item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="111"]]]/td[2]'
@@ -136,14 +136,14 @@ class TestItemPage:
         self.item.enter_texts("//div[@id='e4589osf-fgn3']//input", "111")
         self.item.enter_texts("//div[@id='tnkc4719-huz5']//input", "111")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
             error_popup == "记录已存在,请检查！"
         ), f"预期数据是记录已存在,请检查，实际得到{error_popup}"
@@ -158,7 +158,7 @@ class TestItemPage:
         self.item.click_del_button()  # 点击删除
         sleep(1)
         # 点击取消
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]')
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = self.item.get_find_element_xpath(
@@ -177,7 +177,7 @@ class TestItemPage:
         self.item.enter_texts("//div[@id='e4589osf-fgn3']//input", "1测试A")
         self.item.enter_texts("//div[@id='tnkc4719-huz5']//input", "1测试A")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         adddata = self.item.get_find_element_xpath(
             '//tr[./td[2][.//span[text()="1测试A"]]]/td[2]'
@@ -196,14 +196,14 @@ class TestItemPage:
         # 供应商代码输入111
         self.item.enter_texts("//div[@id='wxryw4ea-71oi']//input", "111")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert error_popup == "记录已存在,请检查！", f"预期数据{error_popup}"
         assert not self.item.has_fail_message()
 
@@ -222,7 +222,7 @@ class TestItemPage:
             "//div[@id='wxryw4ea-71oi']//input", f"{text}"
         )
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(3)
         # 定位表格内容
         itemdata = self.item.get_find_element_xpath(
@@ -242,7 +242,7 @@ class TestItemPage:
         # 供应商代码输入
         self.item.enter_texts("//div[@id='wxryw4ea-71oi']//input", "1测试A")
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 定位表格内容
         itemdata = self.item.get_find_element_xpath(
@@ -328,7 +328,7 @@ class TestItemPage:
 
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 选中供应商代码
         self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
@@ -342,7 +342,7 @@ class TestItemPage:
         # print('input_values', input_values)
         # print('date_values', date_values)
         sleep(1)
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
             len(input_xpath_list) == len(input_values)
             and len(date_xpath_list) == len(date_values)
@@ -568,7 +568,7 @@ class TestItemPage:
 
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.item.wait_for_loading_to_disappear()
         # 选中工厂代码
         self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
@@ -583,7 +583,7 @@ class TestItemPage:
         print('input_values', input_values)
         print('date_values', date_values)
         sleep(1)
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
                 len(input_xpath_list) == len(input_values)
                 and len(date_xpath_list) == len(date_values)

@@ -55,14 +55,14 @@ class TestItemPage:
         # 点击新增按钮
         self.item.click_add_button()
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         message = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
                 (By.XPATH, "//p[text()='请填写信息']")
             )
         )
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         # 检查元素是否包含子节点
         assert message.text == "请填写信息"
         assert not self.item.has_fail_message()
@@ -77,7 +77,7 @@ class TestItemPage:
             "//label[text()='代码']/following-sibling::div//input", "111"
         )
 
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
         sleep(1)
         # 点击修改按钮
@@ -87,7 +87,7 @@ class TestItemPage:
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(['//label[text()="代码"]/following-sibling::div//input'], "111")
         print('input_values', input_values)
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
                 len(input_values) == 1
         )
@@ -119,7 +119,7 @@ class TestItemPage:
             "//label[text()='代码']/following-sibling::div//input", "222"
         )
 
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
 
         sleep(1)
         # 批量获取输入框的value
@@ -146,7 +146,7 @@ class TestItemPage:
         )
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 选中刚刚编辑的数据
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
@@ -156,7 +156,7 @@ class TestItemPage:
         # 批量获取输入框的value
         input_values = self.item.batch_acquisition_input(["//label[text()='代码']/following-sibling::div//input"], text_str)
         sleep(1)
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
                 len(input_values) == 1
         )
@@ -175,14 +175,14 @@ class TestItemPage:
             "//label[text()='代码']/following-sibling::div//input", "333"
         )
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
         ).text
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert error_popup == "记录已存在,请检查！", f"预期数据{error_popup}"
         assert not self.item.has_fail_message()
 
@@ -251,7 +251,7 @@ class TestItemPage:
         self.item.click_button("//span[text()='添加']")
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 选中刚刚编辑的数据行
         self.item.click_button('//tr[./td[2][.//span[text()="11"]]]/td[2]')
@@ -264,7 +264,7 @@ class TestItemPage:
             '//span[text()="11:11:11-22:22:22"]'
         ).text
         sleep(1)
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
             len(input_xpath_list) == len(input_values) and time_text == "11:11:11-22:22:22"
         )
@@ -340,7 +340,7 @@ class TestItemPage:
         self.item.click_button("//span[text()='添加']")
         sleep(1)
         # 点击确定
-        self.item.click_button('(//button[@type="button"]/span[text()="确定"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 选中刚刚编辑的数据行
         self.item.click_button('//tr[./td[2][.//span[text()="22"]]]/td[2]')
@@ -353,7 +353,7 @@ class TestItemPage:
             '//span[text()="11:11:11-22:22:22"]'
         ).text
         sleep(1)
-        self.item.click_button('(//button[@type="button"]/span[text()="取消"])[5]')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
                 len(input_xpath_list) == len(input_values) and time_text == "11:11:11-22:22:22"
         )

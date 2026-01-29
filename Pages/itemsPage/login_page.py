@@ -26,6 +26,7 @@ class LoginPage(BasePage):
 
     def select_planning_unit(self, planning_unit):
         self.click_button('//div[@class="ivu-select-head-flex"]/input')
+        sleep(0.2)
         self.click_button(f'//li[text()="{planning_unit}"]')
 
     def login(self, username, password, planning_unit, timeout=60):

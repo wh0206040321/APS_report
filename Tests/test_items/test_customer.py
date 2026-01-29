@@ -1,5 +1,6 @@
 import logging
 import random
+import re
 from datetime import date
 from time import sleep
 
@@ -1188,12 +1189,47 @@ class TestCustomerPage:
         ele2 = customer.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2
-        customer.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        assert not customer.has_fail_message()
+
+    @allure.story("模拟多选删除")
+    # @pytest.mark.run(order=1)
+    def test_customer_shiftdel(self, login_to_customer):
+        driver = login_to_customer  # WebDriver 实例
+        customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
+        customer.right_refresh('客户')
+        customer.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        customer.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        customer.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改1')
+        sleep(1)
+        ele1 = customer.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
+            "value")
+        customer.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        customer.get_find_message()
+        customer.select_input('1没有数据修改1')
+        ele2 = customer.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele2 == '1没有数据修改1'
+        assert not customer.has_fail_message()
+        customer.select_input('1没有数据修改')
+        before_data = customer.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        customer.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = customer.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
         customer.click_del_button()
         customer.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         message = customer.get_find_message()
-        customer.right_refresh('客户')
+        customer.wait_for_loading_to_disappear()
+        after_data = customer.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
+        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not customer.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")
@@ -1201,6 +1237,7 @@ class TestCustomerPage:
     def test_customer_ctrlC(self, login_to_customer):
         driver = login_to_customer  # WebDriver 实例
         customer = CustomerPage(driver)  # 用 driver 初始化 CustomerPage
+        customer.right_refresh('客户')
         customer.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = customer.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)

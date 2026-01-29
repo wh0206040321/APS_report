@@ -1,7 +1,7 @@
 import random
 from time import sleep
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -160,6 +160,7 @@ class WarehouseLocationPage(BasePage):
     def click_ref_button(self):
         """点击刷新按钮."""
         self.click(By.XPATH, '//p[text()="刷新"]')
+        self.wait_for_loading_to_disappear()
 
     def enter_texts(self, xpath, text):
         """输入文字."""
@@ -168,6 +169,15 @@ class WarehouseLocationPage(BasePage):
     def click_button(self, xpath):
         """点击按钮."""
         self.click(By.XPATH, xpath)
+
+    def right_refresh(self, name):
+        """右键刷新."""
+        but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')
+        but.click()
+        # 右键点击
+        ActionChains(self.driver).context_click(but).perform()
+        self.click_button('//li[text()=" 刷新"]')
+        self.wait_for_loading_to_disappear()
 
     def batch_modify_input(self, xpath_list=[], new_value=""):
         """批量修改输入框"""
@@ -418,3 +428,30 @@ class WarehouseLocationPage(BasePage):
                 print(f"操作 {xpath} 时出错: {str(e)}")
 
         return values
+
+    def hover(self, name=""):
+        # 悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//span[@class="position-absolute font12 right10"]'
+        )
+        ActionChains(self.driver).move_to_element(container).perform()
+
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//ul/li[contains(text(),"{name}")]'
+            ))
+        )
+
+        # 3️⃣ 再点击图标
+        delete_icon.click()
+
+    def select_input(self, xpath_name, name):
+        """选择输入框."""
+        xpath = f'//div[div[span[text()=" {xpath_name}"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL + "a")
+        ele.send_keys(Keys.DELETE)
+        self.enter_texts(xpath, name)
+        sleep(1)

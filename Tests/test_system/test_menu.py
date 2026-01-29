@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from datetime import datetime
 from time import sleep
 
@@ -817,7 +818,8 @@ class TestSMenuPage:
         ele1 = menu.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         menu.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = menu.get_error_message()
+        message = menu.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        menu.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         menu.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not menu.has_fail_message()
@@ -851,22 +853,57 @@ class TestSMenuPage:
         menu.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
         menu.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
-        menu.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改')
+        menu.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[3])[2]//input', '1没有数据修改')
+        ele1 = menu.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[3])[2]//input').get_attribute(
+            "value")
+        menu.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        menu.get_find_message()
+        menu.enter_texts('//div[div[span[text()=" 组件名称"]]]//input', '1没有数据修改')
+        ele2 = menu.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[3])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele2 == '1没有数据修改'
+        assert not menu.has_fail_message()
+
+    @allure.story("模拟多选删除")
+    # @pytest.mark.run(order=1)
+    def test_menu_shiftdel(self, login_to_menu):
+        driver = login_to_menu  # WebDriver 实例
+        menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        menu.right_refresh('菜单组件')
+        menu.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        menu.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        menu.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据添加1')
+        sleep(1)
         ele1 = menu.get_find_element_xpath(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
             "value")
         menu.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         menu.get_find_message()
-        menu.select_input_menu('1没有数据修改')
+        menu.select_input_menu('1没有数据添加1')
         ele2 = menu.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
-        assert ele1 == ele2
-        menu.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        assert ele1 == ele2 == '1没有数据添加1'
+        assert not menu.has_fail_message()
+        menu.select_input_menu('1没有数据添加')
+        before_data = menu.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        menu.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = menu.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
         menu.click_all_button('删除')
         menu.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         message = menu.get_find_message()
-        menu.right_refresh('菜单组件')
+        menu.wait_for_loading_to_disappear()
+        after_data = menu.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
+        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not menu.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")

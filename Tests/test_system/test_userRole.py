@@ -1111,7 +1111,7 @@ class TestUserRolePage:
         user.select_input(input_value)
         user.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span[text()="{input_value}"])')
         user.click_all_button('编辑')
-
+        sleep(3)
         after_all_value = adds.batch_acquisition_input(all_value)
         after_checkbox_list = adds.get_checkbox_value(checkbox_list)
         user.click_all_button('取消')

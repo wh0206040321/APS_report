@@ -1,5 +1,6 @@
 import logging
 import random
+import re
 from datetime import date
 from time import sleep
 
@@ -124,6 +125,7 @@ class TestChangeSpecPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
+        change.wait_for_loading_to_disappear()
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
         change.click_button(
@@ -169,6 +171,7 @@ class TestChangeSpecPage:
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
+        change.wait_for_loading_to_disappear()
         # 勾选框
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
@@ -180,6 +183,7 @@ class TestChangeSpecPage:
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
+        change.wait_for_loading_to_disappear()
         # 勾选框
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         sleep(1)
@@ -211,6 +215,7 @@ class TestChangeSpecPage:
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
+        change.wait_for_loading_to_disappear()
         # 勾选框
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[1]')
         change.click_button(
@@ -223,7 +228,7 @@ class TestChangeSpecPage:
         )
         # 勾选框
         random_int = random.randint(1, 2)
-        sleep(1)
+        change.wait_for_loading_to_disappear()
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         sleep(1)
         change.click_button(
@@ -236,7 +241,7 @@ class TestChangeSpecPage:
         )
         # 勾选框
         random_int1 = random.randint(1, 2)
-        sleep(1)
+        change.wait_for_loading_to_disappear()
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int1}]')
         sleep(1)
         change.click_button(
@@ -278,6 +283,7 @@ class TestChangeSpecPage:
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
         # 勾选框
+        change.wait_for_loading_to_disappear()
         random_int = random.randint(1, 6)
         change.click_button(f'(//table[@class="vxe-table--body"]//tr/td[2]/div/span/span)[{random_int}]')
         change.click_button(
@@ -288,6 +294,7 @@ class TestChangeSpecPage:
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[2]'
         )
+        change.wait_for_loading_to_disappear()
         # 勾选框
         random_int = random.randint(1, 2)
         sleep(1)
@@ -301,6 +308,7 @@ class TestChangeSpecPage:
         change.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[3]'
         )
+        change.wait_for_loading_to_disappear()
         # 勾选框
         random_int1 = random.randint(1, 2)
         sleep(1)
@@ -1240,11 +1248,44 @@ class TestChangeSpecPage:
         ele2 = changespec.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2
-        changespec.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        assert not changespec.has_fail_message()
+
+    @allure.story("模拟多选删除")
+    # @pytest.mark.run(order=1)
+    def test_changespec_shiftdel(self, login_to_changespec):
+        driver = login_to_changespec  # WebDriver 实例
+        changespec = ChangeR(driver)  # 用 driver 初始化 ChangeR
+        changespec.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        changespec.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        changespec.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据添加')
+        sleep(1)
+        ele1 = changespec.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
+            "value")
+        changespec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        changespec.get_find_message()
+        changespec.click_flagdata()
+        ele2 = changespec.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele2 == '1没有数据添加'
+        before_data = changespec.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
+        changespec.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = changespec.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
         changespec.click_del_button()
         changespec.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         message = changespec.get_find_message()
+        changespec.wait_for_loading_to_disappear()
+        after_data = changespec.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
+        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not changespec.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")
