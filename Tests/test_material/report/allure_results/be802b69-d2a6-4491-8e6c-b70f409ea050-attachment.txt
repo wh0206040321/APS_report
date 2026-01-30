@@ -1,0 +1,34 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_item
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialDelUserMap.py, driver_id=2203491670176, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialDelUserMap.py] 截图已保存：D:\PycharmProjects\APS\Tests\test_material\report\screenshots\Tests_test_material_test_materialDelUserMap.py_20260130_170510.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialDelUserMap.py] 截图时间：2026-01-30 17:05:10
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialDelUserMap.py, 文件路径: D:\PycharmProjects\APS\Tests\test_material\report\screenshots\Tests_test_material_test_materialDelUserMap.py_20260130_170510.png
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="用户与物料员对照"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id='rpfclioo-7p50']//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id='04m2qyfz-z28h']//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="取消"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

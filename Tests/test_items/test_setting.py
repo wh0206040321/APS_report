@@ -2,6 +2,7 @@ import logging
 from time import sleep
 
 import allure
+import pyautogui
 import pytest
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver import Keys
@@ -11,8 +12,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 
+from Pages.itemsPage.item_page import ItemPage
 from Pages.itemsPage.login_page import LoginPage
 from Pages.itemsPage.setting_page import SettingPage
+from Pages.systemPage.userRole_page import UserRolePage
 from Utils.data_driven import DateDriver
 from Utils.driver_manager import create_driver, safe_quit, capture_screenshot
 
@@ -2366,3 +2369,77 @@ class TestSettingPage:
         )
         assert after_layout == []
         assert not setting.has_fail_message()
+
+    # @allure.story("分享布局成功-分享范围用户组")
+    # # @pytest.mark.run(order=1)
+    # def test_setting_share_layout(self, login_to_setting):
+    #     driver = login_to_setting  # WebDriver 实例
+    #     setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
+    #     user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
+    #     item = ItemPage(driver)
+    #     page = LoginPage(driver)
+    #     date_driver = DateDriver()
+    #     layout = "1分享布局"
+    #
+    #     list_ = ["系统管理", "系统设置", "用户权限管理"]
+    #     for v in list_:
+    #         setting.click_button(f'(//span[text()="{v}"])[1]')
+    #     name = '1shareLayout'
+    #     password = 'Qw123456'
+    #     role = 'admin'
+    #     user.add_user(name, password, role)
+    #     user.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]')
+    #     user.enter_texts('//div[div[p[text()="计划单元名称"]]]//input', date_driver.planning)
+    #     sleep(3)
+    #     user.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]')
+    #     sleep(1)
+    #     user.click_all_button("保存")
+    #     message = user.get_find_message()
+    #     user.select_input(name)
+    #     ele = user.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
+    #     assert message == "保存成功" and len(ele) == 1
+    #     setting.click_button('//div[@class="labelTitle"][text()=" 物品 "]')
+    #
+    #     item.add_layout(layout)
+    #     item.get_find_message()
+    #     setting.wait_for_loading_to_disappear()
+    #     sleep(1)
+    #     setting.click_button('//i[@id="tabsDrawerIcon"]')
+    #     sleep(1)
+    #     # 获取目标 div 元素，这里的目标是具有特定文本的 div
+    #     target_div = setting.get_find_element_xpath(
+    #         f'//div[@id="container"]/div[.//text()="{layout}"]'
+    #     )
+    #
+    #     # 获取父容器下所有 div
+    #     # 这一步是为了确定目标 div 在其父容器中的位置
+    #     parent_div = setting.get_find_element_xpath(f'//div[@id="container"]')
+    #     all_children = parent_div.find_elements(By.XPATH, "./div")
+    #
+    #     # 获取目标 div 的位置索引（从0开始）
+    #     # 这里是为了后续操作，比如点击目标 div 相关的按钮
+    #     index = all_children.index(target_div)
+    #     print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+    #     setting.hover(layout)
+    #     setting.click_button(f'(//li[text()="共享布局"])[{index + 1}]')
+    #     cla = setting.get_find_element_xpath('//div[label[text()="分享范围"]]//label[text()="角色组"]/span').get_attribute("class")
+    #     if "ivu-checkbox-checked" not in cla:
+    #         setting.click_button('//div[label[text()="分享范围"]]//label[text()="角色组"]/span')
+    #     setting.enter_texts('//input[@placeholder="按回车键添加用户"]', role)
+    #     pyautogui.press('enter')
+    #     sleep(1)
+    #     setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+    #     setting.get_find_message()
+    #     setting.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')
+    #
+    #     setting.click_button('//div[@class="flex-alignItems-center"]')
+    #     setting.click_button('//ul/li/div[text()=" 注销 "]')
+    #     page.login(name, password, date_driver.planning)
+    #     user.wait_for_loadingbox()
+    #     list_ = ["计划管理", "计划基础数据", "物品"]
+    #     for v in list_:
+    #         user.click_button(f'(//span[text()="{v}"])[1]')
+    #     user.wait_for_loading_to_disappear()
+    #     setting.click_button('//i[@id="tabsDrawerIcon"]')
+    #     setting.click_button('//div[p[text()="布局列表"]]/span')
+    #     assert not setting.has_fail_message()

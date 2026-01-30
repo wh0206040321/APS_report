@@ -303,10 +303,18 @@ class TestAffairsPage:
             {"select": '(//div[@class="flex-1"])[2]//input', "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
             {"select": '(//div[@class="flex-1"])[3]//input', "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
         ]
+        affairs.wait_for_loading_wrapper()
         adds.batch_modify_select_input(select_list)
+        WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[1]")
+            )
+        )
         affairs.click_button('(//table[@class="vxe-table--body"])[2]//tr[1]//span')
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+        sleep(1)
         affairs.click_confirm_button()
         ele = driver.find_elements(By.XPATH, f'//div[@class="template-card__title"]/div[text()="{name}"]')
         value = ele[0].find_element(By.XPATH, './ancestor::div[3]/div[3]/div').text
@@ -319,6 +327,9 @@ class TestAffairsPage:
         driver = login_to_affairs  # WebDriver 实例
         affairs = AffairsPage(driver)  # 用 driver 初始化 AffairsPage
         adds = AddsPages(driver)
+
+        driver.refresh()
+        affairs.wait_for_el_loading_mask()
         name = "测试事务模版6"
         affairs.click_add_affairs(name=name, type="接口", button=False)
         select_list = [

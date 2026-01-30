@@ -116,6 +116,15 @@ class MaterialSubstitutionPage(BasePage):
         self.enter_texts(xpath, name)
         sleep(1)
 
+    def select_input(self, xpath_name, name):
+        """选择输入框."""
+        xpath = f'//div[div[span[text()=" {xpath_name}"]]]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL + "a")
+        ele.send_keys(Keys.DELETE)
+        self.enter_texts(xpath, name)
+        sleep(1)
+
     def click_select_button(self):
         """点击选择按钮."""
         self.click_button('//div[@id="8quvzg1r-ahmn"]//button')

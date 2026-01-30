@@ -1,0 +1,82 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物控基础数据"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="物料替代"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[2]//td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6cc386f65+78965]
+	GetHandleVerifier [0x0x7ff6cc386fc0+79056]
+	(No symbol) [0x0x7ff6cc119c0c]
+	(No symbol) [0x0x7ff6cc165747]
+	(No symbol) [0x0x7ff6cc19866a]
+	(No symbol) [0x0x7ff6cc162b56]
+	(No symbol) [0x0x7ff6cc198880]
+	(No symbol) [0x0x7ff6cc1c0dbe]
+	(No symbol) [0x0x7ff6cc198443]
+	(No symbol) [0x0x7ff6cc161311]
+	(No symbol) [0x0x7ff6cc1620a3]
+	GetHandleVerifier [0x0x7ff6cc63e26d+2926461]
+	GetHandleVerifier [0x0x7ff6cc638993+2903715]
+	GetHandleVerifier [0x0x7ff6cc656aed+3026941]
+	GetHandleVerifier [0x0x7ff6cc3a16fe+187406]
+	GetHandleVerifier [0x0x7ff6cc3a96ef+220159]
+	GetHandleVerifier [0x0x7ff6cc38faf4+114692]
+	GetHandleVerifier [0x0x7ff6cc38fca9+115129]
+	GetHandleVerifier [0x0x7ff6cc3764d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[2]//td[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6cc386f65+78965]
+	GetHandleVerifier [0x0x7ff6cc386fc0+79056]
+	(No symbol) [0x0x7ff6cc119c0c]
+	(No symbol) [0x0x7ff6cc165747]
+	(No symbol) [0x0x7ff6cc19866a]
+	(No symbol) [0x0x7ff6cc162b56]
+	(No symbol) [0x0x7ff6cc198880]
+	(No symbol) [0x0x7ff6cc1c0dbe]
+	(No symbol) [0x0x7ff6cc198443]
+	(No symbol) [0x0x7ff6cc161311]
+	(No symbol) [0x0x7ff6cc1620a3]
+	GetHandleVerifier [0x0x7ff6cc63e26d+2926461]
+	GetHandleVerifier [0x0x7ff6cc638993+2903715]
+	GetHandleVerifier [0x0x7ff6cc656aed+3026941]
+	GetHandleVerifier [0x0x7ff6cc3a16fe+187406]
+	GetHandleVerifier [0x0x7ff6cc3a96ef+220159]
+	GetHandleVerifier [0x0x7ff6cc38faf4+114692]
+	GetHandleVerifier [0x0x7ff6cc38fca9+115129]
+	GetHandleVerifier [0x0x7ff6cc3764d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1837389644080

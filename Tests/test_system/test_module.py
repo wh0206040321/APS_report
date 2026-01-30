@@ -1330,6 +1330,7 @@ class TestSModulePage:
         assert all(len(elements) == 0 for elements in itemdata)
 
         module.click_button('(//span[text()="模块管理"])[1]')
+        module.wait_for_loading_to_disappear()
         value = ['ABCDAA', 'ACBDDD']
         module.del_all(xpath='//div[div[span[text()=" 模块代码"]]]//input', value=value)
         module.right_refresh("模块管理")
