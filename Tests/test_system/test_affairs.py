@@ -305,7 +305,7 @@ class TestAffairsPage:
         ]
         affairs.wait_for_loading_wrapper()
         adds.batch_modify_select_input(select_list)
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(driver, 10).until(
             EC.invisibility_of_element_located(
                 (By.XPATH,
                  "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[1]")

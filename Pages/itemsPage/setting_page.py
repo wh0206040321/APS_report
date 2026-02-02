@@ -273,6 +273,23 @@ class SettingPage(BasePage):
         # 3️⃣ 再点击图标
         delete_icon.click()
 
+    def hover_layout(self, name=""):
+        # 分享布局悬停模版容器触发图标显示
+        container = self.get_find_element_xpath(
+            f'//div[span[text()="{name}"]]'
+        )
+        sleep(3)
+        ActionChains(self.driver).move_to_element(container).perform()
+        # 2️⃣ 等待图标可见
+        delete_icon = WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located((
+                By.XPATH,
+                f'//div[span[text()="{name}"]]//i'
+            ))
+        )
+        # 3️⃣ 再点击图标
+        delete_icon.click()
+
     def right_refresh(self, name):
         """右键刷新."""
         but = self.get_find_element_xpath(f'//div[@class="scroll-body"]/div[.//div[text()=" {name} "]]')

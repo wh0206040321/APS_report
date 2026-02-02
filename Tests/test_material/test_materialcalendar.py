@@ -863,7 +863,7 @@ class TestMaterialCalendarPage:
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
         calendar.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         ele1 = calendar.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
@@ -879,7 +879,7 @@ class TestMaterialCalendarPage:
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
         calendar.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         calendar.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
         calendar.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据添加')
         sleep(1)
@@ -900,7 +900,7 @@ class TestMaterialCalendarPage:
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
         calendar.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
         calendar.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
         calendar.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改')
         ele1 = calendar.get_find_element_xpath(
@@ -921,7 +921,7 @@ class TestMaterialCalendarPage:
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
         calendar.right_refresh('收货日历')
         calendar.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         calendar.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
         calendar.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改1')
         sleep(1)
@@ -943,7 +943,7 @@ class TestMaterialCalendarPage:
         calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])
-        ActionChains(self.driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
         sleep(1)
         calendar.click_del_button()
         calendar.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
@@ -964,10 +964,10 @@ class TestMaterialCalendarPage:
         calendar.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = calendar.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
         calendar.click_button('//div[div[p[text()="收货场所"]]]//input')
         sleep(1)
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
         eles = calendar.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr[2]//td[2]')
         eles = [ele.text for ele in eles]
         calendar.right_refresh('收货日历')
@@ -984,9 +984,9 @@ class TestMaterialCalendarPage:
         calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])
-        ActionChains(self.driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
         sleep(1)
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         num = calendar.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[last()]//tr')
         calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert len(num) == 2
@@ -1002,9 +1002,9 @@ class TestMaterialCalendarPage:
         calendar.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = calendar.get_find_element_xpath(elements[1])
-        ActionChains(self.driver).key_down(Keys.CONTROL).click(cell2).key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).click(cell2).key_up(Keys.CONTROL).perform()
         sleep(1)
-        ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
         num = calendar.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[last()]//tr')
         calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         message = calendar.get_find_message()
