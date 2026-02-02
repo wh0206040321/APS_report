@@ -1,0 +1,34 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //i[@id="tabsDrawerIcon"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]/div[.//text()="测试布局B"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]//span[text()="测试布局B"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[text()="重命名"])[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]/div[.//text()="测试布局B"]//input
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: element not interactable
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff737376f65+78965]
+	GetHandleVerifier [0x0x7ff737376fc0+79056]
+	(No symbol) [0x0x7ff737109c0c]
+	(No symbol) [0x0x7ff737155747]
+	(No symbol) [0x0x7ff73718866a]
+	(No symbol) [0x0x7ff737152b56]
+	(No symbol) [0x0x7ff737188880]
+	(No symbol) [0x0x7ff7371b0dbe]
+	(No symbol) [0x0x7ff737188443]
+	(No symbol) [0x0x7ff737151311]
+	(No symbol) [0x0x7ff7371520a3]
+	GetHandleVerifier [0x0x7ff73762e26d+2926461]
+	GetHandleVerifier [0x0x7ff737628993+2903715]
+	GetHandleVerifier [0x0x7ff737646aed+3026941]
+	GetHandleVerifier [0x0x7ff7373916fe+187406]
+	GetHandleVerifier [0x0x7ff7373996ef+220159]
+	GetHandleVerifier [0x0x7ff73737faf4+114692]
+	GetHandleVerifier [0x0x7ff73737fca9+115129]
+	GetHandleVerifier [0x0x7ff7373664d8+10728]
+	BaseThreadInitThunk [0x0x7ffa14ef7374+20]
+	RtlUserThreadStart [0x0x7ffa16b1cc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
