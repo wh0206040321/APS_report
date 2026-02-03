@@ -1333,7 +1333,8 @@ class TestOrderPage:
         ele1 = order.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         order.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = order.get_error_message()
+        message = order.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        order.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         order.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not order.has_fail_message()
@@ -1425,6 +1426,7 @@ class TestOrderPage:
     def test_order_ctrlC(self, login_to_order):
         driver = login_to_order  # WebDriver 实例
         order = OrderPage(driver)  # 用 driver 初始化 OrderPage
+        order.right_refresh('制造订单')
         order.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = order.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)

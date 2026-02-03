@@ -1204,7 +1204,8 @@ class TestChangeSpecPage:
         ele1 = changespec.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         changespec.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = changespec.get_error_message()
+        message = changespec.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        changespec.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         changespec.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not changespec.has_fail_message()

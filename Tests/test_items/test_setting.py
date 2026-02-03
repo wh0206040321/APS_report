@@ -371,7 +371,7 @@ class TestSettingPage:
         sleep(1)
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
-        ).get_attribute('innerText')
+        ).get_attribute('innerText').strip()
         setting.click_button('(//div[@class="demo-drawer-footer"]//span[text()="取消"])[2]')
         assert name == layout
         assert not setting.has_fail_message()
@@ -1186,6 +1186,7 @@ class TestSettingPage:
         # 打开下拉框
         setting.click_button('//div[text()="日期"]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        setting.wait_for_el_loading_mask()
         setting.wait_for_loading_to_disappear()
         # 断言布局名称与预期相符
         setting.click_button('//p[text()="交货期"]/following-sibling::div[1]')
@@ -1207,6 +1208,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         setting.click_button('//div[@class="queryBtn"]/button[2]')
+        sleep(1)
         ele = setting.get_find_element_xpath('//div[@class="ivu-date-picker-rel"]//input').get_attribute("value")
         setting.right_refresh('制造订单')
         assert ele == ""
@@ -1783,7 +1785,7 @@ class TestSettingPage:
         ele.send_keys(Keys.DELETE)
         setting.enter_texts('//span[text()="图表名"]/following-sibling::div[1]//input', "统计图2")
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
-        message = setting.get_error_message()
+        message = setting.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
         driver.refresh()
         setting.wait_for_loading_to_disappear()
         assert message == "记录已存在,请检查！"

@@ -889,8 +889,8 @@ class TestSMenuPage:
         menu.select_input_menu('1没有数据添加')
         before_data = menu.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         before_count = int(re.search(r'\d+', before_data).group())
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         menu.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = menu.get_find_element_xpath(elements[1])
@@ -911,6 +911,7 @@ class TestSMenuPage:
     def test_menu_ctrlC(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        menu.right_refresh('菜单组件')
         menu.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = menu.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)
@@ -929,8 +930,8 @@ class TestSMenuPage:
     def test_menu_shift(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         menu.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = menu.get_find_element_xpath(elements[1])
@@ -947,8 +948,8 @@ class TestSMenuPage:
     def test_menu_ctrls(self, login_to_menu):
         driver = login_to_menu  # WebDriver 实例
         menu = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         menu.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = menu.get_find_element_xpath(elements[1])

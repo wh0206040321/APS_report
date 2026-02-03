@@ -1146,7 +1146,8 @@ class TestProcessPage:
         ele1 = process.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         process.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = process.get_error_message()
+        message = process.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        process.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         process.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not process.has_fail_message()
@@ -1238,6 +1239,7 @@ class TestProcessPage:
     def test_process_ctrlC(self, login_to_process):
         driver = login_to_process  # WebDriver 实例
         process = ProcessPage(driver)  # 用 driver 初始化 ProcessPage
+        process.right_refresh('工序')
         process.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = process.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)

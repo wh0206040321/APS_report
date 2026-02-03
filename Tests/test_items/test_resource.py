@@ -1,5 +1,6 @@
 import logging
 import random
+import re
 from datetime import date
 from time import sleep
 
@@ -1239,7 +1240,8 @@ class TestResourcePage:
         ele1 = resource.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = resource.get_error_message()
+        message = resource.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        resource.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not resource.has_fail_message()
@@ -1283,12 +1285,47 @@ class TestResourcePage:
         ele2 = resource.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2
-        resource.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        assert not resource.has_fail_message()
+
+    @allure.story("模拟多选删除")
+    # @pytest.mark.run(order=1)
+    def test_resource_shiftdel(self, login_to_resource):
+        driver = login_to_resource  # WebDriver 实例
+        resource = ResourcePage(driver)  # 用 driver 初始化 ResourcePage
+        resource.right_refresh('资源')
+        resource.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        resource.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        resource.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改1')
+        sleep(1)
+        ele1 = resource.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
+            "value")
+        resource.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        resource.get_find_message()
+        resource.select_input_resource('1没有数据修改1')
+        ele2 = resource.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele2 == '1没有数据修改1'
+        assert not resource.has_fail_message()
+        resource.select_input_resource('1没有数据修改')
+        before_data = resource.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        resource.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = resource.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
         resource.click_del_button()
         resource.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         message = resource.get_find_message()
-        resource.right_refresh('资源')
+        resource.wait_for_loading_to_disappear()
+        after_data = resource.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
+        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not resource.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")
@@ -1296,6 +1333,7 @@ class TestResourcePage:
     def test_resource_ctrlC(self, login_to_resource):
         driver = login_to_resource  # WebDriver 实例
         resource = ResourcePage(driver)  # 用 driver 初始化 ResourcePage
+        resource.right_refresh('资源')
         resource.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = resource.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)

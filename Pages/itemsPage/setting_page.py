@@ -78,7 +78,10 @@ class SettingPage(BasePage):
 
     def wait_for_el_loading_mask(self, timeout=10):
         WebDriverWait(self.driver, timeout).until(
-            EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
+            lambda driver: all(
+                not element.is_displayed()
+                for element in driver.find_elements(By.CLASS_NAME, "el-loading-mask")
+            )
         )
         sleep(1)
 

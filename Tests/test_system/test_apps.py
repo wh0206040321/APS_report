@@ -492,7 +492,8 @@ class TestSAppsPage:
         ele1 = apps.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = apps.get_error_message()
+        message = apps.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        apps.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not apps.has_fail_message()

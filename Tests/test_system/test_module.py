@@ -1404,7 +1404,7 @@ class TestSModulePage:
     def test_module_shiftdel(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        module.right_refresh('菜单组件')
+        module.right_refresh('模块管理')
         module.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         module.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
@@ -1423,8 +1423,8 @@ class TestSModulePage:
         module.select_input_module('1没有数据添加')
         before_data = module.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         before_count = int(re.search(r'\d+', before_data).group())
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         module.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = module.get_find_element_xpath(elements[1])
@@ -1445,6 +1445,7 @@ class TestSModulePage:
     def test_module_ctrlC(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        module.right_refresh('模块管理')
         module.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = module.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)
@@ -1463,8 +1464,8 @@ class TestSModulePage:
     def test_module_shift(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         module.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = module.get_find_element_xpath(elements[1])
@@ -1481,8 +1482,8 @@ class TestSModulePage:
     def test_module_ctrls(self, login_to_module):
         driver = login_to_module  # WebDriver 实例
         module = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
-        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
-                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
+                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
         module.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = module.get_find_element_xpath(elements[1])

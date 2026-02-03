@@ -608,7 +608,7 @@ class TestSLanguagePage:
         language.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         language.get_find_message()
         language.wait_for_loading_to_disappear()
-        language.select_input_language('1没有数据添加')
+        language.select_input_language('1没有数据修改')
         ele2 = language.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2

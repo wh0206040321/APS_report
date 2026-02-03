@@ -1106,7 +1106,8 @@ class TestChangeRPage:
         ele1 = changeR.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         changeR.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = changeR.get_error_message()
+        message = changeR.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        changeR.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         changeR.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
         assert not changeR.has_fail_message()
