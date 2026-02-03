@@ -1,0 +1,10 @@
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon" and ./div[text()=" 测试布局A "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]//i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//li[text()="删除布局"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]，等待超时 10s
