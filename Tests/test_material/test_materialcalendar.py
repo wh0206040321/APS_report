@@ -862,7 +862,7 @@ class TestMaterialCalendarPage:
     def test_materialcalendar_ctrlIrepeat(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
-        calendar.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        calendar.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         ele1 = calendar.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")

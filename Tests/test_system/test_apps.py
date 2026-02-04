@@ -647,7 +647,7 @@ class TestSAppsPage:
         if 'ivu-checkbox-checked' not in ele:
             apps.click_button('//table[@class="vxe-table--body"]//tr/td[2]//label/span')
 
-        apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        apps.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
         but = apps.finds_elements(By.XPATH, '//div[@class="ivu-modal-body"]//span[text()="确定"]')
         if len(but) == 1:
             apps.click_button('//div[@class="ivu-modal-body"]//span[text()="确定"]')
@@ -686,7 +686,7 @@ class TestSAppsPage:
         if 'ivu-checkbox-checked' not in ele:
             apps.click_button('//table[@class="vxe-table--body"]//tr/td[2]//label/span')
 
-        apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        apps.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
         message = apps.get_find_message()
         assert message == '新增成功！'
         assert not apps.has_fail_message()

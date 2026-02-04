@@ -1505,7 +1505,41 @@ class TestSModulePage:
         module.wait_for_loading_to_disappear()
         layout = "测试布局A"
 
-        module.del_layout(layout)
+        # 获取目标 div 元素，这里的目标是具有特定文本的 div
+        target_div = module.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
+        )
+
+        # 获取父容器下所有 div
+        # 这一步是为了确定目标 div 在其父容器中的位置
+        parent_div = module.get_find_element_xpath(
+            f'//div[@class="tabsDivItemCon" and ./div[text()=" {layout} "]]'
+        )
+        all_children = parent_div.find_elements(By.XPATH, "./div")
+
+        # 获取目标 div 的位置索引（从0开始）
+        # 这里是为了后续操作，比如点击目标 div 相关的按钮
+        index = all_children.index(target_div)
+        print(f"目标 div 是第 {index + 1} 个 div")  # 输出 3（如果从0开始则是2）
+
+        module.click_button(
+            f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]//i'
+        )
+        # 根据目标 div 的位置，点击对应的“删除布局”按钮
+        for i in range(1, 10):
+            try:
+                print(f"尝试点击第 {i} 个删除布局按钮...")
+
+                # 构建XPath，注意索引从1开始
+                xpath = f'(//li[text()="删除布局"])[{index + i}]'
+                module.click_button(xpath)
+                break
+            except Exception as e:
+                print(f"⚠️ 点击第 {i} 个按钮时出错: {e}")
+        sleep(2)
+        # 点击确认删除的按钮
+        module.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        module.wait_for_loading_to_disappear()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'

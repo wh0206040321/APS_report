@@ -1622,7 +1622,7 @@ class TestSettingPage:
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.add_statistics(num=1, name=statistics, code2="物料优先度 (itemPriority)", code3="物料种类 (type)")
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
-        message = setting.get_error_message()
+        message = setting.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
         driver.refresh()
         setting.wait_for_loading_to_disappear()
         assert message == "记录已存在,请检查！"
@@ -1932,8 +1932,8 @@ class TestSettingPage:
         setting.enter_texts('//div[text()="标签名："]/following-sibling::div/input', "标签2")
 
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
-        mess = setting.get_error_message()
-        assert mess == "记录已存在,请检查！"
+        message = setting.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        assert message == "记录已存在,请检查！"
         assert not setting.has_fail_message()
 
     @allure.story("修改标签名，修改成功，添加查询数据")
@@ -2140,7 +2140,7 @@ class TestSettingPage:
         layout = "测试布局B"
         setting.wait_for_loading_to_disappear()
         setting.click_button('//i[@id="tabsDrawerIcon"]')
-        sleep(1)
+        sleep(3)
 
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = setting.get_find_element_xpath(
@@ -2164,7 +2164,7 @@ class TestSettingPage:
         )
         ele.send_keys(Keys.CONTROL, 'a')
         ele.send_keys(Keys.DELETE)
-        setting.enter_texts(f'//div[@id="container"]/div[.//text()="{layout}"]//input', "修改布局")
+        ele.send_keys("修改布局")
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)
@@ -2183,7 +2183,7 @@ class TestSettingPage:
         layout = "修改布局"
         sleep(2)
         setting.click_button('//i[@id="tabsDrawerIcon"]')
-        sleep(1)
+        sleep(3)
 
         # 获取目标 div 元素，这里的目标是具有特定文本的 div
         target_div = setting.get_find_element_xpath(
@@ -2206,7 +2206,8 @@ class TestSettingPage:
         )
         ele.send_keys(Keys.CONTROL, 'a')
         ele.send_keys(Keys.DELETE)
-        setting.enter_texts(f'//div[@id="container"]/div[.//text()="{layout}"]//input', "测试布局A")
+        sleep(1)
+        ele.send_keys("测试布局A")
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)
@@ -2445,6 +2446,10 @@ class TestSettingPage:
         setting.click_button('//div[@class="flex-alignItems-center"]')
         setting.click_button('//ul/li/div[text()=" 注销 "]')
         page.login(name, password, date_driver.planning)
+        err = user.finds_elements(By.XPATH,
+                                  f'//div[@class="ivu-modal-body"]//div[text()="当前用户已经登录此单元，是否继续登录？"]')
+        if len(err) == 1:
+            user.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         user.wait_for_loadingbox()
         list_ = ["计划管理", "计划基础数据", "物品"]
         for v in list_:

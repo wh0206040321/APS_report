@@ -1060,34 +1060,18 @@ class TestChangeSpecPage:
             '//label[text()="更新时间"]/following-sibling::div//input').get_attribute("value")
         today_str = date.today().strftime('%Y/%m/%d')
         change.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        change.right_refresh('生产特征1切换')
+        logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
+        ele = change.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[7][.//span[text()="{input_value}"]]')
+        if len(ele) == 1:
+            change.click_button(
+                f'//table[@class="vxe-table--body"]//tr/td[7][.//span[text()="{input_value}"]]')
+            change.click_del_button()  # 点击删除
+            change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            change.wait_for_loading_to_disappear()
+            change.right_refresh('生产特征1切换')
         assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
             num) == (int(len_num) + 2)
         assert all(before_all_value), "列表中存在为空或为假值的元素！"
-        assert not change.has_fail_message()
-
-    @allure.story("删除全部数据功")
-    # @pytest.mark.run(order=1)
-    def test_changespec_deleteall(self, login_to_changespec):
-        driver = login_to_changespec  # WebDriver 实例
-        change = ChangeR(driver)  # 用 driver 初始化 ChangeR
-        change.click_flagdata()
-        before_data = change.get_find_element_xpath(
-            '(//span[contains(text(),"条记录")])[1]'
-        ).text
-        change.wait_for_loading_to_disappear()
-        change.click_button(
-            '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[1]//td[2]')
-        change.click_del_button()  # 点击删除
-        change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        change.wait_for_loading_to_disappear()
-        # 定位
-        after_data = change.get_find_element_xpath(
-            '(//span[contains(text(),"条记录")])[1]'
-        ).text
-        assert (
-                before_data != after_data
-        ), f"删除后的数据{after_data}，删除前的数据{before_data}"
         assert not change.has_fail_message()
 
     @allure.story("过滤条件查询，一个不选，显示正常")

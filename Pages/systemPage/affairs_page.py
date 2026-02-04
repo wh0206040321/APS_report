@@ -186,7 +186,9 @@ class AffairsPage(BasePage):
         self.click_button(f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]/td[last()]//span[text()="编辑"]')
         sleep(1)
         WebDriverWait(self.driver, 20).until(
-            EC.invisibility_of_element_located((By.CSS_SELECTOR, ".vxe-loading.vxe-modal--loading")))
+            lambda driver: len(driver.find_elements(By.XPATH,
+            '//div[@class="vxe-loading vxe-modal--loading" and contains(@style, "display: block")]'
+        )) == 0)
 
     def add_process_affairs(self, add: bool = True, name="", sel=""):
         """点击添加流程"""

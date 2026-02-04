@@ -1106,8 +1106,8 @@ class TestSpecPage:
         spec.select_input('1没有数据修改')
         before_data = spec.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         before_count = int(re.search(r'\d+', before_data).group())
-        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
-                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
         spec.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = spec.get_find_element_xpath(elements[1])

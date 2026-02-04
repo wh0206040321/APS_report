@@ -129,7 +129,8 @@ class PersonalPage(BasePage):
 
         # 确认
         self.click_button('//div[@class="demo-drawer-footer"]/button[2]')
-        sleep(3)
+        self.get_find_message()
+        sleep(2)
         # 获取并返回特定元素的文本，用于验证语言是否已成功切换
         ele = self.get_find_element('//div[@class="vxe-pulldown--content"]//input').get_attribute("placeholder")
         return ele
