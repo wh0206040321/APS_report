@@ -1,0 +1,10 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@id="tab-air"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="添加全部模版成功"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="el-message-box__btns"]/button[2])[last()]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="添加事务模版"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@id="tab-air"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="添加全部模版成功"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //div[@class="template-card__title"]/div[text()="添加全部模版成功"]，等待超时 10s
