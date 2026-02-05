@@ -1,0 +1,45 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="新增"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[span[text()=" 供应商编号 "]]/following-sibling::div//i
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[span[text()=" 物料编号 "]]/following-sibling::div//i
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" PO编码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 行号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 采购单数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 未交数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 下单日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 到货日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试数据1"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="新增"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[span[text()=" 供应商编号 "]]/following-sibling::div//i
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[span[text()=" 物料编号 "]]/following-sibling::div//i
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" PO编码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 行号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 采购单数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 未交数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 下单日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 到货日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
