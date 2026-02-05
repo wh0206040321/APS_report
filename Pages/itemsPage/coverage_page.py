@@ -236,6 +236,7 @@ class Coverage(BasePage):
         self.click_button(
             '//span[text()=" 更新时间"]/following-sibling::div'
         )
+        sleep(0.5)
 
     def hover(self, name=""):
         # 悬停模版容器触发图标显示

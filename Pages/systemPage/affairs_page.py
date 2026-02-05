@@ -153,7 +153,7 @@ class AffairsPage(BasePage):
         ActionChains(self.driver).move_to_element(container).perform()
 
         # 2️⃣ 等待图标可见
-        delete_icon = WebDriverWait(self.driver, 10).until(
+        delete_icon = WebDriverWait(self.driver, 15).until(
             EC.visibility_of_element_located((
                 By.XPATH,
                 f'//div[@class="template-card__title"]/div[text()="{name}"]/ancestor::div[3]//button/span[text()="{edi}"]'

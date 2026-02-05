@@ -97,6 +97,7 @@ class ChangeR(BasePage):
         self.click_button(
             '//div[p[text()="更新时间"]]/div[1]'
         )
+        sleep(1)
 
     def right_refresh(self, name):
         """右键刷新."""

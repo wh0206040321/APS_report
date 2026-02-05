@@ -1,5 +1,7 @@
+import logging
 import random
 import re
+from datetime import date
 from time import sleep
 
 import allure
@@ -43,109 +45,56 @@ class TestItemPage:
     def setup(self, login_to_item):
         self.driver = login_to_item
         self.item = WarehouseLocationPage(self.driver)
-        # 必填新增输入框xpath
-        self.req_input_add_xpath_list = [
-            "//div[@id='p34nag46-7evf']//input",
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='ctfddy1k-hbmj']//input",
-            "//div[@id='z0h20cps-xzrs']//input"
+        self.custom_xpath_list = [
+            f'//div[span[text()=" 自定义字符{i} "]]/following-sibling::div//input'
+            for i in range(1, 6)
         ]
-        # 必填编辑输入框xpath
-        self.req_input_edit_xpath_list = [
-            "//div[@id='1bw9rz04-1aar']//input",
-            "//div[@id='87jzke17-uc0m']//input",
-            "//div[@id='bfz19u4m-zowp']//input",
-            "//div[@id='cwed5m1v-53u4']//input"
+        self.num_xpath_list1 = [
+            f'//div[span[text()=" 自定义数值{i} "]]/following-sibling::div//input'
+            for i in range(1, 6)
         ]
-
-        # 必填新增日期xpath
-        self.req_date_add_xpath_list = ["//div[@id='dlmc4h3z-eofa']//input", "//div[@id='l7p1eln5-w34j']//input"]
-        # 必填编辑日期xpath
-        self.req_date_edit_xpath_list = ["//div[@id='756m62y4-tcii']//input", "//div[@id='bp7q4cw1-089a']//input"]
+        self.data_xpath_list1 = [
+            f'//div[span[text()=" 自定义日期{i} "]]/following-sibling::div//input'
+            for i in range(1, 6)
+        ]
+        # 必填输入框xpath
+        self.req_input_xpath_list = [
+            '//div[span[text()=" PO编码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 行号 "]]/following-sibling::div//input',
+            '//div[span[text()=" 采购单数量 "]]/following-sibling::div//input',
+            '//div[span[text()=" 未交数量 "]]/following-sibling::div//input',
+            '//div[span[text()=" 下单日期 "]]/following-sibling::div//input',
+            '//div[span[text()=" 到货日期 "]]/following-sibling::div//input',
+        ]
 
         # 全部新增输入框xpath
-        self.all_input_add_xpath_list = [
-            "//div[@id='p34nag46-7evf']//input",
-            "//div[@id='hpjqsv1m-5607']//input",
-            "//div[@id='z0h20cps-xzrs']//input",
-            "//div[@id='7z1rv7fs-trb6']//input",
-            "//div[@id='hguo4esk-gii0']//input",
-            "//div[@id='ywz9q11i-sp3b']//input",
-            "//div[@id='ctfddy1k-hbmj']//input",
-            "//div[@id='0t8pfkrw-y5i1']//input",
-            "//div[@id='u9i1q4uf-3oli']//input",
-            "//div[@id='989l7loi-6nc4']//input",
-            "//div[@id='pqpntuk9-60n4']//input",
-            "//div[@id='e67g7odw-v396']//input",
-            "//div[@id='8nwpr6jl-sqt5']//input",
-            "//div[@id='izx0sysf-otie']//input",
-            "//div[@id='1xvizeqn-gffj']//input",
-            "//div[@id='35lc2nk6-812s']//input",
-            "//div[@id='z0pnhx2y-7qx3']//input"
+        self.all_input_xpath_list = [
+            '//div[span[text()=" PO编码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 供应商编号 "]]/following-sibling::div//input',
+            '//div[span[text()=" 供应商名称 "]]/following-sibling::div//input',
+            '//div[span[text()=" 物料编号 "]]/following-sibling::div//input',
+            '//div[span[text()=" 工厂代码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 订单代码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 备注 "]]/following-sibling::div//input',
+            '//div[span[text()=" 批次号 "]]/following-sibling::div//input',
         ]
+        self.all_input_xpath_list += self.custom_xpath_list
+
+        # 全部新增数值输入框xpath
+        self.all_num_input_xpath_list = [
+            '//div[span[text()=" 行号 "]]/following-sibling::div//input',
+            '//div[span[text()=" 采购单数量 "]]/following-sibling::div//input',
+            '//div[span[text()=" 未交数量 "]]/following-sibling::div//input',
+
+        ]
+        self.all_num_input_xpath_list += self.num_xpath_list1
+
         # 全部新增日期xpath
-        self.all_date_add_xpath_list = [
-            "//div[@id='dsosvk7u-fg07']//input",
-            "//div[@id='dlmc4h3z-eofa']//input",
-            "//div[@id='54xpaxv5-kcvd']//input",
-            "//div[@id='l7p1eln5-w34j']//input",
-            "//div[@id='fyqeuxkw-hani']//input",
-            "//div[@id='7pwkrz9l-r5zu']//input",
-            "//div[@id='qucmz24h-wri3']//input"
+        self.all_date_xpath_list = [
+            '//div[span[text()=" 下单日期 "]]/following-sibling::div//input',
+            '//div[span[text()=" 到货日期 "]]/following-sibling::div//input',
         ]
-        # 全部编辑输入框xpath
-        self.all_input_edit_xpath_list = [
-            "//div[@id='1bw9rz04-1aar']//input",
-            "//div[@id='adoirtm0-2ibf']//input",
-            "//div[@id='2sur8z1i-2kk4']//input",
-            "//div[@id='il6wlw6c-2o9k']//input",
-            "//div[@id='v98ax0rc-ux5e']//input",
-            "//div[@id='g37toij2-6zmz']//input",
-            "//div[@id='cilq6ovd-r7zb']//input",
-            "//div[@id='4f9ktj5s-u0lr']//input",
-            "//div[@id='nvfzew65-zmlm']//input",
-            "//div[@id='i7rr5um5-j69w']//input",
-            "//div[@id='bqv2hc61-xdpj']//input",
-            "//div[@id='gufy4514-u43r']//input",
-            "//div[@id='yv3z11hg-qque']//input",
-            "//div[@id='mhbqie1c-5pvv']//input"
-        ]
-        self.all_input_edit_xpath_list2 = [
-            "//div[@id='1bw9rz04-1aar']//input",
-            "//div[@id='adoirtm0-2ibf']//input",
-            "//div[@id='cwed5m1v-53u4']//input",
-            "//div[@id='925v6ggd-nclb']//input",
-            "//div[@id='87jzke17-uc0m']//input",
-            "//div[@id='bfz19u4m-zowp']//input",
-            "//div[@id='th7cwaue-hqj0']//input",
-            "//div[@id='j4cp0tc2-4d4a']//input",
-            "//div[@id='nx0n5mwq-8mz0']//input",
-            "//div[@id='tnty661w-d6tu']//input",
-            "//div[@id='nqy23sx0-rkjd']//input",
-            "//div[@id='alarfkax-eblo']//input",
-            "//div[@id='3kybjccx-w8m1']//input",
-            "//div[@id='iq3pgaxh-91gj']//input",
-            "//div[@id='38s9sc64-jw0r']//input",
-            "//div[@id='n2iteqmi-20b6']//input",
-            "//div[@id='a44euxz5-dduf']//input",
-        ]
-        # 全部编辑日期xpath
-        self.all_date_edit_xpath_list = [
-            "//div[@id='2pnqtsp1-hxoy']//input",
-            "//div[@id='x11i3oa0-uxa8']//input",
-            "//div[@id='n3pifh3l-i8t8']//input",
-            "//div[@id='eoc2sfey-d5k6']//input",
-            "//div[@id='wl1cpkti-bjt9']//input"
-        ]
-        self.all_date_edit_xpath_list2 = [
-            "//div[@id='756m62y4-tcii']//input",
-            "//div[@id='bp7q4cw1-089a']//input",
-            "//div[@id='2pnqtsp1-hxoy']//input",
-            "//div[@id='x11i3oa0-uxa8']//input",
-            "//div[@id='n3pifh3l-i8t8']//input",
-            "//div[@id='eoc2sfey-d5k6']//input",
-            "//div[@id='wl1cpkti-bjt9']//input"
-        ]
+        self.all_date_xpath_list += self.data_xpath_list1
 
     @allure.story("添加采购PO信息 不填写数据点击确认 不允许提交")
     # @pytest.mark.run(order=1)
@@ -213,49 +162,18 @@ class TestItemPage:
         date_str = "2025/07/23 00:00:00"
         sleep(1)
         input_icon_list = [
-            "//div[@id='u2tgl5h9-otp1']//i",
-            "//div[@id='izykzohi-1l5u']//i",
+            '//div[span[text()=" 供应商编号 "]]/following-sibling::div//i',
+            '//div[span[text()=" 物料编号 "]]/following-sibling::div//i',
         ]
-        text_list = self.item.batch_modify_dialog_box(
-            input_icon_list,
-            '(//div[@id="dialogCanvas"]//table//tr[1]/td[2])'
-        )
-        ele = self.item.get_find_element_xpath(
-            "//div[@id='ywz9q11i-sp3b']//input"
-        )
-        # 清空数字输入框
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        sleep(1)
-        # 批量修改输入框
-        self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
+        self.item.batch_modify_dialog_boxs(input_icon_list, '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[-2:], date_str)
 
-        sleep(1)
-        # 点击确定
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
-        # 选中新增行
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        # 点击编辑按钮
-        self.item.click_edi_button()
-        sleep(1)
-        # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        # 批量获取日期选择框的value
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
-        # 批量获取弹窗式输入框的value
-        pop_input_val = self.item.batch_acquisition_input_list([
-            "//div[@id='v1pgqqgb-updr']//input",
-            "//div[@id='4jd1d10x-4fbu']//input",
-        ], text_list)
-        sleep(1)
-        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        assert (
-                len(self.req_input_add_xpath_list) == len(input_values) and
-                len(self.req_date_add_xpath_list) == len(input_values2) and
-                len(pop_input_val) == len(input_icon_list)
-        )
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        ele = self.item.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{text_str}"]')
+        assert len(ele) == 1
         assert not self.item.has_fail_message()
 
     @allure.story("添加数据重复")
@@ -264,31 +182,17 @@ class TestItemPage:
 
         self.item.click_add_button()  # 检查点击添加
 
-        # 输入框要修改的值
         text_str = "111"
         date_str = "2025/07/23 00:00:00"
-
         sleep(1)
         input_icon_list = [
-            "//div[@id='u2tgl5h9-otp1']//i",
-            "//div[@id='izykzohi-1l5u']//i",
+            '//div[span[text()=" 供应商编号 "]]/following-sibling::div//i',
+            '//div[span[text()=" 物料编号 "]]/following-sibling::div//i',
         ]
-        text_list = self.item.batch_modify_dialog_box(
-            input_icon_list,
-            '(//div[@id="dialogCanvas"]//table//tr[1]/td[2])'
-        )
-        ele = self.item.get_find_element_xpath(
-            "//div[@id='ywz9q11i-sp3b']//input"
-        )
-        # 清空数字输入框
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        # 批量修改输入框
-        self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
+        self.item.batch_modify_dialog_boxs(input_icon_list, '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[-2:], date_str)
 
-        sleep(1)
-        # 点击确定
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
         # 获取重复弹窗文字
@@ -328,52 +232,20 @@ class TestItemPage:
         # 输入框要修改的值
         text_str = "222"
         date_str = "2025/07/23 00:00:00"
+        sleep(1)
         input_icon_list = [
-            "//div[@id='u2tgl5h9-otp1']//i",
-            "//div[@id='izykzohi-1l5u']//i",
+            '//div[span[text()=" 供应商编号 "]]/following-sibling::div//i',
+            '//div[span[text()=" 物料编号 "]]/following-sibling::div//i',
         ]
-        text_list = self.item.batch_modify_dialog_box(
-            input_icon_list,
-             '(//div[@id="dialogCanvas"]//table//tr[1]/td[2])'
-        )
-        # print('text_list', input_val_list)
-        # print('text_list', text_list)
-        ele = self.item.get_find_element_xpath(
-            "//div[@id='ywz9q11i-sp3b']//input"
-        )
-        # 清空数字输入框
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        sleep(1)
-        # 批量修改输入框
-        self.item.batch_modify_input(self.req_input_add_xpath_list, text_str)
-        self.item.batch_modify_input(self.req_date_add_xpath_list, date_str)
+        self.item.batch_modify_dialog_boxs(input_icon_list, '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[-2:], date_str)
 
-        sleep(1)
-        # 点击确定
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
-        # 选中新增行
-        self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
-        # 点击编辑按钮
-        self.item.click_edi_button()
-        sleep(1)
-        # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        # 批量获取日期选择框的value
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
-        # 批量获取弹窗式输入框的value
-        pop_input_val = self.item.batch_acquisition_input_list([
-            "//div[@id='v1pgqqgb-updr']//input",
-            "//div[@id='4jd1d10x-4fbu']//input",
-        ], text_list)
-        sleep(1)
-        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        assert (
-                len(self.req_input_add_xpath_list) == len(input_values) and
-                len(self.req_date_add_xpath_list) == len(input_values2) and
-                len(pop_input_val) == len(input_icon_list)
-        )
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        ele = self.item.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{text_str}"]')
+        assert len(ele) == 1
         assert not self.item.has_fail_message()
 
     @allure.story("修改测试数据成功")
@@ -384,60 +256,39 @@ class TestItemPage:
         text_str = "333"
         date_str = "2025/07/25 00:00:00"
         # 输入框的xpath
-
-        sleep(4)
         # 选中刚刚新增的测试数据
         self.item.click_button('//tr[./td[2][.//span[text()="222"]]]/td[2]')
         # 点击修改按钮
         self.item.click_edi_button()
-        for req in self.req_input_edit_xpath_list:
-            ele = self.item.get_find_element_xpath(req)
-            # 清空数字输入框
-            ele.send_keys(Keys.CONTROL, "a")
-            ele.send_keys(Keys.BACK_SPACE)
-            sleep(0.5)
-        # 批量修改输入框
-        self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
-        # self.item.batch_modify_input(self.req_date_edit_xpath_list, date_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[-2:], date_str)
 
         sleep(1)
+        before_values = self.item.batch_acquisition_inputs(self.req_input_xpath_list)
         # 点击确定
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        sleep(1)
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
         # 选中刚刚编辑的数据
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
         # 点击编辑按钮
         self.item.click_edi_button()
-        sleep(1)
-        # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(self.req_input_edit_xpath_list, text_str)
-        input_values2 = self.item.batch_acquisition_input(self.req_date_edit_xpath_list, date_str)
+        after_values = self.item.batch_acquisition_inputs(self.req_input_xpath_list)
         sleep(1)
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        assert (
-                len(self.req_input_edit_xpath_list) == len(input_values)
-                # len(self.req_date_edit_xpath_list) == len(input_values2)
-        )
+        assert before_values == after_values
         assert not self.item.has_fail_message()
 
     @allure.story("修改数据重复")
     # @pytest.mark.run(order=1)
     def test_qtProgrammeMan_editrepeat(self, login_to_item):
         # 选中1测试A工厂代码
+        text_str = "111"
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
         # 点击修改按钮
         self.item.click_edi_button()
-        sleep(1)
-        for req in self.req_input_edit_xpath_list:
-            ele = self.item.get_find_element_xpath(req)
-            # 清空数字输入框
-            ele.send_keys(Keys.CONTROL, "a")
-            ele.send_keys(Keys.BACK_SPACE)
-            sleep(0.5)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
 
-        # 物料代码等输入111
-        text_str = "111"
-        self.item.batch_modify_input(self.req_input_edit_xpath_list, text_str)
         # 点击确定
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sleep(1)
@@ -473,78 +324,55 @@ class TestItemPage:
     def test_qtProgrammeMan_editnamesuccess(self, login_to_item):
 
         # 输入框要修改的值
+        input_value = '11测试全部数据'
         text_str = "111"
         date_str = "2025/07/23 00:00:00"
-        sleep(4)
         # 选中编辑数据
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
         # 点击修改按钮
         self.item.click_edi_button()
-        input_icon_list = [
-            "//div[@id='v1pgqqgb-updr']//i",
-            "//div[@id='4jd1d10x-4fbu']//i",
-            "//div[@id='7aj6utnu-rdmz']//i"
-        ]
-        text_list = self.item.batch_modify_dialog_box(
-            input_icon_list,
-            '(//div[@id="dialogCanvas"]//table//tr[1]/td[2])'
-        )
-        for req in self.req_input_edit_xpath_list:
-            ele = self.item.get_find_element_xpath(req)
-            # 清空数字输入框
-            ele.send_keys(Keys.CONTROL, "a")
-            ele.send_keys(Keys.BACK_SPACE)
-            sleep(0.5)
+        self.item.batch_modify_inputs(self.all_input_xpath_list, input_value)
+        self.item.batch_modify_inputs(self.all_date_xpath_list, date_str)
+        self.item.batch_modify_inputs(self.all_num_input_xpath_list, text_str)
 
-        # 批量修改输入框
-        self.item.batch_modify_input(self.all_input_edit_xpath_list2, text_str)
-        self.item.batch_modify_input(self.all_date_edit_xpath_list, date_str)
-
-        sleep(1)
-        # 点击确定
+        all_value = self.all_input_xpath_list + self.all_date_xpath_list + self.all_num_input_xpath_list
+        len_num = len(all_value)
+        before_all_value = self.item.batch_acquisition_inputs(all_value)
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        self.item.right_refresh('采购PO')
+        self.item.wait_for_loading_to_disappear()
+        num = self.item.go_settings_page()
         sleep(1)
-        # 选中刚刚编辑的数据行
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        # 点击编辑按钮
+        self.item.select_input('PO编码', input_value)
+        sleep(1)
+        self.item.click_button(
+            f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        sleep(1)
         self.item.click_edi_button()
-        sleep(1)
-        # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(self.all_input_edit_xpath_list2, text_str)
-        input_values2 = self.item.batch_acquisition_input(self.all_date_edit_xpath_list, date_str)
-        # 批量获取弹窗式输入框的value
-        pop_input_val = self.item.batch_acquisition_input_list([
-            "//div[@id='v1pgqqgb-updr']//input",
-            "//div[@id='4jd1d10x-4fbu']//input",
-            "//div[@id='7aj6utnu-rdmz']//input"
-        ], text_list)
-        sleep(1)
+        after_all_value = self.item.batch_acquisition_inputs(all_value)
+        username = self.item.get_find_element_xpath(
+            '//div[span[text()=" 更新者 "]]/following-sibling::div//input').get_attribute(
+            "value")
+        updatatime = self.item.get_find_element_xpath(
+            '//div[span[text()=" 更新时间 "]]/following-sibling::div//input').get_attribute("value")
+        today_str = date.today().strftime('%Y/%m/%d')
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        assert (
-            len(self.all_input_edit_xpath_list2) == len(input_values) and
-            len(self.all_date_edit_xpath_list) == len(input_values2) and
-            len(pop_input_val) == len(input_icon_list)
-        )
-        assert not self.item.has_fail_message()
-
-    @allure.story("删除测试数据成功")
-    # @pytest.mark.run(order=1)
-    def test_qtProgrammeMan_delsuccess2(self, login_to_item):
-        sleep(4)
-        # 定位内容为‘111’的行
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        self.item.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        # 找到共同的父元素
-        self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        self.item.click_ref_button()
-        sleep(1)
-        # 定位内容为‘111’的行
-        itemdata = self.driver.find_elements(
-            By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
-        )
-        assert len(itemdata) == 0
+        logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
+        ele = self.item.finds_elements(By.XPATH,
+                                       f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        if len(ele) == 1:
+            self.item.click_button(
+                f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+            self.item.click_del_button()  # 点击删除
+            self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            self.item.get_find_message()
+            self.item.wait_for_loading_to_disappear()
+            self.item.right_refresh('采购PO')
+        assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
+            num) == (int(len_num) + 2)
+        assert all(before_all_value), "列表中存在为空或为假值的元素！"
         assert not self.item.has_fail_message()
 
     @allure.story("过滤刷新成功")
@@ -563,54 +391,94 @@ class TestItemPage:
         text_str = "111"
         # 日期要修改的值
         date_str = "2025/07/17 00:00:00"
+        input_value = '11测试全部数据'
         self.item.click_add_button()  # 点击添加
+        self.item.batch_modify_inputs(self.all_input_xpath_list, input_value)
+        self.item.batch_modify_inputs(self.all_date_xpath_list, date_str)
+        self.item.batch_modify_inputs(self.all_num_input_xpath_list, text_str)
+
+        all_value = self.all_input_xpath_list + self.all_date_xpath_list + self.all_num_input_xpath_list
+        len_num = len(all_value)
+        before_all_value = self.item.batch_acquisition_inputs(all_value)
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        self.item.right_refresh('采购PO')
+        self.item.wait_for_loading_to_disappear()
+        num = self.item.go_settings_page()
+        sleep(1)
+        self.item.select_input('PO编码', input_value)
+        sleep(1)
+        self.item.click_button(
+            f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        sleep(1)
+        self.item.click_edi_button()
+        after_all_value = self.item.batch_acquisition_inputs(all_value)
+        username = self.item.get_find_element_xpath(
+            '//div[span[text()=" 更新者 "]]/following-sibling::div//input').get_attribute(
+            "value")
+        updatatime = self.item.get_find_element_xpath(
+            '//div[span[text()=" 更新时间 "]]/following-sibling::div//input').get_attribute("value")
+        today_str = date.today().strftime('%Y/%m/%d')
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
+        logging.info(f"before_all_value: {before_all_value}, after_all_value: {after_all_value}")
+        ele = self.item.finds_elements(By.XPATH,
+                                       f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+        if len(ele) == 1:
+            self.item.click_button(
+                f'(//div[@class="vxe-table--main-wrapper"])[2]//table[@class="vxe-table--body"]//tr/td[2][.//span[text()="{input_value}"]]')
+            self.item.click_del_button()  # 点击删除
+            self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            self.item.get_find_message()
+            self.item.wait_for_loading_to_disappear()
+            self.item.right_refresh('采购PO')
+        assert before_all_value == after_all_value and username == DateDriver().username and today_str in updatatime and int(
+            num) == (int(len_num) + 2)
+        assert all(before_all_value), "列表中存在为空或为假值的元素！"
+        assert not self.item.has_fail_message()
+
+    @allure.story("新增多条数据")
+    # @pytest.mark.run(order=1)
+    def test_qtProgrammeMan_adds(self, login_to_item):
+        self.item.click_add_button()  # 检查点击添加
+        # 输入框要修改的值
+        text_str = "1测试数据1"
+        date_str = "2025/07/23 00:00:00"
         sleep(1)
         input_icon_list = [
-            "//div[@id='u2tgl5h9-otp1']//i",
-            "//div[@id='izykzohi-1l5u']//i",
-            "//div[@id='q49wzb03-iuyg']//i"
+            '//div[span[text()=" 供应商编号 "]]/following-sibling::div//i',
+            '//div[span[text()=" 物料编号 "]]/following-sibling::div//i',
         ]
-        text_list = self.item.batch_modify_dialog_box(
-            input_icon_list,
-            '(//div[@id="dialogCanvas"]//table//tr[1]/td[2])'
-        )
-        ele = self.item.get_find_element_xpath(
-            "//div[@id='ywz9q11i-sp3b']//input"
-        )
-        # 清空数字输入框
-        ele.send_keys(Keys.CONTROL, "a")
-        ele.send_keys(Keys.BACK_SPACE)
-        # 批量修改输入框
-        self.item.batch_modify_input(self.all_input_add_xpath_list, text_str)
-        # 批量修改日期
-        self.item.batch_modify_input(self.all_date_add_xpath_list, date_str)
+        self.item.batch_modify_dialog_boxs(input_icon_list, '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[-2:], date_str)
 
-        sleep(1)
-        # 点击确定
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        ele = self.item.finds_elements(By.XPATH,
+                                       f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{text_str}"]')
+        assert len(ele) == 1
+
+        self.item.click_add_button()  # 检查点击添加
+        # 输入框要修改的值
+        text_str = "1测试数据2"
+        date_str = "2025/07/23 00:00:00"
         sleep(1)
-        # 选中物料代码
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        # 点击编辑按钮
-        self.item.click_edi_button()
-        sleep(1)
-        # 批量获取输入框的value
-        input_values = self.item.batch_acquisition_input(self.all_input_edit_xpath_list2, text_str)
-        # 批量获取日期的value
-        date_values = self.item.batch_acquisition_input(self.all_date_edit_xpath_list2, date_str)
-        # 批量获取弹窗式输入框的value
-        pop_input_val = self.item.batch_acquisition_input_list([
-            "//div[@id='v1pgqqgb-updr']//input",
-            "//div[@id='4jd1d10x-4fbu']//input",
-            "//div[@id='7aj6utnu-rdmz']//input"
-        ], text_list)
-        sleep(1)
-        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
-        assert (
-                len(self.all_input_add_xpath_list) == len(input_values)
-                and len(self.all_date_add_xpath_list) == len(date_values)
-                and len(pop_input_val) == len(input_icon_list)
-        )
+        input_icon_list = [
+            '//div[span[text()=" 供应商编号 "]]/following-sibling::div//i',
+            '//div[span[text()=" 物料编号 "]]/following-sibling::div//i',
+        ]
+        self.item.batch_modify_dialog_boxs(input_icon_list, '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        self.item.batch_modify_inputs(self.req_input_xpath_list[:4], text_str)
+        self.item.batch_modify_inputs(self.req_input_xpath_list[-2:], date_str)
+
+        self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        ele = self.item.finds_elements(By.XPATH,
+                                       f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{text_str}"]')
+        assert len(ele) == 1
         assert not self.item.has_fail_message()
 
     @allure.story("查询测试数据成功")
@@ -618,7 +486,7 @@ class TestItemPage:
     def test_qtProgrammeMan_selectcodesuccess(self, login_to_item):
         driver = login_to_item  # WebDriver 实例
         item = WarehouseLocationPage(driver)  # 用 driver 初始化 ItemPage
-
+        name = item.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         # 点击查询
         item.click_sel_button()
         sleep(1)
@@ -646,22 +514,15 @@ class TestItemPage:
         # 点击输入数值
         item.enter_texts(
             '(//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[6]//input',
-            "111",
+            name,
         )
         sleep(1)
 
         # 点击确认
         item.click_select_button()
-        # 定位第一行是否为产品A
-        itemcode = item.get_find_element_xpath(
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[1]/td[2]'
-        ).text
-        # 定位第二行没有数据
-        itemcode2 = driver.find_elements(
-            By.XPATH,
-            '(//table[contains(@class, "vxe-table--body")])[2]//tr[2]/td[2]',
-        )
-        assert itemcode == "111" and len(itemcode2) == 0
+        eles = item.finds_elements(By.XPATH, '(//table[@class="vxe-table--body"])[2]//tr/td[2]')
+        eles = [ele.text for ele in eles]
+        assert all(name == ele for ele in eles)
         assert not item.has_fail_message()
 
     @allure.story("没有数据时显示正常")
@@ -980,6 +841,22 @@ class TestItemPage:
             By.XPATH, '//tr[./td[2][.//span[text()="111"]]]/td[2]'
         )
         assert len(itemdata) == 0
+        assert not self.item.has_fail_message()
+
+    @allure.story("删除测试数据成功，删除布局成功")
+    # @pytest.mark.run(order=1)
+    def test_qtProgrammeMan_delsuccessall(self, login_to_item):
+        self.item.wait_for_loading_to_disappear()
+
+        value = ['1测试数据1', '1测试数据2']
+        self.item.del_all(value, xpath='//div[div[span[text()=" PO编码"]]]//input')
+
+        self.item.right_refresh('采购PO')
+        itemdata = [
+            self.driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
+            for v in value[:2]
+        ]
+        assert all(len(elements) == 0 for elements in itemdata)
         assert not self.item.has_fail_message()
 
     # @allure.story("测试")

@@ -1373,6 +1373,9 @@ class TestAffairsPage:
         name2 = "添加事务模版"
         affairs.click_button('//div[@id="tab-air"]')
         affairs.wait_for_el_loading_mask()
+        element = affairs.get_find_element_xpath('//div[@class="template-list__wrapper"]')
+        driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", element)
+        sleep(1)
         affairs.hover(name1, "删除")
         affairs.click_button('(//div[@class="el-message-box__btns"]/button[2])[last()]')
         affairs.get_find_message()
