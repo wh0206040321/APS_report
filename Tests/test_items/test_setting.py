@@ -372,7 +372,6 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         ).get_attribute('innerText').strip()
-        setting.click_button('(//div[@class="demo-drawer-footer"]//span[text()="取消"])[2]')
         assert name == layout
         assert not setting.has_fail_message()
 
@@ -1363,11 +1362,11 @@ class TestSettingPage:
         setting.click_button(f'(//span[text()=" 在导航中显示布局 "])[{index + 1}]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         setting.get_find_message()
+        setting.wait_for_loading_to_disappear()
         sleep(1)
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         ).get_attribute('innerText')
-        setting.click_button('(//div[@class="ivu-drawer-body"]//span[text()="取消"])[2]')
         setting.right_refresh('物品')
         assert name == layout
         assert not setting.has_fail_message()
@@ -2125,9 +2124,8 @@ class TestSettingPage:
         # 3> 执行方法
         action.perform()
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
-        driver.refresh()
-        sleep(2)
+        setting.get_find_message()
+        setting.wait_for_loading_to_disappear()
         before_name = setting.get_find_element_xpath('//div[@class="tabsDivItemCon"]/div[2]')
         assert before_name.text == afert_name
         assert not setting.has_fail_message()
@@ -2167,8 +2165,8 @@ class TestSettingPage:
         ele.send_keys("修改布局")
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
-        driver.refresh()
+        setting.get_find_message()
+        setting.wait_for_loading_to_disappear()
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" 修改布局 "]'
         ).text
@@ -2323,8 +2321,7 @@ class TestSettingPage:
         setting.hover(layout)
         setting.click_button(f'(//li[text()="复制"])[{index + 1}]')
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
-        sleep(1)
-        driver.refresh()
+        setting.get_find_message()
         setting.wait_for_loading_to_disappear()
         eles = setting.finds_elements(By.XPATH, '//div[@class="tabsDivItemCon"]/div')
         sleep(1)

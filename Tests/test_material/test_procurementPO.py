@@ -270,7 +270,7 @@ class TestItemPage:
         self.item.get_find_message()
         self.item.wait_for_loading_to_disappear()
         # 选中刚刚编辑的数据
-        self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
+        self.item.click_button(f'//tr[./td[2][.//span[text()="{text_str}"]]]/td[2]')
         # 点击编辑按钮
         self.item.click_edi_button()
         after_values = self.item.batch_acquisition_inputs(self.req_input_xpath_list)
@@ -459,7 +459,7 @@ class TestItemPage:
         ele = self.item.finds_elements(By.XPATH,
                                        f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{text_str}"]')
         assert len(ele) == 1
-
+        sleep(2)
         self.item.click_add_button()  # 检查点击添加
         # 输入框要修改的值
         text_str = "1测试数据2"
@@ -674,7 +674,7 @@ class TestItemPage:
         ele1 = self.item.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = self.item.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        message = self.item.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText").strip()
         self.item.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'
@@ -823,15 +823,7 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_qtProgrammeMan_delsuccess3(self, login_to_item):
         layout_name = "测试布局A"
-        sleep(4)
-        # 定位内容为‘111’的行
-        self.item.click_button('//tr[./td[2][.//span[text()="111"]]]/td[2]')
-        self.item.click_del_button()  # 点击删除
-        sleep(1)
-        # 点击确定
-        self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-        self.item.click_ref_button()
-        sleep(1)
+        sleep(2)
         layout = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
         print('layout', len(layout))
         if len(layout) > 1:

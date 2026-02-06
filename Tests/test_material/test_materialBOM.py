@@ -158,7 +158,6 @@ class TestItemPage:
     @allure.story("添加必填数据成功")
     # @pytest.mark.run(order=1)
     def test_materialBOM_addsuccess(self, login_to_item):
-
         self.item.click_add_button()  # 检查点击添加
         # 输入框要修改的值
         text_str = "111"
@@ -172,7 +171,6 @@ class TestItemPage:
     @allure.story("添加数据重复")
     # @pytest.mark.run(order=1)
     def test_materialBOM_addrepeat(self, login_to_item):
-
         self.item.click_add_button()  # 检查点击添加
 
         # 输入框要修改的值
@@ -183,7 +181,7 @@ class TestItemPage:
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
-        ).get_attribute('innerText')
+        ).get_attribute('innerText').strip()
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert (
@@ -226,6 +224,7 @@ class TestItemPage:
     @allure.story("修改测试数据成功")
     # @pytest.mark.run(order=1)
     def test_materialBOM_editcodesuccess(self, login_to_item):
+        sleep(2)
 
         # 输入框要修改的值
         text_str = "333"
@@ -242,6 +241,7 @@ class TestItemPage:
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.item.get_find_message()
         self.item.wait_for_loading_to_disappear()
+        self.item.click_button(f'//tr[./td[2][.//span[text()="{text_str}"]]]/td[2]')
         self.item.click_edi_button()
         after_values = self.item.batch_acquisition_inputs(self.req_input_xpath_list)
         sleep(1)
@@ -252,6 +252,7 @@ class TestItemPage:
     @allure.story("修改数据重复")
     # @pytest.mark.run(order=1)
     def test_materialBOM_editrepeat(self, login_to_item):
+        sleep(2)
 
         # 选中1测试A工厂代码
         self.item.click_button('//tr[./td[2][.//span[text()="333"]]]/td[2]')
@@ -266,7 +267,7 @@ class TestItemPage:
         # 获取重复弹窗文字
         error_popup = self.item.get_find_element_xpath(
             '//div[text()=" 记录已存在,请检查！ "]'
-        ).get_attribute("innerText")
+        ).get_attribute("innerText").strip()
         self.item.click_button('//button[@type="button"]/span[text()="关闭"]')
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert error_popup == "记录已存在,请检查！", f"预期数据{error_popup}"
@@ -425,8 +426,11 @@ class TestItemPage:
         self.item.batch_modify_inputs(self.req_input_xpath_list, text_str)
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
         ele = self.item.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{text_str}"]')
         assert len(ele) == 1
+        sleep(1)
+        self.item.click_add_button()  # 检查点击添加
         text_str = "1测试数据2"
         self.item.batch_modify_inputs(self.req_input_xpath_list, text_str)
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
@@ -625,7 +629,7 @@ class TestItemPage:
         ele1 = self.item.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').get_attribute(
             "innerText")
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        message = self.item.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
+        message = self.item.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText").strip()
         self.item.click_button('//div[@class="ivu-modal-footer"]//span[text()="关闭"]')
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         assert message == '记录已存在,请检查！'

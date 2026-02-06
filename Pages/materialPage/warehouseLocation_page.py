@@ -476,6 +476,7 @@ class WarehouseLocationPage(BasePage):
                 self.click_button(new_value)
                 sleep(0.2)
                 self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
+                sleep(1)
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")
             except Exception as e:

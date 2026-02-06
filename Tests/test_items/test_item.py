@@ -1400,7 +1400,7 @@ class TestItemPage:
             item.del_layout(layout)
         except Exception:
             print(f"布局 '{layout}' 可能不存在或已被删除")
-        item.wait_for_loading_to_disappear()
+        item.right_refresh('物品')
         itemdata = [
             driver.find_elements(By.XPATH, f'//tr[./td[2][.//span[text()="{v}"]]]/td[2]')
             for v in value[:4]
