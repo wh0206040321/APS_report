@@ -1,0 +1,14 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[7][.//span[text()="1测试数据A"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[./td[7][.//span[text()="1测试数据A"]]]/td[2]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[7][.//span[text()="1测试数据A"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="取消"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[./td[7][.//span[text()="1测试数据A"]]]/td[2]

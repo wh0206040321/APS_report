@@ -1,4 +1,0 @@
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[div[text()=" 物品 "]]/span
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="计划业务数据"])[1]
-[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击

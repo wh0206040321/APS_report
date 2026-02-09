@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@id="tab-log"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="el-select el-select--mini"]//input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="el-scrollbar__view el-select-dropdown__list"]//span[text()="10条/页"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //input[@placeholder="请输入流程名称"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = (//table[@class="el-table__body"])[2]/tbody/tr
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //ul[@class="el-pager"]/li[text()="2"]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //ul[@class="el-pager"]/li[text()="2"]，等待超时 10s
