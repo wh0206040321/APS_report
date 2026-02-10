@@ -716,6 +716,7 @@ class TestItemPage:
             '(//table[@class="vxe-table--body"]//tr[2]/td[3])[2]//input').get_attribute("value")
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
         self.item.select_input('订单代码', '1没有数据修改1')
         ele11 = self.item.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[3])[1]').get_attribute(
             "innerText")

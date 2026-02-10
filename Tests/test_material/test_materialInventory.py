@@ -196,6 +196,7 @@ class TestItemPage:
     @allure.story("取消删除数据")
     # @pytest.mark.run(order=1)
     def test_materialInventory_delcancel(self, login_to_item):
+        sleep(1)
         text_str = "1测试数据A"
         # 定位内容为‘111’的行
         self.item.click_button(f'//tr[./td[7][.//span[text()="{text_str}"]]]/td[2]')
@@ -206,9 +207,9 @@ class TestItemPage:
         sleep(1)
         # 定位内容为‘111’的行
         itemdata = self.item.get_find_element_xpath(
-            f'//tr[./td[7][.//span[text()="{text_str}"]]]/td[2]'
+            f'//tr[./td[7][.//span[text()="{text_str}"]]]/td[7]'
         ).text
-        assert itemdata == "111", f"预期{itemdata}"
+        assert itemdata == text_str, f"预期{itemdata}"
         assert not self.item.has_fail_message()
 
     @allure.story("添加测试数据")
@@ -262,6 +263,7 @@ class TestItemPage:
     @allure.story("修改物料员代码重复")
     # @pytest.mark.run(order=1)
     def test_materialInventory_editrepeat(self, login_to_item):
+        self.item.right_refresh('物料库存')
 
         # 选中1测试A工厂代码
         self.item.click_button('//tr[./td[7][.//span[text()="1测试数据A"]]]/td[2]')
@@ -804,21 +806,29 @@ class TestItemPage:
     def test_materialInventory_delsuccess3(self, login_to_item):
         # 定位内容为‘111’的行
         self.item.wait_for_loading_to_disappear()
-        value = ['1测试数据1', '1测试数据2']
-        self.item.del_all(value, xpath='//div[div[span[text()=" 物料编码"]]]//input')
-
-        self.item.right_refresh('在途库存')
+        self.item.select_input('批次号', '1测试数据')
+        before_data = self.item.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
+        self.item.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = self.item.get_find_element_xpath(elements[1])
+        ActionChains(self.driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
         sleep(1)
-        itemdata = [
-            self.driver.find_elements(By.XPATH, f'//tr[./td[7][.//span[text()="{v}"]]]/td[2]')
-            for v in value[:2]
-        ]
+        self.item.click_del_button()
+        self.item.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        message = self.item.get_find_message()
+        self.item.wait_for_loading_to_disappear()
+        after_data = self.item.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
+        assert message == "删除成功！"
+        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         sleep(1)
         layout = self.driver.find_elements(By.CLASS_NAME, "tabsDivItem")
         layout_name = "测试布局A"
         if len(layout) > 1:
             self.item.del_layout(layout_name)
-        assert all(len(elements) == 0 for elements in itemdata)
         assert not self.item.has_fail_message()
 
     # def test_demo(self, login_to_item):

@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from datetime import datetime
 from time import sleep
 
@@ -538,13 +539,61 @@ class TestSAppsPage:
         ele2 = apps.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[3])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2
-        sleep(3)
-        apps.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
+        assert not apps.has_fail_message()
+
+    @allure.story("模拟多选删除")
+    # @pytest.mark.run(order=1)
+    def test_apps_shiftdel(self, login_to_apps):
+        driver = login_to_apps  # WebDriver 实例
+        apps = AppsPage(driver)  # 用 driver 初始化 AppsPage
+        apps.right_refresh('应用管理')
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
+        apps.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = apps.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        apps.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        apps.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据添加1')
+        sleep(2)
+        apps.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        apps.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        apps.enter_texts('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input', '1没有数据添加12')
+        sleep(1)
+        ele1 = apps.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').text
+        ele2 = apps.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input').get_attribute("value")
+        apps.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        apps.get_find_message()
+        apps.select_input('1没有数据添加1')
+        ele11 = apps.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+            "innerText")
+        ele22 = apps.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[2]/td[2])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele11 and ele2 == ele22
+        assert not apps.has_fail_message()
+        apps.select_input('1没有数据添加')
+        before_data = apps.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[3]//td[1])[1]']
+        apps.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = apps.get_find_element_xpath(elements[2])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
         apps.click_all_button('删除')
         apps.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         message = apps.get_find_message()
-        apps.right_refresh('应用管理')
+        apps.wait_for_loading_to_disappear()
+        after_data = apps.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
+        assert before_count - after_count == 3, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not apps.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")
@@ -552,6 +601,7 @@ class TestSAppsPage:
     def test_apps_ctrlC(self, login_to_apps):
         driver = login_to_apps  # WebDriver 实例
         apps = AppsPage(driver)  # 用 driver 初始化 AppsPage
+        apps.right_refresh('应用管理')
         apps.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         before_data = apps.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
         sleep(1)

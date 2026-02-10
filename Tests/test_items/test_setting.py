@@ -329,9 +329,8 @@ class TestSettingPage:
             sleep(1)
             setting.click_confirm_button()
 
-        driver.refresh()
+        setting.right_refresh('物品')
         sleep(1)
-        setting.wait_for_loading_to_disappear()
         name = setting.get_find_element_xpath(
             f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
         )
@@ -1466,6 +1465,7 @@ class TestSettingPage:
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
         message = setting.get_error_message()
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_setting_button()
@@ -1487,6 +1487,7 @@ class TestSettingPage:
             # 如果已选中，直接点击确定按钮保存设置
             setting.click_confirm_button()
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert message == "请输入图表名称"
         assert not setting.has_fail_message()
@@ -1503,6 +1504,7 @@ class TestSettingPage:
         setting.click_last_button()
         name = setting.get_find_element_xpath('//div[@class="statisticalListItemTitle"]/span').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1518,6 +1520,7 @@ class TestSettingPage:
         ele = setting.get_find_element_xpath('//div[@class="statisticalListItemTitle"]/span').text
         # 刷新当前页面
         driver.refresh()
+        setting.wait_for_loadingbox()
         sleep(1)
         setting.add_layout()
         setting.enter_texts(
@@ -1555,6 +1558,7 @@ class TestSettingPage:
         sleep(1)
         eles = driver.find_elements(By.XPATH, '//div[.//span[text()="统计图1 "] and @class="statisticalListItemTitle"]')
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert len(eles) == 1 and ele == "统计图1 (数据源:测试布局A)" and name == layout
         assert not setting.has_fail_message()
@@ -1571,6 +1575,7 @@ class TestSettingPage:
         setting.click_last_button()
         name = setting.get_find_element_xpath(f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1590,6 +1595,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1607,6 +1613,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1623,6 +1630,7 @@ class TestSettingPage:
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
         message = setting.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert message == "记录已存在,请检查！"
         assert not setting.has_fail_message()
@@ -1640,6 +1648,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1657,6 +1666,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1674,6 +1684,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1691,6 +1702,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1708,6 +1720,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1725,6 +1738,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1742,6 +1756,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1759,6 +1774,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1786,6 +1802,7 @@ class TestSettingPage:
         setting.click_button('(//button[@class="ivu-btn ivu-btn-primary"])[last()]')
         message = setting.get_find_element_xpath('//div[text()=" 记录已存在,请检查！ "]').get_attribute("innerText")
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert message == "记录已存在,请检查！"
         assert not setting.has_fail_message()
@@ -1817,6 +1834,7 @@ class TestSettingPage:
         name = setting.get_find_element_xpath(
             f'//div[@class="statisticalListItemTitle"]/span[contains(text(),"{statistics}")]').text
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert name == f"{statistics} "f"(数据源:{layout})"
         assert not setting.has_fail_message()
@@ -1852,10 +1870,12 @@ class TestSettingPage:
 
         sleep(3)
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         setting.click_button('//div[@class="toolTabsDiv"]/div[2]/div[4]//i')
         ele = driver.find_elements(By.XPATH, '//div[@class="statisticalListItemTitle"]/span[contains(text(),"统计图")]')
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert len(ele) == 0
         assert not setting.has_fail_message()
@@ -1880,6 +1900,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         layout = "测试布局A"
         sleep(1)
@@ -1898,6 +1919,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         layout = "测试布局A"
         sleep(1)
@@ -1917,6 +1939,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         layout = "测试布局A"
         lable = "标签1"
@@ -1941,6 +1964,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         layout = "测试布局A"
         lable = "标签1"
@@ -1991,6 +2015,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         layout = "测试布局A"
         lable = "标签3"
@@ -2010,6 +2035,7 @@ class TestSettingPage:
 
         setting.get_find_message()
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         sleep(1)
         eles = driver.find_elements(By.XPATH, '//div[@class="labelItemDIv"]')
@@ -2022,6 +2048,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         layout = "测试布局A"
         lable = "标签3"
@@ -2041,6 +2068,7 @@ class TestSettingPage:
 
         setting.get_find_message()
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         sleep(1)
         setting.click_button(f'//div[@class="labelItemDIv" and text()="{lable}"]')
@@ -2076,6 +2104,7 @@ class TestSettingPage:
 
         sleep(1)
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]')
         sleep(1)
         eles = driver.find_elements(By.XPATH, '//div[@class="labelItemDIv"]')
@@ -2100,6 +2129,7 @@ class TestSettingPage:
         message = setting.get_find_message()
         ele = driver.find_elements(By.XPATH, f'//div[@class="labelItem"]/div[text()=" {lable} "]')
         driver.refresh()
+        setting.wait_for_loadingbox()
         setting.wait_for_loading_to_disappear()
         assert ele == []
         assert message == "保存成功"
@@ -2247,6 +2277,7 @@ class TestSettingPage:
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)
         driver.refresh()
+        setting.wait_for_loadingbox()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -2286,6 +2317,7 @@ class TestSettingPage:
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(2)
         driver.refresh()
+        setting.wait_for_loadingbox()
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout} "]'
@@ -2362,7 +2394,7 @@ class TestSettingPage:
 
         setting.click_button('(//div[@class="demo-drawer-footer"])[2]/button[2]')
         sleep(1)
-        driver.refresh()
+        setting.right_refresh('物品')
         # 再次查找页面上是否有目标 div，以验证是否删除成功
         after_layout = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {first_long_name} "]'

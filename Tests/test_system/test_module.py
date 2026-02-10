@@ -95,8 +95,8 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("新增")
         xpath_list = [
-            '//div[@id="i8jh37dc-1wyr"]//input',
-            '//div[@id="cantp8xp-kz7i"]//input',
+            '//div[span[text()=" 模块代码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 模块名称 "]]/following-sibling::div//input',
         ]
         add.batch_modify_input(xpath_list, name)
         module.click_confirm()
@@ -115,9 +115,9 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("新增")
         xpath_list = [
-            '//div[@id="i8jh37dc-1wyr"]//input',
-            '//div[@id="cantp8xp-kz7i"]//input',
-            '//div[@id="8rj7fu5c-tec3"]//i',
+            '//div[span[text()=" 模块代码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 模块名称 "]]/following-sibling::div//input',
+            '//div[span[text()=" 图标 "]]/following-sibling::div//i',
             '//div[@class="flex-wrap"]/div[1]',
         ]
         add.batch_modify_input(xpath_list[:2], name)
@@ -141,9 +141,9 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("新增")
         xpath_list = [
-            '//div[@id="i8jh37dc-1wyr"]//input',
-            '//div[@id="cantp8xp-kz7i"]//input',
-            '//div[@id="8rj7fu5c-tec3"]//i',
+            '//div[span[text()=" 模块代码 "]]/following-sibling::div//input',
+            '//div[span[text()=" 模块名称 "]]/following-sibling::div//input',
+            '//div[span[text()=" 图标 "]]/following-sibling::div//i',
             '//div[@class="flex-wrap"]/div[1]',
         ]
         add.batch_modify_input(xpath_list[:2], name)
@@ -168,8 +168,7 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[@id="2ac152wb-18ae"]//input',
-            '//div[@id="h95qavco-ll5z"]//input',
+            '//div[span[text()=" 组件代码 "]]/following-sibling::div//input',
         ]
         sleep(2)
         ele = module.get_find_element_xpath(xpath_list[0]).get_attribute("readonly")
@@ -191,8 +190,8 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[@id="h95qavco-ll5z"]//input',
-            '//div[@id="lzd9u38e-i7eq"]//input',
+            '//div[span[text()=" 模块名称 "]]/following-sibling::div//input',
+            '//div[span[text()=" 排序 "]]/following-sibling::div//input',
         ]
         add.batch_modify_input(xpath_list[:1], after_name)
         n = module.get_find_element_xpath(xpath_list[1])
@@ -212,8 +211,8 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[@id="h95qavco-ll5z"]//input',
-            '//div[@id="lzd9u38e-i7eq"]//input',
+            '//div[span[text()=" 组件名称 "]]/following-sibling::div//input',
+            '//div[span[text()=" 排序 "]]/following-sibling::div//input',
         ]
         add.batch_modify_input(xpath_list[:1], before_name)
         n = module.get_find_element_xpath(xpath_list[1])
@@ -844,13 +843,14 @@ class TestSModulePage:
         ele = module.finds_elements(By.XPATH, f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         if len(ele) == 0:
             module.click_all_button("新增")
-            module.enter_texts('//div[@id="ph5ht87u-mndd"]//input', name)
-            module.enter_texts('//div[@id="t4svyhz8-n3vp"]//input', name)
-            module.click_button('//div[@id="twqlo0fa-ulcj"]//i')
+            module.enter_texts('//div[span[text()=" 组件代码 "]]/following-sibling::div//input', name)
+            module.enter_texts('//div[span[text()=" 组件名称 "]]/following-sibling::div//input', name)
+            module.click_button('//div[span[text()=" 图标 "]]/following-sibling::div//i')
             module.click_button('//div[div[text()="请选择图标"]]/following-sibling::div//div[@class="flex-wrap"]/div')
             sleep(0.5)
             module.click_confirm()
             message = module.get_find_message()
+            module.wait_for_loading_to_disappear()
             module.select_input_menu(name)
             sleep(1)
             assert message == "新增成功！"
@@ -865,7 +865,7 @@ class TestSModulePage:
         module.click_button('//table[@class="vxe-table--body"]//tr/td[2]//span[text()="ABCDAA"]')
         sleep(1)
         module.click_all_button("编辑")
-        module.click_button('//div[@id="9o3mw52p-ejn3"]//i')
+        module.click_button('//div[span[text()=" 组件代码 "]]/following-sibling::div//i')
         module.wait_for_loading_to_disappear()
         module.enter_texts('(//div[div[span[text()=" 组件代码"]]]//input)[last()]', name)
         module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
@@ -977,11 +977,11 @@ class TestSModulePage:
         if len(ele) == 0:
             module.click_all_button("新增")
             xpath_list = [
-                '//div[@id="i8jh37dc-1wyr"]//input',
-                '//div[@id="cantp8xp-kz7i"]//input',
-                '//div[@id="8rj7fu5c-tec3"]//i',
+                '//div[span[text()=" 模块代码 "]]/following-sibling::div//input',
+                '//div[span[text()=" 模块名称 "]]/following-sibling::div//input',
+                '//div[span[text()=" 图标 "]]/following-sibling::div//i',
                 '(//div[@class="flex-wrap"]/div[1])[last()]',
-                '//div[@id="dlxsc334-ogr9"]//i'
+                '//div[span[text()=" 组件代码 "]]/following-sibling::div//i'
             ]
             add.batch_modify_input(xpath_list[:2], name)
             module.click_button(xpath_list[2])
@@ -1097,9 +1097,9 @@ class TestSModulePage:
         module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{menu_name}"]')
         module.click_all_button("编辑")
         sleep(1)
-        ele = module.get_find_element_xpath('//div[@id="nrwbi30v-iofl"]//input').is_selected()
+        ele = module.get_find_element_xpath('//div[span[text()=" 是否显示 "]]/following-sibling::label//input').is_selected()
         if ele:
-            module.click_button('//div[@id="nrwbi30v-iofl"]//label/span')
+            module.click_button('//div[span[text()=" 是否显示 "]]/following-sibling::label/span')
             module.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
             message = module.get_find_message()
             assert message == "编辑成功！"
@@ -1125,9 +1125,9 @@ class TestSModulePage:
         module.select_input_menu(menu_name)
         module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{menu_name}"]')
         module.click_all_button("编辑")
-        ele = module.get_find_element_xpath('//div[@id="nrwbi30v-iofl"]//input').is_selected()
+        ele = module.get_find_element_xpath('//div[span[text()=" 是否显示 "]]/following-sibling::label//input').is_selected()
         if not ele:
-            module.click_button('//div[@id="nrwbi30v-iofl"]//label/span')
+            module.click_button('//div[span[text()=" 是否显示 "]]/following-sibling::label/span')
             module.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
             message = module.get_find_message()
             assert message == "编辑成功！"
@@ -1143,9 +1143,9 @@ class TestSModulePage:
         module.select_input_module(name)
         module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         module.click_all_button("编辑")
-        ele = module.get_find_element_xpath('//div[@id="ul4008do-iq01"]//input').is_selected()
+        ele = module.get_find_element_xpath('//div[span[text()=" 显示模块 "]]/following-sibling::label//input').is_selected()
         if ele:
-            module.click_button('//div[@id="ul4008do-iq01"]//label/span')
+            module.click_button('//div[span[text()=" 显示模块 "]]/following-sibling::label/span')
             module.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
             message = module.get_find_message()
             assert message == "编辑成功！"
@@ -1169,11 +1169,11 @@ class TestSModulePage:
         module.select_input_module(name)
         module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{name}"]')
         module.click_all_button("编辑")
-        ele = module.get_find_element_xpath('//div[@id="ul4008do-iq01"]//input').is_selected()
+        ele = module.get_find_element_xpath('//div[span[text()=" 显示模块 "]]/following-sibling::label//input').is_selected()
         if not ele:
-            module.click_button('//div[@id="ul4008do-iq01"]//label/span')
+            module.click_button('//div[span[text()=" 显示模块 "]]/following-sibling::label/span')
 
-        module.enter_texts('//div[@id="lzd9u38e-i7eq"]//input', '2')
+        module.enter_texts('//div[span[text()=" 排序 "]]/following-sibling::div//input', '2')
         module.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
         message = module.get_find_message()
         assert message == "编辑成功！"
@@ -1198,7 +1198,7 @@ class TestSModulePage:
         module.click_button(f'//table[@class="vxe-table--body"]//tr/td[2]//span[text()="{menu_name}"]')
         module.click_all_button("编辑")
 
-        module.enter_texts('//div[@id="4w6qc4c1-ycag"]//input', '1000')
+        module.enter_texts('//div[span[text()=" 排序 "]]/following-sibling::div//input', '1000')
         module.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
         message = module.get_find_message()
         assert message == "编辑成功！"
@@ -1398,6 +1398,62 @@ class TestSModulePage:
             "innerText")
         assert ele1 == ele2 == '1没有数据修改'
         assert not module.has_fail_message()
+
+    @allure.story("模拟多选删除")
+    # @pytest.mark.run(order=1)
+    def test_module_shiftdel(self, login_to_module):
+        driver = login_to_module  # WebDriver 实例
+        button = ExpressionPage(driver)  # 用 driver 初始化 ExpressionPage
+        button.right_refresh('模块管理')
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
+        button.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = button.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        button.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        button.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据添加1')
+        sleep(2)
+        button.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        button.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        button.enter_texts('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input', '1没有数据添加12')
+        sleep(1)
+        ele1 = button.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').text
+        ele2 = button.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input').get_attribute("value")
+        button.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        button.get_find_message()
+        button.wait_for_loading_to_disappear()
+        button.select_input_module('1没有数据添加1')
+        ele11 = button.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+            "innerText")
+        ele22 = button.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[2]/td[2])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele11 and ele2 == ele22
+        assert not button.has_fail_message()
+        button.select_input_module('1没有数据添加')
+        before_data = button.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[3]//td[1])[1]']
+        button.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = button.get_find_element_xpath(elements[2])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
+        button.click_all_button('删除')
+        button.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        message = button.get_find_message()
+        button.wait_for_loading_to_disappear()
+        after_data = button.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        after_count = int(re.search(r'\d+', after_data).group())
+        assert message == "删除成功！"
+        assert before_count - after_count == 3, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
+        assert not button.has_fail_message()
 
     @allure.story("模拟多选删除")
     # @pytest.mark.run(order=1)

@@ -151,7 +151,7 @@ class SchedPage(BasePage):
             self.click_button(
                 '//label[text()="选择复制的方案"]/following-sibling::div/div'
             )  # 点击下拉框
-            self.click_button('//li[text()="排产方案(订单级)"]')
+            self.click_button('//div[label[text()="选择复制的方案"]]//ul[@class="ivu-select-dropdown-list"]/li[1]')
             self.click_name_ok()  # 点击确定
             self.click_save_button()  # 点击保存
 
@@ -209,3 +209,11 @@ class SchedPage(BasePage):
         self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[3]')
         self.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
         sleep(1)
+
+    def wait_for_loading_to_disappear(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH,
+                 "(//div[contains(@class, 'vxe-loading') and contains(@class, 'vxe-table--loading') and contains(@class, 'is--visible')])[1]")
+            )
+        )

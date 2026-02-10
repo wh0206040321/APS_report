@@ -491,29 +491,42 @@ class TestSMaterialSubstitutionPage:
         driver = login_to_materialsubstitution  # WebDriver 实例
         material = MaterialSubstitutionPage(driver)  # 用 driver 初始化 MaterialSubstitutionPage
         material.right_refresh('物料替代')
-        material.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
-        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
-        material.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
-        material.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[8])[2]//input', '651')
-        sleep(1)
-        ele1 = material.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"]//tr[1]/td[8])[2]//input').get_attribute(
-            "value")
-        material.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        material.get_find_message()
-        material.select_input('替代组号', '651')
-        ele2 = material.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[8])[1]').get_attribute(
-            "innerText")
-        assert ele1 == ele2 == '651'
-        assert not material.has_fail_message()
-        material.select_input('替代组号', '65')
-        before_data = material.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
-        before_count = int(re.search(r'\d+', before_data).group())
         elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
                     '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]']
         material.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
         cell2 = material.get_find_element_xpath(elements[1])
+        ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        sleep(1)
+        material.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
+        material.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[8])[2]//input', '651')
+        material.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        material.enter_texts('(//table[@class="vxe-table--body"]//tr[2]/td[8])[2]//input', '6512')
+        sleep(1)
+        ele1 = material.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[1]/td[8])[2]').text
+        ele2 = material.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[2]/td[8])[2]//input').get_attribute("value")
+        material.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+        material.get_find_message()
+        material.select_input('替代组号', '651')
+        ele11 = material.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[8])[1]').get_attribute(
+            "innerText")
+        ele22 = material.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[2]/td[8])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele11 and ele2 == ele22
+        assert not material.has_fail_message()
+        material.select_input('替代组号', '65')
+        before_data = material.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
+        before_count = int(re.search(r'\d+', before_data).group())
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[2]',
+                    '(//table[@class="vxe-table--body"]//tr[3]//td[1])[2]']
+        material.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = material.get_find_element_xpath(elements[2])
         ActionChains(driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
         sleep(1)
         material.click_all_button('删除')
@@ -523,7 +536,7 @@ class TestSMaterialSubstitutionPage:
         after_data = material.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
-        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
+        assert before_count - after_count == 3, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not material.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")

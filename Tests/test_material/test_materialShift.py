@@ -618,29 +618,43 @@ class TestItemPage:
     # @pytest.mark.run(order=1)
     def test_materialShift_shiftdel(self, login_to_item):
         self.item.right_refresh('收货班次')
-        self.item.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
+        self.item.click_button(elements[0])
+        # 第二个单元格 Shift+点击（选择范围）
+        cell2 = self.item.get_find_element_xpath(elements[1])
+        ActionChains(self.driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
+        sleep(1)
         ActionChains(self.driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
+        sleep(1)
         self.item.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
         self.item.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改1')
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        self.item.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
+        self.item.enter_texts('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input', '1没有数据修改12')
         sleep(1)
         ele1 = self.item.get_find_element_xpath(
-            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
-            "value")
+            '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').text
+        ele2 = self.item.get_find_element_xpath(
+            '(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input').get_attribute("value")
         self.item.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         self.item.get_find_message()
         self.item.select_input_standard('班次代码', '1没有数据修改1')
-        ele2 = self.item.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
+        ele11 = self.item.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
-        assert ele1 == ele2 == '1没有数据修改1'
+        ele22 = self.item.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[2]/td[2])[1]').get_attribute(
+            "innerText")
+        assert ele1 == ele11 and ele2 == ele22
         assert not self.item.has_fail_message()
         self.item.select_input_standard('班次代码', '1没有数据修改')
         before_data = self.item.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         before_count = int(re.search(r'\d+', before_data).group())
-        elements = ['//table[@class="vxe-table--body"]//tr[1]//td[1]',
-                    '//table[@class="vxe-table--body"]//tr[2]//td[1]']
+        elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]',
+                    '(//table[@class="vxe-table--body"]//tr[3]//td[1])[1]']
         self.item.click_button(elements[0])
         # 第二个单元格 Shift+点击（选择范围）
-        cell2 = self.item.get_find_element_xpath(elements[1])
+        cell2 = self.item.get_find_element_xpath(elements[2])
         ActionChains(self.driver).key_down(Keys.SHIFT).click(cell2).key_up(Keys.SHIFT).perform()
         sleep(1)
         self.item.click_del_button()
@@ -650,7 +664,7 @@ class TestItemPage:
         after_data = self.item.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         after_count = int(re.search(r'\d+', after_data).group())
         assert message == "删除成功！"
-        assert before_count - after_count == 2, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
+        assert before_count - after_count == 3, f"删除失败: 删除前 {before_count}, 删除后 {after_count}"
         assert not self.item.has_fail_message()
 
     @allure.story("模拟ctrl+c复制可查询")
