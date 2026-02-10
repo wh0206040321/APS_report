@@ -1,6 +1,0 @@
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[3]//i
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label
-[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label，等待超时 10s

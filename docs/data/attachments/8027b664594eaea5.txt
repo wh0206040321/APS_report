@@ -1,0 +1,17 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[3]//i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()=" 显示设置 "]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //tr[./td[3][.//span[text()="物料代码"]]]/td[9]//label
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 物品 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--header"]//tr/th[2])[1]//p
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[@class="vxe-table--header"]//tr/th[2])[1]//p
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li//span[text()="固定列"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[6]//i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
