@@ -1511,6 +1511,7 @@ class TestSchedPage:
         sched.add_copy_sched(name)
         eles = sched.finds_elements(By.XPATH, '//span[@class="ivu-tree-title"]')
         all_texts = [ele.text for ele in eles]
+        sched.right_refresh('计划方案管理')
         assert all(n in all_texts for n in name), f"不是所有名称都存在。现有的元素: {all_texts}"
         assert not sched.has_fail_message()
 
@@ -1557,7 +1558,7 @@ class TestSchedPage:
             element = sched.get_find_element_xpath('//span[text()="添加覆盖日历。"]')
             ActionChains(driver).double_click(element).perform()
             sleep(1)
-            sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+            sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
 
         sched.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sched.click_save_button()
@@ -1607,7 +1608,7 @@ class TestSchedPage:
         element = sched.get_find_element_xpath('//span[text()="添加覆盖日历。"]')
         ActionChains(driver).double_click(element).perform()
         sleep(1)
-        sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+        sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
         input_value = sched.get_find_element_xpath('//div[@class="flex-1 overflow-hidden"]//input[@placeholder="请输入"]').get_attribute("value")
 
         sched.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
@@ -1676,7 +1677,7 @@ class TestSchedPage:
             element = sched.get_find_element_xpath('//span[text()="添加覆盖日历。"]')
             ActionChains(driver).double_click(element).perform()
             sleep(1)
-            sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+            sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
         sched.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sched.click_save_button()
         ele = sched.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')

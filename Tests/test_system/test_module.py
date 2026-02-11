@@ -211,7 +211,7 @@ class TestSModulePage:
         sleep(1)
         module.click_all_button("编辑")
         xpath_list = [
-            '//div[span[text()=" 组件名称 "]]/following-sibling::div//input',
+            '//div[span[text()=" 模块名称 "]]/following-sibling::div//input',
             '//div[span[text()=" 排序 "]]/following-sibling::div//input',
         ]
         add.batch_modify_input(xpath_list[:1], before_name)
