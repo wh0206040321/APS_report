@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[1m[31mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1662018813520
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_resourceAllocation
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1661996515680
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_resourceAllocation
