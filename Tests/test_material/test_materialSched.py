@@ -433,6 +433,7 @@ class TestMaterialSchedPage:
             By.XPATH,
             '(//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="22"]',
         )
+        sched.right_refresh_1('物控方案管理')
         assert len(ele) == 0
         assert not sched.has_fail_message()
 

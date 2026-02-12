@@ -1571,6 +1571,7 @@ class TestSchedPage:
     def test_sched_click2(self, login_to_sched):
         driver = login_to_sched  # WebDriver 实例
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        sched.right_refresh_1('计划方案管理')
         ele = sched.get_find_element_xpath(
             '//span[text()="计划方案库"]/preceding-sibling::span'
         ).get_attribute('class')
@@ -1623,6 +1624,7 @@ class TestSchedPage:
     def test_sched_click3(self, login_to_sched):
         driver = login_to_sched  # WebDriver 实例
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        sched.right_refresh_1('计划方案管理')
         ele = sched.get_find_element_xpath(
             '//span[text()="计划方案库"]/preceding-sibling::span'
         ).get_attribute('class')

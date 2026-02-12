@@ -266,6 +266,7 @@ class MaterialControlDefinition(BasePage):
         self.click_button(f'(//div[@class="ivu-tabs-nav"])[2]/div[text()=" {name} "]')
         self.click_button('(//button[span[text()="查询"]])[2]')
         self.wait_for_loading_to_disappear()
+        self.click_button('//div[@class="vxe-modal--footer"]//span[text()="关闭"]')
 
     def del_all(self, xpath, value=[]):
         for index, v in enumerate(value, start=1):
@@ -355,3 +356,12 @@ class MaterialControlDefinition(BasePage):
         # 点击确认删除的按钮
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
         self.wait_for_loading_to_disappear()
+
+    def select_input(self, name):
+        """选择输入框."""
+        xpath = '//p[text()="物控计算单号"]/ancestor::div[2]//input'
+        ele = self.get_find_element_xpath(xpath)
+        ele.send_keys(Keys.CONTROL + "a")
+        ele.send_keys(Keys.DELETE)
+        self.enter_texts(xpath, name)
+        sleep(1)
