@@ -1,0 +1,118 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="ivu-tree-children"]//span[text()="导入"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="ivu-tree-children"]//span[text()="客户"]/ancestor::ul[1]//label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="ivu-tree-children"]//span[text()="工序"]/ancestor::ul[1]//label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //ul[@class="ivu-tree-children"]//span[text()="工序"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="映射编辑"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[span[text()="浏览文件"]]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//input[@type="file"])[3]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()=" 字段映射 "]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = (//table[@class="vxe-table--body"])[1]//tr
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[1]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[1]/div[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[2]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[2]/div[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[3]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[3]/div[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[4]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[4]/div[4]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[5]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[5]/div[5]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[6]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[6]/div[6]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[7]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[7]/div[7]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="保存"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //span[text()=" 执行方案"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //ul[@class="ivu-tree-children"]//span[@class="valueSpan" and text()="客户"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //ul[@class="ivu-tree-children"]//span[@class="valueSpan" and text()="工序"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //i[@class="ivu-icon ivu-icon-ios-close-circle"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="ivu-tree-children"]//span[text()="导入"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="ivu-tree-children"]//span[text()="客户"]/ancestor::ul[1]//label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //ul[@class="ivu-tree-children"]//span[text()="工序"]/ancestor::ul[1]//label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //ul[@class="ivu-tree-children"]//span[text()="工序"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="映射编辑"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //button[span[text()="浏览文件"]]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//input[@type="file"])[3]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()=" 字段映射 "]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = (//table[@class="vxe-table--body"])[1]//tr
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[1]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[1]/div[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[2]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[2]/div[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[3]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[3]/div[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[4]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[4]/div[4]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[5]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[5]/div[5]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[6]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[6]/div[6]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[7]/td[3]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-select-option--wrapper"])[7]/div[7]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="保存"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //span[text()=" 执行方案"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //ul[@class="ivu-tree-children"]//span[@class="valueSpan" and text()="客户"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //ul[@class="ivu-tree-children"]//span[@class="valueSpan" and text()="工序"]
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //i[@class="ivu-icon ivu-icon-ios-close-circle"]
