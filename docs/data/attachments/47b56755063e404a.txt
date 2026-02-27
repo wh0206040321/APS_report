@@ -1,0 +1,72 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[1]//td[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff645476f65+78965]
+	GetHandleVerifier [0x0x7ff645476fc0+79056]
+	(No symbol) [0x0x7ff645209c0c]
+	(No symbol) [0x0x7ff645255747]
+	(No symbol) [0x0x7ff64528866a]
+	(No symbol) [0x0x7ff645252b56]
+	(No symbol) [0x0x7ff645288880]
+	(No symbol) [0x0x7ff6452b0dbe]
+	(No symbol) [0x0x7ff645288443]
+	(No symbol) [0x0x7ff645251311]
+	(No symbol) [0x0x7ff6452520a3]
+	GetHandleVerifier [0x0x7ff64572e26d+2926461]
+	GetHandleVerifier [0x0x7ff645728993+2903715]
+	GetHandleVerifier [0x0x7ff645746aed+3026941]
+	GetHandleVerifier [0x0x7ff6454916fe+187406]
+	GetHandleVerifier [0x0x7ff6454996ef+220159]
+	GetHandleVerifier [0x0x7ff64547faf4+114692]
+	GetHandleVerifier [0x0x7ff64547fca9+115129]
+	GetHandleVerifier [0x0x7ff6454664d8+10728]
+	BaseThreadInitThunk [0x0x7ff8d91d7374+20]
+	RtlUserThreadStart [0x0x7ff8db1dcc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr[1]//td[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: invalid element state
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff645476f65+78965]
+	GetHandleVerifier [0x0x7ff645476fc0+79056]
+	(No symbol) [0x0x7ff645209c0c]
+	(No symbol) [0x0x7ff645255747]
+	(No symbol) [0x0x7ff64528866a]
+	(No symbol) [0x0x7ff645252b56]
+	(No symbol) [0x0x7ff645288880]
+	(No symbol) [0x0x7ff6452b0dbe]
+	(No symbol) [0x0x7ff645288443]
+	(No symbol) [0x0x7ff645251311]
+	(No symbol) [0x0x7ff6452520a3]
+	GetHandleVerifier [0x0x7ff64572e26d+2926461]
+	GetHandleVerifier [0x0x7ff645728993+2903715]
+	GetHandleVerifier [0x0x7ff645746aed+3026941]
+	GetHandleVerifier [0x0x7ff6454916fe+187406]
+	GetHandleVerifier [0x0x7ff6454996ef+220159]
+	GetHandleVerifier [0x0x7ff64547faf4+114692]
+	GetHandleVerifier [0x0x7ff64547fca9+115129]
+	GetHandleVerifier [0x0x7ff6454664d8+10728]
+	BaseThreadInitThunk [0x0x7ff8d91d7374+20]
+	RtlUserThreadStart [0x0x7ff8db1dcc91+33]
+，尝试使用 JS 清空
+[32mINFO    [0m root:base_page.py:100 ✅ JS 清空成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
