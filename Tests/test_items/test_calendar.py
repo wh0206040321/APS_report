@@ -606,10 +606,11 @@ class TestCalendarPage:
         calendar.click_button(
             '(//i[@class="ivu-icon ivu-icon-md-albums ivu-input-icon ivu-input-icon-normal"])[1]'
         )
+        calendar.wait_for_loading_to_disappear()
 
         # 勾选框
+        calendar.click_button('//table[@class="vxe-table--header"]//tr/th[2]//span[contains(@class,"vxe-cell--checkbox")]')
         random_int = random.randint(1, 6)
-        sleep(1)
         calendar.click_button(f'//table[@class="vxe-table--body"]//tr[{random_int}]/td[2]/div/span/span')
         sleep(1)
 
@@ -803,6 +804,7 @@ class TestCalendarPage:
     def test_calendar_select4(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
+        calendar.right_refresh('生产日历')
         name = calendar.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
         ).get_attribute('innerText')
@@ -815,7 +817,6 @@ class TestCalendarPage:
         eles = calendar.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
-        calendar.right_refresh('生产日历')
         assert all(str(item).startswith(first_char) for item in list_)
         assert not calendar.has_fail_message()
 
@@ -824,6 +825,7 @@ class TestCalendarPage:
     def test_calendar_select5(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
+        calendar.right_refresh('生产日历')
         name = calendar.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
         ).get_attribute('innerText')

@@ -2648,16 +2648,18 @@ class TestSettingPage:
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         user = UserRolePage(driver)  # 用 driver 初始化 UserRolePage
         item = ItemPage(driver)
-        layout1 = "1分享布局"
+        layout1 = "1分享布局1"
         layout2 = "1分享布局2"
         name = '1shareLayout'
-        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout1} "]')
-        sleep(1)
-        item.del_layout(layout1)
         item.right_refresh('物品')
         setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout2} "]')
         sleep(1)
         item.del_layout(layout2)
+        item.right_refresh('物品')
+        sleep(2)
+        setting.click_button(f'//div[@class="tabsDivItemCon"]/div[text()=" {layout1} "]')
+        sleep(1)
+        item.del_layout(layout1)
         item.right_refresh('物品')
         after_layout1 = driver.find_elements(
             By.XPATH, f'//div[@class="tabsDivItemCon"]/div[text()=" {layout1} "]'

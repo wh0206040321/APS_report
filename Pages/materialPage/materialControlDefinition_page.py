@@ -154,6 +154,7 @@ class MaterialControlDefinition(BasePage):
         self.click_all_button("新增")
         sleep(1)
         self.click_button('//div[div[text()="标准需求设置-新增"]]//i[@title="最大化"]')
+        sleep(1)
         input_list = [
             '//div[div[text()=" 需求来源编码: "]]//input',
             '//div[div[text()=" 需求来源名称: "]]//input',

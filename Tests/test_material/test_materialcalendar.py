@@ -798,6 +798,7 @@ class TestMaterialCalendarPage:
     def test_materialcalendar_select4(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
+        calendar.right_refresh('收货日历')
         name = calendar.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
         ).get_attribute('innerText')
@@ -810,8 +811,8 @@ class TestMaterialCalendarPage:
         eles = calendar.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
-        calendar.right_refresh('收货日历')
         assert all(str(item).lower().startswith(first_char.lower()) for item in list_)
+        calendar.right_refresh('收货日历')
         assert not calendar.has_fail_message()
 
     @allure.story("过滤条件查询，设置符合结尾查询成功")
@@ -819,6 +820,7 @@ class TestMaterialCalendarPage:
     def test_materialcalendar_select5(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
+        calendar.right_refresh('收货日历')
         name = calendar.get_find_element_xpath(
             '//div[@class="vxe-table--body-wrapper body--wrapper"]/table[@class="vxe-table--body"]//tr[2]//td[2]'
         ).get_attribute('innerText')
@@ -831,8 +833,8 @@ class TestMaterialCalendarPage:
         eles = calendar.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr//td[2]')
         sleep(1)
         list_ = [ele.text for ele in eles]
-        calendar.right_refresh('收货日历')
         assert all(str(item).lower().endswith(last_char.lower()) for item in list_)
+        calendar.right_refresh('收货日历')
         assert not calendar.has_fail_message()
 
     @allure.story("清除筛选效果成功")
@@ -840,6 +842,7 @@ class TestMaterialCalendarPage:
     def test_materialcalendar_clear(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = MaterialCalendar(driver)  # 用 driver 初始化 MaterialCalendar
+        calendar.right_refresh('收货日历')
         name = "3"
         sleep(1)
         calendar.click_button('//div[div[p[text()="收货场所"]]]//i[contains(@class,"suffixIcon")]')

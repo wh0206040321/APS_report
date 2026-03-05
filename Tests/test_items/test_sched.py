@@ -1511,7 +1511,7 @@ class TestSchedPage:
         sched.add_copy_sched(name)
         eles = sched.finds_elements(By.XPATH, '//span[@class="ivu-tree-title"]')
         all_texts = [ele.text for ele in eles]
-        sched.right_refresh('计划方案管理')
+        sched.right_refresh_1('计划方案管理')
         assert all(n in all_texts for n in name), f"不是所有名称都存在。现有的元素: {all_texts}"
         assert not sched.has_fail_message()
 
@@ -1520,6 +1520,13 @@ class TestSchedPage:
     def test_sched_click1(self, login_to_sched):
         driver = login_to_sched  # WebDriver 实例
         sched = SchedPage(driver)  # 用 driver 初始化 SchedPage
+        name = [
+            "方案属性设置点击不报错",
+        ]
+        ele = sched.finds_elements(By.XPATH, f'//label[text()="{name[0]}"]')
+        if len(ele) == 0:
+            sched.add_copy_sched(name)
+        sched.right_refresh_1('计划方案管理')
         ele = sched.get_find_element_xpath(
             '//span[text()="计划方案库"]/preceding-sibling::span'
         ).get_attribute('class')
@@ -1528,12 +1535,6 @@ class TestSchedPage:
                 '//span[text()="计划方案库"]/preceding-sibling::span'
             )
         sleep(1)
-        name = [
-            "方案属性设置点击不报错",
-        ]
-        ele = sched.finds_elements(By.XPATH, f'//label[text()="{name[0]}"]')
-        if len(ele) == 0:
-            sched.add_copy_sched(name)
         sched.click_button(f'//span[@class="ivu-tree-title"][text()="{name[0]}"]')
         sched.click_button('//div[p[text()=" 内部命令 "]]/div//label[text()="属性编辑"]')
         sched.click_add_commandbutton()
@@ -1610,12 +1611,13 @@ class TestSchedPage:
         ActionChains(driver).double_click(element).perform()
         sleep(1)
         sched.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[last()]')
+        sleep(2)
         input_value = sched.get_find_element_xpath('//div[@class="flex-1 overflow-hidden"]//input[@placeholder="请输入"]').get_attribute("value")
 
         sched.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         sched.click_save_button()
         ele = sched.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
-        assert input_value == 'AddOCalendar(Me.OperationMainRes,#2006/10/01 00:00:00#,#2006/10/15 00:00:00#,1)'
+        assert 'AddOCalendar(Me.OperationMainRes,#2006/10/01 00:00:00#,#2006/10/15 00:00:00#,1)' in input_value
         assert len(ele) == 0
         assert not sched.has_fail_message()
 

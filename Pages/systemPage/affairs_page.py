@@ -98,7 +98,7 @@ class AffairsPage(BasePage):
                 try:
                     confirm = WebDriverWait(self.driver, 3).until(
                         EC.visibility_of_element_located(
-                            (By.XPATH, '(//div[@class="el-message-box__btns"]//button/span[contains(text(),"确定")])[last()]')
+                            (By.XPATH, '//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
                         )
                     )
                     confirm.click()
@@ -142,7 +142,7 @@ class AffairsPage(BasePage):
             sleep(2)
             ele.click()
             sleep(1)
-            self.click_button('(//div[@class="el-message-box__btns"]/button[2])[last()]')
+            self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             self.wait_for_el_loading_mask()
 
     def hover(self, name="", edi=""):

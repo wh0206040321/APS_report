@@ -89,13 +89,14 @@ class TestPlanUnitPage:
         ).text
 
         unit.click_all_button("新增")
+        sleep(2)
         list_ = [
             '(//label[text()="计划单元"])[1]/parent::div//input',
             '(//label[text()="计划单元名称"])[1]/parent::div//input',
             '(//label[text()="模板名称"])[1]/parent::div//div[@class="ivu-select-selection"]',
         ]
         unit.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])')
-        sleep(1)
+        sleep(3)
         value_list = add.get_border_color(list_)
         # 断言边框颜色是否为红色（可以根据实际RGB值调整）
         expected_color = "rgb(237, 64, 20)"  # 红色的 rgb 值

@@ -819,6 +819,7 @@ class TestChangeSpecPage:
             '//div[@class="vxe-modal--footer"]//span[text()="确定"]'
         )
         change.get_find_message()
+        change.right_refresh('生产特征1切换')
         assert not change.has_fail_message()
 
     @allure.story("修改资源切换资源成功")
@@ -1012,6 +1013,15 @@ class TestChangeSpecPage:
         change = ChangeR(driver)  # 用 driver 初始化 ChangeR
         adds = AddsPages(driver)
         input_value = '11测试全部数据'
+        ele = change.finds_elements(By.XPATH,
+                                    f'//table[@class="vxe-table--body"]//tr/td[7][.//span[text()="{input_value}"]]')
+        if len(ele) == 1:
+            change.click_button(
+                f'//table[@class="vxe-table--body"]//tr/td[7][.//span[text()="{input_value}"]]')
+            change.click_del_button()  # 点击删除
+            change.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            change.wait_for_loading_to_disappear()
+            change.right_refresh('生产特征1切换')
         change.click_add_button()
         text_list = [
             '//label[text()="备注"]/following-sibling::div//input',
@@ -1049,6 +1059,7 @@ class TestChangeSpecPage:
             '//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         change.get_find_message()
         driver.refresh()
+        sleep(3)
         change.wait_for_loading_to_disappear()
         num = adds.go_settings_page()
         change.wait_for_loading_to_disappear()

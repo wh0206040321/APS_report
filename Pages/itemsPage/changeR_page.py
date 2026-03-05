@@ -87,6 +87,7 @@ class ChangeR(BasePage):
         )
         self.click_del_button()  # 点击删除
         self.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+        self.get_find_message()
         self.wait_for_loading_to_disappear()
 
     def click_flagdata(self):

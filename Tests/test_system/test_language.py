@@ -580,7 +580,7 @@ class TestSLanguagePage:
         language.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         language.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
-        language.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据添加')
+        language.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '11没有数据添加')
         sleep(1)
         ele1 = language.get_find_element_xpath(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
@@ -588,10 +588,10 @@ class TestSLanguagePage:
         language.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         language.get_find_message()
         language.wait_for_loading_to_disappear()
-        language.select_input_language('1没有数据添加')
+        language.select_input_language('11没有数据添加')
         ele2 = language.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
-        assert ele1 == ele2 == '1没有数据添加'
+        assert ele1 == ele2 == '11没有数据添加'
         assert not language.has_fail_message()
 
     @allure.story("模拟ctrl+m修改")
@@ -602,14 +602,14 @@ class TestSLanguagePage:
         language.click_button('//table[@class="vxe-table--body"]//tr[1]//td[2]')
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('m').key_up(Keys.CONTROL).perform()
         language.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
-        language.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改')
+        language.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '11没有数据修改')
         ele1 = language.get_find_element_xpath(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input').get_attribute(
             "value")
         language.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         language.get_find_message()
         language.wait_for_loading_to_disappear()
-        language.select_input_language('1没有数据修改')
+        language.select_input_language('11没有数据修改')
         ele2 = language.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
         assert ele1 == ele2
@@ -631,11 +631,11 @@ class TestSLanguagePage:
         sleep(1)
         ActionChains(driver).key_down(Keys.CONTROL).send_keys('i').key_up(Keys.CONTROL).perform()
         language.click_button('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]')
-        language.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '1没有数据修改1')
+        language.enter_texts('(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]//input', '11没有数据修改1')
         sleep(2)
         language.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
         language.click_button('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]')
-        language.enter_texts('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input', '1没有数据修改12')
+        language.enter_texts('(//table[@class="vxe-table--body"]//tr[2]/td[2])[2]//input', '11没有数据修改12')
         sleep(1)
         ele1 = language.get_find_element_xpath(
             '(//table[@class="vxe-table--body"]//tr[1]/td[2])[2]').text
@@ -644,14 +644,14 @@ class TestSLanguagePage:
         language.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         language.get_find_message()
         language.wait_for_loading_to_disappear()
-        language.select_input_language('1没有数据修改1')
+        language.select_input_language('11没有数据修改1')
         ele11 = language.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[1]/td[2])[1]').get_attribute(
             "innerText")
         ele22 = language.get_find_element_xpath('(//table[@class="vxe-table--body"]//tr[2]/td[2])[1]').get_attribute(
             "innerText")
         assert ele1 == ele11 and ele2 == ele22
         assert not language.has_fail_message()
-        language.select_input_language('1没有数据修改')
+        language.select_input_language('11没有数据修改')
         before_data = language.get_find_element_xpath('(//span[contains(text(),"条记录")])[1]').text
         before_count = int(re.search(r'\d+', before_data).group())
         elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
