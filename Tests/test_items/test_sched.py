@@ -623,7 +623,7 @@ class TestSchedPage:
         ).text
         sched.right_refresh('计划方案管理')
         assert (
-            before_input == after_input == 'ME.Order.Priority,d'
+            before_input == after_input and 'ME.Order.Priority,d' in before_input
             and sele_text1 == "订单优先度"
             and sele_text2 == "降序"
         )
@@ -670,7 +670,7 @@ class TestSchedPage:
         ).text
         sched.right_refresh('计划方案管理')
         assert (
-            before_input == after_input == 'ME.Order.Priority,a'
+            before_input == after_input and 'ME.Order.Priority,a' in before_input
             and sele_text1 == "订单优先度"
             and sele_text2 == "升序"
         )

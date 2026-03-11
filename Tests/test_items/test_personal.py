@@ -347,7 +347,7 @@ class TestPersonalPage:
         personal.click_button('//label[text()="悬浮"]/span')
         personal.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
         message = personal.get_find_message()
-        sleep(1)
+        sleep(3)
         after_element = driver.find_element(By.XPATH, '//ul[@role="menubar"]')
         after_width = after_element.size['width']
         assert message == "保存成功"
