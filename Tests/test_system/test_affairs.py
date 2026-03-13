@@ -1331,7 +1331,7 @@ class TestAffairsPage:
         affairs.click_button(f'//table[@class="el-table__body"]//tr[td[3][div[text()="{name}"]]]/td[last()]//span[text()="复制"]')
         affairs.click_button('//div[@class="ivu-modal-confirm-footer"]/button[2]')
         affairs.get_find_message()
-        sleep(1)
+        affairs.wait_for_el_loading_mask()
         ele = affairs.get_find_element_xpath('//table[@class="el-table__body"]//tr[1]/td[3]').text
         assert name + "_copy1" == ele
         assert not affairs.has_fail_message()
