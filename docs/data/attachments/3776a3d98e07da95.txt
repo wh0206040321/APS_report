@@ -1,7 +1,0 @@
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //i[@id="tabsDrawerIcon"]
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]/div[.//text()="测试透视表B"]
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]//span[text()="测试透视表B"]
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()=" 在导航中显示布局 "])[1]
-[31m[1mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击

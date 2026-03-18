@@ -1,0 +1,24 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="22"]]]/td[2]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="删除"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：class name = ivu-modal-confirm-footer
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="刷新"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: setup
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3, driver_id=1890425767968, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3_20260319_021716.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3] 截图时间：2026-03-19 02:17:16
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3_20260319_021716.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3, driver_id=1890445810304, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3_20260319_021716.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3] 截图时间：2026-03-19 02:17:16
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3_20260319_021716.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3, driver_id=1890434812992, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3_20260319_021716.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3] 截图时间：2026-03-19 02:17:16
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialShift.py__TestItemPage__test_materialShift_delsuccess3_20260319_021716.png
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：1890434812992
