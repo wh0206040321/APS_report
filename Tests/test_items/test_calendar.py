@@ -987,6 +987,7 @@ class TestCalendarPage:
     def test_calendar_ctrls(self, login_to_calendar):
         driver = login_to_calendar  # WebDriver 实例
         calendar = Calendar(driver)  # 用 driver 初始化 Calendar
+        calendar.click_flagdata()
         elements = ['(//table[@class="vxe-table--body"]//tr[1]//td[1])[1]',
                     '(//table[@class="vxe-table--body"]//tr[2]//td[1])[1]']
         calendar.click_button(elements[0])

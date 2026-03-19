@@ -86,6 +86,7 @@ class TestHomePage:
         home.click_button('//div[p[text()="关联角色"]]/div[contains(@class,"el-select")]')
         sleep(3)
         values = home.finds_elements(By.XPATH, '//div[@class="el-scrollbar"]//ul/li[contains(@class,"selected")]/span')
+        sleep(1)
         values_list = [value.text for value in values]
         if "admin" not in values_list:
             home.click_button('//li[span[text()="admin"]]')
@@ -226,7 +227,7 @@ class TestHomePage:
         home = HomePage(driver)  # 用 driver 初始化 HomePage
         driver.execute_script("document.body.style.zoom='1'")
         home.wait_for_el_loading_mask()
-        home.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[2]')
+        home.click_button('(//div[contains(@class,"homeSetTop")]//button)[2]')
         home.enter_texts('//div[text()=" 名称 "]/following-sibling::div//input', "测试模版confirm")
         home.click_button(
             f'//div[@class="vxe-modal--footer"]//span[text()="确定"]')
@@ -444,6 +445,7 @@ class TestHomePage:
             home.click_button('//div[span[text()=" 测试模版2confirm "]]/span[text()=" 加载模板 "]')
             home.click_button('//div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]')
         home.wait_for_el_loading_mask()
+        sleep(5)
         num = home.count_div_elements()
         home.click_save_button()
         home.get_find_message()

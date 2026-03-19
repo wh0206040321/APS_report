@@ -64,7 +64,7 @@ class HomePage(BasePage):
 
     def click_save_button(self):
         """点击保存按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[1]')
+        self.click_button('(//div[contains(@class,"homeSetTop")]//button)[1]')
         self.wait_for_el_loading_mask()
 
     def click_template(self):
@@ -72,7 +72,7 @@ class HomePage(BasePage):
 
     def click_save_template_button(self, name="", button=""):
         """点击保存模版按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[2]')
+        self.click_button('(//div[contains(@class,"homeSetTop")]//button)[2]')
         if name == "":
             self.click_button(
                 f'//div[@class="vxe-modal--footer"]//span[text()="{button}"]')
@@ -96,14 +96,14 @@ class HomePage(BasePage):
     def clear_all_button(self, span_text):
         """点击清除所有按钮."""
         self.wait_for_el_loading_mask()
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[3]')
+        self.click_button('(//div[contains(@class,"homeSetTop")]//button)[3]')
         self.click_button(
             f'//div[./div[text()="确定要删除所有的组件吗？"]]/following-sibling::div//span[text()="{span_text}"]')
         sleep(1)
 
     def clear_button(self, span_text):
         """点击清除按钮."""
-        self.click_button('(//div[@class="d-flex m-b-7 toolBar"]//button)[4]')
+        self.click_button('(//div[contains(@class,"homeSetTop")]//button)[4]')
         self.click_button(f'//div[./div[text()="你确定要删除这个组件吗"]]/following-sibling::div//span[text()="{span_text}"]')
 
     def count_div_elements(self):

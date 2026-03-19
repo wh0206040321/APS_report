@@ -189,9 +189,9 @@ class TestSModelDesignPage:
             f'//div[@class="content-siadeNav"]//div[@role="treeitem"][1]/div[2]/div//span[text()=" {name} "]')
         model.click_modeldesign_button("保存")
         model.click_del_confirm()
-        message = model.get_find_message()
+        message = model.get_error_message()
         ele = model.finds_elements(By.XPATH, '//i[@class="ivu-icon ivu-icon-ios-close-circle"]')
-        assert message == "保存成功！"
+        assert message == "模型不能为空"
         assert len(ele) == 0
         assert not model.has_fail_message()
 

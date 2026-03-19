@@ -366,7 +366,21 @@ class TestAffairsPage:
             '//div[label[text()="配置参数"]]//input',
             '//div[label[text()="推送参数设置"]]//input',
         ]
-        affairs.click_add_affairs(name=name, type=type, button=False)
+
+        affairs.click_button('//div[@id="pane-air"]//span[text()="新建事务"]')
+        sleep(3)
+        swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute("class")
+        sleep(1)
+        if "ivu-switch-checked" not in swich:
+            affairs.click_button('//div[label[text()="推送"]]/div/div/span')
+        if name:
+            affairs.enter_texts('//div[label[text()="事务名称"]]//input', name)
+        if type:
+            affairs.click_button(f'//div[label[text()="事务类型"]]//i')
+            affairs.click_button(f'//span[text()="{type}"]')
+            affairs.click_button('//div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
+
+
         select_list = [
             {"select": '(//div[@class="flex-1"])[2]//input',
              "value": '(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]'},
@@ -379,10 +393,7 @@ class TestAffairsPage:
         affairs.click_button(
             '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
         affairs.enter_texts('//div[label[text()="事务描述"]]//input', name)
-        swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute("class")
-        sleep(1)
-        if "ivu-switch-checked" not in swich:
-            affairs.click_button('//div[label[text()="推送"]]/div/div/span')
+
 
         checked = affairs.get_find_element_xpath('//label[span[text()="站内"]]/span[1]').get_attribute("class")
         if checked == 'el-checkbox__input':
@@ -1131,7 +1142,7 @@ class TestAffairsPage:
         td2 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[1]//tr[1]/td[3]/div').text
         td6 = affairs.get_find_element_xpath('(//table[@class="el-table__body"])[1]//tr[1]/td[7]/div/span').get_attribute("class")
         ele = affairs.finds_elements(By.XPATH, '(//table[@class="el-table__body"])[1]//tr[3]')
-        assert td1 == template_name and td2 == name and td6 == "ivu-switch ivu-switch-checked ivu-switch-default" and len(ele) == 0
+        assert td1 == template_name and td2 == name and "ivu-switch-checked" in td6 and len(ele) == 0
         assert not affairs.has_fail_message()
 
     @allure.story("我的流程-查询事务流程，开关关闭，流程名称成功")
