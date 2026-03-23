@@ -1,0 +1,30 @@
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_item
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883503000112, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022012.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:12
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022012.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883501173280, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022012.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:12
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022012.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883501167136, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022012.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:12
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022012.png
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_item
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883503000112, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022014.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:14
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022014.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883501173280, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022014.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:14
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022014.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883501167136, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022014.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:14
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022014.png
+[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_materialBuyer.py, driver_id=1883525718384, alive=True
+[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_materialBuyer.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022015.png
+[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_materialBuyer.py] 截图时间：2026-03-24 02:20:15
+[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_materialBuyer.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialBuyer.py_20260324_022015.png
