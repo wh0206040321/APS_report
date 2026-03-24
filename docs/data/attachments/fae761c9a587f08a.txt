@@ -1,4 +1,0 @@
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[4]//i
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功

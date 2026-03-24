@@ -1,0 +1,8 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()=" 订单甘特图 "]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[div[text()=" 订单甘特图 "]]/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="订单关联甘特图"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //a[@title="添加"]
+[31m[1mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
