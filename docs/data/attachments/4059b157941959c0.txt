@@ -1,0 +1,65 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//span[text()="系统设置"])[1]/ancestor::li[1]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7e2126f65+78965]
+	GetHandleVerifier [0x0x7ff7e2126fc0+79056]
+	(No symbol) [0x0x7ff7e1eb9dda]
+	(No symbol) [0x0x7ff7e1ec17c1]
+	(No symbol) [0x0x7ff7e1ec482c]
+	(No symbol) [0x0x7ff7e1ec48ff]
+	(No symbol) [0x0x7ff7e1f124ed]
+	(No symbol) [0x0x7ff7e1f0564e]
+	(No symbol) [0x0x7ff7e1f3866a]
+	(No symbol) [0x0x7ff7e1f02b56]
+	(No symbol) [0x0x7ff7e1f38880]
+	(No symbol) [0x0x7ff7e1f60dbe]
+	(No symbol) [0x0x7ff7e1f38443]
+	(No symbol) [0x0x7ff7e1f01311]
+	(No symbol) [0x0x7ff7e1f020a3]
+	GetHandleVerifier [0x0x7ff7e23de26d+2926461]
+	GetHandleVerifier [0x0x7ff7e23d8993+2903715]
+	GetHandleVerifier [0x0x7ff7e23f6aed+3026941]
+	GetHandleVerifier [0x0x7ff7e21416fe+187406]
+	GetHandleVerifier [0x0x7ff7e21496ef+220159]
+	GetHandleVerifier [0x0x7ff7e212faf4+114692]
+	GetHandleVerifier [0x0x7ff7e212fca9+115129]
+	GetHandleVerifier [0x0x7ff7e21164d8+10728]
+	BaseThreadInitThunk [0x0x7fffe9837374+20]
+	RtlUserThreadStart [0x0x7fffeae5cc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7e2126f65+78965]
+	GetHandleVerifier [0x0x7ff7e2126fc0+79056]
+	(No symbol) [0x0x7ff7e1eb9dda]
+	(No symbol) [0x0x7ff7e1ec17c1]
+	(No symbol) [0x0x7ff7e1ec4bbc]
+	(No symbol) [0x0x7ff7e1f62096]
+	(No symbol) [0x0x7ff7e1f3866a]
+	(No symbol) [0x0x7ff7e1f60dbe]
+	(No symbol) [0x0x7ff7e1f38443]
+	(No symbol) [0x0x7ff7e1f01311]
+	(No symbol) [0x0x7ff7e1f020a3]
+	GetHandleVerifier [0x0x7ff7e23de26d+2926461]
+	GetHandleVerifier [0x0x7ff7e23d8993+2903715]
+	GetHandleVerifier [0x0x7ff7e23f6aed+3026941]
+	GetHandleVerifier [0x0x7ff7e21416fe+187406]
+	GetHandleVerifier [0x0x7ff7e21496ef+220159]
+	GetHandleVerifier [0x0x7ff7e212faf4+114692]
+	GetHandleVerifier [0x0x7ff7e212fca9+115129]
+	GetHandleVerifier [0x0x7ff7e21164d8+10728]
+	BaseThreadInitThunk [0x0x7fffe9837374+20]
+	RtlUserThreadStart [0x0x7fffeae5cc91+33]
+
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 组件代码"]]]/div[3]//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 菜单组件 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功

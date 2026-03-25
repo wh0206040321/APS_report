@@ -1,7 +1,0 @@
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@id="tab-air"]
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-list__wrapper"]
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="添加全部模版成功"]
-[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
-[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="template-card__title"]/div[text()="添加事务模版"]
