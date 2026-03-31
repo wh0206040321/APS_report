@@ -1,0 +1,120 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//span[text()="系统设置"])[1]/ancestor::li[1]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:97 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7a6656f65+78965]
+	GetHandleVerifier [0x0x7ff7a6656fc0+79056]
+	(No symbol) [0x0x7ff7a63e9dda]
+	(No symbol) [0x0x7ff7a63f17c1]
+	(No symbol) [0x0x7ff7a63f482c]
+	(No symbol) [0x0x7ff7a63f48ff]
+	(No symbol) [0x0x7ff7a64424ed]
+	(No symbol) [0x0x7ff7a643564e]
+	(No symbol) [0x0x7ff7a646866a]
+	(No symbol) [0x0x7ff7a6432b56]
+	(No symbol) [0x0x7ff7a6468880]
+	(No symbol) [0x0x7ff7a6490dbe]
+	(No symbol) [0x0x7ff7a6468443]
+	(No symbol) [0x0x7ff7a6431311]
+	(No symbol) [0x0x7ff7a64320a3]
+	GetHandleVerifier [0x0x7ff7a690e26d+2926461]
+	GetHandleVerifier [0x0x7ff7a6908993+2903715]
+	GetHandleVerifier [0x0x7ff7a6926aed+3026941]
+	GetHandleVerifier [0x0x7ff7a66716fe+187406]
+	GetHandleVerifier [0x0x7ff7a66796ef+220159]
+	GetHandleVerifier [0x0x7ff7a665faf4+114692]
+	GetHandleVerifier [0x0x7ff7a665fca9+115129]
+	GetHandleVerifier [0x0x7ff7a66464d8+10728]
+	BaseThreadInitThunk [0x0x7fffdeda7374+20]
+	RtlUserThreadStart [0x0x7fffe0adcc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:102 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7a6656f65+78965]
+	GetHandleVerifier [0x0x7ff7a6656fc0+79056]
+	(No symbol) [0x0x7ff7a63e9dda]
+	(No symbol) [0x0x7ff7a63f17c1]
+	(No symbol) [0x0x7ff7a63f4bbc]
+	(No symbol) [0x0x7ff7a6492096]
+	(No symbol) [0x0x7ff7a646866a]
+	(No symbol) [0x0x7ff7a6490dbe]
+	(No symbol) [0x0x7ff7a6468443]
+	(No symbol) [0x0x7ff7a6431311]
+	(No symbol) [0x0x7ff7a64320a3]
+	GetHandleVerifier [0x0x7ff7a690e26d+2926461]
+	GetHandleVerifier [0x0x7ff7a6908993+2903715]
+	GetHandleVerifier [0x0x7ff7a6926aed+3026941]
+	GetHandleVerifier [0x0x7ff7a66716fe+187406]
+	GetHandleVerifier [0x0x7ff7a66796ef+220159]
+	GetHandleVerifier [0x0x7ff7a665faf4+114692]
+	GetHandleVerifier [0x0x7ff7a665fca9+115129]
+	GetHandleVerifier [0x0x7ff7a66464d8+10728]
+	BaseThreadInitThunk [0x0x7fffdeda7374+20]
+	RtlUserThreadStart [0x0x7fffe0adcc91+33]
+
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 组件代码"]]]/div[3]//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 菜单组件 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//span[text()="系统设置"])[1]/ancestor::li[1]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1新增菜单"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 组件代码"]]]/div[3]//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 菜单组件 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="应用管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1新增应用"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[p[text()="应用代码"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1新增应用2"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[p[text()="应用代码"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 应用管理 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="模块管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="ABCDAA"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 模块代码"]]]//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="ACBDDD"]]]/td[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[span[text()=" 模块代码"]]]//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 模块管理 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
