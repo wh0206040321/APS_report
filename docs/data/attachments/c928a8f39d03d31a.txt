@@ -1,0 +1,2 @@
+[32mINFO    [0m root:driver_manager.py:56 🛑 已从实例池移除并关闭 driver：2026950051440
+[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_materialSched

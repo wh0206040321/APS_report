@@ -1,0 +1,9 @@
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="开启"]/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="开启"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="demo-drawer-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[@class="vxe-pulldown--content"]//input[@placeholder="搜索"]]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[p[text()=" 页面搜索栏展开收缩: "]]//label[text()="开启"]/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="demo-drawer-footer"]//span[text()="确定"]
+[31m[1mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
