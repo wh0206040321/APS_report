@@ -1,0 +1,124 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="新增"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" PO编码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商名称 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 物料编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 工厂代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 订单代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 备注 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 批次号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 下单日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 到货日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 行号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 采购单数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 未交数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" PO编码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商名称 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 物料编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 工厂代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 订单代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 备注 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 批次号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 下单日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 到货日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 行号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 采购单数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 未交数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 采购PO "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //p[text()="新增"]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" PO编码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商名称 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 物料编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 工厂代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 订单代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 备注 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 批次号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 下单日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 到货日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 行号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 采购单数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 未交数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" PO编码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 供应商名称 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 物料编号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 工厂代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 订单代码 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 备注 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 批次号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义字符5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 下单日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 到货日期 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义日期5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 行号 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 采购单数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 未交数量 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值1 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值2 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值3 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值4 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[span[text()=" 自定义数值5 "]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
