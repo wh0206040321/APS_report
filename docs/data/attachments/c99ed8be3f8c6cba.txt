@@ -1,0 +1,4 @@
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 生产特征1 "]]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 生产特征1 "]]，等待超时 10s
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 生产特征1 "]]
+[33mWARNING [0m root:base_page.py:32 ❌ 未找到元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 生产特征1 "]]，等待超时 10s
