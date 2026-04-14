@@ -1,0 +1,90 @@
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="用户权限管理"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[p[text()="用户代码"]]]//input
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //table[@class="vxe-table--body"]//tr[1]/td[2]//span[text()="1shareLayout"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 用户权限管理 "]]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[label[text()="用户有效日期"]]//input
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="ivu-date-picker-cells"]/span[@class="ivu-date-picker-cells-cell ivu-date-picker-cells-cell-today ivu-date-picker-cells-focused"]/following-sibling::span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]/td[2]/div/span)[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="保存"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[div[p[text()="用户代码"]]]//input
+[32mINFO    [0m root:base_page.py:37 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1shareLayout"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="labelTitle"][text()=" 物品 "]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[2]//i
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[text()=" 显示设置 "])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = (//div[./div[text()="是否可见:"]])[1]/label/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[./div[text()="是否可见:"]])[1]/label/span
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]/button[2]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //i[@id="tabsDrawerIcon"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]/div[.//text()="1分享布局1"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[@id="container"]//span[text()="1分享布局1"]
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//li[text()="共享布局"])[1]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:26 查找元素：xpath = //div[label[text()="分享范围"]]//label[text()="角色组"]/span
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //label[text()="共享布局名"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:57 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[33mWARNING [0m root:base_page.py:61 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:64 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="用户权限管理"])[1]
+[33mWARNING [0m root:base_page.py:81 点击失败：Message: element not interactable
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff7405c6f65+78965]
+	GetHandleVerifier [0x0x7ff7405c6fc0+79056]
+	(No symbol) [0x0x7ff740359c0c]
+	(No symbol) [0x0x7ff7403b17fd]
+	(No symbol) [0x0x7ff7403a32a4]
+	(No symbol) [0x0x7ff7403d866a]
+	(No symbol) [0x0x7ff7403a2b56]
+	(No symbol) [0x0x7ff7403d8880]
+	(No symbol) [0x0x7ff740400dbe]
+	(No symbol) [0x0x7ff7403d8443]
+	(No symbol) [0x0x7ff7403a1311]
+	(No symbol) [0x0x7ff7403a20a3]
+	GetHandleVerifier [0x0x7ff74087e26d+2926461]
+	GetHandleVerifier [0x0x7ff740878993+2903715]
+	GetHandleVerifier [0x0x7ff740896aed+3026941]
+	GetHandleVerifier [0x0x7ff7405e16fe+187406]
+	GetHandleVerifier [0x0x7ff7405e96ef+220159]
+	GetHandleVerifier [0x0x7ff7405cfaf4+114692]
+	GetHandleVerifier [0x0x7ff7405cfca9+115129]
+	GetHandleVerifier [0x0x7ff7405b64d8+10728]
+	BaseThreadInitThunk [0x0x7fffdeda7374+20]
+	RtlUserThreadStart [0x0x7fffe0adcc91+33]
+
+[32mINFO    [0m root:base_page.py:48 点击元素：By = xpath, Value = (//span[text()="用户权限管理"])[1]
+[31m[1mERROR   [0m root:base_page.py:77 ❌ 元素未在 10 秒内变为可点击
