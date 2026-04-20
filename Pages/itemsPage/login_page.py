@@ -88,4 +88,4 @@ class LoginPage(BasePage):
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))
         )
-        sleep(1)
+        sleep(2)

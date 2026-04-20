@@ -196,7 +196,7 @@ class TestCalendarPage:
         message = calendar.get_error_message()
         calendar.click_button('//div[@class="vxe-modal--footer"]//span[text()="取消"]')
         calendar.right_refresh('生产日历')
-        assert message == "请先填写表单"
+        assert message == "请选择日期或者星期"
         assert not calendar.has_fail_message()
 
     @allure.story("数字文本框 只允许填写数字")

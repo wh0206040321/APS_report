@@ -137,6 +137,11 @@ class SchedPage(BasePage):
         )
         return message.text
 
+    def get_error_messagetext(self):
+        """获取错误信息"""
+        message = self.get_find_element_xpath('//div[@class="ivu-form-item-error-tip"]')
+        return message.text
+
     def wait_for_el_loading_mask(self, timeout=15):
         WebDriverWait(self.driver, timeout).until(
             EC.invisibility_of_element_located((By.CLASS_NAME, "el-loading-mask"))

@@ -202,9 +202,10 @@ class AffairsPage(BasePage):
             self.click_button('//div[text()=" 自定义 "]')
             self.enter_texts('//div[p[text()="自定义服务:"]]//input', "http12ssc")
             self.click_button(
-                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[2]//span[text()="确定"]')
+                '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]')
+            sleep(2)
             self.click_button(
-                '(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[1]//span[text()="确定"]')
+                '(//div[@class="vxe-modal--footer"]//span[text()="确定"])[1]')
             self.click_button(f'//div[@class="application__name"]/div[@class="name" and contains(text(),"{name}")]')
         elif sel:
             self.enter_texts('//input[@placeholder="请输入关键词"]', sel)
@@ -213,7 +214,7 @@ class AffairsPage(BasePage):
         sleep(1)
         num = len(self.finds_elements(By.XPATH, '//div[@class="application__name"]/div[@class="name"]'))
         value = self.get_find_element_xpath('//div[@class="application__item activated"]/div[@class="application__name"]/div[@class="name"]').get_attribute('innerText')
-        sleep(1)
+        sleep(3)
         self.click_button('//div[@class="el-dialog__footer"]//span[text()="确定"]')
         return num, value
 

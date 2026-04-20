@@ -2493,8 +2493,15 @@ class TestSettingPage:
         sleep(1)
         pyautogui.press('enter')
         sleep(2)
+        setting.click_button('//label[text()="共享布局名"]')
+        sleep(2)
         setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
-        setting.get_find_message()
+
+        try:
+            setting.get_find_message()
+        except:
+            setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
+            setting.get_find_message()
         setting.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')
 
         setting.click_button('//div[@class="flex-alignItems-center"]')
@@ -2571,6 +2578,8 @@ class TestSettingPage:
         sleep(1)
         pyautogui.press('enter')
         sleep(2)
+        setting.click_button('//label[text()="共享布局名"]')
+        sleep(1)
         setting.click_button('//div[@class="vxe-modal--footer"]//span[text()="确定"]')
         setting.get_find_message()
         setting.click_button('(//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]')

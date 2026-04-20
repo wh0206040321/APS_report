@@ -400,10 +400,11 @@ class TestAffairsPage:
             affairs.click_button('//label[span[text()="站内"]]/span[1]')
 
         affairs.click_button('//div[label[text()="推送参数设置"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]')
-        affairs.click_button('//div[text()=" 用户 "]')
+        affairs.click_button('//span[text()="用户"]')
         affairs.click_button('//div[span[text()="用户:"]]//i')
         affairs.click_button('(//ul[@class="el-scrollbar__view el-select-dropdown__list"])[last()]/li[1]')
-        affairs.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[3]//span[text()="确定"]')
+        affairs.click_button('//div[text()="推送参数设置"]')
+        affairs.click_button('(//div[@class="vxe-modal--footer"]//span[text()="确定"])[3]')
         sleep(1)
         before_list = affairs.batch_acquisition_input(xpth_list)
         before_swich = affairs.get_find_element_xpath('//div[label[text()="推送"]]/div/div/span').get_attribute("class")

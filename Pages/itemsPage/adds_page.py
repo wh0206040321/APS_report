@@ -62,8 +62,9 @@ class AddsPages(BasePage):
             try:
                 self.click_button(xpath)
                 self.wait_for_loading_to_disappear()
+                sleep(0.5)
                 self.click_button(new_value)
-                sleep(0.2)
+                sleep(0.5)
                 self.click_button('(//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"])[last()]//span[text()="确定"]')
             except NoSuchElementException:
                 print(f"未找到元素: {xpath}")

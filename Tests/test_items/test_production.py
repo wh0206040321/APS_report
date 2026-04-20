@@ -943,6 +943,25 @@ class TestProductionPage:
         assert ele == "vxe-icon-funnel suffixIcon"
         assert not production.has_fail_message()
 
+    @allure.story("模拟ctrl+c复制可查询")
+    # @pytest.mark.run(order=1)
+    def test_production_ctrlC(self, login_to_production):
+        driver = login_to_production  # WebDriver 实例
+        production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        production.right_refresh('生产报工')
+        production.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        before_data = production.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
+        sleep(1)
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
+        production.click_button('//p[text()="工作代码"]/ancestor::div[2]//input')
+        sleep(1)
+        ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+        eles = production.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr[2]//td[2]')
+        eles = [ele.text for ele in eles]
+        production.right_refresh('生产报工')
+        assert all(before_data in ele for ele in eles)
+        assert not production.has_fail_message()
+
     @allure.story("模拟ctrl+i添加")
     # @pytest.mark.run(order=1)
     def test_production_ctrlI(self, login_to_production):
@@ -981,28 +1000,9 @@ class TestProductionPage:
             production.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"是")]')
         else:
             production.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
-            message = production.get_find_message()
-            assert message == "删除成功！"
+        message = production.get_find_message()
         production.wait_for_loading_to_disappear()
-        assert not production.has_fail_message()
-
-    @allure.story("模拟ctrl+c复制可查询")
-    # @pytest.mark.run(order=1)
-    def test_production_ctrlC(self, login_to_production):
-        driver = login_to_production  # WebDriver 实例
-        production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
-        production.right_refresh('生产报工')
-        production.click_button('//table[@class="vxe-table--body"]//tr[2]//td[2]')
-        before_data = production.get_find_element_xpath('//table[@class="vxe-table--body"]//tr[2]//td[2]').text
-        sleep(1)
-        ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
-        production.click_button('//p[text()="工作代码"]/ancestor::div[2]//input')
-        sleep(1)
-        ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
-        eles = production.finds_elements(By.XPATH, '//table[@class="vxe-table--body"]//tr[2]//td[2]')
-        eles = [ele.text for ele in eles]
-        production.right_refresh('生产报工')
-        assert all(before_data in ele for ele in eles)
+        assert message == "删除成功！"
         assert not production.has_fail_message()
 
     @allure.story("删除数据")
@@ -1010,6 +1010,7 @@ class TestProductionPage:
     def test_production_delete3(self, login_to_production):
         driver = login_to_production  # WebDriver 实例
         production = ProductionPage(driver)  # 用 driver 初始化 ProductionPage
+        production.right_refresh('生产报工')
         name = "1测试C订单"
         production.enter_texts('//p[text()="订单代码"]/ancestor::div[2]//input', name)
         sleep(1)
@@ -1018,11 +1019,11 @@ class TestProductionPage:
             production.click_button(f'//tr[./td[9]//span[text()="{name}"]]/td[4]')
             production.click_del_button()
             sleep(1)
-            ele = driver.find_elements(By.XPATH, f'//div[@class="el-message-box__btns"]//span[contains(text(),"是")]')
+            ele = driver.find_elements(By.XPATH, f'//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
             if len(ele) > 0:
-                production.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"是")]')
-            else:
                 production.click_button('//div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]')
+            else:
+                production.click_button('//div[@class="el-message-box__btns"]//span[contains(text(),"是")]')
             production.wait_for_loading_to_disappear()
             ele = production.get_find_element_xpath('//p[text()="订单代码"]/ancestor::div[2]//input')
             ele.send_keys(Keys.CONTROL, "a")

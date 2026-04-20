@@ -199,8 +199,6 @@ class TestSModelDesignPage:
     def test_modeldesign_del(self, login_to_modeldesign):
         driver = login_to_modeldesign
         model = OtherPage(driver)
-        pyautogui.press('esc')
-        driver.refresh()
 
         list_name = ['2测试模型', '3测试模型']
 

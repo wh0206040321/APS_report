@@ -403,6 +403,9 @@ class TestHomePage:
         elem1 = len(driver.find_elements(By.XPATH, '//div[p[text()=" 主页启动模板: "]]/div/div[contains(@class,"demo-upload-list")]'))
         home.click_button('//div[@class="demo-drawer-footer"]//span[text()="取消"]')
         home.click_template()
+        element = home.get_find_element_xpath(
+            '//div[span[text()=" 测试模版2confirm "]]/span[text()=" 加载模板 "]')
+        driver.execute_script("arguments[0].scrollIntoView();", element)
         sty = home.get_find_element_xpath(
             '//div[span[text()=" 测试模版2confirm "]]/span[text()=" 加载模板 "]').get_attribute("style")
         if sty != "display: none;":
@@ -451,8 +454,9 @@ class TestHomePage:
         home.get_find_message()
         PersonalPage(driver).go_setting_page()
         home.wait_for_el_loading_mask()
+        sleep(3)
         home.click_button('//div[p[text()=" 主页启动模板: "]]/div/div[contains(@class,"demo-upload-list")][last()]')
-        home.click_button('//div[@class="h-40px flex-justify-end flex-align-items-end b-t-s-d9e3f3"]/button')
+        home.click_button('//div[@class="vxe-modal--footer"]//span[text()="关闭"]')
         home.click_button('//div[@class="demo-drawer-footer"]//span[text()="确定"]')
         home.click_button('//div[@class="scroll-body"]//div[text()=" 主页 "]')
         sleep(1)
