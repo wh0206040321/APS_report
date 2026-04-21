@@ -142,6 +142,8 @@ class SettingPage(BasePage):
         else:
             # 如果已选中，直接点击确定按钮保存设置
             self.click_button('(//div[@class="demo-drawer-footer"])[3]/button[2]')
+        self.wait_for_el_loading_mask()
+        return self.get_find_message()
 
     def del_layout(self, layout):
         self.wait_for_loading_to_disappear()

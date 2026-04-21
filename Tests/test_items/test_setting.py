@@ -121,7 +121,7 @@ class TestSettingPage:
         driver = login_to_setting  # WebDriver 实例
         setting = SettingPage(driver)  # 用 driver 初始化 SettingPage
         layout = "测试布局A"
-        setting.add_layout_ok(layout)
+        message = setting.add_layout_ok(layout)
 
         # 获取布局名称的文本元素
         name = setting.get_find_element_xpath(
@@ -130,6 +130,7 @@ class TestSettingPage:
         # 断言布局名称与预期相符
         setting.right_refresh('物品')
         assert name == layout
+        assert "成功" in message
         assert not setting.has_fail_message()
 
     @allure.story("添加测试布局重复，添加失败")
