@@ -1,0 +1,193 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="PSI设置"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi1"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //p[text()="删除"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //p[text()="PSI名称"]/ancestor::div[2]//input
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //p[text()="删除"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //p[text()="PSI名称"]/ancestor::div[2]//input
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi3"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //p[text()="删除"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //p[text()="PSI名称"]/ancestor::div[2]//input
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi1"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi2"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[2]//span[text()="1测试psi3"]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="计划运行"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="方案管理"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="计划方案管理"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[text()="排产方案(订单级)同步1"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[text()="排产方案(订单级)同步2"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[text()="排产方案(订单级)同步3"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="排产方案(订单级)同步1"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="排产方案(订单级)同步2"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="排产方案(订单级)同步3"]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="物控方案管理"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[text()="物控方案(订单级)同步1"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[text()="物控方案(订单级)同步2"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[text()="物控方案(订单级)同步3"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="删除方案"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="物控方案(订单级)同步1"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="物控方案(订单级)同步2"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//div[@class="ivu-radio-group ivu-radio-group-small ivu-radio-small ivu-radio-group-button"])[2]/label[text()="物控方案(订单级)同步3"]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="数据接口底座"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="DBLinK"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="导入设置"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//li[text()="1同步导入1"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//li[text()="1同步导入2"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//li[text()="1同步导入3"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="保存"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//ul[@class="ivu-select-dropdown-list"])[1]/li[text()="数据接口底座"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//ul[@class="ivu-select-dropdown-list"])[1]/li[text()="DBLinK"]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = (//ul[@class="ivu-select-dropdown-list"])[1]/li[text()="导入设置"]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//input[@class="ivu-select-input"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="计划单元"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 计划单元 "]]

@@ -1,0 +1,25 @@
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：hongaoqing
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：1234qweR
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-select-head-flex"]/input
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //li[text()="金属（演示）"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //button[contains(@class, "ivu-btn-primary")]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="物控管理"])[1]
+[31m[1mERROR   [0m root:base_page.py:168 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"
+[33mWARNING [0m conftest:conftest.py:116 [DEBUG] fixture_setup failed: login_to_item
+[32mINFO    [0m conftest:conftest.py:99 [DEBUG] try_capture for Tests_test_material_test_materialDelArea.py, driver_id=2523713220240, alive=True
+[32mINFO    [0m conftest:conftest.py:78 [Tests_test_material_test_materialDelArea.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialDelArea.py_20260422_012214.png
+[32mINFO    [0m conftest:conftest.py:81 [Tests_test_material_test_materialDelArea.py] 截图时间：2026-04-22 01:22:14
+[32mINFO    [0m conftest:conftest.py:103 [DEBUG] 截图成功: Tests_test_material_test_materialDelArea.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialDelArea.py_20260422_012214.png
+[33mWARNING [0m conftest:conftest.py:116 [DEBUG] fixture_setup failed: login_to_item
+[32mINFO    [0m conftest:conftest.py:99 [DEBUG] try_capture for Tests_test_material_test_materialDelArea.py, driver_id=2523713220240, alive=True
+[32mINFO    [0m conftest:conftest.py:78 [Tests_test_material_test_materialDelArea.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialDelArea.py_20260422_012416.png
+[32mINFO    [0m conftest:conftest.py:81 [Tests_test_material_test_materialDelArea.py] 截图时间：2026-04-22 01:24:16
+[32mINFO    [0m conftest:conftest.py:103 [DEBUG] 截图成功: Tests_test_material_test_materialDelArea.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialDelArea.py_20260422_012416.png
+[32mINFO    [0m conftest:conftest.py:99 [DEBUG] try_capture for Tests_test_material_test_materialDelArea.py, driver_id=2523724566000, alive=True
+[32mINFO    [0m conftest:conftest.py:78 [Tests_test_material_test_materialDelArea.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialDelArea.py_20260422_012417.png
+[32mINFO    [0m conftest:conftest.py:81 [Tests_test_material_test_materialDelArea.py] 截图时间：2026-04-22 01:24:17
+[32mINFO    [0m conftest:conftest.py:103 [DEBUG] 截图成功: Tests_test_material_test_materialDelArea.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_materialDelArea.py_20260422_012417.png

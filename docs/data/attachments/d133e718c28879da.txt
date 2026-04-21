@@ -1,5 +1,0 @@
-[33mWARNING [0m conftest:conftest.py:114 [DEBUG] fixture_setup failed: login_to_item
-[32mINFO    [0m conftest:conftest.py:97 [DEBUG] try_capture for Tests_test_material_test_warehouseLocation.py, driver_id=1621018400640, alive=True
-[32mINFO    [0m conftest:conftest.py:76 [Tests_test_material_test_warehouseLocation.py] 截图已保存：D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_warehouseLocation.py_20260421_010838.png
-[32mINFO    [0m conftest:conftest.py:79 [Tests_test_material_test_warehouseLocation.py] 截图时间：2026-04-21 01:08:38
-[32mINFO    [0m conftest:conftest.py:101 [DEBUG] 截图成功: Tests_test_material_test_warehouseLocation.py, 文件路径: D:\PycharmProjects\APS\report\screenshots\Tests_test_material_test_warehouseLocation.py_20260421_010838.png

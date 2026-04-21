@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="日计划报表"])[1]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[text()=" 按工作 "]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = (//table[@class="vxe-table--header"])[3]//tr/th[2]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[text()=" 按订单 "]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = (//table[@class="vxe-table--header"])[5]//tr/th[2]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[div[text()=" 日计划报表 "]]/span
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

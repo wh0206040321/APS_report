@@ -1,0 +1,3 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //a[@title="显示表格"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //table[@class="vxe-table--header"]//tr/th[1]

@@ -1,0 +1,6 @@
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //input[@placeholder="搜索相关事务名称或描述关键词"]
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：自定义事务描述
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //div[@class="template-card__desc"]/div
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 事务管理 "]]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功

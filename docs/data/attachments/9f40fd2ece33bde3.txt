@@ -1,0 +1,145 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = (//span[text()="系统设置"])[1]/ancestor::li[1]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="系统设置"])[1]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="菜单组件"])[1]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:223 ⚠️ clear() 清空失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff736ef6f65+78965]
+	GetHandleVerifier [0x0x7ff736ef6fc0+79056]
+	(No symbol) [0x0x7ff736c89dda]
+	(No symbol) [0x0x7ff736c917c1]
+	(No symbol) [0x0x7ff736c9482c]
+	(No symbol) [0x0x7ff736c948ff]
+	(No symbol) [0x0x7ff736ce24ed]
+	(No symbol) [0x0x7ff736cd564e]
+	(No symbol) [0x0x7ff736d0866a]
+	(No symbol) [0x0x7ff736cd2b56]
+	(No symbol) [0x0x7ff736d08880]
+	(No symbol) [0x0x7ff736d30dbe]
+	(No symbol) [0x0x7ff736d08443]
+	(No symbol) [0x0x7ff736cd1311]
+	(No symbol) [0x0x7ff736cd20a3]
+	GetHandleVerifier [0x0x7ff7371ae26d+2926461]
+	GetHandleVerifier [0x0x7ff7371a8993+2903715]
+	GetHandleVerifier [0x0x7ff7371c6aed+3026941]
+	GetHandleVerifier [0x0x7ff736f116fe+187406]
+	GetHandleVerifier [0x0x7ff736f196ef+220159]
+	GetHandleVerifier [0x0x7ff736effaf4+114692]
+	GetHandleVerifier [0x0x7ff736effca9+115129]
+	GetHandleVerifier [0x0x7ff736ee64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa98bb7374+20]
+	RtlUserThreadStart [0x0x7ffa98cfcc91+33]
+，尝试使用 JS 清空
+[33mWARNING [0m root:base_page.py:228 ❌ JS 清空也失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff736ef6f65+78965]
+	GetHandleVerifier [0x0x7ff736ef6fc0+79056]
+	(No symbol) [0x0x7ff736c89dda]
+	(No symbol) [0x0x7ff736c917c1]
+	(No symbol) [0x0x7ff736c94bbc]
+	(No symbol) [0x0x7ff736d32096]
+	(No symbol) [0x0x7ff736d0866a]
+	(No symbol) [0x0x7ff736d30dbe]
+	(No symbol) [0x0x7ff736d08443]
+	(No symbol) [0x0x7ff736cd1311]
+	(No symbol) [0x0x7ff736cd20a3]
+	GetHandleVerifier [0x0x7ff7371ae26d+2926461]
+	GetHandleVerifier [0x0x7ff7371a8993+2903715]
+	GetHandleVerifier [0x0x7ff7371c6aed+3026941]
+	GetHandleVerifier [0x0x7ff736f116fe+187406]
+	GetHandleVerifier [0x0x7ff736f196ef+220159]
+	GetHandleVerifier [0x0x7ff736effaf4+114692]
+	GetHandleVerifier [0x0x7ff736effca9+115129]
+	GetHandleVerifier [0x0x7ff736ee64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa98bb7374+20]
+	RtlUserThreadStart [0x0x7ffa98cfcc91+33]
+
+[33mWARNING [0m root:base_page.py:236 输入失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff736ef6f65+78965]
+	GetHandleVerifier [0x0x7ff736ef6fc0+79056]
+	(No symbol) [0x0x7ff736c89dda]
+	(No symbol) [0x0x7ff736c917c1]
+	(No symbol) [0x0x7ff736c9482c]
+	(No symbol) [0x0x7ff736c948ff]
+	(No symbol) [0x0x7ff736ce120a]
+	(No symbol) [0x0x7ff736ce12d7]
+	(No symbol) [0x0x7ff736cd6acc]
+	(No symbol) [0x0x7ff736d0866a]
+	(No symbol) [0x0x7ff736cd2b56]
+	(No symbol) [0x0x7ff736d08880]
+	(No symbol) [0x0x7ff736d30dbe]
+	(No symbol) [0x0x7ff736d08443]
+	(No symbol) [0x0x7ff736cd1311]
+	(No symbol) [0x0x7ff736cd20a3]
+	GetHandleVerifier [0x0x7ff7371ae26d+2926461]
+	GetHandleVerifier [0x0x7ff7371a8993+2903715]
+	GetHandleVerifier [0x0x7ff7371c6aed+3026941]
+	GetHandleVerifier [0x0x7ff736f116fe+187406]
+	GetHandleVerifier [0x0x7ff736f196ef+220159]
+	GetHandleVerifier [0x0x7ff736effaf4+114692]
+	GetHandleVerifier [0x0x7ff736effca9+115129]
+	GetHandleVerifier [0x0x7ff736ee64d8+10728]
+	BaseThreadInitThunk [0x0x7ffa98bb7374+20]
+	RtlUserThreadStart [0x0x7ffa98cfcc91+33]
+
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：1新增菜单
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1新增菜单"]]]/td[2]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[div[span[text()=" 组件代码"]]]/div[3]//input
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 菜单组件 "]]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="应用管理"])[1]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：1新增应用
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1新增应用"]]]/td[2]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[p[text()="应用代码"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：1新增应用2
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="1新增应用2"]]]/td[2]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[p[text()="应用代码"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 应用管理 "]]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//span[text()="模块管理"])[1]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：ABCDAA
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="ABCDAA"]]]/td[2]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[div[span[text()=" 模块代码"]]]//input
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：ACBDDD
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="ACBDDD"]]]/td[2]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="删除"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[div[span[text()=" 模块代码"]]]//input
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 模块管理 "]]
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

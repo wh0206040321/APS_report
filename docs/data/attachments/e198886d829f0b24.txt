@@ -1,0 +1,13 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[div[text()="标准需求设置-新增"]]//i[@title="最大化"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //label[span[text()="制造"]]
+[31m[1mERROR   [0m root:base_page.py:168 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[div[text()="标准需求设置-新增"]]//i[@title="最大化"]
+[31m[1mERROR   [0m root:base_page.py:168 ❌ 元素未在 10 秒内变为可点击
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"

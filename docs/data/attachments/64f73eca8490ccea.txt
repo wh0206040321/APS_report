@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[2]//i
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //li[text()="添加新布局"]
+[33mWARNING [0m root:base_page.py:152 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:155 ✅ JS 点击成功
+[33mWARNING [0m root:base_page.py:236 输入失败：Message: 
+
+[33mWARNING [0m root:base_page.py:236 输入失败：Message: 
+
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"

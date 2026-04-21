@@ -1,0 +1,14 @@
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[4]//i
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="统计图1 "]/following-sibling::div
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //span[text()="统计图1 "]/following-sibling::div//div[text()="设置"]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //span[text()="图表名"]/following-sibling::div[1]//input
+[32mINFO    [0m root:base_page.py:232 ✅ 输入成功：统计图13
+[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[last()]
+[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:108 查找元素：xpath = //div[@class="statisticalListItemTitle"]/span[contains(text(),"统计图13")]
+[32mINFO    [0m root:base_page.py:119 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
