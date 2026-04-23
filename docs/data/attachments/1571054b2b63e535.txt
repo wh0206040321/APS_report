@@ -1,0 +1,18 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[label[text()="用鼠标移动工作方法:"]]/div//i
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()="插入(右推)"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[label[text()="制造时间计算:"]]/div//i
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()="基于主资源"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="用鼠标移动工作方法:"]]/div//span
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="制造时间计算:"]]/div//span
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //p[text()="保存"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 环境设置 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="用鼠标移动工作方法:"]]/div//span
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="制造时间计算:"]]/div//span
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

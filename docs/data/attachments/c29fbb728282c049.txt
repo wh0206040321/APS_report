@@ -1,0 +1,9 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=" 主页设置 "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=" 模板 "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[./span[text()=" 初始模版使用 "]]/span[text()=" 加载模板 "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]
+[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
+[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

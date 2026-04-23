@@ -1,0 +1,7 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[div[span[text()=" 组件代码"]]]//input
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：ABCDAA
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 菜单组件 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[div[span[text()=" 组件代码"]]]//input
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

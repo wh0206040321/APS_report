@@ -1,0 +1,6 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="queryBtn"]/button[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="ivu-date-picker-rel"]//input
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 制造订单 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功

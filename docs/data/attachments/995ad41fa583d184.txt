@@ -1,0 +1,26 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：appstest测试模版1
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：appstest测试模版1
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="d-flex"]/div[label[text()="模块名称"]]//input[@type="text"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()="计划基础数据"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="d-flex"]/div[label[text()="图标"]]//i[contains(@class,"ivu-icon")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="flex-wrap"]/div[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[contains(@class,"AppSetTop")]/div[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：appstest测试模版1
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="ivu-tabs"])[1]/div[1]//div[text()=" 模板 "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = (//div[@class="ivu-tabs"])[1]/div[2]//div[div/span[contains(text(),"appstest测试模版1")]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[div[text()=" 应用设计 "]]/span
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="ivu-modal-confirm-footer"]//span[text()="无需保存"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

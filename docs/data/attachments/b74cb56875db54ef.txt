@@ -1,0 +1,48 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试透视表B "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="toolTabsDiv"]/div[2]/div[3]//i
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="是否默认启动:"]/following-sibling::label/span
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"])[3]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[div[text()=" 物品 "]]/span
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[33mWARNING [0m root:base_page.py:346 点击失败：Message: element not interactable
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff788186f65+78965]
+	GetHandleVerifier [0x0x7ff788186fc0+79056]
+	(No symbol) [0x0x7ff787f19c0c]
+	(No symbol) [0x0x7ff787f717fd]
+	(No symbol) [0x0x7ff787f632a4]
+	(No symbol) [0x0x7ff787f9866a]
+	(No symbol) [0x0x7ff787f62b56]
+	(No symbol) [0x0x7ff787f98880]
+	(No symbol) [0x0x7ff787fc0dbe]
+	(No symbol) [0x0x7ff787f98443]
+	(No symbol) [0x0x7ff787f61311]
+	(No symbol) [0x0x7ff787f620a3]
+	GetHandleVerifier [0x0x7ff78843e26d+2926461]
+	GetHandleVerifier [0x0x7ff788438993+2903715]
+	GetHandleVerifier [0x0x7ff788456aed+3026941]
+	GetHandleVerifier [0x0x7ff7881a16fe+187406]
+	GetHandleVerifier [0x0x7ff7881a96ef+220159]
+	GetHandleVerifier [0x0x7ff78818faf4+114692]
+	GetHandleVerifier [0x0x7ff78818fca9+115129]
+	GetHandleVerifier [0x0x7ff7881764d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
+[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试透视表B "]
+[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
+[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

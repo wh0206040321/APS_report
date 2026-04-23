@@ -1,0 +1,38 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=" 数据导入 "]
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[p[text()="数据导入方案名称"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1同步导入1
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//tr[td[3]//span[text()="1同步导入1"]])[1]/td[2]/div/span
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//div[p[text()="计划单元"]]/following-sibling::div//input)[4]
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1测试计划单元标准
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //tr[td[3]//span[text()="1测试计划单元标准"]]/td[2]/div/span
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //p[text()="同步"]
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[div[text()="将同步数据到目的计划单元, 是否继续?"]]/following-sibling::div//span[text()="确定"]
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=" 数据导入 "]
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[p[text()="数据导入方案名称"]]/following-sibling::div//input
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1同步导入1
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//tr[td[3]//span[text()="1同步导入1"]])[1]/td[2]/div/span
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//div[p[text()="计划单元"]]/following-sibling::div//input)[4]
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1测试计划单元标准
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //tr[td[3]//span[text()="1测试计划单元标准"]]/td[2]/div/span
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //p[text()="同步"]
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[div[text()="将同步数据到目的计划单元, 是否继续?"]]/following-sibling::div//span[text()="确定"]
+[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
+[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

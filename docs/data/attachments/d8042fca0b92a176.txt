@@ -1,0 +1,4 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//table[@class="vxe-table--header"]//tr/th[3])[1]//p
+[33mWARNING [0m root:base_page.py:251 ❌ 未找到元素：xpath = (//table[@class="vxe-table--header"]//tr/th[3])[1]//p，等待超时 10s
+[32mINFO    [0m root:base_page.py:263 [AI Agent] find_element 失败 → AI 修复中…
+[31m[1mERROR   [0m root:base_page.py:289 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

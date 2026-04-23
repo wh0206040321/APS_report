@@ -1,0 +1,22 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1测试角色代码2
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：1测试角色代码2
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[label[text()="计划单元名称"]]//div[@class="ivu-select-selection"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[label[text()="计划单元名称"]]//li[text()="1测试计划单元CTB"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：需求管理
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="ivu-tree"]/ul[1]//label/span
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="保存"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[text()=" 记录已存在,请检查！ "]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="ivu-modal-footer"]//span[text()="关闭"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="取消"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 角色管理 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

@@ -1,0 +1,18 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@id="pane-air"]//span[text()="新建事务"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：测试事务模版4
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[label[text()="事务类型"]]//i
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //span[text()="服务"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[label[text()="配置参数"]]//i[@class="ivu-icon ivu-icon-md-albums paramIcon"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=" 自定义 "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：https
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：自定义事务描述
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

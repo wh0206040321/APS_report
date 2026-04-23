@@ -1,9 +1,0 @@
-[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[p[text()=" LOGO显示方式: "]]//span
-[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //ul/li[text()="仅显示图标"]
-[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value =  //button[span[text()="保存"]]
-[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="el-message el-message--success"]/p[text()="保存成功"]
-[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="navTop"]/div[1]/span
-[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

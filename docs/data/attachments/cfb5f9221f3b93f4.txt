@@ -1,0 +1,19 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：text1231
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //label[text()="物料"]/parent::div/div//i
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-grid--table-container"]//tr[2]/td[2])[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//label[text()="交货期"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="取消"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 制造订单 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

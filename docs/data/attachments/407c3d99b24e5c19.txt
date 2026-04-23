@@ -1,0 +1,42 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="查询"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="模块名称" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[3]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="(" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="包含" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：计划
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[7]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=")" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[3]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="(" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[4]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="排序" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[5]//input
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=">" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：4
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[2]/td[7]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()=")" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="demo-drawer-footer"]//span[text()="确定"])[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = (//table[@class="vxe-table--body"])[2]//tr/td[5]
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = (//table[@class="vxe-table--body"])[2]//tr/td[3]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 模块管理 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

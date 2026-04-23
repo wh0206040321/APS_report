@@ -1,0 +1,7 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="系统管理"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="单元设置"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="环境设置"])[1]
+[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
+[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

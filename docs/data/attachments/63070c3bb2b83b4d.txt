@@ -1,0 +1,16 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="计划管理"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="计划基础数据"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="客户"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="物品组"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//span[text()="物品"])[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]//div[text()=" 物品 "]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="scroll-body"]//div[text()=" 物品 "]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[33mWARNING [0m root:base_page.py:426 输入失败：Message: 
+
+[33mWARNING [0m root:base_page.py:426 输入失败：Message:
