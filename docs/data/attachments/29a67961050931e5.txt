@@ -1,0 +1,176 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="333"]]]/td[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@id='mg5mnbcw-8r3c']//input
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[33mWARNING [0m root:base_page.py:411 输入失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc7c17c1]
+	(No symbol) [0x0x7ff6dc7c482c]
+	(No symbol) [0x0x7ff6dc7c48ff]
+	(No symbol) [0x0x7ff6dc81120a]
+	(No symbol) [0x0x7ff6dc8112d7]
+	(No symbol) [0x0x7ff6dc806acc]
+	(No symbol) [0x0x7ff6dc83866a]
+	(No symbol) [0x0x7ff6dc802b56]
+	(No symbol) [0x0x7ff6dc838880]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[33mWARNING [0m root:base_page.py:411 输入失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc7c17c1]
+	(No symbol) [0x0x7ff6dc7c482c]
+	(No symbol) [0x0x7ff6dc7c48ff]
+	(No symbol) [0x0x7ff6dc81120a]
+	(No symbol) [0x0x7ff6dc8112d7]
+	(No symbol) [0x0x7ff6dc806acc]
+	(No symbol) [0x0x7ff6dc83866a]
+	(No symbol) [0x0x7ff6dc802b56]
+	(No symbol) [0x0x7ff6dc838880]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[32mINFO    [0m root:base_page.py:429 🤖 AI 修复成功，新输入定位器：//input[@id='ooq1fci1-fl62']
+[33mWARNING [0m root:base_page.py:411 输入失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc7c17c1]
+	(No symbol) [0x0x7ff6dc7c482c]
+	(No symbol) [0x0x7ff6dc7c48ff]
+	(No symbol) [0x0x7ff6dc81120a]
+	(No symbol) [0x0x7ff6dc8112d7]
+	(No symbol) [0x0x7ff6dc806acc]
+	(No symbol) [0x0x7ff6dc83866a]
+	(No symbol) [0x0x7ff6dc802b56]
+	(No symbol) [0x0x7ff6dc838880]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[33mWARNING [0m root:base_page.py:411 输入失败：Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=137.0.7151.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc7c17c1]
+	(No symbol) [0x0x7ff6dc7c482c]
+	(No symbol) [0x0x7ff6dc7c48ff]
+	(No symbol) [0x0x7ff6dc81120a]
+	(No symbol) [0x0x7ff6dc8112d7]
+	(No symbol) [0x0x7ff6dc806acc]
+	(No symbol) [0x0x7ff6dc83866a]
+	(No symbol) [0x0x7ff6dc802b56]
+	(No symbol) [0x0x7ff6dc838880]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[32mINFO    [0m root:base_page.py:429 🤖 AI 修复成功，新输入定位器：//input[@id='ieizb165-sgk4']
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：2025/07/23 00:00:00
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：2025/07/23 00:00:00
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：2025/07/23 00:00:00
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：2025/07/23 00:00:00
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：2025/07/23 00:00:00
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //tr[./td[2][.//span[text()="111"]]]/td[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="取消"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

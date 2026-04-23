@@ -1,0 +1,53 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@id="tab-flow"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //button[span[text()="新建流程"]]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：添加全部成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：服务
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[label[text()="频率"]]/div//i
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[span[text()="每天"]]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[label[text()="执行设置"]]/div//i
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[span[text()="间隔执行"]]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//input[@placeholder="开始日期"])[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //td[@class="available today"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//span[normalize-space(text())="26"])[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="el-picker-panel__footer"]/button[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：添加全部成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="footer"]//span[text()="下一步"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()="添加下一个事务 "]/i
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：添加全部模版成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="application__name"]/div[@class="name" and contains(text(),"添加全部模版成功")]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="application__name"]/div[@class="name"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="application__item activated"]/div[@class="application__name"]/div[@class="name"]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="el-dialog__footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="footer"]//span[text()="保存"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 事务管理 "]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@id="tab-flow"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //table[@class="el-table__body"]//tr[td[3][div[text()="添加全部成功"]]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //table[@class="el-table__body"]//tr[td[3][div[text()="添加全部成功"]]]/td[last()]//span[text()="编辑"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="名称"]]//input
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="分类"]]//input
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="频率"]]//input
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="执行设置"]]//input
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="间隔执行"]]//input
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //textarea[@prop="comments"]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="流程"]]//i[@title="关闭"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

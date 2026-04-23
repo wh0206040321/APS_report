@@ -1,0 +1,70 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//span[text()="1测试A"])[1]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[text()=" 记录已存在,请检查！ "]
+[33mWARNING [0m root:base_page.py:256 ❌ 未找到元素：//div[text()=" 记录已存在,请检查！ "]
+[32mINFO    [0m root:base_page.py:268 [AI Agent] find_element 失败 → AI 修复中…
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[32mINFO    [0m root:base_page.py:280 🤖 AI 修复成功：//div[text()=" 记录已存在,请检查！ "] → //div[contains(text(), '记录已存在')]
+[31m[1mERROR   [0m root:base_page.py:294 AI 修复失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc8102ea]
+	(No symbol) [0x0x7ff6dc81059c]
+	(No symbol) [0x0x7ff6dc863f37]
+	(No symbol) [0x0x7ff6dc8386af]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//span[text()="1测试A"])[1]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="编辑"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[text()=" 记录已存在,请检查！ "]
+[33mWARNING [0m root:base_page.py:256 ❌ 未找到元素：//div[text()=" 记录已存在,请检查！ "]
+[32mINFO    [0m root:base_page.py:268 [AI Agent] find_element 失败 → AI 修复中…
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[32mINFO    [0m root:base_page.py:280 🤖 AI 修复成功：//div[text()=" 记录已存在,请检查！ "] → //div[contains(text(), '记录已存在')]
+[31m[1mERROR   [0m root:base_page.py:294 AI 修复失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc8102ea]
+	(No symbol) [0x0x7ff6dc81059c]
+	(No symbol) [0x0x7ff6dc863f37]
+	(No symbol) [0x0x7ff6dc8386af]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]

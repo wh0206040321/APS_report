@@ -1,0 +1,88 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center background-ffffff h-36px w-b-100 m-l-12 toolbar-container"]//p[text()="新增"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="标准供应设置-新增"]]//i[@title="最大化"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()=" 数据库名称: "]]//input[@class="ivu-select-input"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[1]/li[1]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()=" 表或视图名: "]]//input[@class="ivu-select-input"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[2]/li[text()="APS_Order"]
+[33mWARNING [0m root:base_page.py:332 点击失败：Message: element click intercepted: Element <li data-v-1b97a9b1="" class="ivu-select-item">...</li> is not clickable at point (602, 612). Other element would receive the click: <div class="vxe-cell c--tooltip" style="max-height: 28px; width: 78px;">...</div>
+  (Session info: chrome=137.0.7151.69)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc8182e9]
+	(No symbol) [0x0x7ff6dc815c82]
+	(No symbol) [0x0x7ff6dc812cd1]
+	(No symbol) [0x0x7ff6dc811c44]
+	(No symbol) [0x0x7ff6dc8032a4]
+	(No symbol) [0x0x7ff6dc83866a]
+	(No symbol) [0x0x7ff6dc802b56]
+	(No symbol) [0x0x7ff6dc838880]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="d-flex m-b-10"]//ul[@class="ivu-select-dropdown-list"])[2]/li[text()="APS_Order"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：1测试数据1
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：1测试数据1
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：1测试数据1
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="Bussiness_No"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="Bussiness_No"]]/td[6]//li[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="DataSource"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="DataSource"]]/td[6]//li[3]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ItemCode"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="ItemCode"]]/td[6]//li[4]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyCode"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyCode"]]/td[6]//li[5]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyDate"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyDate"]]/td[6]//li[6]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyName"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyName"]]/td[6]//li[7]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyQty"]]/td[6]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="d-flex"]//table[@class="vxe-table--body"]//tr[td[3]//span[text()="SupplyQty"]]/td[6]//li[8]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="备注:"]]//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[text()=" 记录已存在,请检查！ "]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="ivu-modal-footer"]//span[text()="关闭"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="取消"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

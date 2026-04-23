@@ -1,0 +1,10 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="flex-alignItems-center"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //i[@class="el-icon-setting"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //label[text()="展开(默认)"]//input
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //label[text()="展开(默认)"]/span
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="demo-drawer-footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

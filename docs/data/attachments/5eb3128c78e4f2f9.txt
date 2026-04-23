@@ -1,0 +1,31 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="排产方案(订单级)复制"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //span[text()="属性设置"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()=" 时间属性 "]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()="分派开始时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()=" 标准登录 "]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //span[text()="收集的工作中最早的开始时刻"]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"])[3]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[text()="分派开始时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[1]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //button[./span[text()="保存设置"]]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //ul[@visible="visible"]//ul//span[text()="排产方案(订单级)复制"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //span[text()="属性设置"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()=" 时间属性 "]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[text()="分派开始时间"]/following-sibling::div//div[@class="w-b-100 h-100 flex-alignItems-center cursor-pointer"]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="取消"])[1]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 计划方案管理 "]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

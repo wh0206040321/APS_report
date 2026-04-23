@@ -1,7 +1,0 @@
-[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[text()=" 模板 "]
-[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[./span[text()=" 测试模版confirm "]]/span[text()=" 加载模板 "]
-[32mINFO    [0m root:base_page.py:148 ✅ 点击成功
-[32mINFO    [0m root:base_page.py:138 点击元素：By = xpath, Value = //div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]
-[31m[1mERROR   [0m root:base_page.py:168 ❌ 元素未在 10 秒内变为可点击
-[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"

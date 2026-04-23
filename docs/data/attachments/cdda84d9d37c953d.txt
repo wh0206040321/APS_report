@@ -1,0 +1,54 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[div[p[text()="表代码"]]]//input
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：AAtest1
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[1]/td[2]//span[text()="AAtest1"]
+[33mWARNING [0m root:base_page.py:332 点击失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc8102ea]
+	(No symbol) [0x0x7ff6dc81059c]
+	(No symbol) [0x0x7ff6dc863f37]
+	(No symbol) [0x0x7ff6dc8386af]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"])[1]//tr[1]/td[2]//span[text()="AAtest1"]
+[33mWARNING [0m root:base_page.py:332 点击失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6dca26f65+78965]
+	GetHandleVerifier [0x0x7ff6dca26fc0+79056]
+	(No symbol) [0x0x7ff6dc7b9dda]
+	(No symbol) [0x0x7ff6dc8102ea]
+	(No symbol) [0x0x7ff6dc81059c]
+	(No symbol) [0x0x7ff6dc863f37]
+	(No symbol) [0x0x7ff6dc8386af]
+	(No symbol) [0x0x7ff6dc860dbe]
+	(No symbol) [0x0x7ff6dc838443]
+	(No symbol) [0x0x7ff6dc801311]
+	(No symbol) [0x0x7ff6dc8020a3]
+	GetHandleVerifier [0x0x7ff6dccde26d+2926461]
+	GetHandleVerifier [0x0x7ff6dccd8993+2903715]
+	GetHandleVerifier [0x0x7ff6dccf6aed+3026941]
+	GetHandleVerifier [0x0x7ff6dca416fe+187406]
+	GetHandleVerifier [0x0x7ff6dca496ef+220159]
+	GetHandleVerifier [0x0x7ff6dca2faf4+114692]
+	GetHandleVerifier [0x0x7ff6dca2fca9+115129]
+	GetHandleVerifier [0x0x7ff6dca164d8+10728]
+	BaseThreadInitThunk [0x0x7fff1f917374+20]
+	RtlUserThreadStart [0x0x7fff214bcc91+33]
+
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 402 Payment Required"
+[31m[1mERROR   [0m root:base_page.py:383 AI 修复失败：Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}}

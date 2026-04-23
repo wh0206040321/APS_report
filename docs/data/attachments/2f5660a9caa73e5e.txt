@@ -1,0 +1,19 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()=" 周期 "]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="计划基准日期:"]]/div/div/div[1]/label/span
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[label[text()="计划基准日期:"]]/div/div/div[1]/div//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //span[@class="ivu-date-picker-cells-cell ivu-date-picker-cells-cell-today ivu-date-picker-cells-focused"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[label[text()="计划基准日期:"]]/div/div/div[1]/div//input
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="保存"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 环境设置 "]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()=" 周期 "]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 环境设置 "]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

@@ -1,0 +1,2 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@id="homeCanvasBox"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//div[@class="menuList"])[1]/div[.//span[text()="表格"]]

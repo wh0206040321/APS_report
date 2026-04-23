@@ -1,0 +1,16 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[contains(@class,"homeSetTop")]//button)[3]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[./div[text()="确定要删除所有的组件吗？"]]/following-sibling::div//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@id="homeCanvasBox"]
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = (//div[@class="menuList"])[1]/div
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = (//div[@class="menuList"])[2]/div
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//div[@class="menuList"])[1]/div[1]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[contains(@class,"homeSetTop")]//button)[3]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[./div[text()="确定要删除所有的组件吗？"]]/following-sibling::div//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@id="homeCanvasBox"]
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = (//div[@class="menuList"])[1]/div
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = (//div[@class="menuList"])[2]/div
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//div[@class="menuList"])[1]/div[1]

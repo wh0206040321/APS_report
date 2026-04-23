@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //tr[./td[6]//span[text()="100"] and ./td[2]//span[text()="1测试C订单:1"]]/td[6]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="删除"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //p[text()="当前工作已【结束】，是否需要修改成【开始生产】？"]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="el-message-box__header"]/button
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 生产报工 "]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

@@ -1,0 +1,23 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[text()=" 模板 "]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[./span[text()=" 测试模版confirm "]]/span[text()=" 加载模板 "]
+[33mWARNING [0m root:base_page.py:332 点击失败：Message: 
+
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[./span[text()=" 测试模版confirm "]]/span[text()=" 加载模板 "]
+[33mWARNING [0m root:base_page.py:332 点击失败：Message: 
+
+[32mINFO    [0m httpx:_client.py:1025 HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[32mINFO    [0m root:base_page.py:366 🤖 AI 修复成功，新点击定位器：//div[contains(., '测试模版confirm')]//span[contains(text(), '加载模板')]
+[32mINFO    [0m root:base_page.py:379 ✅ 点击成功（AI 修复后）
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[div[text()="是否加载这个模板？加载后会覆盖当前内容。"]]/following-sibling::div//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="ivu-tabs-tab"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@id="homeCanvasBox"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//div[@class="menuList"])[1]/div[.//span[text()="数字"]]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 主页设置 "]]
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //button[./span[text()="无需保存"]]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@id="homeCanvasBox"]/div

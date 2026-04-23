@@ -1,0 +1,19 @@
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //p[text()="新增"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:407 ✅ 输入成功：1测试A
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //label[text()="物料"]/parent::div/div//i
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="vxe-grid--table-container"]//tr[3]/td[2])[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="vxe-modal--footer"]//span[text()="确定"])[2]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//label[text()="交货期"])[1]/parent::div//input
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//div[@class="ivu-date-picker-cells"])[3]/span[19]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary ivu-btn-small"])[3]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:320 点击元素：By = xpath, Value = //div[@class="vxe-modal--footer"]//span[text()="确定"]
+[32mINFO    [0m root:base_page.py:328 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //tr[./td[2][.//span[text()="1测试A"]]]/td[2]
+[32mINFO    [0m root:base_page.py:300 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]
