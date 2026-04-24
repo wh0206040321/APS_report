@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//table[@class="vxe-table--body"]//tr[1]//td[1])[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = (//table[@class="vxe-table--body"]//tr[1]//td[1])[2]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li//span[text()="隐藏行"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //table[@class="vxe-table--body"]//tr[1]//td[2]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //span[@class="hiddenRowIcon hiddenRowIcon_Top"]/i
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //table[@class="vxe-table--body"]//tr[2]//td[2]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="scroll-body"]/div[.//div[text()=" 物品 "]]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //li[text()=" 刷新"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
