@@ -1,5 +1,0 @@
-[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]
-[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="tabsDivItemCon" and ./div[text()=" 测试布局A "]]
-[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="tabsDivItemCon"]/div[text()=" 测试布局A "]//i
-[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
-[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

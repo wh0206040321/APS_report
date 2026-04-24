@@ -1,0 +1,22 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[span[text()="操作时间:"]]//input
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：2026/04/01 - 2026/04/25
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：洪奥青
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="d-flex"]//li[text()="洪奥青"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[span[text()="用户:"]]//i[@class="ivu-icon ivu-icon-ios-arrow-down ivu-select-arrow"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[span[text()="异常:"] ]//input[@class="ivu-select-input"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="d-flex"]//li[text()="是"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[@class="d-flex"]//span[text()="查询"]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[3]
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //table[@class="vxe-table--body"]//tr/td[6]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[p[text()="执行开始时间"]]/div[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //table[@class="vxe-table--body"]//tr[1]/td[8]
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[p[text()="执行开始时间"]]/div[1]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //table[@class="vxe-table--body"]//tr[1]/td[8]
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

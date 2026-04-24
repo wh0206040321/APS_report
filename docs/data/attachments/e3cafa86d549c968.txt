@@ -1,3 +1,0 @@
-[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//table[@class="vxe-table--header"]//tr/th[2])[1]//p
-[31m[1mERROR   [0m root:base_page.py:341 ❌ 元素未在 10 秒内变为可点击
-[31m[1mERROR   [0m root:base_page.py:398 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。

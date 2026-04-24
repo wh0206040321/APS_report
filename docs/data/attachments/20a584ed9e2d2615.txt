@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版1"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版2"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版3"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版4"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版5"]
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版6"]
+[33mWARNING [0m root:base_page.py:251 ❌ 未找到元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版6"]，等待超时 10s
+[32mINFO    [0m root:base_page.py:263 [AI Agent] find_element 失败 → AI 修复中…
+[1m[31mERROR   [0m root:base_page.py:289 AI 修复失败：未配置 DEEPSEEK_API_KEY，AI 修复已跳过。
+[32mINFO    [0m root:base_page.py:243 查找元素：xpath = //div[@class="template-card__title"]/div[text()="测试事务模版7"]
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="template-card__title"]/div[contains(text(),"测试事务模版")]
+[32mINFO    [0m root:base_page.py:295 查找元素：xpath = //div[@class="ivu-modal-content"]//div[text()=" 对不起,在处理您的请求期间,产生了一个服务器内部错误! "]

@@ -1,0 +1,12 @@
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //p[text()="查询"]
+[33mWARNING [0m root:base_page.py:325 ⚠️ 原生点击被拦截，尝试使用 JS 点击
+[32mINFO    [0m root:base_page.py:328 ✅ JS 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="主物料代码" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//div[@class="vxe-table--render-wrapper"])[3]/div[1]/div[2]//tr[1]/td[5]//input
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = //div[text()="=" and contains(@optid,"opt_")]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功
+[32mINFO    [0m root:base_page.py:422 ✅ 输入成功：111
+[32mINFO    [0m root:base_page.py:312 点击元素：By = xpath, Value = (//button[@class="ivu-btn ivu-btn-primary"]/span[text()="确定"])[2]
+[32mINFO    [0m root:base_page.py:321 ✅ 点击成功

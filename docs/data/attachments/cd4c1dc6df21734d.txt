@@ -1,3 +1,0 @@
-[33mWARNING [0m root:base_page.py:426 输入失败：Message: 
-
-[33mWARNING [0m root:base_page.py:426 输入失败：Message:
